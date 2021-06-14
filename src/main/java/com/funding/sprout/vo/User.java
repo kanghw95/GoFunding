@@ -1,5 +1,6 @@
 package com.funding.sprout.vo;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class User {
@@ -18,15 +19,15 @@ public class User {
 	private Timestamp suspensionStart; // 정지시작일
 	private Timestamp suspensionFin; // 정지종료일
 	private int reportCnt; // 신고누적횟수
-	
+	private Date joinDate; // 가입일
+	private Date loginDate; // 최근로그인일자
 	
 	public User() {
-		
 	}
-	
+
 	public User(String userId, String userPwd, String userName, String userNick, String userPhone, String userAddress,
 			String userEmail, char gender, int userAge, String userFav, int point, char authority,
-			Timestamp suspensionStart, Timestamp suspensionFin, int reportCnt) {
+			Timestamp suspensionStart, Timestamp suspensionFin, int reportCnt, Date joinDate, Date loginDate) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -43,8 +44,145 @@ public class User {
 		this.suspensionStart = suspensionStart;
 		this.suspensionFin = suspensionFin;
 		this.reportCnt = reportCnt;
+		this.joinDate = joinDate;
+		this.loginDate = loginDate;
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getUserPwd() {
+		return userPwd;
+	}
+
+	public void setUserPwd(String userPwd) {
+		this.userPwd = userPwd;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserNick() {
+		return userNick;
+	}
+
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+
+	public String getUserAddress() {
+		return userAddress;
+	}
+
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
+	}
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
+	public char getGender() {
+		return gender;
+	}
+
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
+
+	public int getUserAge() {
+		return userAge;
+	}
+
+	public void setUserAge(int userAge) {
+		this.userAge = userAge;
+	}
+
+	public String getUserFav() {
+		return userFav;
+	}
+
+	public void setUserFav(String userFav) {
+		this.userFav = userFav;
+	}
+
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
+	public char getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(char authority) {
+		this.authority = authority;
+	}
+
+	public Timestamp getSuspensionStart() {
+		return suspensionStart;
+	}
+
+	public void setSuspensionStart(Timestamp suspensionStart) {
+		this.suspensionStart = suspensionStart;
+	}
+
+	public Timestamp getSuspensionFin() {
+		return suspensionFin;
+	}
+
+	public void setSuspensionFin(Timestamp suspensionFin) {
+		this.suspensionFin = suspensionFin;
+	}
+
+	public int getReportCnt() {
+		return reportCnt;
+	}
+
+	public void setReportCnt(int reportCnt) {
+		this.reportCnt = reportCnt;
+	}
+
+	public Date getJoinDate() {
+		return joinDate;
+	}
+
+	public void setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
+	}
+
+	public Date getLoginDate() {
+		return loginDate;
+	}
+
+	public void setLoginDate(Date loginDate) {
+		this.loginDate = loginDate;
+	}
 
 	@Override
 	public String toString() {
@@ -52,99 +190,8 @@ public class User {
 				+ ", userPhone=" + userPhone + ", userAddress=" + userAddress + ", userEmail=" + userEmail + ", gender="
 				+ gender + ", userAge=" + userAge + ", userFav=" + userFav + ", point=" + point + ", authority="
 				+ authority + ", suspensionStart=" + suspensionStart + ", suspensionFin=" + suspensionFin
-				+ ", reportCnt=" + reportCnt + "]";
+				+ ", reportCnt=" + reportCnt + ", joinDate=" + joinDate + ", loginDate=" + loginDate + "]";
 	}
-	
-	
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	public String getUserPwd() {
-		return userPwd;
-	}
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getUserNick() {
-		return userNick;
-	}
-	public void setUserNick(String userNick) {
-		this.userNick = userNick;
-	}
-	public String getUserPhone() {
-		return userPhone;
-	}
-	public void setUserPhone(String userPhone) {
-		this.userPhone = userPhone;
-	}
-	public String getUserAddress() {
-		return userAddress;
-	}
-	public void setUserAddress(String userAddress) {
-		this.userAddress = userAddress;
-	}
-	public String getUserEmail() {
-		return userEmail;
-	}
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
-	public char getGender() {
-		return gender;
-	}
-	public void setGender(char gender) {
-		this.gender = gender;
-	}
-	public int getUserAge() {
-		return userAge;
-	}
-	public void setUserAge(int userAge) {
-		this.userAge = userAge;
-	}
-	public String getUserFav() {
-		return userFav;
-	}
-	public void setUserFav(String userFav) {
-		this.userFav = userFav;
-	}
-	public int getPoint() {
-		return point;
-	}
-	public void setPoint(int point) {
-		this.point = point;
-	}
-	public char getAuthority() {
-		return authority;
-	}
-	public void setAuthority(char authority) {
-		this.authority = authority;
-	}
-	public Timestamp getSuspensionStart() {
-		return suspensionStart;
-	}
-	public void setSuspensionStart(Timestamp suspensionStart) {
-		this.suspensionStart = suspensionStart;
-	}
-	public Timestamp getSuspensionFin() {
-		return suspensionFin;
-	}
-	public void setSuspensionFin(Timestamp suspensionFin) {
-		this.suspensionFin = suspensionFin;
-	}
-	public int getReportCnt() {
-		return reportCnt;
-	}
-	public void setReportCnt(int reportCnt) {
-		this.reportCnt = reportCnt;
-	}
-	
+
 }
+
