@@ -2,6 +2,9 @@ package com.funding.sprout.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Board {
 
 	private int boardNo; // 글번호

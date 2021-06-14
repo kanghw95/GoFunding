@@ -1,30 +1,32 @@
 package com.funding.sprout.board.service;
 
 import java.util.List;
-
 import com.funding.sprout.vo.Board;
 
-
 public interface BoardService {
-
-	int totalCount();
-
-	Board selectBoard();
-
-	List<Board> selectSearch();
-
-	List<Board> selectList();
-
-	void insertBoard();
-
-	int addReadCount();
 	
-	Board updateBoard();
-
-	void deleteBoard();
+	int totalCount(); // 게시글 목록
 	
-	int ReportSend();
+	int insertBoard(Board b); // 게시글 등록
 	
-	Board getLike(); //TODO 좋아요 정보 이거는 수정이 필요해보임 추가도
-
+	Board detail(int boardNo); // 게시글 상세보기
+	
+	
+	
+	Board selectOne(int boardNo); 
+	
+	List<Board> searchList(String keyword);
+	
+	List<Board> selectList(int startPage, int limit);
+	
+	int addReadCount(int boardCnt);
+	
+	int updateBoard(Board b);
+	
+	int deleteBoard(int boardNo);
+	
+	int ReportSend(Board b);
+	
+	int getLike(Board b);
+	
 }
