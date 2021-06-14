@@ -1,0 +1,147 @@
+@charset "UTF-8";
+
+.wrap {
+	min-width: 1140px;
+}
+
+.content {
+	position: relative;
+	z-index: 20;
+}
+
+.FundingDetailTop_wrap {
+	width: 1140px;
+	margin: 0 auto;
+	padding: 50px 0 30px;
+	background-color: #fff;
+}
+
+.FundingDetailTop_wrap:after {
+	display: table;
+	table-layout: fixed;
+	clear: both;
+	content: "";
+}
+
+.FundingDetailCover_wrap {
+	position: relative;
+	float: left;
+	width: 750px;
+	margin-right: 40px;
+	font-family: NanumSquareWebFont, dotum, Sans-serif;
+}
+
+.FundingDetailCover_list_image {
+	position: relative;
+	font-size: 0;
+	line-height: 0;
+}
+
+.slick-list, .slick-slider {
+	position: relative;
+	display: block;
+}
+
+.slick-slider .slick-list, .slick-slider .slick-track {
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+.slick-list {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.slick-slider {
+	box-sizing: border-box;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-touch-callout: none;
+	-khtml-user-select: none;
+	-ms-touch-action: pan-y;
+	touch-action: pan-y;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.slick-track:after {
+    clear: both;
+}
+.slick-track:after, .slick-track:before {
+    display: table;
+    content: "";
+}
+
+.FundingDetailCover_wrap .slick-list:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid rgba(0,0,0,.02);
+    content: "";
+}
+
+.slick-initialized .slick-slide {
+    display: block;
+}
+
+
+.slick-slide {
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+}
+
+.FundingDetailCover_thumbnail__3EBD3 {
+    height: 480px;
+}
+
+.slick-slide img {
+    display: block;
+}
+
+.FundingDetailCover_image__3JSh- {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    vertical-align: top;
+}
+
+*, :after, :before {
+	box-sizing: border-box;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+div {
+	display: block;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+}
+
+*, :after, :before {
+	box-sizing: border-box;
+}
+
+body, button, input, select, table, textarea {
+	font-family: NanumBarunGothic, dotum, Sans-serif;
+	font-size: 14px;
+	line-height: 19px;
+	color: #202020;
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<settings> <!-- 입력 값이 Null일 경우 “”이 아닌 Null로 처리 -->
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	<typeAliases> <!-- 사용하고자 하는 클래스의 별칭을 선언 -->
+		<typeAlias type="com.funding.sprout.vo.Admin" alias="Admin" />
+		<typeAlias type="com.funding.sprout.vo.Board" alias="Board" />
+		<typeAlias type="com.funding.sprout.vo.Comment" alias="Comment" />
+		<typeAlias type="com.funding.sprout.vo.Faq" alias="Faq" />
+		<typeAlias type="com.funding.sprout.vo.Funding" alias="Funding" />
+		<typeAlias type="com.funding.sprout.vo.Message" alias="Message" />
+		<typeAlias type="com.funding.sprout.vo.Order" alias="Order" />
+		<typeAlias type="com.funding.sprout.vo.Qna" alias="Qna" />
+		<typeAlias type="com.funding.sprout.vo.Report" alias="Report" />
+		<typeAlias type="com.funding.sprout.vo.User" alias="User" />
+	</typeAliases>
+
+	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->
+		<mapper resource="mappers/admin-mapper.xml" />
+		<mapper resource="mappers/board-mapper.xml" />
+		<mapper resource="mappers/comment-mapper.xml" />
+		<mapper resource="mappers/faq-mapper.xml" />
+		<mapper resource="mappers/funding-mapper.xml" />
+		<mapper resource="mappers/message-mapper.xml" />
+		<mapper resource="mappers/order-mapper.xml" />
+		<mapper resource="mappers/report-mapper.xml" />
+		<mapper resource="mappers/user-mapper.xml" />
+	</mappers>
+
+</configuration>

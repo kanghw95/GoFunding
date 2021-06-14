@@ -1,0 +1,228 @@
+@charset "UTF-8";
+.FundingDetailSummary_reward__37UNd {
+    float: right;
+    position: relative;
+    width: 350px;
+    margin-top: 18px;
+    border-top: 1px solid rgba(0,0,0,.05);
+    padding-top: 18px;
+}
+
+.FundingDetailSummary_reward_inner__RRaVg {
+    position: relative;
+}
+
+.FundingDetailSummary_select__11YDc {
+    position: relative;
+}
+
+.FundingDetailSummary_button_select__z82SF {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    padding-left: 11px;
+    border: 1px solid rgba(0,0,0,.12);
+    border-radius: 3px;
+    font-size: 14px;
+    color: #202020;
+    text-align: left;
+}
+
+.FundingDetailSummary_button_select__z82SF .FundingDetailSummary_icon__nPdnD {
+    position: relative;
+    display: inline-block;
+    width: 19px;
+    height: 9px;
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.FundingDetailSummary_button_select__z82SF .FundingDetailSummary_icon__nPdnD:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 11px;
+    height: 11px;
+    -ms-transform: translate(-50%,-50%) scaleY(.94737) rotate(45deg);
+    transform: translate(-50%,-50%) scaleY(.94737) rotate(
+45deg
+);
+    margin-top: -4px;
+    border-right: 1px solid #333;
+    border-bottom: 1px solid #333;
+}
+
+.FundingDetailSummary_total__1G7lf {
+    margin-top: 21px;
+}
+
+.FundingDetailSummary_total__1G7lf .FundingDetailSummary_count__1muox {
+    float: left;
+    margin: 6px 0 0 1px;
+    font-size: 14px;
+    color: #666;
+}
+
+.FundingDetailSummary_total__1G7lf .FundingDetailSummary_count__1muox .FundingDetailSummary_number__3xyc9 {
+    margin-left: 7px;
+}
+
+.FundingDetailSummary_total__1G7lf .FundingDetailSummary_amount__7Ploe {
+    float: right;
+}
+
+.FundingDetailSummary_total__1G7lf .FundingDetailSummary_amount__7Ploe .FundingDetailSummary_name__1B3YW {
+    margin-right: 15px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.FundingDetailSummary_total__1G7lf .FundingDetailSummary_amount__7Ploe .FundingDetailSummary_description__2gvz4 {
+    font-size: 17px;
+    line-height: 1.76;
+    color: #008040;
+}
+
+.FundingDetailSummary_total__1G7lf .FundingDetailSummary_amount__7Ploe .FundingDetailSummary_number__3xyc9 {
+    display: inline-block;
+    margin: -2px 1px 0 0;
+    font-family: NanumSquareWebFont,dotum,Sans-serif;
+    font-size: 27px;
+    font-weight: 800;
+    line-height: 1.11;
+    letter-spacing: -1.1px;
+    vertical-align: top;
+}
+
+.FundingDetailSummary_total__1G7lf:after {
+    display: table;
+    table-layout: fixed;
+    clear: both;
+    content: "";
+}
+
+
+.FundingDetailSummary_delivery__1fPO9 {
+    padding-top: 17px;
+    margin-top: 10px;
+    border-top: 1px solid rgba(0,0,0,.05);
+}
+
+.FundingDetailSummary_delivery__1fPO9 .FundingDetailSummary_name__1B3YW {
+    display: inline-block;
+    font-size: 14px;
+    color: #666;
+    vertical-align: top;
+}
+
+.FundingDetailSummary_delivery__1fPO9 .FundingDetailSummary_amount__7Ploe {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.FundingDetailSummary_delivery__1fPO9 .FundingDetailSummary_amount__7Ploe:before {
+    display: inline-block;
+    width: 1px;
+    height: 14px;
+    margin: 2px 8px 0;
+    background-color: rgba(0,0,0,.15);
+    vertical-align: top;
+    content: "";
+}
+.FundingDetailSummary_button_area__3AU_L {
+    margin-top: 18px;
+}
+
+.FundingDetailSummary_button_join__mOiIi {
+    display: inline-block;
+    width: 290px;
+    height: 52px;
+    background-color: #008040;
+    border: 1px solid rgba(0,0,0,.02);
+    border-radius: 3px;
+    font-size: 19px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -.3px;
+}
+
+.FundingDetailSummary_button_share__257Pl {
+    display: inline-block;
+    width: 52px;
+    height: 52px;
+    padding: 13px 0 0 14px;
+    margin-left: 8px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 3px;
+    color: #333;
+    vertical-align: top;
+}
+
+.Social_wrap__2vzNR {
+    position: relative;
+    font-size: 0;
+    float: right;
+}
+
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.Social_wrap__2vzNR:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: "";
+}
+path[Attributes Style] {
+    fill: currentcolor;
+    fill-rule: nonzero;
+    d: path("M 17.23 4.309 V 0.5 a 0.5 0.5 0 0 1 0.846 -0.362 l 6.77 6.462 a 0.5 0.5 0 0 1 0 0.723 l -6.77 6.462 a 0.5 0.5 0 0 1 -0.845 -0.362 V 9.616 h -3.192 c -2.335 0 -4.13 0.7 -5.471 1.865 a 6.626 6.626 0 0 0 -1.137 1.27 a 3.921 3.921 0 0 0 -0.32 0.543 c -0.23 0.516 -1.005 0.315 -0.955 -0.248 c 0.44 -4.976 3.599 -8.737 8.03 -8.737 h 3.045 Z m 1 -2.64 v 3.14 a 0.5 0.5 0 0 1 -0.5 0.5 h -3.543 c -3.24 0 -5.727 2.351 -6.671 5.783 c 0.123 -0.122 0.255 -0.244 0.396 -0.366 c 1.519 -1.32 3.546 -2.11 6.127 -2.11 h 3.692 a 0.5 0.5 0 0 1 0.5 0.5 v 3.14 l 5.545 -5.293 l -5.545 -5.294 Z m 0.847 19.255 V 15.27 h 1 v 6.654 H 0 V 4.31 h 6.654 v 1 H 1 v 15.615 h 18.077 Z");
+}
+
+svg {
+    vertical-align: top;
+}
+
+svg[Attributes Style] {
+    width: 25;
+    height: 22;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+div {
+	display: block;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+}
+
+body, button, input, select, table, textarea {
+	font-family: NanumBarunGothic, dotum, Sans-serif;
+	font-size: 14px;
+	line-height: 19px;
+	color: #202020;
+}
+
+button, input[type=button], input[type=checkbox]+label, input[type=radio]+label,
+	input[type=reset], input[type=submit] {
+	cursor: pointer;
+}

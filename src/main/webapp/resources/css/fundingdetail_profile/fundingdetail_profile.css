@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+.FundingDetailSummary_profile__300Ph {
+    overflow: hidden;
+    display: table;
+    position: relative;
+    width: 350px;
+    height: 60px;
+    margin: 26px 16px 0;
+    table-layout: fixed;
+}
+
+.FundingDetailSummary_profile__300Ph .FundingDetailSummary_thumbnail__2b070 {
+    display: table-cell;
+    width: 74px;
+    height: 60px;
+    padding-right: 14px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.FundingDetailSummary_profile__300Ph .FundingDetailSummary_image__qODvx {
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    width: 60px;
+    height: 60px;
+    background-origin: border-box;
+    border: 1px solid rgba(0,0,0,.05);
+    border-radius: 50%;
+}
+
+.FundingDetailSummary_profile__300Ph .FundingDetailSummary_text__2ncys {
+    display: table-cell;
+    width: 100%;
+    padding-top: 1px;
+    vertical-align: middle;
+}
+
+.FundingDetailSummary_profile__300Ph .FundingDetailSummary_name__1B3YW {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: -.3px;
+}
+
+.FundingDetailSummary_profile__300Ph .FundingDetailSummary_introduction__3Zzxo {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    margin-top: 4px;
+    font-size: 14px;
+    color: #666;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+div {
+	display: block;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+}
+
+body, button, input, select, table, textarea {
+	font-family: NanumBarunGothic, dotum, Sans-serif;
+	font-size: 14px;
+	line-height: 19px;
+	color: #202020;
+}
