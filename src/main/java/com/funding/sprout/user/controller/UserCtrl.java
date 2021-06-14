@@ -1,18 +1,28 @@
 package com.funding.sprout.user.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.funding.sprout.HomeController;
 import com.funding.sprout.user.service.UserService;
+import com.funding.sprout.vo.User;
 
 @Controller
+@RequestMapping("/user")
 public class UserCtrl {
 	
 	@Autowired
@@ -32,23 +42,64 @@ public class UserCtrl {
 		
 	}
 	
-	@RequestMapping(value = "userInsert", method = RequestMethod.GET)  
-	public ModelAndView userInsert() {
-		return null; // 회원 가입
+	
+	
+	// 회원가입 페이지
+	@RequestMapping(value = "/join", method = RequestMethod.GET)  
+	public String insertUserGet() {
+		
+	
+		return "user/join";
+	}
+	
+	
+	// 회원가입 처리
+	@RequestMapping(value = "/doJoin", method = RequestMethod.POST)  
+	public void insertUserPost(User user, RedirectAttributes redirectAttributes) {
+		// 비밀번호 암호화
+		String hashedPwd = BCrypt.hashpw(user.getUserPwd(), BCrypt.gensalt());
+		user.setUserPwd(hashedPwd);
+		userService.insertUser(user);
+		redirectAttributes.addFlashAttribute("msg", "JOIN COMPLETE");
+		
 		
 	}
 	
-	@RequestMapping(value = "id_nickCheck", method = RequestMethod.GET)  
-	public ModelAndView id_nickCheck() {
-		return null; // 아이디/닉네임 중복체크
+	@ResponseBody
+	@RequestMapping(value = "/idCheck", method = RequestMethod.POST, produces = "application/text; charset=utf-8")  
+	public String idCheck(@RequestBody String paramData) {
+		System.out.println("idCheck 컨트롤러 들어옴");
+		// 아이디 중복 체크
 		
+		String str = paramData.trim();
+		System.out.println("str: " + str);
+		
+		int index = str.indexOf("=");
+		String userId = str.substring(0, index);
+		System.out.println("userId: " + userId);
+		
+		int result = userService.idCheck(userId);
+		System.out.println("result: " + result);
+
+		String real = "";
+		if(result != 0) {
+			real = "사용불가";
+		}else {
+			real = "사용가능";
+		}
+		System.out.println("real : " + real);
+		return real;
 	}
 	
-	@RequestMapping(value = "login", method = RequestMethod.GET)  
-	public ModelAndView login() {
-		return null; // 로그인
+	@RequestMapping(value = "/nickCheck", method = RequestMethod.GET)  
+	public ModelAndView nickCheck() {
+		// 닉네임 중복 체크
 		
+		
+		return null; 
 	}
+	
+	
 	@RequestMapping(value = "modifyUser", method = RequestMethod.GET)  
 	public ModelAndView modifyUser() {
 		return null; // 내 정보 수정

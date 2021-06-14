@@ -24,17 +24,16 @@ public class UserDao {
 		
 	}
 	
-	public int userInsert() { //회원가입
-		return 0;
+	public int insertUser(User user) { //회원가입
+		return sqlSession.insert("User.insertUser", user);
+	}
+	
+	public int idCheck(String userId){ // 아이디 중복체크
+		return sqlSession.selectOne("User.idCheck", userId);
 		
 	}
 	
-	public ArrayList<User> id_nickCheck(){ // 아이디/닉네임 중복체크
-		return null;
-		
-	}
-	
-	public User login() { // 로그인
+	public ArrayList<User> nickCheck(){ // 닉네임 중복체크
 		return null;
 		
 	}
