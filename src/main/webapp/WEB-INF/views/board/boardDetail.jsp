@@ -74,8 +74,10 @@
 			
 			<div id = "Declaration">
 			신고
-			<input type = "button" value = "수정" id = "bRewrite">
-			<input type = "button" value = "삭제">
+			
+			<input type = "button" value = "수정" >	
+			<input type = "button" value = "삭제" id = "delete">				
+	
 			</div>
 			
 			<div id = "boardCnt">
@@ -98,11 +100,11 @@
 			<div id = "button">
 			<input type = "button" value = "등록">
 			</div>
-			
-			<script>
-			$("#bRewrite").on("click", function() {
-				location.href = "bRewrite"
-			})
-			</script>
+					
+	<script>
+		$("#delete").on("click", function() {
+			location.href = "boardDelete"
+		})
+	</script>
 </body>
 </html>

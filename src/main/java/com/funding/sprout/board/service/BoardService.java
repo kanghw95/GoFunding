@@ -7,12 +7,18 @@ public interface BoardService {
 	
 	int totalCount(); // 게시글 목록
 	
-	int insertBoard(Board b); // 게시글 등록
-	
 	Board detail(int boardNo); // 게시글 상세보기
 	
+	int insertBoard(Board b); // 게시글 등록
+	
+	Board selectBoard(int chk, int boardNo);
+	
+	void deleteBoard(int boardNo); // 글 삭제
 	
 	
+	
+	
+
 	Board selectOne(int boardNo); 
 	
 	List<Board> searchList(String keyword);
@@ -23,7 +29,7 @@ public interface BoardService {
 	
 	int updateBoard(Board b);
 	
-	int deleteBoard(int boardNo);
+	
 	
 	int ReportSend(Board b);
 	

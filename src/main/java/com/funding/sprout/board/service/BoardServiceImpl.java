@@ -20,14 +20,36 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	public Board detail(int boardNo) { // 게시글 상세보기
+		return boDao.detail(boardNo);
+	}
+	
+	@Override
 	public int insertBoard(Board b) { // 게시글 등록
 		return boDao.insertBoard(b);
 	}
 	
 	@Override
-	public Board detail(int boardNo) { // 게시글 상세보기
-		return boDao.detail(boardNo);
+	public Board selectBoard(int chk, int boardNo) {
+
+		if (chk == 0) {
+			boDao.addReadCount(boardNo);
+		}
+		return boDao.selectOne(boardNo);
 	}
+	
+	@Override
+	public void deleteBoard(int boardNo) { // 글 삭제
+		boDao.deleteBoard(boardNo);
+	}
+
+	
+	
+	
+	
+	
+	
+	
 	
 	@Override
 	public int updateBoard(Board b) { // 글 수정
@@ -69,10 +91,6 @@ public class BoardServiceImpl implements BoardService {
 		return boDao.addReadCount(boardCnt);
 	}
 
-	@Override
-	public int deleteBoard(int boardNo) { // 글 삭제
-		return boDao.deleteBoard(boardNo);
-	}
 
 	@Override
 	public int ReportSend(Board b) { // 게시글 신고

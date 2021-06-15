@@ -20,16 +20,16 @@ public class BoardDao {
 		return sqlSession.selectOne("Board.listCount"); // 게시글 목록
 	}
 
-	public int insertBoard(Board b) {
-		return sqlSession.insert("Board.insertBoard" , b); // 게시글 등록
-	}
-	
 	public Board detail(int boardNo) {
 		return sqlSession.selectOne("Board.detail", boardNo); // 게시글 상세보기
 	}
 	
-	public int updateBoard(Board b) {
-		return sqlSession.update("Board.updateBoard" , b); // 글 수정
+	public int insertBoard(Board b) {
+		return sqlSession.insert("Board.insertBoard" , b); // 게시글 등록
+	}
+	
+	public int deleteBoard(int boardNo) {
+		return sqlSession.delete("Board.deleteBoard" , boardNo); // 글 삭제
 	}
 	
 	
@@ -38,6 +38,13 @@ public class BoardDao {
 	
 	
 	
+	
+	
+	
+	public int updateBoard(Board b) {
+		return sqlSession.update("Board.updateBoard" , b); // 글 수정
+	}
+		
 	public Board selectOne(int boardNo) {
 		return sqlSession.selectOne("Board.selectOne" , boardNo); // 글 가져오기
 	}
@@ -59,9 +66,7 @@ public class BoardDao {
 		return sqlSession.update("Board.addReadCount", boardCnt ); // 글 조회 수 증가
 	}
 
-	public int deleteBoard(int boardNo) {
-		return sqlSession.delete("Board.deleteBoard" , boardNo); // 글 삭제
-	}
+
 	
 	public int ReportSend(Board b) { //게시글 신고
 		return sqlSession.insert("Board.insertBoard", b);

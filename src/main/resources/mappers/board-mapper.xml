@@ -15,21 +15,24 @@
 		SELECT count(*) FROM BULLETINEBOARD
 	</select>
 	
-	<!-- 게시글 등록 -->
-	<insert id="insertBoard" parameterType="Board" flushCache="true" statementType="PREPARED">
-		INSERT INTO BULLETINEBOARD VALUES('BO'||TO_CHAR(SYSDATE,'RRMMDD')||LPAD(BOARD_SEQ.NEXTVAL,2,'0'),
-		#{board_writer}, #{board_title}, 0, SYSDATE, #{board_content}, #{board_file}, #{board_pwd})
-	</insert>
-	
 	<!-- 게시글 상세보기 -->
 	<select id="detail" resultMap="resultBoard" parameterType="int">
 		SELECT * FROM BULLETINEBOARD WHERE FREENO = #{FREENO} 
 	</select>
 	
+	<!-- 게시글 등록 -->
+ 	<insert id="insertBoard" parameterType="Board" flushCache="true" statementType="PREPARED">
+		INSERT INTO BULLETINEBOARD(FREENO, FREETITLE, FREECONTENT, FREEDATE, FREECNT, ID)
+		VALUES(SEQ_BULLETINEBOARD.NEXTVAL, #{boardTitle}, #{boardContent}, SYSDATE, 0, #{boardId})
+	</insert>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoard" parameterType="Board" flushCache="true" statementType="PREPARED">
+		DELETE FROM BULLETINEBOARD WHERE FREENO = #{boardNo}
+	</delete>
 	
 	
-	
-	
+
 	
 	<!-- 페이지당 게시글 조회 -->
 	<select id="selectList" resultMap="resultBoard" >
@@ -57,10 +60,7 @@
 		UPDATE BULLETINEBOARD SET BOARD_TITLE = #{board_title}, BOARD_CONTENT = #{board_content}, BOARD_FILE = #{board_file} WHERE BOARD_NUM = #{board_num} AND BOARD_PWD = #{board_pwd}
 	</update>
 	
-	<!-- 게시글 삭제 -->
-	<delete id="deleteBoard" parameterType="string" flushCache="true" statementType="PREPARED">
-		DELETE FROM BULLETINEBOARD WHERE BOARD_NUM = #{board_num}
-	</delete>
+
 	
 	<!-- 게시글 신고 -->
 	<!-- 좋아요 -->
