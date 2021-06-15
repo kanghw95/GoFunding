@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+/*임시~~ 폰트*/
+@font-face {
+    font-family: 'Wemakeprice-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Wemakeprice-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Wemakeprice-SemiBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-SemiBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*공통*/
+
+
+*{
+	font-family: Wemakeprice-Bold;
+}
+
+
+.content {
+	position: relative;
+	justify-content: center !important;
+	max-width: 1240px;
+	min-width : 1140px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 100px; /* header height + 20px */
+	padding-bottom: 200px; /* footer height */
+	text-align: center;
+}

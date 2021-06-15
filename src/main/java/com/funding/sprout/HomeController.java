@@ -45,4 +45,14 @@ public class HomeController {
 		return "funding/paytest";
 	}
 
+	
+	@RequestMapping(value = "/header", method = RequestMethod.GET)
+	public String headertest(Locale locale, Model model) {
+		logger.info("header 테스트", locale);
+
+
+
+		return "header";
+	}
+
 }
