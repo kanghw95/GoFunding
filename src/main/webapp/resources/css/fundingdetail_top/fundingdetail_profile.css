@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.FundingDetailSummary_profile__300Ph {
+.FundingDetailSummary_profile {
     overflow: hidden;
     display: table;
     position: relative;
@@ -10,7 +10,7 @@
     table-layout: fixed;
 }
 
-.FundingDetailSummary_profile__300Ph .FundingDetailSummary_thumbnail__2b070 {
+.FundingDetailSummary_profile .FundingDetailSummary_thumbnail {
     display: table-cell;
     width: 74px;
     height: 60px;
@@ -19,7 +19,7 @@
     vertical-align: middle;
 }
 
-.FundingDetailSummary_profile__300Ph .FundingDetailSummary_image__qODvx {
+.FundingDetailSummary_profile .FundingDetailSummary_image {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: cover;
@@ -30,14 +30,14 @@
     border-radius: 50%;
 }
 
-.FundingDetailSummary_profile__300Ph .FundingDetailSummary_text__2ncys {
+.FundingDetailSummary_profile .FundingDetailSummary_text {
     display: table-cell;
     width: 100%;
     padding-top: 1px;
     vertical-align: middle;
 }
 
-.FundingDetailSummary_profile__300Ph .FundingDetailSummary_name__1B3YW {
+.FundingDetailSummary_profile .FundingDetailSummary_name {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -48,7 +48,7 @@
     letter-spacing: -.3px;
 }
 
-.FundingDetailSummary_profile__300Ph .FundingDetailSummary_introduction__3Zzxo {
+.FundingDetailSummary_profile .FundingDetailSummary_introduction {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

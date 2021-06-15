@@ -1,17 +1,16 @@
 @charset "UTF-8";
 
-.FundingDetailStoryContent_wrap_reward__3HEdK {
+.FundingDetailStoryContent_wrap_reward {
     float: right;
     width: 350px;
-    padding-top: 50px;
     margin-left: 50px;
 }
 
-.FundingDetailRewardList_wrap__1v0li {
+.FundingDetailRewardList_wrap {
     position: relative;
 }
 
-.FundingDetailRewardList_title__dRZyj {
+.FundingDetailRewardList_title {
     font-family: NanumSquareWebFont,dotum,Sans-serif;
     font-size: 20px;
     font-weight: 800;
@@ -19,16 +18,16 @@
     letter-spacing: -.3px;
 }
 
-.FundingDetailRewardList_list__b9RmD {
+.FundingDetailRewardList_list {
     position: relative;
     margin: 20px 0 31px;
 }
-.FundingDetailRewardList_item__b87gY {
+.FundingDetailRewardList_item {
     position: relative;
     border: 1px solid rgba(0,0,0,.08);
 }
 
-.FundingDetailRewardList_amount__2MFRL {
+.FundingDetailRewardList_amount_ {
     display: block;
     padding: 14px 16px 12px;
     border-bottom: 1px solid rgba(0,0,0,.08);
@@ -39,16 +38,16 @@
     letter-spacing: -.6px;
 }
 
-.FundingDetailRewardList_amount__2MFRL .FundingDetailRewardList_number__36CIR {
+.FundingDetailRewardList_amount_ .FundingDetailRewardList_number {
     margin-right: 4px;
     color: #1f9eff;
 }
 
-.FundingDetailRewardList_text__27Yme {
+.FundingDetailRewardList_text_ {
     padding: 21px 16px 29px;
 }
 
-.FundingDetailRewardList_name__UVKT2 {
+.FundingDetailRewardList_name {
     font-family: NanumSquareWebFont,dotum,Sans-serif;
     font-size: 17px;
     line-height: 1.29;
@@ -56,7 +55,7 @@
     letter-spacing: -.3px;
 }
 
-.FundingDetailRewardList_count__2qzY_ {
+.FundingDetailRewardList_count {
     position: absolute;
     top: 11px;
     right: 15px;
@@ -69,11 +68,11 @@
     letter-spacing: -.3px;
 }
 
-.FundingDetailRewardList_information__3xvMk {
+.FundingDetailRewardList_information {
     margin-top: 13px;
 }
 
-.FundingDetailRewardList_item_information__1lV1C {
+.FundingDetailRewardList_item_information {
     font-size: 14px;
     line-height: 1.43;
     color: #828282;
@@ -81,19 +80,19 @@
 }
 
 
-.FundingDetailRewardList_item_information__1lV1C+.FundingDetailRewardList_item_information__1lV1C {
+.FundingDetailRewardList_item_information+.FundingDetailRewardList_item_information {
     margin-top: 2px;
 }
 
-.FundingDetailRewardList_item_information__1lV1C .FundingDetailRewardList_highlight__3rANs {
+.FundingDetailRewardList_item_information .FundingDetailRewardList_highlight {
     color: #202020;
 }
 
-.FundingDetailRewardList_item_information__1lV1C .FundingDetailRewardList_date__2eIhm {
+.FundingDetailRewardList_item_information .FundingDetailRewardList_date {
     margin-right: 8px;
 }
 
-.FundingDetailRewardList_link__3d3kh {
+.FundingDetailRewardList_link {
     position: absolute;
     top: -5px;
     right: -10px;
@@ -104,7 +103,7 @@
     text-decoration: underline;
 }
 
-.FundingDetailRewardList_icon__63Rne {
+.FundingDetailRewardList_icon {
     position: relative;
     display: inline-block;
     width: 6px;
