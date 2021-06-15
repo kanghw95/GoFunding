@@ -119,29 +119,3 @@
     object-fit: cover;
     vertical-align: top;
 }
-
-*, :after, :before {
-	box-sizing: border-box;
-}
-*, :after, :before {
-    box-sizing: border-box;
-}
-
-div {
-	display: block;
-}
-
-body {
-	-webkit-font-smoothing: antialiased;
-}
-
-*, :after, :before {
-	box-sizing: border-box;
-}
-
-body, button, input, select, table, textarea {
-	font-family: NanumBarunGothic, dotum, Sans-serif;
-	font-size: 14px;
-	line-height: 19px;
-	color: #202020;
-}

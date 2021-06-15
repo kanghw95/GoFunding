@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+.FundingDetailTab_wrap__wZXxP {
+    height: 61px;
+    border: 1px solid rgba(0,0,0,.05);
+    border-width: 1px 0;
+}
+
+.FundingDetailTab_inner__12OmQ {
+    width: 1140px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+
+.FundingDetailTab_item__1sN0t, .FundingDetailTab_list__-hYbS {
+    display: inline-block;
+    vertical-align: top;
+}
+.FundingDetailTab_item__1sN0t+.FundingDetailTab_item__1sN0t {
+    margin-left: 60px;
+}
+
+.FundingDetailTab_list__-hYbS {
+    height: 100%;
+    padding-left: 5px;
+}
+.FundingDetailTab_tab__2PFWI[aria-current=true] {
+    font-weight: 800;
+    color: #1f9eff;
+}
+.FundingDetailTab_tab__2PFWI {
+    display: block;
+    position: relative;
+    padding: 20px 5px 21px;
+    font-family: NanumSquareWebFont,dotum,Sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+.FundingDetailTab_tab__2PFWI[aria-current=true]:after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: #1f9eff;
+    content: "";
+}

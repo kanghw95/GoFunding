@@ -52,10 +52,9 @@ public class FundingCtrl {
 	@RequestMapping(value = "funding/detail", method = RequestMethod.GET)
 	public ModelAndView fundingDetail(@RequestParam(name = "no") int fundingno, ModelAndView mv) {
 		try {
-			System.out.println("선택한 펀딩 번호" + fundingno);
 			Funding funding = funService.selectOne(fundingno);
-			System.out.println("선택한 펀딩 :" + funding);
-			
+			System.out.println("선택한 펀딩 정보 :" + funding);
+			System.out.println(funding.getFundingtitle());
 			mv.addObject("funding", funService.selectOne(fundingno));
 			mv.setViewName("funding/fundingdetail");
 		} catch (Exception e) {

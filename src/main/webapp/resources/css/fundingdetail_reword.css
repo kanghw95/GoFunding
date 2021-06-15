@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+.FundingDetailStoryContent_wrap_reward__3HEdK {
+    float: right;
+    width: 350px;
+    padding-top: 50px;
+    margin-left: 50px;
+}
+
+.FundingDetailRewardList_wrap__1v0li {
+    position: relative;
+}
+
+.FundingDetailRewardList_title__dRZyj {
+    font-family: NanumSquareWebFont,dotum,Sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.35;
+    letter-spacing: -.3px;
+}
+
+.FundingDetailRewardList_list__b9RmD {
+    position: relative;
+    margin: 20px 0 31px;
+}
+.FundingDetailRewardList_item__b87gY {
+    position: relative;
+    border: 1px solid rgba(0,0,0,.08);
+}
+
+.FundingDetailRewardList_amount__2MFRL {
+    display: block;
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    font-family: NanumSquareWebFont,dotum,Sans-serif;
+    font-size: 17px;
+    line-height: 1.35;
+    color: #202020;
+    letter-spacing: -.6px;
+}
+
+.FundingDetailRewardList_amount__2MFRL .FundingDetailRewardList_number__36CIR {
+    margin-right: 4px;
+    color: #1f9eff;
+}
+
+.FundingDetailRewardList_text__27Yme {
+    padding: 21px 16px 29px;
+}
+
+.FundingDetailRewardList_name__UVKT2 {
+    font-family: NanumSquareWebFont,dotum,Sans-serif;
+    font-size: 17px;
+    line-height: 1.29;
+    color: #202020;
+    letter-spacing: -.3px;
+}
+
+.FundingDetailRewardList_count__2qzY_ {
+    position: absolute;
+    top: 11px;
+    right: 15px;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 19px;
+    padding: 6px 9px 4px;
+    font-size: 13px;
+    line-height: 1.15;
+    color: #333;
+    letter-spacing: -.3px;
+}
+
+.FundingDetailRewardList_information__3xvMk {
+    margin-top: 13px;
+}
+
+.FundingDetailRewardList_item_information__1lV1C {
+    font-size: 14px;
+    line-height: 1.43;
+    color: #828282;
+    letter-spacing: -.2px;
+}
+
+
+.FundingDetailRewardList_item_information__1lV1C+.FundingDetailRewardList_item_information__1lV1C {
+    margin-top: 2px;
+}
+
+.FundingDetailRewardList_item_information__1lV1C .FundingDetailRewardList_highlight__3rANs {
+    color: #202020;
+}
+
+.FundingDetailRewardList_item_information__1lV1C .FundingDetailRewardList_date__2eIhm {
+    margin-right: 8px;
+}
+
+.FundingDetailRewardList_link__3d3kh {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    padding: 10px;
+    font-size: 13px;
+    color: #333;
+    letter-spacing: -.3px;
+    text-decoration: underline;
+}
+
+.FundingDetailRewardList_icon__63Rne {
+    position: relative;
+    display: inline-block;
+    width: 6px;
+    height: 13px;
+    margin: 2px 0 0 4px;
+    vertical-align: top;
+}
+
+
+
+.FundingDetailStoryContent_wrap__1XbqX:after {
+    display: table;
+    table-layout: fixed;
+    clear: both;
+    content: "";
+}
+
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+    display: block;
+}

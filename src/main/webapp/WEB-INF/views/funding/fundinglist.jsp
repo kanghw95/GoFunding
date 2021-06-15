@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +12,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link href=" resources/css/fundinglist.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/fundinglist.css" rel="stylesheet" type="text/css" />
+
 </head>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <body>
@@ -131,13 +134,14 @@
 					<td colspan="6" align="center"><br><br>펀딩이 존재하지않습니다.<br><br></td>
 				</tr>
 			</c:if>
-			
+
+
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}">
 					<li class="fundingContent_item">
 							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
 								<div class="FundingCard_img_wrap">
-									<img loading="lazy" src="https://happybean-phinf.pstatic.net/20210607_132/16230285505583hMru_JPEG/252.jpg" alt="나만의 작은 시골을 담은 패브릭 포스터" width="267" height="200" class="fundingCard_img">
+									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
 									<div class="fundingCard_content">
 										<strong class="fundingCard_percent">
@@ -145,7 +149,16 @@
 											<strong class="fundingCard_title">${vo.fundingtitle}</strong>
 										<div class="fundingCard_organization">${vo.maker}</div>
 										<div class="fundingCard_figure">
-											<span class="fundingCard_date">40 일 남음</span>
+										<jsp:useBean id="currTime" class="java.util.Date" />
+
+										<jsp:useBean id="now" class="java.util.Date" />
+										<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+										<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
+										<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+										<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
+										<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+										
+											<span class="fundingCard_date">${endDate - strDate } 일 남음</span>
 											<span class="fundingCard_amount"><strong class="FundingCard_number__n_hbd">37,000</strong>원</span>
 										</div>
 									</div>

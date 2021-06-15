@@ -106,26 +106,4 @@
     letter-spacing: -1px;
     vertical-align: bottom;
 }
-*, :after, :before {
-    box-sizing: border-box;
-}
 
-
-body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, select, table, td, textarea, th, ul {
-    margin: 0;
-    padding: 0;
-}
-div {
-	display: block;
-}
-
-body {
-	-webkit-font-smoothing: antialiased;
-}
-
-body, button, input, select, table, textarea {
-	font-family: NanumBarunGothic, dotum, Sans-serif;
-	font-size: 14px;
-	line-height: 19px;
-	color: #202020;
-}

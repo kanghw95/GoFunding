@@ -57,22 +57,3 @@
     font-size: 14px;
     color: #666;
 }
-
-*, :after, :before {
-    box-sizing: border-box;
-}
-
-div {
-	display: block;
-}
-
-body {
-	-webkit-font-smoothing: antialiased;
-}
-
-body, button, input, select, table, textarea {
-	font-family: NanumBarunGothic, dotum, Sans-serif;
-	font-size: 14px;
-	line-height: 19px;
-	color: #202020;
-}
