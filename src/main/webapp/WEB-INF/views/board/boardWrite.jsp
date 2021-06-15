@@ -1,6 +1,7 @@
 <%@page import="com.funding.sprout.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,7 +67,9 @@
 	</style>
 
 </head>
+	    	
 <body>
+<%User user = (User) session.getAttribute("user"); %>	
 	<div id = "BULLETINEBOARD">
 	<h1>자유게시판</h1>
 	</div>	
@@ -79,9 +82,10 @@
 			<textarea placeholder="제목 입력" rows="3" cols="50" id = "Title2" name = "boardTitle"></textarea>		
 			<textarea placeholder="글 내용 입력" rows = "20" cols = "230" id = "Content" name = "boardContent"></textarea>
 		
+			<input type="hidden" name="userid" value="<%=user.getUserId()%>">
 			<input type = "file" id = "File1">
 			<textarea name = "file" placeholder = "파일 이름" rows="2" cols="50" id = "File2"></textarea>
-			<%User user = (User) session.getAttribute("userId"); %>
+
 			
 		<input type = "submit" value = "글 등록" id = "Insert">
 		<input type = "reset" value = "다시 쓰기" id = "reset">

@@ -111,21 +111,21 @@
 
 					</div>
 				</div>
-				<div class="FundingDetailTab_wrap__wZXxP">
-					<div class="FundingDetailTab_inner__12OmQ">
-						<ul role="tablist" class="FundingDetailTab_list__-hYbS">
-							<li class="FundingDetailTab_item__1sN0t" role="presentation"><a
-								role="tab" id="wa_story_tab" class="FundingDetailTab_tab__2PFWI"
+				<div class="FundingDetailTab_wrap">
+					<div class="FundingDetailTab_inner">
+						<ul role="tablist" class="FundingDetailTab_list">
+							<li class="FundingDetailTab_item" role="presentation"><a
+								role="tab" id="wa_story_tab" class="FundingDetailTab_tab"
 								aria-controls="wa_story_tabpanel" aria-current="true"
 								href="#">스토리</a></li>
-							<li class="FundingDetailTab_item__1sN0t" role="presentation"><a
+							<li class="FundingDetailTab_item" role="presentation"><a
 								role="tab" id="wa_reward_tab"
-								class="FundingDetailTab_tab__2PFWI"
+								class="FundingDetailTab_tab"
 								aria-controls="wa_reward_tabpanel" aria-current="false"
 								href="#">리워드</a></li>
-							<li class="FundingDetailTab_item__1sN0t" role="presentation"><a
+							<li class="FundingDetailTab_item" role="presentation"><a
 								role="tab" id="wa_review_tab"
-								class="FundingDetailTab_tab__2PFWI"
+								class="FundingDetailTab_tab"
 								aria-controls="wa_review_tabpanel" aria-current="false"
 								href="#">소식∙후기</a></li>
 						</ul>

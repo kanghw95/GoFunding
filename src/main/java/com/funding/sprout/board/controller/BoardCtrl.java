@@ -1,22 +1,14 @@
 package com.funding.sprout.board.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -90,15 +82,32 @@ public class BoardCtrl {
 	}
 
 	@RequestMapping(value = "boardInsert", method = RequestMethod.POST)
-	public ModelAndView boardInsert(Board b, @RequestParam(name = "upfile", required = false) MultipartFile report,
-			HttpServletRequest request, ModelAndView mv, HttpSession session, Board vo) { // 게시글 등록		
-		String boardId = (String) session.getAttribute("userId");
-		vo.setBoardId(boardId);
-		boService.insertBoard(b);
-		System.out.println("userId : 12312141412");
+	public ModelAndView boardInsert(Board b, @RequestParam(name = "upfile", required = false) MultipartFile report, 
+			@RequestParam("boardTitle") String boardtitle, @RequestParam("boardContent") String boardcotent, 
+			@RequestParam("userid") String userid,
+			HttpServletRequest request, ModelAndView mv, Board vo
+	
+			) { // 게시글 등록		
+			int result = 0;
+			System.out.println("제목 : " + boardtitle);
+			System.out.println("내용 : " + boardcotent);
+			System.out.println("작성자 : " + userid);
+			
+			vo = new Board();
+			
+			vo.setBoardTitle(boardtitle);
+			vo.setBoardContent(boardcotent);
+			vo.setBoardId(userid);
+			
+			result = boService.insertBoard(vo);
+					
 		try {
-			boService.insertBoard(b);
-			mv.setViewName("redirect:boardList");
+			if(result != 0) {
+			mv.setViewName("board/boardList");
+			}else {
+				mv.addObject("msg", "글 등록 실패");
+				mv.setViewName("errorPage");
+			}
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");

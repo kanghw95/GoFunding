@@ -76,6 +76,7 @@ public class UserLoginCtrl {
 			return "redirect:/"; // err500 처리 추가
 		}
 		session.setAttribute("user",loginUser);
+		System.out.println(loginUser);
 		System.out.println("성공");
 		return "redirect:/";
 	}
