@@ -21,13 +21,14 @@ public class User {
 	private int reportCnt; // 신고누적횟수
 	private Date joinDate; // 가입일
 	private Date loginDate; // 최근로그인일자
+	private int userNo;
 	
 	public User() {
 	}
 
 	public User(String userId, String userPwd, String userName, String userNick, String userPhone, String userAddress,
 			String userEmail, char gender, int userAge, String userFav, int point, char authority,
-			Timestamp suspensionStart, Timestamp suspensionFin, int reportCnt, Date joinDate, Date loginDate) {
+			Timestamp suspensionStart, Timestamp suspensionFin, int reportCnt, Date joinDate, Date loginDate, int userNo) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -46,6 +47,7 @@ public class User {
 		this.reportCnt = reportCnt;
 		this.joinDate = joinDate;
 		this.loginDate = loginDate;
+		this.userNo = userNo;
 	}
 
 	public String getUserId() {
@@ -183,6 +185,14 @@ public class User {
 	public void setLoginDate(Date loginDate) {
 		this.loginDate = loginDate;
 	}
+	
+	public int getUserNo() {
+		return userNo;
+	}
+	
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
 
 	@Override
 	public String toString() {
@@ -190,7 +200,7 @@ public class User {
 				+ ", userPhone=" + userPhone + ", userAddress=" + userAddress + ", userEmail=" + userEmail + ", gender="
 				+ gender + ", userAge=" + userAge + ", userFav=" + userFav + ", point=" + point + ", authority="
 				+ authority + ", suspensionStart=" + suspensionStart + ", suspensionFin=" + suspensionFin
-				+ ", reportCnt=" + reportCnt + ", joinDate=" + joinDate + ", loginDate=" + loginDate + "]";
+				+ ", reportCnt=" + reportCnt + ", joinDate=" + joinDate + ", loginDate=" + loginDate + ", userNo=" + userNo + "]";
 	}
 
 }

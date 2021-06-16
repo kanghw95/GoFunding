@@ -3,6 +3,7 @@ package com.funding.sprout.admin.service;
 import java.util.List;
 
 import com.funding.sprout.vo.Admin;
+import com.funding.sprout.vo.Criteria;
 import com.funding.sprout.vo.Faq;
 import com.funding.sprout.vo.Notifiy;
 import com.funding.sprout.vo.Qna;
@@ -13,15 +14,17 @@ public interface AdminService {
 
 	public Admin adminlogin(); // 관리자 계정 세선 저장용
 
-	public List<User> getUserByPage(); // 검색 가능한 전체 회원 조회
+	public List<User> list(Criteria cri) throws Exception; // 검색 가능한 전체 회원 조회
+	
+	public List<User> selectUserId(User user) throws Exception; // 유저 아이디 조회
+	
+	public List<User> selectUserName(User user) throws Exception; // 유저 이름 조회
+	
+	public List<User> selectUserNick(User user) throws Exception; // 유저 닉네임 조회
 
-	public List<User> selectUser(); // 특정 유저 조회
+	public int listCount() throws Exception; // 유저수 조회
 
-	public int getUserCount(); // 유저수 조회
-
-
-	public int userStop(); // 회원 권한 박탈
-
+	public void userStop(String userNo); // 회원 권한 박탈
 
 	public int userStart(); // 회원 권한 복원
 

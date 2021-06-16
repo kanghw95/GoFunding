@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.funding.sprout.admin.dao.AdminDao;
 import com.funding.sprout.vo.Admin;
+import com.funding.sprout.vo.Criteria;
 import com.funding.sprout.vo.Faq;
 import com.funding.sprout.vo.Notifiy;
 import com.funding.sprout.vo.Qna;
@@ -26,27 +27,33 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<User> getUserByPage() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> list(Criteria cri) throws Exception {
+		return adDao.list(cri);
+	}
+	
+	@Override
+	public List<User> selectUserId(User user) throws Exception {
+		return adDao.selectUserId(user);
+	}
+	
+	@Override
+	public List<User> selectUserName(User user) throws Exception {
+		return adDao.selectUserName(user);
+	}
+	
+	@Override
+	public List<User> selectUserNick(User user) throws Exception {
+		return adDao.selectUserNick(user);
 	}
 
 	@Override
-	public List<User> selectUser() {
-		// TODO Auto-generated method stub
-		return null;
+	public int listCount() throws Exception {
+		return adDao.listCount();
 	}
 
 	@Override
-	public int getUserCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int userStop() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void userStop(String userNo) {
+		adDao.userStop(userNo);
 	}
 
 	@Override

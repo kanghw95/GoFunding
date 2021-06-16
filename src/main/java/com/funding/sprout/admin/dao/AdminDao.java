@@ -2,11 +2,13 @@ package com.funding.sprout.admin.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.funding.sprout.vo.Admin;
+import com.funding.sprout.vo.Criteria;
 import com.funding.sprout.vo.Faq;
 import com.funding.sprout.vo.Qna;
 import com.funding.sprout.vo.Report;
@@ -23,22 +25,28 @@ public class AdminDao {
 		
 	}
 
-	public List<User> getUserByPage() { // 검색 가능한 전체 회원 조회
-		return null;
+	public List<User> list(Criteria cri) throws Exception { // 검색 가능한 전체 회원 조회
+		return sqlSession.selectList("Admin.selectUser", cri);
 	}
 
-	public List<User> selectUser() { // 특정 유저 조회
-		return null;
-
+	public List<User> selectUserId(User user) throws Exception { // 유저 아이디 조회
+		return sqlSession.selectList("Admin.searchId", user);
+	}
+	
+	public List<User> selectUserName(User user) throws Exception { // 유저 이름 조회
+		return sqlSession.selectList("Admin.searchName", user);
+	}
+	
+	public List<User> selectUserNick(User user) throws Exception { // 유저 닉네임 조회
+		return sqlSession.selectList("Admin.searchNick", user);
 	}
 
-	public int getUserCount() { // 유저수 조회
-		return 0;
-
+	public int listCount() throws Exception { // 유저수 조회
+		return sqlSession.selectOne("Admin.countUser");
 	}
 
-	public int userStop() { // 회원 권한 박탈
-		return 0;
+	public void userStop(String userNo) { // 회원 권한 박탈
+		sqlSession.delete("Admin.deleteUser", userNo);
 
 	}
 
