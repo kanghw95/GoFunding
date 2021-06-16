@@ -13,7 +13,7 @@ public class BeforeLog {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AfterThrowingLog.class);
 	
-	@Before("commonPointcut()")
+	@Before("execution(* com.funding.sprout..*Impl.*(..))")
 	public void beforeMethod(JoinPoint jp) {
 		
 		
