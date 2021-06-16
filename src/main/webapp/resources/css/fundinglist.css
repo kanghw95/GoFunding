@@ -54,15 +54,6 @@
     font-size: 15px;
     color: #333;
 }
-.fundingcontent_filter {
-    margin-top: 43px;
-}
-.fundingcontent_filter:after {
-    display: table;
-    table-layout: fixed;
-    clear: both;
-    content: "";
-}
 .fundingcontent_checkbox .fundingcontent_icon {
     display: inline-block;
     width: 22px;
@@ -72,6 +63,24 @@
     border: 1px solid #e2e2e2;
     vertical-align: top;
 }
+
+.fundingcontent_checkbox .fundingcontent_input:checked+.fundingcontent_label .fundingcontent_icon:after {
+    display: inline-block;
+    width: 13px;
+    height: 10px;
+    background-image: url(../fundingimg/check.svg);
+    content: "";
+}
+.fundingcontent_filter {
+    margin-top: 43px;
+}
+.fundingcontent_filter:after {
+    display: table;
+    table-layout: fixed;
+    clear: both;
+    content: "";
+}
+
 .fundingContent_select {
     float: right;
     position: relative;

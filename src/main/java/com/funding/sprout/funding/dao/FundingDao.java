@@ -1,6 +1,8 @@
 package com.funding.sprout.funding.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +24,32 @@ public class FundingDao {
 	public Funding selectOne(int fundingno) {
 		return sqlSession.selectOne("Funding.selectOne",fundingno); // 펀딩 가져오기
 	}
-
-	public List<Funding> searchList() {
-		return null; // 펀딩 검색 조회
-	}
-
+	
 	public List<Funding> selectList() {
-		return sqlSession.selectList("Funding.selectList");// 전체 펀딩 조회
+		return sqlSession.selectList("Funding.selectlist");// 전체 펀딩 조회
 	}
+
+	public List<Funding> searchTitleList(String fundingtitle) {
+		System.out.println(fundingtitle);
+		return sqlSession.selectList("Funding.selectTitleList",fundingtitle); // 펀딩 제목 검색
+	}
+	
+	public List<Funding> searchContentList(String fundingcontent) {
+		return sqlSession.selectList("Funding.selectCotentList",fundingcontent); // 펀딩 내용 검색
+	}
+	
+	public List<Funding> searchAllList(String keyword) { // 펀딩 제목,내용 검색
+		
+		return sqlSession.selectList("Funding.selectAllList",keyword);
+	}
+
+public List<Funding> searchList(String serchOption, String keyword) { //펀딩 검색
+		Map<String, String> map = new HashMap<String, String>();
+		System.out.println("검색옵션"+serchOption);
+		map.put("serchOption", serchOption);
+		map.put("keyword", keyword);
+		return sqlSession.selectList("Funding.selectfunList",map);
+	} 
 
 	public int insertFunding() {
 		return 0; // 펀딩 입력
@@ -52,5 +72,7 @@ public class FundingDao {
 		return null;
 
 	}
+
+
 
 }

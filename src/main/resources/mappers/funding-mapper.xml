@@ -20,9 +20,23 @@
 		SELECT count(*) FROM FUNDING
 	</select>
 	
-	<!-- 페이지당 펀딩 조회 -->
-	<select id="selectList" resultType="arraylist" resultMap="resultFunding">
+	<!-- 펀딩  전체  조회 -->
+	<select id="selectlist" resultType="arraylist" resultMap="resultFunding">
 		SELECT * FROM FUNDING
+	</select>
+	
+	<!-- 펀딩  제목&내용 검색 -->
+	<select id="selectfunList" resultType="arraylist" resultMap="resultFunding">
+			<if test="serchOption.equals('제목')">
+				SELECT * FROM FUNDING WHERE FUNDINGTITLE LIKE '%'||#{keyword}||'%'
+			</if>
+			<if test="serchOption.equals('내용')">
+				SELECT * FROM FUNDING WHERE FUNDINGCONTENT LIKE '%'||#{keyword}||'%'
+			</if>
+			
+			<if test="serchOption.equals('제목내용')">
+					SELECT * FROM FUNDING WHERE FUNDINGTITLE LIKE '%'||#{keyword}||'%' OR FUNDINGCONTENT LIKE '%'||#{keyword}||'%'
+            </if>
 	</select>
 	
 	<!-- 펀딩 단일 조회 -->

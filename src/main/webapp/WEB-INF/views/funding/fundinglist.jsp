@@ -17,6 +17,18 @@
 </head>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <body>
+<div style="text-align: center; padding-top: 50px;">
+	<form method="get" name="funsearchform" action="funsearch">
+		<select name="serchOption" style=" border: 1px solid black;">
+			<option value="제목" selected="selected">제목</option>
+			<option value="내용">내용</option>
+			<option value="제목내용">제목&내용</option>
+		</select>
+		<input type="text" name="keyword" style="border: 1px solid black;"> 
+		<input type="submit" value="검색" style="border: 1px solid black;" >
+	</form>
+</div>
+<input type="text" >
 <div id="wrap" class="wrap" style="">
 	<div role="main" id="content" class="content">
 		<!-- 메인 슬라이드 -->
@@ -113,7 +125,10 @@
 	
 	<div class="fundingcontent_filter">
 		<div class="fundingcontent_checkbox">
-			<input type="checkbox" id="showendfunding" class="fundingcontent_input"><label for="showendfunding" class="fundingcontent_label"><span class="fundingcontent_icon"></span>종료펀딩만 보기</label>
+			<input type="checkbox" id="showendfunding" class="fundingcontent_input">
+			<label for="showendfunding" class="fundingcontent_label">
+				<span class="fundingcontent_icon"></span>종료펀딩만 보기
+			</label>
 			
 			<div class="fundingContent_select">
 				<div class="SelectArea_select" style="visibility: visible;">
@@ -169,7 +184,7 @@
 			
 
 		</ul>
-		<button type="button" class="fundingContent_button_more">더보기<span class="FundingHomeContent_icon__nXxyM"></span></button>
+		<button type="button" class="fundingContent_button_more">더보기<span class="fundingcontent_icon"></span></button>
 		</div>
 		</section>
 	</div>

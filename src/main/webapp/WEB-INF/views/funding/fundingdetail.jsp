@@ -170,54 +170,50 @@
 								</div>
 							</article>
 							<section class="FundingDetailStoryContent_guide">
-								<h4 class="FundingDetailStoryContent_title">결제방법 및
-									배송 안내</h4>
+								<h4 class="FundingDetailStoryContent_title">결제방법 및 배송 안내</h4>
 								<div class="FundingDetailStoryContent_content">
 									<ul class="FundingDetailStoryContent_list_guide">
-										<li class="FundingDetailStoryContent_item">리워드는 해당
-											프로젝트 개설자가 제공합니다.</li>
-										<li class="FundingDetailStoryContent_item">100% 달성
-											시에만 아래 지정일에 결제됩니다.</li>
+										<li class="FundingDetailStoryContent_item">리워드는 해당 프로젝트 개설자가 제공합니다.</li>
+										<li class="FundingDetailStoryContent_item">100% 달성 시에만 아래 지정일에 결제됩니다.</li>
 									</ul>
 									<strong class="FundingDetailStoryContent_subtitle__mm0mM">
 									결제 및 발송 예정일</strong>
 									<ul class="FundingDetailStoryContent_list_date__1xfUX">
-										<li class="FundingDetailStoryContent_item"><span
-											class="FundingDetailStoryContent_text FundingDetailStoryContent_highlight">1차
-												결제 : 2021년 6월 28일, 예상 발송일 : 2021년 7월 5일</span></li>
-										<li class="FundingDetailStoryContent_item"><span
-											class="FundingDetailStoryContent_text">2차 결제 :
-												2021년 7월 16일, 예상 발송일 : 2021년 7월 23일</span></li>
+										<li class="FundingDetailStoryContent_item">
+											<span class="FundingDetailStoryContent_text FundingDetailStoryContent_highlight">
+											1차 결제 : 2021년 6월 28일, 예상 발송일 : 2021년 7월 5일
+											</span>
+										</li>
+										<li class="FundingDetailStoryContent_item">
+											<span class="FundingDetailStoryContent_text">
+											2차 결제 : 2021년 7월 16일, 예상 발송일 : 2021년 7월 23일
+											</span>
+										</li>
 									</ul>
 								</div>
 							</section>
-							<section
-								class="FundingDetailStoryParticipationTabPanel_wrap">
+							<section class="FundingDetailStoryParticipationTabPanel_wrap">
 								<h4 class="FundingDetailStoryParticipationTabPanel_title">참여내역</h4>
 								<p class="FundingDetailStoryParticipationList_summary">
-									<strong
-										class="FundingDetailStoryParticipationList_number">총
-										11명</strong>이 참여하였습니다.
+									<strong class="FundingDetailStoryParticipationList_number">
+									총 명</strong>이 참여하였습니다.
 								</p>
 								<ul class="FundingDetailStoryParticipationList_wrap">
 									<li class="FundingDetailStoryParticipationList_item"><div
 											class="FundingDetailStoryParticipationList_thumbnail"
 											style="background-image: url(&quot;https://ssl.pstatic.net/happyimg2/img3/social/comment/img/default_profile.jpg&quot;);"></div>
-										<div class="FundingDetailStoryParticipationList_date">2021.06.15
-											09:08:14</div>
+										<div class="FundingDetailStoryParticipationList_date">9999.99.99 00:00:00</div>
 										<div class="FundingDetailStoryParticipationList_user">
-											<span class="FundingDetailStoryParticipationList_name_">kal53님</span><span
-												class="FundingDetailStoryParticipationList_amount"><strong
-												class="FundingDetailStoryParticipationList_number">200,100</strong>원
-												참여</span>
-										</div></li>
+											<span class="FundingDetailStoryParticipationList_name_">kang님</span>
+											<span class="FundingDetailStoryParticipationList_amount">
+												<strong class="FundingDetailStoryParticipationList_number"></strong>원 참여
+											</span>
+										</div>
+									</li>
 								</ul>
-								<nav class="Pagination_wrap" role="navigation"
-									aria-label="페이지 네비게이션">
-									<button type="button" class="Pagination_previous"
-										aria-label="이전" disabled=""></button>
-									<button type="button" class="Pagination_next"
-										aria-label="다음"></button>
+								<nav class="Pagination_wrap" role="navigation" aria-label="페이지 네비게이션">
+									<button type="button" class="Pagination_previous" aria-label="이전" disabled=""></button>
+									<button type="button" class="Pagination_next" aria-label="다음"></button>
 								</nav>
 							</section>
 						</div>
@@ -227,43 +223,50 @@
 								<ul class="FundingDetailRewardList_list">
 									<li class="FundingDetailRewardList_item">
 									<strong class="FundingDetailRewardList_amount_">
-										<span class="FundingDetailRewardList_number">69,000원</span>펀딩참여</strong>
+										<span class="FundingDetailRewardList_number">원</span>펀딩참여
+									</strong>
 									<div class="FundingDetailRewardList_text_">
-											<strong class="FundingDetailRewardList_name">점프1
-												(스니커즈 1EA+사은품 핸드폰 스트랩1+추가끈1) </strong>
+											<strong class="FundingDetailRewardList_name">
+											점프1 (스니커즈 1EA+사은품 핸드폰 스트랩1+추가끈1)
+											</strong>
 											<div class="FundingDetailRewardList_count">
 												<strong>89</strong>개 남음
 											</div>
 											<ul class="FundingDetailRewardList_information">
-												<li class="FundingDetailRewardList_item_information">현재
-													11명 펀딩 참여</li>
-												<li class="FundingDetailRewardList_item_information"><strong
-													class="FundingDetailRewardList_highlight"><span
-														class="FundingDetailRewardList_date">발송예상일</span>2021.7.5</strong></li>
+												<li class="FundingDetailRewardList_item_information">현재명 펀딩 참여</li>
+												<li class="FundingDetailRewardList_item_information">
+													<strong class="FundingDetailRewardList_highlight">
+													<span class="FundingDetailRewardList_date">발송예상일</span>2021.7.5
+													</strong>
+												</li>
 											</ul>
 										</div></li>
-									<li class="FundingDetailRewardList_item"><strong
-										class="FundingDetailRewardList_amount_"><span
-											class="FundingDetailRewardList_number">원</span>펀딩
-											참여</strong>
+									<li class="FundingDetailRewardList_item">
+										<strong class="FundingDetailRewardList_amount_">
+											<span class="FundingDetailRewardList_number">원</span>펀딩 참여
+										</strong>
 									<div class="FundingDetailRewardList_text_">
-											<strong class="FundingDetailRewardList_name">점프1
-												커플백(스니커즈 2EA+사은품 핸드폰 스트랩2+추가끈2) </strong>
+											<strong class="FundingDetailRewardList_name">
+												점프1 커플백(스니커즈 2EA+사은품 핸드폰 스트랩2+추가끈2)
+											</strong>
 											<div class="FundingDetailRewardList_count">
 												<strong>99</strong>개 남음
 											</div>
 											<ul class="FundingDetailRewardList_information">
-												<li class="FundingDetailRewardList_item_information">현재
-													1명 펀딩 참여</li>
-												<li class="FundingDetailRewardList_item_information"><strong
-													class="FundingDetailRewardList_highlight"><span
-														class="FundingDetailRewardList_date">발송예상일</span>2021.7.5</strong></li>
+												<li class="FundingDetailRewardList_item_information">
+												현재 1명 펀딩 참여
+												</li>
+												<li class="FundingDetailRewardList_item_information">
+													<strong class="FundingDetailRewardList_highlight">
+														<span class="FundingDetailRewardList_date">발송예상일</span>2021.7.5
+													</strong>
+												</li>
 											</ul>
 										</div></li>
 								</ul>
-								<a class="FundingDetailRewardList_link"
-									href="#">자세히 보기<span
-									class="FundingDetailRewardList_icon"></span></a>
+								<a class="FundingDetailRewardList_link" href="#">자세히 보기
+									<span class="FundingDetailRewardList_icon"></span>
+								</a>
 							</div>
 						</section>
 					</div>

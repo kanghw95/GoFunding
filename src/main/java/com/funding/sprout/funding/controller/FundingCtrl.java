@@ -1,6 +1,5 @@
 package com.funding.sprout.funding.controller;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,20 +15,37 @@ import com.funding.sprout.vo.Funding;
 
 @Controller
 public class FundingCtrl {
-	
+
 	@Autowired
 	private FundingService funService;
-	
+
 	@RequestMapping(value = "funone", method = RequestMethod.GET)
 	public ModelAndView selectOne() {
+		
+
 		return null; // 펀딩 가져오기
 	}
 
 	@RequestMapping(value = "funsearch", method = RequestMethod.GET)
-	public ModelAndView searchList() {
-		return null; // 펀딩 검색 조회
+	public ModelAndView searchList(ModelAndView mv, @RequestParam(name = "keyword") String keyword,
+			@RequestParam(name = "serchOption") String serchOption) {
+		System.out.println(keyword);
+		System.out.println(serchOption);
+		List<Funding> searchlist = null;
+		try {
+				searchlist = funService.searchList(serchOption, keyword);
+
+
+			System.out.println("검색된 펀딩 목록 : " + searchlist);
+			mv.addObject("fundinglist", searchlist);
+			mv.setViewName("funding/fundinglist");
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("errorPage");
+		}
+		return mv; // 펀딩 검색 조회
 	}
-	
+
 	// 전체 펀딩 조회
 	@RequestMapping(value = "funselect", method = RequestMethod.GET)
 	public ModelAndView selectList(ModelAndView mv) {
@@ -41,14 +57,15 @@ public class FundingCtrl {
 			mv.addObject("fundinglist", fundinglist);
 			mv.addObject("listcount", listcount);
 			mv.setViewName("funding/fundinglist");
-			
+
 		} catch (Exception e) {
-			e.printStackTrace();
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("errorPage");
 		}
 		return mv;
 	}
-	
-	//펀딩 상세 페이지
+
+	// 펀딩 상세 페이지
 	@RequestMapping(value = "funding/detail", method = RequestMethod.GET)
 	public ModelAndView fundingDetail(@RequestParam(name = "no") int fundingno, ModelAndView mv) {
 		try {
@@ -68,22 +85,21 @@ public class FundingCtrl {
 	public ModelAndView insertFunding() {
 		return null; // 펀딩 입력
 	}
-	
+
 	@RequestMapping(value = "funupdate", method = RequestMethod.GET)
 	public ModelAndView updateFunding() {
 		return null; // 펀딩 수정
 	}
-	
+
 	@RequestMapping(value = "fundelete", method = RequestMethod.GET)
 	public ModelAndView deleteFunding() {
 		return null; // 펀딩 삭제
 	}
-	
+
 	@RequestMapping(value = "funlike", method = RequestMethod.GET)
-	public ModelAndView getPreference() {  //TODO 선호하는 펀딩 정보 이거는 수정이 필요해보임 추가도
+	public ModelAndView getPreference() { // TODO 선호하는 펀딩 정보 이거는 수정이 필요해보임 추가도
 		return null;
 
 	}
-	
 
 }

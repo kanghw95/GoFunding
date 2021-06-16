@@ -1,6 +1,5 @@
 package com.funding.sprout.funding.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.funding.sprout.vo.Funding;
@@ -10,8 +9,11 @@ public interface FundingService {
 	public int listCount();// 전체 펀딩수 조회
 
 	public Funding selectOne(int fundingno); // 펀딩 가져오기
+	
+	public List<Funding> selectlist(); // 펀딩 전체 조회
 
-	public List<Funding> searchList(); // 펀딩 검색 조회
+	
+	public List<Funding> searchList(String serchOption, String keyword); // 펀딩  제목&내용 검색
 
 	public List<Funding> selectList();// 전체 펀딩 조회
 

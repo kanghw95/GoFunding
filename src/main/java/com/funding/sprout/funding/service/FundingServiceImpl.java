@@ -25,11 +25,15 @@ public class FundingServiceImpl implements FundingService{
 		// TODO Auto-generated method stub
 		return funDao.selectOne(fundingno);
 	}
-
+	
 	@Override
-	public List<Funding> searchList() {
+	public List<Funding> selectlist() {
 		// TODO Auto-generated method stub
-		return null;
+		return funDao.selectList();
+	}
+	
+	public List<Funding> searchList(String serchOption, String keyword){
+		return funDao.searchList(serchOption,keyword);
 	}
 
 	@Override
@@ -67,4 +71,6 @@ public class FundingServiceImpl implements FundingService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 }
