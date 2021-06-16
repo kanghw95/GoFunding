@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.funding.sprout.user.dao.UserDao;
+import com.funding.sprout.user.dao.UserInsertDao;
 import com.funding.sprout.vo.User;
 
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserInsertServiceImpl implements UserInsertService {
 	
 	@Autowired
-	private UserDao userDao;
+	private UserInsertDao userDao;
 
 	@Override
 	public ArrayList<User> selectAll() {
@@ -46,18 +46,6 @@ public class UserServiceImpl implements UserService {
 	public int modifyUser() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public User idFind() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User pwFind() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

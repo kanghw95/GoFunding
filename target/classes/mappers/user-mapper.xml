@@ -23,12 +23,12 @@
 	
 	<!-- 회원가입 -->
 	<insert id="insertUser" parameterType="User">
+		<![CDATA[
 		INSERT INTO USERS 
 		(ID, PWD, NAME, NICKNAME, PHONE, ADDRESS, EMAIL, GENDER, AGE, FAV, JOINDATE)
 		VALUES 
-		(#{userId}, #{userPwd}, #{userName}, #{userNick}, #{userPhone}, #{userAddress}, #{userEmail}, #{gender}, #{userAge}, 
-		#{userFav}, SYSDATE)
-		)
+		(#{userId}, #{userPwd}, #{userName}, #{userNick}, #{userPhone}, #{userAddress}, #{userEmail}, #{gender}, #{userAge}, #{userFav}, SYSDATE)
+		]]>
 	</insert>
 	
 	<!-- id 중복체크 -->

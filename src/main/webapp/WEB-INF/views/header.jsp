@@ -10,7 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <header>
 <div class="header">
-	<div class="header-content">	
+	<div class="header_content">	
 		<a href="#"> 
 		<img alt="logo" src="resources/bannerimg/logo3.png" width="100" height="65" id="logo">
 		</a>	
@@ -98,7 +98,7 @@
 			<%-- <c:when test="${user == null }"> --%>
 				<div class="beforeLogin">
 					<button type="button" id="btnLogin" onclick="location.href='#'">로그인</button>
-					<button type="button" id="btnJoin" onclick="location.href='#'">회원가입</button>
+					<button type="button" id="btnSignin" onclick="location.href='#'">회원가입</button>
 				</div>
 		<%-- 	</c:when>
 			<c:when test="${user.autority == '8'}">
@@ -130,13 +130,10 @@
 		</c:choose> --%>
 		<div class="hold">
 			<button type="button" id="createFunding" onclick="location.href='#'">펀딩 등록</button>		
-			<span class="HeaderUserProfile_bar__1OPU2"></span>
-			<a href="#"><img class="image" src="resources/images/searching.png">
+			<a href="#"><img class="image" src="resources/img/searching.png">
 			</a>
 		</div>
-		
-		
-	</div>
+	</div>	
 </div>
 </header>
 

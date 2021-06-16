@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+[type='text'], [type='password'] {
+	width: 400px;
+	height: 40px;
+	font-size: 17px;
+	padding-left: 10px;
+}
+
+td {
+	padding: 5px 5px;
+}
+
+tr td:nth-of-type(3) {
+	width: 320px;
+}
+
+tr:nth-of-type(1) td:nth-of-type(3) div, tr:nth-of-type(2) td:nth-of-type(3) div
+	{
+	float: left;
+}
+
+table {
+	margin: 0 auto 0 auto;
+}
+
+.required {
+	color: green;
+	font-size: 1px;
+}
+
+.optional {
+	color: brown;
+	font-size: 1px;
+}
+
+.desc {
+	font-size: 13px;
+	text-align: left;
+}
+
+
+.findPostCode {
+	width: 85px;
+	height: 40px;
+	border: none;
+	padding: 5px;
+	outline: none;
+	border-radius: 5px;
+	color: #1e1e1e;
+	background-color: #cff09e;
+	border: 1px solid #cff09e;
+	font-size: 15px;
+}
+
+.findPostCode:hover {
+	color: #1abc9c;
+}
+
+.btnJoin {
+	width: 85px;
+	height: 40px;
+	border: none;
+	padding: 5px;
+	outline: none;
+	border-radius: 5px;
+	color: #1e1e1e;
+	background-color: #a8dba8;
+	border: 1px solid #a8dba8;
+	font-size: 15px;
+}
+
+#idcheck, #nicknamecheck {
+	cursor: pointer;
+	color: blue;
+}

@@ -1,6 +1,9 @@
 package com.funding.sprout.user.controller;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,15 +21,15 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.funding.sprout.HomeController;
-import com.funding.sprout.user.service.UserService;
+import com.funding.sprout.user.service.UserInsertService;
 import com.funding.sprout.vo.User;
 
 @Controller
 @RequestMapping("/user")
-public class UserCtrl {
+public class UserInsertCtrl {
 	
 	@Autowired
-	private UserService userService;
+	private UserInsertService userService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -54,14 +57,19 @@ public class UserCtrl {
 	
 	
 	// 회원가입 처리
-	@RequestMapping(value = "/doJoin", method = RequestMethod.POST)  
-	public void insertUserPost(User user, RedirectAttributes redirectAttributes) {
+	@ResponseBody
+	@RequestMapping(value = "/doJoin", method = RequestMethod.POST, produces = "application/text; charset=utf-8")  
+	public void insertUserPost(User user) {
 		// 비밀번호 암호화
-		String hashedPwd = BCrypt.hashpw(user.getUserPwd(), BCrypt.gensalt());
-		user.setUserPwd(hashedPwd);
-		userService.insertUser(user);
-		redirectAttributes.addFlashAttribute("msg", "JOIN COMPLETE");
+		// TODO BCrypt 
+//		String hashedPwd = BCrypt.hashpw(user.getUserPwd(), BCrypt.gensalt());
+//		user.setUserPwd(hashedPwd);
+		System.out.println("컨트롤 들어옴");
+		int result = 0;
+		result = userService.insertUser(user);
+		System.out.println("컨트롤 result" + result);
 		
+
 		
 	}
 	

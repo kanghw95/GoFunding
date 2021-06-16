@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.funding.sprout.vo.User;
 
 @Repository("userDao")
-public class UserDao {
+public class UserInsertDao {
 	
 	@Autowired
 	private SqlSession sqlSession;

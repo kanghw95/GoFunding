@@ -1,51 +1,71 @@
 @charset "UTF-8";
 
+/* header 기본 세팅*/
+header{
+	dispaly: block;
+	z-index: 1000;
+	font-family: 'TmoneyRoundWindRegular';
+	
+}
+
 .header {
 	width: 100%;
 	height: 80px;
 	position: fixed;
 	top: 0;
 	left: 0;
-	dispaly: block;
-	z-index: 1000;
 	background-color: #fff;
 	border-bottom: 1px solid #025951;
 }
 
-.header-content {
+.header_content {
+	position: relative;
 	left: 0;
 	right: 0;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 1140px;
-	min-width: 1140px;
+	width: 1140px;
 	hegith: 80px;
 }
 
-
-#logo {
-	margin: 10px;
+.logo {
 	float: left;
+	margin-top: 21px;
+	width: 80px;
+	height: 80px;
 }
+
+/* navbar */
 
 .navbar {
-	 float: left;
-	 width: 460px;
+	display: inline-block;
+	position: absolute;
+	top: 23px;
+	right: 100px;
+	left: 100px;
+	text-align: left;
 }
 
-.navbar a {
-  float: left;
-  font-size: 20px;
-  color: #3E3E3E;
-  text-align: center;
-  padding: 15px 16px;
-  text-decoration: none;
+
+/* navbar 내부 큰 메뉴 */
+
+.navBox1, .navBox2, .navBox3, .navBox4{
+	font-size: 20px;
+	color: #202020;
+	text-align: center;
+	display: inline-block;
+	padding: 0 25px;
+	line-height: 24px;	
+	
+	
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
-	color: #038c65;
+.navBox1 a, .navBox2 a, .navBox3 a, .navBox4 a{
+	text-decoration: none;	
 }
 
+
+/* 드롭다운 메뉴 (전체-아이콘)*/
 .dropdown {
 	float: left;
 	overflow: hidden;
@@ -53,11 +73,9 @@
 
 .dropdown .dropbtn {
 	cursor: pointer;
-	font-size: 16px;  
 	border: none;
 	outline: none;
- 	color: #4E4E4E;
-	padding: 14px 16px;
+ 	color: #202020;
 	background-color: inherit;
 	font-family: inherit;
 	margin: 0;
@@ -72,14 +90,11 @@
 	z-index: 1;
 }
 
-.dropdown-content a {
-	float: none;
-	color: #4E4E4E;
-	padding: 12px 16px;
-	text-decoration: none;
-	display: block;
-	text-align: left;
+.dropdown:hover .dropdown-content, .dropdown:hover .miniDropdown-content {
+  display: block;
 }
+
+/* 드롭다운 메뉴 content (펀딩, 커뮤니티, 공지사항) */
 
 .miniDropdown-content {
 	display: none;
@@ -92,81 +107,35 @@
 
 .miniDropdown-content a {
 	float: none;
-	color: #4E4E4E;
-	padding: 12px 16px;
+	color: #202020;
 	text-decoration: none;
 	display: block;
 	text-align: left;
 }
 
-
 .miniDropdown-content a:hover {
 	background-color: #ddd;
 }
 
-
-.dropdown:hover .dropdown-content, .dropdown:hover .miniDropdown-content {
-  display: block;
-}
-
-
-.show {
-  display: block;
-}
-
-i, i:hover {
-	padding: 15px;
-}
-
-
-.menu1 {
-	float: left;
-}
-
-.menu2 {
-	color: 4E4E4E;
-	font-size: 18px; 
-	padding-top: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
-	padding-bottom: 0;
-	margin: 20px;
-}
-
-li {
-	list-style-type: none;
-	padding: 0;
-}
-
-.hold {
-	float: right;
-	bottom: 20px;
-	position: relative;
-}
-
-.image {
-	width: 30px;
-	height: 30px;
-	margin: 15px;
-}
-
-/*로그인 하기 전 - 로그인, 회원가입 버튼, 펀딩 등록 버튼, 검색*/
-
+/* 헤더 버튼 */
+/* 로그인 전 */
 .beforeLogin {
-	width: 200px;
-	margin-top: 25px;
-	margin-right: 10px;
-	float: right;
-	position: relative;
+	display: inline-block;
+	text-align: right;
+	top: 24px;
 }
 
 #btnLogin {
+	display: inline-block;
+	position: absolute;
+	right: 245px;
+	top: 24px;
 	width: 80px;
 	border: none;
 	padding: 5px;
 	outline: none;
 	border-radius: 5px;
-	color: #4E4E4E;
+	color: #202020;
 	background-color: transparent;
 	border: 1px solid #79bd9a;
 }
@@ -177,30 +146,52 @@ li {
 }
 
 
-#btnJoin {
+#btnSignin {
+	display: inline-block;
+	position: absolute;
+	right: 150px;
+	top: 24px;
 	width: 80px;
 	border: none;
 	padding: 5px;
 	outline: none;
 	border-radius: 5px;
-	color: #4E4E4E;
+	color: #202020;
 	background-color: transparent;
 	border: 1px solid #79bd9a;
 	
 }
 
-#btnJoin:hover{
+#btnSignin:hover{
 	color: white;
 	background-color: #79bd9a;
 }
 
+/* 로그인 여부 관계없이 고정 */
+.hold{
+	display: inline-block;
+	text-align: right;
+	top: 24px;
+}
+
+.image {
+	position: absolute;
+	top: 24px;
+	right: 10px;
+	width: 35px;
+	height: 35px;
+}
+
 #createFunding{
+	position: absolute;
+	top: 24px;
+	right: 60px;
 	width: 80px;
 	border: none;
 	padding: 5px;
 	outline: none;
 	border-radius: 5px;
-	color: #4E4E4E;
+	color: #202020;
 	background-color: transparent;
 	border: 1px solid #79bd9a;	
 }
@@ -208,6 +199,28 @@ li {
 #createFunding:hover{
 	color: white;
 	background-color: #79bd9a;
+}
+
+
+#search {
+	display: inline-block;
+	
+	
+}
+
+/* 전체 메뉴 드롭다운 박스 content */
+.menuBox {
+	float: left;
+}
+
+.menuTitle {
+	color: #202020;
+	font-size: 18px; 
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 0;
+	margin: 20px;
 }
 
 

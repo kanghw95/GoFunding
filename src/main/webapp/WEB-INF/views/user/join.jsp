@@ -1,89 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원가입</title>
-<style>
-[type='text'], [type='password'] {
-	width: 400px;
-	height: 40px;
-	font-size: 17px;
-	padding-left: 10px;
-}
-
-td {
-	padding: 5px 5px;
-}
-
-tr td:nth-of-type(3) {
-	width: 320px;
-}
-
-tr:nth-of-type(1) td:nth-of-type(3) div, tr:nth-of-type(2) td:nth-of-type(3) div
-	{
-	float: left;
-}
-
-table {
-	margin: 0 auto 0 auto;
-}
-
-.required {
-	color: green;
-	font-size: 1px;
-}
-
-.optional {
-	color: brown;
-	font-size: 1px;
-}
-
-#idcheck, #nicknamecheck {
-	cursor: pointer;
-	color: blue;
-}
-
-.desc {
-	font-size: 13px;
-	text-align: left;
-}
-
-
-.findPostCode {
-	width: 85px;
-	height: 40px;
-	border: none;
-	padding: 5px;
-	outline: none;
-	border-radius: 5px;
-	color: #1e1e1e;
-	background-color: #cff09e;
-	border: 1px solid #cff09e;
-	font-size: 15px;
-}
-
-.findPostCode:hover {
-	color: #1abc9c;
-}
-
-.btnJoin {
-	width: 85px;
-	height: 40px;
-	border: none;
-	padding: 5px;
-	outline: none;
-	border-radius: 5px;
-	color: #1e1e1e;
-	background-color: #a8dba8;
-	border: 1px solid #a8dba8;
-	font-size: 15px;
-}
-</style>
+	pageEncoding="UTF-8"%>
+<link href="../resources/css/userdetail_join/join.css" rel="stylesheet" type="text/css" />
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+	// 공백 체크 정규식
+	var emptyReg = /\s/g;
+	// id 정규식
+	var idReg = /^[a-z0-9]{4,12}$/g; // 4-12자리 영소문자, 숫자만
+	// 닉네임 정규식
+	var nickNameReg = /^[가-힣A-Za-z0-9]{1,8}$/g;
+	// 비밀번호 정규식
+	var pwReg = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*+=-]).{8,25}$/g;  //비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.
+	// 이름 정규식
+	var nameReg = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/g; // 2~4글자 한글이름 or 영문 이름(이름 공백 성)
+	// 이메일 정규식
+	var emailReg = /^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*.[a-zA-Z]{2,3}$/g;
+	
+	
+	
+	
+	// 아이디 중복 체크 임시
+/*	$("#id").blur(function(){
+		if
+	})*/
 
 	// 아이디 중복 체크
 	var idcheck = false;
@@ -91,9 +31,7 @@ table {
 	$(function(){
 		$("#idcheck").click(function(){
 			console.log("중복확인 클릭~");
-			
 			var id = $("#id").val();
-			
 			console.log(id);
 			
 			if(id == ""){
@@ -130,7 +68,64 @@ table {
 		
 		
 	}) // $function 끝
+
+
+		// 필수 칸 입력 체크
+	function required(){
+		if($("#id").val() == ""){
+			alert("필수 입력칸입니다");
+			$("#id").focus();
+			return false;
+		}
+		
+		if($("nickname").val() == ""){
+			alert("필수 입력칸입니다");
+			$("#nickname").focus();
+			return false;
+		}
+		
+		if($("#password1").val() == ""){
+			alert("필수 입력칸입니다");
+			$("#password1").focus();
+			return false;
+		}
+		
+		if($("#password2").val() == ""){
+			alert("필수 입력칸입니다");
+			$("#password2").focus();
+			return false;
+		}
+		
+	}// required 끝
 	
+	
+	
+		// 회원가입 ajax
+	function Join(){
+		var frmdata = $("#frmJoin").serialize();
+		console.log("frmdata: " + frmdata);
+		
+		$.ajax({
+			url: "doJoin",
+			type: "POST",
+			data: frmdata,
+			
+			success: function(data){
+				console.log("성공성공성공~");
+				if(data > 0){
+					alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
+					location.href="login";
+				}else {
+					console.log(data);
+					alert("회원가입이 되지 않았습니다. id, pw를 다시 입력해주세요.")
+					$("#id").val("").focus();
+				}
+			},
+			eroor: function(){
+				console.log("회원가입 실패")
+			}
+		})
+	}// join 함수(회원가입 ajax) 끝
 </script>
 <script>
 // 주소 검색 api
@@ -175,17 +170,17 @@ function sample6_execDaumPostcode() {
 }
 </script>
 </head>
-<body>
+<body class="bodyContent">
 	<form id="frmJoin">
 		<table>
 			<tr>
-					<td><input type="text" name="id" id="id" placeholder="아이디를 입력해주세요"></td>
-					<td><div>
-							<span id="idcheck">중복확인</span>
-						</div>
-						<div>
-							<span class="desc"> 4~15자의 영문자, 숫자만 사용 가능합니다.</span>
-						</div></td>
+				<td><input type="text" name="id" id="id" placeholder="아이디를 입력해주세요"></td>
+				<td><div>
+						<span id="idcheck">중복확인</span>
+					</div>
+					<div>
+						<span class="desc"> 4~12자의 영소문자, 숫자만 사용 가능합니다.</span>
+					</div></td>
 				</tr>
 				<tr>
 					<td><input type="text" name="nickname" id="nickname" placeholder="닉네임을 입력해주세요"></td>
@@ -266,20 +261,5 @@ function sample6_execDaumPostcode() {
 		</table>
 	</form>
 	
-	<script>
-		$("#btnJoin").on("click", function(){
-			var frmdata = $("#frmJoin").serialize();
-			$.ajax({
-				url: "",
-				type: "POST",
-				data: frmdata,
-				
-				success: function(data){
-					
-				}
-			})
-		})
-	
-	</script>
 </body>
 </html>
