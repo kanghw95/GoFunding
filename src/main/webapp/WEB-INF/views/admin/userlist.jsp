@@ -140,9 +140,9 @@ li {
 </style>
 <script>
 	var cv = "";
-	
-	function searchUser() {
-		console.log("제대로 찍혔는가?");
+
+	function searchUser() { // 사용자 검색
+		console.log("검색 시작");
 		var target = document.getElementById("select");
 		var sValue = target.options[target.selectedIndex].value;
 		var search = "%" + document.getElementById("text").value + "%";
@@ -150,10 +150,10 @@ li {
 		console.log("컨트롤러로 넘길 값은 : " + search);
 		console.log("셀렉트 values는 " + sValue);
 
-		if (sValue == 0) {
+		if (sValue == 0) { // 선택된 option이 없는 경우
 			console.log("선택 해야된다.");
 			alert("검색 항목을 선택해주세요.");
-		} else if (sValue == 1) {
+		} else if (sValue == 1) { // 아이디 검색
 			console.log("이메일 입니다.");
 			$.ajax({
 				url : "userselect",
@@ -167,7 +167,7 @@ li {
 					console.log("이메일 error 발생");
 				}
 			});
-		} else if (sValue == 2) {
+		} else if (sValue == 2) { // 이름 검색
 			console.log("이름 입니다.");
 			$.ajax({
 				url : "userselect",
@@ -181,7 +181,7 @@ li {
 					console.log("이름 error 발생");
 				}
 			});
-		} else if (sValue == 3) {
+		} else if (sValue == 3) { // 닉네임 검색
 			console.log("닉네임 입니다.");
 			$.ajax({
 				url : "userselect",
@@ -198,7 +198,7 @@ li {
 		}
 	}
 	
-	function deleteUser() {
+	function deleteUser() { // 유저 삭제
 		console.log("유저 삭제 입니다.");
 		var checked = document.getElementsByName("check");
 		var userNo = document.getElementsByName("userNo");
@@ -240,7 +240,7 @@ li {
 	}
 	
 	
-	function searchId(data) {
+	function searchId(data) { // 아이디 검색의 success 함수
 		cv = "";
 		$(".search").remove();
 		var elements = document.getElementsByName("userList");
@@ -252,7 +252,7 @@ li {
 		$.each(data, function(i, list) {
 			cv += "<tr class='search'>"
 				cv += "<td><input type='text' name='userNo' class='userNo' value='"+data[i].userNo+"' readonly/></td>"
-				cv += "<td><input type='checkbox' name='check'></td>"
+				cv += "<td><input type='checkbox' name='check' onclick='checkOne()'></td>"
 			cv += "<td>" + data[i].userId + "</td>"
 			cv += "<td>" + data[i].userName + "</td>"
 			cv += "<td>" + data[i].userNick + "</td>"
@@ -266,7 +266,7 @@ li {
 		$("#tr").append(cv);
 	}
 	
-	function searchName(data) {
+	function searchName(data) { // 이름 검색의 success 함수
 		cv = "",
 		$(".search").remove();
 		var elements = document.getElementsByName("userList");
@@ -278,7 +278,7 @@ li {
 		$.each(data, function(i, list) {
 			cv += "<tr class='search'>"
 				cv += "<td><input type='text' name='userNo' class='userNo' value='"+data[i].userNo+"' readonly/></td>"
-				cv += "<td><input type='checkbox' name='check'></td>"
+				cv += "<td><input type='checkbox' name='check' onclick='checkOne()'></td>"
 			cv += "<td>" + data[i].userId + "</td>"
 			cv += "<td>" + data[i].userName + "</td>"
 			cv += "<td>" + data[i].userNick + "</td>"
@@ -292,7 +292,7 @@ li {
 		$("#tr").append(cv);
 	}
 	
-	function searchNick(data) {
+	function searchNick(data) { // 닉네임 검색의 success 함수
 		cv = "",
 		$(".search").remove();
 		var elements = document.getElementsByName("userList");
@@ -304,7 +304,7 @@ li {
 		$.each(data, function(i, list) {
 			cv += "<tr class='search'>"
 			cv += "<td><input type='text' name='userNo' class='userNo' value='"+data[i].userNo+"' readonly/></td>"
-			cv += "<td><input type='checkbox' name='check'></td>"
+			cv += "<td><input type='checkbox' name='check' onclick='checkOne()'></td>"
 			cv += "<td>" + data[i].userId + "</td>"
 			cv += "<td>" + data[i].userName + "</td>"
 			cv += "<td>" + data[i].userNick + "</td>"
@@ -317,13 +317,44 @@ li {
 		});
 		$("#tr").append(cv);
 	}
+	
+	function checkAll() { // 체크박스 전체 체크, 해제
+		console.log("체크박스 함수 진입");
+		var checked = document.getElementsByName("check");
+		var checkAll = document.getElementById("checkAll");
+		if (checkAll.checked == false) {
+			for (var i = 0; i < checked.length; i++) {
+				checked[i].checked = false; 
+				console.log("전체 선택 취소");
+			}
+		} else {
+			for (var i = 0; i < checked.length; i++) {
+				checked[i].checked = true;
+				console.log("전체 선택");
+			}
+		}
+	}
+	
+	function checkOne() { // 체크박스 개별 체크, 해제
+		console.log("체크박스 개별 함수 진입");
+		var allBox = document.querySelectorAll("input[name='check']");
+		var checkedBox = document.querySelectorAll("input[name='check']:checked");
+		var checkAll = document.getElementById("checkAll");
+		console.log(allBox);
+		console.log(checkedBox);
+		if (allBox.length == checkedBox.length) {
+			checkAll.checked = true;
+		} else {
+			checkAll.checked = false;
+		}
+	}
 </script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
 	<div id="space">
 		<div id="wrapper">
-			<img src="resources/image/list.png" id="list">&nbsp;
+			<img src="resources/img/admin/list.png" id="list">&nbsp;
 			<p id="userManage">회원관리</p>
 		</div>
 		<c:if test="${!empty usercount }">
@@ -337,7 +368,7 @@ li {
 		<table class="tg" border="1" id="tr">
 			<tr>
 				<th>NO</th>
-				<th><input type="checkbox"></th>
+				<th><input type="checkbox" id="checkAll" onclick="checkAll()"></th>
 				<th>이메일</th>
 				<th>이름</th>
 				<th>닉네임</th>
@@ -351,7 +382,7 @@ li {
 				<c:forEach var="user" items="${userlist }" varStatus="status">
 					<tr name="userList" id="userList" class="search">
 						<td class="noBox"><input type="text" name="userNo" class="userNo" value=${user.userNo } readonly></td>
-						<td><input type="checkbox" name="check"></td>
+						<td><input type="checkbox" name="check" onclick='checkOne()'></td>
 						<td>${user.userId }</td>
 						<td>${user.userName}</td>
 						<td>${user.userNick}</td>
