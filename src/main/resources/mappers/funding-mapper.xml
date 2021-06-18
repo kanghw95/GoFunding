@@ -43,4 +43,5 @@
 	<select id="selectOne" parameterType="int" resultType="Funding">
 		SELECT * FROM FUNDING WHERE FUNDINGNO = #{fundingno}
 	</select>
+	
 </mapper>

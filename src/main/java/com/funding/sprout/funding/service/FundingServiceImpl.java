@@ -1,5 +1,6 @@
 package com.funding.sprout.funding.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.funding.sprout.funding.dao.FundingDao;
 import com.funding.sprout.vo.Funding;
+import com.funding.sprout.vo.Reward;
 
 @Service("funService")
 public class FundingServiceImpl implements FundingService{
@@ -26,12 +28,6 @@ public class FundingServiceImpl implements FundingService{
 		return funDao.selectOne(fundingno);
 	}
 	
-	@Override
-	public List<Funding> selectlist() {
-		// TODO Auto-generated method stub
-		return funDao.selectList();
-	}
-	
 	public List<Funding> searchList(String serchOption, String keyword){
 		return funDao.searchList(serchOption,keyword);
 	}
@@ -42,6 +38,13 @@ public class FundingServiceImpl implements FundingService{
 		return funDao.selectList();
 	}
 
+	@Override
+	public List<Reward> selectReward(int fundingno) {
+		// TODO Auto-generated method stub
+		return funDao.selectReward(fundingno);
+	}
+
+	
 	@Override
 	public int insertFunding() {
 		// TODO Auto-generated method stub
@@ -71,6 +74,7 @@ public class FundingServiceImpl implements FundingService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 
 }

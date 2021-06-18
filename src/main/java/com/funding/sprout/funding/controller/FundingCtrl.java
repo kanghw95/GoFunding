@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.funding.sprout.funding.service.FundingService;
 import com.funding.sprout.vo.Funding;
+import com.funding.sprout.vo.Reward;
 
 @Controller
 public class FundingCtrl {
@@ -25,7 +26,9 @@ public class FundingCtrl {
 
 		return null; // 펀딩 가져오기
 	}
-
+	
+	
+	//펀딩 검색
 	@RequestMapping(value = "funsearch", method = RequestMethod.GET)
 	public ModelAndView searchList(ModelAndView mv, @RequestParam(name = "keyword") String keyword,
 			@RequestParam(name = "serchOption") String serchOption) {
@@ -69,11 +72,16 @@ public class FundingCtrl {
 	@RequestMapping(value = "funding/detail", method = RequestMethod.GET)
 	public ModelAndView fundingDetail(@RequestParam(name = "no") int fundingno, ModelAndView mv) {
 		try {
-			Funding funding = funService.selectOne(fundingno);
+			Funding funding = funService.selectOne(fundingno);	
+			List<Reward> rewardlist = funService.selectReward(fundingno);
 			System.out.println("선택한 펀딩 정보 :" + funding);
-			System.out.println(funding.getFundingtitle());
+			System.out.println("선택한 리워드 정보 :" + rewardlist);
+			
 			mv.addObject("funding", funService.selectOne(fundingno));
+			mv.addObject("reward", funService.selectReward(fundingno));
+			
 			mv.setViewName("funding/fundingdetail");
+			
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");

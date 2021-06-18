@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +81,7 @@
 	
 		<ul class="fundingcategory">
 			<li class="fundingcategory_item">
-			<input type="radio" id="funding_home_tab_1" name="funding" role="tab" aria-controls="funding_tab_panel" class="fundingcategory_input">
+			<input type="radio" id="funding_home_tab_all" name="funding" role="tab" aria-controls="funding_tab_panel" class="fundingcategory_input">
 			<label for="funding_home_tab_all" class="fundingcategory_label">전체</label>
 			</li>
 	
@@ -91,32 +91,32 @@
 			</li>
 			
 			<li class="fundingcategory_item">
-			<input type="radio" id="funding_home_tab_1" name="funding" role="tab" aria-controls="funding_tab_panel" class="fundingcategory_input">
+			<input type="radio" id="funding_home_tab_2" name="funding" role="tab" aria-controls="funding_tab_panel" class="fundingcategory_input">
 			<label for="funding_home_tab_2" class="fundingcategory_label">공정 무역</label>
 			</li>
 			
 			<li class="fundingcategory_item">
-			<input type="radio" id="funding_home_tab_1" name="funding" role="tab" aria-controls="funding_tab_panel" class="fundingcategory_input">
+			<input type="radio" id="funding_home_tab_3" name="funding" role="tab" aria-controls="funding_tab_panel" class="fundingcategory_input">
 			<label for="funding_home_tab_3" class="fundingcategory_label">친환경</label>
 			</li>
 			
 			<li class="fundingcategory_item">
-			<input type="radio" id="funding_home_tab_1" name="funding" role="tab" aria-controls="funding_tab_panel" class="fundingcategory_input">
+			<input type="radio" id="funding_home_tab_4" name="funding" role="tab" aria-controls="funding_tab_panel" class="fundingcategory_input">
 			<label for="funding_home_tab_4" class="fundingcategory_label">기부</label>
 			</li>
 			
 			<li class="fundingcategory_item">
-			<input type="radio" id="funding_home_tab_1" name="funding" role="tab" aria-controls="funding_tab_panel" class="fundingcategory_input">
+			<input type="radio" id="funding_home_tab_5" name="funding" role="tab" aria-controls="funding_tab_panel" class="fundingcategory_input">
 			<label for="funding_home_tab_5" class="fundingcategory_label">작은 가게</label>
 			</li>
 			
 			<li class="fundingcategory_item">
-			<input type="radio" id="funding_home_tab_1" name="funding" role="tab" aria-controls="funding_tab_panel" class="fundingcategory_input">
+			<input type="radio" id="funding_home_tab_6" name="funding" role="tab" aria-controls="funding_tab_panel" class="fundingcategory_input">
 			<label for="funding_home_tab_6" class="fundingcategory_label">미디어</label>
 			</li>
 			
 			<li class="fundingcategory_item">
-			<input type="radio" id="funding_home_tab_1" name="funding" role="tab" aria-controls="funding_tab_panel" class="fundingcategory_input">
+			<input type="radio" id="funding_home_tab_7" name="funding" role="tab" aria-controls="funding_tab_panel" class="fundingcategory_input">
 			<label for="funding_home_tab_7" class="fundingcategory_label">창작자</label>
 			</li>
 		</ul>
@@ -173,7 +173,14 @@
 										<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
 										<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
 										
-											<span class="fundingCard_date">${endDate - strDate } 일 남음</span>
+										<c:choose>
+											<c:when test="${(endDate-strDate) gt 0 }">
+												<span class="fundingCard_date">${endDate - strDate } 일 남음</span>
+											</c:when>
+											<c:otherwise>
+											<span class="fundingCard_date">종료</span>
+											</c:otherwise>
+										</c:choose>
 											<span class="fundingCard_amount"><strong class="FundingCard_number__n_hbd">37,000</strong>원</span>
 										</div>
 									</div>
@@ -208,6 +215,8 @@
 				list.setAttribute("aria-hidden","true");
 			}
 		});
+		
+		
 		
 </script>
 

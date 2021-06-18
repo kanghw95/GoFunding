@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Reward">
+	<resultMap type="Reward" id="resultReward">
+		<!-- property는 필드명, column 은 DB 컬럼 명을 입력한다 -->
+		<id property="rewardNo" column="REWARDNO" />
+		<result property="rewardTitle" column="REWARDTITLE" />
+		<result property="rewardEA" column="REWARDEA" />
+		<result property="rewardPrice" column="REWARDPRICE" />
+		<result property="fundingNo" column="FUNDINGNO" />
+	</resultMap>
+	
+	<!-- 리워드 조회 -->
+	<select id="selectrewardlist"  parameterType="int"  resultMap="resultReward">
+		SELECT * FROM REWARD WHERE FUNDINGNO = #{fundingNo}
+	</select>
+</mapper>

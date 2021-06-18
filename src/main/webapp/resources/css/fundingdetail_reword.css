@@ -111,10 +111,21 @@
     margin: 2px 0 0 4px;
     vertical-align: top;
 }
+.FundingDetailRewardList_icon:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    -ms-transform: translate(-50%,-50%) scaleX(.92308) rotate(45deg);
+    transform: translate(-50%,-50%) scaleX(.92308) rotate(45deg);
+    margin-left: -2px;
+    border-top: 1px solid #666;
+    border-right: 1px solid #666;
+}
 
-
-
-.FundingDetailStoryContent_wrap__1XbqX:after {
+.FundingDetailStoryContent_wrap:after {
     display: table;
     table-layout: fixed;
     clear: both;

@@ -14,6 +14,7 @@
 		<typeAlias type="com.funding.sprout.vo.Order" alias="Order" />
 		<typeAlias type="com.funding.sprout.vo.Qna" alias="Qna" />
 		<typeAlias type="com.funding.sprout.vo.Report" alias="Report" />
+		<typeAlias type="com.funding.sprout.vo.Reward" alias="Reward" />
 		<typeAlias type="com.funding.sprout.vo.User" alias="User" />
 	</typeAliases>
 
@@ -26,6 +27,7 @@
 		<mapper resource="mappers/message-mapper.xml" />
 		<mapper resource="mappers/order-mapper.xml" />
 		<mapper resource="mappers/report-mapper.xml" />
+		<mapper resource="mappers/reward-mapper.xml" />
 		<mapper resource="mappers/user-mapper.xml" />
 	</mappers>
 

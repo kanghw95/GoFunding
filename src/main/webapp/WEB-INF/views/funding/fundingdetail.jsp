@@ -17,6 +17,10 @@
 <link href="<%=request.getContextPath() %>/resources/css/fundingdetail_reword.css" rel="stylesheet" type="text/css" />
 
 </head>
+<script>
+
+
+</script>
 <body>
 	<div class="wrap">
 		<div role="main" id="content" class="content">
@@ -75,19 +79,35 @@
 					<div class="FundingDetailSummary_reward">
 						<div class="FundingDetailSummary_reward_inner">
 							<div class="FundingDetailSummary_select">
-								<button type="button" class="FundingDetailSummary_button_select" aria-expanded="false">
+								<button type="button" id="FundingDetailSummary_button_select" class="FundingDetailSummary_button_select" aria-expanded="false">
 									리워드 선택하기
 									<span class="FundingDetailSummary_icon"></span>
 								</button>
+								<ul id="FundingDetailSummary_list_reward__2O_UT" class="FundingDetailSummary_list_reward__2O_UT">
+									<c:forEach var="reward" items="${reward}">
+										<li class="FundingDetailSummary_item__uEGFt">
+											<button type="button" id="reword${reward.rewardNo}" class="FundingDetailSummary_button__3drOk">${reward.rewardTitle} &nbsp;</button>
+											<input type="hidden" id="rewardEA${reward.rewardNo}" value="${reward.rewardEA}">
+											<input type="hidden"  id="rewardPrice${reward.rewardNo}" value="${reward.rewardPrice}">
+										</li>
+									</c:forEach>
+									<li class="FundingDetailSummary_item__uEGFt">
+									<button type="button" id="cheer1" class="FundingDetailSummary_button__3drOk">(선택) 메이커에게 1,000원 더 응원하기</button>
+									</li>
+
+								</ul>
 							</div>
+							<ul id="FundingDetailSummary_list_cart__3t2SB" class="FundingDetailSummary_list_cart__3t2SB">
+
+							</ul>
 							<div class="FundingDetailSummary_total">
 								<div class="FundingDetailSummary_count">
-									총 수량<span class="FundingDetailSummary_number">0</span>개
+									총 수량<span id="FundingTotalnumber" class="FundingDetailSummary_number">0</span>개
 								</div>
 								<div class="FundingDetailSummary_amount">
 									<strong class="FundingDetailSummary_name">총 금액</strong>
 									<strong class="FundingDetailSummary_description">
-									<span class="FundingDetailSummary_number">0</span>원</strong>
+									<span id="FundingTotalPrice" class="FundingDetailSummary_number">0</span>원</strong>
 								</div>
 							</div>
 							<div class="FundingDetailSummary_delivery">
@@ -100,13 +120,13 @@
 								class="FundingDetailSummary_button_join"
 								aria-expanded="false" aria-controls="wa_option"
 								aria-hidden="false">펀딩 참여하기</button>
-							<a href=":;0"
+							<a href="#"
 								class="naver-splugin Social_wrap FundingDetailSummary_button_share"
 								role="button" aria-label="공유하기" aria-hidden="false"
 								data-style="unity-v2" data-blog-source-form="2"
-								splugin-id="9881009287"><svg width="25" height="22"
-									viewBox="0 0 25 22">
-								</svg></a>
+								splugin-id="9881009287">
+								<svg width="25" height="22" viewBox="0 0 25 22"> </svg>
+							</a>
 						</div>
 
 					</div>
@@ -139,14 +159,10 @@
 							<article class="FundingDetailStoryContent_article">
 								<h4 class="blind">스토리 본문</h4>
 								<div class="FundingDetailArticle_wrap">
-									<strong class="FundingDetailEditorParagraph_title">일상의
-										신발에 따뜻한 생각을 담은 발걸음 프로젝트</strong>
-									<p class="FundingDetailEditorParagraph_content">'점프
-										1'은 누구나 차별 없는 사회를 꿈꾸는 소셜벤처 ‘점프’와 세상의 모든 예쁜 신발을 생각하는 맞춤형 신발 플랫폼
-										그룹 ‘신발연구소’가 협업해 만든 스니커즈 브랜드입니다. 이 신발이 당신의 발걸음을 응원하면 좋겠다는 생각,
-										당신이 구입한 신발 하나가 누군가의 발걸음과 함께하면 좋겠다는 마음으로 시작했습니다. 화이트 색상의 군더더기
-										없는 디자인, 친환경적인 마이크로 화이버 소재와 쿠션감 뛰어난 인솔 등 좋은 소재를 사용했습니다. 신발이
-										가져야할 패션과 기능 외에 ‘함께 걷는 사회’라는 우리의 꿈을 담은 특별한 스니커즈 '점프1'을 만나보세요.</p>
+									<strong class="FundingDetailEditorParagraph_title">${funding.fundingtitle}</strong>
+									<p class="FundingDetailEditorParagraph_content">
+									${funding.fundingcontent}
+									</p>
 									<div class="FundingDetailEditorSingleImage_wrap">
 										<img
 											src=""
@@ -155,18 +171,11 @@
 									</div>
 									<div
 										class="FundingDetailEditorTitle_wrap FundingDetailEditorTitle_type_b">
-										<strong class="FundingDetailEditorTitle_text">펀딩
-											후원금 사용계획</strong>
+										<strong class="FundingDetailEditorTitle_text">펀딩 후원금 사용계획</strong>
 									</div>
-									<p class="FundingDetailEditorParagraph_content">점프
-										1은 다양한 배경의 아이들과 함께 뜁니다. 더 밝고, 자신감 있게 사회와 통합되고 성장할 수 있도록,
-										판매수익금은 &lt;점프 1 스포츠 클럽&gt; 운영에 사용됩니다. 스포츠클럽은 ‘세상 아이들을 가장 많이 뛰어
-										놀게 하자’는 목표를 가진 점프의 휴브 사업팀을 주축으로 운영되어, 1개의 클럽에 지역아동센터 아동 20여명이
-										참여하여 양성된 대학생 코치들과 함께 다양한 놀이와 팀플레이를 경험할 수 있습니다. 체육활동을 통해 육체적,
-										정신적 건강을 지켜 나갈 수 있도록, 다양한 팀스포츠를 통해 경쟁보다는 협력을 이루어 “경쟁력”을 갖춘 아이로
-										성장 할 수 있도록 지원할 예정입니다. 점프 1 운동화 400켤레의 판매 수익금이 모여 6개월 동안 지역아동센터
-										아동·청소년 20명으로 구성된 1개의 스포츠클럽을 운영할 수 있습니다. 400켤레 이상 판매가 이루어질 경우
-										스포츠 클럽을 더욱 장기적으로 운영할 수 있습니다.</p>
+									<p class="FundingDetailEditorParagraph_content">
+									후원금 사용 계획 적는곳
+									</p>
 								</div>
 							</article>
 							<section class="FundingDetailStoryContent_guide">
@@ -176,17 +185,16 @@
 										<li class="FundingDetailStoryContent_item">리워드는 해당 프로젝트 개설자가 제공합니다.</li>
 										<li class="FundingDetailStoryContent_item">100% 달성 시에만 아래 지정일에 결제됩니다.</li>
 									</ul>
-									<strong class="FundingDetailStoryContent_subtitle__mm0mM">
-									결제 및 발송 예정일</strong>
+									<strong class="FundingDetailStoryContent_subtitle__mm0mM"> 결제 및 발송 예정일</strong>
 									<ul class="FundingDetailStoryContent_list_date__1xfUX">
 										<li class="FundingDetailStoryContent_item">
 											<span class="FundingDetailStoryContent_text FundingDetailStoryContent_highlight">
-											1차 결제 : 2021년 6월 28일, 예상 발송일 : 2021년 7월 5일
+											1차 결제 : 0000년 0월 00일, 예상 발송일 : 0000년 0월 00일
 											</span>
 										</li>
 										<li class="FundingDetailStoryContent_item">
 											<span class="FundingDetailStoryContent_text">
-											2차 결제 : 2021년 7월 16일, 예상 발송일 : 2021년 7월 23일
+											2차 결제 : 0000년 0월 00일, 예상 발송일 : 0000년 0월 00일
 											</span>
 										</li>
 									</ul>
@@ -221,48 +229,31 @@
 							<div class="FundingDetailRewardList_wrap">
 								<h4 class="FundingDetailRewardList_title">리워드 안내</h4>
 								<ul class="FundingDetailRewardList_list">
+								<c:forEach var="reward" items="${reward}">
 									<li class="FundingDetailRewardList_item">
 									<strong class="FundingDetailRewardList_amount_">
-										<span class="FundingDetailRewardList_number">원</span>펀딩참여
+										<span class="FundingDetailRewardList_number">${reward.rewardPrice}원</span>펀딩참여
 									</strong>
 									<div class="FundingDetailRewardList_text_">
 											<strong class="FundingDetailRewardList_name">
-											점프1 (스니커즈 1EA+사은품 핸드폰 스트랩1+추가끈1)
+											${reward.rewardTitle}
 											</strong>
 											<div class="FundingDetailRewardList_count">
-												<strong>89</strong>개 남음
+												<strong>${reward.rewardEA}</strong> 개 남음
 											</div>
 											<ul class="FundingDetailRewardList_information">
-												<li class="FundingDetailRewardList_item_information">현재명 펀딩 참여</li>
+												<li class="FundingDetailRewardList_item_information">현재0명 펀딩 참여</li>
 												<li class="FundingDetailRewardList_item_information">
 													<strong class="FundingDetailRewardList_highlight">
-													<span class="FundingDetailRewardList_date">발송예상일</span>2021.7.5
+														<span class="FundingDetailRewardList_date">발송예상일</span>0000.0.00
 													</strong>
 												</li>
 											</ul>
-										</div></li>
-									<li class="FundingDetailRewardList_item">
-										<strong class="FundingDetailRewardList_amount_">
-											<span class="FundingDetailRewardList_number">원</span>펀딩 참여
-										</strong>
-									<div class="FundingDetailRewardList_text_">
-											<strong class="FundingDetailRewardList_name">
-												점프1 커플백(스니커즈 2EA+사은품 핸드폰 스트랩2+추가끈2)
-											</strong>
-											<div class="FundingDetailRewardList_count">
-												<strong>99</strong>개 남음
-											</div>
-											<ul class="FundingDetailRewardList_information">
-												<li class="FundingDetailRewardList_item_information">
-												현재 1명 펀딩 참여
-												</li>
-												<li class="FundingDetailRewardList_item_information">
-													<strong class="FundingDetailRewardList_highlight">
-														<span class="FundingDetailRewardList_date">발송예상일</span>2021.7.5
-													</strong>
-												</li>
-											</ul>
-										</div></li>
+										</div>
+									</li>
+									
+									</c:forEach>
+
 								</ul>
 								<a class="FundingDetailRewardList_link" href="#">자세히 보기
 									<span class="FundingDetailRewardList_icon"></span>
@@ -274,5 +265,90 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		//리워드 선택 list 열고 닫기
+		var listbtn = document.getElementById("FundingDetailSummary_button_select");
+		var list = document.getElementById("FundingDetailSummary_list_reward__2O_UT");
+		
+		listbtn.addEventListener("click",function(){
+			
+			if(listbtn.getAttribute("aria-expanded") == "false"){
+			listbtn.setAttribute("aria-expanded","true");
+			list.style.display = 'block';
+			}else{
+				listbtn.setAttribute("aria-expanded","false");
+				list.style.display = 'none';
+			}
+		});
+		
+		//리워드 리스트에서 선택하기 
+		var reword_btn1 = document.getElementById("reword1");
+		var reword_price1 = document.getElementById("rewardPrice1").value;
+		var reword_val1 = document.getElementById("reword1").innerText;
+		
+		var reword_btn2 = document.getElementById("reword2");
+		var reword_price2 = document.getElementById("rewardPrice2").value;
+		var reword_val2 = document.getElementById("reword2").innerText;
+		
+		var cheer_btn1 = document.getElementById("cheer1");
+		var cheer_val1 = document.getElementById("cheer1").innerText;
+		
+		var ul_list = document.getElementById("FundingDetailSummary_list_cart__3t2SB"); //ul_list선언
+		var totalprice =  document.getElementById("FundingTotalPrice");
+		var totalnumber =  document.getElementById("FundingTotalnumber");
+		
+		var funtotalprice = totalprice.innerText;
+		var funtotalnumber = totalnumber.innerText;
+		console.log(funtotalprice);
+		console.log(funtotalnumber);
+		var li1 = document.createElement("li");
+		var li2 = document.createElement("li");
+		var li3 = document.createElement("li");
+		
+		reword_btn1.addEventListener("click",function(){
+			ul_list.style.display = 'block';
+			listbtn.setAttribute("aria-expanded","false");
+			list.style.display = 'none';
+			li1.setAttribute('class','FundingDetailRewardCartItem_wrap__vdT7T');
+			li1.innerHTML = "<strong class='FundingDetailRewardCartItem_name__1BPbo'>"+reword_val1+"</strong> <div class='FundingDetailRewardCartItem_counter__1jk_P'> <input id='reward-cart-item-9' type='number' class='FundingDetailRewardCartItem_input_count__Em-cm' value='1'> <label for='reward-cart-item-9' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus__1zWpw' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus__13l8X'> <span class='FundingDetailRewardCartItem_icon_plus__3xFSP'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount__1WmUb'><strong>"+reword_price1+"</strong>원</span> <button class='FundingDetailRewardCartItem_button_delete__feY-l'> <span class='FundingDetailRewardCartItem_icon__3CScL'></span> <span class='blind'>삭제</span></button>";
+			funtotalprice = parseInt(funtotalprice) + parseInt(reword_price1);
+			totalprice.innerText = funtotalprice;
+		
+			funtotalnumber = parseInt(funtotalnumber) + 1;
+			totalnumber.innerText = funtotalnumber;
+			ul_list.appendChild(li1);
+			});
+		
+		reword_btn2.addEventListener("click",function(){
+			ul_list.style.display = 'block';
+			listbtn.setAttribute("aria-expanded","false");
+			list.style.display = 'none';
+			li2.setAttribute('class','FundingDetailRewardCartItem_wrap__vdT7T');
+			li2.innerHTML = "<strong class='FundingDetailRewardCartItem_name__1BPbo'>"+reword_val2+"</strong> <div class='FundingDetailRewardCartItem_counter__1jk_P'> <input id='reward-cart-item-9' type='number' class='FundingDetailRewardCartItem_input_count__Em-cm' value='1'> <label for='reward-cart-item-9' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus__1zWpw' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus__13l8X'> <span class='FundingDetailRewardCartItem_icon_plus__3xFSP'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount__1WmUb'><strong>"+reword_price2+"</strong>원</span> <button class='FundingDetailRewardCartItem_button_delete__feY-l'> <span class='FundingDetailRewardCartItem_icon__3CScL'></span> <span class='blind'>삭제</span></button>";
+		
+			funtotalprice = parseInt(funtotalprice) + parseInt(reword_price2);
+			totalprice.innerText = funtotalprice;
+		
+			funtotalnumber = parseInt(funtotalnumber) + 1;
+			totalnumber.innerText = funtotalnumber;
+			
+			ul_list.appendChild(li2);
+
+			});
+		
+		cheer_btn1.addEventListener("click",function(){
+			ul_list.style.display = 'block';
+			listbtn.setAttribute("aria-expanded","false");
+			list.style.display = 'none';
+			li3.setAttribute('class','FundingDetailRewardCartItem_wrap__vdT7T');
+			li3.appendChild(textNode3);
+			ul_list.appendChild(li3);
+
+			});
+
+
+
+</script>
 </body>
 </html>

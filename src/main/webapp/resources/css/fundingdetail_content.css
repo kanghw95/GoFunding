@@ -16,7 +16,7 @@
 .FundingDetailStoryContent_wrap_content {
     float: left;
     width: 740px;
-    padding-top: 20px;
+    padding-top: 60px;
 }
 
 .FundingDetailStoryContent_article {
@@ -89,14 +89,6 @@
     font-weight: 700;
     line-height: 1.27;
     letter-spacing: -.6px;
-}
-
-.FundingDetailEditorParagraph_content {
-    margin-top: 20px;
-    font-size: 17px;
-    line-height: 1.53;
-    color: #333;
-    white-space: pre-line;
 }
 
 .FundingDetailEditorTitle_type_b {

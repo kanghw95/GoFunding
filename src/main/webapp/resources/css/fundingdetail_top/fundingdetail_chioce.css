@@ -48,13 +48,41 @@
     width: 11px;
     height: 11px;
     -ms-transform: translate(-50%,-50%) scaleY(.94737) rotate(45deg);
-    transform: translate(-50%,-50%) scaleY(.94737) rotate(
-45deg
-);
+    transform: translate(-50%,-50%) scaleY(.94737) rotate(45deg);
     margin-top: -4px;
     border-right: 1px solid #333;
     border-bottom: 1px solid #333;
 }
+
+.FundingDetailSummary_button_select[aria-expanded=true] {
+    border-color: #7f7f7f;
+    border-radius: 3px 3px 0 0;
+    border-bottom: none;
+    color: #1f9eff;
+}
+
+.FundingDetailSummary_list_reward__2O_UT {
+	display : none;
+    position: absolute;
+    top: 39px;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    background-color: #fff;
+    border: 1px solid #7f7f7f;
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+}
+.FundingDetailSummary_list_reward__2O_UT .FundingDetailSummary_item__uEGFt {
+    border-top: 1px solid rgba(0,0,0,.12);
+}
+
+.FundingDetailSummary_button__3drOk {
+    width: 100%;
+    padding: 10px 11px 9px;
+    text-align: left;
+}
+
 
 .FundingDetailSummary_total {
     margin-top: 21px;
@@ -178,6 +206,175 @@
     content: "";
 }
 
+.FundingDetailSummary_list_cart__3t2SB {
+	display : none;
+    margin-top: 20px;
+    border: 1px solid #000;
+    border-width: 1px 0;
+}
+
+.FundingDetailRewardCartItem_wrap__vdT7T {
+    position: relative;
+    padding: 18px 0;
+}
+
+.FundingDetailRewardCartItem_name__1BPbo {
+    display: block;
+    margin-right: 30px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.36;
+    color: #000;
+    word-break: break-all;
+}
+
+.FundingDetailRewardCartItem_counter__1jk_P {
+    position: relative;
+    width: 136px;
+    margin-top: 10px;
+}
+
+.FundingDetailRewardCartItem_input_count__Em-cm {
+    width: 100%;
+    padding: 2px 37px 0;
+}
+
+.FundingDetailRewardCartItem_input_amount__gWlf3, .FundingDetailRewardCartItem_input_count__Em-cm {
+    display: inline-block;
+    height: 38px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #333;
+    text-align: center;
+    vertical-align: top;
+}
+
+.FundingDetailRewardCartItem_button_minus__1zWpw {
+    left: 0;
+    border-right: 1px solid #e0e0e0;
+}
+
+.FundingDetailRewardCartItem_button_minus__1zWpw, .FundingDetailRewardCartItem_button_plus__13l8X {
+    position: absolute;
+    top: 0;
+    width: 38px;
+    height: 38px;
+    padding-top: 6px;
+    vertical-align: top;
+}
+
+.FundingDetailRewardCartItem_icon_minus__1Jcwy {
+    display: inline-block;
+    position: relative;
+    width: 15px;
+    height: 15px;
+    font-size: 0;
+    text-align: center;
+    vertical-align: top;
+}
+
+.FundingDetailRewardCartItem_icon_minus__1Jcwy:after {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 15px;
+    height: 1px;
+    background-color: #666;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    content: "";
+}
+
+.FundingDetailRewardCartItem_button_plus__13l8X {
+    right: 0;
+    border-left: 1px solid #e0e0e0;
+}
+
+.FundingDetailRewardCartItem_icon_plus__3xFSP {
+    display: inline-block;
+    position: relative;
+    width: 15px;
+    height: 15px;
+    font-size: 0;
+    text-align: center;
+    vertical-align: top;
+}
+
+.FundingDetailRewardCartItem_icon_plus__3xFSP:after, .FundingDetailRewardCartItem_icon_plus__3xFSP:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1px;
+    height: 15px;
+    background-color: #666;
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    content: "";
+}
+
+.FundingDetailRewardCartItem_icon_plus__3xFSP:after {
+    -ms-transform: translate(-50%,-50%) rotate(90deg);
+    transform: translate(-50%,-50%) rotate(90deg);
+}
+
+.FundingDetailRewardCartItem_amount__1WmUb {
+    position: absolute;
+    right: 0;
+    bottom: 27px;
+    font-size: 15px;
+}
+
+.FundingDetailRewardCartItem_button_delete__feY-l {
+    position: absolute;
+    top: 5px;
+    right: -15px;
+    padding: 15px;
+    font-size: 0;
+    line-height: 0;
+}
+
+.FundingDetailRewardCartItem_button_delete__feY-l .FundingDetailRewardCartItem_icon__3CScL {
+    position: relative;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+}
+
+.FundingDetailRewardCartItem_button_delete__feY-l .FundingDetailRewardCartItem_icon__3CScL:before {
+    -ms-transform: translate(-50%,-50%) rotate(45deg);
+    transform: translate(-50%,-50%) rotate(45deg);
+}
+
+.FundingDetailRewardCartItem_button_delete__feY-l .FundingDetailRewardCartItem_icon__3CScL:after {
+    -ms-transform: translate(-50%,-50%) rotate(135deg);
+    transform: translate(-50%,-50%) rotate(135deg);
+}
+
+
+.FundingDetailRewardCartItem_button_delete__feY-l .FundingDetailRewardCartItem_icon__3CScL:after, .FundingDetailRewardCartItem_button_delete__feY-l .FundingDetailRewardCartItem_icon__3CScL:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 19px;
+    height: 1px;
+    background-color: rgba(0,0,0,.2);
+}
+
+.blind, input[type=checkbox], input[type=radio] {
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    clip: rect(0 0 0 0);
+}
+
+
+
 a {
     text-decoration: none;
     color: inherit;
@@ -221,6 +418,17 @@ body, button, input, select, table, textarea {
 	line-height: 19px;
 	color: #202020;
 }
+
+button, input, select, textarea {
+    border: 0;
+    border-radius: 0;
+    background-color: rgba(0,0,0,0);
+    box-shadow: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
 
 button, input[type=button], input[type=checkbox]+label, input[type=radio]+label,
 	input[type=reset], input[type=submit] {
