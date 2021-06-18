@@ -18,6 +18,7 @@ public interface BoardService {
 	
 	
 	
+	
 
 	Board selectOne(int boardNo); 
 	

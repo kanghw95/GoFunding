@@ -3,7 +3,6 @@ package com.funding.sprout.board.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,7 @@ public class BoardCtrl {
 	@Autowired
 	private BoardService boService;
 
-	public static final int LIMIT = 10;
-
+	public static final int LIMIT = 70;
 	private static final Logger logger = LoggerFactory.getLogger(BoardCtrl.class);
 
 	@RequestMapping(value = "boardList", method = RequestMethod.GET)
@@ -48,7 +46,6 @@ public class BoardCtrl {
 				System.out.println("aaa: " + aaa.get(0).toString());
 				mv.addObject("list", aaa);
 			}
-
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount);
@@ -77,33 +74,31 @@ public class BoardCtrl {
 	}
 
 	@RequestMapping(value = "boardWrite", method = RequestMethod.GET)
-	public String write() { // write로 이동
+	public String write() { // write로 이동		
 		return "board/boardWrite";
 	}
 
 	@RequestMapping(value = "boardInsert", method = RequestMethod.POST)
 	public ModelAndView boardInsert(Board b, @RequestParam(name = "upfile", required = false) MultipartFile report, 
-			@RequestParam("boardTitle") String boardtitle, @RequestParam("boardContent") String boardcotent, 
+			@RequestParam("boardTitle") String boardtitle, 
+			@RequestParam("boardContent") String boardcotent, 
 			@RequestParam("userid") String userid,
 			HttpServletRequest request, ModelAndView mv, Board vo
-	
 			) { // 게시글 등록		
 			int result = 0;
 			System.out.println("제목 : " + boardtitle);
 			System.out.println("내용 : " + boardcotent);
-			System.out.println("작성자 : " + userid);
+			System.out.println("작성자 :" + userid);
 			
-			vo = new Board();
-			
+			vo = new Board();		
 			vo.setBoardTitle(boardtitle);
 			vo.setBoardContent(boardcotent);
 			vo.setBoardId(userid);
-			
 			result = boService.insertBoard(vo);
 					
 		try {
 			if(result != 0) {
-			mv.setViewName("board/boardList");
+			mv.setViewName("redirect:boardList");
 			}else {
 				mv.addObject("msg", "글 등록 실패");
 				mv.setViewName("errorPage");

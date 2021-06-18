@@ -90,7 +90,9 @@
 			</div>
 			
 			<div id = "Content2">
-			<textarea name = "content" rows = "10" cols = "100">${data.boardContent }</textarea>
+			<!-- <textarea name = "content" rows = "10" cols = "100"> -->
+			${data.boardContent }
+			<!-- </textarea> -->
 			</div>
 			
 			<div id = "Reply">
