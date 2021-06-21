@@ -52,18 +52,19 @@ public class BoardCtrl {
 			logger.info("boardList()aaaa: ");
 			mv.setViewName("board/boardList");
 		} catch (Exception e) {
+			e.printStackTrace();
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");
 		}
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "boardDetail", method = RequestMethod.GET)
 	public ModelAndView boardDetail(ModelAndView mv, Model model, int boardNo) { // 게시글 상세보기
 //	public String boardDetail(ModelAndView mv,Model model, int boardNo) { // 게시글 상세보기
 		Board data = boService.detail(boardNo); // no값넘김
 		System.out.println("data : " + data.toString());
-
+		
 		// 방법1
 		mv.addObject("data", data);
 		mv.setViewName("board/boardDetail");
@@ -74,81 +75,91 @@ public class BoardCtrl {
 	}
 
 	@RequestMapping(value = "boardWrite", method = RequestMethod.GET)
-	public String write() { // write로 이동		
+	public String write() { // write로 이동
 		return "board/boardWrite";
 	}
 
 	@RequestMapping(value = "boardInsert", method = RequestMethod.POST)
-	public ModelAndView boardInsert(Board b, @RequestParam(name = "upfile", required = false) MultipartFile report, 
-			@RequestParam("boardTitle") String boardtitle, 
-			@RequestParam("boardContent") String boardcotent, 
-			@RequestParam("userid") String userid,
-			HttpServletRequest request, ModelAndView mv, Board vo
-			) { // 게시글 등록		
-			int result = 0;
-			System.out.println("제목 : " + boardtitle);
-			System.out.println("내용 : " + boardcotent);
-			System.out.println("작성자 :" + userid);
-			
-			vo = new Board();		
-			vo.setBoardTitle(boardtitle);
-			vo.setBoardContent(boardcotent);
-			vo.setBoardId(userid);
-			result = boService.insertBoard(vo);
-					
+	public ModelAndView boardInsert(Board b, @RequestParam(name = "upfile", required = false) MultipartFile report,
+			@RequestParam("boardTitle") String boardtitle, @RequestParam("boardContent") String boardcotent,
+			@RequestParam("userid") String userid, HttpServletRequest request, ModelAndView mv, Board vo) { // 게시글 등록
+		int result = 0;
+		System.out.println("제목 : " + boardtitle);
+		System.out.println("내용 : " + boardcotent);
+		System.out.println("작성자 :" + userid);
+
+		vo = new Board();
+		vo.setBoardTitle(boardtitle);
+		vo.setBoardContent(boardcotent);
+		vo.setBoardId(userid);
+		result = boService.insertBoard(vo);
+
 		try {
-			if(result != 0) {
-			mv.setViewName("redirect:boardList");
-			}else {
+			if (result != 0) {
+				mv.setViewName("redirect:boardList");
+			} else {
 				mv.addObject("msg", "글 등록 실패");
 				mv.setViewName("errorPage");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");
 		}
 		return mv;
 	}
 
-	@RequestMapping(value = "boardDelete", method = RequestMethod.GET)
+	@RequestMapping(value = "boardDelete")
 	public ModelAndView boardDelete(@RequestParam(name = "boardNo") int boardNo,
-			@RequestParam(name = "page", defaultValue = "1") int page, HttpServletRequest request, ModelAndView mv) { // 게시글 삭제
-			System.out.println("a2a2a2");
-			try {
-				Board b = boService.selectBoard(1, boardNo);
-				boService.deleteBoard(boardNo);
-				mv.addObject("currentPage", page);
-				mv.setViewName("redirect:boardList");
-			} catch (Exception e) {
-				mv.addObject("msg", e.getMessage());
-				mv.setViewName("errorPage");
-			}
+			@RequestParam(name = "page", defaultValue = "1") int page,
+			ModelAndView mv) { // 게시글 삭제
+	
+		System.out.println("boardNO" + boardNo);
+
+		try {
+//			Board b = boService.selectBoard(1, boardNo);
+			boService.deleteBoard(boardNo);
+			mv.addObject("currentPage", page);
+			mv.setViewName("redirect:boardList");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("errorPage");
+		}
+
 		return mv;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	@RequestMapping(value = "bRewrite", method = RequestMethod.GET)
-	public ModelAndView boardRenew() { // 게시글 수정 jsp 이동
-		return null;
+
+	@RequestMapping(value = "bRewrite", method = RequestMethod.POST)
+	public String boardRenew(int boardNo, Model model) { // 게시글 수정 jsp 이동
+		Board data = boService.detail(boardNo);
+		System.out.println("boardRenew:"+ data.toString());
+		model.addAttribute("data", data);
+		return "board/boardUpdate";
 	}
-
-	@RequestMapping(value = "boardUpdate", method = RequestMethod.GET)
-	public ModelAndView boardUpdate() { // 게시글 수정
-		return null;
-
+	
+	@RequestMapping(value = "boardUpdate", method = RequestMethod.POST)
+	public String boardUpdate(Board b) { // 게시글 수정
+		System.out.println("boardUpdate:"+ b.toString());
+		boService.updateBoard(b);
+		return "redirect:boardList";
 	}
-
-
 	
 
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
 	@RequestMapping(value = "boardRead", method = RequestMethod.GET)
 	public ModelAndView boarRead() { // 게시글 읽기
 		return null;

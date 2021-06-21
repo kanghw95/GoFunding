@@ -6,18 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
-<script src = "https://code.jquery.com/jquery-3.6.0.js"></script>
-	<style>
-		#select{
-			position: absolute;
-			left : 800px;
-		}
-		
-		#writeBtn{
-			position: absolute;
-			left : 800px;
-		}
-	</style>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<style>
+#select {
+	position: absolute;
+	left: 800px;
+}
+
+#writeBtn {
+	position: absolute;
+	left: 800px;
+}
+</style>
 </head>
 <body>
 	<h1>자유게시판</h1>
@@ -35,9 +35,9 @@
 	<input type="radio" name="radio">댓글순
 	<br>
 	<br>
-	
-	<input type="button" value="글쓰기" id = "writeBtn">
-	
+
+	<input type="button" value="글쓰기" id="writeBtn">
+
 	<br>
 	<br>
 
@@ -52,31 +52,33 @@
 		</tr>
 
 		<!-- 글이 없을 경우 -->
-		<c:if test = "${listCount eq 0}">
+		<c:if test="${listCount eq 0}">
 			<tr>
-				<td colspan = "6" align = "center"><br><br>
-				게시판에 저장된 글이 없습니다.<br><br></td>
+				<td colspan="6" align="center"><br>
+				<br> 게시판에 저장된 글이 없습니다.<br>
+				<br></td>
 			</tr>
 		</c:if>
 
-		<c:if test = "${listCount ne 0 }">
-		<c:forEach var = "vo" items = "${list}">
-			<tr>
-				<td align = "center">${vo.boardNo }</td>
-				<td align = "left"><a href = "boardDetail?boardNo=${vo.boardNo }&page=${currentPage}">&nbsp;${vo.boardTitle }</a></td>
-				<td align = "center">${vo.boardId }</td>
-				<td align = "center" >${vo.boardCnt }</td>
-		<%--	<td align = "center">${vo.getLike }</td> --%>
-				<td align = "center">0</td>
-				<td align = "center">${vo.boardDate }</td>
-			</tr>
-		</c:forEach>
+		<c:if test="${listCount ne 0 }">
+			<c:forEach var="vo" items="${list}">
+				<tr>
+					<td align="center">${vo.boardNo }</td>
+					<td align="left"><a
+						href="boardDetail?boardNo=${vo.boardNo }&page=${currentPage}">&nbsp;${vo.boardTitle }</a></td>
+					<td align="center">${vo.boardId }</td>
+					<td align="center">${vo.boardCnt }</td>
+					<%--	<td align = "center">${vo.getLike }</td> --%>
+					<td align="center">0</td>
+					<td align="center">${vo.boardDate }</td>
+				</tr>
+			</c:forEach>
 		</c:if>
 	</table>
-	
+
 	<script>
 		$("#writeBtn").on("click", function() {
-			location.href = "boardWrite"
+			location.href = "boardWrite";
 		})
 	</script>
 </body>

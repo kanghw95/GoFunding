@@ -32,18 +32,18 @@ public class BoardDao {
 		return sqlSession.delete("Board.deleteBoard" , boardNo); // 글 삭제
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public int updateBoard(Board b) {
 		return sqlSession.update("Board.updateBoard" , b); // 글 수정
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		
 	public Board selectOne(int boardNo) {
 		return sqlSession.selectOne("Board.selectOne" , boardNo); // 글 가져오기

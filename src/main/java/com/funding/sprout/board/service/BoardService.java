@@ -15,11 +15,20 @@ public interface BoardService {
 	
 	void deleteBoard(int boardNo); // 글 삭제
 	
-	
+	int updateBoard(Board b); // 글 수정
 	
 	
 	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	Board selectOne(int boardNo); 
 	
 	List<Board> searchList(String keyword);
@@ -27,10 +36,6 @@ public interface BoardService {
 	List<Board> selectList(int startPage, int limit);
 	
 	int addReadCount(int boardCnt);
-	
-	int updateBoard(Board b);
-	
-	
 	
 	int ReportSend(Board b);
 	

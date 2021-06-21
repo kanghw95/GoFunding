@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 등록</title>
+<title>게시글 수정</title>
 <!-- 스마트 에디터 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript"
@@ -29,35 +29,29 @@
 </style>
 
 <body>
-	<%
-		User user = (User) session.getAttribute("user");
-	%>
 
 	<h1 id=Title>자유게시판</h1>
-	<form action="boardInsert" method="POST">
-		<input type="hidden" name="userid" value="<%=user.getUserId()%>">
-
-		<!--  	<input type = "file" id = "File1">
-		<textarea name = "file" placeholder = "파일 이름" rows="2" cols="50" id = "File2"></textarea> -->
-
+	<form action= "boardUpdate" method="POST">
+		<input type="hidden" name="boardNo" value = "${data.boardNo }"/>
 		<table class="board">
 			<tr>
 				<td id="boardTitle1">제목</td>
-				<td><input type="text" name="boardTitle" style="width: 650px" /></td>
+				<td><input type="text" name="boardTitle" style="width: 650px" value = "${data.boardTitle }"/></td>
 			</tr>
 			<tr>
 				<td id="boardContent1">내용</td>
-				<td><input type = "text" id="ir1" style = "width: 650px; height: 350px;" name="boardContent"></td>
-				<!-- <textarea rows="10" cols="30" id="ir1" name="boardContent" style="width: 650px; height: 350px;"></textarea>-->
+				<td><input type = "text" id="ir1" style = "width: 650px; height: 350px;" name="boardContent" value = "${data.boardContent }"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" id="writebtn" name="writebtn" value="저장" />
-				<input type="button" value="취소" /></td>
+				<td colspan="2">
+				<input type="button" id="writebtn" name="writebtn" value="저장" />
+				<input type="button" value="취소" onclick = "history.back(-1)"/>
+				</td>
 			</tr>
 		</table>
 	</form>
 </body>
-
+	
 <script type="text/javascript">
 			var oEditors = [];
 			nhn.husky.EZCreator.createInIFrame({

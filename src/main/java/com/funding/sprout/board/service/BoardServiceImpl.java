@@ -43,18 +43,20 @@ public class BoardServiceImpl implements BoardService {
 		boDao.deleteBoard(boardNo);
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public int updateBoard(Board b) { // 글 수정
 		return boDao.updateBoard(b);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
 	
 	
 	
