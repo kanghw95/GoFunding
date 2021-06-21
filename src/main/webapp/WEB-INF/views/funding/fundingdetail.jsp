@@ -15,16 +15,124 @@
 <link href="<%=request.getContextPath() %>/resources/css/fundingdetail_tap.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/fundingdetail_content.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/fundingdetail_reword.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+
+.modal {
+
+   position: absolute;
+   overflow: hidden;
+   top: 10px;
+   right: 10px;
+   z-index: 10;
+   font-family: '서울남산 장체 L', sans-serif;
+   font-size: 12px;
+   text-align: center;
+   background: white;
+   border-radius: 12px;
+   border: 3px solid #CFCFCF;
+   
+}
+
+.modal2 {
+   position: absolute;
+   overflow: hidden;
+   top: 10px;
+   right: 70px;	
+   z-index: 10;
+   height : 54px;
+   font-family: '서울남산 장체 L', sans-serif;
+   font-size: 12px;
+   font-weight : bolder;
+   text-align: center;
+   background: white;
+   padding: 0 7 0 7;
+        border-radius: 12px;
+        border: 3px solid #CFCFCF;
+}
+
+   .modal_wrap{
+   		
+        display: none;
+        width: 300px;
+        height: 500px;
+        position: absolute;
+        top:17%;
+        left: 50%;
+        margin: -100px 0 0 -100px;
+        background:white;
+        z-index: 2;
+        border-radius: 12px;
+        border: 3px solid #CFCFCF;
+        
+    }
+    .black_bg{
+        display: none;
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color:rgba(0, 0,0, 0.5);
+        top:0;
+        left: 0;
+        z-index: 1;
+    }
+    .modal_close{
+        width: 26px;
+        height: 26px;
+        position: absolute;
+        top: -35px;
+        right: 0;
+    }
+    .modal_close> a{
+        display: block;
+        width: 100%;
+        height: 100%;
+        background:url(https://img.icons8.com/metro/26/000000/close-window.png);
+        text-indent: -9999px;
+    }
+</style>
 
 </head>
 <script>
-
+window.onload = function()  {
+	 
+    function onClick() {
+        document.querySelector('.modal_wrap').style.display ='block';
+        document.querySelector('.black_bg').style.display ='block';
+    }   
+    function offClick() {
+        document.querySelector('.modal_wrap').style.display ='none';
+        document.querySelector('.black_bg').style.display ='none';
+    }
+    document.querySelector('.modal_close').addEventListener('click', offClick);
+    document.getElementById("FundingDetailSummary_button_join").addEventListener('click', onClick);
+    
+};
 
 </script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <body>
+	<fmt:parseDate value="${funding.fundingfin}" var="paymentday" pattern="yyyy-MM-dd HH:mm:ss"/> 
+
+	
 	<div class="wrap">
 		<div role="main" id="content" class="content">
 			<div>
+				<div class="black_bg"></div>
+					 <div class="modal_wrap">
+					 펀딩 참여전 확인하세요!
+					 <hr>
+					 지금 신청하고 있는 펀딩은	<fmt:formatDate value="${paymentday}" pattern="yyyy-MM-dd"/> 일에 실제 결제가 이루어집니다.
+					 <hr>
+					 펀딩은 쇼핑과 달리 실결제 이후, 단순 변심으로 인한 취소, 환불이 어려울 수 있습니다.
+					 결제 진행 전, 예약 결제 취소는 마이페이지에서 가능합니다.
+					 <br>
+					 <button type="button" id="noagree" style=" border: 1px solid black;">동의 안함</button>
+					 <button type="button" id="agree"style=" border: 1px solid black;"  onclick="requestPay();" >동의</button>
+						 <div class="modal_close"><a href="#">close</a></div>
+					</div>
 				<div class="FundingDetailTop_wrap">
 					<div class="FundingDetailCover_wrap">
 						<div class="slick-slider FundingDetailCover_list_image slick-initialized">
@@ -116,7 +224,7 @@
 							</div>
 						</div>
 						<div class="FundingDetailSummary_button_area">
-							<button type="button"
+							<button type="button" id="FundingDetailSummary_button_join"
 								class="FundingDetailSummary_button_join"
 								aria-expanded="false" aria-controls="wa_option"
 								aria-hidden="false">펀딩 참여하기</button>
@@ -128,7 +236,6 @@
 								<svg width="25" height="22" viewBox="0 0 25 22"> </svg>
 							</a>
 						</div>
-
 					</div>
 				</div>
 				<div class="FundingDetailTab_wrap">
@@ -300,6 +407,7 @@
 		
 		var funtotalprice = totalprice.innerText;
 		var funtotalnumber = totalnumber.innerText;
+		
 		console.log(funtotalprice);
 		console.log(funtotalnumber);
 		var li1 = document.createElement("li");
@@ -311,13 +419,25 @@
 			listbtn.setAttribute("aria-expanded","false");
 			list.style.display = 'none';
 			li1.setAttribute('class','FundingDetailRewardCartItem_wrap__vdT7T');
-			li1.innerHTML = "<strong class='FundingDetailRewardCartItem_name__1BPbo'>"+reword_val1+"</strong> <div class='FundingDetailRewardCartItem_counter__1jk_P'> <input id='reward-cart-item-9' type='number' class='FundingDetailRewardCartItem_input_count__Em-cm' value='1'> <label for='reward-cart-item-9' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus__1zWpw' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus__13l8X'> <span class='FundingDetailRewardCartItem_icon_plus__3xFSP'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount__1WmUb'><strong>"+reword_price1+"</strong>원</span> <button class='FundingDetailRewardCartItem_button_delete__feY-l'> <span class='FundingDetailRewardCartItem_icon__3CScL'></span> <span class='blind'>삭제</span></button>";
+			li1.innerHTML = "<strong class='FundingDetailRewardCartItem_name__1BPbo'>"+reword_val1+"</strong> <div class='FundingDetailRewardCartItem_counter__1jk_P'> <input id='reward-cart-item-9' type='number' class='FundingDetailRewardCartItem_input_count__Em-cm' value='1'> <label for='reward-cart-item-9' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus__1zWpw' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus__13l8X'> <span class='FundingDetailRewardCartItem_icon_plus__3xFSP'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount__1WmUb'><strong>"+reword_price1+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete1' class='FundingDetailRewardCartItem_button_delete__feY-l'> <span class='FundingDetailRewardCartItem_icon__3CScL'></span> <span class='blind'>삭제</span></button>";
+			
 			funtotalprice = parseInt(funtotalprice) + parseInt(reword_price1);
 			totalprice.innerText = funtotalprice;
-		
 			funtotalnumber = parseInt(funtotalnumber) + 1;
 			totalnumber.innerText = funtotalnumber;
 			ul_list.appendChild(li1);
+			
+			var deletebtn1 = document.getElementById("FundingDetailRewardCartItem_button_delete1");
+				deletebtn1.addEventListener("click",function(){
+							
+					li1.remove();
+					funtotalprice = parseInt(funtotalprice) - parseInt(reword_price1);
+					totalprice.innerText = funtotalprice;
+					funtotalnumber = parseInt(funtotalnumber) - 1;
+					totalnumber.innerText = funtotalnumber;
+	
+					});
+			
 			});
 		
 		reword_btn2.addEventListener("click",function(){
@@ -325,7 +445,7 @@
 			listbtn.setAttribute("aria-expanded","false");
 			list.style.display = 'none';
 			li2.setAttribute('class','FundingDetailRewardCartItem_wrap__vdT7T');
-			li2.innerHTML = "<strong class='FundingDetailRewardCartItem_name__1BPbo'>"+reword_val2+"</strong> <div class='FundingDetailRewardCartItem_counter__1jk_P'> <input id='reward-cart-item-9' type='number' class='FundingDetailRewardCartItem_input_count__Em-cm' value='1'> <label for='reward-cart-item-9' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus__1zWpw' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus__13l8X'> <span class='FundingDetailRewardCartItem_icon_plus__3xFSP'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount__1WmUb'><strong>"+reword_price2+"</strong>원</span> <button class='FundingDetailRewardCartItem_button_delete__feY-l'> <span class='FundingDetailRewardCartItem_icon__3CScL'></span> <span class='blind'>삭제</span></button>";
+			li2.innerHTML = "<strong class='FundingDetailRewardCartItem_name__1BPbo'>"+reword_val2+"</strong> <div class='FundingDetailRewardCartItem_counter__1jk_P'> <input id='reward-cart-item-9' type='number' class='FundingDetailRewardCartItem_input_count__Em-cm' value='1'> <label for='reward-cart-item-9' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus__1zWpw' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus__13l8X'> <span class='FundingDetailRewardCartItem_icon_plus__3xFSP'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount__1WmUb'><strong>"+reword_price2+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete2' class='FundingDetailRewardCartItem_button_delete__feY-l'> <span class='FundingDetailRewardCartItem_icon__3CScL'></span> <span class='blind'>삭제</span></button>";
 		
 			funtotalprice = parseInt(funtotalprice) + parseInt(reword_price2);
 			totalprice.innerText = funtotalprice;
@@ -334,6 +454,17 @@
 			totalnumber.innerText = funtotalnumber;
 			
 			ul_list.appendChild(li2);
+			
+			var deletebtn2 = document.getElementById("FundingDetailRewardCartItem_button_delete2");
+				deletebtn2.addEventListener("click",function(){
+						
+				li2.remove();
+				funtotalprice = parseInt(funtotalprice) - parseInt(reword_price2);
+				totalprice.innerText = funtotalprice;
+				funtotalnumber = parseInt(funtotalnumber) - 1;
+				totalnumber.innerText = funtotalnumber;
+
+				});
 
 			});
 		
@@ -346,9 +477,44 @@
 			ul_list.appendChild(li3);
 
 			});
+		
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp28987277'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 
 
-
+		function requestPay() {
+		    // IMP.request_pay(param, callback) 호출
+		    IMP.request_pay({ // param
+		        pg: "html5_inicis",
+		        pay_method: "card",
+		        merchant_uid: "ORD20180131-0000011",
+		        name: reword_val1,
+		        amount: funtotalprice,
+		        buyer_email: "gildong@gmail.com",
+		        buyer_name: "강현우",
+		        buyer_tel: "010-4242-4242",
+		        buyer_addr: "서울특별시 강남구 신사동",
+		        buyer_postcode: "01181"
+		    }, function (rsp) { // callback
+			    if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+			        // jQuery로 HTTP 요청
+			        jQuery.ajax({
+			            url: "https://www.myservice.com/payments/complete", // 가맹점 서버
+			            method: "POST",
+			            headers: { "Content-Type": "application/json" },
+			            data: {
+			                imp_uid: rsp.imp_uid,
+			                merchant_uid: rsp.merchant_uid
+			            }
+			        }).done(function (data) {
+			          // 가맹점 서버 결제 API 성공시 로직
+			        })
+			      } else {
+			        alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+			      }
+			    });
+		  }
+		
 </script>
 </body>
 </html>
