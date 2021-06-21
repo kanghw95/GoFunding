@@ -12,6 +12,46 @@
 		<result property="reportCnt" column="reportcnt"/>
 		<result property="userNo" column="userno"/>
 	</resultMap>
+	<resultMap type="Board" id="freeBoard"> <!-- 자유 게시판 -->
+		<id property="boardNo" column="freeno"/>
+		<result property="boardTitle" column="freetitle"/>		
+		<result property="boardContent" column="freecontent"/>		
+		<result property="boardDate" column="freedate"/>		
+		<result property="boardCnt" column="freecnt"/>		
+		<result property="boardId" column="id"/>		
+	</resultMap>
+	<resultMap type="Board" id="reviewBoard"> <!-- 후기 게시판 -->
+		<id property="boardNo" column="reviewno"/>
+		<result property="boardTitle" column="reviewtitle"/>		
+		<result property="boardContent" column="reviewcontent"/>		
+		<result property="boardDate" column="reviewdate"/>		
+		<result property="boardCnt" column="reviewcnt"/>		
+		<result property="boardId" column="id"/>
+	</resultMap>
+	<resultMap type="Board" id="questionBoard"> <!-- 질의응답 게시판 -->
+ 		<id property="boardNo" column="qboardno"/>
+		<result property="boardTitle" column="qboardtitle"/>		
+		<result property="boardContent" column="qboardcontent"/>		
+		<result property="boardDate" column="qboarddate"/>		
+		<result property="boardCnt" column="qboardcnt"/>		
+		<result property="boardId" column="id"/>
+	</resultMap>
+	<resultMap type="Board" id="shareBoard"> <!-- 정보공유 게시판 -->
+		<id property="boardNo" column="shareno"/>
+		<result property="boardTitle" column="sharetitle"/>		
+		<result property="boardContent" column="sharecontent"/>		
+		<result property="boardDate" column="sharedate"/>		
+		<result property="boardCnt" column="sharecnt"/>		
+		<result property="boardId" column="id"/>
+	</resultMap>
+	<resultMap type="Board" id="eventBoard"> <!-- 이벤트 게시판 -->
+		<id property="boardNo" column="eventno"/>
+		<result property="boardTitle" column="eventtitle"/>		
+		<result property="boardContent" column="eventcontent"/>		
+		<result property="boardDate" column="eventdate"/>		
+		<result property="boardCnt" column="eventcnt"/>		
+		<result property="boardId" column="id"/>
+	</resultMap>
 	
 	<!-- 페이징 + 사용자 조회 -->
 	<select id="selectUser" resultType="arraylist" resultMap="resultUser">
@@ -26,19 +66,163 @@
 		SELECT COUNT(*) FROM USERS
 	</select>
 	
+	<!-- 사용자 아이디 조회 -->
 	<select id="searchId" resultType="arraylist" resultMap="resultUser">
 		SELECT * FROM USERS WHERE ID LIKE #{userId} ORDER BY USERNO ASC
 	</select>
 	
+	<!-- 사용자 이름 조회 -->
 	<select id="searchName" resultType="arraylist" resultMap="resultUser">
 		SELECT * FROM USERS WHERE NAME LIKE #{userName} ORDER BY USERNO ASC
 	</select>
 	
+	<!-- 사용자 닉네임 조회 -->
 	<select id="searchNick" resultType="arraylist" resultMap="resultUser">
 		SELECT * FROM USERS WHERE NICKNAME LIKE #{userNick} ORDER BY USERNO ASC
 	</select>
 	
+	<!-- 사용자 삭제 -->
 	<delete id="deleteUser">
 		DELETE FROM USERS WHERE USERNO = #{userNo}
+	</delete>
+	
+	<!-- 페이징 + 자유 게시판 조회 -->
+	<select id="selectFree" resultType="arraylist" resultMap="freeBoard">
+		SELECT * FROM (SELECT FREENO, FREETITLE, FREECONTENT, FREEDATE, FREECNT, ID
+		, ROW_NUMBER() OVER (ORDER BY FREENO ASC) AS RNUM FROM BULLETINEBOARD) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY FREENO ASC
+	</select>
+	
+	<!-- 페이징 + 후기 게시판 조회 -->
+	<select id="selectReview" resultType="arraylist" resultMap="reviewBoard">
+		SELECT * FROM (SELECT REVIEWNO, REVIEWTITLE, REVIEWCONTENT, REVIEWDATE, REVIEWCNT, ID
+		, ROW_NUMBER() OVER (ORDER BY REVIEWNO ASC) AS RNUM FROM REVIEWBOARD) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY REVIEWNO ASC
+	</select>
+	
+	<!-- 페이징 + 질의응답 게시판 조회 -->
+	<select id="selectQuestion" resultType="arraylist" resultMap="questionBoard">
+		SELECT * FROM (SELECT QBOARDNO, QBOARDTITLE, QBOARDCONTENT, QBOARDDATE, QBOARDCNT, ID
+		, ROW_NUMBER() OVER (ORDER BY QBOARDNO ASC) AS RNUM FROM QUESTIONBOARD) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY QBOARDNO ASC
+	</select>
+	
+	<!-- 페이징 + 정보공유 게시판 조회 -->
+	<select id="selectShare" resultType="arraylist" resultMap="shareBoard">
+		SELECT * FROM (SELECT SHARENO, SHARETITLE, SHARECONTENT, SHAREDATE, SHARECNT, ID
+		, ROW_NUMBER() OVER (ORDER BY SHARENO ASC) AS RNUM FROM SHAREBOARD) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY SHARENO ASC
+	</select>
+	
+	<!-- 페이징 + 이벤트 게시판 조회 -->
+	<select id="selectEvent" resultType="arraylist" resultMap="eventBoard">
+		SELECT * FROM (SELECT EVENTNO, EVENTTITLE, EVENTCONTENT, EVENTDATE, EVENTCNT, ID
+		, ROW_NUMBER() OVER (ORDER BY EVENTNO ASC) AS RNUM FROM EVENTBOARD) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY EVENTNO ASC
+	</select>
+	
+	<!-- 자유 게시판 글 수 조회 -->
+	<select id="countFreeBoard" resultType="int">
+		SELECT COUNT(*) FROM BULLETINEBOARD
+	</select>
+	
+	<!-- 자유 게시판 제목 조회 -->
+	<select id="searchFBoardTitle" resultType="arraylist" resultMap="freeBoard">
+		SELECT * FROM BULLETINEBOARD WHERE FREETITLE LIKE #{boardTitle} ORDER BY FREENO ASC
+	</select>
+	
+	<!-- 자유 게시판 작성자 조회 -->
+	<select id="searchFBoardId" resultType="arraylist" resultMap="freeBoard">
+		SELECT * FROM BULLETINEBOARD WHERE ID LIKE #{boardId} ORDER BY FREENO ASC
+	</select>
+	
+	<!-- 후기 게시판 제목 조회 -->
+	<select id="searchRBoardTitle" resultType="arraylist" resultMap="reviewBoard">
+		SELECT * FROM REVIEWBOARD WHERE REVIEWTITLE LIKE #{boardTitle} ORDER BY REVIEWNO ASC
+	</select>
+	
+	<!-- 후기 게시판 작성자 조회 -->
+	<select id="searchRBoardId" resultType="arraylist" resultMap="reviewBoard">
+		SELECT * FROM REVIEWBOARD WHERE ID LIKE #{boardId} ORDER BY REVIEWNO ASC
+	</select>
+	
+	<!-- 질의응답 게시판 제목 조회 -->
+	<select id="searchQBoardTitle" resultType="arraylist" resultMap="questionBoard">
+		SELECT * FROM QUESTIONBOARD WHERE QBOARDTITLE LIKE #{boardTitle} ORDER BY QBOARDNO ASC
+	</select>
+	
+	<!-- 질의응답 게시판 작성자 조회 -->
+	<select id="searchQBoardId" resultType="arraylist" resultMap="questionBoard">
+		SELECT * FROM QUESTIONBOARD WHERE ID LIKE #{boardId} ORDER BY QBOARDNO ASC
+	</select>
+	
+	<!-- 정보공유 게시판 제목 조회 -->
+	<select id="searchSBoardTitle" resultType="arraylist" resultMap="shareBoard">
+		SELECT * FROM SHAREBOARD WHERE SHARETITLE LIKE #{boardTitle} ORDER BY SHARENO ASC
+	</select>
+	
+	<!-- 정보공유 게시판 작성자 조회 -->
+	<select id="searchSBoardId" resultType="arraylist" resultMap="shareBoard">
+		SELECT * FROM SHAREBOARD WHERE ID LIKE #{boardId} ORDER BY SHARENO ASC
+	</select>
+	
+	<!-- 이벤트 게시판 제목 조회 -->
+	<select id="searchEBoardTitle" resultType="arraylist" resultMap="eventBoard">
+		SELECT * FROM EVENTBOARD WHERE EVENTTITLE LIKE #{boardTitle} ORDER BY EVENTNO ASC
+	</select>
+	
+	<!-- 이벤트 게시판 작성자 조회 -->
+	<select id="searchEBoardId" resultType="arraylist" resultMap="eventBoard">
+		SELECT * FROM EVENTBOARD WHERE ID LIKE #{boardId} ORDER BY EVENTNO ASC
+	</select>
+	
+	<!-- 후기 게시판 글 수 조회 -->
+	<select id="countReviewBoard" resultType="int">
+		SELECT COUNT(*) FROM REVIEWBOARD
+	</select>
+	
+	<!-- 질의응답 게시판 글 수 조회 -->
+	<select id="countQuestionBoard" resultType="int">
+		SELECT COUNT(*) FROM QUESTIONBOARD
+	</select>
+	
+	<!-- 정보공유 게시판 글 수 조회 -->
+	<select id="countShareBoard" resultType="int">
+		SELECT COUNT(*) FROM SHAREBOARD
+	</select>
+	
+	<!-- 이벤트 게시판 글 수 조회 -->
+	<select id="countEventBoard" resultType="int">
+		SELECT COUNT(*) FROM EVENTBOARD
+	</select>
+	
+	<!-- 자유게시판 글 삭제 -->
+	<delete id="deleteFBoardList">
+		DELETE FROM BULLETINEBOARD WHERE FREENO = #{boardNo}
+	</delete>
+	
+	<!-- 후기 게시판 글 삭제 -->
+	<delete id="deleteRBoardList">
+		DELETE FROM REVIEWBOARD WHERE REVIEWNO = #{boardNo}
+	</delete>
+	
+	<!-- 질의응답 게시판 글 삭제 -->
+	<delete id="deleteQBoardList">
+		DELETE FROM QUESTIONBOARD WHERE QBOARDNO = #{boardNo}
+	</delete>
+	
+	<!-- 정보공유 게시판 글 삭제 -->
+	<delete id="deleteSBoardList">
+		DELETE FROM SHAREBOARD WHERE SHARENO = #{boardNo}
+	</delete>
+	
+	<!-- 이벤트 게시판 글 삭제 -->
+	<delete id="deleteEBoardList">
+		DELETE FROM EVENTBOARD WHERE EVENTNO = #{boardNo}
 	</delete>
 </mapper>

@@ -229,14 +229,13 @@ li {
 					success : function(data) {
 						console.log("success 진입");
 						console.log(data);
-						location.replace("list");
+						location.replace("userlist");
 					},
 					error : function(error) {
 						console.log("error 발생");
 					}
 				});
 			}
-		
 	}
 	
 	
@@ -407,15 +406,15 @@ li {
 			<ul>
 				<c:if test="${pageMaker.prev}">
 					<li><a
-						href="list${pageMaker.makeQuery(pageMaker.startPage - 1)}"><</a></li>
+						href="userlist${pageMaker.makeQuery(pageMaker.startPage - 1)}"><</a></li>
 				</c:if>
 				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
 					var="idx">
-					<li><a href="list${pageMaker.makeQuery(idx)}" id="num">${idx}</a></li>
+					<li><a href="userlist${pageMaker.makeQuery(idx)}" id="num">${idx}</a></li>
 				</c:forEach>
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 					<li><a
-						href="list${pageMaker.makeQuery(pageMaker.endPage + 1)}">></a></li>
+						href="userlist${pageMaker.makeQuery(pageMaker.endPage + 1)}">></a></li>
 				</c:if>
 			</ul>
 		</div>
