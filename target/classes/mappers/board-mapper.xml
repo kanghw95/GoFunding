@@ -12,9 +12,9 @@
 
 	<!-- 게시글 목록 -->
 	<select id="listCount" resultType="int">
-		SELECT count(*) FROM BULLETINEBOARD
+	    SELECT count(*) FROM BULLETINEBOARD
 	</select>
-
+	
 	<!-- 게시글 상세보기 -->
 	<select id="detail" resultMap="resultBoard" parameterType="int">
 		SELECT * FROM BULLETINEBOARD WHERE FREENO = #{FREENO}
@@ -39,20 +39,18 @@
 		AND BOARD_PWD = #{board_pwd} -->
 	</update>
 
-
-
-
-
-
-
-
-
-
-	<!-- 페이지당 게시글 조회 -->
+	<!-- 페이지당 게시글 조회 / 번호정렬 -->
 	<select id="selectList" resultMap="resultBoard">
-		SELECT * FROM
-		BULLETINEBOARD
+		SELECT * FROM BULLETINEBOARD ORDER BY FREENO ASC
 	</select>
+
+
+
+
+
+
+
+
 
 	<!-- 게시글 단일 조회 -->
 	<select id="selectOne" parameterType="string" resultType="Board">
@@ -75,10 +73,6 @@
 		UPDATE BULLETINEBOARD SET READ_COUNT =
 		READ_COUNT+1 WHERE BOARD_NUM = #{board_num}
 	</update>
-
-
-
-
 
 	<!-- 게시글 신고 -->
 	<!-- 좋아요 -->

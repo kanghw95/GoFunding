@@ -5,7 +5,8 @@ import com.funding.sprout.vo.Board;
 
 public interface BoardService {
 	
-	int totalCount(); // 게시글 목록
+	int totalCount();  // 게시글 목록
+	
 	
 	Board detail(int boardNo); // 게시글 상세보기
 	
@@ -17,7 +18,7 @@ public interface BoardService {
 	
 	int updateBoard(Board b); // 글 수정
 	
-	
+	List<Board> selectList(int startPage, int limit); // 번호 정렬
 	
 
 	
@@ -27,13 +28,11 @@ public interface BoardService {
 	
 	
 	
-	
+
 	
 	Board selectOne(int boardNo); 
 	
 	List<Board> searchList(String keyword);
-	
-	List<Board> selectList(int startPage, int limit);
 	
 	int addReadCount(int boardCnt);
 	

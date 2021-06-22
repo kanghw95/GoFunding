@@ -35,6 +35,16 @@ public class BoardDao {
 	public int updateBoard(Board b) {
 		return sqlSession.update("Board.updateBoard" , b); // 글 수정
 	}
+
+	public List<Board> selectList(int startPage, int limit) { // 번호 정렬
+		int startRow = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(startRow, limit);
+		System.out.println("startRow:"+ startRow);
+		System.out.println("limit:"+ limit);
+		return sqlSession.selectList("Board.selectList" , null, row);
+	}
+
+
 	
 	
 	
@@ -44,7 +54,7 @@ public class BoardDao {
 	
 	
 	
-		
+	
 	public Board selectOne(int boardNo) {
 		return sqlSession.selectOne("Board.selectOne" , boardNo); // 글 가져오기
 	}
@@ -52,22 +62,11 @@ public class BoardDao {
 	public List<Board> searchList(String keyword) {
 		return sqlSession.selectList("Board.searchList" , keyword); // 게시글 검색 조회
 	}
-
-	public List<Board> selectList(int startPage, int limit) {
-		int startRow = (startPage - 1) * limit;
-		RowBounds row = new RowBounds(startRow, limit);
-		System.out.println("startRow:"+ startRow);
-		System.out.println("limit:"+ limit);
-		return sqlSession.selectList("Board.selectList" , null, row);// 특정 페이지 단위의 게시글 조회
-	}
 	
-
 	public int addReadCount(int boardCnt) {
 		return sqlSession.update("Board.addReadCount", boardCnt ); // 글 조회 수 증가
 	}
 
-
-	
 	public int ReportSend(Board b) { //게시글 신고
 		return sqlSession.insert("Board.insertBoard", b);
 		
@@ -77,5 +76,4 @@ public class BoardDao {
 		return sqlSession.update("Board.updateBoard", b);
 
 	}
-	
 } 

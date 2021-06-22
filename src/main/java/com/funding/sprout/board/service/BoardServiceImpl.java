@@ -18,6 +18,7 @@ public class BoardServiceImpl implements BoardService {
 	public int totalCount() { // 게시글 목록
 		return boDao.listCount();
 	}
+
 	
 	@Override
 	public Board detail(int boardNo) { // 게시글 상세보기
@@ -48,31 +49,8 @@ public class BoardServiceImpl implements BoardService {
 		return boDao.updateBoard(b);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
 	@Override
-	public Board selectOne(int boardNo) { // 글 가져오기
-		return boDao.selectOne(boardNo);
-	}
-
-	@Override
-	public List<Board> searchList(String keyword) { // 게시글 검색 조회
-		return boDao.searchList(keyword);
-	}
-
-	@Override
-	public List<Board> selectList(int startPage, int limit) { // 특정 페이지 단위의 게시글 조회
+	public List<Board> selectList(int startPage, int limit) { // 번호 정렬
 		List<Board> result = null;
 		try{
 			System.out.println("Aaa"+ startPage );
@@ -86,7 +64,15 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	}
 	
+	@Override
+	public Board selectOne(int boardNo) { // 글 가져오기
+		return boDao.selectOne(boardNo);
+	}
 
+	@Override
+	public List<Board> searchList(String keyword) { // 게시글 검색 조회
+		return boDao.searchList(keyword);
+	}
 
 	@Override
 	public int addReadCount(int boardCnt) { // 글 조회수 증가

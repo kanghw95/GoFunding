@@ -36,11 +36,12 @@
 		<table class="board">
 			<tr>
 				<td id="boardTitle1">제목</td>
-				<td><input type="text" name="boardTitle" style="width: 650px" value = "${data.boardTitle }"/></td>
+				<td><input type="text" name="boardTitle" style="width: 645px" value = "${data.boardTitle }"/></td>
 			</tr>
 			<tr>
 				<td id="boardContent1">내용</td>
-				<td><input type = "text" id="ir1" style = "width: 650px; height: 350px;" name="boardContent" value = "${data.boardContent }"></td>
+				<td><textarea id="ir1" name="boardContent" style="width: 650px; height: 350px;"></textarea></td>
+				<%-- <input type = "text" id="ir1" style = "width: 650px; height: 350px;" name="boardContent" value = "${data.boardContent }"> --%>
 			</tr>
 			<tr>
 				<td colspan="2">

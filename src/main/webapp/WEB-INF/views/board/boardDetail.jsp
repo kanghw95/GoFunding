@@ -67,6 +67,12 @@
 	left: 800px;
 	top: 500px;
 }
+
+#List{
+	position : absolute;
+	left : 800px;
+	top : 650px;
+}
 </style>
 
 </head>
@@ -109,29 +115,36 @@
 		<input type = "button" value = "등록">
 	</div>
 
-	<input type = "button" value = "목록" onclick = "history.back(-1)">
+	<input type = "button" id = "List" value = "목록" onclick = "history.back(-1)">
+	
 
 	<script>
 		$("#modify").on("click", function() {
- 			var sessionUserId = '${sessionScope.user.userId}';
-			var boardId = '${data.boardId}';
-			
-			console.log("sessionUserId" + sessionUserId);
-			console.log("boardId:" + boardId);
-			
-			if(sessionUserId=='null' || sessionUserId==''){
-				alert("로그인 후 수정 가능합니다.")
-				return;
+			var modify1 = confirm("수정하시겠습니까?");
+ 			
+			if(modify1 == true) {
+				var sessionUserId = '${sessionScope.user.userId}';
+				var boardId = '${data.boardId}';
+				
+				console.log("sessionUserId" + sessionUserId);
+				console.log("boardId:" + boardId);
+				
+				if(sessionUserId=='null' || sessionUserId==''){
+					alert("로그인 후 수정 가능합니다.");
+					return;
+				}
+				if(boardId=='null' || boardId==''){
+					alert("작성자가 아니므로 글 수정이 되지 않습니다.");
+					return;
+				}
+				if(boardId != sessionUserId){
+					alert("작성자가 아니므로 글 수정이 되지 않습니다.");
+					return;
+				}	
+			} else{
+				return false;
 			}
-			if(boardId=='null' || boardId==''){
-				alert("작성자가 아니므로 글 수정이 되지 않습니다.")
-				return;
-			}
-			if(boardId != sessionUserId){
-				alert("작성자가 아니므로 글 수정이 되지 않습니다.")
-				return;
-			}
-			
+				
 			var frm = document.getElementById("frmUpdate");
 			frm.action = "bRewrite";
 			frm.method = "post";
@@ -139,6 +152,27 @@
 		});
 	
 		$("#delete").on("click", function() {
+			var delete1 = confirm("삭제하시겠습니까?");
+			if(delete1 == true) {
+				var sessionUserId = '${sessionScope.user.userId}';
+				var boardId = '${data.boardId}';
+				
+				if(sessionUserId == 'null' || sessionUserId == ''){
+					alert("로그인 후 삭제 가능합니다")
+					return;
+				}
+				if(boardId == 'null' || boardId == ''){
+					alert("작성자가 아니므로 글 삭제가 되지 않습니다")
+					return;
+				}
+				if(boardId != sessionUserId){
+					alert("작성자가 아니므로 글 삭제가 되지 않습니다")
+					return;
+				}
+			}else{
+				return false;
+			}	
+		
 			var frm = document.getElementById("frmUpdate");
 			frm.action = "boardDelete";
 			frm.method="post";

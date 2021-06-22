@@ -13,7 +13,7 @@
 	left: 800px;
 }
 
-#writeBtn {
+#writeBtn2 {
 	position: absolute;
 	left: 800px;
 }
@@ -35,9 +35,11 @@
 	<input type="radio" name="radio">댓글순
 	<br>
 	<br>
-
-	<input type="button" value="글쓰기" id="writeBtn">
-
+	
+	<form id = "writeBtn2">
+	<input type="button" value="글쓰기" id = "writing">
+	</form>
+	
 	<br>
 	<br>
 
@@ -77,8 +79,27 @@
 	</table>
 
 	<script>
-		$("#writeBtn").on("click", function() {
-			location.href = "boardWrite";
+		$("#writing").on("click", function() {
+			var write1 = confirm("글 쓰기 하시겠습니까?");
+			
+			if(write1 == true) {
+				var sessionUserId = '${sessionScope.user.userId}';
+				
+				console.log("sessionUserId : " + sessionUserId);
+		
+				if(sessionUserId == 'null' || sessionUserId == ''){
+					alert("로그인 후 글 쓰기가 가능합니다.");
+					return;
+				}	
+			}else{
+				return false;
+			}
+			
+			var frm = document.getElementById("writeBtn2");
+			frm.action = "boardWrite";
+			frm.method = "get";
+			frm.submit();
+//			location.href = "boardWrite";
 		})
 	</script>
 </body>
