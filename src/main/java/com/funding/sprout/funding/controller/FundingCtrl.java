@@ -1,6 +1,5 @@
 package com.funding.sprout.funding.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +86,33 @@ public class FundingCtrl {
 			mv.setViewName("errorPage");
 		}
 		return mv;
+	}
+	
+	@RequestMapping(value = "funding/fundingpay", method = RequestMethod.POST)
+	public ModelAndView fundingpay(
+			@RequestParam(name = "funding_pay_price") int funding_pay_price,
+			@RequestParam(name = "funding_pay_rewordEA") int funding_pay_rewordEA,
+			@RequestParam(name = "funding_no") int fundingno,
+			ModelAndView mv) {
+			System.out.println(funding_pay_price);
+			System.out.println(funding_pay_rewordEA);
+		try {
+			
+			Funding funding = funService.selectOne(fundingno);	
+			List<Reward> rewardlist = funService.selectReward(fundingno);
+			System.out.println("선택한 펀딩 정보 :" + funding);
+			System.out.println("선택한 리워드 정보 :" + rewardlist);
+			
+			mv.addObject("funding_pay_price",funding_pay_price);
+			mv.addObject("funding_pay_rewordEA",funding_pay_rewordEA);
+			mv.addObject("funding", funService.selectOne(fundingno));
+			mv.addObject("reward", funService.selectReward(fundingno));
+			mv.setViewName("funding/fundingpay");
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("errorPage");
+		}
+		return mv;  // 펀딩 결제 페이지
 	}
 
 	@RequestMapping(value = "funinsert", method = RequestMethod.GET)

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상세페이지</title>
 <link href="<%=request.getContextPath() %>/resources/css/fundingdetail_top/fundingdetail_cover.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/fundingdetail_top/fundingdetail_sumary.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/fundingdetail_top/fundingdetail_profile.css" rel="stylesheet" type="text/css" />
@@ -104,7 +104,7 @@ window.onload = function()  {
         document.querySelector('.modal_wrap').style.display ='none';
         document.querySelector('.black_bg').style.display ='none';
     }
-    document.querySelector('.modal_close').addEventListener('click', offClick);
+    document.querySelector('#noagree').addEventListener('click', offClick);
     document.getElementById("FundingDetailSummary_button_join").addEventListener('click', onClick);
     
 };
@@ -121,17 +121,25 @@ window.onload = function()  {
 		<div role="main" id="content" class="content">
 			<div>
 				<div class="black_bg"></div>
-					 <div class="modal_wrap">
+					 <div class="modal_wrap" style="text-align: center;">
 					 펀딩 참여전 확인하세요!
 					 <hr>
-					 지금 신청하고 있는 펀딩은	<fmt:formatDate value="${paymentday}" pattern="yyyy-MM-dd"/> 일에 실제 결제가 이루어집니다.
+					 지금 신청하고 있는 펀딩은 <fmt:formatDate value="${paymentday}" pattern="yyyy년 MM월 dd일"/> 일에 실제 결제가 이루어집니다.
 					 <hr>
-					 펀딩은 쇼핑과 달리 실결제 이후, 단순 변심으로 인한 취소, 환불이 어려울 수 있습니다.
+					 펀딩은 쇼핑과 달리 실결제 이후, 단순 변심으로 인한 취소, 환불이 어려울 수 있습니다.<br>
 					 결제 진행 전, 예약 결제 취소는 마이페이지에서 가능합니다.
 					 <br>
+					 <form action="fundingpay" method="POST">
 					 <button type="button" id="noagree" style=" border: 1px solid black;">동의 안함</button>
-					 <button type="button" id="agree"style=" border: 1px solid black;"  onclick="requestPay();" >동의</button>
-						 <div class="modal_close"><a href="#">close</a></div>
+					 <input type="submit" value="동의" id="agree" style=" border: 1px solid black;" >
+					 
+					 <input type="hidden" id="funding_pay_price" name="funding_pay_price" value="0">
+					 <input type="hidden" id="funding_pay_rewordEA" name="funding_pay_rewordEA" value="0">
+					 <input type="hidden" id="funding_pay_title" name="funding_pay_title" value="${funding.fundingtitle}">
+					 <input type="hidden" id="funding_pay_maker" name="funding_pay_maker" value="${funding.maker}">
+					 <input type="hidden" id="funding_no" name="funding_no" value="${funding.fundingno}">
+					 
+					 </form>
 					</div>
 				<div class="FundingDetailTop_wrap">
 					<div class="FundingDetailCover_wrap">
@@ -162,7 +170,7 @@ window.onload = function()  {
 						<h3 class="FundingDetailSummary_title">${funding.fundingtitle}</h3>
 						<div class="FundingDetailSummary_graph">
 							<div class="FundingDetailSummary_rate">
-								<strong class="FundingDetailSummary_number">62</strong>%
+								<strong class="FundingDetailSummary_number">0</strong>%
 							</div>
 							<div class="FundingDetailSummary_bar">
 								<span class="FundingDetailSummary_current" style="width: 62%;"></span>
@@ -171,7 +179,7 @@ window.onload = function()  {
 							<span class="FundingDetailSummary_number">${funding.fundingprice}</span>원 목표
 							</span>
 							<span class="FundingDetailSummary_amount">
-							<strong class="FundingDetailSummary_number">624,000</strong>원
+							<strong class="FundingDetailSummary_number">0</strong>원
 							</span>
 						</div>
 					</div>
@@ -396,7 +404,7 @@ window.onload = function()  {
 		
 		var reword_btn2 = document.getElementById("reword2");
 		var reword_price2 = document.getElementById("rewardPrice2").value;
-		var reword_val2 = document.getElementById("reword2").innerText;
+		var reword_val2 = document.getElementById("reword2").innerText; 
 		
 		var cheer_btn1 = document.getElementById("cheer1");
 		var cheer_val1 = document.getElementById("cheer1").innerText;
@@ -405,11 +413,11 @@ window.onload = function()  {
 		var totalprice =  document.getElementById("FundingTotalPrice");
 		var totalnumber =  document.getElementById("FundingTotalnumber");
 		
+		var fundingpayprice =  document.getElementById("funding_pay_price"); // 결제 페이지용 가격
+		var fundingpayEA = document.getElementById("funding_pay_rewordEA"); // 결제 페이지용 수량
 		var funtotalprice = totalprice.innerText;
 		var funtotalnumber = totalnumber.innerText;
 		
-		console.log(funtotalprice);
-		console.log(funtotalnumber);
 		var li1 = document.createElement("li");
 		var li2 = document.createElement("li");
 		var li3 = document.createElement("li");
@@ -422,9 +430,13 @@ window.onload = function()  {
 			li1.innerHTML = "<strong class='FundingDetailRewardCartItem_name__1BPbo'>"+reword_val1+"</strong> <div class='FundingDetailRewardCartItem_counter__1jk_P'> <input id='reward-cart-item-9' type='number' class='FundingDetailRewardCartItem_input_count__Em-cm' value='1'> <label for='reward-cart-item-9' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus__1zWpw' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus__13l8X'> <span class='FundingDetailRewardCartItem_icon_plus__3xFSP'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount__1WmUb'><strong>"+reword_price1+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete1' class='FundingDetailRewardCartItem_button_delete__feY-l'> <span class='FundingDetailRewardCartItem_icon__3CScL'></span> <span class='blind'>삭제</span></button>";
 			
 			funtotalprice = parseInt(funtotalprice) + parseInt(reword_price1);
+			fundingpayprice.value = parseInt(fundingpayprice.value) + parseInt(reword_price1);
 			totalprice.innerText = funtotalprice;
+			
 			funtotalnumber = parseInt(funtotalnumber) + 1;
+			fundingpayEA.value = parseInt(fundingpayEA.value) + 1;
 			totalnumber.innerText = funtotalnumber;
+			
 			ul_list.appendChild(li1);
 			
 			var deletebtn1 = document.getElementById("FundingDetailRewardCartItem_button_delete1");
@@ -432,8 +444,11 @@ window.onload = function()  {
 							
 					li1.remove();
 					funtotalprice = parseInt(funtotalprice) - parseInt(reword_price1);
+					fundingpayprice.value = parseInt(fundingpayprice.value) - parseInt(reword_price1);
 					totalprice.innerText = funtotalprice;
+					
 					funtotalnumber = parseInt(funtotalnumber) - 1;
+					fundingpayEA.value = parseInt(fundingpayEA.value) - 1;
 					totalnumber.innerText = funtotalnumber;
 	
 					});
@@ -448,9 +463,11 @@ window.onload = function()  {
 			li2.innerHTML = "<strong class='FundingDetailRewardCartItem_name__1BPbo'>"+reword_val2+"</strong> <div class='FundingDetailRewardCartItem_counter__1jk_P'> <input id='reward-cart-item-9' type='number' class='FundingDetailRewardCartItem_input_count__Em-cm' value='1'> <label for='reward-cart-item-9' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus__1zWpw' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus__13l8X'> <span class='FundingDetailRewardCartItem_icon_plus__3xFSP'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount__1WmUb'><strong>"+reword_price2+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete2' class='FundingDetailRewardCartItem_button_delete__feY-l'> <span class='FundingDetailRewardCartItem_icon__3CScL'></span> <span class='blind'>삭제</span></button>";
 		
 			funtotalprice = parseInt(funtotalprice) + parseInt(reword_price2);
+			fundingpayprice.value = parseInt(fundingpayprice.value) + parseInt(reword_price2);
 			totalprice.innerText = funtotalprice;
 		
 			funtotalnumber = parseInt(funtotalnumber) + 1;
+			fundingpayEA.value = parseInt(fundingpayEA.value) + 1;
 			totalnumber.innerText = funtotalnumber;
 			
 			ul_list.appendChild(li2);
@@ -460,8 +477,11 @@ window.onload = function()  {
 						
 				li2.remove();
 				funtotalprice = parseInt(funtotalprice) - parseInt(reword_price2);
+				fundingpayprice.value = parseInt(fundingpayprice.value) - parseInt(reword_price2);
 				totalprice.innerText = funtotalprice;
+				
 				funtotalnumber = parseInt(funtotalnumber) - 1;
+				fundingpayEA.value = parseInt(fundingpayEA.value) - 1;
 				totalnumber.innerText = funtotalnumber;
 
 				});
