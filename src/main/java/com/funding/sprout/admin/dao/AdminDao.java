@@ -1,6 +1,7 @@
 package com.funding.sprout.admin.dao;
 
 import java.util.List;
+
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,6 +128,26 @@ public class AdminDao {
 	
 	public List<Board> selectEBoardTitle(Board board) throws Exception { // 이벤트 게시판 제목 조회
 		return sqlSession.selectList("Admin.searchEBoardTitle", board);
+	}
+	
+	public List<Board> selectFRadio(Board board) throws Exception { // 자유 게시판 라디오박스 조회
+		return sqlSession.selectList("Admin.selectFRadio", board);
+	}
+	
+	public List<Board> selectRRadio(Board board) throws Exception { // 후기 게시판 라디오박스 조회
+		return sqlSession.selectList("Admin.selectRRadio", board);
+	}
+	
+	public List<Board> selectQRadio(Board board) throws Exception { // 질의응답 게시판 라디오박스 조회
+		return sqlSession.selectList("Admin.selectQRadio", board);
+	}
+	
+	public List<Board> selectSRadio(Board board) throws Exception { // 정보공유 게시판 라디오박스 조회
+		return sqlSession.selectList("Admin.selectSRadio", board);
+	}
+	
+	public List<Board> selectERadio(Board board) throws Exception { // 이벤트 게시판 라디오박스 조회
+		return sqlSession.selectList("Admin.selectERadio", board);
 	}
 	
 	public void deleteFBoardList(String boardNo) { // 자유 게시판 글 삭제

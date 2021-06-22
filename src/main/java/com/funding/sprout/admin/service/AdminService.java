@@ -67,6 +67,16 @@ public interface AdminService {
 	
 	public List<Board> selectEBoardTitle(Board board) throws Exception; // 이벤트 게시판 제목 조회
 	
+	public List<Board> selectFRadio(Board board) throws Exception; // 자유 게시판 라디오박스 조회
+	
+	public List<Board> selectRRadio(Board board) throws Exception; // 후기 게시판 라디오박스 조회
+	
+	public List<Board> selectQRadio(Board board) throws Exception; // 질의응답 게시판 라디오박스 조회
+	
+	public List<Board> selectSRadio(Board board) throws Exception; // 정보공유 게시판 라디오박스 조회
+	
+	public List<Board> selectERadio(Board board) throws Exception; // 이벤트 게시판 라디오박스 조회
+	
 	public void deleteFBoardList(String boardNo); // 자유 게시판 글 삭제
 	
 	public void deleteRBoardList(String boardNo); // 리뷰 게시판 글 삭제

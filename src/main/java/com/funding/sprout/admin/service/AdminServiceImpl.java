@@ -28,157 +28,182 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<User> list(Criteria cri) throws Exception { // °Ë»ö °¡´ÉÇÑ ÀüÃ¼ È¸¿ø Á¶È¸
+	public List<User> list(Criteria cri) throws Exception { // ê²€ìƒ‰ ê°€ëŠ¥í•œ ì „ì²´ íšŒì› ì¡°íšŒ
 		return adDao.list(cri);
 	}
 	
 	@Override
-	public int listCount() throws Exception { // À¯Àú ¼ö Á¶È¸
+	public int listCount() throws Exception { // ìœ ì € ìˆ˜ ì¡°íšŒ
 		return adDao.listCount();
 	}
 	
 	@Override
-	public List<User> selectUserId(User user) throws Exception { // À¯Àú ¾ÆÀÌµğ Á¶È¸
+	public List<User> selectUserId(User user) throws Exception { // ìœ ì € ì•„ì´ë”” ì¡°íšŒ
 		return adDao.selectUserId(user);
 	}
 	
 	@Override
-	public List<User> selectUserName(User user) throws Exception { // À¯Àú ÀÌ¸§ Á¶È¸
+	public List<User> selectUserName(User user) throws Exception { // ìœ ì € ì´ë¦„ ì¡°íšŒ
 		return adDao.selectUserName(user);
 	}
 	
 	@Override
-	public List<User> selectUserNick(User user) throws Exception { // À¯Àú ´Ğ³×ÀÓ Á¶È¸
+	public List<User> selectUserNick(User user) throws Exception { // ìœ ì € ë‹‰ë„¤ì„ ì¡°íšŒ
 		return adDao.selectUserNick(user);
 	}
 
 	@Override
-	public void userStop(String userNo) { // È¸¿ø ±ÇÇÑ ¹ÚÅ»
+	public void userStop(String userNo) { // íšŒì› ê¶Œí•œ ë°•íƒˆ
 		adDao.userStop(userNo);
 	}
 	
 	@Override
-	public List<Board> freeBoardList(Criteria cri) throws Exception { // ÀÚÀ¯ °Ô½ÃÆÇ Á¶È¸
+	public List<Board> freeBoardList(Criteria cri) throws Exception { // ììœ  ê²Œì‹œíŒ ì¡°íšŒ
 		return adDao.freeBoardList(cri);
 	}
 	
 	@Override
-	public List<Board> reviewBoardList(Criteria cri) throws Exception { // ÈÄ±â °Ô½ÃÆÇ Á¶È¸
+	public List<Board> reviewBoardList(Criteria cri) throws Exception { // í›„ê¸° ê²Œì‹œíŒ ì¡°íšŒ
 		return adDao.reviewBoardList(cri);
 	}
 	
 	@Override
-	public List<Board> questionBoardList(Criteria cri) throws Exception { // ÁúÀÇÀÀ´ä °Ô½ÃÆÇ Á¶È¸
+	public List<Board> questionBoardList(Criteria cri) throws Exception { // ì§ˆì˜ì‘ë‹µ ê²Œì‹œíŒ ì¡°íšŒ
 		return adDao.questionBoardList(cri);
 	}
 
 	@Override
-	public List<Board> shareBoardList(Criteria cri) throws Exception { // Á¤º¸°øÀ¯ °Ô½ÃÆÇ Á¶È¸
+	public List<Board> shareBoardList(Criteria cri) throws Exception { // ì •ë³´ê³µìœ  ê²Œì‹œíŒ ì¡°íšŒ
 		return adDao.shareBoardList(cri);
 	}
 	
 	@Override
-	public List<Board> eventBoardList(Criteria cri) throws Exception { // ÀÌº¥Æ® °Ô½ÃÆÇ Á¶È¸
+	public List<Board> eventBoardList(Criteria cri) throws Exception { // ì´ë²¤íŠ¸ ê²Œì‹œíŒ ì¡°íšŒ
 		return adDao.eventBoardList(cri);
 	}
 
 	@Override
-	public int freeBoardCount() throws Exception { // ÀÚÀ¯ °Ô½ÃÆÇ ±Û ¼ö Á¶È¸
+	public int freeBoardCount() throws Exception { // ììœ  ê²Œì‹œíŒ ê¸€ ìˆ˜ ì¡°íšŒ
 		return adDao.freeBoardCount();
 	}
 	
 	@Override
-	public int reviewBoardCount() throws Exception { // ÀÚÀ¯ °Ô½ÃÆÇ ±Û ¼ö Á¶È¸
+	public int reviewBoardCount() throws Exception { // ììœ  ê²Œì‹œíŒ ê¸€ ìˆ˜ ì¡°íšŒ
 		return adDao.reviewBoardCount();
 	}
 	
 	@Override
-	public int questionBoardCount() throws Exception { // ÀÚÀ¯ °Ô½ÃÆÇ ±Û ¼ö Á¶È¸
+	public int questionBoardCount() throws Exception { // ììœ  ê²Œì‹œíŒ ê¸€ ìˆ˜ ì¡°íšŒ
 		return adDao.questionBoardCount();
 	}
 	
 	@Override
-	public int shareBoardCount() throws Exception { // ÀÚÀ¯ °Ô½ÃÆÇ ±Û ¼ö Á¶È¸
+	public int shareBoardCount() throws Exception { // ììœ  ê²Œì‹œíŒ ê¸€ ìˆ˜ ì¡°íšŒ
 		return adDao.shareBoardCount();
 	}
 	
 	@Override
-	public int eventBoardCount() throws Exception { // ÀÚÀ¯ °Ô½ÃÆÇ ±Û ¼ö Á¶È¸
+	public int eventBoardCount() throws Exception { // ììœ  ê²Œì‹œíŒ ê¸€ ìˆ˜ ì¡°íšŒ
 		return adDao.eventBoardCount();
 	}
 	
 	@Override
-	public List<Board> selectFBoardId(Board board) throws Exception { // ÀÚÀ¯ °Ô½ÃÆÇ ÀÛ¼ºÀÚ Á¶È¸
+	public List<Board> selectFBoardId(Board board) throws Exception { // ììœ  ê²Œì‹œíŒ ì‘ì„±ì ì¡°íšŒ
 		return adDao.selectFBoardId(board);
 	}
 	
 	@Override
-	public List<Board> selectFBoardTitle(Board board) throws Exception { // ÀÚÀ¯ °Ô½ÃÆÇ Á¦¸ñ Á¶È¸
+	public List<Board> selectFBoardTitle(Board board) throws Exception { // ììœ  ê²Œì‹œíŒ ì œëª© ì¡°íšŒ
 		return adDao.selectFBoardTitle(board);
 	}
 	
 	@Override
-	public List<Board> selectRBoardId(Board board) throws Exception { // ÈÄ±â °Ô½ÃÆÇ ÀÛ¼ºÀÚ Á¶È¸
+	public List<Board> selectRBoardId(Board board) throws Exception { // í›„ê¸° ê²Œì‹œíŒ ì‘ì„±ì ì¡°íšŒ
 		return adDao.selectRBoardId(board);
 	}
 	
 	@Override
-	public List<Board> selectRBoardTitle(Board board) throws Exception { // ÈÄ±â °Ô½ÃÆÇ Á¦¸ñ Á¶È¸
+	public List<Board> selectRBoardTitle(Board board) throws Exception { // í›„ê¸° ê²Œì‹œíŒ ì œëª© ì¡°íšŒ
 		return adDao.selectRBoardTitle(board);
 	}
 	
 	@Override
-	public List<Board> selectQBoardId(Board board) throws Exception { // ÁúÀÇÀÀ´ä °Ô½ÃÆÇ ÀÛ¼ºÀÚ Á¶È¸
+	public List<Board> selectQBoardId(Board board) throws Exception { // ì§ˆì˜ì‘ë‹µ ê²Œì‹œíŒ ì‘ì„±ì ì¡°íšŒ
 		return adDao.selectQBoardId(board);
 	}
 
 	@Override
-	public List<Board> selectQBoardTitle(Board board) throws Exception { // ÁúÀÇÀÀ´ä °Ô½ÃÆÇ Á¦¸ñ Á¶È¸
+	public List<Board> selectQBoardTitle(Board board) throws Exception { // ì§ˆì˜ì‘ë‹µ ê²Œì‹œíŒ ì œëª© ì¡°íšŒ
 		return adDao.selectQBoardTitle(board);
 	}
 
 	@Override
-	public List<Board> selectSBoardId(Board board) throws Exception { // Á¤º¸°øÀ¯ °Ô½ÃÆÇ ÀÛ¼ºÀÚ Á¶È¸
+	public List<Board> selectSBoardId(Board board) throws Exception { // ì •ë³´ê³µìœ  ê²Œì‹œíŒ ì‘ì„±ì ì¡°íšŒ
 		return adDao.selectSBoardId(board);
 	}
 	
 	@Override
-	public List<Board> selectSBoardTitle(Board board) throws Exception { // Á¤º¸°øÀ¯ °Ô½ÃÆÇ Á¦¸ñ Á¶È¸
+	public List<Board> selectSBoardTitle(Board board) throws Exception { // ì •ë³´ê³µìœ  ê²Œì‹œíŒ ì œëª© ì¡°íšŒ
 		return adDao.selectSBoardTitle(board);
 	}	
 	
 	@Override
-	public List<Board> selectEBoardId(Board board) throws Exception { // ÀÌº¥Æ® °Ô½ÃÆÇ ÀÛ¼ºÀÚ Á¶È¸
+	public List<Board> selectEBoardId(Board board) throws Exception { // ì´ë²¤íŠ¸ ê²Œì‹œíŒ ì‘ì„±ì ì¡°íšŒ
 		return adDao.selectEBoardId(board);
 	}	
 		
 	@Override
-	public List<Board> selectEBoardTitle(Board board) throws Exception { // ÀÌº¥Æ® °Ô½ÃÆÇ Á¦¸ñ Á¶È¸
+	public List<Board> selectEBoardTitle(Board board) throws Exception { // ì´ë²¤íŠ¸ ê²Œì‹œíŒ ì œëª© ì¡°íšŒ
 		return adDao.selectEBoardTitle(board);
+	}
+	
+	@Override
+	public List<Board> selectFRadio(Board board) throws Exception { // ììœ  ê²Œì‹œíŒ ë¼ë””ì˜¤ë°•ìŠ¤ ì¡°íšŒ
+		return adDao.selectFRadio(board);
+	}
+	
+	@Override
+	public List<Board> selectRRadio(Board board) throws Exception { // í›„ê¸° ê²Œì‹œíŒ ë¼ë””ì˜¤ë°•ìŠ¤ ì¡°íšŒ
+		return adDao.selectRRadio(board);
+	}
+	
+	@Override
+	public List<Board> selectQRadio(Board board) throws Exception { // ì§ˆì˜ì‘ë‹µ ê²Œì‹œíŒ ë¼ë””ì˜¤ë°•ìŠ¤ ì¡°íšŒ
+		return adDao.selectQRadio(board);
+	}
+	
+	@Override
+	public List<Board> selectSRadio(Board board) throws Exception { // ì •ë³´ê³µìœ  ê²Œì‹œíŒ ë¼ë””ì˜¤ë°•ìŠ¤ ì¡°íšŒ
+		return adDao.selectSRadio(board);
+	}
+	
+	@Override
+	public List<Board> selectERadio(Board board) throws Exception { // ì´ë²¤íŠ¸ ê²Œì‹œíŒ ë¼ë””ì˜¤ë°•ìŠ¤ ì¡°íšŒ
+		return adDao.selectERadio(board);
 	}
 		
 	@Override
-	public void deleteFBoardList(String boardNo) { // ÀÚÀ¯ °Ô½ÃÆÇ ±Û »èÁ¦
+	public void deleteFBoardList(String boardNo) { // ììœ  ê²Œì‹œíŒ ê¸€ ì‚­ì œ
 		adDao.deleteFBoardList(boardNo);
 	}
 	
 	@Override
-	public void deleteRBoardList(String boardNo) { // ÈÄ±â °Ô½ÃÆÇ ±Û »èÁ¦
+	public void deleteRBoardList(String boardNo) { // í›„ê¸° ê²Œì‹œíŒ ê¸€ ì‚­ì œ
 		adDao.deleteRBoardList(boardNo);
 	}
 	
 	@Override
-	public void deleteQBoardList(String boardNo) { // ÁúÀÇÀÀ´ä °Ô½ÃÆÇ ±Û »èÁ¦
+	public void deleteQBoardList(String boardNo) { // ì§ˆì˜ì‘ë‹µ ê²Œì‹œíŒ ê¸€ ì‚­ì œ
 		adDao.deleteQBoardList(boardNo);
 	}
 	
 	@Override
-	public void deleteSBoardList(String boardNo) { // Á¤º¸°øÀ¯ °Ô½ÃÆÇ ±Û »èÁ¦
+	public void deleteSBoardList(String boardNo) { // ì •ë³´ê³µìœ  ê²Œì‹œíŒ ê¸€ ì‚­ì œ
 		adDao.deleteSBoardList(boardNo);
 	}
 	
 	@Override
-	public void deleteEBoardList(String boardNo) { // ÀÌº¥Æ® °Ô½ÃÆÇ ±Û »èÁ¦
+	public void deleteEBoardList(String boardNo) { // ì´ë²¤íŠ¸ ê²Œì‹œíŒ ê¸€ ì‚­ì œ
 		adDao.deleteEBoardList(boardNo);
 	}
 	

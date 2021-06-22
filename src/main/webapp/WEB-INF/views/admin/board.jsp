@@ -141,7 +141,7 @@ li {
 <script>
 	var cv = "";
 
-	function searchFreeBoard() {
+	function searchFreeBoard() { // 자유 게시판 검색
 		console.log("검색 시작");
 		var target = document.getElementById("select");
 		var sValue = target.options[target.selectedIndex].value;
@@ -184,7 +184,7 @@ li {
 		}
 	}
 	
-	function searchReviewBoard() {
+	function searchReviewBoard() { // 후기 게시판 검색
 		console.log("검색 시작");
 		var target = document.getElementById("select");
 		var sValue = target.options[target.selectedIndex].value;
@@ -227,7 +227,7 @@ li {
 		}
 	}
 	
-	function searchQuestionBoard() {
+	function searchQuestionBoard() { // 질의응답 게시판 검색
 		console.log("검색 시작");
 		var target = document.getElementById("select");
 		var sValue = target.options[target.selectedIndex].value;
@@ -270,7 +270,7 @@ li {
 		}
 	}
 	
-	function searchShareBoard() {
+	function searchShareBoard() { // 정보공유 게시판 검색
 		console.log("검색 시작");
 		var target = document.getElementById("select");
 		var sValue = target.options[target.selectedIndex].value;
@@ -313,7 +313,7 @@ li {
 		}
 	}
 	
-	function searchEventBoard() {
+	function searchEventBoard() { // 이벤트 게시판 검색
 		console.log("검색 시작");
 		var target = document.getElementById("select");
 		var sValue = target.options[target.selectedIndex].value;
@@ -561,7 +561,7 @@ li {
 			
 	}
 	
-	function searchBoard(data) {
+	function searchBoard(data) { // 모든 게시판 검색 sucess
 		cv = "",
 		$(".search").remove();
 		var elements = document.getElementsByName("boardList");
@@ -582,6 +582,35 @@ li {
 			cv += "</tr>"
 		});
 		$("#tr").append(cv);
+	}
+	
+	function BoardRadio() { // 라디보 박스 체크 시 자유 게시판 조회
+		var name = document.getElementsByName("radio");
+		for (var i = 0; i < name.length; i++) {
+			if (name[i].checked == false) {
+				console.log("체크된 값이 없습니다.")
+			} else {
+				var id = name[i].id;
+				var value = name[i].value;
+			}
+		}
+		console.log("id 값은 : " + id);
+		console.log("value 값은 : " + value);
+		$.ajax({
+			url : "boardradio",
+			type : "POST",
+			traditional : true,
+			data : {
+				id : id,
+				value : value
+			},
+			success : function(data) {
+				console.log("success 진입");
+			},
+			error : function(error) {
+				console.log("error 발생");
+			}
+		});
 	}
 	
 	function checkAll() { // 체크박스 전체 체크, 해제
@@ -638,6 +667,36 @@ li {
 				<p id="userManage">이벤트게시판</p>
 			</c:if>
 		</div>
+		<c:if test="${!empty freeboard }">
+			<input type="radio" name="radio" id="free" value="new" onclick="BoardRadio()">최신순
+			<input type="radio" name="radio" id="free" value="like" onclick="BoardRadio()">추천순
+			<input type="radio" name="radio" id="free" value="cnt" onclick="BoardRadio()">조회순
+			<input type="radio" name="radio" id="free" value="cmt" onclick="BoardRadio()">댓글순
+		</c:if>
+		<c:if test="${!empty reviewboard }">
+			<input type="radio" name="radio" id="review" value="new" onclick="BoardRadio()">최신순
+			<input type="radio" name="radio" id="review" value="like" onclick="BoardRadio()">추천순
+			<input type="radio" name="radio" id="review" value="cnt" onclick="BoardRadio()">조회순
+			<input type="radio" name="radio" id="review" value="cmt" onclick="BoardRadio()">댓글순
+		</c:if>
+		<c:if test="${!empty questionboard }">
+			<input type="radio" name="radio" id="question" value="new" onclick="BoardRadio()">최신순
+			<input type="radio" name="radio" id="question" value="like" onclick="BoardRadio()">추천순
+			<input type="radio" name="radio" id="question" value="cnt" onclick="BoardRadio()">조회순
+			<input type="radio" name="radio" id="question" value="cmt" onclick="BoardRadio()">댓글순
+		</c:if>
+		<c:if test="${!empty shareboard }">
+			<input type="radio" name="radio" id="share" value="new" onclick="BoardRadio()">최신순
+			<input type="radio" name="radio" id="share" value="like" onclick="BoardRadio()">추천순
+			<input type="radio" name="radio" id="share" value="cnt" onclick="BoardRadio()">조회순
+			<input type="radio" name="radio" id="share" value="cmt" onclick="BoardRadio()">댓글순
+		</c:if>
+		<c:if test="${!empty eventboard }">
+			<input type="radio" name="radio" id="event" value="new" onclick="BoardRadio()">최신순
+			<input type="radio" name="radio" id="event" value="like" onclick="BoardRadio()">추천순
+			<input type="radio" name="radio" id="event" value="cnt" onclick="BoardRadio()">조회순
+			<input type="radio" name="radio" id="event" value="cmt" onclick="BoardRadio()">댓글순
+		</c:if>
 	</div>
 	<div id="userInfo">
 		<table class="tg" border="1" id="tr">

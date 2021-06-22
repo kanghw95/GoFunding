@@ -201,6 +201,31 @@
 		SELECT COUNT(*) FROM EVENTBOARD
 	</select>
 	
+	<!-- 자유 게시판 라디오박스 조회 -->
+	<select id="selectFRadio" resultType="arraylist" resultMap="freeBoard">
+		SELECT * FROM BULLETINEBOARD ORDER BY #{boardTitle} ASC
+	</select>
+	
+	<!-- 후기 게시판 라디오박스 조회 -->
+	<select id="selectRRadio" resultType="arraylist" resultMap="reviewBoard">
+		SELECT * FROM REVIEWBOARD ORDER BY #{boardTitle} ASC
+	</select>
+	
+	<!-- 질의응답 게시판 라디오박스 조회 -->
+	<select id="selectQRadio" resultType="arraylist" resultMap="questionBoard">
+		SELECT * FROM QUESTIONBOARD ORDER BY #{boardTitle} ASC
+	</select>
+	
+	<!-- 정보공유 게시판 라디오박스 조회 -->
+	<select id="selectSRadio" resultType="arraylist" resultMap="shareBoard">
+		SELECT * FROM SHAREBOARD ORDER BY #{boardTitle} ASC
+	</select>
+	
+	<!-- 이벤트 게시판 라디오박스 조회 -->
+	<select id="selectERadio" resultType="arraylist" resultMap="eventBoard">
+		SELECT * FROM EVENTBOARD ORDER BY #{boardTitle} ASC
+	</select>
+	
 	<!-- 자유게시판 글 삭제 -->
 	<delete id="deleteFBoardList">
 		DELETE FROM BULLETINEBOARD WHERE FREENO = #{boardNo}
@@ -225,4 +250,5 @@
 	<delete id="deleteEBoardList">
 		DELETE FROM EVENTBOARD WHERE EVENTNO = #{boardNo}
 	</delete>
+	
 </mapper>

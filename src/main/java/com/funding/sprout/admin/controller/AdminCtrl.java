@@ -445,6 +445,174 @@ public class AdminCtrl {
 		return "admin/eventboardlist";
 	}
 	
+	@RequestMapping(value = "boardradio", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String boardRadio(Board board, HttpServletRequest request) throws Exception { // 자유 게시판 라디오 버튼 선택 나열
+		request.setCharacterEncoding("UTF-8");
+		
+		System.out.println("컨트롤러 진입");
+		String id = request.getParameter("id"); // 제목 값 받기
+		String value = request.getParameter("value"); // 작성자 값 받기
+		System.out.println("mapper로 넘길 값은 : " + id);
+		System.out.println("mapper로 넘길 값은 : " + value);
+		
+		if (id.equals("free")) { // 자유 게시판에서 넘어온 라디오 id
+			System.out.println("free 값 확인");
+			if (value.equals("new")) {
+				System.out.println("최신순 조회입니다.");
+				board.setBoardTitle("FREEDATE");
+				String type = board.getBoardTitle();
+				System.out.println("mapper로 넘길 값은 : " + type);
+				List<Board> selectFRadio = adService.selectFRadio(board);
+				System.out.println("radioList : " + selectFRadio);
+				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				String jsonOutput = gson.toJson(selectFRadio);
+				System.out.println("jsonOutput : "+ jsonOutput);
+				return jsonOutput;
+			} else if (value.equals("like")) {
+				System.out.println("추천순 조회입니다.");
+				// TODO
+			} else if (value.equals("cnt")) {
+				System.out.println("조회순 조회입니다.");
+				board.setBoardTitle("FREECNT");
+				String type = board.getBoardTitle();
+				System.out.println("mapper로 넘길 값은 : " + type);
+				List<Board> selectFRadio = adService.selectFRadio(board);
+				System.out.println("radioList : " + selectFRadio);
+				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				String jsonOutput = gson.toJson(selectFRadio);
+				System.out.println("jsonOutput : "+ jsonOutput);
+				return jsonOutput;
+			} else if (value.equals("cmt")) {
+				System.out.println("댓글순 조회입니다.");
+				// TODO
+			}
+		} else if (id.equals("review")) {
+			System.out.println("review 값 확인");
+			if (value.equals("new")) {
+				System.out.println("최신순 조회입니다.");
+				board.setBoardTitle("REVIEWDATE");
+				String type = board.getBoardTitle();
+				System.out.println("mapper로 넘길 값은 : " + type);
+				List<Board> selectRRadio = adService.selectRRadio(board);
+				System.out.println("radioList : " + selectRRadio);
+				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				String jsonOutput = gson.toJson(selectRRadio);
+				System.out.println("jsonOutput : "+ jsonOutput);
+				return jsonOutput;
+			} else if (value.equals("like")) {
+				System.out.println("추천순 조회입니다.");
+				// TODO
+			} else if (value.equals("cnt")) {
+				System.out.println("조회순 조회입니다.");
+				board.setBoardTitle("REVIEWCNT");
+				String type = board.getBoardTitle();
+				System.out.println("mapper로 넘길 값은 : " + type);
+				List<Board> selectRRadio = adService.selectRRadio(board);
+				System.out.println("radioList : " + selectRRadio);
+				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				String jsonOutput = gson.toJson(selectRRadio);
+				System.out.println("jsonOutput : "+ jsonOutput);
+				return jsonOutput;
+			} else if (value.equals("cmt")) {
+				System.out.println("댓글순 조회입니다.");
+				// TODO
+			}
+		} else if (id.equals("question")) {
+			System.out.println("question 값 확인");
+			if (value.equals("new")) {
+				System.out.println("최신순 조회입니다.");
+				board.setBoardTitle("QBOARDDATE");
+				String type = board.getBoardTitle();
+				System.out.println("mapper로 넘길 값은 : " + type);
+				List<Board> selectQRadio = adService.selectQRadio(board);
+				System.out.println("radioList : " + selectQRadio);
+				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				String jsonOutput = gson.toJson(selectQRadio);
+				System.out.println("jsonOutput : "+ jsonOutput);
+				return jsonOutput;
+			} else if (value.equals("like")) {
+				System.out.println("추천순 조회입니다.");
+				// TODO
+			} else if (value.equals("cnt")) {
+				System.out.println("조회순 조회입니다.");
+				board.setBoardTitle("QBOARDCNT");
+				String type = board.getBoardTitle();
+				System.out.println("mapper로 넘길 값은 : " + type);
+				List<Board> selectQRadio = adService.selectQRadio(board);
+				System.out.println("radioList : " + selectQRadio);
+				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				String jsonOutput = gson.toJson(selectQRadio);
+				System.out.println("jsonOutput : "+ jsonOutput);
+				return jsonOutput;
+			} else if (value.equals("cmt")) {
+				System.out.println("댓글순 조회입니다.");
+				// TODO
+			}
+		} else if (id.equals("share")) {
+			System.out.println("share 값 확인");
+			if (value.equals("new")) {
+				System.out.println("최신순 조회입니다.");
+				board.setBoardTitle("SHAREDATE");
+				String type = board.getBoardTitle();
+				System.out.println("mapper로 넘길 값은 : " + type);
+				List<Board> selectSRadio = adService.selectSRadio(board);
+				System.out.println("radioList : " + selectSRadio);
+				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				String jsonOutput = gson.toJson(selectSRadio);
+				System.out.println("jsonOutput : "+ jsonOutput);
+				return jsonOutput;
+			} else if (value.equals("like")) {
+				System.out.println("추천순 조회입니다.");
+				// TODO
+			} else if (value.equals("cnt")) {
+				System.out.println("조회순 조회입니다.");
+				board.setBoardTitle("SHARECNT");
+				String type = board.getBoardTitle();
+				System.out.println("mapper로 넘길 값은 : " + type);
+				List<Board> selectSRadio = adService.selectSRadio(board);
+				System.out.println("radioList : " + selectSRadio);
+				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				String jsonOutput = gson.toJson(selectSRadio);
+				System.out.println("jsonOutput : "+ jsonOutput);
+				return jsonOutput;
+			} else if (value.equals("cmt")) {
+				System.out.println("댓글순 조회입니다.");
+				// TODO
+			}
+		} else if (id.equals("event")) {
+			System.out.println("event 값 확인");
+			if (value.equals("new")) {
+				System.out.println("최신순 조회입니다.");
+				board.setBoardTitle("EVENTDATE");
+				String type = board.getBoardTitle();
+				System.out.println("mapper로 넘길 값은 : " + type);
+				List<Board> selectERadio = adService.selectERadio(board);
+				System.out.println("radioList : " + selectERadio);
+				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				String jsonOutput = gson.toJson(selectERadio);
+				System.out.println("jsonOutput : "+ jsonOutput);
+			} else if (value.equals("like")) {
+				System.out.println("추천순 조회입니다.");
+				// TODO
+			} else if (value.equals("cnt")) {
+				System.out.println("조회순 조회입니다.");
+				board.setBoardTitle("EVENTCNT");
+				String type = board.getBoardTitle();
+				System.out.println("mapper로 넘길 값은 : " + type);
+				List<Board> selectERadio = adService.selectERadio(board);
+				System.out.println("radioList : " + selectERadio);
+				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				String jsonOutput = gson.toJson(selectERadio);
+				System.out.println("jsonOutput : "+ jsonOutput);
+			} else if (value.equals("cmt")) {
+				System.out.println("댓글순 조회입니다.");
+				// TODO
+			}
+		}
+		return "admin/userlist";
+	}
+	
 	@RequestMapping(value = "userstart", method = RequestMethod.GET)
 	public ModelAndView userStart() { // 회원 권한 복원
 		return null;
