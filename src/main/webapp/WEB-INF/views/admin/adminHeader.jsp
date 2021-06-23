@@ -6,14 +6,16 @@
 	min-height: 100%;
 	margin: 0 auto;
 	padding-top: 50px;
-	width: 60%;
+	text-align: center;
 }
 
 #nav {
 	height: 120px;
 	background-color: #ccc;
 	width: 1140px;
+	display: inline-block;
 }
+
 
 
 #logomenu {

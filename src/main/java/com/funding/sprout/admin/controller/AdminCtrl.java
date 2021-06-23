@@ -58,7 +58,7 @@ public class AdminCtrl {
 		
 		model.addAttribute("pageMaker", pageMaker);
 		
-		return "admin/userlist";
+		return "admin/userList";
 	}
 	
 	@RequestMapping(value = "userselect", method = RequestMethod.POST, produces = "application/text; charset=utf8")
@@ -105,7 +105,7 @@ public class AdminCtrl {
 			System.out.println("jsonOutput : " + jsonOutput);
 			return jsonOutput;
 		}
-		return "admin/userlist";
+		return "admin/userList";
 	}
 	
 	@RequestMapping(value = "userstop", method = RequestMethod.POST)
@@ -117,7 +117,7 @@ public class AdminCtrl {
 			System.out.println("deleteList index " + i + " : " + deleteList[i]);
 			adService.userStop(deleteList[i]); // 유저 번호 검색해서 해당 유저 삭제
 		}
-		return "admin/userlist";
+		return "admin/userList";
 	}
 	
 	@RequestMapping(value = "freeboardlist", method = RequestMethod.GET)
@@ -238,7 +238,7 @@ public class AdminCtrl {
 			return jsonOutput;
 		}
 		
-		return "admin/userlist";
+		return "admin/userList";
 	}
 	
 	@RequestMapping(value = "rboardselect", method = RequestMethod.POST, produces = "application/text; charset=utf8")
@@ -274,7 +274,7 @@ public class AdminCtrl {
 			return jsonOutput;
 		}
 		
-		return "admin/userlist";
+		return "admin/userList";
 	}
 	
 	@RequestMapping(value = "qboardselect", method = RequestMethod.POST, produces = "application/text; charset=utf8")
@@ -310,7 +310,7 @@ public class AdminCtrl {
 			return jsonOutput;
 		}
 		
-		return "admin/userlist";
+		return "admin/userList";
 	}
 	
 	@RequestMapping(value = "sboardselect", method = RequestMethod.POST, produces = "application/text; charset=utf8")
@@ -346,7 +346,7 @@ public class AdminCtrl {
 			return jsonOutput;
 		}
 		
-		return "admin/userlist";
+		return "admin/userList";
 	}
 	
 	@RequestMapping(value = "eboardselect", method = RequestMethod.POST, produces = "application/text; charset=utf8")
@@ -382,7 +382,7 @@ public class AdminCtrl {
 			return jsonOutput;
 		}
 		
-		return "admin/userlist";
+		return "admin/userList";
 	}
 	
 	@RequestMapping(value = "deletefboardlist", method = RequestMethod.POST)
@@ -394,7 +394,7 @@ public class AdminCtrl {
 			System.out.println("deleteList index " + i + " : " + deleteList[i]);
 			adService.deleteFBoardList(deleteList[i]); // 자유 게시판 글 번호 검색해서 해당 유저 삭제 
 		}
-		return "admin/userlist";
+		return "admin/userList";
 	}
 	
 	@RequestMapping(value = "deleterboardlist", method = RequestMethod.POST)
@@ -474,8 +474,8 @@ public class AdminCtrl {
 				// TODO
 			} else if (value.equals("cnt")) {
 				System.out.println("조회순 조회입니다.");
-				board.setBoardTitle("FREECNT");
-				String type = board.getBoardTitle();
+				board.setBoardContent("FREECNT");
+				String type = board.getBoardContent();
 				System.out.println("mapper로 넘길 값은 : " + type);
 				List<Board> selectFRadio = adService.selectFRadio(board);
 				System.out.println("radioList : " + selectFRadio);
@@ -505,11 +505,11 @@ public class AdminCtrl {
 				// TODO
 			} else if (value.equals("cnt")) {
 				System.out.println("조회순 조회입니다.");
-				board.setBoardTitle("REVIEWCNT");
-				String type = board.getBoardTitle();
+				board.setBoardContent("REVIEWCNT");
+				String type = board.getBoardContent();
 				System.out.println("mapper로 넘길 값은 : " + type);
 				List<Board> selectRRadio = adService.selectRRadio(board);
-				System.out.println("radioList : " + selectRRadio);
+				System.out.println("radioList : " + selectRRadio.get(0).toString());
 				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
 				String jsonOutput = gson.toJson(selectRRadio);
 				System.out.println("jsonOutput : "+ jsonOutput);
@@ -536,8 +536,8 @@ public class AdminCtrl {
 				// TODO
 			} else if (value.equals("cnt")) {
 				System.out.println("조회순 조회입니다.");
-				board.setBoardTitle("QBOARDCNT");
-				String type = board.getBoardTitle();
+				board.setBoardContent("QBOARDCNT");
+				String type = board.getBoardContent();
 				System.out.println("mapper로 넘길 값은 : " + type);
 				List<Board> selectQRadio = adService.selectQRadio(board);
 				System.out.println("radioList : " + selectQRadio);
@@ -567,8 +567,8 @@ public class AdminCtrl {
 				// TODO
 			} else if (value.equals("cnt")) {
 				System.out.println("조회순 조회입니다.");
-				board.setBoardTitle("SHARECNT");
-				String type = board.getBoardTitle();
+				board.setBoardContent("SHARECNT");
+				String type = board.getBoardContent();
 				System.out.println("mapper로 넘길 값은 : " + type);
 				List<Board> selectSRadio = adService.selectSRadio(board);
 				System.out.println("radioList : " + selectSRadio);

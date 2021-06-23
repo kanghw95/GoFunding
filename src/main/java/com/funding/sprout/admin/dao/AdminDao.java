@@ -1,6 +1,8 @@
 package com.funding.sprout.admin.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -131,23 +133,58 @@ public class AdminDao {
 	}
 	
 	public List<Board> selectFRadio(Board board) throws Exception { // 자유 게시판 라디오박스 조회
-		return sqlSession.selectList("Admin.selectFRadio", board);
+		Map<String, String> map = new HashMap<String, String>();
+		String date = board.getBoardTitle();
+		String cnt = board.getBoardContent();
+		System.out.println("날짜 값 : " + date);
+		System.out.println("조회 값 : " + cnt);
+		map.put("date", date);
+		map.put("cnt", cnt);
+		return sqlSession.selectList("Admin.selectFRadio", map);
 	}
 	
 	public List<Board> selectRRadio(Board board) throws Exception { // 후기 게시판 라디오박스 조회
-		return sqlSession.selectList("Admin.selectRRadio", board);
+		Map<String, String> map = new HashMap<String, String>();
+		String date = board.getBoardTitle();
+		String cnt = board.getBoardContent();
+		System.out.println("날짜 값 : " + date);
+		System.out.println("조회 값 : " + cnt);
+		map.put("date", date);
+		map.put("cnt", cnt);
+		return sqlSession.selectList("Admin.selectRRadio", map);
 	}
 	
 	public List<Board> selectQRadio(Board board) throws Exception { // 질의응답 게시판 라디오박스 조회
-		return sqlSession.selectList("Admin.selectQRadio", board);
+		Map<String, String> map = new HashMap<String, String>();
+		String date = board.getBoardTitle();
+		String cnt = board.getBoardContent();
+		System.out.println("날짜 값 : " + date);
+		System.out.println("조회 값 : " + cnt);
+		map.put("date", date);
+		map.put("cnt", cnt);
+		return sqlSession.selectList("Admin.selectQRadio", map);
 	}
 	
 	public List<Board> selectSRadio(Board board) throws Exception { // 정보공유 게시판 라디오박스 조회
-		return sqlSession.selectList("Admin.selectSRadio", board);
+		Map<String, String> map = new HashMap<String, String>();
+		String date = board.getBoardTitle();
+		String cnt = board.getBoardContent();
+		System.out.println("날짜 값 : " + date);
+		System.out.println("조회 값 : " + cnt);
+		map.put("date", date);
+		map.put("cnt", cnt);
+		return sqlSession.selectList("Admin.selectSRadio", map);
 	}
 	
 	public List<Board> selectERadio(Board board) throws Exception { // 이벤트 게시판 라디오박스 조회
-		return sqlSession.selectList("Admin.selectERadio", board);
+		Map<String, String> map = new HashMap<String, String>();
+		String date = board.getBoardTitle();
+		String cnt = board.getBoardContent();
+		System.out.println("날짜 값 : " + date);
+		System.out.println("조회 값 : " + cnt);
+		map.put("date", date);
+		map.put("cnt", cnt);
+		return sqlSession.selectList("Admin.selectERadio", map);
 	}
 	
 	public void deleteFBoardList(String boardNo) { // 자유 게시판 글 삭제
