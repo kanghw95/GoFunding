@@ -2,6 +2,7 @@ package com.funding.sprout.board.controller;
 
 import java.util.ArrayList;
 
+
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,17 +25,19 @@ public class BoardCtrl {
 	@Autowired
 	private BoardService boService;
 
-	public static final int LIMIT = 70;
+	public static final int LIMIT = 10;
 	private static final Logger logger = LoggerFactory.getLogger(BoardCtrl.class);
 
 	@RequestMapping(value = "boardList", method = RequestMethod.GET)
-	public ModelAndView boardList( // 게시글 목록
+	public ModelAndView boardList( // 게시글 목록 
 			@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", required = false) String keyword, ModelAndView mv) {
+		
+		
+		
 		logger.info("boardList()");
 		try {
-			int currentPage = page;
-			// 한 페이지당 출력할 목록 갯수
+			int currentPage = page; // 한 페이지당 출력할 목록 갯수
 			int listCount = boService.totalCount();
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 			System.out.println("listCount:" + listCount);
@@ -60,14 +63,21 @@ public class BoardCtrl {
 	}
 
 	@RequestMapping(value = "boardDetail", method = RequestMethod.GET)
-	public ModelAndView boardDetail(ModelAndView mv, Model model, int boardNo) { // 게시글 상세보기
-//	public String boardDetail(ModelAndView mv,Model model, int boardNo) { // 게시글 상세보기
+	public ModelAndView boardDetail(ModelAndView mv, Model model, 
+			@RequestParam(name = "boardNo")int boardNo,
+			@RequestParam(name = "page", defaultValue = "1") int page) { // 게시글 상세보기
+//	public String boardDetail(ModelAndView mv,Model model, int boardNo) { 
 		Board data = boService.detail(boardNo); // no값넘김
 		System.out.println("data : " + data.toString());
 		
 		// 방법1
+		try {
 		mv.addObject("data", data);
 		mv.setViewName("board/boardDetail");
+		}catch(Exception e) {
+			mv.addObject("msg" , e.getMessage());
+			mv.setViewName("errorPage");
+		}
 		return mv;
 		// 방법2
 //		model.addAttribute("data", data);
@@ -156,10 +166,15 @@ public class BoardCtrl {
 	
 	
 	
+	
+	
+	
 
 
 
 
+	
+	
 	@RequestMapping(value = "boardRead", method = RequestMethod.GET)
 	public ModelAndView boarRead() { // 게시글 읽기
 		return null;

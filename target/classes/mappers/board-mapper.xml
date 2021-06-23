@@ -43,6 +43,15 @@
 	<select id="selectList" resultMap="resultBoard">
 		SELECT * FROM BULLETINEBOARD ORDER BY FREENO ASC
 	</select>
+	
+	<!-- 글 조회수 증가-->
+  	<update id="addReadCount" parameterType="string" flushCache="true" statementType="PREPARED">
+  		UPDATE BULLETINEBOARD SET FREECNT = FREECNT+1 WHERE FREENO = #{boardNo}
+  	</update>
+	
+
+
+
 
 
 
@@ -66,13 +75,6 @@
 		#{keyword} ||'%'
 		ORDER BY REGDATE DESC
 	</select>
-
-	<!-- 게시글 조회 수 증가 -->
-	<update id="addReadCount" parameterType="string"
-		flushCache="true" statementType="PREPARED">
-		UPDATE BULLETINEBOARD SET READ_COUNT =
-		READ_COUNT+1 WHERE BOARD_NUM = #{board_num}
-	</update>
 
 	<!-- 게시글 신고 -->
 	<!-- 좋아요 -->

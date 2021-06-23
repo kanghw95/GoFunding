@@ -1,7 +1,6 @@
 package com.funding.sprout.board.dao;
 
 import java.util.List;
-
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +42,15 @@ public class BoardDao {
 		System.out.println("limit:"+ limit);
 		return sqlSession.selectList("Board.selectList" , null, row);
 	}
-
-
+	
+	public int addReadCount(int boardNo) {
+		return sqlSession.update("Board.addReadCount",boardNo); // 글 조회 수 증가
+	}
+	
+	
+	
+	
+	
 	
 	
 	
@@ -61,10 +67,6 @@ public class BoardDao {
 
 	public List<Board> searchList(String keyword) {
 		return sqlSession.selectList("Board.searchList" , keyword); // 게시글 검색 조회
-	}
-	
-	public int addReadCount(int boardCnt) {
-		return sqlSession.update("Board.addReadCount", boardCnt ); // 글 조회 수 증가
 	}
 
 	public int ReportSend(Board b) { //게시글 신고

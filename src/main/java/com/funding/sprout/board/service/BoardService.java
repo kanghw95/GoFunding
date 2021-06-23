@@ -1,6 +1,7 @@
 package com.funding.sprout.board.service;
 
 import java.util.List;
+
 import com.funding.sprout.vo.Board;
 
 public interface BoardService {
@@ -19,11 +20,9 @@ public interface BoardService {
 	int updateBoard(Board b); // 글 수정
 	
 	List<Board> selectList(int startPage, int limit); // 번호 정렬
-	
-
-	
-	
-	
+		
+	// Board updateBoard(Board b); 
+	Board addReadCount(Board b);// 글  조회수 증가
 	
 	
 	
@@ -33,8 +32,6 @@ public interface BoardService {
 	Board selectOne(int boardNo); 
 	
 	List<Board> searchList(String keyword);
-	
-	int addReadCount(int boardCnt);
 	
 	int ReportSend(Board b);
 	
