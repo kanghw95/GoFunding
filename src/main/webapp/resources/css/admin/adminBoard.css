@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+table {
+	text-align: center;
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+	border-color: #ccc;
+}
+
+#userInfo {
+	text-align: center;
+}
+
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+th {
+	background-color: #e6e6e6;
+	border-color: #ccc;
+}
+
+td {
+	border-color: #ccc;
+}
+
+#list {
+	width: 35px;
+	line-height: 40px;
+}
+
+#space {
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 80px;
+}
+
+#wrapper {
+	display: table;
+	margin-bottom: 80px;
+}
+
+#userManage {
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 20px;
+}
+
+#userCount {
+	margin-bottom: 10px;
+}
+
+#select {
+	height: 30px;
+	float: left;
+}
+
+#text {
+	height: 24px;
+	width: 150px;
+	margin-left: 5px;
+	float: left;
+}
+
+#searchBtn {
+	margin-left: 75px;
+	box-shadow: none;
+	border-radius: 10px;
+}
+
+#deleteBtn {
+	margin-left: 65px;
+	background-color: rgb(255, 72, 0);
+	color: white;
+	box-shadow: none;
+	border-radius: 10px;
+}
+
+#under {
+	width: 900px;
+	height: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+}
+
+#paging {
+	float: right;
+	width: 900px;
+	height: 30px;
+	text-align: center;
+}
+
+ul {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	display: inline-block;
+	list-style: none;
+	float: left;
+	padding: 6px;
+}
+
+#num {
+	float: none;
+	text-decoration: none;
+	font: menu;
+	padding: 2px 8px;
+	background: ButtonFace;
+	color: ButtonText;
+	border-width: 2px;
+	border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+}
+
+.boardNo {
+	border: none;
+	text-align: center;
+	outline: none;
+	width: 30px;
+}
+
+.noBox {
+	width: 30px;
+}

@@ -202,28 +202,73 @@
 	</select>
 	
 	<!-- 자유 게시판 라디오박스 조회 -->
-	<select id="selectFRadio" resultType="arraylist" resultMap="freeBoard">
-		SELECT * FROM BULLETINEBOARD ORDER BY #{boardTitle} ASC
+	<select id="selectFRadio"  resultMap="freeBoard">
+		SELECT * FROM BULLETINEBOARD 
+		<choose>
+			<when test="date != null">
+				ORDER BY FREEDATE DESC
+			</when>
+			<when test="cnt != null">
+				ORDER BY FREECNT DESC
+			</when>
+			<otherwise></otherwise>
+		</choose>
 	</select>
 	
 	<!-- 후기 게시판 라디오박스 조회 -->
-	<select id="selectRRadio" resultType="arraylist" resultMap="reviewBoard">
-		SELECT * FROM REVIEWBOARD ORDER BY #{boardTitle} ASC
+	<select id="selectRRadio" resultMap="reviewBoard">
+		SELECT * FROM REVIEWBOARD
+		<choose>
+			<when test="date != null">
+				ORDER BY REVIEWDATE DESC
+			</when>
+			<when test="cnt != null">
+				ORDER BY REVIEWCNT DESC
+			</when>
+			<otherwise></otherwise>
+		</choose>
 	</select>
 	
 	<!-- 질의응답 게시판 라디오박스 조회 -->
-	<select id="selectQRadio" resultType="arraylist" resultMap="questionBoard">
-		SELECT * FROM QUESTIONBOARD ORDER BY #{boardTitle} ASC
+	<select id="selectQRadio" resultMap="questionBoard">
+		SELECT * FROM QUESTIONBOARD 
+		<choose>
+			<when test="date != null">
+				ORDER BY QBOARDDATE DESC
+			</when>
+			<when test="cnt != null">
+				ORDER BY QBOARDCNT DESC
+			</when>
+			<otherwise></otherwise>
+		</choose>
 	</select>
 	
 	<!-- 정보공유 게시판 라디오박스 조회 -->
 	<select id="selectSRadio" resultType="arraylist" resultMap="shareBoard">
-		SELECT * FROM SHAREBOARD ORDER BY #{boardTitle} ASC
+		SELECT * FROM SHAREBOARD ORDER BY 
+		<choose>
+			<when test="date != null">
+				ORDER BY SHAREDATE DESC
+			</when>
+			<when test="cnt != null">
+				ORDER BY SHARECNT DESC
+			</when>
+			<otherwise></otherwise>
+		</choose>
 	</select>
 	
 	<!-- 이벤트 게시판 라디오박스 조회 -->
 	<select id="selectERadio" resultType="arraylist" resultMap="eventBoard">
-		SELECT * FROM EVENTBOARD ORDER BY #{boardTitle} ASC
+		SELECT * FROM EVENTBOARD ORDER BY 
+		<choose>
+			<when test="date != null">
+				ORDER BY EVENTDATE DESC
+			</when>
+			<when test="cnt != null">
+				ORDER BY EVENTCNT DESC
+			</when>
+			<otherwise></otherwise>
+		</choose>
 	</select>
 	
 	<!-- 자유게시판 글 삭제 -->
