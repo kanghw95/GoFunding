@@ -39,13 +39,22 @@
 					src="<c:url value='/resources/img/naver_login.png'/>"></a> <br>
 				<a href="${kakaoAuthUrl}"> <img width="200" height="50"
 					src="<c:url value='/resources/img/kakao_login.png'/>">
-				</a>
+				</a><br>
+			</div>
+			<div>
+				<a href="<%=request.getContextPath() %>/user/findUserId">아이디찾기</a>
 			</div>
 		</c:if>
 	</form>
 	<c:if test="${!empty user}">
 		<div>
 			<a href="<%=request.getContextPath() %>/user/logout">로그아웃</a>
+			<a href="<%=request.getContextPath() %>/message/msgList1">회원-메이커메세지</a>
+			<a href="<%=request.getContextPath() %>/message/msgList3">메이커-회원메세지</a>
+			<a href="<%=request.getContextPath() %>/message/msgList2">회원-회원메세지</a>
+			<a href="<%=request.getContextPath() %>/message/msgAdminList">회원-관리자메세지</a>
+			<c:if test="${user.userId eq 'admin'}">
+			<a href="<%=request.getContextPath() %>/message/msgUserList">관리자-회원메세지</a></c:if>
 		</div>
 	</c:if>
 
