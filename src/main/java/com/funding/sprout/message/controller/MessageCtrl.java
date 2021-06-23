@@ -35,9 +35,7 @@ public class MessageCtrl {
 		
 		User loginUser = (User)session.getAttribute("user");
 		String senderId=loginUser.getUserId();
-		System.out.println("loginId : "+senderId);
 		List<Map<String, String>> msgList = msgService.msgMakerList(senderId);
-		System.out.println(msgList);
 		
 		mv.addObject("msgList1",msgList);
 		mv.setViewName("/message/msgList1");
@@ -55,9 +53,7 @@ public class MessageCtrl {
 		vo.put("senderId", senderId);
 		vo.put("msgRoot", "2");
 		
-		System.out.println("vo : "+vo);
 		List<Map<String, String>> msgList = msgService.msgUserList(vo);
-		System.out.println(msgList);
 		mv.addObject("msgList2",msgList);
 		mv.setViewName("/message/msgList2");
 		
@@ -71,7 +67,6 @@ public class MessageCtrl {
 		String receiverId=loginUser.getUserId();
 		
 		List<Map<String, String>> msgList = msgService.msgMakerUserList(receiverId);
-		System.out.println(msgList);
 		mv.addObject("msgList3",msgList);
 		mv.setViewName("/message/msgList3");
 		
@@ -86,7 +81,6 @@ public class MessageCtrl {
 		vo.put("msgRoot", "3");
 
 		List<Map<String, String>> msgList = msgService.msgUserList(vo);
-		System.out.println("msgList: "+msgList);
 		mv.addObject("msgList",msgList);
 		mv.setViewName("/message/msgUserList");
 		
@@ -103,7 +97,6 @@ public class MessageCtrl {
 		vo.put("senderId", receiverId);
 		vo.put("msgRoot", "4");
 		List<Map<String, String>> msgList = msgService.msgUserList(vo);
-		System.out.println("msgList: "+msgList);
 		mv.addObject("msgList",msgList);
 		mv.setViewName("/message/msgAdminList");
 		
@@ -114,18 +107,15 @@ public class MessageCtrl {
 	public ModelAndView msgRead1 (
 			@RequestParam(name="receiverId") String receiverId, 
 			HttpSession session) {
-		System.out.println("receiverId: "+receiverId);
 		User loginUser=(User)session.getAttribute("user");
 		String senderId=loginUser.getUserId();
 		Map<String, String> id = new HashMap<String, String>();
 		id.put("receiverId", receiverId);
 		id.put("senderId", senderId);
 		List<Message> ml=msgService.getMakerMessage(id);
-		System.out.println("리스트"+ml);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", ml);
 		mv.setViewName("/message/msgRead1");
-		System.out.println("들어간리스트"+ml);
 		return mv;
 	}
 
@@ -133,7 +123,6 @@ public class MessageCtrl {
 	public ModelAndView msgRead2 (
 			@RequestParam(name="receiverId") String receiverId, 
 			HttpSession session) {
-		System.out.println("receiverId: "+receiverId);
 		User loginUser=(User)session.getAttribute("user");
 		String loginId=loginUser.getUserId();
 		HashMap<String, String> id=new HashMap<String, String>();
@@ -141,11 +130,9 @@ public class MessageCtrl {
 		id.put("loginId", loginId);
 		id.put("msgRoot", "2");
 		List<Message> ml=msgService.getUserMessage(id);
-		System.out.println("리스트1"+ml);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", ml);
 		mv.setViewName("/message/msgRead2");
-		System.out.println("들어간리스트"+ml);
 		return mv;
 	}
 	
@@ -153,18 +140,15 @@ public class MessageCtrl {
 	public ModelAndView msgRead3 (
 			@RequestParam(name="receiverId") String receiverId, 
 			HttpSession session) {
-		System.out.println("receiverId: "+receiverId);
 		User loginUser=(User)session.getAttribute("user");
 		String loginId=loginUser.getUserId();
 		HashMap<String, String> id=new HashMap<String, String>();
 		id.put("senderId", receiverId);
 		id.put("receiverId", loginId);
 		List<Message> ml=msgService.getMakerMessage(id);
-		System.out.println("리스트1"+ml);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", ml);
 		mv.setViewName("/message/msgRead3");
-		System.out.println("들어간리스트"+ml);
 		return mv;
 	}
 	
@@ -179,11 +163,9 @@ public class MessageCtrl {
 		id.put("userId", receiverId);
 		id.put("loginId", loginId);
 		List<Message> ml=msgService.getAdminMessage(id);
-		System.out.println("리스트1"+ml);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", ml);
 		mv.setViewName("/message/msgAdminRead");
-		System.out.println("들어간리스트"+ml);
 		return mv;
 	}
 	
@@ -191,25 +173,20 @@ public class MessageCtrl {
 	public ModelAndView msgUserRead (
 			@RequestParam(name="receiverId") String receiverId, 
 			HttpSession session) {
-		System.out.println("receiverId: "+receiverId);
 		HashMap<String, String> id=new HashMap<String, String>();
 		id.put("userId", receiverId);
 		id.put("loginId", "admin");
 		List<Message> ml=msgService.getAdminMessage(id);
-		System.out.println("리스트1"+ml);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", ml);
 		mv.setViewName("/message/msgUserRead");
-		System.out.println("들어간리스트"+ml);
 		return mv;
 	}
 	
-	@RequestMapping(value = "msgInsert1", method = RequestMethod.POST) // 메이커-회원 발송 메시지 저장
+	@RequestMapping(value = "msgInsert1", method = RequestMethod.POST) // 메이커-회원 발송 메시지 저장 (회원 root0 메이커 root1)
 	public void msgInsert1(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
 		int result=0;
 		User loginUser=(User)session.getAttribute("user");
-		System.out.println(loginUser);
-		System.out.println("makerChk: "+request.getParameter("makerChk"));
 		char maker=request.getParameter("makerChk").charAt(0);
 		
 		String senderId=loginUser.getUserId();
@@ -225,7 +202,6 @@ public class MessageCtrl {
 			msg.setReceiverId(senderId);
 			msg.setSenderId(request.getParameter("receiverId"));
 		}
-		System.out.println(msg);
 		result=msgService.msgInsert(msg);
 		System.out.println(result);
 		response.setContentType("text/html; charset=UTF-8");
@@ -240,7 +216,7 @@ public class MessageCtrl {
 		}
 	}
 	
-	@RequestMapping(value = "msgInsert2", method = RequestMethod.POST) // 회원-회원 발송 메시지 저장
+	@RequestMapping(value = "msgInsert2", method = RequestMethod.POST) // 회원-회원 발송 메시지 저장 (회원 간 root2)
 	public void msgInsert2(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
 		int result=0;
 		User loginUser=(User)session.getAttribute("user");
@@ -251,11 +227,8 @@ public class MessageCtrl {
 		msg.setReceiverId(request.getParameter("receiverId"));
 		msg.setMsgRoot('2');
 		msg.setSenderId(senderId);
-		System.out.println(msg);
 		
 		result=msgService.msgInsert(msg);
-		
-		System.out.println(result);
 		
 		response.setContentType("text/html; charset=UTF-8");
 		try {
@@ -273,11 +246,8 @@ public class MessageCtrl {
 	public void msgAdminInsert(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
 		int result=0;
 		User loginUser=(User)session.getAttribute("user");
-		System.out.println(loginUser);
 		String loginId=loginUser.getUserId();
-		System.out.println("loginId:"+loginId);
 		String receiverId=request.getParameter("receiverId");
-		System.out.println("receiverId:"+receiverId);
 		
 		Message msg = new Message();
 		
@@ -286,16 +256,12 @@ public class MessageCtrl {
 			msg.setMsgRoot('3');
 			msg.setReceiverId(receiverId);
 			msg.setSenderId(loginId);
-			System.out.println("관리자발신~~");
 		} else {
 			msg.setMsgRoot('4');
 			msg.setReceiverId("admin");
 			msg.setSenderId(loginId);
-			System.out.println("회원발신~~");
 		}
-		System.out.println(msg);
 		result=msgService.msgInsert(msg);
-		System.out.println(result);
 		response.setContentType("text/html; charset=UTF-8");
 		try {
 			PrintWriter wr=response.getWriter();
@@ -311,7 +277,6 @@ public class MessageCtrl {
 	@ResponseBody
 	@RequestMapping(value = "msgDelete", method = RequestMethod.GET) // 메시지 삭제
 	public int msgDelete(String num) {
-		System.out.println(num);
 		int result = 0, msgNo = 0;
 		try {
 			msgNo=Integer.parseInt(num);

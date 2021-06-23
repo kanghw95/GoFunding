@@ -9,7 +9,7 @@ import org.springframework.web.socket.server.standard.ServletServerContainerFact
 
 @Configuration
 @EnableWebSocket
-public class WebSocketConfig implements WebSocketConfigurer {
+public class WebSocketConfig implements WebSocketConfigurer { //알람용으로 남김 사용 안할 경우 삭제 예정
 	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {

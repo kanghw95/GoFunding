@@ -17,20 +17,16 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public List<Map<String, String>> msgMakerList(String senderId) {
-		System.out.println("service: "+senderId);
 		return msgDao.msgMakerList(senderId);
 	}
 	
 	@Override
 	public List<Map<String, String>> msgMakerUserList(String receiverId) {
-		System.out.println("service: "+receiverId);
 		return msgDao.msgMakerUserList(receiverId);
 	}
 	
 	@Override
 	public List<Map<String, String>> msgUserList(Map<String, String> vo) {
-		System.out.println("service: "+vo);
-		
 		List<Map<String, String>> vo1=null;
 		try {
 			vo1=msgDao.msgUserList(vo);

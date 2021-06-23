@@ -19,8 +19,8 @@ public interface MessageService {
 	
 	public List<Message> getAdminMessage(Map<String, String> id); //관리자-회원 상세 조회
 
-	public int msgInsert(Message msg); // 추가
+	public int msgInsert(Message msg); //메세지 저장
 
-	public int deleteMessage(int msgNo); //삭제
+	public int deleteMessage(int msgNo); //메세지 삭제
 	
 }

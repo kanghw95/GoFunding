@@ -17,7 +17,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.funding.sprout.vo.User;
 
 @Component
-public class EchoHandler extends TextWebSocketHandler {
+public class EchoHandler extends TextWebSocketHandler { //알람용으로 남김 사용 안할 경우 삭제 예정
 
 	private static List<WebSocketSession> sessions;
 	Map<String, WebSocketSession> userSessions = new HashMap<>();

@@ -40,18 +40,14 @@ public class UserLoginCtrl {
 	
 	@RequestMapping(value = "/login")
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
-		System.out.println("들어옴!");
 		String serverUrl = request.getScheme()+"://"+request.getServerName();
-		System.out.println("1: "+serverUrl);
 		if(request.getServerPort() != 80) {
 			serverUrl = serverUrl + ":" + request.getServerPort();
 		}
 		
-		System.out.println("2: "+serverUrl);
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session, serverUrl);
 		model.addAttribute("naverAuthUrl", naverAuthUrl);
 		
-		System.out.println("3: "+naverAuthUrl);
 		String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session, serverUrl);
 		model.addAttribute("kakaoAuthUrl", kakaoAuthUrl);
 		
@@ -62,17 +58,12 @@ public class UserLoginCtrl {
 	public String loginPost (User user, HttpSession session, Model model) throws Exception {
 		logger.info("loginPost들어옴");
 		User loginUser=userLoginService.login(user);
-		System.out.println("ctrl나옴"+loginUser);
-		System.out.println(user);
 		
 		String pw1=user.getUserPwd();
 		String pw2=loginUser.getUserPwd();
-		System.out.println(pw1.equals(pw2));
-		
 		
 		if(loginUser==null || !pw1.equals(pw2)) { // TODO bcrypt 추가
 			System.out.println("실패");
-			System.out.println(!pw1.equals(pw2));
 			return "redirect:/"; // err500 처리 추가
 		}
 		session.setAttribute("user",loginUser);
@@ -105,7 +96,6 @@ public class UserLoginCtrl {
 		JSONObject jsonObj = (JSONObject) obj;
 		
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");
-		System.out.println(response_obj);
 
 		// 프로필 조회
 		String userName = (String) response_obj.get("name");
@@ -114,13 +104,11 @@ public class UserLoginCtrl {
 		Map<String, String> vo=new HashMap<String, String>();
 		vo.put("userName", userName);
 		vo.put("userEmail", userEmail);
-		System.out.println(vo);
 		
 		User loginUser=userLoginService.socialLogin(vo);
 		
 		// 세션에 사용자 정보 등록
 		session.setAttribute("user", loginUser);
-		System.out.println("user:"+session.getAttribute("user"));
 		
 		return "redirect:/";
 	}
@@ -129,7 +117,6 @@ public class UserLoginCtrl {
 	@RequestMapping(value = "/kakaoCallback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String kakaoOauth2ClientCallback(HttpServletRequest request, HttpServletResponse response, Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws Exception {
 
-		System.out.println("콜백들어옴");
 		String serverUrl = request.getScheme() + "://" + request.getServerName();
 		if (request.getServerPort() != 80) {
 			serverUrl = serverUrl + ":" + request.getServerPort();
@@ -153,28 +140,18 @@ public class UserLoginCtrl {
 
 		JSONObject response_obj = (JSONObject) jsonObj.get("kakao_account");
 		JSONObject profile_obj = (JSONObject)response_obj.get("profile");
-		System.out.println("1:"+response_obj);
-		System.out.println("2:"+profile_obj);
 
 		// 프로필 조회
 		String userName = (String) profile_obj.get("nickname");
 		String userEmail = (String) response_obj.get("email");
-		System.out.println(userName);
-		System.out.println("*");
 		
 		Map<String, String> vo=new HashMap<String, String>();
 		vo.put("userName", userName);
 		vo.put("userEmail", userEmail);
-		System.out.println("돌림"+vo);
-		
 		User loginUser=userLoginService.socialLogin(vo);
-		System.out.println("***");
 		
 		// 세션에 사용자 정보 등록
 		session.setAttribute("user", loginUser);
-		System.out.println("user:"+session.getAttribute("user"));
-
-		System.out.println("****");
 		
 		return "redirect:/";
 	}
@@ -188,9 +165,7 @@ public class UserLoginCtrl {
 			Map<String, String> vo=new HashMap<String, String>();
 			vo.put("userName", userName);
 			vo.put("userEmail", userEmail);
-			System.out.println(vo);
 			User loginUser = userLoginService.socialLogin(vo);
-			System.out.println(loginUser);
 			session.setAttribute("user", loginUser);
 		} else {
 			System.out.println("로그인 실패");
@@ -203,7 +178,7 @@ public class UserLoginCtrl {
 	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		
 		// 세션 삭제
-		System.out.println("로그아웃들어옴");
+		System.out.println("로그아웃");
 		session.removeAttribute("user");
 		
 		return "redirect:/";

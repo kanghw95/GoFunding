@@ -8,22 +8,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.2/sockjs.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Insert title here</title>
-<style type="text/css">
-#text-3{
-	text-align: left;
-}
-#text-4{
-	text-align: right;
-}
-#textArea{
-	width:500px;
-	height:auto;
-}
-.table{
-	width:500px;
-	height:30px;
-}
-</style>
 </head>
 <body>
 	<div id="textArea">
@@ -47,16 +31,6 @@
 	<input id="sendBtn" value="Send" type="button">
 </form>
 <script>
-	$(function(){
-		var userId1=$('#userId1').val(); //발신인
-		console.log(userId1);
-		var userId2=$('#userId2').val(); //상대편
-		console.log(userId2);
-		if('tr[id^="'+userId2+'"]'){
-			$(this).css('text-align','right');
-		}
-	})
-
 	var webSocket = new WebSocket("ws://localhost:8090/sprout/msgRead");
 	//콘솔 텍스트 에리어 오브젝트
 

@@ -19,7 +19,7 @@ import com.funding.sprout.vo.User;
 
 @Component
 @ServerEndpoint("/msgRead")
-public class WebSocketCtrl {
+public class WebSocketCtrl { //알람용으로 남김 사용 안할 경우 삭제 예정
 
 	private static ArrayList<Session> sessionList = new ArrayList<Session>();
 	private static Pattern pattern = Pattern.compile("^\\{\\{.*?\\}\\}");
@@ -37,13 +37,6 @@ public class WebSocketCtrl {
 	// 메시지 내용을 콘솔에 출력한다.
 	System.out.println(message);
 	System.out.println(userSession);
-	
-//	User loginUser=(User)id.getAttribute("user");
-//	String userId= loginUser.getUserId();
-//	System.out.println(userId);
-	
-	
-	
 	
 	// 초기 유저 명
 	String name = "anonymous";
