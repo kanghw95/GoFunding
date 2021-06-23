@@ -10,6 +10,10 @@
 <title>결제 페이지</title>
 </head>
 <link href="<%=request.getContextPath() %>/resources/css/fundingpay/fundingpay.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <body>
 	<div role="main" id="content" class="content">
 		<div>
@@ -35,8 +39,9 @@
 							class="FundingDetailApplicationContent_amount__aTe92"><em
 								class="FundingDetailApplicationContent_number__2kFus">배송비</em>원</span></li>
 					</ul>
+					<fmt:parseDate value="${funding.fundingfin}" var="paymentday" pattern="yyyy-MM-dd HH:mm:ss"/> 
 					<div class="FundingDetailApplicationContent_total__1pwx-">
-						<strong class="FundingDetailApplicationContent_date__3KleL">2021.06.29결제 예정</strong>
+						<strong class="FundingDetailApplicationContent_date__3KleL"><fmt:formatDate value="${paymentday}" pattern="yyyy년 MM월 dd일"/> 결제 예정</strong>
 						<strong class="FundingDetailApplicationContent_item__3hhAd">총<span class="FundingDetailApplicationContent_count__IZBVx"><span
 								class="FundingDetailApplicationContent_number__2kFus">${funding_pay_rewordEA}</span>개</span></strong><strong
 							class="FundingDetailApplicationContent_item__3hhAd">총<span
@@ -45,8 +50,7 @@
 					</div>
 				</section>
 				<section class="FundingDetailApplicationContent_section__gfh97">
-					<h3 class="FundingDetailApplicationContent_subtitle__mdStj">배송지
-						정보</h3>
+					<h3 class="FundingDetailApplicationContent_subtitle__mdStj">배송지 정보</h3>
 					<div class="FundingDetailApplicationContent_address__rKPWo">
 						<div class="FundingDetailApplicationContent_radio__GXncM">
 							<input type="radio" name="address" id="wa_default_address"
@@ -63,21 +67,19 @@
 								value="DIRECT_INPUT"><label for="wa_new_address"
 								class="FundingDetailApplicationContent_label_type__1LZJ6">직접입력</label>
 						</div>
-						<dl class="FundingDetailApplicationContent_list_basic__F5tPH"
-							id="wa_default_address_box" aria-hidden="false"
+						<dl class="FundingDetailApplicationContent_list_basic__F5tPH" id="wa_default_address_box" aria-hidden="false"
 							aria-labelledby="wa_default_address">
 							<div class="FundingDetailApplicationContent_item__3hhAd">
 								<dt class="FundingDetailApplicationContent_title__2BYvK">이름</dt>
-								<dd class="FundingDetailApplicationContent_description__2wk3i">강현우</dd>
+								<dd class="FundingDetailApplicationContent_description__2wk3i">${sessionScope.user.userName}</dd>
 							</div>
 							<div class="FundingDetailApplicationContent_item__3hhAd">
 								<dt class="FundingDetailApplicationContent_title__2BYvK">연락처</dt>
-								<dd class="FundingDetailApplicationContent_description__2wk3i">010-4514-1635</dd>
+								<dd class="FundingDetailApplicationContent_description__2wk3i">${sessionScope.user.userPhone}</dd>
 							</div>
 							<div class="FundingDetailApplicationContent_item__3hhAd">
 								<dt class="FundingDetailApplicationContent_title__2BYvK">주소</dt>
-								<dd class="FundingDetailApplicationContent_description__2wk3i">(우)14696
-									경기도 부천시 범안로22번길 52 (괴안동) 우성팰리스 503호</dd>
+								<dd class="FundingDetailApplicationContent_description__2wk3i">${sessionScope.user.userAddress}</dd>
 							</div>
 						</dl>
 						<div class="FundingDetailApplicationContent_list_input__DNaub"
@@ -91,18 +93,8 @@
 							</div>
 							<div class="FundingDetailApplicationContent_item__3hhAd">
 								<label for="input_tel_head"
-									class="FundingDetailApplicationContent_label__3WPCE">연락처</label><input
-									type="text" id="input_tel_head"
-									class="FundingDetailApplicationContent_input_text__1vbSp"
-									value="010"><span
-									class="FundingDetailApplicationContent_bar__1O-Fk"></span><input
-									type="text" id="input_tel_body"
-									class="FundingDetailApplicationContent_input_text__1vbSp"
-									value="4514"><span
-									class="FundingDetailApplicationContent_bar__1O-Fk"></span><input
-									type="text" id="input_tel_tail"
-									class="FundingDetailApplicationContent_input_text__1vbSp"
-									value="1635">
+									class="FundingDetailApplicationContent_label__3WPCE">연락처</label>
+									<input type="text" id="input_tel_head" class="FundingDetailApplicationContent_input_text__1vbSp" value="">
 							</div>
 							<div class="FundingDetailApplicationContent_item__3hhAd">
 								<label for="input_zipcode"
@@ -110,16 +102,15 @@
 								<div class="FundingDetailApplicationContent_zipcode__2Jdu9">
 									<input type="zipcode" id="input_zipcode"
 										class="FundingDetailApplicationContent_input_zipcode__3rEpT"
-										readonly="" value="14696">
-									<button type="button_zipcode"
-										class="FundingDetailApplicationContent_button_zipcode__1rDcO">주소검색</button>
+										readonly="" value="">
+									<button type="button" onclick="sample6_execDaumPostcode()" class="FundingDetailApplicationContent_button_zipcode__1rDcO">주소검색</button>
 								</div>
 								<input type="text" id="input_address1"
 									class="FundingDetailApplicationContent_input_address__IFygD"
-									readonly="" value="경기도 부천시 범안로22번길 52 (괴안동)"><input
+									readonly="" value=""><input
 									type="text" id="input_address2"
 									class="FundingDetailApplicationContent_input_address__IFygD"
-									placeholder="상세주소 입력" readonly="" value="우성팰리스 503호">
+									placeholder="상세주소 입력" readonly="" value="">
 								<div class="FundingDetailApplicationContent_checkline__-E-HP">
 									<input type="checkbox" id="input_check"
 										class="FundingDetailApplicationContent_input_checkline__2MGj1"><label
@@ -202,5 +193,112 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	
+	
+	//배송지 직접입력 
+	var dafault_address_btn = document.getElementById("wa_default_address");
+	var new_address_btn = document.getElementById("wa_new_address");
+
+	var dafault_address = document.getElementById("wa_default_address_box");
+	var new_address = document.getElementById("wa_new_address_box");
+	
+	new_address_btn.addEventListener("click",function(){
+		
+		if(new_address.getAttribute("aria-hidden") == "true"){
+			new_address.setAttribute("aria-hidden","false");
+			dafault_address.setAttribute("aria-hidden","true");
+		}
+	});
+	dafault_address_btn.addEventListener("click",function(){
+		
+		if(dafault_address.getAttribute("aria-hidden") == "true"){
+			dafault_address.setAttribute("aria-hidden","false");
+			new_address.setAttribute("aria-hidden","true");
+		}
+	});
+
+	
+	var IMP = window.IMP; // 생략가능
+	IMP.init('imp28987277'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+
+
+	function requestPay() {
+	    // IMP.request_pay(param, callback) 호출
+	    IMP.request_pay({ // param
+	        pg: "html5_inicis",
+	        pay_method: "card",
+	        merchant_uid: "ORD20180131-0000011",
+	        name: reword_val1,
+	        amount: funtotalprice,
+	        buyer_email: "gildong@gmail.com",
+	        buyer_name: "강현우",
+	        buyer_tel: "010-4242-4242",
+	        buyer_addr: "서울특별시 강남구 신사동",
+	        buyer_postcode: "01181"
+	    }, function (rsp) { // callback
+		    if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+		        // jQuery로 HTTP 요청
+		        jQuery.ajax({
+		            url: "https://www.myservice.com/payments/complete", // 가맹점 서버
+		            method: "POST",
+		            headers: { "Content-Type": "application/json" },
+		            data: {
+		                imp_uid: rsp.imp_uid,
+		                merchant_uid: rsp.merchant_uid
+		            }
+		        }).done(function (data) {
+		          // 가맹점 서버 결제 API 성공시 로직
+		        })
+		      } else {
+		        alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+		      }
+		    });
+	  }
+	
+	</script>
+	
+	<script>
+// 주소 검색 api
+function sample6_execDaumPostcode() {
+	new daum.Postcode(
+			{
+				oncomplete : function(data) {
+					var addr = ''; // 주소 변수
+					var extraAddr = ''; // 참고항목 변수
+
+					if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+						addr = data.roadAddress;
+					} else { // 사용자가 지번 주소를 선택했을 경우(J)
+						addr = data.jibunAddress;
+					}
+
+					if (data.userSelectedType === 'R') {
+						if (data.bname !== ''
+								&& /[동|로|가]$/g.test(data.bname)) {
+							extraAddr += data.bname;
+						}
+						if (data.buildingName !== ''
+								&& data.apartment === 'Y') {
+							extraAddr += (extraAddr !== '' ? ', '
+									+ data.buildingName : data.buildingName);
+						}
+						if (extraAddr !== '') {
+							extraAddr = ' (' + extraAddr + ')';
+						}
+						document.getElementById("sample6_extraAddress").value = extraAddr;
+
+					} else {
+						document.getElementById("sample6_extraAddress").value = '';
+					}
+
+					document.getElementById('sample6_postcode').value = data.zonecode;
+					document.getElementById("sample6_address").value = addr;
+					document.getElementById("sample6_detailAddress")
+							.focus();
+				}
+			}).open();
+}
+</script>
 </body>
 </html>

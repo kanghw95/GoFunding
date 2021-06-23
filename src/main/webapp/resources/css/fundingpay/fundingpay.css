@@ -288,6 +288,8 @@
 
 /*배송지 직접입력 */
 
+
+
 .FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_list_basic__F5tPH[aria-hidden=true], .FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_list_input__DNaub[aria-hidden=true] {
     display: none;
 }
@@ -314,7 +316,7 @@
 }
 
 .FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_input_text__1vbSp {
-    width: 107px;
+    width: 115px;
     height: 38px;
     padding: 0 15px;
     border: 1px solid rgba(0,0,0,.08);
@@ -329,21 +331,78 @@
     padding-left: 113px;
     line-height: 0;
 }
-
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_input_text__1vbSp {
-    width: 107px;
-    height: 38px;
-    padding: 0 15px;
-    border: 1px solid rgba(0,0,0,.08);
-    font-size: 14px;
-}
-
 .FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_bar__1O-Fk {
     display: inline-block;
     width: 5px;
     height: 1px;
     margin: 19px 8px 0;
     background-color: #828282;
+    vertical-align: top;
+}
+
+.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_input_zipcode__3rEpT {
+    width: 129px;
+    height: 38px;
+    padding: 0 12px;
+    border: 1px solid rgba(0,0,0,.08);
+    font-size: 14px;
+}
+
+.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_button_zipcode__1rDcO {
+    display: inline-block;
+    height: 38px;
+    padding: 0 19px;
+    margin-left: -1px;
+    border: 1px solid #333;
+    color: #333;
+    vertical-align: top;
+}
+
+.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_zipcode__2Jdu9 {
+    margin-bottom: 10px;
+}
+
+.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_input_address__IFygD {
+    width: 405px;
+    height: 38px;
+    padding: 0 15px;
+    border: 1px solid rgba(0,0,0,.08);
+    font-size: 14px;
+}
+
+.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_input_address__IFygD+.FundingDetailApplicationContent_input_address__IFygD {
+    width: 271px;
+    margin-left: 10px;
+}
+
+.FundingDetailApplicationContent_checkline__-E-HP {
+    margin-top: 14px;
+}
+
+.FundingDetailApplicationContent_checkline__-E-HP .FundingDetailApplicationContent_input_checkline__2MGj1 {
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    clip: rect(0 0 0 0);
+}
+
+.FundingDetailApplicationContent_checkline__-E-HP .FundingDetailApplicationContent_label_checkline__1lw6z {
+    font-size: 14px;
+    line-height: 1.43;
+    color: #a3a3a3;
+}
+
+.FundingDetailApplicationContent_checkline__-E-HP .FundingDetailApplicationContent_label_checkline__1lw6z .FundingDetailApplicationContent_icon__3inag {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    padding-top: 4px;
+    margin: 1px 7px 0 0;
+    border: 1px solid #c7c7c7;
+    border-radius: 50%;
+    text-align: center;
     vertical-align: top;
 }
 
