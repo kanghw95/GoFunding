@@ -17,7 +17,7 @@
 	
 	<!-- 게시글 상세보기 -->
 	<select id="detail" resultMap="resultBoard" parameterType="int">
-		SELECT * FROM BULLETINEBOARD WHERE FREENO = #{FREENO}
+		SELECT * FROM BULLETINEBOARD WHERE FREENO = #{boardNo}
 	</select>
 
 	<!-- 게시글 등록 -->
@@ -34,9 +34,6 @@
 	<!-- 게시글 수정 -->
 	<update id="updateBoard" parameterType="Board" flushCache="true" statementType="PREPARED">
 		UPDATE BULLETINEBOARD SET FREETITLE = #{boardTitle}, FREECONTENT =#{boardContent} WHERE FREENO = #{boardNo}
-
-		<!-- UPDATE BULLETINEBOARD SET BOARD_TITLE = #{board_title}, BOARD_CONTENT = #{board_content}, BOARD_FILE = #{board_file} WHERE BOARD_NUM = #{board_num} 
-		AND BOARD_PWD = #{board_pwd} -->
 	</update>
 
 	<!-- 페이지당 게시글 조회 / 번호정렬 -->
@@ -45,27 +42,24 @@
 	</select>
 	
 	<!-- 글 조회수 증가-->
-  	<update id="addReadCount" parameterType="string" flushCache="true" statementType="PREPARED">
+  	<update id="addReadCount" parameterType="int" flushCache="true" statementType="PREPARED">
   		UPDATE BULLETINEBOARD SET FREECNT = FREECNT+1 WHERE FREENO = #{boardNo}
   	</update>
 	
-
-
-
-
-
-
-
-
-
-
-
-
 	<!-- 게시글 단일 조회 -->
-	<select id="selectOne" parameterType="string" resultType="Board">
-		SELECT
-		* FROM BULLETINEBOARD WHERE BOARD_NUM = #{board_num}
+	<select id="selectOne" parameterType="int" resultMap="resultBoard">
+		SELECT * FROM BULLETINEBOARD WHERE FREENO = #{boardNo}
 	</select>
+	
+	
+	
+	
+	
+	<!-- 게시글 신고 -->
+	<!-- 좋아요 -->
+
+
+
 
 	<!-- 검색한 게시글 조회 -->
 	<select id="searchList" parameterType="string"
@@ -75,8 +69,4 @@
 		#{keyword} ||'%'
 		ORDER BY REGDATE DESC
 	</select>
-
-	<!-- 게시글 신고 -->
-	<!-- 좋아요 -->
-
 </mapper>

@@ -33,14 +33,13 @@ public class BoardCtrl {
 			@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", required = false) String keyword, ModelAndView mv) {
 		
-		
-		
 		logger.info("boardList()");
 		try {
 			int currentPage = page; // 한 페이지당 출력할 목록 갯수
 			int listCount = boService.totalCount();
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 			System.out.println("listCount:" + listCount);
+			
 			if (keyword != null && !keyword.equals(""))
 				mv.addObject("list", boService.searchList(keyword));
 			else {
@@ -49,6 +48,7 @@ public class BoardCtrl {
 				System.out.println("aaa: " + aaa.get(0).toString());
 				mv.addObject("list", aaa);
 			}
+			mv.addObject("list", boService.selectList(currentPage, LIMIT));
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount);
@@ -67,14 +67,17 @@ public class BoardCtrl {
 			@RequestParam(name = "boardNo")int boardNo,
 			@RequestParam(name = "page", defaultValue = "1") int page) { // 게시글 상세보기
 //	public String boardDetail(ModelAndView mv,Model model, int boardNo) { 
-		Board data = boService.detail(boardNo); // no값넘김
-		System.out.println("data : " + data.toString());
 		
 		// 방법1
 		try {
+			Board data = boService.selectBoard(0,boardNo); // no값넘김  
+			System.out.println("data : " + data.toString());
+		int currentPage = page; 		
+		mv.addObject("currentPage", currentPage);
 		mv.addObject("data", data);
 		mv.setViewName("board/boardDetail");
 		}catch(Exception e) {
+			e.printStackTrace();
 			mv.addObject("msg" , e.getMessage());
 			mv.setViewName("errorPage");
 		}
@@ -83,7 +86,7 @@ public class BoardCtrl {
 //		model.addAttribute("data", data);
 //		return "board/boardDetail";	 
 	}
-
+	
 	@RequestMapping(value = "boardWrite", method = RequestMethod.GET)
 	public String write() { // write로 이동
 		return "board/boardWrite";

@@ -8,12 +8,9 @@ public interface BoardService {
 	
 	int totalCount();  // 게시글 목록
 	
-	
 	Board detail(int boardNo); // 게시글 상세보기
 	
 	int insertBoard(Board b); // 게시글 등록
-	
-	Board selectBoard(int chk, int boardNo);
 	
 	void deleteBoard(int boardNo); // 글 삭제
 	
@@ -21,20 +18,21 @@ public interface BoardService {
 	
 	List<Board> selectList(int startPage, int limit); // 번호 정렬
 		
-	// Board updateBoard(Board b); 
-	Board addReadCount(Board b);// 글  조회수 증가
+	Board selectBoard(int chk, int boardNo); // 조회수 증가
+	
+	Board selectOne(int boardNo); // 글 가져오기
+	
+
 	
 	
 	
 	
 
 	
-	Board selectOne(int boardNo); 
-	
+
 	List<Board> searchList(String keyword);
 	
 	int ReportSend(Board b);
 	
 	int getLike(Board b);
-	
 }

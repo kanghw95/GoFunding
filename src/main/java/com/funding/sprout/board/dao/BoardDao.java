@@ -47,23 +47,20 @@ public class BoardDao {
 		return sqlSession.update("Board.addReadCount",boardNo); // 글 조회 수 증가
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public Board selectOne(int boardNo) {
 		return sqlSession.selectOne("Board.selectOne" , boardNo); // 글 가져오기
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 
 	public List<Board> searchList(String keyword) {
 		return sqlSession.selectList("Board.searchList" , keyword); // 게시글 검색 조회

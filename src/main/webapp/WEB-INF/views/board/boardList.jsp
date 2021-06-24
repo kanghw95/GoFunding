@@ -66,12 +66,12 @@
 			<c:forEach var="vo" items="${list}">
 				<tr>
 					<td align="center">${vo.boardNo }</td>
-					<td align="left"><a
-						href="boardDetail?boardNo=${vo.boardNo }&page=${currentPage}">&nbsp;${vo.boardTitle }</a></td>
+					<td align="left"><a href="boardDetail?boardNo=${vo.boardNo }&page=${currentPage}">&nbsp;${vo.boardTitle }</a></td>
 					<td align="center">${vo.boardId }</td>
+					
 					<td align="center">${vo.boardCnt }</td>
 					<%--	<td align = "center">${vo.getLike }</td> --%>
-					<td align="center">0</td>
+					<td align="center">0</td> <!-- 추천 -->
 					<td align="center">${vo.boardDate }</td>
 				</tr>
 			</c:forEach>

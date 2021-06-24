@@ -1,6 +1,7 @@
 <%@page import="com.funding.sprout.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,9 +39,21 @@
 	top: 160px;
 }
 
-#boardCnt {
+#boardId {
 	position: absolute;
-	left: 70px;
+	left: 50px;
+	top: 190px;
+}
+
+#Cmtcount {
+	position: absolute;
+	left: 100px;
+	top: 190px;
+}
+
+#boardcnt {
+	position: absolute;
+	left: 160px;
 	top: 190px;
 }
 
@@ -68,7 +81,7 @@
 	top: 500px;
 }
 
-#List{
+#page{
 	position : absolute;
 	left : 800px;
 	top : 650px;
@@ -94,9 +107,9 @@
 		<input type = "button" value = "삭제" id = "delete">
 		</form>
 	
-
-	<div id = "boardCnt">댓글수 ${data.boardCnt }</div>
-
+	<div id = "boardId">${data.boardId }</div>
+	<div id = "Cmtcount">댓글수 <%-- ${data.boardCnt } --%></div>
+	<div id = "boardcnt">${data.boardCnt }</div>
 	<div id = "Content1">
 		<h3>글 내용</h3>
 	</div>
@@ -113,11 +126,15 @@
 
 	<div id = "button">
 		<input type = "button" value = "등록">
+		
 	</div>
-
-	<input type = "button" id = "List" value = "목록" onclick = "history.back(-1)">
 	
-
+	<div id = "page">
+	<c:url var="boardList" value="boardList">
+					<c:param name="page" value="${currentPage}" />
+				</c:url><a href="${boardList}">목록</a>
+	</div>
+	
 	<script>
 		$("#modify").on("click", function() {
 			var modify1 = confirm("수정하시겠습니까?");
@@ -135,7 +152,7 @@
 				}
 				if(boardId=='null' || boardId==''){
 					alert("작성자가 아니므로 글 수정이 되지 않습니다.");
-					return;
+					return;	
 				}
 				if(boardId != sessionUserId){
 					alert("작성자가 아니므로 글 수정이 되지 않습니다.");
@@ -151,6 +168,7 @@
 			frm.submit();
 		});
 	
+		
 		$("#delete").on("click", function() {
 			var delete1 = confirm("삭제하시겠습니까?");
 			if(delete1 == true) {

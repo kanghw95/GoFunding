@@ -19,7 +19,6 @@ public class BoardServiceImpl implements BoardService {
 		return boDao.listCount();
 	}
 
-	
 	@Override
 	public Board detail(int boardNo) { // 게시글 상세보기
 		return boDao.detail(boardNo);
@@ -28,15 +27,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int insertBoard(Board b) { // 게시글 등록
 		return boDao.insertBoard(b);
-	}
-	
-	@Override
-	public Board selectBoard(int chk, int boardNo) {
-
-		if (chk == 0) {
-			boDao.addReadCount(boardNo);
-		}
-		return boDao.selectOne(boardNo);
 	}
 	
 	@Override
@@ -63,40 +53,36 @@ public class BoardServiceImpl implements BoardService {
 		System.out.println("Aaa");
 		return result;
 	}
-		
+			
 	@Override
-	public Board addReadCount(Board b) {
-		int result = boDao.updateBoard(b);
-		if(result > 0) {
-			b = boDao.selectOne(b.getBoardNo());
-		} else {
-			b = null;
+	public Board selectBoard(int chk, int boardNo) { // 글 조회수 증가
+
+		if (chk == 0) {
+			boDao.addReadCount(boardNo);
 		}
-		return b;
+		return boDao.selectOne(boardNo);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@Override
 	public Board selectOne(int boardNo) { // 글 가져오기
 		return boDao.selectOne(boardNo);
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	@Override
 	public List<Board> searchList(String keyword) { // 게시글 검색 조회
 		return boDao.searchList(keyword);
 	}
-
-
-
 
 	@Override
 	public int ReportSend(Board b) { // 게시글 신고
@@ -107,18 +93,4 @@ public class BoardServiceImpl implements BoardService {
 	public int getLike(Board b) { // 좋아요
 		return boDao.updateBoard(b);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
