@@ -25,7 +25,6 @@ public class NaverLoginBO {
 		String state = generateRandomString();
 		setSession(session, state);
 		OAuth20Service oauthService = new ServiceBuilder().apiKey(NAVER_CLIENT_ID).apiSecret(NAVER_CLIENT_SECRET).callback(NAVER_REDIRECT_URI).state(state).build(NaverOAuthApi20.instance());
-		System.out.println("!!:"+oauthService);
 		return oauthService.getAuthorizationUrl();
 	}
 

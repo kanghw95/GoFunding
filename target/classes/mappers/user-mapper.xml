@@ -56,4 +56,16 @@
 		SELECT * FROM USERS WHERE NAME = #{userName} AND EMAIL = #{userEmail} AND PHONE = #{phone}
 	</select>
 	
+	<!-- 펀딩신청서 저장 -->
+	<insert id="inputForm">
+		INSERT INTO APPLICATION VALUES (SEQ_APPLYNO.NEXTVAL, #{maker}, #{description}, #{id}, #{makerTel},
+		#{makerEmail}, #{makerInfo}, #{fundingTitle}, #{fundingCategory}, #{fundingContent}, #{fundingPrice},
+		#{fundingStart}, #{fundingFin}, #{fundingPlan}, #{rewardDesc}, #{rewardPrice}, #{rewardTitle}, #{rewardEA}, null)
+	</insert>
+	
+	<!-- 메이커명 중복체크 -->
+	<select id="makerChk" parameterType="string" resultType="java.lang.String">
+		SELECT MAKER FROM MAKER WHERE MAKER = #{maker}
+	</select>
+	
 </mapper>

@@ -25,7 +25,6 @@ public class KakaoLoginBO {
 		String state = generateRandomString();
 		setSession(session, state);
 		OAuth20Service oauthService = new ServiceBuilder().apiKey(KAKAO_CLIENT_ID).apiSecret(KAKAO_CLIENT_SECRET).callback(KAKAO_REDIRECT_URI).state(state).build(KakaoOAuthApi20.instance());
-		System.out.println(oauthService);
 		return oauthService.getAuthorizationUrl();
 	}
 
