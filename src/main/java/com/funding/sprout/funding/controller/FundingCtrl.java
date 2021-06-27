@@ -75,7 +75,6 @@ public class FundingCtrl {
 			List<Reward> rewardlist = funService.selectReward(fundingno);
 			System.out.println("선택한 펀딩 정보 :" + funding);
 			System.out.println("선택한 리워드 정보 :" + rewardlist);
-			
 			mv.addObject("funding", funService.selectOne(fundingno));
 			mv.addObject("reward", funService.selectReward(fundingno));
 			
@@ -88,14 +87,16 @@ public class FundingCtrl {
 		return mv;
 	}
 	
+	//결제 페이지 이동
 	@RequestMapping(value = "funding/fundingpay", method = RequestMethod.POST)
 	public ModelAndView fundingpay(
-			@RequestParam(name = "funding_pay_price") int funding_pay_price,
-			@RequestParam(name = "funding_pay_rewordEA") int funding_pay_rewordEA,
+			@RequestParam(name = "funding_pay_total_price") int funding_pay_price,
+			@RequestParam(name = "funding_pay_total_rewordEA") int funding_pay_rewordEA,
 			@RequestParam(name = "funding_no") int fundingno,
+			@RequestParam(name = "funding_pay_reword") String[] reword,
+			@RequestParam(name = "funding_pay_price") String[] price,
+			@RequestParam(name = "funding_pay_rewordEA") String[] rewordEA,
 			ModelAndView mv) {
-			System.out.println(funding_pay_price);
-			System.out.println(funding_pay_rewordEA);
 		try {
 			
 			Funding funding = funService.selectOne(fundingno);	
@@ -106,7 +107,9 @@ public class FundingCtrl {
 			mv.addObject("funding_pay_price",funding_pay_price);
 			mv.addObject("funding_pay_rewordEA",funding_pay_rewordEA);
 			mv.addObject("funding", funService.selectOne(fundingno));
-			mv.addObject("reward", funService.selectReward(fundingno));
+			mv.addObject("reward", reword);
+			mv.addObject("price", price);
+			mv.addObject("rewordEA", rewordEA);
 			mv.setViewName("funding/fundingpay");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());

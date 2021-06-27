@@ -1,6 +1,7 @@
 package com.funding.sprout.vo;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class Funding {
 	private int fundingno; // 펀딩번호
@@ -12,18 +13,20 @@ public class Funding {
 	private Timestamp fundingstart; // 시작일
 	private Timestamp fundingfin; // 종료일
 	private String maker; // 메이커
+	private Date fundingchkdate; //펀딩 승인 일자
+	private int deliverycharge; // 배송비
+	private Date deliverydate; // 배송일자
 	
 	
 	public Funding() {
 		
 	}
 
-	
-
 
 
 	public Funding(int fundingno, char fundingstate, String fundingcategory, String fundingtitle, String fundingcontent,
-			int fundingprice, Timestamp fundingstart, Timestamp fundingfin, String maker) {
+			int fundingprice, Timestamp fundingstart, Timestamp fundingfin, String maker, Date fundingchkdate,
+			int deliverycharge, Date deliverydate) {
 		super();
 		this.fundingno = fundingno;
 		this.fundingstate = fundingstate;
@@ -34,9 +37,10 @@ public class Funding {
 		this.fundingstart = fundingstart;
 		this.fundingfin = fundingfin;
 		this.maker = maker;
+		this.fundingchkdate = fundingchkdate;
+		this.deliverycharge = deliverycharge;
+		this.deliverydate = deliverydate;
 	}
-
-
 
 
 
@@ -45,10 +49,9 @@ public class Funding {
 		return "Funding [fundingno=" + fundingno + ", fundingstate=" + fundingstate + ", fundingcategory="
 				+ fundingcategory + ", fundingtitle=" + fundingtitle + ", fundingcontent=" + fundingcontent
 				+ ", fundingprice=" + fundingprice + ", fundingstart=" + fundingstart + ", fundingfin=" + fundingfin
-				+ ", maker=" + maker + "]";
+				+ ", maker=" + maker + ", fundingchkdate=" + fundingchkdate + ", deliverycharge=" + deliverycharge
+				+ ", deliverydate=" + deliverydate + "]";
 	}
-
-
 
 
 
@@ -143,5 +146,42 @@ public class Funding {
 		this.maker = maker;
 	}
 
+
+
+	public Date getFundingchkdate() {
+		return fundingchkdate;
+	}
+
+
+
+	public void setFundingchkdate(Date fundingchkdate) {
+		this.fundingchkdate = fundingchkdate;
+	}
+
+
+
+	public int getDeliverycharge() {
+		return deliverycharge;
+	}
+
+
+
+	public void setDeliverycharge(int deliverycharge) {
+		this.deliverycharge = deliverycharge;
+	}
+
+
+
+	public Date getDeliverydate() {
+		return deliverydate;
+	}
+
+
+
+	public void setDeliverydate(Date deliverydate) {
+		this.deliverydate = deliverydate;
+	}
+
+	
 
 }

@@ -55,15 +55,8 @@
     text-align: right;
 }
 
-.FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_name__28fMG {
-    float: left;
-    max-width: 770px;
-    margin-top: -1px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #333;
-    letter-spacing: -.2px;
-    text-align: left;
+.FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_item__3hhAd+.FundingDetailApplicationContent_item__3hhAd {
+    margin-top: 15px;
 }
 
 .FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_count__IZBVx {
@@ -406,6 +399,22 @@
     vertical-align: top;
 }
 
+.FundingDetailApplicationContent_checkline__-E-HP .FundingDetailApplicationContent_input_checkline__2MGj1:checked+.FundingDetailApplicationContent_label_checkline__1lw6z .FundingDetailApplicationContent_icon__3inag:after {
+    border-color: #fff;
+}
+
+
+.FundingDetailApplicationContent_checkline__-E-HP .FundingDetailApplicationContent_label_checkline__1lw6z .FundingDetailApplicationContent_icon__3inag:after {
+    display: inline-block;
+    width: 10px;
+    height: 6px;
+    border: 1px solid #c7c7c7;
+    border-width: 0 0 1px 1px;
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    vertical-align: top;
+    content: "";
+}
 /*배송 메시지*/
 .FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_item__3hhAd.FundingDetailApplicationContent_message__3OJBc .FundingDetailApplicationContent_label__3WPCE {
     top: 8px;
@@ -477,8 +486,11 @@
 .FundingDetailApplicationContent_terms__2Jx3e .FundingDetailApplicationContent_group__292es {
     padding-top: 30px;
 }
+
 .FundingDetailApplicationContent_checkbox__1z5rX .FundingDetailApplicationContent_input__1Q10H:checked+.FundingDetailApplicationContent_label__3WPCE .FundingDetailApplicationContent_icon__3inag:after {
     position: absolute;
+    margin-top: 3px;
+    margin-left: 4px;
     width: 14px;
     height: 8px;
     border: 1px solid #fff;
@@ -487,6 +499,7 @@
     transform: rotate(-45deg);
     content: "";
 }
+
 
 /*펀딩 참여하기*/
 .FundingDetailApplicationContent_button_join__E6XFt {
@@ -528,7 +541,7 @@ div {
     display: block;
 }
 
-ol, ul {
+ol, ul, li {
     list-style: none;
 }
 
@@ -540,10 +553,6 @@ ul {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     padding-inline-start: 40px;
-}
-
-strong {
-    font-weight: bold;
 }
 
 

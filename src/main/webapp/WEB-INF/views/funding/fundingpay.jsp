@@ -20,20 +20,26 @@
 			<div class="FundingDetailApplicationContent_wrap__3lh7-">
 				<section
 					class="FundingDetailApplicationContent_section_title__6xAZn">
-					<a href="/fundings/detail/F169"><h2
+					<a href="detail?no=${funding.fundingno}"><h2
 							class="FundingDetailApplicationContent_title__2BYvK">${funding.fundingtitle}</h2></a><span
 						class="FundingDetailApplicationContent_funder__1eTbL">${funding.maker}</span>
 				</section>
 				<section class="FundingDetailApplicationContent_section__gfh97">
 					<h3 class="FundingDetailApplicationContent_subtitle__mdStj">펀딩내역</h3>
 					<ul class="FundingDetailApplicationContent_list_order__20w1j">
-						<li class="FundingDetailApplicationContent_item__3hhAd"><strong
-							class="FundingDetailApplicationContent_name__28fMG">선택 리워드 내용 표시</strong><span
-							class="FundingDetailApplicationContent_count__IZBVx"><em
-								class="FundingDetailApplicationContent_number__2kFus">선택 리워드 갯수 표시</em>개</span><span
-							class="FundingDetailApplicationContent_amount__aTe92"><em
-								class="FundingDetailApplicationContent_number__2kFus">선택 리워드 금액 표시</em>원</span></li>
-						<li class="FundingDetailApplicationContent_item_addition__EPV2y"><strong
+					<c:forEach var="reward" items="${reward}" varStatus="status">
+						<c:if test="${reward ne ''}">
+						<li class="FundingDetailApplicationContent_item__3hhAd">
+							<strong class="FundingDetailApplicationContent_name__28fMG">${reward}</strong>
+							<span class="FundingDetailApplicationContent_count__IZBVx">
+								<em class="FundingDetailApplicationContent_number__2kFus">${rewordEA[status.index]}</em>개</span>
+								<span class="FundingDetailApplicationContent_amount__aTe92">
+									<em class="FundingDetailApplicationContent_number__2kFus">${price[status.index]}</em>원</span>
+						</li>
+						</c:if>
+					</c:forEach>
+					
+										<li class="FundingDetailApplicationContent_item_addition__EPV2y"><strong
 							class="FundingDetailApplicationContent_name__28fMG">배송비<span
 								class="FundingDetailApplicationContent_date__3KleL">선택 리워드 발송 날짜</span></strong><span
 							class="FundingDetailApplicationContent_amount__aTe92"><em
@@ -112,12 +118,12 @@
 									class="FundingDetailApplicationContent_input_address__IFygD"
 									placeholder="상세주소 입력" readonly="" value="">
 								<div class="FundingDetailApplicationContent_checkline__-E-HP">
-									<input type="checkbox" id="input_check"
-										class="FundingDetailApplicationContent_input_checkline__2MGj1"><label
-										for="input_check"
-										class="FundingDetailApplicationContent_label_checkline__1lw6z"><span
-										class="FundingDetailApplicationContent_icon__3inag"></span>입력한
-										주소를 배송지 목록에 추가</label>
+									<input type="checkbox" id="input_check" aria-hidden="false"
+										class="FundingDetailApplicationContent_input_checkline__2MGj1">
+										<label for="input_check" class="FundingDetailApplicationContent_label_checkline__1lw6z">
+											<span id="new_address_input" class="FundingDetailApplicationContent_icon__3inag"></span>
+											입력한 주소를 배송지 목록에 추가
+										</label>
 								</div>
 							</div>
 						</div>
@@ -140,47 +146,45 @@
 						<div class="FundingDetailApplicationContent_bundle__3ztI-">
 							<div
 								class="FundingDetailApplicationContent_checkbox__1z5rX undefined">
-								<input id="agree_terms_all" type="checkbox"
+								<input id="agree_terms_all" type="checkbox" aria-hidden="false" name="all_agree"
 									class="FundingDetailApplicationContent_input__1Q10H"><label
 									for="agree_terms_all"
-									class="FundingDetailApplicationContent_label__3WPCE"><span
+									class="FundingDetailApplicationContent_label__3WPCE"><span  id="agree_span0"
 									class="FundingDetailApplicationContent_icon__3inag"></span>약관 및
 									개인정보 관련 사항(선택 동의 포함)에 모두 동의합니다.</label>
 							</div>
 						</div>
 						<div class="FundingDetailApplicationContent_group__292es">
 							<div class="FundingDetailApplicationContent_checkbox__1z5rX">
-								<input id="agree_terms_1" type="checkbox"
-									class="FundingDetailApplicationContent_input__1Q10H"><label
-									for="agree_terms_1"
-									class="FundingDetailApplicationContent_label__3WPCE"><span
-									class="FundingDetailApplicationContent_icon__3inag"></span>(필수)
-									개인정보의 수집 및 이용에 동의합니다.</label><a href="#"
-									class="FundingDetailApplicationContent_link__2JXht">자세히 보기</a>
+								<input name="agree" id="agree_terms_1" type="checkbox" class="FundingDetailApplicationContent_input__1Q10H" onclick="checkSelectAll(); checkColorChange(1);">
+									<label for="agree_terms_1" class="FundingDetailApplicationContent_label__3WPCE">
+										<span id="agree_span1" class="FundingDetailApplicationContent_icon__3inag"></span>(필수) 개인정보의 수집 및 이용에 동의합니다.
+									</label>
+									<a href="#" class="FundingDetailApplicationContent_link__2JXht">자세히 보기</a>
 							</div>
 							<div class="FundingDetailApplicationContent_checkbox__1z5rX">
-								<input id="agree_terms_2" type="checkbox"
+								<input id="agree_terms_2" type="checkbox" name="agree" onclick="checkSelectAll(); checkColorChange(2); "
 									class="FundingDetailApplicationContent_input__1Q10H"><label
 									for="agree_terms_2"
-									class="FundingDetailApplicationContent_label__3WPCE"><span
+									class="FundingDetailApplicationContent_label__3WPCE"><span id="agree_span2"
 									class="FundingDetailApplicationContent_icon__3inag"></span>(필수)
 									개인정보의 제3자 제공에 동의합니다.</label><a href="#"
 									class="FundingDetailApplicationContent_link__2JXht">자세히 보기</a>
 							</div>
 							<div class="FundingDetailApplicationContent_checkbox__1z5rX">
-								<input id="agree_terms_3" type="checkbox"
+								<input id="agree_terms_3" type="checkbox" name="agree" onclick="checkSelectAll(); checkColorChange(3);"
 									class="FundingDetailApplicationContent_input__1Q10H"><label
 									for="agree_terms_3"
-									class="FundingDetailApplicationContent_label__3WPCE"><span
+									class="FundingDetailApplicationContent_label__3WPCE"><span id="agree_span3"
 									class="FundingDetailApplicationContent_icon__3inag"></span>(필수)
 									‘해피빈 펀딩 약관’에 동의합니다.</label><a href="#"
 									class="FundingDetailApplicationContent_link__2JXht">자세히 보기</a>
 							</div>
 							<div class="FundingDetailApplicationContent_checkbox__1z5rX">
-								<input id="agree_terms_4" type="checkbox"
+								<input id="agree_terms_4" type="checkbox" name="agree" onclick="checkSelectAll(); checkColorChange(4);"
 									class="FundingDetailApplicationContent_input__1Q10H"><label
 									for="agree_terms_4"
-									class="FundingDetailApplicationContent_label__3WPCE"><span
+									class="FundingDetailApplicationContent_label__3WPCE"><span id="agree_span4"
 									class="FundingDetailApplicationContent_icon__3inag"></span>(선택)
 									해피빈 마케팅 알림 수신에 동의합니다.</label>
 							</div>
@@ -194,8 +198,6 @@
 		</div>
 	</div>
 	<script>
-	
-	
 	//배송지 직접입력 
 	var dafault_address_btn = document.getElementById("wa_default_address");
 	var new_address_btn = document.getElementById("wa_new_address");
@@ -203,21 +205,93 @@
 	var dafault_address = document.getElementById("wa_default_address_box");
 	var new_address = document.getElementById("wa_new_address_box");
 	
-	new_address_btn.addEventListener("click",function(){
+	new_address_btn.addEventListener("click",function(){ // 배송지 추가
 		
 		if(new_address.getAttribute("aria-hidden") == "true"){
 			new_address.setAttribute("aria-hidden","false");
 			dafault_address.setAttribute("aria-hidden","true");
 		}
 	});
-	dafault_address_btn.addEventListener("click",function(){
+	dafault_address_btn.addEventListener("click",function(){ // 기본 배송지
 		
 		if(dafault_address.getAttribute("aria-hidden") == "true"){
 			dafault_address.setAttribute("aria-hidden","false");
 			new_address.setAttribute("aria-hidden","true");
 		}
 	});
+	
+	// 주소 배송지 목록 추가
+	var input_check = document.getElementById("input_check");
+	var new_address_input = document.getElementById("new_address_input");
+	
+	input_check.addEventListener("click",function(){ 
+		
+		if(input_check.getAttribute("aria-hidden") == "false"){
+			input_check.setAttribute("aria-hidden","true");
+			new_address_input.style = "background-color : #1f9eff";
+		}else{
+			input_check.setAttribute("aria-hidden","false");
+			new_address_input.style = "background-color : none";
+		}
+	});
 
+
+	var agree_terms_all = document.getElementById("agree_terms_all");
+
+	agree_terms_all.addEventListener("click",function(){ 
+		
+		if(agree_terms_all.getAttribute("aria-hidden") == "false"){
+			agree_terms_all.setAttribute("aria-hidden","true");
+			$("input:checkbox[name='agree']").prop("checked",true);
+			$(".FundingDetailApplicationContent_icon__3inag").css(
+					{'background-color' : '#1f9eff'});
+
+		}else{
+			agree_terms_all.setAttribute("aria-hidden","false");
+			 $("input:checkbox[name='agree']").prop("checked",false);
+			 $(".FundingDetailApplicationContent_icon__3inag").css(
+						{'background-color' : ''});
+		}
+	});
+	
+	
+	function checkSelectAll()  {
+		
+		var agree_span0 = document.getElementById("agree_span0");
+		  // 전체 체크박스
+		  var checkboxes = document.querySelectorAll('input[name="agree"]');
+		  // 선택된 체크박스
+		  var checked = document.querySelectorAll('input[name="agree"]:checked');
+		  // select all 체크박스
+		  var selectAll = document.querySelector('input[name="all_agree"]');
+		  
+		  if(checkboxes.length === checked.length)  {
+		    selectAll.checked = true;
+		    agree_terms_all.setAttribute("aria-hidden","true");
+		    agree_span0.style.backgroundColor = "#1f9eff"
+		  }else {
+		    selectAll.checked = false;
+		    agree_terms_all.setAttribute("aria-hidden","false");
+		    agree_span0.style.backgroundColor = ""
+		    
+		  }
+
+		}
+	
+	function checkColorChange(number)  {
+		
+		var i = number;
+		
+		var agree_span = document.getElementById("agree_span"+number);
+		
+		console.log(agree_span);
+		
+		if(agree_span.style.backgroundColor == ""){
+			agree_span.style.backgroundColor = "#1f9eff"
+		}else if(agree_span.style.backgroundColor = "#1f9eff"){
+			agree_span.style.backgroundColor = ""
+		}
+	};
 	
 	var IMP = window.IMP; // 생략가능
 	IMP.init('imp28987277'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
@@ -257,6 +331,7 @@
 	  }
 	
 	</script>
+	
 	
 	<script>
 // 주소 검색 api

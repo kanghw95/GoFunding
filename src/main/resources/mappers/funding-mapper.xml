@@ -12,6 +12,9 @@
 		<result property="fundingstart" column="FUNDINGSTRAT" />
 		<result property="fundingfin" column="FUNDINGFIN" />
 		<result property="maker" column="MAKER" />
+		<result property="fundingchkdate" column="FUNDINGCHKDATE" />
+		<result property="deliverycharge" column="DELIVERYCHARGE" />
+		<result property="deliverydate" column="DELIVERYDATE" />
 	</resultMap>
 	
 	
@@ -22,7 +25,7 @@
 	
 	<!-- 펀딩  전체  조회 -->
 	<select id="selectlist" resultType="arraylist" resultMap="resultFunding">
-		SELECT * FROM FUNDING
+		SELECT * FROM FUNDING  order by fundingstate desc
 	</select>
 	
 	<!-- 펀딩  제목&내용 검색 -->
