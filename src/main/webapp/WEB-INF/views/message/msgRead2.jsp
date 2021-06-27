@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,10 +37,9 @@
 		<table class="table">
 			<tr>
 				<td>
-				${msg.senderId} ${userId}<br>
 				${msg.msgContent}<br>
 				${msg.senderName}<br>
-				${msg.msgDate}</td>
+				<fmt:formatDate value="${msg.msgDate}" pattern="yy-MM-dd"/></td>
 				<td><button type="button" id="msgDelete">X</button>
 				<input type="hidden" name="msgNo" id="msgNo" value="${msg.msgNo}"></td>
 			</tr>
@@ -50,9 +50,8 @@
 		<table class="table" border="1">
 			<tr>
 				<td>
-				${msg.senderId} ${userId}<br>
 				${msg.msgContent}<br>
-				${msg.msgDate}</td>
+				<fmt:formatDate value="${msg.msgDate}" pattern="yy-MM-dd"/></td>
 				<td><button type="button" id="msgDelete">X</button>
 				<input type="hidden" name="msgNo" id="msgNo" value="${msg.msgNo}"></td>
 			</tr>

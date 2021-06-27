@@ -111,10 +111,12 @@ public class MessageCtrl {
 		Map<String, String> id = new HashMap<String, String>();
 		id.put("receiverId", receiverId);
 		id.put("senderId", senderId);
-		List<Message> ml=msgService.getMakerMessage(id);
+		List<Map<String, String>> ml=msgService.getMakerMessage(id);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", ml);
 		mv.setViewName("/message/msgRead1");
+		
+		System.out.println(ml);
 		return mv;
 	}
 
@@ -144,7 +146,7 @@ public class MessageCtrl {
 		HashMap<String, String> id=new HashMap<String, String>();
 		id.put("senderId", receiverId);
 		id.put("receiverId", loginId);
-		List<Message> ml=msgService.getMakerMessage(id);
+		List<Map<String, String>> ml=msgService.getMakerMessage(id);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", ml);
 		mv.setViewName("/message/msgRead3");

@@ -296,4 +296,47 @@
 		DELETE FROM EVENTBOARD WHERE EVENTNO = #{boardNo}
 	</delete>
 	
+	
+	
+	
+	
+	
+	<!-- 펀딩 신청 목록 조회 -->
+	<select id="selectFormList" resultType="Application">
+		SELECT FUNDINGTITLE, APPLYNO FROM APPLICATION WHERE FEEDBACK IS NULL ORDER BY APPLYNO
+	</select>
+	
+	<!-- 반려 펀딩 목록 조회 -->
+	<select id="selectRejectedForm" resultType="Application">
+		SELECT FUNDINGTITLE, APPLYNO FROM APPLICATION WHERE FEEDBACK != 'approved'
+		AND FEEDBACK IS NOT NULL ORDER BY APPLYNO
+	</select>
+	
+	<!-- 펀딩 신청 상세페이지 -->
+	<select id="selectFormDetail" resultType="Application">
+		SELECT * FROM APPLICATION WHERE APPLYNO = #{applyNo}
+	</select>
+	
+	<!-- 신청 승인 / 메이커 생성 -->
+	<insert id="makeMaker">
+		INSERT INTO MAKER VALUES(#{maker}, #{description}, #{id})
+	</insert>
+	
+	<!-- 신청 승인 / 펀딩 생성 -->
+	<insert id="makeFunding">
+		INSERT INTO FUNDING VALUES(SEQ_FUNDINGNO.NEXTVAL, 1, #{fundingCategory},
+		#{fundingTitle}, #{fundingPrice}, #{fundingStart}, #{fundingFin}, #{maker},
+		SYSDATE, #{fundingContent}, #{deliveryCharge}, #{deliveryDate})
+	</insert>
+	
+	<!-- 신청 승인 / 신청서 confirmed 입력 -->
+	<update id="applicationConfirm" parameterType="int">
+		UPDATE APPLICATION SET FEEDBACK = 'approved' WHERE APPLYNO = #{applyNo}
+	</update>
+	
+	<!-- 신청 거절 / 신청서 feedback 입력 -->
+	<update id="formReject">
+		UPDATE APPLICATION SET FEEDBACK = #{feedback} WHERE APPLYNO = #{applyNo}
+	</update>
+	
 </mapper>

@@ -122,9 +122,9 @@
 							<tr>
 								<td>
 									5. 펀딩 시작일<br>
-									<input type="text" id="fundingStart" name="start" class="datepick"><br>
+									<input type="text" id="fundingStart" name="start" class="datepick" required><br>
 									6. 펀딩 종료일<br>
-									<input type="text" id="fundingFin" name="end" class="datepick">
+									<input type="text" id="fundingFin" name="end" class="datepick" required>
 								</td>
 								<td>
 									7. 펀딩 후원금 사용 계획<br>
@@ -140,22 +140,32 @@
 								<td>8. 리워드 소개<br>
 									<textarea name="rewardDesc" id="rewardDesc" cols="50" rows="10"
 										placeholder="내용을 입력해주세요." required></textarea>
-								</td>
+								</td><td></td>
 							</tr>
 								<tr>
-									<td><input type="text" id="rewardPrice" name="rewardPrice" placeholder="금액" pattern="[0-9]+" required>&nbsp;원
+									<td>9. 리워드 구성<br>
+									<input type="text" id="rewardPrice" name="rewardPrice" placeholder="금액" pattern="[0-9]+" required>&nbsp;원
 										달성 시&nbsp;
 										<input type="text" id="rewardTitle" name="rewardTitle"
-											placeholder="리워드 종류" required>&nbsp;
+											placeholder="리워드 종류" required>&nbsp;</td><td>
 										최대&nbsp;<input type="text" name="rewardEA" id="rewardEA" placeholder="개수" pattern="[0-9]+" required>개
 										<button type="button" id="addReward">리워드 추가</button>
 										<button type="button" class="closeRewardBtn">삭제</button>
 									</td>
 								</tr>
+								<tr>
+									<td>
+										10. 배송일자<br>
+										<input type="text" id="deliveryDate" name="delivery" class="datepick" required>
+									</td>
+									<td>
+										11. 배송비<br>
+										<input type="text" id="deliveryCharge" name="deliveryCharge" placeholder="배송비" pattern="[0-9]+" required>원
+									</td>
+								</tr>
 							<tbody id="tbody2">
 							</tbody>
 						</table>
-						9. 리워드 구성<br>
 						<!--개인정보 동의서 팝업 / 동의안하면 안 넘어감-->
 						<input type="checkbox" id="privacyChk">개인정보 수집 및 이용에 동의&nbsp;&nbsp;&nbsp;
 						<button type="button" id="openPrivacy">자세히 보기</button>

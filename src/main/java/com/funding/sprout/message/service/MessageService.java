@@ -13,7 +13,7 @@ public interface MessageService {
 	
 	public List<Map<String, String>> msgUserList(Map<String, String> vo); // 회원(관리자)-회원 목록
 	
-	public List<Message> getMakerMessage(Map<String, String> id); //메이커-회원 상세 조회
+	public List<Map<String, String>> getMakerMessage(Map<String, String> id); //메이커-회원 상세 조회
 	
 	public List<Message> getUserMessage(Map<String, String> id); //회원-회원 상세 조회
 	

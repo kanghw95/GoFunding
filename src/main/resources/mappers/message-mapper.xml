@@ -28,13 +28,13 @@
 		SELECT DISTINCT SENDERID FROM MESSAGE WHERE MSGROOT = 1 AND RECEIVERID= #{receiverId}
 	</select>
 	<!-- 회원-메이커 상세 -->
-	<select id="selectMakerRead" parameterType="string" resultType="Message"> 
-		SELECT MSGNO, MSGCONTENT, RECEIVERID, RECEIVERNAME, SENDERID, SENDERNAME, MSGDATE, MSGROOT
-		FROM MESSAGE WHERE RECEIVERID = #{receiverId} AND SENDERID = #{senderId}
-	<![CDATA[
-		AND MSGROOT < 2
+	<select id="selectMakerRead" parameterType="string" resultType="map"> 
+		SELECT MS.MSGNO, MS.MSGCONTENT, MS.MSGDATE, MS.SENDERID, MS.SENDERNAME, MS.RECEIVERID, MS.MSGROOT, M.MAKER
+		FROM MESSAGE MS JOIN MAKER M ON MS.RECEIVERID = M.ID AND 
+	<![CDATA[	
+		MS.MSGROOT < 2
 	]]>
-		ORDER BY MSGNO
+		WHERE SENDERID = #{senderId} AND RECEIVERID = #{receiverId} ORDER BY MS.MSGNO
 	</select>
 	<!-- 회원-회원 상세 -->
 	<select id="selectUserRead" resultType="Message"> 

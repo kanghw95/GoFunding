@@ -27,7 +27,7 @@ public class MessageDao {
 		return sqlSession.selectList("Message.selectUserList", vo);
 	}
 
-	public List<Message> getMakerMessage(Map<String, String> id) { //메이커-회원 상세 조회
+	public List<Map<String, String>> getMakerMessage(Map<String, String> id) { //메이커-회원 상세 조회
 		return sqlSession.selectList("Message.selectMakerRead", id);
 	}
 	

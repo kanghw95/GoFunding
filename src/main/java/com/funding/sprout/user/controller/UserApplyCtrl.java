@@ -44,16 +44,19 @@ public class UserApplyCtrl {
 
 	@RequestMapping(value = "/formSend")
 	public String formSend (HttpSession session, Application app, HttpServletResponse response,
-			@RequestParam() String start, @RequestParam() String end, @RequestParam() String domain) {
+			@RequestParam() String start, @RequestParam() String end, @RequestParam() String domain,
+			@RequestParam() String delivery) {
 		
 		String makerEmail=app.getMakerEmail()+"@"+domain;
 		Timestamp fundingStart=new Timestamp(0);
 		Timestamp fundingFin=new Timestamp(0);
+		Date dd= new Date();
 		
 		try {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date startDate = dateFormat.parse(start);
 			Date endDate = dateFormat.parse(end);
+			dd = dateFormat.parse(delivery);
 			
 			System.out.println(startDate);
 			System.out.println(endDate);
@@ -64,9 +67,12 @@ public class UserApplyCtrl {
 			e.printStackTrace();
 		}
 		
+		java.sql.Date deliveryDate= new java.sql.Date(dd.getTime());
+		
 		app.setMakerEmail(makerEmail);
 		app.setFundingStart(fundingStart);
 		app.setFundingFin(fundingFin);
+		app.setDeliveryDate(deliveryDate);
 		System.out.println(app);
 		
 		int result = userApplyService.inputForm(app);

@@ -17,6 +17,7 @@
 		<typeAlias type="com.funding.sprout.vo.Reward" alias="Reward" />
 		<typeAlias type="com.funding.sprout.vo.User" alias="User" />
 		<typeAlias type="com.funding.sprout.vo.MessageList" alias="MessageList" />
+		<typeAlias type="com.funding.sprout.vo.Application" alias="Application" />
 	</typeAliases>
 
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->

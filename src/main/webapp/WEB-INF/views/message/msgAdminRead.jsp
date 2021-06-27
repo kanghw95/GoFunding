@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.2/sockjs.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Insert title here</title>
+<style type="text/css">
+#text-3{
+	border: 1px solid black;
+	width:400px;
+	height:auto;
+}
+#text-4{
+	border: 1px solid black;
+	width:400px;
+	height:auto;
+	text-align:right;
+}
+.table{
+	width:400px;
+	height:30px;
+}
+</style>
 </head>
 <body>
 	<div id="textArea">
@@ -17,7 +35,7 @@
 				<td>${msg.msgContent}<br>
 				<c:if test="${msg.msgRoot eq '3'.charAt(0)}">
 				${msg.senderName}<br></c:if>
-				${msg.msgDate}</td>
+				<fmt:formatDate value="${msg.msgDate}" pattern="yy-MM-dd"/></td>
 				<td><button type="button" id="msgDelete">X</button>
 				<input type="hidden" name="msgNo" id="msgNo" value="${msg.msgNo}"></td>
 			</tr>

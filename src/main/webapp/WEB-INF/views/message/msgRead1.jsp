@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,13 +30,13 @@
 	<div id="textArea">
 		<table class="table" border="1">
 	<c:forEach var="msg" items="${msg}" varStatus="status">
-			<tr id="text-${msg.msgRoot}">
-				<td>${msg.msgContent}<br>
-				<c:if test="${msg.msgRoot eq '1'.charAt(0)}">
-				${msg.receiverName}<br></c:if>
-				${msg.msgDate}</td>
+			<tr id="text-${msg.MSGROOT}">
+				<td>${msg.MSGCONTENT}<br>
+				<c:if test="${msg.MSGROOT eq '1'}">
+				${msg.MAKER}<br></c:if>
+				<fmt:formatDate value="${msg.MSGDATE}" pattern="yy-MM-dd"/></td>
 				<td><button type="button" id="msgDelete">X</button>
-				<input type="hidden" name="msgNo" id="msgNo" value="${msg.msgNo}"></td>
+				<input type="hidden" name="msgNo" id="msgNo" value="${msg.MSGNO}"></td>
 			</tr>
 	</c:forEach>
 		</table>

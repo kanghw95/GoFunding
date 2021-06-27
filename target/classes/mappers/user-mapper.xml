@@ -60,7 +60,7 @@
 	<insert id="inputForm">
 		INSERT INTO APPLICATION VALUES (SEQ_APPLYNO.NEXTVAL, #{maker}, #{description}, #{id}, #{makerTel},
 		#{makerEmail}, #{makerInfo}, #{fundingTitle}, #{fundingCategory}, #{fundingContent}, #{fundingPrice},
-		#{fundingStart}, #{fundingFin}, #{fundingPlan}, #{rewardDesc}, #{rewardPrice}, #{rewardTitle}, #{rewardEA}, null)
+		#{fundingStart}, #{fundingFin}, #{fundingPlan}, #{rewardDesc}, #{rewardPrice}, #{rewardTitle}, #{rewardEA}, null, #{deliveryCharge}, #{deliveryDate})
 	</insert>
 	
 	<!-- 메이커명 중복체크 -->

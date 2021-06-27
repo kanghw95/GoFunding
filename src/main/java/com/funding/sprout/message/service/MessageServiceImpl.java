@@ -37,7 +37,7 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public List<Message> getMakerMessage(Map<String, String> id) {
+	public List<Map<String, String>> getMakerMessage(Map<String, String> id) {
 		return msgDao.getMakerMessage(id);
 	}
 	
