@@ -310,8 +310,10 @@ window.onload = function()  {
 									<strong class="FundingDetailStoryContent_subtitle__mm0mM"> 결제 및 발송 예정일</strong>
 									<ul class="FundingDetailStoryContent_list_date__1xfUX">
 										<li class="FundingDetailStoryContent_item">
+										<fmt:parseDate value="${funding.fundingfin}" var="paymentday" pattern="yyyy-MM-dd"/> 
+										<fmt:formatDate value="${funding.deliverydate}" type="DATE" var="deliverydate" pattern="yyyy년 MM월 dd일"/> 
 											<span class="FundingDetailStoryContent_text FundingDetailStoryContent_highlight">
-											1차 결제 : 0000년 0월 00일, 예상 발송일 : 0000년 0월 00일
+											1차 결제 : <fmt:formatDate value="${paymentday}" pattern="yyyy년 MM월 dd일"/>, 예상 발송일 : ${deliverydate}
 											</span>
 										</li>
 										<li class="FundingDetailStoryContent_item">

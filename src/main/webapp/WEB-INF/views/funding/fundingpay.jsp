@@ -38,12 +38,20 @@
 						</li>
 						</c:if>
 					</c:forEach>
-					
-										<li class="FundingDetailApplicationContent_item_addition__EPV2y"><strong
-							class="FundingDetailApplicationContent_name__28fMG">배송비<span
-								class="FundingDetailApplicationContent_date__3KleL">선택 리워드 발송 날짜</span></strong><span
-							class="FundingDetailApplicationContent_amount__aTe92"><em
-								class="FundingDetailApplicationContent_number__2kFus">배송비</em>원</span></li>
+									<li class="FundingDetailApplicationContent_item_addition__EPV2y">
+										<strong class="FundingDetailApplicationContent_name__28fMG">배송비
+										<fmt:formatDate value="${funding.deliverydate}" type="DATE" var="deliverydate" pattern="yyyy년 MM월 dd일"/> 
+											<span class="FundingDetailApplicationContent_date__3KleL">${deliverydate} 발송 예정</span>
+										</strong>
+										<span class="FundingDetailApplicationContent_amount__aTe92">
+											<c:if test="${deliverycharge eq 0}">
+											<em class="FundingDetailApplicationContent_number__2kFus">무료</em></span>
+											</c:if>
+											<c:if test="${deliverycharge ne 0}">
+											<em class="FundingDetailApplicationContent_number__2kFus">배송비</em>${funding.deliverycharge}원</span>
+											</c:if>	
+										
+									</li>
 					</ul>
 					<fmt:parseDate value="${funding.fundingfin}" var="paymentday" pattern="yyyy-MM-dd HH:mm:ss"/> 
 					<div class="FundingDetailApplicationContent_total__1pwx-">
@@ -191,9 +199,7 @@
 						</div>
 					</div>
 				</section>
-				<button type="submit"
-					class="FundingDetailApplicationContent_button_join__E6XFt">펀딩
-					참여하기</button>
+				<button type="button" class="FundingDetailApplicationContent_button_join__E6XFt" onclick="requestPay()">펀딩 참여하기</button>
 			</div>
 		</div>
 	</div>
@@ -296,15 +302,14 @@
 	var IMP = window.IMP; // 생략가능
 	IMP.init('imp28987277'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 
-
 	function requestPay() {
 	    // IMP.request_pay(param, callback) 호출
 	    IMP.request_pay({ // param
 	        pg: "html5_inicis",
 	        pay_method: "card",
-	        merchant_uid: "ORD20180131-0000011",
-	        name: reword_val1,
-	        amount: funtotalprice,
+	        merchant_uid: "ORD20180131-0000012",
+	        name: "${reward[0]}",
+	        amount: "${funding_pay_price}",
 	        buyer_email: "gildong@gmail.com",
 	        buyer_name: "강현우",
 	        buyer_tel: "010-4242-4242",

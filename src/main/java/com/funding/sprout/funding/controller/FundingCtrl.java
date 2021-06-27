@@ -93,6 +93,7 @@ public class FundingCtrl {
 			@RequestParam(name = "funding_pay_total_price") int funding_pay_price,
 			@RequestParam(name = "funding_pay_total_rewordEA") int funding_pay_rewordEA,
 			@RequestParam(name = "funding_no") int fundingno,
+			@RequestParam(name = "deliverycharge") int deliverycharge,
 			@RequestParam(name = "funding_pay_reword") String[] reword,
 			@RequestParam(name = "funding_pay_price") String[] price,
 			@RequestParam(name = "funding_pay_rewordEA") String[] rewordEA,
@@ -102,11 +103,12 @@ public class FundingCtrl {
 			Funding funding = funService.selectOne(fundingno);	
 			List<Reward> rewardlist = funService.selectReward(fundingno);
 			System.out.println("선택한 펀딩 정보 :" + funding);
-			System.out.println("선택한 리워드 정보 :" + rewardlist);
+			System.out.println("선택한 리워드 정보 :" + reword[0]);
 			
 			mv.addObject("funding_pay_price",funding_pay_price);
 			mv.addObject("funding_pay_rewordEA",funding_pay_rewordEA);
 			mv.addObject("funding", funService.selectOne(fundingno));
+			mv.addObject("deliverycharge", deliverycharge);
 			mv.addObject("reward", reword);
 			mv.addObject("price", price);
 			mv.addObject("rewordEA", rewordEA);
