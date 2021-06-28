@@ -37,6 +37,8 @@ public interface AdminService {
 	
 	public List<Board> eventBoardList(Criteria cri) throws Exception; // 이벤트 게시판 조회
 	
+	public List<Board> noticeList(Criteria cri) throws Exception; // 공지사항 조회
+	
 	public int freeBoardCount() throws Exception; // 자유 게시판 글 수 조회
 	
 	public int reviewBoardCount() throws Exception; // 후기 게시판 글 수 조회
@@ -46,6 +48,8 @@ public interface AdminService {
 	public int shareBoardCount() throws Exception; // 정보공유 게시판 글 수 조회
 	
 	public int eventBoardCount() throws Exception; // 이벤트 게시판 글 수 조회
+	
+	public int noticeCount() throws Exception; // 공지사항 글 수 조회
 	
 	public List<Board> selectFBoardId(Board board) throws Exception; // 자유 게시판 작성자 조회
 	
@@ -67,6 +71,10 @@ public interface AdminService {
 	
 	public List<Board> selectEBoardTitle(Board board) throws Exception; // 이벤트 게시판 제목 조회
 	
+	public List<Board> selectNBoardId(Board board) throws Exception; // 공지사항 작성자 조회
+	
+	public List<Board> selectNBoardTitle(Board board) throws Exception; // 공지사항 제목 조회
+	
 	public List<Board> selectFRadio(Board board) throws Exception; // 자유 게시판 라디오박스 조회
 	
 	public List<Board> selectRRadio(Board board) throws Exception; // 후기 게시판 라디오박스 조회
@@ -77,6 +85,8 @@ public interface AdminService {
 	
 	public List<Board> selectERadio(Board board) throws Exception; // 이벤트 게시판 라디오박스 조회
 	
+	public List<Board> selectNRadio(Board board) throws Exception; // 공지사항 라디오박스 조회
+	
 	public void deleteFBoardList(String boardNo); // 자유 게시판 글 삭제
 	
 	public void deleteRBoardList(String boardNo); // 리뷰 게시판 글 삭제
@@ -86,6 +96,8 @@ public interface AdminService {
 	public void deleteSBoardList(String boardNo); // 정보공유 게시판 글 삭제
 	
 	public void deleteEBoardList(String boardNo); // 이벤트 게시판 글 삭제
+	
+	public void deleteNBoardList(String boardNo); // 공지사항 글 삭제
 	
 	public int userStart(); // 회원 권한 복원
 

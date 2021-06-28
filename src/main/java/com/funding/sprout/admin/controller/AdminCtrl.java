@@ -121,7 +121,7 @@ public class AdminCtrl {
 	}
 	
 	@RequestMapping(value = "freeboardlist", method = RequestMethod.GET)
-	public String FreeBoardList(Model model, Criteria cri) throws Exception { // 자유게시판 조회
+	public String FreeBoardList(Model model, Criteria cri) throws Exception { // 자유 게시판 조회
 		
 		List<Board> freeBoard = adService.freeBoardList(cri); // 게시판 리스트 가져오기
 		System.out.println("freeBoard : " + freeBoard);
@@ -138,7 +138,7 @@ public class AdminCtrl {
 	}
 	
 	@RequestMapping(value = "reviewboardlist", method = RequestMethod.GET)
-	public String reviewBoardList(Model model, Criteria cri) throws Exception { // 자유게시판 조회
+	public String reviewBoardList(Model model, Criteria cri) throws Exception { // 후기 게시판 조회
 		
 		List<Board> reviewBoard = adService.reviewBoardList(cri); // 게시판 리스트 가져오기
 		System.out.println("reviewBoard : " + reviewBoard);
@@ -155,7 +155,7 @@ public class AdminCtrl {
 	}
 	
 	@RequestMapping(value = "questionboardlist", method = RequestMethod.GET)
-	public String questionBoardList(Model model, Criteria cri) throws Exception { // 자유게시판 조회
+	public String questionBoardList(Model model, Criteria cri) throws Exception { // 질의응답 게시판 조회
 		
 		List<Board> questionBoard = adService.questionBoardList(cri); // 게시판 리스트 가져오기
 		System.out.println("questionBoard : " + questionBoard);
@@ -172,7 +172,7 @@ public class AdminCtrl {
 	}
 	
 	@RequestMapping(value = "shareboardlist", method = RequestMethod.GET)
-	public String shareBoardList(Model model, Criteria cri) throws Exception { // 자유게시판 조회
+	public String shareBoardList(Model model, Criteria cri) throws Exception { // 정보공유 게시판 조회
 		
 		List<Board> shareBoard = adService.shareBoardList(cri); // 게시판 리스트 가져오기
 		System.out.println("shareBoard : " + shareBoard);
@@ -189,7 +189,7 @@ public class AdminCtrl {
 	}
 	
 	@RequestMapping(value = "eventboardlist", method = RequestMethod.GET)
-	public String eventBoardList(Model model, Criteria cri) throws Exception { // 자유게시판 조회
+	public String eventBoardList(Model model, Criteria cri) throws Exception { // 이벤트 게시판 조회
 		
 		List<Board> eventBoard = adService.eventBoardList(cri); // 게시판 리스트 가져오기
 		System.out.println("eventBoard : " + eventBoard);
@@ -204,6 +204,24 @@ public class AdminCtrl {
 		
 		return "admin/board";	
 	}
+	
+	@RequestMapping(value = "notice", method = RequestMethod.GET)
+	public String noticeList(Model model, Criteria cri) throws Exception { // 공지사항 조회
+		
+		List<Board> notice = adService.noticeList(cri); // 게시판 리스트 가져오기
+		System.out.println("notice : " + notice);
+		model.addAttribute("notice", notice);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		System.out.println(pageMaker.getCri());
+		pageMaker.setTotalCount(adService.noticeCount());
+		
+		model.addAttribute("pageMaker", pageMaker);
+		
+		return "admin/notice";	
+	}
+
 	
 	@RequestMapping(value = "fboardselect", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
@@ -385,6 +403,42 @@ public class AdminCtrl {
 		return "admin/userList";
 	}
 	
+	@RequestMapping(value = "noticeselect", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String noticeSelect(Board board, HttpServletRequest request) throws Exception { // 자유 게시판 특정 글 조회
+		request.setCharacterEncoding("UTF-8");
+		
+		System.out.println("컨트롤러 진입");
+		String boardTitle = request.getParameter("boardTitle"); // 제목 값 받기
+		String boardId = request.getParameter("boardId"); // 작성자 값 받기
+		System.out.println("mapper로 넘길 값은 : " + boardTitle);
+		System.out.println("mapper로 넘길 값은 : " + boardId);
+		
+		if (boardTitle != null) { // select에서 제목을 선택했을 때
+			board.setBoardTitle(boardTitle); // vo에 제목을 넣음
+			String getBoardTitle = board.getBoardTitle();			
+			System.out.println("최종 boardTitle 값은 : " + getBoardTitle);
+			List<Board> searchTitle = adService.selectNBoardTitle(board); // 제목으로 검색한 리스트 가져오기
+			System.out.println("searchTitle : " + searchTitle);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(searchTitle);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		} else if (boardId != null) { // select에서 작성자를 선택했을 때
+			board.setBoardId(boardId); // vo에 작성자를 넣음
+			String getBoardId = board.getBoardId();
+			System.out.println("최종 boardId 값은 : " + getBoardId);
+			List<Board> searchId = adService.selectNBoardId(board); // 이름으로 검색한 리스트 가져오기
+			System.out.println("searchId : " + searchId);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(searchId);
+			System.out.println("jsonOutput : " + jsonOutput);
+			return jsonOutput;
+		}
+		
+		return "admin/userList";
+	}
+	
 	@RequestMapping(value = "deletefboardlist", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteFBoardList(HttpServletRequest request) { // 자유 게시판 글 삭제
@@ -443,6 +497,18 @@ public class AdminCtrl {
 			adService.deleteEBoardList(deleteList[i]); // 이벤트 게시판 글 번호 검색해서 해당 유저 삭제 
 		}
 		return "admin/eventboardlist";
+	}
+	
+	@RequestMapping(value = "deletenoticelist", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteNoticeList(HttpServletRequest request) { // 공지사항 글 삭제
+		String[] deleteList = request.getParameterValues("boardNo"); // 체크된 공지사항 글 번호 리스트에 넣기
+		System.out.println("deleteList 길이 : " + deleteList.length);
+		for (int i = 0; i < deleteList.length; i++) { // for문 사용해서 deleteList[0]부터 삭제
+			System.out.println("deleteList index " + i + " : " + deleteList[i]);
+			adService.deleteNBoardList(deleteList[i]); // 공지사항 글 번호 검색해서 해당 유저 삭제 
+		}
+		return "admin/notice";
 	}
 	
 	@RequestMapping(value = "boardradio", method = RequestMethod.POST, produces = "application/text; charset=utf8")
@@ -611,6 +677,49 @@ public class AdminCtrl {
 			}
 		}
 		return "admin/userlist";
+	}
+	
+	@RequestMapping(value = "noticeradio", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String noticeRadio(Board board, HttpServletRequest request) throws Exception { // 자유 게시판 라디오 버튼 선택 나열
+		request.setCharacterEncoding("UTF-8");
+		
+		System.out.println("컨트롤러 진입");
+		String id = request.getParameter("id"); // 제목 값 받기
+		String value = request.getParameter("value"); // 작성자 값 받기
+		System.out.println("mapper로 넘길 값은 : " + id);
+		System.out.println("mapper로 넘길 값은 : " + value);
+		System.out.println("notice 값 확인");
+		if (value.equals("new")) {
+			System.out.println("최신순 조회입니다.");
+			board.setBoardTitle("NOTICEDATE");
+			String type = board.getBoardTitle();
+			System.out.println("mapper로 넘길 값은 : " + type);
+			List<Board> selectFRadio = adService.selectNRadio(board);
+			System.out.println("radioList : " + selectFRadio);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(selectFRadio);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		} else if (value.equals("like")) {
+			System.out.println("추천순 조회입니다.");
+			// TODO
+		} else if (value.equals("cnt")) {
+			System.out.println("조회순 조회입니다.");
+			board.setBoardContent("NOTICECNT");
+			String type = board.getBoardContent();
+			System.out.println("mapper로 넘길 값은 : " + type);
+			List<Board> selectNRadio = adService.selectNRadio(board);
+			System.out.println("radioList : " + selectNRadio);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(selectNRadio);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		} else if (value.equals("cmt")) {
+			System.out.println("댓글순 조회입니다.");
+			// TODO
+		}
+		return "admin/notice";
 	}
 	
 	@RequestMapping(value = "userstart", method = RequestMethod.GET)

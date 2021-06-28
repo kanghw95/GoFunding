@@ -81,6 +81,11 @@ public class AdminServiceImpl implements AdminService {
 	public List<Board> eventBoardList(Criteria cri) throws Exception { // 이벤트 게시판 조회
 		return adDao.eventBoardList(cri);
 	}
+	
+	@Override
+	public List<Board> noticeList(Criteria cri) throws Exception { // 공지사항 조회
+		return adDao.noticeList(cri);
+	}
 
 	@Override
 	public int freeBoardCount() throws Exception { // 자유 게시판 글 수 조회
@@ -105,6 +110,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int eventBoardCount() throws Exception { // 자유 게시판 글 수 조회
 		return adDao.eventBoardCount();
+	}
+	
+	@Override
+	public int noticeCount() throws Exception { // 공지사항 글 수 조회
+		return adDao.noticeCount();
 	}
 	
 	@Override
@@ -158,6 +168,16 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	public List<Board> selectNBoardId(Board board) throws Exception { // 공지사항 작성자 조회
+		return adDao.selectNBoardId(board);
+	}
+	
+	@Override
+	public List<Board> selectNBoardTitle(Board board) throws Exception { // 공지사항 제목 조회
+		return adDao.selectNBoardTitle(board);
+	}
+	
+	@Override
 	public List<Board> selectFRadio(Board board) throws Exception { // 자유 게시판 라디오박스 조회
 		return adDao.selectFRadio(board);
 	}
@@ -180,6 +200,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Board> selectERadio(Board board) throws Exception { // 이벤트 게시판 라디오박스 조회
 		return adDao.selectERadio(board);
+	}
+	
+	@Override
+	public List<Board> selectNRadio(Board board) throws Exception { // 공지사항 라디오박스 조회
+		return adDao.selectNRadio(board);
 	}
 		
 	@Override
@@ -205,6 +230,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void deleteEBoardList(String boardNo) { // 이벤트 게시판 글 삭제
 		adDao.deleteEBoardList(boardNo);
+	}
+	
+	@Override
+	public void deleteNBoardList(String boardNo) { // 공지사항 글 삭제
+		adDao.deleteNBoardList(boardNo);
 	}
 	
 	@Override

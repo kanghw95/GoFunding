@@ -72,6 +72,10 @@ public class AdminDao {
 		return sqlSession.selectList("Admin.selectEvent", cri);
 	}
 	
+	public List<Board> noticeList(Criteria cri) throws Exception { // 공지사항 조회
+		return sqlSession.selectList("Admin.selectNotice", cri);
+	}
+	
 	public int freeBoardCount() throws Exception { // 자유 게시판 글 수 조회
 		return sqlSession.selectOne("Admin.countFreeBoard");
 	}
@@ -90,6 +94,10 @@ public class AdminDao {
 	
 	public int eventBoardCount() throws Exception { // 이벤트 게시판 글 수 조회
 		return sqlSession.selectOne("Admin.countEventBoard");
+	}
+	
+	public int noticeCount() throws Exception { // 공지사항 글 수 조회
+		return sqlSession.selectOne("Admin.countNotice");
 	}
 	
 	public List<Board> selectFBoardId(Board board) throws Exception { // 자유 게시판 작성자 조회
@@ -130,6 +138,14 @@ public class AdminDao {
 	
 	public List<Board> selectEBoardTitle(Board board) throws Exception { // 이벤트 게시판 제목 조회
 		return sqlSession.selectList("Admin.searchEBoardTitle", board);
+	}
+	
+	public List<Board> selectNBoardId(Board board) throws Exception { // 공자사항 작성자 조회
+		return sqlSession.selectList("Admin.searchNBoardId", board);
+	}
+	
+	public List<Board> selectNBoardTitle(Board board) throws Exception { // 공지사항 제목 조회
+		return sqlSession.selectList("Admin.searchNBoardTitle", board);
 	}
 	
 	public List<Board> selectFRadio(Board board) throws Exception { // 자유 게시판 라디오박스 조회
@@ -187,6 +203,17 @@ public class AdminDao {
 		return sqlSession.selectList("Admin.selectERadio", map);
 	}
 	
+	public List<Board> selectNRadio(Board board) throws Exception { // 공지사항 라디오박스 조회
+		Map<String, String> map = new HashMap<String, String>();
+		String date = board.getBoardTitle();
+		String cnt = board.getBoardContent();
+		System.out.println("날짜 값 : " + date);
+		System.out.println("조회 값 : " + cnt);
+		map.put("date", date);
+		map.put("cnt", cnt);
+		return sqlSession.selectList("Admin.selectNRadio", map);
+	}
+	
 	public void deleteFBoardList(String boardNo) { // 자유 게시판 글 삭제
 		sqlSession.delete("Admin.deleteFBoardList", boardNo);
 	}
@@ -203,8 +230,12 @@ public class AdminDao {
 		sqlSession.delete("Admin.deleteSBoardList", boardNo);
 	}
 	
-	public void deleteEBoardList(String boardNo) {
+	public void deleteEBoardList(String boardNo) { // 이벤트 게시판 글 삭제
 		sqlSession.delete("Admin.deleteEBoardList", boardNo);
+	}
+	
+	public void deleteNBoardList(String boardNo) { // 공지사항 글 삭제
+		sqlSession.delete("Admin.deleteNBoardList", boardNo);
 	}
 	
 	public int userStart() { // 회원 권한 복원

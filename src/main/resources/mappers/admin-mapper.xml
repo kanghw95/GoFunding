@@ -52,6 +52,14 @@
 		<result property="boardCnt" column="eventcnt"/>		
 		<result property="boardId" column="id"/>
 	</resultMap>
+	<resultMap type="Board" id="notice">
+		<id property="boardNo" column="noticeno"/>
+		<result property="boardTitle" column="noticetitle"/>		
+		<result property="boardContent" column="noticecontent"/>		
+		<result property="boardDate" column="noticedate"/>		
+		<result property="boardCnt" column="noticecnt"/>		
+		<result property="boardId" column="id"/>
+	</resultMap>
 	
 	<!-- 페이징 + 사용자 조회 -->
 	<select id="selectUser" resultType="arraylist" resultMap="resultUser">
@@ -126,9 +134,12 @@
 		ORDER BY EVENTNO ASC
 	</select>
 	
-	<!-- 자유 게시판 글 수 조회 -->
-	<select id="countFreeBoard" resultType="int">
-		SELECT COUNT(*) FROM BULLETINEBOARD
+	<!-- 페이징 + 공지사항 조회 -->
+	<select id="selectNotice" resultType="arraylist" resultMap="notice">
+		SELECT * FROM (SELECT NOTICENO, NOTICETITLE, NOTICECONTENT, NOTICEDATE, NOTICECNT, ID
+		, ROW_NUMBER() OVER (ORDER BY NOTICENO ASC) AS RNUM FROM NOTICE) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY NOTICENO ASC
 	</select>
 	
 	<!-- 자유 게시판 제목 조회 -->
@@ -181,6 +192,21 @@
 		SELECT * FROM EVENTBOARD WHERE ID LIKE #{boardId} ORDER BY EVENTNO ASC
 	</select>
 	
+	<!-- 공지사항 제목 조회 -->
+	<select id="searchNBoardTitle" resultType="arraylist" resultMap="notice">
+		SELECT * FROM NOTICE WHERE NOTICETITLE LIKE #{boardTitle} ORDER BY NOTICENO ASC
+	</select>
+	
+	<!-- 공지사항 작성자 조회 -->
+	<select id="searchNBoardId" resultType="arraylist" resultMap="notice">
+		SELECT * FROM NOTICE WHERE ID LIKE #{boardId} ORDER BY NOTICENO ASC
+	</select>
+	
+	<!-- 자유 게시판 글 수 조회 -->
+	<select id="countFreeBoard" resultType="int">
+		SELECT COUNT(*) FROM BULLETINEBOARD
+	</select>
+	
 	<!-- 후기 게시판 글 수 조회 -->
 	<select id="countReviewBoard" resultType="int">
 		SELECT COUNT(*) FROM REVIEWBOARD
@@ -199,6 +225,11 @@
 	<!-- 이벤트 게시판 글 수 조회 -->
 	<select id="countEventBoard" resultType="int">
 		SELECT COUNT(*) FROM EVENTBOARD
+	</select>
+	
+	<!-- 공지사항 글 수 조회 -->
+	<select id="countNotice" resultType="int">
+		SELECT COUNT(*) FROM NOTICE
 	</select>
 	
 	<!-- 자유 게시판 라디오박스 조회 -->
@@ -245,7 +276,7 @@
 	
 	<!-- 정보공유 게시판 라디오박스 조회 -->
 	<select id="selectSRadio" resultType="arraylist" resultMap="shareBoard">
-		SELECT * FROM SHAREBOARD ORDER BY 
+		SELECT * FROM SHAREBOARD
 		<choose>
 			<when test="date != null">
 				ORDER BY SHAREDATE DESC
@@ -259,7 +290,7 @@
 	
 	<!-- 이벤트 게시판 라디오박스 조회 -->
 	<select id="selectERadio" resultType="arraylist" resultMap="eventBoard">
-		SELECT * FROM EVENTBOARD ORDER BY 
+		SELECT * FROM EVENTBOARD
 		<choose>
 			<when test="date != null">
 				ORDER BY EVENTDATE DESC
@@ -268,6 +299,19 @@
 				ORDER BY EVENTCNT DESC
 			</when>
 			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<!-- 공지사항 라디오박스 조회 -->
+	<select id="selectNRadio" resultMap="notice">
+		SELECT * FROM NOTICE
+		<choose>
+			<when test="date != null">
+				ORDER BY NOTICEDATE DESC
+			</when>
+			<when test="cnt != null">
+				ORDER BY NOTICECNT DESC
+			</when>
 		</choose>
 	</select>
 	
@@ -295,27 +339,10 @@
 	<delete id="deleteEBoardList">
 		DELETE FROM EVENTBOARD WHERE EVENTNO = #{boardNo}
 	</delete>
-	
-	
-	
-	
-	
-	
-	<!-- 펀딩 신청 목록 조회 -->
-	<select id="selectFormList" resultType="Application">
-		SELECT FUNDINGTITLE, APPLYNO FROM APPLICATION WHERE FEEDBACK IS NULL ORDER BY APPLYNO
-	</select>
-	
-	<!-- 반려 펀딩 목록 조회 -->
-	<select id="selectRejectedForm" resultType="Application">
-		SELECT FUNDINGTITLE, APPLYNO FROM APPLICATION WHERE FEEDBACK != 'approved'
-		AND FEEDBACK IS NOT NULL ORDER BY APPLYNO
-	</select>
-	
-	<!-- 펀딩 신청 상세페이지 -->
-	<select id="selectFormDetail" resultType="Application">
-		SELECT * FROM APPLICATION WHERE APPLYNO = #{applyNo}
-	</select>
+	<!-- 공지사항 글 삭제 -->	
+	<delete id="deleteNBoardList">		
+	DELETE FROM NOTICE WHERE NOTICENO = #{boardNo}	
+	</delete>
 	
 	<!-- 신청 승인 / 메이커 생성 -->
 	<insert id="makeMaker">
