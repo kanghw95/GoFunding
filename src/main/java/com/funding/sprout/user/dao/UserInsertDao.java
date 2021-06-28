@@ -33,8 +33,13 @@ public class UserInsertDao {
 		
 	}
 	
-	public ArrayList<User> nickCheck(){ // 닉네임 중복체크
-		return null;
+	public int nickCheck(String userNick){ // 닉네임 중복체크
+		return sqlSession.selectOne("User.nickCheck", userNick);
+		
+	}
+	
+	public int emailCheck(String userEmail){ // 이메일 중복체크
+		return sqlSession.selectOne("User.emailCheck", userEmail);
 		
 	}
 	
@@ -42,17 +47,6 @@ public class UserInsertDao {
 		return 0; // 내 정보 수정
 		
 	}
-	
-	public User idFind() { // 아이디 찾기
-		return null;
-		
-	}
-	
-	public User pwFind() { //비밀번호 찾기
-		return null;
-		
-	}
-	
 	
 	public int drawlUser() { // 회원 탈퇴
 		return 0;

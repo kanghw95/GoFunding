@@ -38,7 +38,12 @@
 	
 	<!-- nickname 중복체크 -->
 	<select id="nickCheck" parameterType="string" resultType="User">
-		
+		SELECT count(*) FROM USERS WHERE nickname = #{userNick}
+	</select>
+	
+	<!-- email 중복체크 -->
+	<select id="emailCheck" parameterType="string" resultType="User">
+		SELECT count(*) FROM USERS WHERE email = #{userEmail}
 	</select>
 	
 	<!-- 로그인 -->

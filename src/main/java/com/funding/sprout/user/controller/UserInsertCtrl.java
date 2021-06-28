@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -65,47 +66,76 @@ public class UserInsertCtrl {
 //		String hashedPwd = BCrypt.hashpw(user.getUserPwd(), BCrypt.gensalt());
 //		user.setUserPwd(hashedPwd);
 		System.out.println("컨트롤 들어옴");
+		System.out.println("user:" + user);
 		int result = 0;
 		result = userService.insertUser(user);
 		System.out.println("컨트롤 result" + result);
-		
-
 		
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST, produces = "application/text; charset=utf-8")  
-	public String idCheck(@RequestBody String paramData) {
+	public String idCheck(@RequestParam("userId") String id) {
 		System.out.println("idCheck 컨트롤러 들어옴");
-		// 아이디 중복 체크
-		
-		String str = paramData.trim();
-		System.out.println("str: " + str);
-		
-		int index = str.indexOf("=");
-		String userId = str.substring(0, index);
-		System.out.println("userId: " + userId);
-		
-		int result = userService.idCheck(userId);
-		System.out.println("result: " + result);
 
-		String real = "";
-		if(result != 0) {
-			real = "사용불가";
+		// 아이디 중복 체크
+		int result = userService.idCheck(id);
+		String idCheck;
+		
+		if(result > 0) {
+			System.out.println("result : " + result);
+			idCheck = "중복 사용 불가";
 		}else {
-			real = "사용가능";
+			System.out.println("result : " + result);
+			idCheck = "사용가능";
 		}
-		System.out.println("real : " + real);
-		return real;
+		System.out.println("idCheck : " + idCheck);
+		
+		return idCheck;
 	}
 	
-	@RequestMapping(value = "/nickCheck", method = RequestMethod.GET)  
-	public ModelAndView nickCheck() {
+	@ResponseBody
+	@RequestMapping(value = "/nickCheck", method = RequestMethod.POST, produces = "application/text; charset=utf-8")  
+	public String nickCheck(@RequestParam("userNick") String nick) {
+		System.out.println("nickCheck 컨트롤러");
 		// 닉네임 중복 체크
+		int result = userService.idCheck(nick);
+		String nickCheck;
 		
+		if(result > 0) {
+			System.out.println("result : " + result);
+			nickCheck = "중복 사용 불가";
+		}else {
+			System.out.println("result : " + result);
+			nickCheck = "사용가능";
+		}
+		System.out.println("nickCheck : " + nickCheck);
 		
-		return null; 
+		return nickCheck;
+		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/emailCheck", method = RequestMethod.POST, produces = "application/text; charset=utf-8")  
+	public String emailCheck(@RequestParam("userEmail") String email) {
+		System.out.println("emailCheck 컨트롤러");
+		// 이메일 중복 체크
+		int result = userService.idCheck(email);
+		String emailCheck;
+		
+		if(result > 0) {
+			System.out.println("result : " + result);
+			emailCheck = "중복 사용 불가";
+		}else {
+			System.out.println("result : " + result);
+			emailCheck = "사용가능";
+		}
+		System.out.println("emailCheck : " + emailCheck);
+		
+		return emailCheck;
+		
+	}
+	
 	
 	
 	@RequestMapping(value = "modifyUser", method = RequestMethod.GET)  
@@ -113,17 +143,7 @@ public class UserInsertCtrl {
 		return null; // 내 정보 수정
 		
 	}
-	@RequestMapping(value = "idFind", method = RequestMethod.GET)  
-	public ModelAndView idFind() {
-		return null; // 아이디 찾기
-		
-	}
-	
-	@RequestMapping(value = "pwFind", method = RequestMethod.GET)  
-	public ModelAndView pwFind() {
-		return null; // 비밀번호 찾기
-		
-	}
+
 	
 	@RequestMapping(value = "drawlUser", method = RequestMethod.GET)  
 	public ModelAndView drawlUser() {

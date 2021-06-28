@@ -5,15 +5,10 @@
 	height: 40px;
 	font-size: 17px;
 	padding: 10px;
-	margin-top: 5px;
-	margin-bottom: 5px; 
 	border-radius: 5px;
 	border: 1px solid #ddd;
 }
 
-.inputPost{
-	width: 200px; 
-}
 
 .join-bodyContent {
 	justify-content: center;
@@ -35,7 +30,7 @@
 	font-size: 30px;
 }
 
-.insideBtn {
+.findPostCode {
 	width: 85px;
 	height: 40px;
 	border: none;

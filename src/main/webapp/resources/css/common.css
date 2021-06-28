@@ -24,6 +24,7 @@
 	-moz-box-sizing: border-box;
 	padding: 0;
 	margin: 0;
+	font-family: 'TmoneyRoundWindRegular'; 	
 }
 
 :after, :before {
@@ -38,6 +39,8 @@ body {
 	margin: 0;
 	min-height: 100%;
 	font-family: 'TmoneyRoundWindRegular'; 	
+	padding-top: 150px; /* header height + 20px */
+	padding-bottom: 200px; /* footer height */
 }
 
 /* 개별 폰트 설정 */

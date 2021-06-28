@@ -14,7 +14,9 @@ public interface UserInsertService {
 	
 	public int idCheck(String userId); // 아이디 중복체크
 	
-	public ArrayList<User> nickCheck(); // 닉네임 중복체크
+	public int nickCheck(String userNick); // 닉네임 중복체크
+
+	public int emailCheck(String userEmail); // 이메일 중복체크
 	
 	public int modifyUser(); // 내 정보 수정
 

@@ -37,9 +37,13 @@ public class UserInsertServiceImpl implements UserInsertService {
 	}
 	
 	@Override
-	public ArrayList<User> nickCheck() {
-		// TODO Auto-generated method stub
-		return null;
+	public int nickCheck(String userNick) {
+		return userDao.nickCheck(userNick);
+	}
+	
+	@Override
+	public int emailCheck(String userEmail) {
+		return userDao.emailCheck(userEmail);
 	}
 
 	@Override
