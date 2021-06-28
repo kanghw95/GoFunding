@@ -11,7 +11,10 @@
 <body>
 펀딩 반려 목록
 <div>
+	<form id="frm">
 	<select name="fundingCategory" id="fundingCategory">
+		<option value="종류" selected disabled>-종류별-</option>
+		<option value="" >전체</option>
 		<option value="일자리창출">일자리창출</option>
 		<option value="공정무역">공정무역</option>
 		<option value="친환경">친환경</option>
@@ -20,6 +23,7 @@
 		<option value="미디어">미디어</option>
 		<option value="창작자">창작자</option>
 	</select>
+</form>
 </div>
 <div>
 	<table border="1">
@@ -36,7 +40,13 @@
 </div>
 
 <script>
-
+	$("#fundingCategory").change(function(){
+		var fundingCategory=$("#fundingCategory option:selected").val();
+		console.log(fundingCategory);
+		$("#frm").attr("action","formRejectCate");
+		$("#frm").attr("method","get");
+		$("#frm").submit();
+	});
 </script>
 </body>
 </html>

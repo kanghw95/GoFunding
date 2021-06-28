@@ -128,41 +128,56 @@ $('.closeStandard').click(function(){ //펀딩개설기준 모달창 삭제
 	$('.wrap2').fadeOut();
 });
 
-$('.closeComplete').click(function(){ //펀딩개설기준 모달창 삭제
-	$('.wrap3').fadeOut();
-});
-
-
 $(document).ready(function(){
+	$("#chkInform").on("propertychange change input", function(){ //중복확인 후 특정 텍스트만 프로젝트 개설 버튼 활성화 TODO
+		if($("#privacyChk").is(":checked")&&$("#chkInform").val()=="사용할 수 있는 아이디 입니다."){
+			$("#submitBtn").attr("disabled",false);
+		} else {
+			$("#submitBtn").attr("disabled",true);
+		}
+	})
 	$("#privacyChk").change(function(){ //개인정보 수집 및 이용 동의 체크박스 : 체크 되어야만 프로젝트 개설 버튼 활성화
-		if($("#privacyChk").is(":checked")&&$("#chkInform").html()=="사용할 수 있는 아이디 입니다."){
+		if($("#privacyChk").is(":checked")&&$("#chkInform").val()=="사용할 수 있는 아이디 입니다."){
                 $("#submitBtn").attr("disabled",false);
 		} else {
 			$("#submitBtn").attr("disabled",true);
 		}
 	})
+	$("#direct").hide();
 })
+
+$(document).on("change", "#email", function(){ //직접입력 선택시 도메인 입력 text 출력 TODO
+	if($("#direct").val()==""){
+		$("#direct").show();
+	} else if(("#direct").val()!="") {
+		$("#direct").hide();
+	}
+});
 
 $("#nameChk").click(function(){ //주체명(메이커명) 중복 확인
 	var maker=$("#maker").val();
-	$.ajax({
-		url: 'makerChk',
-		type: 'get',
-		data: {'maker': maker},
-		success: function(msg){
-			idChk(msg);
-		},
-		error: function(request,status,error){
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	})
+	if(maker==""||maker==null){
+		alert("아이디를 입력해주세요.");
+	} else {
+		$.ajax({
+			url: 'makerChk',
+			type: 'get',
+			data: {'maker': maker},
+			success: function(msg){
+				idChk(msg);
+			},
+			error: function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		})
+	}
 });
 
 function idChk(msg){ //중복 검사 결과 확인 텍스트 생성
 	if(msg=='no'){
-		$("#chkInform").html("사용할 수 있는 아이디 입니다.");
+		$("#chkInform").val("사용할 수 있는 아이디 입니다.");
 	} else {
-		$("#chkInform").html(msg+"는 사용할 수 없는 아이디 입니다.");
+		$("#chkInform").val(msg+"는 사용할 수 없는 아이디 입니다.");
 		$("#maker").val("");
 	}
 }

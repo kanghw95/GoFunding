@@ -47,7 +47,8 @@ public class UserApplyCtrl {
 			@RequestParam() String start, @RequestParam() String end, @RequestParam() String domain,
 			@RequestParam() String delivery) {
 		
-		String makerEmail=app.getMakerEmail()+"@"+domain;
+		String email=app.getMakerEmail()+"@"+domain;
+		String makerEmail=email.replace(",", "");
 		Timestamp fundingStart=new Timestamp(0);
 		Timestamp fundingFin=new Timestamp(0);
 		Date dd= new Date();

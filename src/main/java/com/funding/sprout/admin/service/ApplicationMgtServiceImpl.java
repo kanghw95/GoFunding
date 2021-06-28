@@ -15,13 +15,33 @@ public class ApplicationMgtServiceImpl implements ApplicationMgtService {
 	private ApplicationMgtDao applicationMgtDao;
 
 	@Override
-	public List<Application> formList() { //펀딩 신청 목록 조회
+	public List<Application> fundingList() { //펀딩 목록 조회 : 전체
+		return applicationMgtDao.fundingList();
+	}
+	
+	@Override
+	public List<Application> fundingListCate(String fundingCategory) { //펀딩 목록 조회 : 카테고리
+		return applicationMgtDao.fundingListCate(fundingCategory);
+	}
+
+	@Override
+	public List<Application> formList() { //펀딩 신청서 목록 조회 : 전체
 		return applicationMgtDao.formList();
 	}
 	
 	@Override
-	public List<Application> formReject() { //반려 펀딩 목록 조회
+	public List<Application> formListCate(String fundingCategory) { //펀딩 신청서 목록 조회 : 카테고리
+		return applicationMgtDao.formListCate(fundingCategory);
+	}
+	
+	@Override
+	public List<Application> formReject() { //반려 펀딩 목록 조회 : 전체
 		return applicationMgtDao.formReject();
+	}
+	
+	@Override
+	public List<Application> formRejectCate(String fundingCategory) { //반려 펀딩 목록 조회 : 카테고리
+		return applicationMgtDao.formRejectCate(fundingCategory);
 	}
 
 	@Override
@@ -45,8 +65,8 @@ public class ApplicationMgtServiceImpl implements ApplicationMgtService {
 	}
 
 	@Override
-	public int formReject(Application app) { //펀딩 거절 - 거절 사유 입력
-		return applicationMgtDao.formReject(app);
+	public int formRejectInput(Application app) { //펀딩 거절 - 거절 사유 입력
+		return applicationMgtDao.formRejectInput(app);
 	}
 
 }

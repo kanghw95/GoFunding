@@ -9,7 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-펀딩 신청관리 목록
+펀딩 목록
 <div>
 	<form id="frm">
 	<select name="fundingCategory" id="fundingCategory">
@@ -24,11 +24,12 @@
 		<option value="창작자">창작자</option>
 	</select>
 </form>
+펀딩상세페이지로 연결 예정
 </div>
 <div>
 	<table border="1">
 		<tr>
-			<c:forEach var="app" items="${formList}">
+			<c:forEach var="app" items="${fundingList}">
 			<td id="formTitle">
 				이미지<br>
 				${app.fundingTitle}
@@ -43,13 +44,14 @@
 $("[id^='formTitle']").click(function(event){
 	var applyNo=$(this).children().next().val();
 	console.log(applyNo);
-	window.location.href="http://localhost:8090/sprout/formDetail?applyNo="+applyNo;
+	//window.location.href="http://localhost:8090/sprout/fundingDetail?applyNo="+applyNo;
+	//펀딩상세페이지연결예정
 });
 
 $("#fundingCategory").change(function(){
 	var fundingCategory=$("#fundingCategory option:selected").val();
 	console.log(fundingCategory);
-	$("#frm").attr("action","formListCate");
+	$("#frm").attr("action","fundingListCate");
 	$("#frm").attr("method","get");
 	$("#frm").submit();
 });

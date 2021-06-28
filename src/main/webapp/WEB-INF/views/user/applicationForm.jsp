@@ -47,7 +47,8 @@
 					<tr>
 						<td>주체명 (필수)</td>
 						<td><input type="text" name="maker" id="maker" placeholder="내용을 입력해주세요." required><button type="button"
-								id="nameChk">중복체크</button><div id="chkInform"></div></td>
+								id="nameChk">중복체크</button>
+								<div><input type="text" id="chkInform"></div></td>
 					</tr>
 					<tr>
 						<td>소개 (필수)</td>
@@ -69,8 +70,9 @@
 								<option value="naver.com">naver.com</option>
 								<option value="daum.net">daum.net</option>
 								<option value="gmail.com">gmail.com</option>
-								<option value="직접입력">직접입력</option>
+								<option value="">직접입력</option>
 							</select>
+							<input type="text" id="direct" name="domain">
 						</td>
 					</tr>
 						<tr>
@@ -122,9 +124,9 @@
 							<tr>
 								<td>
 									5. 펀딩 시작일<br>
-									<input type="text" id="fundingStart" name="start" class="datepick" required><br>
+									<input type="text" id="fundingStart" name="start" class="datepick" placeholder="일자를 선택해주세요." required><br>
 									6. 펀딩 종료일<br>
-									<input type="text" id="fundingFin" name="end" class="datepick" required>
+									<input type="text" id="fundingFin" name="end" class="datepick" placeholder="일자를 선택해주세요." required>
 								</td>
 								<td>
 									7. 펀딩 후원금 사용 계획<br>
@@ -153,18 +155,19 @@
 										<button type="button" class="closeRewardBtn">삭제</button>
 									</td>
 								</tr>
+							<tbody id="tbody2">
+							</tbody>
 								<tr>
 									<td>
 										10. 배송일자<br>
-										<input type="text" id="deliveryDate" name="delivery" class="datepick" required>
+										<input type="text" id="deliveryDate" name="delivery" class="datepick" placeholder="일자를 선택해주세요." required>
 									</td>
 									<td>
 										11. 배송비<br>
 										<input type="text" id="deliveryCharge" name="deliveryCharge" placeholder="배송비" pattern="[0-9]+" required>원
 									</td>
 								</tr>
-							<tbody id="tbody2">
-							</tbody>
+							
 						</table>
 						<!--개인정보 동의서 팝업 / 동의안하면 안 넘어감-->
 						<input type="checkbox" id="privacyChk">개인정보 수집 및 이용에 동의&nbsp;&nbsp;&nbsp;

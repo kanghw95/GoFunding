@@ -339,10 +339,55 @@
 	<delete id="deleteEBoardList">
 		DELETE FROM EVENTBOARD WHERE EVENTNO = #{boardNo}
 	</delete>
+	
 	<!-- 공지사항 글 삭제 -->	
 	<delete id="deleteNBoardList">		
 	DELETE FROM NOTICE WHERE NOTICENO = #{boardNo}	
-	</delete>
+	</delete>	
+	
+	
+	
+	
+	
+	
+	<!-- 펀딩 목록 조회 : 전체 -->
+	<select id="fundingList" resultType="Application">
+		SELECT FUNDINGTITLE, FUNDINGNO FROM FUNDING WHERE FUNDINGSTATE = '1' ORDER BY FUNDINGNO
+	</select>
+	
+	<!-- 펀딩 목록 조회 : 카테고리 -->
+	<select id="fundingListCate" resultType="Application">
+		SELECT FUNDINGTITLE, FUNDINGNO FROM FUNDING WHERE FUNDINGSTATE = '1'
+		AND FUNDINGCATEGORY = #{fundingCategory} ORDER BY FUNDINGNO
+	</select>
+	
+	<!-- 펀딩 신청 목록 조회 : 전체 -->
+	<select id="selectFormList" resultType="Application">
+		SELECT FUNDINGTITLE, APPLYNO FROM APPLICATION WHERE FEEDBACK IS NULL ORDER BY APPLYNO
+	</select>
+	
+	<!-- 펀딩 신청 목록 조회 : 카테고리 -->
+	<select id="selectFormCate" resultType="Application">
+		SELECT FUNDINGTITLE, APPLYNO FROM APPLICATION WHERE FEEDBACK IS NULL AND
+		FUNDINGCATEGORY = #{fundingCategory} ORDER BY APPLYNO
+	</select>
+	
+	<!-- 반려 펀딩 목록 조회 : 전체 -->
+	<select id="selectRejectedForm" resultType="Application">
+		SELECT FUNDINGTITLE, FUNDINGCATEGORY, APPLYNO FROM APPLICATION WHERE FEEDBACK != 'approved'
+		AND FEEDBACK IS NOT NULL ORDER BY APPLYNO
+	</select>
+
+	<!-- 반려 펀딩 목록 조회 : 카테고리 -->
+	<select id="selectRejectedCategory" resultType="Application">
+		SELECT FUNDINGTITLE, FUNDINGCATEGORY, APPLYNO FROM APPLICATION WHERE FEEDBACK != 'approved'
+		AND FEEDBACK IS NOT NULL AND FUNDINGCATEGORY = #{fundingCategory} ORDER BY APPLYNO
+	</select>
+	
+	<!-- 펀딩 신청 상세페이지 -->
+	<select id="selectFormDetail" resultType="Application">
+		SELECT * FROM APPLICATION WHERE APPLYNO = #{applyNo}
+	</select>
 	
 	<!-- 신청 승인 / 메이커 생성 -->
 	<insert id="makeMaker">
