@@ -15,6 +15,7 @@
 <link href="<%=request.getContextPath() %>/resources/css/fundingdetail_tap.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/fundingdetail_content.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/fundingdetail_reword.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style type="text/css">
 
 .modal {
@@ -93,23 +94,7 @@
 </style>
 
 </head>
-<script>
-window.onload = function()  {
-	 
-    function onClick() {
-        document.querySelector('.modal_wrap').style.display ='block';
-        document.querySelector('.black_bg').style.display ='block';
-    }   
-    function offClick() {
-        document.querySelector('.modal_wrap').style.display ='none';
-        document.querySelector('.black_bg').style.display ='none';
-    }
-    document.querySelector('#noagree').addEventListener('click', offClick);
-    document.getElementById("FundingDetailSummary_button_join").addEventListener('click', onClick);
-    
-};
 
-</script>
 
 <body>
 	<fmt:parseDate value="${funding.fundingfin}" var="paymentday" pattern="yyyy-MM-dd HH:mm:ss"/> 
@@ -407,13 +392,12 @@ window.onload = function()  {
 		});
 		
 		//리워드 리스트에서 선택하기 
-		var reword_btn1 = document.getElementById("reword1");
-		var reword_price1 = document.getElementById("rewardPrice1").value;
-		var reword_val1 = document.getElementById("reword1").innerText;
 		
-		var reword_btn2 = document.getElementById("reword2");
-		var reword_price2 = document.getElementById("rewardPrice2").value;
-		var reword_val2 = document.getElementById("reword2").innerText; 
+		 <c:forEach var="reward" items="${reward}">
+			var reword_btn${reward.rewardNo} = document.getElementById("reword${reward.rewardNo}");
+			var reword_price${reward.rewardNo} = document.getElementById("rewardPrice${reward.rewardNo}").value;
+			var reword_val${reward.rewardNo} = document.getElementById("reword${reward.rewardNo}").innerText;
+		</c:forEach>
 		
 		var cheer_btn1 = document.getElementById("cheer1");
 		var cheer_val1 = document.getElementById("cheer1").innerText;
@@ -427,103 +411,65 @@ window.onload = function()  {
 		var funding_pay_total_price =  document.getElementById("funding_pay_total_price"); // 결제 페이지용 가격
 		var funding_pay_total_rewordEA = document.getElementById("funding_pay_total_rewordEA"); // 결제 페이지용 수량
 		
-		
-		
 		var funtotalprice = totalprice.innerText;
 		var funtotalnumber = totalnumber.innerText;
 		
 		var li1 = document.createElement("li");
 		var li2 = document.createElement("li");
 		var li3 = document.createElement("li");
-		 <c:forEach var="reward" items="${reward}">
+		<c:forEach var="reward" items="${reward}">
 		 
 			var funding_pay_reword${reward.rewardNo} = document.getElementById("funding_pay_reword${reward.rewardNo}"); // 결제 페이지 리워드 이름 저장용
 			var funding_pay_price${reward.rewardNo} = document.getElementById("funding_pay_reword_price${reward.rewardNo}"); // 결제 페이지 리워드 가격 저장용
 			var funding_pay_rewordEA${reward.rewardNo} = document.getElementById("funding_pay_rewordEA${reward.rewardNo}"); // 결제 페이지 리워드 갯수 저장용
 		
 		</c:forEach>
-			
-		reword_btn1.addEventListener("click",function(){
-			ul_list.style.display = 'block';
-			listbtn.setAttribute("aria-expanded","false");
-			list.style.display = 'none';
-			li1.setAttribute('class','FundingDetailRewardCartItem_wrap__vdT7T');
-			li1.innerHTML = "<strong class='FundingDetailRewardCartItem_name__1BPbo'>"+reword_val1+"</strong> <div class='FundingDetailRewardCartItem_counter__1jk_P'> <input id='reward-cart-item-9' type='number' class='FundingDetailRewardCartItem_input_count__Em-cm' value='1'> <label for='reward-cart-item-9' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus__1zWpw' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus__13l8X'> <span class='FundingDetailRewardCartItem_icon_plus__3xFSP'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount__1WmUb'><strong>"+reword_price1+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete1' class='FundingDetailRewardCartItem_button_delete__feY-l'> <span class='FundingDetailRewardCartItem_icon__3CScL'></span> <span class='blind'>삭제</span></button>";
-			
-			funtotalprice = parseInt(funtotalprice) + parseInt(reword_price1);
-			funding_pay_total_price.value = parseInt(funding_pay_total_price.value) + parseInt(reword_price1);
-			totalprice.innerText = funtotalprice;
-			
-			funtotalnumber = parseInt(funtotalnumber) + 1;
-			funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) + 1;
-			totalnumber.innerText = funtotalnumber;
-			
-			funding_pay_reword1.value = reword_val1;
-			funding_pay_price1.value = reword_price1;
-			funding_pay_rewordEA1.value = parseInt(funding_pay_rewordEA1.value) + 1;
-			
-			ul_list.appendChild(li1);
-			
-			var deletebtn1 = document.getElementById("FundingDetailRewardCartItem_button_delete1");
-				deletebtn1.addEventListener("click",function(){
-							
-					li1.remove();
-					funtotalprice = parseInt(funtotalprice) - parseInt(reword_price1);
-					funding_pay_total_price.value = parseInt(funding_pay_total_price.value) - parseInt(reword_price1);
-					totalprice.innerText = funtotalprice;
-					
-					funtotalnumber = parseInt(funtotalnumber) - 1;
-					funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) - 1;
-					totalnumber.innerText = funtotalnumber;
-					
-					funding_pay_reword1.value = "";
-					funding_pay_price1.value = "";
-					funding_pay_rewordEA1.value =  parseInt(funding_pay_rewordEA1.value) - 1;
-					
-					});
-			
-			});
 		
-		reword_btn2.addEventListener("click",function(){
-			ul_list.style.display = 'block';
-			listbtn.setAttribute("aria-expanded","false");
-			list.style.display = 'none';
-			li2.setAttribute('class','FundingDetailRewardCartItem_wrap__vdT7T');
-			li2.innerHTML = "<strong class='FundingDetailRewardCartItem_name__1BPbo'>"+reword_val2+"</strong> <div class='FundingDetailRewardCartItem_counter__1jk_P'> <input id='reward-cart-item-9' type='number' class='FundingDetailRewardCartItem_input_count__Em-cm' value='1'> <label for='reward-cart-item-9' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus__1zWpw' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus__13l8X'> <span class='FundingDetailRewardCartItem_icon_plus__3xFSP'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount__1WmUb'><strong>"+reword_price2+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete2' class='FundingDetailRewardCartItem_button_delete__feY-l'> <span class='FundingDetailRewardCartItem_icon__3CScL'></span> <span class='blind'>삭제</span></button>";
-		
-			funtotalprice = parseInt(funtotalprice) + parseInt(reword_price2);
-			funding_pay_total_price.value = parseInt(funding_pay_total_price.value) + parseInt(reword_price2);
-			totalprice.innerText = funtotalprice;
-		
-			funtotalnumber = parseInt(funtotalnumber) + 1;
-			funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) + 1;
-			totalnumber.innerText = funtotalnumber;
-			
-			funding_pay_reword2.value = reword_val2;
-			funding_pay_price2.value = reword_price2;
-			funding_pay_rewordEA2.value = parseInt(funding_pay_rewordEA2.value) + 1;
-			
-			ul_list.appendChild(li2);
-			
-			var deletebtn2 = document.getElementById("FundingDetailRewardCartItem_button_delete2");
-				deletebtn2.addEventListener("click",function(){
-						
-				li2.remove();
-				funtotalprice = parseInt(funtotalprice) - parseInt(reword_price2);
-				funding_pay_total_price.value = parseInt(funding_pay_total_price.value) - parseInt(reword_price2);
+		<c:forEach var="reward" items="${reward}">
+
+			reword_btn${reward.rewardNo}.addEventListener("click",function(){
+				ul_list.style.display = 'block';
+				listbtn.setAttribute("aria-expanded","false");
+				list.style.display = 'none';
+				li1.setAttribute('class','FundingDetailRewardCartItem_wrap__vdT7T');
+				li1.innerHTML = "<strong class='FundingDetailRewardCartItem_name__1BPbo'>"+reword_val${reward.rewardNo}+"</strong> <div class='FundingDetailRewardCartItem_counter__1jk_P'> <input id='reward-cart-item-9' type='number' class='FundingDetailRewardCartItem_input_count__Em-cm' value='1'> <label for='reward-cart-item-9' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus__1zWpw' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus__13l8X'> <span class='FundingDetailRewardCartItem_icon_plus__3xFSP'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount__1WmUb'><strong>"+reword_price${reward.rewardNo}+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete1' class='FundingDetailRewardCartItem_button_delete__feY-l'> <span class='FundingDetailRewardCartItem_icon__3CScL'></span> <span class='blind'>삭제</span></button>";
+				
+				funtotalprice = parseInt(funtotalprice) + parseInt(reword_price${reward.rewardNo});
+				funding_pay_total_price.value = parseInt(funding_pay_total_price.value) + parseInt(reword_price${reward.rewardNo});
 				totalprice.innerText = funtotalprice;
 				
-				funtotalnumber = parseInt(funtotalnumber) - 1;
-				funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) - 1;
+				funtotalnumber = parseInt(funtotalnumber) + 1;
+				funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) + 1;
 				totalnumber.innerText = funtotalnumber;
-
-				funding_pay_reword2.value = "";
-				funding_pay_price2.value = "";
-				funding_pay_rewordEA2.value =  parseInt(funding_pay_rewordEA2.value) - 1;
+				
+				funding_pay_reword${reward.rewardNo}.value = reword_val${reward.rewardNo};
+				funding_pay_price${reward.rewardNo}.value = reword_price${reward.rewardNo};
+				funding_pay_rewordEA${reward.rewardNo}.value = parseInt(funding_pay_rewordEA${reward.rewardNo}.value) + 1;
+				
+				ul_list.appendChild(li1);
+				
+				var deletebtn1 = document.getElementById("FundingDetailRewardCartItem_button_delete1");
+					deletebtn1.addEventListener("click",function(){
+								
+						li1.remove();
+						funtotalprice = parseInt(funtotalprice) - parseInt(reword_price${reward.rewardNo});
+						funding_pay_total_price.value = parseInt(funding_pay_total_price.value) - parseInt(reword_price${reward.rewardNo});
+						totalprice.innerText = funtotalprice;
+						
+						funtotalnumber = parseInt(funtotalnumber) - 1;
+						funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) - 1;
+						totalnumber.innerText = funtotalnumber;
+						
+						funding_pay_reword${reward.rewardNo}.value = "";
+						funding_pay_price${reward.rewardNo}.value = "";
+						funding_pay_rewordEA${reward.rewardNo}.value =  parseInt(funding_pay_rewordEA${reward.rewardNo}.value) - 1;
+						
+						});
 				
 				});
+			
+		</c:forEach>
 
-			});
 		
 		cheer_btn1.addEventListener("click",function(){
 			ul_list.style.display = 'block';
@@ -535,7 +481,40 @@ window.onload = function()  {
 
 			});
 		
+		// 펀딩 참여하기 로그인, 리워드 선택 유무 검사
+		var join_btn =  document.getElementById("FundingDetailSummary_button_join"); 
 		
+		var sessionUserId = '${sessionScope.user.userId}';
+	
+		join_btn.addEventListener("click",function(){
+		
+		if(sessionUserId != ''){
+			console.log("sessionUserId : " + sessionUserId);
+			console.log("funtotalprice : " + funtotalprice);
+			
+			if(funtotalprice == 0 || funtotalnumber == 0){
+				alert("라워드를 선택해주세요!");
+				return;
+			}
+			
+		        document.querySelector('.modal_wrap').style.display ='block';
+		        document.querySelector('.black_bg').style.display ='block';
+		    function offClick() {
+		        document.querySelector('.modal_wrap').style.display ='none';
+		        document.querySelector('.black_bg').style.display ='none';
+		    }
+		    document.querySelector('#noagree').addEventListener('click', offClick);
+		} else if(sessionUserId == ''){
+			alert("로그인 후 참여가 가능합니다.");
+			return;
+		}
+	});
 </script>
+
+<script>
+
+
+</script>
+
 </body>
 </html>

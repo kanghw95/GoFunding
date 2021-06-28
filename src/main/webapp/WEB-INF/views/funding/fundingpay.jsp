@@ -199,7 +199,7 @@
 						</div>
 					</div>
 				</section>
-				<button type="button" class="FundingDetailApplicationContent_button_join__E6XFt" onclick="requestPay()">펀딩 참여하기</button>
+				<button type="button" id="FundingDetailApplicationContent_button_join__E6XFt" class="FundingDetailApplicationContent_button_join__E6XFt">펀딩 참여하기</button>
 			</div>
 		</div>
 	</div>
@@ -334,6 +334,23 @@
 		      }
 		    });
 	  }
+	
+	
+	
+	
+	// 펀딩 참여하기 체크리스트 검사
+	var join_btn =  document.getElementById("FundingDetailApplicationContent_button_join__E6XFt"); 
+
+	join_btn.addEventListener("click",function(){
+		for(var i = 1; i<4; i++){
+			var check_i = document.getElementById("agree_terms_"+i); 
+				if(check_i.checked != true){
+					alert("필수 약관에 동의해주세요!");
+					return;
+				}
+			}
+		requestPay()
+});
 	
 	</script>
 	
