@@ -37,12 +37,12 @@
 	</select>
 	
 	<!-- nickname 중복체크 -->
-	<select id="nickCheck" parameterType="string" resultType="User">
+	<select id="nickCheck" parameterType="string" resultType="int">
 		SELECT count(*) FROM USERS WHERE nickname = #{userNick}
 	</select>
 	
 	<!-- email 중복체크 -->
-	<select id="emailCheck" parameterType="string" resultType="User">
+	<select id="emailCheck" parameterType="string" resultType="int">
 		SELECT count(*) FROM USERS WHERE email = #{userEmail}
 	</select>
 	

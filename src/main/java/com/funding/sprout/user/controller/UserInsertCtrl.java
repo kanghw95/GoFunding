@@ -4,6 +4,7 @@ package com.funding.sprout.user.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.funding.sprout.HomeController;
 import com.funding.sprout.user.service.UserInsertService;
+import com.funding.sprout.user.service.UserSMSService;
 import com.funding.sprout.vo.User;
 
 import net.nurigo.java_sdk.Coolsms;
@@ -35,6 +37,9 @@ public class UserInsertCtrl {
 	
 	@Autowired
 	private UserInsertService userService;
+	
+	@Autowired
+	private UserSMSService smsService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -103,7 +108,8 @@ public class UserInsertCtrl {
 	public String nickCheck(@RequestParam("userNick") String nick) {
 		System.out.println("nickCheck 컨트롤러");
 		// 닉네임 중복 체크
-		int result = userService.idCheck(nick);
+		System.out.println("nick : " + nick);
+		int result = userService.nickCheck(nick);
 		String nickCheck;
 		
 		if(result > 0) {
@@ -124,7 +130,8 @@ public class UserInsertCtrl {
 	public String emailCheck(@RequestParam("userEmail") String email) {
 		System.out.println("emailCheck 컨트롤러");
 		// 이메일 중복 체크
-		int result = userService.idCheck(email);
+		System.out.println("email: " + email);
+		int result = userService.emailCheck(email);
 		String emailCheck;
 		
 		if(result > 0) {
@@ -139,6 +146,24 @@ public class UserInsertCtrl {
 		return emailCheck;
 		
 	}
+	
+    @ResponseBody
+    @RequestMapping(value = "/sendSMS", method = RequestMethod.POST, produces = "application/text; charset=utf-8")
+    public String sendSMS(String phoneNumber) {
+
+        Random rand  = new Random();
+        String numStr = "";
+        for(int i=0; i<4; i++) {
+            String ran = Integer.toString(rand.nextInt(10));
+            numStr+=ran;
+        }
+
+        System.out.println("수신자 번호 : " + phoneNumber);
+        System.out.println("인증번호 : " + numStr);
+        smsService.certifiedPhoneNumber(phoneNumber,numStr);
+        return numStr;
+    }
+	
 	
 
 	@RequestMapping(value = "modifyUser", method = RequestMethod.GET)  

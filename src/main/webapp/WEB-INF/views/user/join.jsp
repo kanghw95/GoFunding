@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <link href="<%=request.getContextPath() %>/resources/css/userdetail_join/join.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -66,7 +67,6 @@ $(document).ready(function () {
 	var isPassId = false;
 	var isPassName = false;
 	var isPassPw = false;
-	var isPassPw2 = false;
 	var isPassEmail = false;
 	var isPassNickName = false;
 	var isPassAgree = false;
@@ -78,6 +78,8 @@ $(document).ready(function () {
 	var nickCheck = false;
 	var emailCheck = false;
 	var pwCheck = false;
+	
+	var certifyPhoneNumber = false;
 	
 	// 아이디 중복검사
 	var checkId = function(){
@@ -177,7 +179,7 @@ $(document).ready(function () {
 			$.ajax({
 				url: "emailCheck",
 				type: "POST",
-				data: {"userEmail":email},
+				data: {"userEmail" : email},
 				
 				dataType : "text",
 				success : function(data){
@@ -247,8 +249,8 @@ $(document).ready(function () {
 			$("#pwCheck").text("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다");
 			$("#pwCheck").css("color", "red");
 		}
-		else if(pwReg.test($("pw").val())){
-			console.log(pwReg.test($("pw").val()));
+		else if(pwReg.test(pw)){
+			console.log(pwReg.test(pw));
 			$("#pwCheck").text("사용 가능한 비밀번호입니다");
 			$("#pwCheck").css("color", "blue");
 			isPassPw = true;
@@ -328,13 +330,20 @@ $(document).ready(function () {
 	// 주소 하나로 합치기 
 	var mergeAddress = function(){
 		
-		$("#address").val( $("#sample6_postcode").val() + "," 
-				+ $("#sample6_address").val() + "," 
-				+ $("#sample6_detailAddress").val() + "," 
-				+ $("#sample6_extraAddress").val());
+		if($("#sample6_postcode").val() == ""){
+			isPassAddress = false;
+			console.log("isPassAddress:" + isPassAddress);
+		}else{
+			$("#address").val( $("#sample6_postcode").val() + "," 
+					+ $("#sample6_address").val() + "," 
+					+ $("#sample6_detailAddress").val() + "," 
+					+ $("#sample6_extraAddress").val());
+			
+			isPassAddress = true;	
+			console.log("isPassAddress:" + isPassAddress);	
+		}
 		
-		isPassAddress = true;	
-		console.log("isPassAddress:" + isPassAddress);
+		
 	}
 	
 	// 관심사 하나로 합치기
@@ -349,7 +358,7 @@ $(document).ready(function () {
 		selected.forEach((el) => {
 			fav += el.value + ",";
 		})
-		
+		 
 		console.log("fav : " + fav);
 
 		var result = fav.replace(/,$/, '');
@@ -369,28 +378,45 @@ $(document).ready(function () {
 		}
 	}
 
-
-	var joinClick = function(){
-		var frmData = $("#frmJoin").serialize(); 
+	// 휴대폰 번호 인증
+	$("#checkPhoneNumber").click(function(){
+		var phoneNumber = $("#phone").val();
+		Swal.fire("인증번호 발송 완료!");
 		
 		$.ajax({
-			url: "doJoin",
 			type: "POST",
-			data: frmData,
+			url: "sendSMS",
+			data: {"phoneNumber" : phoneNumber},
 			
 			success: function(data){
-				console.log(data);
-				console.log("회원가입 성공성공");
-				location.href="<%=request.getContextPath()%>/user/login";
-			},
-			error: function(data){
-				console.log(data);
-				console.log("ajax는 들어왔는데 실패쓰");
-			}
-			
+				console.log("성공!!");
+				console.log("success data:" + data);
+				$("#checkCerNumber").click(function(){
+					if($.trim(data) == $("#certification").val()){
+						Swal.fire(
+							'인증 성공!',
+							'휴대폰 인증이 정상적으로 완료되었습니다',
+							'success'
+						)
+						certifyPhoneNumber = true;
+						console.log("certifyPhoneNumber : " + certifyPhoneNumber );
+					}else{
+						Swal.fire({
+							icon: 'error',
+							title: '인증 오류',
+							text: '인증번호가 올바르지 않습니다'
+						})
+					}
+				})
+			} // 번호인증 버튼 success 끝
 		})
-	}
+		
+	}) // 번호인증 버튼 click 끝
 	
+	
+
+	
+	 
 	
 	$("#id").on("keyup", checkId);
 	$("#id").on("keyup", checkIdReg);
@@ -403,26 +429,50 @@ $(document).ready(function () {
 	$("#email").on("keyup", checkEmailReg);
 	$("#phone").on("keyup", checkPhoneReg);
 
+	$(".btnJoin").on("click", mergeAddress);
+	$(".btnJoin").on("click", mergeFav);
 
 	
-	/*if(isPassId && isPassName && isPassPw && isPassPw2 && isPassEmail && isPassNickName && isPassPhone && isPassAddress && isPassFav && idCheck && nickCheck
-			&& emailCheck && pwCheck){*/
-		$(".btnJoin").on("click", mergeAddress);
-		$(".btnJoin").on("click", mergeFav);
-		$(".btnJoin").on("click", joinClick);		
-	
-	
-	/*$(".btnJoin").on("click", function(){
-		console.log("클림됨");
-	})*/
-
 		
-		
+	$(".btnJoin").on("click", function(){
+			
+		if(isPassId && isPassName && isPassPw && isPassEmail && isPassNickName && isPassPhone && idCheck && nickCheck
+				&& emailCheck && pwCheck && certifyPhoneNumber){
+			console.log("id 유효성" + isPassId + "\n이름 유효성" + isPassName + "\n비번 유효성" + isPassPw + "\n이메일 유효성" + isPassEmail 
+					+ "\n닉네임 유효성" + isPassNickName + "\n핸드폰 유효성" + isPassPhone + "\n아이디 중복검사" + idCheck +"\n닉네임 중복검사"+ nickCheck
+					+"\n이메일 중복검사"+ emailCheck +"\n비번 일치"+ pwCheck +"\n핸드폰 인증"+ certifyPhoneNumber)
+			
+			
+			var frmData = $("#frmJoin").serialize(); 
+			
+			$.ajax({
+				url: "doJoin",
+				type: "POST",
+				data: frmData,
+				
+				success: function(data){
+					console.log(data);
+					console.log("회원가입 성공성공");
+					location.href="<%=request.getContextPath()%>/user/login";
+				},
+				error: function(data){
+					console.log(data);
+					console.log("ajax는 들어왔는데 실패쓰");
+				}
+				
+			})
+			
+		}else{
+			Swal.fire({
+				icon: 'error',
+				title: '회원가입 실패',
+				text: '데이터를 다시 입력해주세요'
+			})
+		}
+	});		
 
 	
-})//$function 끝	
-	
-	
+});
 		
 	
 </script>
@@ -475,8 +525,12 @@ $(document).ready(function () {
 			</div>
 			
 			<div class="frmGroup">
-				<input type="button" class="insideBtn" value="인증하기"><div id="phoneCheck"></div>
-				<input type="text" id="phone" name="userPhone" placeholder="전화번호를 입력해주세요">
+				
+				<div id="phoneCheck"></div>
+				<input type="text" id="phone" class="inputPhone" name="userPhone" placeholder="전화번호를 입력해주세요">
+				<input type="button" id="checkPhoneNumber" class="insideBtn" value="번호확인">
+				<input type="text" id="certification" class="inputPhone" name="certification" placeholder="인증번호를 입력해주세요">
+				<input type="button" id="checkCerNumber" class="insideBtn" value="인증하기">
 			</div>
 			
 			<div class="frmGroup">
