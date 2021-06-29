@@ -100,7 +100,7 @@
 					 <input type="submit" value="동의" id="agree" style=" border: 1px solid black;" >
 					 <c:forEach var="reward" items="${reward}">
 						 <input type="hidden" id="funding_pay_reword${reward.rewardNo}" name="funding_pay_reword" value="">
-						 <input type="hidden" id="funding_pay_reword_price${reward.rewardNo}" name="funding_pay_price" value="">
+						 <input type="hidden" id="funding_pay_reword_price${reward.rewardNo}" name="funding_pay_price" value="0">
 						 <input type="hidden" id="funding_pay_rewordEA${reward.rewardNo}" name="funding_pay_rewordEA" value="0">
 					</c:forEach>
 					 	
@@ -109,9 +109,9 @@
 					 <input type="hidden" id="deliverycharge" name="deliverycharge" value="${funding.deliverycharge}">
 					 <input type="hidden" id="funding_no" name="funding_no" value="${funding.fundingno}">
 					 
-					 <input type="hidden" id="cheer_pay" name="cheer_pay" value = "">
-					 <input type="hidden" id="cheer_pay_price" name="cheer_pay_price" value = "">
-					 <input type="hidden" id="cheer_pay_EA" name="cheer_pay_EA" value = "0">
+					 <input type="text" id="cheer_pay" name="cheer_pay" value = "">
+					 <input type="text" id="cheer_pay_price" name="cheer_pay_price" value = "">
+					 <input type="text" id="cheer_pay_EA" name="cheer_pay_EA" value = "0">
 					 
 					 </form>
 					</div>
@@ -364,9 +364,9 @@
 			}
 		});
 		
-		//리워드 리스트에서 선택하기 
+		//리워드  선택하기 
 		
-		 <c:forEach var="reward" items="${reward}">
+		<c:forEach var="reward" items="${reward}">
 			var reword_btn${reward.rewardNo} = document.getElementById("reword${reward.rewardNo}");
 			var reword_price${reward.rewardNo} = document.getElementById("rewardPrice${reward.rewardNo}").value;
 			var reword_val${reward.rewardNo} = document.getElementById("reword${reward.rewardNo}").innerText;
@@ -396,13 +396,14 @@
 		</c:forEach>
 		
 		<c:forEach var="reward" items="${reward}">
-
+		
 			reword_btn${reward.rewardNo}.addEventListener("click",function(){
+				
 				ul_list.style.display = 'block';
 				listbtn.setAttribute("aria-expanded","false");
 				list.style.display = 'none';
 				li${reward.rewardNo}.setAttribute('class','FundingDetailRewardCartItem_wrap');
-				li${reward.rewardNo}.innerHTML = "<strong class='FundingDetailRewardCartItem_name'>"+reword_val${reward.rewardNo}+"</strong> <div class='FundingDetailRewardCartItem_counter'> <input id='reward-cart-item-${reward.rewardNo}' type='number' class='FundingDetailRewardCartItem_input_count' value='1'> <label for='reward-cart-item-9' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus'> <span class='FundingDetailRewardCartItem_icon_plus'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount'><strong>"+reword_price${reward.rewardNo}+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete1' class='FundingDetailRewardCartItem_button_delete'> <span class='FundingDetailRewardCartItem_icon'></span> <span class='blind'>삭제</span></button>";
+				li${reward.rewardNo}.innerHTML = "<strong class='FundingDetailRewardCartItem_name'>"+reword_val${reward.rewardNo}+"</strong> <div class='FundingDetailRewardCartItem_counter'> <input onchange='change();' id='reward-cart-item-${reward.rewardNo}' type='number' class='FundingDetailRewardCartItem_input_count' value='1'> <label for='reward-cart-item-${reward.rewardNo}' class='blind'>개수</label> <button type='button' onclick='minus${reward.rewardNo}();' class='FundingDetailRewardCartItem_button_minus'> <span class='FundingDetailRewardCartItem_icon_minus_'></span> <span class='blind'>-</span> </button> <button type='button' onclick='plus${reward.rewardNo}();' class='FundingDetailRewardCartItem_button_plus'> <span class='FundingDetailRewardCartItem_icon_plus'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount'><strong id='reword_price_id${reward.rewardNo}'>"+reword_price${reward.rewardNo}+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete${reward.rewardNo}' class='FundingDetailRewardCartItem_button_delete'> <span class='FundingDetailRewardCartItem_icon'></span> <span class='blind'>삭제</span></button>";
 				
 				funtotalprice = parseInt(funtotalprice) + parseInt(reword_price${reward.rewardNo});
 				funding_pay_total_price.value = parseInt(funding_pay_total_price.value) + parseInt(reword_price${reward.rewardNo});
@@ -418,21 +419,25 @@
 				
 				ul_list.appendChild(li${reward.rewardNo});
 				
-				var deletebtn1 = document.getElementById("FundingDetailRewardCartItem_button_delete1");
-					deletebtn1.addEventListener("click",function(){
-								
-						li${reward.rewardNo}.remove();
-						funtotalprice = parseInt(funtotalprice) - parseInt(reword_price${reward.rewardNo});
-						funding_pay_total_price.value = parseInt(funding_pay_total_price.value) - parseInt(reword_price${reward.rewardNo});
-						totalprice.innerText = funtotalprice;
+				var deletebtn${reward.rewardNo} = document.getElementById("FundingDetailRewardCartItem_button_delete${reward.rewardNo}");
+					deletebtn${reward.rewardNo}.addEventListener("click",function(){
 						
-						funtotalnumber = parseInt(funtotalnumber) - 1;
-						funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) - 1;
+						var funding_EA${reward.rewardNo} = document.getElementById("reward-cart-item-${reward.rewardNo}");
+						
+						var reword_price_id${reward.rewardNo} = document.getElementById("reword_price_id${reward.rewardNo}");
+						var each_reword_price_id${reward.rewardNo} = reword_price_id${reward.rewardNo}.innerText;
+						
+						li${reward.rewardNo}.remove();
+						funtotalprice = parseInt(funtotalprice) - parseInt(each_reword_price_id${reward.rewardNo});
+						funding_pay_total_price.value = parseInt(funding_pay_total_price.value) - parseInt(each_reword_price_id${reward.rewardNo});
+						totalprice.innerText = funtotalprice;
+						funtotalnumber = parseInt(funtotalnumber) - parseInt(funding_EA${reward.rewardNo}.value);
+						funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) - parseInt(funding_EA${reward.rewardNo}.value);
 						totalnumber.innerText = funtotalnumber;
 						
 						funding_pay_reword${reward.rewardNo}.value = "";
-						funding_pay_price${reward.rewardNo}.value = "";
-						funding_pay_rewordEA${reward.rewardNo}.value =  parseInt(funding_pay_rewordEA${reward.rewardNo}.value) - 1;
+						funding_pay_price${reward.rewardNo}.value = "0";
+						funding_pay_rewordEA${reward.rewardNo}.value =  "0";
 						
 						});
 				
@@ -440,7 +445,7 @@
 			
 		</c:forEach>
 
-		
+		// 메이커 응원하기 버튼
 		var cheer_btn1 = document.getElementById("cheer1");
 		var cheer_val = document.getElementById("cheer1").innerText;
 		var cheer_EA = document.getElementById("cheerEA");
@@ -455,7 +460,7 @@
 			listbtn.setAttribute("aria-expanded","false");
 			list.style.display = 'none';
 			li99.setAttribute('class','FundingDetailRewardCartItem_wrap');
-			li99.innerHTML = "<strong class='FundingDetailRewardCartItem_name'>"+cheer_val+"</strong> <div class='FundingDetailRewardCartItem_counter'> <input id='reward-cart-item-cheer1' type='number' class='FundingDetailRewardCartItem_input_count' value='1'> <label for='cheer1' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus'> <span class='FundingDetailRewardCartItem_icon_plus'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount'><strong>"+cheer_price1.value+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete1' class='FundingDetailRewardCartItem_button_delete'> <span class='FundingDetailRewardCartItem_icon'></span> <span class='blind'>삭제</span></button>";
+			li99.innerHTML = "<strong class='FundingDetailRewardCartItem_name'>"+cheer_val+"</strong> <div class='FundingDetailRewardCartItem_counter'> <input id='reward-cart-item-cheer1' onchange='change();' type='number' class='FundingDetailRewardCartItem_input_count' value='1'> <label for='reward-cart-item-cheer1' class='blind'>개수</label> <button type='button' onclick='cheer_minus();' class='FundingDetailRewardCartItem_button_minus'> <span class='FundingDetailRewardCartItem_icon_minus_'></span> <span class='blind'>-</span> </button> <button type='button' onclick='cheer_plus();' class='FundingDetailRewardCartItem_button_plus'> <span class='FundingDetailRewardCartItem_icon_plus'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount'><strong id='cheer_price_id'>"+cheer_price1.value+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete_cheer1' class='FundingDetailRewardCartItem_button_delete'> <span class='FundingDetailRewardCartItem_icon'></span> <span class='blind'>삭제</span></button>";
 			
 			funtotalprice = parseInt(funtotalprice) + parseInt(cheer_price1.value);
 			funding_pay_total_price.value = parseInt(funding_pay_total_price.value) + parseInt(cheer_price1.value);
@@ -471,25 +476,175 @@
 			
 			ul_list.appendChild(li99);
 			
-			var deletebtn1 = document.getElementById("FundingDetailRewardCartItem_button_delete1");
-				deletebtn1.addEventListener("click",function(){
+			var delete_cheer = document.getElementById("FundingDetailRewardCartItem_button_delete_cheer1");
+				delete_cheer.addEventListener("click",function(){
 							
+					var funding_cheer_EA = document.getElementById("reward-cart-item-cheer1");
+					
+					var reword_price_cheer_id = document.getElementById("cheer_price_id");
+					var each_reword_price_cheer_id = reword_price_cheer_id.innerText;
+					
 					li99.remove();
-					funtotalprice = parseInt(funtotalprice) - parseInt(cheer_price1.value);
-					funding_pay_total_price.value = parseInt(funding_pay_total_price.value) - parseInt(cheer_price1.value);
+					funtotalprice = parseInt(funtotalprice) - parseInt(each_reword_price_cheer_id);
+					funding_pay_total_price.value = parseInt(funding_pay_total_price.value) - parseInt(each_reword_price_cheer_id);
 					totalprice.innerText = funtotalprice;
 					
-					funtotalnumber = parseInt(funtotalnumber) - 1;
-					funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) - 1;
+					funtotalnumber = parseInt(funtotalnumber) - parseInt(funding_cheer_EA.value);
+					funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) - parseInt(funding_cheer_EA.value);
 					totalnumber.innerText = funtotalnumber;
 					
 					cheer_pay.value = "";
-					cheer_pay_price.value = "";
-					cheer_pay_EA.value =  parseInt(cheer_pay_EA.value) - 1;
+					cheer_pay_price.value = "0";
+					cheer_pay_EA.value = "0";
 					
 					});
 			
 			});
+		
+		// 리워드 +- 버튼 동작
+		
+
+		<c:forEach var="reward" items="${reward}">
+			function plus${reward.rewardNo}() {
+				
+					var funding_EA${reward.rewardNo} = document.getElementById("reward-cart-item-${reward.rewardNo}");
+					
+					var reword_price_id${reward.rewardNo} = document.getElementById("reword_price_id${reward.rewardNo}");
+					var each_reword_price_id${reward.rewardNo} = reword_price_id${reward.rewardNo}.innerText;
+					
+					reword_price${reward.rewardNo};
+					funding_EA${reward.rewardNo}.value ++ ;
+					
+					each_reword_price_id${reward.rewardNo} = parseInt(each_reword_price_id${reward.rewardNo}) + parseInt(reword_price${reward.rewardNo});
+					reword_price_id${reward.rewardNo}.innerText = each_reword_price_id${reward.rewardNo};
+					
+					funtotalprice = parseInt(funtotalprice) + parseInt(reword_price${reward.rewardNo});
+					funding_pay_total_price.value = parseInt(funding_pay_total_price.value) + parseInt(reword_price${reward.rewardNo});
+					totalprice.innerText = funtotalprice;
+					
+					funtotalnumber = parseInt(funtotalnumber) +1;
+					funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) + 1;
+					totalnumber.innerText = funtotalnumber;
+					
+					funding_pay_reword${reward.rewardNo}.value = reword_val${reward.rewardNo};
+					funding_pay_price${reward.rewardNo}.value =  parseInt(funding_pay_price${reward.rewardNo}.value) +  parseInt(reword_price${reward.rewardNo});
+					funding_pay_rewordEA${reward.rewardNo}.value = parseInt(funding_pay_rewordEA${reward.rewardNo}.value) + 1;
+					
+			}
+			
+			
+		</c:forEach>
+			function cheer_plus() {
+				
+				var funding_cheer_EA = document.getElementById("reward-cart-item-cheer1");
+				
+				var reword_price_cheer_id = document.getElementById("cheer_price_id");
+				var each_reword_price_cheer_id = reword_price_cheer_id.innerText;
+				if(funding_cheer_EA.value < 5){
+				cheer_price1;
+				funding_cheer_EA.value++;
+				
+				each_reword_price_cheer_id = parseInt(each_reword_price_cheer_id) + parseInt(cheer_price1.value);
+				reword_price_cheer_id.innerText = each_reword_price_cheer_id;
+				
+				funtotalprice = parseInt(funtotalprice) + parseInt(cheer_price1.value);
+				funding_pay_total_price.value = parseInt(funding_pay_total_price.value) + parseInt(cheer_price1.value);
+				totalprice.innerText = funtotalprice;
+				
+				funtotalnumber = parseInt(funtotalnumber) +1;
+				funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) + 1;
+				totalnumber.innerText = funtotalnumber;
+				
+				cheer_pay.value = cheer_val;
+				cheer_pay_price.value = parseInt(cheer_pay_price.value) + parseInt(cheer_price1.value);
+				cheer_pay_EA.value = parseInt(cheer_pay_EA.value) + 1;
+				
+				}
+		}
+		
+		<c:forEach var="reward" items="${reward}">
+			function minus${reward.rewardNo}() {
+				
+				var funding_EA${reward.rewardNo} = document.getElementById("reward-cart-item-${reward.rewardNo}");
+				
+				var reword_price_id${reward.rewardNo} = document.getElementById("reword_price_id${reward.rewardNo}");
+				var each_reword_price_id${reward.rewardNo} = reword_price_id${reward.rewardNo}.innerText;
+				
+				if (funding_EA${reward.rewardNo}.value > 1) {
+					
+				reword_price${reward.rewardNo};
+				funding_EA${reward.rewardNo}.value -- ;
+				
+				each_reword_price_id${reward.rewardNo} = parseInt(each_reword_price_id${reward.rewardNo}) - parseInt(reword_price${reward.rewardNo});
+				reword_price_id${reward.rewardNo}.innerText = each_reword_price_id${reward.rewardNo}
+			
+				funtotalprice = parseInt(funtotalprice) - parseInt(reword_price${reward.rewardNo});
+				funding_pay_total_price.value = parseInt(funding_pay_total_price.value) - parseInt(reword_price${reward.rewardNo});
+				totalprice.innerText = funtotalprice;
+				
+				funtotalnumber = parseInt(funtotalnumber) - 1;
+				funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) - 1;
+				totalnumber.innerText = funtotalnumber;
+				
+				funding_pay_reword${reward.rewardNo}.value = reword_val${reward.rewardNo};
+				funding_pay_price${reward.rewardNo}.value = reword_price${reward.rewardNo};
+				funding_pay_rewordEA${reward.rewardNo}.value =  parseInt(funding_pay_rewordEA${reward.rewardNo}.value) - 1;
+				
+					}
+			}
+		</c:forEach>
+		
+		function cheer_minus() {
+			
+			var funding_cheer_EA = document.getElementById("reward-cart-item-cheer1");
+			
+			var reword_price_cheer_id = document.getElementById("cheer_price_id");
+			var each_reword_price_cheer_id = reword_price_cheer_id.innerText;
+			if(funding_cheer_EA.value > 1){
+			cheer_price1;
+			funding_cheer_EA.value--;
+			
+			each_reword_price_cheer_id = parseInt(each_reword_price_cheer_id) - parseInt(cheer_price1.value);
+			reword_price_cheer_id.innerText = each_reword_price_cheer_id;
+			
+			funtotalprice = parseInt(funtotalprice) - parseInt(cheer_price1.value);
+			funding_pay_total_price.value = parseInt(funding_pay_total_price.value) - parseInt(cheer_price1.value);
+			totalprice.innerText = funtotalprice;
+			
+			funtotalnumber = parseInt(funtotalnumber) - 1;
+			funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) - 1;
+			totalnumber.innerText = funtotalnumber;
+			
+			cheer_pay.value = cheer_val;
+			cheer_pay_price.value = parseInt(cheer_pay_price.value) - parseInt(cheer_price1.value);
+			cheer_pay_EA.value = parseInt(cheer_pay_EA.value) - 1;
+			
+			}
+	}
+
+		function change () {
+			hm = document.form.amount;
+			sum = document.form.sum;
+
+				if (hm.value < 0) {
+					hm.value = 0;
+				}
+			sum.value = parseInt(hm.value) * sell_price;
+		}  
+		
+		Number.prototype.formatNumber = function(){
+
+		    if(this==0) return 0;
+
+		    let regex = /(^[+-]?\d+)(\d)/;
+
+		    let nstr = (this + '');
+
+		    while (regex.test(nstr)) nstr = nstr.replace(regex, '$1' + ',' + '$2');
+
+		    return nstr;
+
+		};
 		
 		// 펀딩 참여하기 로그인, 리워드 선택 유무 검사
 		var join_btn =  document.getElementById("FundingDetailSummary_button_join"); 
@@ -519,12 +674,9 @@
 			return;
 		}
 	});
+		
+		
+		
 </script>
-
-<script>
-
-
-</script>
-
 </body>
 </html>

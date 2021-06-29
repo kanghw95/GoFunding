@@ -266,7 +266,7 @@
     vertical-align: top;
 }
 
-.FundingDetailRewardCartItem_icon_minus__1Jcwy {
+.FundingDetailRewardCartItem_icon_minus_ {
     display: inline-block;
     position: relative;
     width: 15px;
@@ -276,7 +276,7 @@
     vertical-align: top;
 }
 
-.FundingDetailRewardCartItem_icon_minus__1Jcwy:after {
+.FundingDetailRewardCartItem_icon_minus_:after {
     position: absolute;
     top: 50%;
     left: 0;
