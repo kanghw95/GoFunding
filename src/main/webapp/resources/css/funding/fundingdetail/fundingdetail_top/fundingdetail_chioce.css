@@ -77,7 +77,7 @@
     border-top: 1px solid rgba(0,0,0,.12);
 }
 
-.FundingDetailSummary_button__3drOk {
+.FundingDetailSummary_button {
     width: 100%;
     padding: 10px 11px 9px;
     text-align: left;
@@ -206,19 +206,19 @@
     content: "";
 }
 
-.FundingDetailSummary_list_cart__3t2SB {
+.FundingDetailSummary_list_cart {
 	display : none;
     margin-top: 20px;
     border: 1px solid #000;
     border-width: 1px 0;
 }
 
-.FundingDetailRewardCartItem_wrap__vdT7T {
+.FundingDetailRewardCartItem_wrap {
     position: relative;
     padding: 18px 0;
 }
 
-.FundingDetailRewardCartItem_name__1BPbo {
+.FundingDetailRewardCartItem_name {
     display: block;
     margin-right: 30px;
     font-size: 14px;
@@ -228,18 +228,18 @@
     word-break: break-all;
 }
 
-.FundingDetailRewardCartItem_counter__1jk_P {
+.FundingDetailRewardCartItem_counter {
     position: relative;
     width: 136px;
     margin-top: 10px;
 }
 
-.FundingDetailRewardCartItem_input_count__Em-cm {
+.FundingDetailRewardCartItem_input_count {
     width: 100%;
     padding: 2px 37px 0;
 }
 
-.FundingDetailRewardCartItem_input_amount__gWlf3, .FundingDetailRewardCartItem_input_count__Em-cm {
+.FundingDetailRewardCartItem_input_amount, .FundingDetailRewardCartItem_input_count {
     display: inline-block;
     height: 38px;
     background-color: #fff;
@@ -252,12 +252,12 @@
     vertical-align: top;
 }
 
-.FundingDetailRewardCartItem_button_minus__1zWpw {
+.FundingDetailRewardCartItem_button_minus {
     left: 0;
     border-right: 1px solid #e0e0e0;
 }
 
-.FundingDetailRewardCartItem_button_minus__1zWpw, .FundingDetailRewardCartItem_button_plus__13l8X {
+.FundingDetailRewardCartItem_button_minus, .FundingDetailRewardCartItem_button_plus {
     position: absolute;
     top: 0;
     width: 38px;
@@ -288,12 +288,12 @@
     content: "";
 }
 
-.FundingDetailRewardCartItem_button_plus__13l8X {
+.FundingDetailRewardCartItem_button_plus {
     right: 0;
     border-left: 1px solid #e0e0e0;
 }
 
-.FundingDetailRewardCartItem_icon_plus__3xFSP {
+.FundingDetailRewardCartItem_icon_plus {
     display: inline-block;
     position: relative;
     width: 15px;
@@ -303,7 +303,7 @@
     vertical-align: top;
 }
 
-.FundingDetailRewardCartItem_icon_plus__3xFSP:after, .FundingDetailRewardCartItem_icon_plus__3xFSP:before {
+.FundingDetailRewardCartItem_icon_plus:after, .FundingDetailRewardCartItem_icon_plus:before {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -315,19 +315,19 @@
     content: "";
 }
 
-.FundingDetailRewardCartItem_icon_plus__3xFSP:after {
+.FundingDetailRewardCartItem_icon_plus:after {
     -ms-transform: translate(-50%,-50%) rotate(90deg);
     transform: translate(-50%,-50%) rotate(90deg);
 }
 
-.FundingDetailRewardCartItem_amount__1WmUb {
+.FundingDetailRewardCartItem_amount {
     position: absolute;
     right: 0;
     bottom: 27px;
     font-size: 15px;
 }
 
-.FundingDetailRewardCartItem_button_delete__feY-l {
+.FundingDetailRewardCartItem_button_delete {
     position: absolute;
     top: 5px;
     right: -15px;
@@ -336,25 +336,25 @@
     line-height: 0;
 }
 
-.FundingDetailRewardCartItem_button_delete__feY-l .FundingDetailRewardCartItem_icon__3CScL {
+.FundingDetailRewardCartItem_button_delete .FundingDetailRewardCartItem_icon {
     position: relative;
     display: inline-block;
     width: 14px;
     height: 14px;
 }
 
-.FundingDetailRewardCartItem_button_delete__feY-l .FundingDetailRewardCartItem_icon__3CScL:before {
+.FundingDetailRewardCartItem_button_delete .FundingDetailRewardCartItem_icon:before {
     -ms-transform: translate(-50%,-50%) rotate(45deg);
     transform: translate(-50%,-50%) rotate(45deg);
 }
 
-.FundingDetailRewardCartItem_button_delete__feY-l .FundingDetailRewardCartItem_icon__3CScL:after {
+.FundingDetailRewardCartItem_button_delete .FundingDetailRewardCartItem_icon:after {
     -ms-transform: translate(-50%,-50%) rotate(135deg);
     transform: translate(-50%,-50%) rotate(135deg);
 }
 
 
-.FundingDetailRewardCartItem_button_delete__feY-l .FundingDetailRewardCartItem_icon__3CScL:after, .FundingDetailRewardCartItem_button_delete__feY-l .FundingDetailRewardCartItem_icon__3CScL:before {
+.FundingDetailRewardCartItem_button_delete .FundingDetailRewardCartItem_icon:after, .FundingDetailRewardCartItem_button_delete .FundingDetailRewardCartItem_icon:before {
     content: "";
     position: absolute;
     top: 50%;

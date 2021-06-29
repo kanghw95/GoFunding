@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>결제 페이지</title>
 </head>
-<link href="<%=request.getContextPath() %>/resources/css/fundingpay/fundingpay.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/funding/fundingpay/fundingpay.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -17,184 +17,158 @@
 <body>
 	<div role="main" id="content" class="content">
 		<div>
-			<div class="FundingDetailApplicationContent_wrap__3lh7-">
-				<section
-					class="FundingDetailApplicationContent_section_title__6xAZn">
-					<a href="detail?no=${funding.fundingno}"><h2
-							class="FundingDetailApplicationContent_title__2BYvK">${funding.fundingtitle}</h2></a><span
-						class="FundingDetailApplicationContent_funder__1eTbL">${funding.maker}</span>
+			<div class="FundingDetailApplicationContent_wrap">
+				<section class="FundingDetailApplicationContent_section_title">
+					<a href="detail?no=${funding.fundingno}">
+						<h2 class="FundingDetailApplicationContent_title">${funding.fundingtitle}</h2>
+					</a>
+						<span class="FundingDetailApplicationContent_funder">${funding.maker}</span>
 				</section>
-				<section class="FundingDetailApplicationContent_section__gfh97">
-					<h3 class="FundingDetailApplicationContent_subtitle__mdStj">펀딩내역</h3>
-					<ul class="FundingDetailApplicationContent_list_order__20w1j">
-					<c:forEach var="reward" items="${reward}" varStatus="status">
-						<c:if test="${reward ne ''}">
-						<li class="FundingDetailApplicationContent_item__3hhAd">
-							<strong class="FundingDetailApplicationContent_name__28fMG">${reward}</strong>
-							<span class="FundingDetailApplicationContent_count__IZBVx">
-								<em class="FundingDetailApplicationContent_number__2kFus">${rewordEA[status.index]}</em>개</span>
-								<span class="FundingDetailApplicationContent_amount__aTe92">
-									<em class="FundingDetailApplicationContent_number__2kFus">${price[status.index]}</em>원</span>
-						</li>
-						</c:if>
-					</c:forEach>
-									<li class="FundingDetailApplicationContent_item_addition__EPV2y">
-										<strong class="FundingDetailApplicationContent_name__28fMG">배송비
-										<fmt:formatDate value="${funding.deliverydate}" type="DATE" var="deliverydate" pattern="yyyy년 MM월 dd일"/> 
-											<span class="FundingDetailApplicationContent_date__3KleL">${deliverydate} 발송 예정</span>
-										</strong>
-										<span class="FundingDetailApplicationContent_amount__aTe92">
-											<c:if test="${deliverycharge eq 0}">
-											<em class="FundingDetailApplicationContent_number__2kFus">무료</em></span>
-											</c:if>
-											<c:if test="${deliverycharge ne 0}">
-											<em class="FundingDetailApplicationContent_number__2kFus">배송비</em>${funding.deliverycharge}원</span>
-											</c:if>	
+				<section class="FundingDetailApplicationContent_section">
+					<h3 class="FundingDetailApplicationContent_subtitle">펀딩내역</h3>
+					<ul class="FundingDetailApplicationContent_list_order">
+						<c:forEach var="reward" items="${reward}" varStatus="status">
+							<c:if test="${reward ne ''}">
+								<li class="FundingDetailApplicationContent_item">
+									<strong class="FundingDetailApplicationContent_name">${reward}</strong>
+									<span class="FundingDetailApplicationContent_count">
+										<em class="FundingDetailApplicationContent_number">${rewordEA[status.index]}</em>개</span>
+										<span class="FundingDetailApplicationContent_amount">
+											<em class="FundingDetailApplicationContent_number">${price[status.index]}</em>원</span>
+								</li>
+							</c:if>
+
+						</c:forEach>
+							<c:if test="${cheer_pay ne ''}">
+								<li class="FundingDetailApplicationContent_item">
+									<strong class="FundingDetailApplicationContent_name">${cheer_pay}</strong>
+									<span class="FundingDetailApplicationContent_count">
+										<em class="FundingDetailApplicationContent_number">${cheer_pay_EA}</em>개</span>
+										<span class="FundingDetailApplicationContent_amount">
+											<em class="FundingDetailApplicationContent_number">${cheer_pay_price}</em>원</span>
+								</li>
+							</c:if>
+							<li class="FundingDetailApplicationContent_item_addition">
+								<strong class="FundingDetailApplicationContent_name">배송비
+								<fmt:formatDate value="${funding.deliverydate}" type="DATE" var="deliverydate" pattern="yyyy년 MM월 dd일"/> 
+									<span class="FundingDetailApplicationContent_date">${deliverydate} 발송 예정</span>
+								</strong>
+								<span class="FundingDetailApplicationContent_amount">
+									<c:if test="${deliverycharge eq 0}">
+										<em class="FundingDetailApplicationContent_number">무료</em></span>
+									</c:if>
+									<c:if test="${deliverycharge ne 0}">
+										<em class="FundingDetailApplicationContent_number"></em>${funding.deliverycharge}원</span>
+									</c:if>	
 										
-									</li>
+							</li>
 					</ul>
 					<fmt:parseDate value="${funding.fundingfin}" var="paymentday" pattern="yyyy-MM-dd HH:mm:ss"/> 
-					<div class="FundingDetailApplicationContent_total__1pwx-">
-						<strong class="FundingDetailApplicationContent_date__3KleL"><fmt:formatDate value="${paymentday}" pattern="yyyy년 MM월 dd일"/> 결제 예정</strong>
-						<strong class="FundingDetailApplicationContent_item__3hhAd">총<span class="FundingDetailApplicationContent_count__IZBVx"><span
-								class="FundingDetailApplicationContent_number__2kFus">${funding_pay_rewordEA}</span>개</span></strong><strong
-							class="FundingDetailApplicationContent_item__3hhAd">총<span
-							class="FundingDetailApplicationContent_amount__aTe92"><span
-								class="FundingDetailApplicationContent_number__2kFus">${funding_pay_price}</span>원</span></strong>
+					<div class="FundingDetailApplicationContent_total">
+						<strong class="FundingDetailApplicationContent_date"><fmt:formatDate value="${paymentday}" pattern="yyyy년 MM월 dd일"/> 결제 예정</strong>
+						<strong class="FundingDetailApplicationContent_item">총<span class="FundingDetailApplicationContent_count">
+							<span class="FundingDetailApplicationContent_number">${funding_pay_rewordEA}</span>개</span>
+						</strong>
+						<strong class="FundingDetailApplicationContent_item">총<span class="FundingDetailApplicationContent_amount">
+							<span class="FundingDetailApplicationContent_number">${funding_pay_price+funding.deliverycharge}</span>원</span>
+						</strong>
 					</div>
 				</section>
-				<section class="FundingDetailApplicationContent_section__gfh97">
-					<h3 class="FundingDetailApplicationContent_subtitle__mdStj">배송지 정보</h3>
-					<div class="FundingDetailApplicationContent_address__rKPWo">
-						<div class="FundingDetailApplicationContent_radio__GXncM">
-							<input type="radio" name="address" id="wa_default_address"
-								aria-controls="wa_default_address_box"
-								class="FundingDetailApplicationContent_input_type__2gqMr"
-								value="PRIMARY_SHIPPING" checked=""><label
-								for="wa_default_address"
-								class="FundingDetailApplicationContent_label_type__1LZJ6">기본배송지</label>
-							<button type="button"
-								class="FundingDetailApplicationContent_button_list__7AlKd">배송지
-								목록</button>
-							<input type="radio" name="address" id="wa_new_address"
-								class="FundingDetailApplicationContent_input_type__2gqMr"
-								value="DIRECT_INPUT"><label for="wa_new_address"
-								class="FundingDetailApplicationContent_label_type__1LZJ6">직접입력</label>
+				<section class="FundingDetailApplicationContent_section">
+					<h3 class="FundingDetailApplicationContent_subtitle">배송지 정보</h3>
+					<div class="FundingDetailApplicationContent_address">
+						<div class="FundingDetailApplicationContent_radio">
+							<input type="radio" name="address" id="wa_default_address" aria-controls="wa_default_address_box" class="FundingDetailApplicationContent_input_type" value="PRIMARY_SHIPPING" checked="">
+								<label for="wa_default_address"ㅠ class="FundingDetailApplicationContent_label_type">기본배송지</label>
+							<button type="button" class="FundingDetailApplicationContent_button_list">배송지 목록</button>
+							<input type="radio" name="address" id="wa_new_address" class="FundingDetailApplicationContent_input_type" value="DIRECT_INPUT">
+								<label for="wa_new_address" class="FundingDetailApplicationContent_label_type">직접입력</label>
 						</div>
-						<dl class="FundingDetailApplicationContent_list_basic__F5tPH" id="wa_default_address_box" aria-hidden="false"
+						<dl class="FundingDetailApplicationContent_list_basic" id="wa_default_address_box" aria-hidden="false"
 							aria-labelledby="wa_default_address">
-							<div class="FundingDetailApplicationContent_item__3hhAd">
-								<dt class="FundingDetailApplicationContent_title__2BYvK">이름</dt>
-								<dd class="FundingDetailApplicationContent_description__2wk3i">${sessionScope.user.userName}</dd>
+							<div class="FundingDetailApplicationContent_item">
+								<dt class="FundingDetailApplicationContent_title">이름</dt>
+								<dd class="FundingDetailApplicationContent_description">${sessionScope.user.userName}</dd>
 							</div>
-							<div class="FundingDetailApplicationContent_item__3hhAd">
-								<dt class="FundingDetailApplicationContent_title__2BYvK">연락처</dt>
-								<dd class="FundingDetailApplicationContent_description__2wk3i">${sessionScope.user.userPhone}</dd>
+							<div class="FundingDetailApplicationContent_item">
+								<dt class="FundingDetailApplicationContent_title">연락처</dt>
+								<dd class="FundingDetailApplicationContent_description">${sessionScope.user.userPhone}</dd>
 							</div>
-							<div class="FundingDetailApplicationContent_item__3hhAd">
-								<dt class="FundingDetailApplicationContent_title__2BYvK">주소</dt>
-								<dd class="FundingDetailApplicationContent_description__2wk3i">${sessionScope.user.userAddress}</dd>
+							<div class="FundingDetailApplicationContent_item">
+								<dt class="FundingDetailApplicationContent_title">주소</dt>
+								<dd class="FundingDetailApplicationContent_description">${sessionScope.user.userAddress}</dd>
 							</div>
 						</dl>
-						<div class="FundingDetailApplicationContent_list_input__DNaub"
-							id="wa_new_address_box" aria-hidden="true"
-							aria-labelledby="wa_new_address">
-							<div class="FundingDetailApplicationContent_item__3hhAd">
-								<label for="input_name"
-									class="FundingDetailApplicationContent_label__3WPCE">이름</label><input
-									type="text" id="input_name"
-									class="FundingDetailApplicationContent_input_text__1vbSp">
+						<div class="FundingDetailApplicationContent_list_input" id="wa_new_address_box" aria-hidden="true" aria-labelledby="wa_new_address">
+							<div class="FundingDetailApplicationContent_item">
+								<label for="input_name" class="FundingDetailApplicationContent_label">이름</label>
+									<input type="text" id="input_name" class="FundingDetailApplicationContent_input_text">
 							</div>
-							<div class="FundingDetailApplicationContent_item__3hhAd">
-								<label for="input_tel_head"
-									class="FundingDetailApplicationContent_label__3WPCE">연락처</label>
-									<input type="text" id="input_tel_head" class="FundingDetailApplicationContent_input_text__1vbSp" value="">
+							<div class="FundingDetailApplicationContent_item">
+								<label for="input_tel_head" class="FundingDetailApplicationContent_label">연락처</label>
+									<input type="text" id="input_tel_head" class="FundingDetailApplicationContent_input_text" value="">
 							</div>
-							<div class="FundingDetailApplicationContent_item__3hhAd">
+							<div class="FundingDetailApplicationContent_item">
 								<label for="input_zipcode"
-									class="FundingDetailApplicationContent_label__3WPCE">주소</label>
-								<div class="FundingDetailApplicationContent_zipcode__2Jdu9">
-									<input type="zipcode" id="input_zipcode"
-										class="FundingDetailApplicationContent_input_zipcode__3rEpT"
-										readonly="" value="">
+									class="FundingDetailApplicationContent_label">주소</label>
+								<div class="FundingDetailApplicationContent_zipcode">
+									<input type="zipcode" id="input_zipcode" class="FundingDetailApplicationContent_input_zipcode" readonly="" value="">
 									<button type="button" onclick="sample6_execDaumPostcode()" class="FundingDetailApplicationContent_button_zipcode__1rDcO">주소검색</button>
 								</div>
-								<input type="text" id="input_address1"
-									class="FundingDetailApplicationContent_input_address__IFygD"
-									readonly="" value=""><input
-									type="text" id="input_address2"
-									class="FundingDetailApplicationContent_input_address__IFygD"
-									placeholder="상세주소 입력" readonly="" value="">
-								<div class="FundingDetailApplicationContent_checkline__-E-HP">
+								<input type="text" id="input_address1" class="FundingDetailApplicationContent_input_address" readonly="" value="">
+								<input type="text" id="input_address2" class="FundingDetailApplicationContent_input_address" placeholder="상세주소 입력" value="">
+								<div class="FundingDetailApplicationContent_checkline">
 									<input type="checkbox" id="input_check" aria-hidden="false"
-										class="FundingDetailApplicationContent_input_checkline__2MGj1">
-										<label for="input_check" class="FundingDetailApplicationContent_label_checkline__1lw6z">
-											<span id="new_address_input" class="FundingDetailApplicationContent_icon__3inag"></span>
+										class="FundingDetailApplicationContent_input_checkline">
+										<label for="input_check" class="FundingDetailApplicationContent_label_checkline">
+											<span id="new_address_input" class="FundingDetailApplicationContent_icon"></span>
 											입력한 주소를 배송지 목록에 추가
 										</label>
 								</div>
 							</div>
 						</div>
-						<div
-							class="FundingDetailApplicationContent_item__3hhAd FundingDetailApplicationContent_message__3OJBc">
-							<label for="input_message"
-								class="FundingDetailApplicationContent_label__3WPCE">배송
-								메시지</label>
-							<textarea id="input_message"
-								class="FundingDetailApplicationContent_textarea__1bwF3"></textarea>
+						<div class="FundingDetailApplicationContent_item FundingDetailApplicationContent_message">
+							<label for="input_message" class="FundingDetailApplicationContent_label">배송 메시지</label>
+							<textarea id="input_message" class="FundingDetailApplicationContent_textarea"></textarea>
 						</div>
 					</div>
 				</section>
-				<p class="FundingDetailApplicationContent_guide__3vpdM">* 결제/배송
-					알림은 펀딩 신청자의 네이버 아이디로 발송됩니다. 배송관련 SMS는 배송지에 입력한 전화번호로 발송됩니다.</p>
-				<section class="FundingDetailApplicationContent_section__gfh97">
-					<h3 class="FundingDetailApplicationContent_subtitle__mdStj">약관
-						동의</h3>
-					<div class="FundingDetailApplicationContent_terms__2Jx3e">
-						<div class="FundingDetailApplicationContent_bundle__3ztI-">
-							<div
-								class="FundingDetailApplicationContent_checkbox__1z5rX undefined">
-								<input id="agree_terms_all" type="checkbox" aria-hidden="false" name="all_agree"
-									class="FundingDetailApplicationContent_input__1Q10H"><label
-									for="agree_terms_all"
-									class="FundingDetailApplicationContent_label__3WPCE"><span  id="agree_span0"
-									class="FundingDetailApplicationContent_icon__3inag"></span>약관 및
-									개인정보 관련 사항(선택 동의 포함)에 모두 동의합니다.</label>
+				<p class="FundingDetailApplicationContent_guide">* 결제/배송 메일은 펀딩 신청자의 메일로 발송됩니다. 배송관련 SMS는 배송지에 입력한 전화번호로 발송됩니다.</p>
+				<section class="FundingDetailApplicationContent_section">
+					<h3 class="FundingDetailApplicationContent_subtitle">약관 동의</h3>
+					<div class="FundingDetailApplicationContent_terms">
+						<div class="FundingDetailApplicationContent_bundle">
+							<div class="FundingDetailApplicationContent_checkbox undefined">
+								<input id="agree_terms_all" type="checkbox" aria-hidden="false" name="all_agree" class="FundingDetailApplicationContent_input">
+									<label for="agree_terms_all" class="FundingDetailApplicationContent_label">
+									<span  id="agree_span0" class="FundingDetailApplicationContent_icon"></span>
+									약관 및 개인정보 관련 사항(선택 동의 포함)에 모두 동의합니다.
+									</label>
 							</div>
 						</div>
 						<div class="FundingDetailApplicationContent_group__292es">
-							<div class="FundingDetailApplicationContent_checkbox__1z5rX">
-								<input name="agree" id="agree_terms_1" type="checkbox" class="FundingDetailApplicationContent_input__1Q10H" onclick="checkSelectAll(); checkColorChange(1);">
-									<label for="agree_terms_1" class="FundingDetailApplicationContent_label__3WPCE">
-										<span id="agree_span1" class="FundingDetailApplicationContent_icon__3inag"></span>(필수) 개인정보의 수집 및 이용에 동의합니다.
-									</label>
-									<a href="#" class="FundingDetailApplicationContent_link__2JXht">자세히 보기</a>
+							<div class="FundingDetailApplicationContent_checkbox">
+								<input name="agree" id="agree_terms_1" type="checkbox" class="FundingDetailApplicationContent_input" onclick="checkSelectAll(); checkColorChange(1);">
+									<label for="agree_terms_1" class="FundingDetailApplicationContent_label">
+										<span id="agree_span1" class="FundingDetailApplicationContent_icon"></span>(필수) 개인정보의 수집 및 이용에 동의합니다. </label>
+									<a href="#" class="FundingDetailApplicationContent_link">자세히 보기</a>
 							</div>
-							<div class="FundingDetailApplicationContent_checkbox__1z5rX">
-								<input id="agree_terms_2" type="checkbox" name="agree" onclick="checkSelectAll(); checkColorChange(2); "
-									class="FundingDetailApplicationContent_input__1Q10H"><label
-									for="agree_terms_2"
-									class="FundingDetailApplicationContent_label__3WPCE"><span id="agree_span2"
-									class="FundingDetailApplicationContent_icon__3inag"></span>(필수)
-									개인정보의 제3자 제공에 동의합니다.</label><a href="#"
-									class="FundingDetailApplicationContent_link__2JXht">자세히 보기</a>
+							<div class="FundingDetailApplicationContent_checkbox">
+								<input id="agree_terms_2" type="checkbox" name="agree" onclick="checkSelectAll(); checkColorChange(2); " class="FundingDetailApplicationContent_input">
+									<label for="agree_terms_2" class="FundingDetailApplicationContent_label">
+										<span id="agree_span2" class="FundingDetailApplicationContent_icon"></span>(필수) 개인정보의 제3자 제공에 동의합니다.</label>
+									<a href="#" class="FundingDetailApplicationContent_link">자세히 보기</a>
 							</div>
-							<div class="FundingDetailApplicationContent_checkbox__1z5rX">
-								<input id="agree_terms_3" type="checkbox" name="agree" onclick="checkSelectAll(); checkColorChange(3);"
-									class="FundingDetailApplicationContent_input__1Q10H"><label
-									for="agree_terms_3"
-									class="FundingDetailApplicationContent_label__3WPCE"><span id="agree_span3"
-									class="FundingDetailApplicationContent_icon__3inag"></span>(필수)
-									‘해피빈 펀딩 약관’에 동의합니다.</label><a href="#"
-									class="FundingDetailApplicationContent_link__2JXht">자세히 보기</a>
+							<div class="FundingDetailApplicationContent_checkbox">
+								<input id="agree_terms_3" type="checkbox" name="agree" onclick="checkSelectAll(); checkColorChange(3);" class="FundingDetailApplicationContent_input">
+									<label for="agree_terms_3" class="FundingDetailApplicationContent_label">
+										<span id="agree_span3" class="FundingDetailApplicationContent_icon"></span>(필수) ‘새싹나눔 펀딩 약관’에 동의합니다.</label>
+									<a href="#" class="FundingDetailApplicationContent_link">자세히 보기</a>
 							</div>
-							<div class="FundingDetailApplicationContent_checkbox__1z5rX">
-								<input id="agree_terms_4" type="checkbox" name="agree" onclick="checkSelectAll(); checkColorChange(4);"
-									class="FundingDetailApplicationContent_input__1Q10H"><label
-									for="agree_terms_4"
-									class="FundingDetailApplicationContent_label__3WPCE"><span id="agree_span4"
-									class="FundingDetailApplicationContent_icon__3inag"></span>(선택)
-									해피빈 마케팅 알림 수신에 동의합니다.</label>
+							<div class="FundingDetailApplicationContent_checkbox">
+								<input id="agree_terms_4" type="checkbox" name="agree" onclick="checkSelectAll(); checkColorChange(4);" class="FundingDetailApplicationContent_input">
+									<label for="agree_terms_4" class="FundingDetailApplicationContent_label">
+										<span id="agree_span4" class="FundingDetailApplicationContent_icon"></span>(선택) 새싹나눔 마케팅 알림 수신에 동의합니다.</label>
 							</div>
 						</div>
 					</div>
@@ -249,13 +223,13 @@
 		if(agree_terms_all.getAttribute("aria-hidden") == "false"){
 			agree_terms_all.setAttribute("aria-hidden","true");
 			$("input:checkbox[name='agree']").prop("checked",true);
-			$(".FundingDetailApplicationContent_icon__3inag").css(
+			$(".FundingDetailApplicationContent_icon").css(
 					{'background-color' : '#1f9eff'});
 
 		}else{
 			agree_terms_all.setAttribute("aria-hidden","false");
 			 $("input:checkbox[name='agree']").prop("checked",false);
-			 $(".FundingDetailApplicationContent_icon__3inag").css(
+			 $(".FundingDetailApplicationContent_icon").css(
 						{'background-color' : ''});
 		}
 	});
@@ -307,7 +281,7 @@
 	    IMP.request_pay({ // param
 	        pg: "html5_inicis",
 	        pay_method: "card",
-	        merchant_uid: "ORD20180131-0000012",
+	        merchant_uid: "ORD20180131-0000012", //new Date().getTime(), 추가예정
 	        name: "${reward[0]}",
 	        amount: "${funding_pay_price}",
 	        buyer_email: "gildong@gmail.com",
@@ -318,7 +292,7 @@
 	    }, function (rsp) { // callback
 		    if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
 		        // jQuery로 HTTP 요청
-		        jQuery.ajax({
+		        	jQuery.ajax({
 		            url: "https://www.myservice.com/payments/complete", // 가맹점 서버
 		            method: "POST",
 		            headers: { "Content-Type": "application/json" },
@@ -326,16 +300,29 @@
 		                imp_uid: rsp.imp_uid,
 		                merchant_uid: rsp.merchant_uid
 		            }
-		        }).done(function (data) {
-		          // 가맹점 서버 결제 API 성공시 로직
-		        })
-		      } else {
-		        alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-		      }
-		    });
+		        }).done(function(data) {
+		            //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+		            if ( everythings_fine ) {
+		             var msg = '결제가 완료되었습니다.';
+		             msg += '\n고유ID : ' + rsp.imp_uid;
+		             msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+		             msg += '\결제 금액 : ' + rsp.paid_amount;
+		             msg += '카드 승인번호 : ' + rsp.apply_num;
+
+		             alert(msg);
+		            } else {
+		             //[3] 아직 제대로 결제가 되지 않았습니다.
+		             //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+		            }
+		           });
+		          } else {
+		              var msg = '결제에 실패하였습니다.';
+		              msg += '에러내용 : ' + rsp.error_msg;
+
+		              alert(msg);
+		          }
+		      });
 	  }
-	
-	
 	
 	
 	// 펀딩 참여하기 체크리스트 검사
@@ -371,28 +358,23 @@ function sample6_execDaumPostcode() {
 					}
 
 					if (data.userSelectedType === 'R') {
-						if (data.bname !== ''
-								&& /[동|로|가]$/g.test(data.bname)) {
+						if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
 							extraAddr += data.bname;
 						}
-						if (data.buildingName !== ''
-								&& data.apartment === 'Y') {
-							extraAddr += (extraAddr !== '' ? ', '
-									+ data.buildingName : data.buildingName);
+						if (data.buildingName !== '' && data.apartment === 'Y') {
+							extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
 						}
 						if (extraAddr !== '') {
 							extraAddr = ' (' + extraAddr + ')';
+							document.getElementById("input_address1").value = addr;
+							document.getElementById("input_address1").value += extraAddr
 						}
-						document.getElementById("sample6_extraAddress").value = extraAddr;
 
 					} else {
-						document.getElementById("sample6_extraAddress").value = '';
+						document.getElementById("input_address2").value = '';
 					}
-
-					document.getElementById('sample6_postcode').value = data.zonecode;
-					document.getElementById("sample6_address").value = addr;
-					document.getElementById("sample6_detailAddress")
-							.focus();
+					document.getElementById('input_zipcode').value = data.zonecode;
+					document.getElementById("input_address2").focus();
 				}
 			}).open();
 }

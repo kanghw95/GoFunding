@@ -8,13 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>상세페이지</title>
-<link href="<%=request.getContextPath() %>/resources/css/fundingdetail_top/fundingdetail_cover.css" rel="stylesheet" type="text/css" />
-<link href="<%=request.getContextPath() %>/resources/css/fundingdetail_top/fundingdetail_sumary.css" rel="stylesheet" type="text/css" />
-<link href="<%=request.getContextPath() %>/resources/css/fundingdetail_top/fundingdetail_profile.css" rel="stylesheet" type="text/css" />
-<link href="<%=request.getContextPath() %>/resources/css/fundingdetail_top/fundingdetail_chioce.css" rel="stylesheet" type="text/css" />
-<link href="<%=request.getContextPath() %>/resources/css/fundingdetail_tap.css" rel="stylesheet" type="text/css" />
-<link href="<%=request.getContextPath() %>/resources/css/fundingdetail_content.css" rel="stylesheet" type="text/css" />
-<link href="<%=request.getContextPath() %>/resources/css/fundingdetail_reword.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_top/fundingdetail_cover.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_top/fundingdetail_sumary.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_top/fundingdetail_profile.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_top/fundingdetail_chioce.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_tap.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_content.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_reword.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style type="text/css">
 
@@ -25,7 +25,6 @@
    top: 10px;
    right: 10px;
    z-index: 10;
-   font-family: '서울남산 장체 L', sans-serif;
    font-size: 12px;
    text-align: center;
    background: white;
@@ -41,7 +40,6 @@
    right: 70px;	
    z-index: 10;
    height : 54px;
-   font-family: '서울남산 장체 L', sans-serif;
    font-size: 12px;
    font-weight : bolder;
    text-align: center;
@@ -77,20 +75,6 @@
         left: 0;
         z-index: 1;
     }
-    .modal_close{
-        width: 26px;
-        height: 26px;
-        position: absolute;
-        top: -35px;
-        right: 0;
-    }
-    .modal_close> a{
-        display: block;
-        width: 100%;
-        height: 100%;
-        background:url(https://img.icons8.com/metro/26/000000/close-window.png);
-        text-indent: -9999px;
-    }
 </style>
 
 </head>
@@ -98,7 +82,6 @@
 
 <body>
 	<fmt:parseDate value="${funding.fundingfin}" var="paymentday" pattern="yyyy-MM-dd HH:mm:ss"/> 
-
 	
 	<div class="wrap">
 		<div role="main" id="content" class="content">
@@ -125,6 +108,10 @@
 					 <input type="hidden" id="funding_pay_total_rewordEA" name="funding_pay_total_rewordEA" value="0">
 					 <input type="hidden" id="deliverycharge" name="deliverycharge" value="${funding.deliverycharge}">
 					 <input type="hidden" id="funding_no" name="funding_no" value="${funding.fundingno}">
+					 
+					 <input type="hidden" id="cheer_pay" name="cheer_pay" value = "">
+					 <input type="hidden" id="cheer_pay_price" name="cheer_pay_price" value = "">
+					 <input type="hidden" id="cheer_pay_EA" name="cheer_pay_EA" value = "0">
 					 
 					 </form>
 					</div>
@@ -163,10 +150,10 @@
 								<span class="FundingDetailSummary_current" style="width: 62%;"></span>
 							</div>
 							<span class="FundingDetailSummary_goal">
-							<span class="FundingDetailSummary_number">${funding.fundingprice}</span>원 목표
+								<span class="FundingDetailSummary_number">${funding.fundingprice}</span>원 목표
 							</span>
 							<span class="FundingDetailSummary_amount">
-							<strong class="FundingDetailSummary_number">0</strong>원
+								<strong class="FundingDetailSummary_number">0</strong>원
 							</span>
 						</div>
 					</div>
@@ -189,18 +176,20 @@
 								<ul id="FundingDetailSummary_list_reward__2O_UT" class="FundingDetailSummary_list_reward__2O_UT">
 									<c:forEach var="reward" items="${reward}">
 										<li class="FundingDetailSummary_item__uEGFt">
-											<button type="button" id="reword${reward.rewardNo}" class="FundingDetailSummary_button__3drOk">${reward.rewardTitle} &nbsp;</button>
+											<button type="button" id="reword${reward.rewardNo}" class="FundingDetailSummary_button">${reward.rewardTitle} &nbsp;</button>
 											<input type="hidden" id="rewardEA${reward.rewardNo}" value="${reward.rewardEA}">
 											<input type="hidden"  id="rewardPrice${reward.rewardNo}" value="${reward.rewardPrice}">
 										</li>
 									</c:forEach>
 									<li class="FundingDetailSummary_item__uEGFt">
-									<button type="button" id="cheer1" class="FundingDetailSummary_button__3drOk">(선택) 메이커에게 1,000원 더 응원하기</button>
+									<button type="button" id="cheer1" class="FundingDetailSummary_button">(선택) 메이커에게 1,000원 더 응원하기 </button>
+									<input type="hidden" id="cheerEA" value="1">
+									<input type="hidden" id="cheerPrice" value="1000">
 									</li>
 
 								</ul>
 							</div>
-							<ul id="FundingDetailSummary_list_cart__3t2SB" class="FundingDetailSummary_list_cart__3t2SB">
+							<ul id="FundingDetailSummary_list_cart" class="FundingDetailSummary_list_cart">
 
 							</ul>
 							<div class="FundingDetailSummary_total">
@@ -216,23 +205,16 @@
 							<div class="FundingDetailSummary_delivery">
 								<span class="FundingDetailSummary_name">배송비</span>
 								<c:if test="${funding.deliverycharge eq 0}">
-								<span class="FundingDetailSummary_amount">무료</span>
+									<span class="FundingDetailSummary_amount">무료</span>
 								</c:if>
 								<c:if test="${funding.deliverycharge ne 0}">
-								<span class="FundingDetailSummary_amount">${funding.deliverycharge}원</span>
+									<span class="FundingDetailSummary_amount">${funding.deliverycharge}원</span>
 								</c:if>	
 							</div>
 						</div>
 						<div class="FundingDetailSummary_button_area">
-							<button type="button" id="FundingDetailSummary_button_join"
-								class="FundingDetailSummary_button_join"
-								aria-expanded="false" aria-controls="wa_option"
-								aria-hidden="false">펀딩 참여하기</button>
-							<a href="#"
-								class="naver-splugin Social_wrap FundingDetailSummary_button_share"
-								role="button" aria-label="공유하기" aria-hidden="false"
-								data-style="unity-v2" data-blog-source-form="2"
-								splugin-id="9881009287">
+							<button type="button" id="FundingDetailSummary_button_join" class="FundingDetailSummary_button_join" aria-expanded="false" aria-controls="wa_option" aria-hidden="false">펀딩 참여하기</button>
+							<a href="#" class="naver-splugin Social_wrap FundingDetailSummary_button_share" role="button" aria-label="공유하기" aria-hidden="false" data-style="unity-v2" data-blog-source-form="2" splugin-id="9881009287">
 								<svg width="25" height="22" viewBox="0 0 25 22"> </svg>
 							</a>
 						</div>
@@ -241,28 +223,22 @@
 				<div class="FundingDetailTab_wrap">
 					<div class="FundingDetailTab_inner">
 						<ul role="tablist" class="FundingDetailTab_list">
-							<li class="FundingDetailTab_item" role="presentation"><a
-								role="tab" id="wa_story_tab" class="FundingDetailTab_tab"
-								aria-controls="wa_story_tabpanel" aria-current="true"
-								href="#">스토리</a></li>
-							<li class="FundingDetailTab_item" role="presentation"><a
-								role="tab" id="wa_reward_tab"
-								class="FundingDetailTab_tab"
-								aria-controls="wa_reward_tabpanel" aria-current="false"
-								href="#">리워드</a></li>
-							<li class="FundingDetailTab_item" role="presentation"><a
-								role="tab" id="wa_review_tab"
-								class="FundingDetailTab_tab"
-								aria-controls="wa_review_tabpanel" aria-current="false"
-								href="#">소식∙후기</a></li>
+							<li class="FundingDetailTab_item" role="presentation">
+								<a role="tab" id="wa_story_tab" class="FundingDetailTab_tab" aria-controls="wa_story_tabpanel" aria-current="true" href="#">스토리</a>
+							</li>
+							<li class="FundingDetailTab_item" role="presentation">
+								<a role="tab" id="wa_reward_tab" class="FundingDetailTab_tab" aria-controls="wa_reward_tabpanel" aria-current="false" href="#">리워드</a>
+							</li>
+							<li class="FundingDetailTab_item" role="presentation">
+								<a role="tab" id="wa_review_tab" class="FundingDetailTab_tab" aria-controls="wa_review_tabpanel" aria-current="false" href="#">소식∙후기</a>
+							</li>
 						</ul>
 					</div>
 				</div>
 
 				<div class="Alldetail">
 					<div class="FundingDetailStoryContent_wrap">
-						<div id="wa_story_tabpanel" class="FundingDetailStoryContent_wrap_content"
-							role="tabpanel" aria-labelledby="wa_story_tab">
+						<div id="wa_story_tabpanel" class="FundingDetailStoryContent_wrap_content" role="tabpanel" aria-labelledby="wa_story_tab">
 							<article class="FundingDetailStoryContent_article">
 								<h4 class="blind">스토리 본문</h4>
 								<div class="FundingDetailArticle_wrap">
@@ -276,8 +252,7 @@
 											alt="" width="" height=""
 											class="FundingDetailEditorSingleImage_image">
 									</div>
-									<div
-										class="FundingDetailEditorTitle_wrap FundingDetailEditorTitle_type_b">
+									<div class="FundingDetailEditorTitle_wrap FundingDetailEditorTitle_type_b">
 										<strong class="FundingDetailEditorTitle_text">펀딩 후원금 사용계획</strong>
 									</div>
 									<p class="FundingDetailEditorParagraph_content">
@@ -295,7 +270,6 @@
 									<strong class="FundingDetailStoryContent_subtitle__mm0mM"> 결제 및 발송 예정일</strong>
 									<ul class="FundingDetailStoryContent_list_date__1xfUX">
 										<li class="FundingDetailStoryContent_item">
-										<fmt:parseDate value="${funding.fundingfin}" var="paymentday" pattern="yyyy-MM-dd"/> 
 										<fmt:formatDate value="${funding.deliverydate}" type="DATE" var="deliverydate" pattern="yyyy년 MM월 dd일"/> 
 											<span class="FundingDetailStoryContent_text FundingDetailStoryContent_highlight">
 											1차 결제 : <fmt:formatDate value="${paymentday}" pattern="yyyy년 MM월 dd일"/>, 예상 발송일 : ${deliverydate}
@@ -316,9 +290,8 @@
 									총 명</strong>이 참여하였습니다.
 								</p>
 								<ul class="FundingDetailStoryParticipationList_wrap">
-									<li class="FundingDetailStoryParticipationList_item"><div
-											class="FundingDetailStoryParticipationList_thumbnail"
-											style="background-image: url(&quot;https://ssl.pstatic.net/happyimg2/img3/social/comment/img/default_profile.jpg&quot;);"></div>
+									<li class="FundingDetailStoryParticipationList_item">
+										<div class="FundingDetailStoryParticipationList_thumbnail" style="background-image: url(&quot;https://ssl.pstatic.net/happyimg2/img3/social/comment/img/default_profile.jpg&quot;);"></div>
 										<div class="FundingDetailStoryParticipationList_date">9999.99.99 00:00:00</div>
 										<div class="FundingDetailStoryParticipationList_user">
 											<span class="FundingDetailStoryParticipationList_name_">kang님</span>
@@ -398,11 +371,8 @@
 			var reword_price${reward.rewardNo} = document.getElementById("rewardPrice${reward.rewardNo}").value;
 			var reword_val${reward.rewardNo} = document.getElementById("reword${reward.rewardNo}").innerText;
 		</c:forEach>
-		
-		var cheer_btn1 = document.getElementById("cheer1");
-		var cheer_val1 = document.getElementById("cheer1").innerText;
-		
-		var ul_list = document.getElementById("FundingDetailSummary_list_cart__3t2SB"); //ul_list선언
+
+		var ul_list = document.getElementById("FundingDetailSummary_list_cart"); //ul_list선언
 		var fundingpay = document.getElementById("fundingpay"); //pay form선언
 		
 		var totalprice =  document.getElementById("FundingTotalPrice");
@@ -414,10 +384,10 @@
 		var funtotalprice = totalprice.innerText;
 		var funtotalnumber = totalnumber.innerText;
 		
-		var li1 = document.createElement("li");
-		var li2 = document.createElement("li");
-		var li3 = document.createElement("li");
+		var li99 = document.createElement("li");
+		
 		<c:forEach var="reward" items="${reward}">
+			var li${reward.rewardNo} = document.createElement("li");
 		 
 			var funding_pay_reword${reward.rewardNo} = document.getElementById("funding_pay_reword${reward.rewardNo}"); // 결제 페이지 리워드 이름 저장용
 			var funding_pay_price${reward.rewardNo} = document.getElementById("funding_pay_reword_price${reward.rewardNo}"); // 결제 페이지 리워드 가격 저장용
@@ -431,8 +401,8 @@
 				ul_list.style.display = 'block';
 				listbtn.setAttribute("aria-expanded","false");
 				list.style.display = 'none';
-				li1.setAttribute('class','FundingDetailRewardCartItem_wrap__vdT7T');
-				li1.innerHTML = "<strong class='FundingDetailRewardCartItem_name__1BPbo'>"+reword_val${reward.rewardNo}+"</strong> <div class='FundingDetailRewardCartItem_counter__1jk_P'> <input id='reward-cart-item-9' type='number' class='FundingDetailRewardCartItem_input_count__Em-cm' value='1'> <label for='reward-cart-item-9' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus__1zWpw' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus__13l8X'> <span class='FundingDetailRewardCartItem_icon_plus__3xFSP'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount__1WmUb'><strong>"+reword_price${reward.rewardNo}+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete1' class='FundingDetailRewardCartItem_button_delete__feY-l'> <span class='FundingDetailRewardCartItem_icon__3CScL'></span> <span class='blind'>삭제</span></button>";
+				li${reward.rewardNo}.setAttribute('class','FundingDetailRewardCartItem_wrap');
+				li${reward.rewardNo}.innerHTML = "<strong class='FundingDetailRewardCartItem_name'>"+reword_val${reward.rewardNo}+"</strong> <div class='FundingDetailRewardCartItem_counter'> <input id='reward-cart-item-${reward.rewardNo}' type='number' class='FundingDetailRewardCartItem_input_count' value='1'> <label for='reward-cart-item-9' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus'> <span class='FundingDetailRewardCartItem_icon_plus'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount'><strong>"+reword_price${reward.rewardNo}+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete1' class='FundingDetailRewardCartItem_button_delete'> <span class='FundingDetailRewardCartItem_icon'></span> <span class='blind'>삭제</span></button>";
 				
 				funtotalprice = parseInt(funtotalprice) + parseInt(reword_price${reward.rewardNo});
 				funding_pay_total_price.value = parseInt(funding_pay_total_price.value) + parseInt(reword_price${reward.rewardNo});
@@ -446,12 +416,12 @@
 				funding_pay_price${reward.rewardNo}.value = reword_price${reward.rewardNo};
 				funding_pay_rewordEA${reward.rewardNo}.value = parseInt(funding_pay_rewordEA${reward.rewardNo}.value) + 1;
 				
-				ul_list.appendChild(li1);
+				ul_list.appendChild(li${reward.rewardNo});
 				
 				var deletebtn1 = document.getElementById("FundingDetailRewardCartItem_button_delete1");
 					deletebtn1.addEventListener("click",function(){
 								
-						li1.remove();
+						li${reward.rewardNo}.remove();
 						funtotalprice = parseInt(funtotalprice) - parseInt(reword_price${reward.rewardNo});
 						funding_pay_total_price.value = parseInt(funding_pay_total_price.value) - parseInt(reword_price${reward.rewardNo});
 						totalprice.innerText = funtotalprice;
@@ -471,14 +441,54 @@
 		</c:forEach>
 
 		
+		var cheer_btn1 = document.getElementById("cheer1");
+		var cheer_val = document.getElementById("cheer1").innerText;
+		var cheer_EA = document.getElementById("cheerEA");
+		var cheer_price1 = document.getElementById("cheerPrice");
+		
+		var cheer_pay = document.getElementById("cheer_pay");
+		var cheer_pay_EA = document.getElementById("cheer_pay_EA");
+		var cheer_pay_price = document.getElementById("cheer_pay_price");
+		
 		cheer_btn1.addEventListener("click",function(){
 			ul_list.style.display = 'block';
 			listbtn.setAttribute("aria-expanded","false");
 			list.style.display = 'none';
-			li3.setAttribute('class','FundingDetailRewardCartItem_wrap__vdT7T');
-			li3.appendChild(textNode3);
-			ul_list.appendChild(li3);
-
+			li99.setAttribute('class','FundingDetailRewardCartItem_wrap');
+			li99.innerHTML = "<strong class='FundingDetailRewardCartItem_name'>"+cheer_val+"</strong> <div class='FundingDetailRewardCartItem_counter'> <input id='reward-cart-item-cheer1' type='number' class='FundingDetailRewardCartItem_input_count' value='1'> <label for='cheer1' class='blind'>개수</label> <button type='button' class='FundingDetailRewardCartItem_button_minus' disabled=''> <span class='FundingDetailRewardCartItem_icon_minus__1Jcwy'></span> <span class='blind'>-</span> </button> <button type='button' class='FundingDetailRewardCartItem_button_plus'> <span class='FundingDetailRewardCartItem_icon_plus'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount'><strong>"+cheer_price1.value+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete1' class='FundingDetailRewardCartItem_button_delete'> <span class='FundingDetailRewardCartItem_icon'></span> <span class='blind'>삭제</span></button>";
+			
+			funtotalprice = parseInt(funtotalprice) + parseInt(cheer_price1.value);
+			funding_pay_total_price.value = parseInt(funding_pay_total_price.value) + parseInt(cheer_price1.value);
+			totalprice.innerText = funtotalprice;
+			
+			funtotalnumber = parseInt(funtotalnumber) + 1;
+			funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) + 1;
+			totalnumber.innerText = funtotalnumber;
+			
+			cheer_pay.value = cheer_val;
+			cheer_pay_price.value = cheer_price1.value;
+			cheer_pay_EA.value = parseInt(cheer_pay_EA.value) + 1;
+			
+			ul_list.appendChild(li99);
+			
+			var deletebtn1 = document.getElementById("FundingDetailRewardCartItem_button_delete1");
+				deletebtn1.addEventListener("click",function(){
+							
+					li99.remove();
+					funtotalprice = parseInt(funtotalprice) - parseInt(cheer_price1.value);
+					funding_pay_total_price.value = parseInt(funding_pay_total_price.value) - parseInt(cheer_price1.value);
+					totalprice.innerText = funtotalprice;
+					
+					funtotalnumber = parseInt(funtotalnumber) - 1;
+					funding_pay_total_rewordEA.value = parseInt(funding_pay_total_rewordEA.value) - 1;
+					totalnumber.innerText = funtotalnumber;
+					
+					cheer_pay.value = "";
+					cheer_pay_price.value = "";
+					cheer_pay_EA.value =  parseInt(cheer_pay_EA.value) - 1;
+					
+					});
+			
 			});
 		
 		// 펀딩 참여하기 로그인, 리워드 선택 유무 검사

@@ -37,7 +37,6 @@ public class FundingCtrl {
 		try {
 				searchlist = funService.searchList(serchOption, keyword);
 
-
 			System.out.println("검색된 펀딩 목록 : " + searchlist);
 			mv.addObject("fundinglist", searchlist);
 			mv.setViewName("funding/fundinglist");
@@ -97,6 +96,9 @@ public class FundingCtrl {
 			@RequestParam(name = "funding_pay_reword") String[] reword,
 			@RequestParam(name = "funding_pay_price") String[] price,
 			@RequestParam(name = "funding_pay_rewordEA") String[] rewordEA,
+			@RequestParam(name = "cheer_pay") String cheer_pay,
+			@RequestParam(name = "cheer_pay_price") int cheer_pay_price,
+			@RequestParam(name = "cheer_pay_EA") String cheer_pay_EA,
 			ModelAndView mv) {
 		try {
 			
@@ -112,6 +114,9 @@ public class FundingCtrl {
 			mv.addObject("reward", reword);
 			mv.addObject("price", price);
 			mv.addObject("rewordEA", rewordEA);
+			mv.addObject("cheer_pay", cheer_pay);
+			mv.addObject("cheer_pay_price", cheer_pay_price);
+			mv.addObject("cheer_pay_EA", cheer_pay_EA);
 			mv.setViewName("funding/fundingpay");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());

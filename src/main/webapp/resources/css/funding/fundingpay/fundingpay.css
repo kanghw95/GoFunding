@@ -4,19 +4,19 @@
     position: relative;
     z-index: 20;
 }
-.FundingDetailApplicationContent_wrap__3lh7- {
+.FundingDetailApplicationContent_wrap {
     width: 1140px;
     margin: 0 auto;
     padding: 0 40px 14px;
 }
 
-.FundingDetailApplicationContent_section_title__6xAZn {
+.FundingDetailApplicationContent_section_title {
     padding: 65px 0 40px;
     font-family: NanumSquareWebFont,dotum,Sans-serif;
     text-align: center;
 }
 
-.FundingDetailApplicationContent_section_title__6xAZn .FundingDetailApplicationContent_title__2BYvK {
+.FundingDetailApplicationContent_section_title .FundingDetailApplicationContent_title {
     font-size: 34px;
     line-height: 1.12;
     color: #000;
@@ -25,7 +25,7 @@
     word-break: keep-all;
 }
 
-.FundingDetailApplicationContent_section_title__6xAZn .FundingDetailApplicationContent_funder__1eTbL {
+.FundingDetailApplicationContent_section_title .FundingDetailApplicationContent_funder {
     display: block;
     margin-top: 16px;
     font-size: 17px;
@@ -33,38 +33,38 @@
     letter-spacing: -.3px;
 }
 
-.FundingDetailApplicationContent_section__gfh97 {
+.FundingDetailApplicationContent_section {
     margin: 30px auto 0;
     background-color: #fff;
     border: 1px solid rgba(0,0,0,.08);
 }
 
-.FundingDetailApplicationContent_subtitle__mdStj {
+.FundingDetailApplicationContent_subtitle {
     padding: 26px 39px 24px;
     border-bottom: 1px solid rgba(0,0,0,.08);
     font-family: NanumSquareWebFont,dotum,Sans-serif;
     font-size: 22px;
 }
 
-.FundingDetailApplicationContent_list_order__20w1j {
+.FundingDetailApplicationContent_list_order {
     padding: 41px 39px 38px;
 }
 
-.FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_item__3hhAd, .FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_item_addition__EPV2y {
+.FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_item, .FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_item_addition {
     line-height: 1.19;
     text-align: right;
 }
 
-.FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_item__3hhAd+.FundingDetailApplicationContent_item__3hhAd {
+.FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_item+.FundingDetailApplicationContent_item {
     margin-top: 15px;
 }
 
-.FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_count__IZBVx {
+.FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_count {
     font-size: 15px;
     color: #1f9eff;
 }
 
-.FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_number__2kFus {
+.FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_number {
     display: inline-block;
     margin: 0 1px 0 0;
     font-family: NanumSquareWebFont,dotum,Sans-serif;
@@ -74,7 +74,7 @@
     vertical-align: top;
 }
 
-.FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_count__IZBVx:after {
+.FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_count:after {
     display: inline-block;
     width: 1px;
     height: 15px;
@@ -84,11 +84,11 @@
     content: "";
 }
 
-.FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_amount__aTe92 {
+.FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_amount {
     font-size: 15px;
     color: #1f9eff;
 }
-.FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_number__2kFus {
+.FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_number {
     display: inline-block;
     margin: 0 1px 0 0;
     font-family: NanumSquareWebFont,dotum,Sans-serif;
@@ -98,21 +98,21 @@
     vertical-align: top;
 }
 
-.FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_item__3hhAd:after, .FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_item_addition__EPV2y:after {
+.FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_item:after, .FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_item_addition:after {
     display: table;
     table-layout: fixed;
     clear: both;
     content: "";
 }
 
-.FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_item_addition__EPV2y {
+.FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_item_addition {
     margin-top: 19px;
 }
-.FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_item_addition__EPV2y .FundingDetailApplicationContent_amount__aTe92, .FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_item_addition__EPV2y .FundingDetailApplicationContent_name__28fMG {
+.FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_item_addition .FundingDetailApplicationContent_amount, .FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_item_addition .FundingDetailApplicationContent_name {
     color: #828282;
 }
 
-.FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_name__28fMG {
+.FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_name {
     float: left;
     max-width: 770px;
     margin-top: -1px;
@@ -123,7 +123,7 @@
     text-align: left;
 }
 
-.FundingDetailApplicationContent_list_order__20w1j .FundingDetailApplicationContent_date__3KleL {
+.FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_date {
     display: inline-block;
     margin: 2px 0 0 11px;
     font-size: 14px;
@@ -131,14 +131,14 @@
     letter-spacing: -.2px;
     vertical-align: top;
 }
-.FundingDetailApplicationContent_total__1pwx- {
+.FundingDetailApplicationContent_total {
     margin: 0 39px;
     padding: 28px 0 19px;
     border-top: 1px solid rgba(0,0,0,.05);
     text-align: right;
 }
 
-.FundingDetailApplicationContent_total__1pwx- .FundingDetailApplicationContent_date__3KleL {
+.FundingDetailApplicationContent_total .FundingDetailApplicationContent_date {
     float: left;
     margin-top: -2px;
     font-size: 15px;
@@ -146,24 +146,24 @@
     letter-spacing: -.2px;
 }
 
-.FundingDetailApplicationContent_total__1pwx- .FundingDetailApplicationContent_item__3hhAd {
+.FundingDetailApplicationContent_total .FundingDetailApplicationContent_item {
     font-size: 17px;
 }
-.FundingDetailApplicationContent_total__1pwx- .FundingDetailApplicationContent_amount__aTe92, .FundingDetailApplicationContent_total__1pwx- .FundingDetailApplicationContent_count__IZBVx {
+.FundingDetailApplicationContent_total .FundingDetailApplicationContent_amount, .FundingDetailApplicationContent_total .FundingDetailApplicationContent_count {
     color: #1f9eff;
 }
 
-.FundingDetailApplicationContent_total__1pwx- .FundingDetailApplicationContent_count__IZBVx .FundingDetailApplicationContent_number__2kFus {
+.FundingDetailApplicationContent_total .FundingDetailApplicationContent_count .FundingDetailApplicationContent_number {
     margin: -4px 2px 0 8px;
     font-size: 22px;
     line-height: 1.14;
 }
 
-.FundingDetailApplicationContent_total__1pwx- .FundingDetailApplicationContent_item__3hhAd {
+.FundingDetailApplicationContent_total .FundingDetailApplicationContent_item {
     font-size: 17px;
 }
 
-.FundingDetailApplicationContent_total__1pwx- .FundingDetailApplicationContent_item__3hhAd+.FundingDetailApplicationContent_item__3hhAd:before {
+.FundingDetailApplicationContent_total .FundingDetailApplicationContent_item+.FundingDetailApplicationContent_item:before {
     display: inline-block;
     width: 1px;
     height: 19px;
@@ -173,11 +173,11 @@
     content: "";
 }
 
-.FundingDetailApplicationContent_total__1pwx- .FundingDetailApplicationContent_amount__aTe92, .FundingDetailApplicationContent_total__1pwx- .FundingDetailApplicationContent_count__IZBVx {
+.FundingDetailApplicationContent_total .FundingDetailApplicationContent_amount, .FundingDetailApplicationContent_total .FundingDetailApplicationContent_count {
     color: #1f9eff;
 }
 
-.FundingDetailApplicationContent_total__1pwx-:after {
+.FundingDetailApplicationContent_total:after {
     display: table;
     table-layout: fixed;
     clear: both;
@@ -187,11 +187,11 @@
 
 /*중간 */
 
-.FundingDetailApplicationContent_address__rKPWo {
+.FundingDetailApplicationContent_address {
     padding: 31px 39px 39px;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_radio__GXncM {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_radio {
     margin-bottom: 30px;
 }
 
@@ -207,18 +207,18 @@
 }
 
 
-.FundingDetailApplicationContent_label_type__1LZJ6 {
+.FundingDetailApplicationContent_label_type {
     display: inline-block;
     padding: 3px 0 0;
     font-size: 16px;
     line-height: 1.19;
 }
-.FundingDetailApplicationContent_input_type__2gqMr:checked+.FundingDetailApplicationContent_label_type__1LZJ6:before {
+.FundingDetailApplicationContent_input_type:checked+.FundingDetailApplicationContent_label_type:before {
     padding: 3px;
     background-clip: content-box;
     background-color: #1f9eff;
 }
-.FundingDetailApplicationContent_label_type__1LZJ6:before {
+.FundingDetailApplicationContent_label_type:before {
     display: inline-block;
     width: 24px;
     height: 24px;
@@ -229,7 +229,7 @@
     content: "";
 }
 
-.FundingDetailApplicationContent_button_list__7AlKd {
+.FundingDetailApplicationContent_button_list {
     padding: 8px 14px 6px;
     margin: 0 30px 0 10px;
     border: 1px solid rgba(0,0,0,.15);
@@ -237,7 +237,7 @@
     color: #828282;
 }
 
-.FundingDetailApplicationContent_label_type__1LZJ6:before {
+.FundingDetailApplicationContent_label_type:before {
     display: inline-block;
     width: 24px;
     height: 24px;
@@ -248,20 +248,20 @@
     content: "";
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_list_basic__F5tPH {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_list_basic {
     padding: 12px 0 24px;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_item__3hhAd {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_item {
     position: relative;
     padding-left: 113px;
     line-height: 0;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_title__2BYvK {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_title {
     top: 0;
 }
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_label__3WPCE, .FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_title__2BYvK {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_label, .FundingDetailApplicationContent_address .FundingDetailApplicationContent_title {
     position: absolute;
     left: 0;
     font-size: 15px;
@@ -269,12 +269,12 @@
     color: #828282;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_description__2wk3i {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_description {
     font-size: 15px;
     line-height: 1.23;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_list_basic__F5tPH .FundingDetailApplicationContent_item__3hhAd+.FundingDetailApplicationContent_item__3hhAd {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_list_basic .FundingDetailApplicationContent_item+.FundingDetailApplicationContent_item {
     margin-top: 19px;
 }
 
@@ -283,24 +283,24 @@
 
 
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_list_basic__F5tPH[aria-hidden=true], .FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_list_input__DNaub[aria-hidden=true] {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_list_basic[aria-hidden=true], .FundingDetailApplicationContent_address .FundingDetailApplicationContent_list_input[aria-hidden=true] {
     display: none;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_list_input__DNaub {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_list_input {
     padding-bottom: 19px;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_item__3hhAd {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_item {
     position: relative;
     padding-left: 113px;
     line-height: 0;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_label__3WPCE {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_label {
     top: 12px;
 }
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_label__3WPCE, .FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_title__2BYvK {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_label, .FundingDetailApplicationContent_address .FundingDetailApplicationContent_title {
     position: absolute;
     left: 0;
     font-size: 15px;
@@ -308,23 +308,23 @@
     color: #828282;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_input_text__1vbSp {
-    width: 115px;
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_input_text {
+    width: 125px;
     height: 38px;
     padding: 0 15px;
     border: 1px solid rgba(0,0,0,.08);
     font-size: 14px;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_list_input__DNaub .FundingDetailApplicationContent_item__3hhAd+.FundingDetailApplicationContent_item__3hhAd {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_list_input .FundingDetailApplicationContent_item+.FundingDetailApplicationContent_item {
     margin-top: 15px;
 }
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_item__3hhAd {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_item {
     position: relative;
     padding-left: 113px;
     line-height: 0;
 }
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_bar__1O-Fk {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_bar__1O-Fk {
     display: inline-block;
     width: 5px;
     height: 1px;
@@ -333,7 +333,7 @@
     vertical-align: top;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_input_zipcode__3rEpT {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_input_zipcode {
     width: 129px;
     height: 38px;
     padding: 0 12px;
@@ -341,7 +341,7 @@
     font-size: 14px;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_button_zipcode__1rDcO {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_button_zipcode__1rDcO {
     display: inline-block;
     height: 38px;
     padding: 0 19px;
@@ -351,11 +351,11 @@
     vertical-align: top;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_zipcode__2Jdu9 {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_zipcode {
     margin-bottom: 10px;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_input_address__IFygD {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_input_address {
     width: 405px;
     height: 38px;
     padding: 0 15px;
@@ -363,16 +363,16 @@
     font-size: 14px;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_input_address__IFygD+.FundingDetailApplicationContent_input_address__IFygD {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_input_address+.FundingDetailApplicationContent_input_address {
     width: 271px;
     margin-left: 10px;
 }
 
-.FundingDetailApplicationContent_checkline__-E-HP {
+.FundingDetailApplicationContent_checkline {
     margin-top: 14px;
 }
 
-.FundingDetailApplicationContent_checkline__-E-HP .FundingDetailApplicationContent_input_checkline__2MGj1 {
+.FundingDetailApplicationContent_checkline .FundingDetailApplicationContent_input_checkline {
     overflow: hidden;
     position: absolute;
     width: 1px;
@@ -381,13 +381,13 @@
     clip: rect(0 0 0 0);
 }
 
-.FundingDetailApplicationContent_checkline__-E-HP .FundingDetailApplicationContent_label_checkline__1lw6z {
+.FundingDetailApplicationContent_checkline .FundingDetailApplicationContent_label_checkline {
     font-size: 14px;
     line-height: 1.43;
     color: #a3a3a3;
 }
 
-.FundingDetailApplicationContent_checkline__-E-HP .FundingDetailApplicationContent_label_checkline__1lw6z .FundingDetailApplicationContent_icon__3inag {
+.FundingDetailApplicationContent_checkline .FundingDetailApplicationContent_label_checkline .FundingDetailApplicationContent_icon {
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -399,12 +399,12 @@
     vertical-align: top;
 }
 
-.FundingDetailApplicationContent_checkline__-E-HP .FundingDetailApplicationContent_input_checkline__2MGj1:checked+.FundingDetailApplicationContent_label_checkline__1lw6z .FundingDetailApplicationContent_icon__3inag:after {
+.FundingDetailApplicationContent_checkline .FundingDetailApplicationContent_input_checkline:checked+.FundingDetailApplicationContent_label_checkline .FundingDetailApplicationContent_icon:after {
     border-color: #fff;
 }
 
 
-.FundingDetailApplicationContent_checkline__-E-HP .FundingDetailApplicationContent_label_checkline__1lw6z .FundingDetailApplicationContent_icon__3inag:after {
+.FundingDetailApplicationContent_checkline .FundingDetailApplicationContent_label_checkline .FundingDetailApplicationContent_icon:after {
     display: inline-block;
     width: 10px;
     height: 6px;
@@ -416,11 +416,11 @@
     content: "";
 }
 /*배송 메시지*/
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_item__3hhAd.FundingDetailApplicationContent_message__3OJBc .FundingDetailApplicationContent_label__3WPCE {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_item.FundingDetailApplicationContent_message .FundingDetailApplicationContent_label {
     top: 8px;
 }
 
-.FundingDetailApplicationContent_address__rKPWo .FundingDetailApplicationContent_textarea__1bwF3 {
+.FundingDetailApplicationContent_address .FundingDetailApplicationContent_textarea {
     width: 806px;
     min-height: 120px;
     padding: 11px 13px;
@@ -431,7 +431,7 @@
 }
 
 /*주의사항*/
-.FundingDetailApplicationContent_guide__3vpdM {
+.FundingDetailApplicationContent_guide {
     margin-top: 12px;
     font-size: 14px;
     line-height: 1.43;
@@ -440,41 +440,41 @@
 }
 
 /*약관 동의*/
-.FundingDetailApplicationContent_section__gfh97 {
+.FundingDetailApplicationContent_section {
     margin: 30px auto 0;
     background-color: #fff;
     border: 1px solid rgba(0,0,0,.08);
 }
 
-.FundingDetailApplicationContent_terms__2Jx3e {
+.FundingDetailApplicationContent_terms {
     padding: 6px 39px 39px;
 }
 
-.FundingDetailApplicationContent_terms__2Jx3e .FundingDetailApplicationContent_bundle__3ztI- {
+.FundingDetailApplicationContent_terms .FundingDetailApplicationContent_bundle {
     padding: 24px 0;
     border-bottom: 1px solid rgba(0,0,0,.03);
 }
 
-.FundingDetailApplicationContent_checkbox__1z5rX {
+.FundingDetailApplicationContent_checkbox {
     min-height: 19px;
     font-size: 14px;
     line-height: 1.29;
     color: #333;
 }
 
-.FundingDetailApplicationContent_terms__2Jx3e .FundingDetailApplicationContent_bundle__3ztI- .FundingDetailApplicationContent_checkbox__1z5rX .FundingDetailApplicationContent_label__3WPCE {
+.FundingDetailApplicationContent_terms .FundingDetailApplicationContent_bundle .FundingDetailApplicationContent_checkbox .FundingDetailApplicationContent_label {
     padding: 2px 0 2px 34px;
     font-size: 16px;
     line-height: 1.29;
     color: #333;
 }
-.FundingDetailApplicationContent_checkbox__1z5rX .FundingDetailApplicationContent_label__3WPCE {
+.FundingDetailApplicationContent_checkbox .FundingDetailApplicationContent_label {
     display: inline-block;
     position: relative;
     padding: 4px 0 4px 34px;
     vertical-align: top;
 }
-.FundingDetailApplicationContent_checkbox__1z5rX .FundingDetailApplicationContent_label__3WPCE .FundingDetailApplicationContent_icon__3inag {
+.FundingDetailApplicationContent_checkbox .FundingDetailApplicationContent_label .FundingDetailApplicationContent_icon {
     position: absolute;
     top: 0;
     left: 0;
@@ -483,11 +483,11 @@
     border: 1px solid rgba(0,0,0,.12);
 }
 
-.FundingDetailApplicationContent_terms__2Jx3e .FundingDetailApplicationContent_group__292es {
+.FundingDetailApplicationContent_terms .FundingDetailApplicationContent_group__292es {
     padding-top: 30px;
 }
 
-.FundingDetailApplicationContent_checkbox__1z5rX .FundingDetailApplicationContent_input__1Q10H:checked+.FundingDetailApplicationContent_label__3WPCE .FundingDetailApplicationContent_icon__3inag:after {
+.FundingDetailApplicationContent_checkbox .FundingDetailApplicationContent_input:checked+.FundingDetailApplicationContent_label .FundingDetailApplicationContent_icon:after {
     position: absolute;
     margin-top: 3px;
     margin-left: 4px;
