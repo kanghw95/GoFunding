@@ -1,6 +1,10 @@
 var cnt=0; 
 var infoCnt=0; 
 var rewardCnt=0;
+let ischkid=false;
+let isprivacy=false;
+var check = 3;
+var warning="중복확인 버튼을 눌러주세요.";
 
 $(".datepick").each(function () { //펀딩 시작~종료 기간 달력 선택
 	$(this).datepicker();
@@ -8,18 +12,18 @@ $(".datepick").each(function () { //펀딩 시작~종료 기간 달력 선택
 
 $.datepicker.setDefaults({
 	dateFormat: 'yy-mm-dd',	//날짜 포맷
-	prevText: '이전 달',	// 마우스 오버시 이전달 텍스트
-	nextText: '다음 달',	// 마우스 오버시 다음달 텍스트
-	closeText: '닫기', // 닫기 버튼 텍스트 변경
+	prevText: '이전 달', //마우스 오버시 이전달 텍스트
+	nextText: '다음 달', //마우스 오버시 다음달 텍스트
+	closeText: '닫기', //닫기 버튼 텍스트 변경
 	currentText: '오늘', // 오늘 텍스트 변경
-	monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],	//한글 월 표시
-	monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],	//한글 월 표시
-	dayNames: ['일', '월', '화', '수', '목', '금', '토'],	//한글 요일 표시
-	dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],	//한글 요일 표시
-	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],	// 한글 요일 표시
-	showMonthAfterYear: true,	// true : 년 월  false : 월 년 순
+	monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'], //한글 월 표시
+	monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'], //한글 월 표시
+	dayNames: ['일', '월', '화', '수', '목', '금', '토'], //한글 요일 표시
+	dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'], //한글 요일 표시
+	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], //한글 요일 표시
+	showMonthAfterYear: true, //true : 년 월  false : 월 년 순
 	yearSuffix: '년',	
-	showButtonPanel: true,	//오늘 버튼과 달력 닫기 버튼 보기 옵션
+	showButtonPanel: true, //오늘 버튼과 달력 닫기 버튼 보기 옵션
 	minDate: 0 //오늘 이전 선택 불가
 });
 
@@ -129,20 +133,6 @@ $('.closeStandard').click(function(){ //펀딩개설기준 모달창 삭제
 });
 
 $(document).ready(function(){
-	$("#chkInform").on("propertychange change input", function(){ //중복확인 후 특정 텍스트만 프로젝트 개설 버튼 활성화 TODO
-		if($("#privacyChk").is(":checked")&&$("#chkInform").val()=="사용할 수 있는 아이디 입니다."){
-			$("#submitBtn").attr("disabled",false);
-		} else {
-			$("#submitBtn").attr("disabled",true);
-		}
-	})
-	$("#privacyChk").change(function(){ //개인정보 수집 및 이용 동의 체크박스 : 체크 되어야만 프로젝트 개설 버튼 활성화
-		if($("#privacyChk").is(":checked")&&$("#chkInform").val()=="사용할 수 있는 아이디 입니다."){
-                $("#submitBtn").attr("disabled",false);
-		} else {
-			$("#submitBtn").attr("disabled",true);
-		}
-	})
 	$("#direct").hide();
 })
 
@@ -153,6 +143,19 @@ $(document).on("change", "#email", function(){ //직접입력 선택시 도메�
 		$("#direct").hide();
 	}
 });
+
+$("#privacyChk").change(function(){ //개인정보 수집 및 이용 동의 체크박스 : 체크 되어야만 프로젝트 개설 버튼 활성화
+	if($("#privacyChk").is(":checked")){
+		isprivacy=true;
+		if(ischkid==true){
+			$("#submitBtn").attr("disabled",false);
+		} else {
+			$("#submitBtn").attr("disabled",true);
+		}
+	} else {
+		isprivacy=false;
+	}
+})
 
 $("#nameChk").click(function(){ //주체명(메이커명) 중복 확인
 	var maker=$("#maker").val();
@@ -165,6 +168,8 @@ $("#nameChk").click(function(){ //주체명(메이커명) 중복 확인
 			data: {'maker': maker},
 			success: function(msg){
 				idChk(msg);
+				removeWarn();
+				
 			},
 			error: function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -173,9 +178,40 @@ $("#nameChk").click(function(){ //주체명(메이커명) 중복 확인
 	}
 });
 
-function idChk(msg){ //중복 검사 결과 확인 텍스트 생성
+function removeWarn(){ //중복확인 버튼 클릭 요청 문구 삭제
+	$("#warning").empty();
+	if($("#chkInform").val()=="사용할 수 있는 아이디 입니다."){
+		ischkid=true;
+		if(isprivacy==true&&check == 0){
+			$("#submitBtn").attr("disabled",false);
+		} else {
+			$("#submitBtn").attr("disabled",true);
+		}
+	} else {
+		ischkid=false;
+	}
+};
+
+$("#maker").blur(function(event){ //중복확인 하지 않았을때 submit 비활성화
+	if($("#warning").text()==""||$("#warning").text()==null){
+		$("#warning").append(warning);
+		ischkid=false;
+		check = 2;
+		console.log(check);
+		
+		if(isprivacy==true&&check == 0){
+			$("#submitBtn").attr("disabled",false);
+		} else {
+			$("#submitBtn").attr("disabled",true);
+		}
+	}
+});
+
+function idChk(msg){ //중복확인 결과 텍스트 생성
 	if(msg=='no'){
 		$("#chkInform").val("사용할 수 있는 아이디 입니다.");
+		check = 0;
+		console.log(check);
 	} else {
 		$("#chkInform").val(msg+"는 사용할 수 없는 아이디 입니다.");
 		$("#maker").val("");

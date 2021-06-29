@@ -58,7 +58,11 @@ public class ApplicationMgtServiceImpl implements ApplicationMgtService {
 	public int makeFunding(Application app) { //펀딩 승인 - 펀딩 생성
 		return applicationMgtDao.makeFunding(app);
 	}
-
+	
+	@Override
+	public int makeReward(Application app) { //펀딩 승인 - 리워드 생성
+		return applicationMgtDao.makeReward(app);
+	}
 	@Override
 	public int applicationConfirm(int applyNo) { //펀딩 승인 - 신청서 approved 입력
 		return applicationMgtDao.applicationConfirm(applyNo);

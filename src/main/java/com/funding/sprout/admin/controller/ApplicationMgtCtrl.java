@@ -98,11 +98,10 @@ public class ApplicationMgtCtrl {
 	
 	@RequestMapping(value = "/formPermit", method = RequestMethod.POST)
 	public void formPermit(Application app, @RequestParam() String start, @RequestParam() String end,
-			 @RequestParam() String delivery, HttpServletResponse response) { //펀딩 신청서 승인
+			 @RequestParam() String delivery, HttpServletResponse response) { //펀딩 신청서 승인 : 펀딩, 메이커, 리워드 생성
 		Timestamp fundingStart=new Timestamp(0);
 		Timestamp fundingFin=new Timestamp(0);
 		Date dd= new Date();
-		System.out.println(app+start+end+delivery);
 		
 		try {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -115,31 +114,72 @@ public class ApplicationMgtCtrl {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		java.sql.Date deliveryDate= new java.sql.Date(dd.getTime());
+
 		app.setFundingStart(fundingStart);
 		app.setFundingFin(fundingFin);
 		app.setDeliveryDate(deliveryDate);
 		int applyNo=app.getApplyNo();
+
+		int cnt=0, result=0, sum=0;
+		String price=app.getRewardPrice();
+		String title=app.getRewardTitle();
+		String ea=app.getRewardEA();
 		
-		int a=applicationMgtService.makeMaker(app);
-		int b=applicationMgtService.makeFunding(app);
-		int c=applicationMgtService.applicationConfirm(applyNo);
-		int result=a+b+c;
-		System.out.println(a+b+c);
-		
-		if(result==3) {
-			response.setContentType("text/html; charset=UTF-8");
-			try {
-				PrintWriter wr=response.getWriter();
-				wr.println("<script type='text/javascript'>"); 
-				wr.println("location.href='http://localhost:8090/sprout/formList';"); 
-				wr.println("</script>");
-				wr.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} 
+		if(price.contains(",")) {
+			String[] rewardPrice=price.split(",");
+			String[] rewardTitle=title.split(",");
+			String[] rewardEA=ea.split(",");
+			Application vo=new Application();
+
+			int a=applicationMgtService.makeMaker(app);
+			int b=applicationMgtService.makeFunding(app);
+			int c=applicationMgtService.applicationConfirm(applyNo);
+			System.out.println(rewardPrice.length);
+			
+			for(int i=0;i<rewardPrice.length;i++) {
+				vo.setRewardPrice(rewardPrice[i]);
+				vo.setRewardTitle(rewardTitle[i]);
+				vo.setRewardEA(rewardEA[i]);
+				vo.setRewardDesc(app.getRewardDesc());
+				vo.setMaker(app.getMaker());
+				System.out.println("리워드"+i+": "+vo);
+				result=applicationMgtService.makeReward(vo);
+				cnt+=result;
+			}
+			sum=a+b+c+result;
+				
+				if(sum==4) {
+					response.setContentType("text/html; charset=UTF-8");
+					try {
+						PrintWriter wr=response.getWriter();
+						wr.println("<script type='text/javascript'>"); 
+						wr.println("location.href='http://localhost:8090/sprout/formList';"); 
+						wr.println("</script>");
+						wr.flush();
+					} catch (IOException e) {
+						e.printStackTrace();
+					} 
+				}
 		} else {
+			int a=applicationMgtService.makeMaker(app);
+			int b=applicationMgtService.makeFunding(app);
+			int c=applicationMgtService.applicationConfirm(applyNo);
+			int d=applicationMgtService.makeReward(app);
+			sum=a+b+c+d;
+			
+			if(sum==4) {
+				response.setContentType("text/html; charset=UTF-8");
+				try {
+					PrintWriter wr=response.getWriter();
+					wr.println("<script type='text/javascript'>"); 
+					wr.println("location.href='http://localhost:8090/sprout/formList';"); 
+					wr.println("</script>");
+					wr.flush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} 
+			}
 		}
 	}
 	

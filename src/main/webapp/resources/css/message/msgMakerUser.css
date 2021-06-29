@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.tabs{
+	font-size: 25px;
+	position: relative;
+	display: inline-block;
+	margin-top: 50px;
+}
+
+#table{
+	border-collapse: collapse;
+}
+
+.tdImg{
+	width: 150px; height: 150px;
+}
+
+.tdImg, #msgId{
+	text-align: center;
+}
+
+#msgId{
+	width: 950px;
+	
+}
+
+#outer{
+	display: flex;
+	justify-content: center;
+}
+
+#msg{
+	border-bottom: solid 1px #d3d3d3;
+}

@@ -47,7 +47,7 @@
 					<tr>
 						<td>주체명 (필수)</td>
 						<td><input type="text" name="maker" id="maker" placeholder="내용을 입력해주세요." required><button type="button"
-								id="nameChk">중복체크</button>
+								id="nameChk">중복체크</button><div id="warning"></div>
 								<div><input type="text" id="chkInform"></div></td>
 					</tr>
 					<tr>
@@ -118,7 +118,7 @@
 								</td>
 								<td>
 									4. 펀딩 목표 금액<br>
-									<input type="text" id="fundingPrice" name="fundingPrice" pattern="[0-9]+" required>&nbsp;원
+									<input type="text" id="fundingPrice" name="fundingPrice" pattern="[1-9][0-9]{0,10}" required>&nbsp;원
 								</td>
 							</tr>
 							<tr>
@@ -146,11 +146,11 @@
 							</tr>
 								<tr>
 									<td>9. 리워드 구성<br>
-									<input type="text" id="rewardPrice" name="rewardPrice" placeholder="금액" pattern="[0-9]+" required>&nbsp;원
+									<input type="text" id="rewardPrice" name="rewardPrice" placeholder="금액" pattern="[1-9][0-9]{0,10}" required>&nbsp;원
 										달성 시&nbsp;
 										<input type="text" id="rewardTitle" name="rewardTitle"
 											placeholder="리워드 종류" required>&nbsp;</td><td>
-										최대&nbsp;<input type="text" name="rewardEA" id="rewardEA" placeholder="개수" pattern="[0-9]+" required>개
+										최대&nbsp;<input type="text" name="rewardEA" id="rewardEA" placeholder="개수" pattern="[1-9][0-9]{0,10}" required>개
 										<button type="button" id="addReward">리워드 추가</button>
 										<button type="button" class="closeRewardBtn">삭제</button>
 									</td>
@@ -164,7 +164,7 @@
 									</td>
 									<td>
 										11. 배송비<br>
-										<input type="text" id="deliveryCharge" name="deliveryCharge" placeholder="배송비" pattern="[0-9]+" required>원
+										<input type="text" id="deliveryCharge" name="deliveryCharge" placeholder="배송비" pattern="[1-9][0-9]{0,10}" required>원
 									</td>
 								</tr>
 							

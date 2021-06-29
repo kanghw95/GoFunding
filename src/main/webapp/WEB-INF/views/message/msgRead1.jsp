@@ -8,34 +8,21 @@
 <meta charset="UTF-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.2/sockjs.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="<%=request.getContextPath() %>/resources/css/message/userMakerRead.css?ver=1.0" rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
-<style type="text/css">
-#text-0{
-	text-align: right;
-}
-#text-1{
-	text-align: left;
-}
-#textArea{
-	width:500px;
-	height:auto;
-}
-.table{
-	width:500px;
-	height:30px;
-}
-</style>
 </head>
 <body>
+	<div id="outer">
+	<div id="inner">
 	<div id="textArea">
-		<table class="table" border="1">
+		<table class="table">
 	<c:forEach var="msg" items="${msg}" varStatus="status">
-			<tr id="text-${msg.MSGROOT}">
+			<tr id="text-${msg.MSGROOT}" class="textRow">
 				<td>${msg.MSGCONTENT}<br>
 				<c:if test="${msg.MSGROOT eq '1'}">
 				${msg.MAKER}<br></c:if>
 				<fmt:formatDate value="${msg.MSGDATE}" pattern="yy-MM-dd"/></td>
-				<td><button type="button" id="msgDelete">X</button>
+				<td id="deleteBtn"><button type="button" id="msgDelete">X</button>
 				<input type="hidden" name="msgNo" id="msgNo" value="${msg.MSGNO}"></td>
 			</tr>
 	</c:forEach>
@@ -45,8 +32,10 @@
 	<input name="receiverId" value="${param.receiverId}" type="hidden">
 	<input name="makerChk" value="0" type="hidden">
 	<input id="txtMsg" name="msgContent" type="text">
-	<input id="sendBtn" value="Send" type="button"><br>
+	<input id="sendBtn" value="전송" type="button"><br>
 </form>
+	</div>
+	</div>
 <script>
 	var webSocket = new WebSocket("ws://localhost:8090/sprout/msgRead");
 	//콘솔 텍스트 에리어 오브젝트

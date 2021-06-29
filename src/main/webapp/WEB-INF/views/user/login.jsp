@@ -12,37 +12,39 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script type="text/javascript"
-	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-	charset="utf-8"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<link href="<%=request.getContextPath() %>/resources/css/user/login.css?ver=1.0" rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="<%=request.getContextPath() %>/user/loginPost"
-		method="post">
+	<form action="<%=request.getContextPath() %>/user/loginPost" method="post">
 		<c:if test="${empty user}">
-			<div class="form-group">
-				<input type="text" name="userId" class="form-control"
-					placeholder="아이디">
+		<div class="outer">
+		<div class="login loginDiv">
+			<div class="idPwd">
+			<h1>로그인</h1>
+				<input type="text" name="userId" class="form inputId"
+					placeholder="아이디"><br><br>
+				<input type="password" name="userPwd" class="form inputPwd"
+					placeholder="비밀번호"><br><br>
+				<a class="chk findId" href="<%=request.getContextPath() %>/user/findUserId">아이디/비밀번호 찾기</a>&nbsp;&nbsp;&nbsp;
+				<a class="chk chkPwd" href="#">비밀번호 확인하기</a><br><br>
+				<button type="submit" class="btns loginBtn">로그인</button><br><br>
+				<hr>
 			</div>
-			<div class="form-group">
-				<input type="password" name="userPwd" class="form-control"
-					placeholder="비밀번호">
-			</div>
-			<div class="col-xs-4">
-				<button type="submit" class="btns">로그인</button>
-			</div>
-			<br>
-			<div class="g-signin2" data-onsuccess="onSignIn"></div>
 			<div>
-				<a href="${naverAuthUrl}"> <img width="200" height="50"
-					src="<c:url value='/resources/img/naver_login.png'/>"></a> <br>
-				<a href="${kakaoAuthUrl}"> <img width="200" height="50"
-					src="<c:url value='/resources/img/kakao_login.png'/>">
+			<div class="g-signin2" data-onsuccess="onSignIn"><img width="50" height="50"
+					src="<c:url value='/resources/img/google_login.png'/>"></div>
+				<a href="${kakaoAuthUrl}"> <img width="50" height="50"
+					src="<c:url value='/resources/img/kakao_login.png'/>"></a>
+				<a href="${naverAuthUrl}"> <img width="50" height="50"
+					src="<c:url value='/resources/img/naver_login.png'/>">
 				</a><br>
 			</div>
 			<div>
-				<a href="<%=request.getContextPath() %>/user/findUserId">아이디찾기</a>
+				<br>아직 회원이 아니라면? <a href="#">회원가입</a>
+			</div>
+			</div>
 			</div>
 		</c:if>
 	</form>
@@ -57,7 +59,6 @@
 			<a href="<%=request.getContextPath() %>/message/msgUserList">관리자-회원메세지</a></c:if>
 		</div>
 	</c:if>
-
 	<script>
     function onSignIn(googleUser) {
     	// 프로필 가져오기

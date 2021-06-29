@@ -49,8 +49,12 @@ public class ApplicationMgtDao {
 		return sqlSession.insert("Admin.makeMaker", app);
 	}
 	
-	public int makeFunding(Application app) { //펀딩 승인 - 메이커 생성
+	public int makeFunding(Application app) { //펀딩 승인 - 펀딩 생성
 		return sqlSession.insert("Admin.makeFunding", app);
+	}
+	
+	public int makeReward(Application app) { //펀딩 승인 - 리워드 생성
+		return sqlSession.insert("Admin.makeReward", app);
 	}
 	
 	public int applicationConfirm(int applyNo) { //펀딩 승인 - 신청서 approved 입력

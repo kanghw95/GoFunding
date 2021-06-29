@@ -24,6 +24,8 @@ public interface ApplicationMgtService {
 	
 	public int makeFunding(Application app); //펀딩 승인 - 펀딩 생성
 	
+	public int makeReward(Application app); //펀딩 승인 - 리워드 생성
+	
 	public int applicationConfirm(int applyNo); //펀딩 승인 - 신청서 approved 입력
 	
 	public int formRejectInput(Application app); //펀딩 거절 - 거절 사유 입력

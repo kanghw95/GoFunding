@@ -401,6 +401,12 @@
 		SYSDATE, #{fundingContent}, #{deliveryCharge}, #{deliveryDate})
 	</insert>
 	
+	<!-- 신청 승인 / 리워드 생성 -->
+	<insert id="makeReward">
+		INSERT INTO REWARD VALUES (SEQ_REWARDNO.NEXTVAL, #{rewardTitle}, #{rewardEA},
+		#{rewardPrice}, (SELECT FUNDINGNO FROM FUNDING WHERE MAKER = #{maker}) )
+	</insert>
+	
 	<!-- 신청 승인 / 신청서 confirmed 입력 -->
 	<update id="applicationConfirm" parameterType="int">
 		UPDATE APPLICATION SET FEEDBACK = 'approved' WHERE APPLYNO = #{applyNo}

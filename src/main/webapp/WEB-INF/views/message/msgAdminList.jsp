@@ -6,21 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="<%=request.getContextPath() %>/resources/css/message/msgUserUser.css?ver=1.0" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 </head>
 <body>
-	회원-관리자
+	<div id="outer">
 	<div class="tabs">
-			<table border="1">
+	<i class="far fa-comments fa-2x"></i>&nbsp;메시지(회원-관리자)
+			<table id="table">
 				<c:forEach var="msg" items="${msgList}" varStatus="status">
 					<tr id="msg">
-						<td>이미지</td>
+						<td class="tdImg"><i class="far fa-envelope fa-3x"></i></td>
 						<td id="msgId">${msg.SENDERID}</td>
 					</tr>
-					<tr></tr>
 				</c:forEach>
 			</table>
+		</div>
 		</div>
 	<script>
     $("body").on("click", "[id^=msgId]", function(event) {
