@@ -3,10 +3,12 @@ package com.funding.sprout.user.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +26,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.funding.sprout.HomeController;
 import com.funding.sprout.user.service.UserInsertService;
 import com.funding.sprout.vo.User;
+
+import net.nurigo.java_sdk.Coolsms;
 
 @Controller
 @RequestMapping("/user")
@@ -136,8 +140,7 @@ public class UserInsertCtrl {
 		
 	}
 	
-	
-	
+
 	@RequestMapping(value = "modifyUser", method = RequestMethod.GET)  
 	public ModelAndView modifyUser() {
 		return null; // 내 정보 수정

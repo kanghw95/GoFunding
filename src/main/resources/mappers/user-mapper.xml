@@ -25,9 +25,9 @@
 	<insert id="insertUser" parameterType="User">
 		<![CDATA[
 		INSERT INTO USERS 
-		(ID, PWD, NAME, NICKNAME, PHONE, ADDRESS, EMAIL, GENDER, AGE, FAV, JOINDATE)
+		(ID, PWD, NAME, NICKNAME, PHONE, ADDRESS, EMAIL, GENDER, AGE, FAV, JOINDATE, LOGINDATE)
 		VALUES 
-		(#{userId}, #{userPwd}, #{userName}, #{userNick}, #{userPhone}, #{userAddress}, #{userEmail}, #{gender}, #{userAge}, #{userFav}, SYSDATE)
+		(#{userId}, #{userPwd}, #{userName}, #{userNick}, #{userPhone}, #{userAddress}, #{userEmail}, #{gender}, #{userAge}, #{userFav}, SYSDATE, SYSDATE)
 		]]>
 	</insert>
 	

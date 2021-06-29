@@ -340,10 +340,24 @@ $(document).ready(function () {
 	// 관심사 하나로 합치기
 	var mergeFav = function(){
 		
-		$(".fav:checked").each(function(){
-			$("#favorite").append($(".fav:checked").val());
-			console.log($(".fav:checked").val());
+		// 선택된 목록 가져오기
+		var query = 'input[name="interest"]:checked';
+		var selected = document.querySelectorAll(query); 
+		
+		//선택된 목록에서 value 찾기
+		var fav = "";
+		selected.forEach((el) => {
+			fav += el.value + ",";
 		})
+		
+		console.log("fav : " + fav);
+
+		var result = fav.replace(/,$/, '');
+		
+		console.log("result: " + result);
+		
+		$("#favorite").val(result);
+		
 		
 		if($("#favorite").val() == ""){
 			isPassFav = false;
