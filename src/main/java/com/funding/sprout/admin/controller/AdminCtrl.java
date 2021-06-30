@@ -21,6 +21,7 @@ import com.funding.sprout.admin.service.AdminService;
 import com.funding.sprout.vo.Board;
 import com.funding.sprout.vo.Criteria;
 import com.funding.sprout.vo.PageMaker;
+import com.funding.sprout.vo.Qna;
 import com.funding.sprout.vo.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -439,6 +440,69 @@ public class AdminCtrl {
 		return "admin/userList";
 	}
 	
+	@RequestMapping(value = "qnaSelect", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String qndSelect(Qna qna, HttpServletRequest request) throws Exception { // Qna 특정 글 조회
+		request.setCharacterEncoding("UTF-8");
+		
+		System.out.println("컨트롤러 진입");
+		String funding = request.getParameter("funding"); // 펀딩문의
+		String payment = request.getParameter("payment"); // 결제문의
+		String account = request.getParameter("account"); // 계정문의
+		String etc = request.getParameter("etc"); // 기타문의
+		System.out.println("funding : " + funding); 
+		System.out.println("payment : " + payment);
+		System.out.println("account : " + account);
+		System.out.println("etc : " + etc);
+		
+		if (funding != null) { // select에서 제목을 선택했을 때
+			System.out.println("펀딩문의");
+			qna.setQnaType(funding);
+			String getQnaType = qna.getQnaType();			
+			System.out.println("최종 qnaType 값은 : " + getQnaType);
+			List<Qna> selectType = adService.selectQnaType(qna);
+			System.out.println("selectType : " + selectType);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(selectType);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		} else if (payment != null) { // select에서 작성자를 선택했을 때
+			System.out.println("결제문의");
+			qna.setQnaType(payment);
+			String getQnaType = qna.getQnaType();
+			System.out.println("최종 qnaType 값은 : " + getQnaType);
+			List<Qna> selectType = adService.selectQnaType(qna);
+			System.out.println("selectType : " + selectType);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(selectType);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		} else if (account != null) {
+			System.out.println("계정문의");
+			qna.setQnaType(account);
+			String getQnaType = qna.getQnaType();
+			System.out.println("최종 qnaType 값은 : " + getQnaType);
+			List<Qna> selectType = adService.selectQnaType(qna);
+			System.out.println("selectType : " + selectType);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(selectType);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		} else if (etc != null) {
+			System.out.println("기타");
+			qna.setQnaType(etc);
+			String getQnaType = qna.getQnaType();
+			System.out.println("최종 qnaType 값은 : " + getQnaType);
+			List<Qna> selectType = adService.selectQnaType(qna);
+			System.out.println("selectType : " + selectType);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(selectType);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		}	
+		return "admin/qna";
+	}
+	
 	@RequestMapping(value = "deletefboardlist", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteFBoardList(HttpServletRequest request) { // 자유 게시판 글 삭제
@@ -507,6 +571,18 @@ public class AdminCtrl {
 		for (int i = 0; i < deleteList.length; i++) { // for문 사용해서 deleteList[0]부터 삭제
 			System.out.println("deleteList index " + i + " : " + deleteList[i]);
 			adService.deleteNBoardList(deleteList[i]); // 공지사항 글 번호 검색해서 해당 유저 삭제 
+		}
+		return "admin/notice";
+	}
+	
+	@RequestMapping(value = "deleteQna", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteQna(HttpServletRequest request) { // 공지사항 글 삭제
+		String[] deleteList = request.getParameterValues("qnaNo"); // 체크된 공지사항 글 번호 리스트에 넣기
+		System.out.println("deleteList 길이 : " + deleteList.length);
+		for (int i = 0; i < deleteList.length; i++) { // for문 사용해서 deleteList[0]부터 삭제
+			System.out.println("deleteList index " + i + " : " + deleteList[i]);
+			adService.deleteQna(deleteList[i]); // 공지사항 글 번호 검색해서 해당 유저 삭제 
 		}
 		return "admin/notice";
 	}
@@ -728,22 +804,40 @@ public class AdminCtrl {
 
 	}
 	
-	@RequestMapping(value = "qnaAll", method = RequestMethod.GET)
-	public ModelAndView getQNAByPage() { // qna 리스트 조회
-		return null;
-
+	@RequestMapping(value = "qna", method = RequestMethod.GET)
+	public String qndList(Model model, Criteria cri) throws Exception { // qna 리스트 조회
+		
+		List<Qna> qnaList = adService.qnaList(cri); // Qna 리스트 가져오기
+		int qnaCount = adService.qnaCount(); // Qna 총 수 가져오기
+		System.out.println("qnaCount : " + qnaCount);
+		System.out.println("qnaList : " + qnaList);
+		model.addAttribute("qnaList", qnaList); // Qna 리스트 jsp로
+		model.addAttribute("qnaCount", qnaCount); // Qna 총 수 jsp로
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		System.out.println(pageMaker.getCri());
+		pageMaker.setTotalCount(adService.qnaCount());
+		
+		model.addAttribute("pageMaker", pageMaker);
+		
+		return "admin/qna";
+	}
+	
+	@RequestMapping(value = "qnaReply", method = RequestMethod.GET)
+	public String qnaReply(Model model, HttpServletRequest request) throws Exception {
+		
+		String[] qnaNo = request.getParameterValues("qnaNo");
+		System.out.println("qnaNo : " + qnaNo[0]);
+		System.out.println("qnaNo : " + qnaNo[1]);
+		System.out.println("qnaNo : " + qnaNo[2]);
+		return "admin/qnaReply";
 	}
 	
 	@RequestMapping(value = "qnainsert", method = RequestMethod.GET)
-	public ModelAndView qnaInsert() { // qna 답변 쓰기
-		return null;
+	public String qnaInsert() { // qna 답변 쓰기
+		return "admin/qnaReply";
 		
-	}
-	
-	@RequestMapping(value = "qnacount", method = RequestMethod.GET)
-	public ModelAndView getQNACount() { // qna수 조회
-		return null;
-
 	}
 
 	@RequestMapping(value = "qnaupdate", method = RequestMethod.GET)

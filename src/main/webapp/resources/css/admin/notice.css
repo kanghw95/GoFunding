@@ -69,6 +69,7 @@ td {
 	margin-left: 75px;
 	box-shadow: none;
 	border-radius: 10px;
+	height: 30px;
 }
 
 #deleteBtn {
@@ -77,6 +78,7 @@ td {
 	color: white;
 	box-shadow: none;
 	border-radius: 10px;
+	height: 30px;
 }
 
 #under {
