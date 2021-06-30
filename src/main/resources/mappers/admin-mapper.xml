@@ -431,7 +431,6 @@
 	<select id="selectFormDetail" resultType="Application">
 		SELECT * FROM APPLICATION WHERE APPLYNO = #{applyNo}
 	</select>
->>>>>>> 83bbf4024900fd143ffcceb862fe866b5d0fef6e
 	
 	<!-- 신청 승인 / 메이커 생성 -->
 	<insert id="makeMaker">
