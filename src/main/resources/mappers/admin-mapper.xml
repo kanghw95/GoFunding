@@ -385,7 +385,6 @@
 	
 	<!-- 공지사항 글 삭제 -->	
 	<delete id="deleteNBoardList">		
-<<<<<<< HEAD
 		DELETE FROM NOTICE WHERE NOTICENO = #{boardNo}	
 	</delete>
 	
@@ -393,15 +392,7 @@
 	<delete id="deleteQna">
 		DELETE FROM QNA WHERE QNANO = #{qnaNo}
 	</delete>
-=======
-	DELETE FROM NOTICE WHERE NOTICENO = #{boardNo}	
-	</delete>	
-	
-	
-	
-	
-	
-	
+
 	<!-- 펀딩 목록 조회 : 전체 -->
 	<select id="fundingList" resultType="Application">
 		SELECT FUNDINGTITLE, FUNDINGNO FROM FUNDING WHERE FUNDINGSTATE = '1' ORDER BY FUNDINGNO
