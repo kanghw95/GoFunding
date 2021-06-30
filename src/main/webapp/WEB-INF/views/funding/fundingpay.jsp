@@ -283,7 +283,7 @@
 	        pay_method: "card",
 	        merchant_uid: "ORD20180131-0000012", //new Date().getTime(), 추가예정
 	        name: "${reward[0]}",
-	        amount: "${funding_pay_price}",
+	        amount: "${funding_pay_price+funding.deliverycharge}",
 	        buyer_email: "gildong@gmail.com",
 	        buyer_name: "강현우",
 	        buyer_tel: "010-4242-4242",
@@ -311,16 +311,13 @@
 
 		             alert(msg);
 		            } else {
-		             //[3] 아직 제대로 결제가 되지 않았습니다.
-		             //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-		            }
-		           });
-		          } else {
-		              var msg = '결제에 실패하였습니다.';
-		              msg += '에러내용 : ' + rsp.error_msg;
+			              var msg = '결제에 실패하였습니다.';
+			              msg += '에러내용 : ' + rsp.error_msg;
 
-		              alert(msg);
-		          }
+			              alert(msg);
+			          }
+		           });
+		          } 
 		      });
 	  }
 	
