@@ -17,6 +17,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
 	<form action="<%=request.getContextPath() %>/user/loginPost" method="post">
 		<c:if test="${empty user}">
 		<div class="outer">
@@ -49,7 +50,7 @@
 		</c:if>
 	</form>
 	<c:if test="${!empty user}">
-		<div>
+		<div class="login">
 			<a href="<%=request.getContextPath() %>/user/logout">로그아웃</a>
 			<a href="<%=request.getContextPath() %>/message/msgList1">회원-메이커메세지</a>
 			<a href="<%=request.getContextPath() %>/message/msgList3">메이커-회원메세지</a>
@@ -98,5 +99,6 @@
     	});
     	}
     </script>
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

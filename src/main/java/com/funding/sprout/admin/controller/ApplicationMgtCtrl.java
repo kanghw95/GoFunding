@@ -161,7 +161,7 @@ public class ApplicationMgtCtrl {
 					try {
 						PrintWriter wr=response.getWriter();
 						wr.println("<script type='text/javascript'>"); 
-						wr.println("location.href='http://112.221.156.36:8090/sprout/formList';"); 
+						wr.println("location.href='http://localhost:8090/sprout/formList';"); 
 						wr.println("</script>");
 						wr.flush();
 					} catch (IOException e) {
@@ -180,7 +180,7 @@ public class ApplicationMgtCtrl {
 				try {
 					PrintWriter wr=response.getWriter();
 					wr.println("<script type='text/javascript'>"); 
-					wr.println("location.href='http://112.221.156.36:8090/sprout/formList';"); 
+					wr.println("location.href='http://localhost:8090/sprout/formList';"); 
 					wr.println("</script>");
 					wr.flush();
 				} catch (IOException e) {

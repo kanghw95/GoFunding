@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
 	관리자-회원
 		<div>
 			<table border="1">
@@ -25,8 +26,9 @@
     $("body").on("click", "[id^=msgId]", function(event) {
                 var receiverId = $(this).text();
 		    	var pop = window.open("about:blank","content","width=500,height=800");
-       			pop.location.href="http://112.221.156.36:8090/sprout/message/msgUserRead?receiverId="+receiverId;
+       			pop.location.href="http://localhost:8090/sprout/message/msgUserRead?receiverId="+receiverId;
             });
 </script>
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

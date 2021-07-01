@@ -11,6 +11,7 @@
 <link href="<%=request.getContextPath() %>/resources/css/admin/formList.css?after" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
 <div class="outer">
 <div class="inner">
 <h3>펀딩 반려 목록</h3>
@@ -56,5 +57,6 @@
 		$("#frm").submit();
 	});
 </script>
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

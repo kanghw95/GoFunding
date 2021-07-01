@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.outer{
+	display: flex;
+	justify-content: center;
+}
+
+.inner{
+	width: 1140px;
+	position: relative;
+	display: inline-block;
+	font-size: 20px;
+	padding: 5% 10%;
+}
+
+#category{
+	text-align: right;
+}
+
+.tabDiv{
+	text-align: center;
+}
+
+.table, tr{
+	width: 1000px;
+	border-collapse: collapse;
+}
+
+#formTitle{
+	width: 25%;
+	padding: 20px;
+}
+
+.sprout{
+	color: #79bd9a;
+}
+
+#fundingCategory{
+	width: 150px; height:50px;
+}

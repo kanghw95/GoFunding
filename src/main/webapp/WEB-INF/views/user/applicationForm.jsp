@@ -13,6 +13,7 @@
 		<link href="<%=request.getContextPath() %>/resources/css/user/applicationForm.css?ver=1.0" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
+	<jsp:include page="/WEB-INF/views/header.jsp"/>
 		<div class="outer">
 		<div class="inner">
 		<i class="far fa-plus-square fa-2x"></i>&nbsp;내 펀딩 개설하기
@@ -206,5 +207,6 @@
 		</div>
 		</div>
 		<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/user/applicationForm.js"></script>
+	<jsp:include page="/WEB-INF/views/footer.jsp"/>
 	</body>
 	</html>

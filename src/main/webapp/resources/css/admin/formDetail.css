@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+.outer{
+	display: flex;
+	justify-content: center;
+}
+
+.inner{
+	width: 1140px;
+	position: relative;
+	display: inline-block;
+	font-size: 16px;
+	padding: 5% 10%;
+}
+
+#tabDiv{
+	
+}
+
+.table{
+	width: 1000px;
+	border-collapse: collapse;
+}
+
+.title{
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	height: 50px;
+	font-size: 17px;
+	text-align: center;
+}
+
+.titleCenter{
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	width: 50%;
+}
+
+.titleNo{
+	width: 10%;	
+}
+
+.titleId{
+	width: 40%;
+}
+
+.btns{
+	height: 50px;
+}
+
+#rejectForm{
+	width: 150px; height: 150px;
+	background: white;
+	border: 1px solid #ccc;
+	cursor: pointer;
+}
+
+#list, #permitForm{
+	width: 100px; height: 40px;
+	background: white;
+	border: none;	
+	cursor: pointer;
+}

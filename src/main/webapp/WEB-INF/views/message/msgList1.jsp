@@ -11,6 +11,7 @@
 <link href="<%=request.getContextPath() %>/resources/css/message/msgUserMaker.css?ver=1.0" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
 	<div id="outer">
 	<div class="tabs">
 	<i class="far fa-comments fa-2x"></i>&nbsp;메시지(회원-메이커)
@@ -34,8 +35,9 @@
                 var receiverId = $(this).next().children().val();
                 console.log(receiverId);
 		    	var pop = window.open("about:blank","content","width=430,height=800");
-       			pop.location.href="http://112.221.156.36:8090/sprout/message/msgRead1?receiverId="+receiverId;
+       			pop.location.href="http://localhost:8090/sprout/message/msgRead1?receiverId="+receiverId;
             });
 </script>
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

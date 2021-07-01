@@ -11,6 +11,7 @@
 <link href="<%=request.getContextPath() %>/resources/css/admin/formList.css?after" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
 	<div class="outer">
 		<div class="inner">
 <h3>펀딩 목록</h3>
@@ -50,7 +51,7 @@
 <script>
 $("[id^='formTitle']").click(function(event){
 	var fundingNo=$(this).children().next().val();
-	window.location.href="http://112.221.156.36:8090/sprout/funding/detail?no="+fundingNo;
+	window.location.href="http://localhost:8090/sprout/funding/detail?no="+fundingNo;
 });
 
 $("#fundingCategory").change(function(){
@@ -61,5 +62,6 @@ $("#fundingCategory").change(function(){
 	$("#frm").submit();
 });
 </script>
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

@@ -32,7 +32,7 @@
 	<input name="receiverId" value="${param.receiverId}" type="hidden">
 	<input name="makerChk" value="1" type="hidden">
 	<input id="txtMsg" name="msgContent" type="text">
-	<input id="sendBtn" value="Send" type="button">
+	<input id="sendBtn" value="전송" type="button">
 </form></div></div>
 <script>
 	var webSocket = new WebSocket("ws://localhost:8090/sprout/msgRead");

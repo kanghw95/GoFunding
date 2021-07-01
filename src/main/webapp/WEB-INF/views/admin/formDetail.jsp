@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
 	<div class="outer">
 		<div class="inner">
 			<h3>펀딩 신청관리 상세페이지</h3>
@@ -101,7 +102,7 @@
 								type: 'get',
 								success: function(){
 									alert('전송성공');
-									window.location.href="http://112.221.156.36:8090/sprout/formReject";
+									window.location.href="http://localhost:8090/sprout/formReject";
 								},
 								error: function(request, status, error){
 									alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -110,5 +111,6 @@
 						}
 					});
 				</script>
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

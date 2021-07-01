@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
 	<div id="outer">
 	<div class="tabs">
 	<i class="far fa-comments fa-2x"></i>&nbsp;메시지(회원-회원)
@@ -28,8 +29,9 @@
     $("body").on("click", "[id^=msgId]", function(event) {
                 var receiverId = $(this).text();
 		    	var pop = window.open("about:blank","content","width=430,height=800");
-       			pop.location.href="http://112.221.156.36:8090/sprout/message/msgRead2?receiverId="+receiverId;
+       			pop.location.href="http://localhost:8090/sprout/message/msgRead2?receiverId="+receiverId;
             });
 </script>
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>
