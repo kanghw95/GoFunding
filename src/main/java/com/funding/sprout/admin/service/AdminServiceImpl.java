@@ -86,6 +86,11 @@ public class AdminServiceImpl implements AdminService {
 	public List<Board> noticeList(Criteria cri) throws Exception { // 공지사항 조회
 		return adDao.noticeList(cri);
 	}
+	
+	@Override
+	public List<Qna> qnaList(Criteria cri) throws Exception { // Qna 조회
+		return adDao.qnaList(cri);
+	}
 
 	@Override
 	public int freeBoardCount() throws Exception { // 자유 게시판 글 수 조회
@@ -115,6 +120,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int noticeCount() throws Exception { // 공지사항 글 수 조회
 		return adDao.noticeCount();
+	}
+	
+	@Override
+	public int qnaCount() throws Exception { // Qna 글 수 조회
+		return adDao.qnaCount();
 	}
 	
 	@Override
@@ -178,6 +188,11 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	public List<Qna> selectQnaType(Qna qna) throws Exception { // Qna 유형 조회
+		return adDao.selectQnaType(qna);
+	}
+	
+	@Override
 	public List<Board> selectFRadio(Board board) throws Exception { // 자유 게시판 라디오박스 조회
 		return adDao.selectFRadio(board);
 	}
@@ -235,6 +250,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void deleteNBoardList(String boardNo) { // 공지사항 글 삭제
 		adDao.deleteNBoardList(boardNo);
+	}
+	
+	@Override
+	public void deleteQna(String qnaNo) { // Qna 글 삭제
+		adDao.deleteQna(qnaNo);
 	}
 	
 	@Override

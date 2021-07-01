@@ -66,14 +66,14 @@ td {
 }
 
 #searchBtn {
-	margin-left: 75px;
+	margin-left: 30px;
 	box-shadow: none;
 	border-radius: 10px;
 	height: 30px;
 }
 
 #deleteBtn {
-	margin-left: 65px;
+	margin-left: 30px;
 	background-color: rgb(255, 72, 0);
 	color: white;
 	box-shadow: none;
@@ -120,7 +120,7 @@ li {
 	border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
 }
 
-.userNo {
+.boardNo {
 	border: none;
 	text-align: center;
 	outline: none;
@@ -129,4 +129,23 @@ li {
 
 .noBox {
 	width: 30px;
+}
+
+.title {
+	width: 240px;
+}
+
+.uId {
+	width: 60px;
+}
+
+.mId {
+	width: 60px;
+}
+
+.reply {
+	box-shadow: none;
+	border-radius: 10px;
+	font-size: 5px;
+	width: 56px;
 }

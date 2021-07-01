@@ -82,7 +82,7 @@
 
 <body>
 	<fmt:parseDate value="${funding.fundingfin}" var="paymentday" pattern="yyyy-MM-dd HH:mm:ss"/> 
-	
+	<fmt:formatDate value="${funding.deliverydate}" type="DATE" var="deliverydate" pattern="yyyy년 MM월 dd일"/> 
 	<div class="wrap">
 		<div role="main" id="content" class="content">
 			<div>
@@ -90,10 +90,10 @@
 					 <div class="modal_wrap" style="text-align: center;">
 					 펀딩 참여전 확인하세요!
 					 <hr>
-					 지금 신청하고 있는 펀딩은 <fmt:formatDate value="${paymentday}" pattern="yyyy년 MM월 dd일"/> 일에 실제 결제가 이루어집니다.
+					 지금 신청하고 있는 펀딩은 ${deliverydate} 일에 배송이 시작됩니다.
 					 <hr>
-					 펀딩은 쇼핑과 달리 실결제 이후, 단순 변심으로 인한 취소, 환불이 어려울 수 있습니다.<br>
-					 결제 진행 전, 예약 결제 취소는 마이페이지에서 가능합니다.
+					 펀딩은 쇼핑과 달리 배송이후 단순 변심으로 인한 취소, 환불이 어려울 수 있습니다.<br>
+					 배송 진행 전 결제 취소는 마이페이지에서 가능합니다.
 					 <br>
 					 <form action="fundingpay" method="POST" id="fundingpay">
 					 <button type="button" id="noagree" style=" border: 1px solid black;">동의 안함</button>
@@ -109,9 +109,9 @@
 					 <input type="hidden" id="deliverycharge" name="deliverycharge" value="${funding.deliverycharge}">
 					 <input type="hidden" id="funding_no" name="funding_no" value="${funding.fundingno}">
 					 
-					 <input type="text" id="cheer_pay" name="cheer_pay" value = "">
-					 <input type="text" id="cheer_pay_price" name="cheer_pay_price" value = "">
-					 <input type="text" id="cheer_pay_EA" name="cheer_pay_EA" value = "0">
+					 <input type="hidden" id="cheer_pay" name="cheer_pay" value = "">
+					 <input type="hidden" id="cheer_pay_price" name="cheer_pay_price" value = "0">
+					 <input type="hidden" id="cheer_pay_EA" name="cheer_pay_EA" value = "0">
 					 
 					 </form>
 					</div>
@@ -270,7 +270,6 @@
 									<strong class="FundingDetailStoryContent_subtitle__mm0mM"> 결제 및 발송 예정일</strong>
 									<ul class="FundingDetailStoryContent_list_date__1xfUX">
 										<li class="FundingDetailStoryContent_item">
-										<fmt:formatDate value="${funding.deliverydate}" type="DATE" var="deliverydate" pattern="yyyy년 MM월 dd일"/> 
 											<span class="FundingDetailStoryContent_text FundingDetailStoryContent_highlight">
 											1차 결제 : <fmt:formatDate value="${paymentday}" pattern="yyyy년 MM월 dd일"/>, 예상 발송일 : ${deliverydate}
 											</span>
@@ -403,7 +402,7 @@
 				listbtn.setAttribute("aria-expanded","false");
 				list.style.display = 'none';
 				li${reward.rewardNo}.setAttribute('class','FundingDetailRewardCartItem_wrap');
-				li${reward.rewardNo}.innerHTML = "<strong class='FundingDetailRewardCartItem_name'>"+reword_val${reward.rewardNo}+"</strong> <div class='FundingDetailRewardCartItem_counter'> <input onchange='change();' id='reward-cart-item-${reward.rewardNo}' type='number' class='FundingDetailRewardCartItem_input_count' value='1'> <label for='reward-cart-item-${reward.rewardNo}' class='blind'>개수</label> <button type='button' onclick='minus${reward.rewardNo}();' class='FundingDetailRewardCartItem_button_minus'> <span class='FundingDetailRewardCartItem_icon_minus_'></span> <span class='blind'>-</span> </button> <button type='button' onclick='plus${reward.rewardNo}();' class='FundingDetailRewardCartItem_button_plus'> <span class='FundingDetailRewardCartItem_icon_plus'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount'><strong id='reword_price_id${reward.rewardNo}'>"+reword_price${reward.rewardNo}+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete${reward.rewardNo}' class='FundingDetailRewardCartItem_button_delete'> <span class='FundingDetailRewardCartItem_icon'></span> <span class='blind'>삭제</span></button>";
+				li${reward.rewardNo}.innerHTML = "<strong class='FundingDetailRewardCartItem_name'>"+reword_val${reward.rewardNo}+"</strong> <div class='FundingDetailRewardCartItem_counter'> <input id='reward-cart-item-${reward.rewardNo}' type='number' class='FundingDetailRewardCartItem_input_count' value='1'> <label for='reward-cart-item-${reward.rewardNo}' class='blind'>개수</label> <button type='button' onclick='minus${reward.rewardNo}();' class='FundingDetailRewardCartItem_button_minus'> <span class='FundingDetailRewardCartItem_icon_minus_'></span> <span class='blind'>-</span> </button> <button type='button' onclick='plus${reward.rewardNo}();' class='FundingDetailRewardCartItem_button_plus'> <span class='FundingDetailRewardCartItem_icon_plus'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount'><strong id='reword_price_id${reward.rewardNo}'>"+reword_price${reward.rewardNo}+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete${reward.rewardNo}' class='FundingDetailRewardCartItem_button_delete'> <span class='FundingDetailRewardCartItem_icon'></span> <span class='blind'>삭제</span></button>";
 				
 				funtotalprice = parseInt(funtotalprice) + parseInt(reword_price${reward.rewardNo});
 				funding_pay_total_price.value = parseInt(funding_pay_total_price.value) + parseInt(reword_price${reward.rewardNo});
@@ -460,7 +459,7 @@
 			listbtn.setAttribute("aria-expanded","false");
 			list.style.display = 'none';
 			li99.setAttribute('class','FundingDetailRewardCartItem_wrap');
-			li99.innerHTML = "<strong class='FundingDetailRewardCartItem_name'>"+cheer_val+"</strong> <div class='FundingDetailRewardCartItem_counter'> <input id='reward-cart-item-cheer1' onchange='change();' type='number' class='FundingDetailRewardCartItem_input_count' value='1'> <label for='reward-cart-item-cheer1' class='blind'>개수</label> <button type='button' onclick='cheer_minus();' class='FundingDetailRewardCartItem_button_minus'> <span class='FundingDetailRewardCartItem_icon_minus_'></span> <span class='blind'>-</span> </button> <button type='button' onclick='cheer_plus();' class='FundingDetailRewardCartItem_button_plus'> <span class='FundingDetailRewardCartItem_icon_plus'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount'><strong id='cheer_price_id'>"+cheer_price1.value+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete_cheer1' class='FundingDetailRewardCartItem_button_delete'> <span class='FundingDetailRewardCartItem_icon'></span> <span class='blind'>삭제</span></button>";
+			li99.innerHTML = "<strong class='FundingDetailRewardCartItem_name'>"+cheer_val+"</strong> <div class='FundingDetailRewardCartItem_counter'> <input id='reward-cart-item-cheer1' type='number' class='FundingDetailRewardCartItem_input_count' value='1'> <label for='reward-cart-item-cheer1' class='blind'>개수</label> <button type='button' onclick='cheer_minus();' class='FundingDetailRewardCartItem_button_minus'> <span class='FundingDetailRewardCartItem_icon_minus_'></span> <span class='blind'>-</span> </button> <button type='button' onclick='cheer_plus();' class='FundingDetailRewardCartItem_button_plus'> <span class='FundingDetailRewardCartItem_icon_plus'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount'><strong id='cheer_price_id'>"+cheer_price1.value+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete_cheer1' class='FundingDetailRewardCartItem_button_delete'> <span class='FundingDetailRewardCartItem_icon'></span> <span class='blind'>삭제</span></button>";
 			
 			funtotalprice = parseInt(funtotalprice) + parseInt(cheer_price1.value);
 			funding_pay_total_price.value = parseInt(funding_pay_total_price.value) + parseInt(cheer_price1.value);
@@ -622,15 +621,6 @@
 			}
 	}
 
-		function change () {
-			hm = document.form.amount;
-			sum = document.form.sum;
-
-				if (hm.value < 0) {
-					hm.value = 0;
-				}
-			sum.value = parseInt(hm.value) * sell_price;
-		}  
 		
 		Number.prototype.formatNumber = function(){
 

@@ -76,6 +76,10 @@ public class AdminDao {
 		return sqlSession.selectList("Admin.selectNotice", cri);
 	}
 	
+	public List<Qna> qnaList(Criteria cri) throws Exception { // Qna 조회
+		return sqlSession.selectList("Admin.selectQna", cri);
+	}
+	
 	public int freeBoardCount() throws Exception { // 자유 게시판 글 수 조회
 		return sqlSession.selectOne("Admin.countFreeBoard");
 	}
@@ -98,6 +102,10 @@ public class AdminDao {
 	
 	public int noticeCount() throws Exception { // 공지사항 글 수 조회
 		return sqlSession.selectOne("Admin.countNotice");
+	}
+	
+	public int qnaCount() throws Exception {
+		return sqlSession.selectOne("Admin.countQna"); // Qna 글 수 조회
 	}
 	
 	public List<Board> selectFBoardId(Board board) throws Exception { // 자유 게시판 작성자 조회
@@ -146,6 +154,14 @@ public class AdminDao {
 	
 	public List<Board> selectNBoardTitle(Board board) throws Exception { // 공지사항 제목 조회
 		return sqlSession.selectList("Admin.searchNBoardTitle", board);
+	}
+	
+	public List<Qna> selectQnaType(Qna qna) throws Exception { // Qna 유형 조회
+		Map<String, String> map = new HashMap<String, String>();
+		String type = qna.getQnaType();
+		System.out.println("유형 : " + type);
+		map.put("type", type);
+		return sqlSession.selectList("Admin.selectQnaType", map);
 	}
 	
 	public List<Board> selectFRadio(Board board) throws Exception { // 자유 게시판 라디오박스 조회
@@ -236,6 +252,10 @@ public class AdminDao {
 	
 	public void deleteNBoardList(String boardNo) { // 공지사항 글 삭제
 		sqlSession.delete("Admin.deleteNBoardList", boardNo);
+	}
+	
+	public void deleteQna(String qnaNo) { // Qna 글 삭제
+		sqlSession.delete("Admin.deleteQna", qnaNo);
 	}
 	
 	public int userStart() { // 회원 권한 복원

@@ -55,4 +55,12 @@ public class HomeController {
 		return "header";
 	}
 	
+	@RequestMapping(value = "/footer", method = RequestMethod.GET)
+	public String footertest(Locale locale, Model model) {
+		logger.info("header 테스트", locale);
+
+
+
+		return "footer";
+	}
 }

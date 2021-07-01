@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.joinTitle {
+	margin-bottom: 20px;	
+}
+
 [type='text'], [type='password'] {
 	width: 400px;
 	height: 40px;
@@ -10,6 +14,12 @@
 	border-radius: 5px;
 	border: 1px solid #ddd;
 }
+
+[type='checkbox']{
+	margin-top: 10px;
+	margin-bottom: 10px; 
+}
+
 
 .inputPost{
 	width: 200px; 

@@ -2,27 +2,26 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<title>SPROUT! 새싹나눔</title>
+<link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/header.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href=" resources/css/header.css" rel="stylesheet" type="text/css" />
-<link href=" resources/css/common.css" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <header>
 <div class="header">
 	<div class="header_content">	
 		<a href="#"> 
-		<img alt="logo" src="resources/bannerimg/logo3.png" width="100" height="65" id="logo">
+		<img alt="logo" src="<%=request.getContextPath() %>/resources/bannerimg/logoG80.png" class="logo">
 		</a>	
 		<div class="navbar">
 			<div class="navBox1">
 			<div class="dropdown">
 				<button class="dropbtn w3-xlarge"><i class="fa fa-bars" id="fulldropdown"></i></button>
-				<div class="dropdown-content" id="wholeMenu">
+			<div class="dropdown-content" id="wholeMenu">
 					<div class="menu1">
 					<br>
 					<span class="menu2" style="padding-left: 20px;">펀딩</span>
-					<ul>
+					<ul style="padding-left: 20px;">
 						<li><a href="#">일자리 창출</a></li>
 						<li><a href="#">공정 무역</a></li>
 						<li><a href="#">친환경</a></li>
@@ -130,18 +129,12 @@
 		</c:choose> --%>
 		<div class="hold">
 			<button type="button" id="createFunding" onclick="location.href='#'">펀딩 등록</button>		
-			<a href="#"><img class="image" src="resources/img/searching.png">
+			<a href="#"><img class="search" src="<%=request.getContextPath() %>/resources/img/searching.png">
 			</a>
 		</div>
 	</div>	
 </div>
 </header>
-
-<script>
-
-	
-	
-</script>
 
 
 

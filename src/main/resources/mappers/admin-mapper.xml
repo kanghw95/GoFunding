@@ -60,13 +60,24 @@
 		<result property="boardCnt" column="noticecnt"/>		
 		<result property="boardId" column="id"/>
 	</resultMap>
+	<resultMap type="Qna" id="qna">
+		<id property="qnaNo" column="qnano"/>
+		<result property="qnaTitle" column="qnatitle"/>		
+		<result property="qnaContent" column="qnacontent"/>
+		<result property="qnaType" column="qnatype"/>		
+		<result property="qnaDate" column="qnadate"/>		
+		<result property="qnaCnt" column="qnacnt"/>		
+		<result property="qnaId" column="id"/>
+		<result property="qnaMId" column="mid"/>
+		<result property="qnaADate" column="adate"/>
+	</resultMap>
 	
 	<!-- 페이징 + 사용자 조회 -->
 	<select id="selectUser" resultType="arraylist" resultMap="resultUser">
-		SELECT * FROM (SELECT ID, NAME, NICKNAME, PHONE, GENDER, AGE, POINT, REPORTCNT, USERNO
+        SELECT * FROM (SELECT ID, NAME, NICKNAME, PHONE, GENDER, AGE, POINT, REPORTCNT, USERNO
 		, ROW_NUMBER() OVER (ORDER BY USERNO ASC) AS RNUM FROM USERS) MP
 		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
-		ORDER BY USERNO ASC
+		ORDER BY USERNO ASC;
 	</select>
 	
 	<!-- 사용자 수 조회 -->
@@ -142,6 +153,14 @@
 		ORDER BY NOTICENO ASC
 	</select>
 	
+	<!-- 페이징 + Qna 조회 -->
+	<select id="selectQna" resultType="arraylist" resultMap="qna">
+		SELECT * FROM (SELECT QNANO, QNATITLE, QNACONTENT, QNATYPE, QNADATE, QNACNT, ID, MID, ADATE
+		, ROW_NUMBER() OVER (ORDER BY QNANO ASC) AS RNUM FROM QNA) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY QNANO ASC
+	</select>
+	
 	<!-- 자유 게시판 제목 조회 -->
 	<select id="searchFBoardTitle" resultType="arraylist" resultMap="freeBoard">
 		SELECT * FROM BULLETINEBOARD WHERE FREETITLE LIKE #{boardTitle} ORDER BY FREENO ASC
@@ -202,6 +221,25 @@
 		SELECT * FROM NOTICE WHERE ID LIKE #{boardId} ORDER BY NOTICENO ASC
 	</select>
 	
+	<!-- Qna 유형 조회 -->
+	<select id="selectQnaType" resultType="arraylist" resultMap="qna">
+		SELECT * FROM QNA 
+		<choose>
+			<when test="type == 1">
+				WHERE QNATYPE = '펀딩문의'
+			</when>
+			<when test="type == 2">
+				WHERE QNATYPE = '결제문의'
+			</when>
+			<when test="type == 3">
+				WHERE QNATYPE = '계정문의'
+			</when>
+			<otherwise>
+				WHERE QNATYPE = '기타'
+			</otherwise>
+		</choose>
+	</select>
+	
 	<!-- 자유 게시판 글 수 조회 -->
 	<select id="countFreeBoard" resultType="int">
 		SELECT COUNT(*) FROM BULLETINEBOARD
@@ -230,6 +268,11 @@
 	<!-- 공지사항 글 수 조회 -->
 	<select id="countNotice" resultType="int">
 		SELECT COUNT(*) FROM NOTICE
+	</select>
+	
+	<!-- Qna 글 수 조회 -->
+	<select id="countQna" resultType="int">
+		SELECT COUNT(*) FROM QNA
 	</select>
 	
 	<!-- 자유 게시판 라디오박스 조회 -->
@@ -342,14 +385,14 @@
 	
 	<!-- 공지사항 글 삭제 -->	
 	<delete id="deleteNBoardList">		
-	DELETE FROM NOTICE WHERE NOTICENO = #{boardNo}	
-	</delete>	
+		DELETE FROM NOTICE WHERE NOTICENO = #{boardNo}	
+	</delete>
 	
-	
-	
-	
-	
-	
+	<!-- Qna 글 삭제 -->
+	<delete id="deleteQna">
+		DELETE FROM QNA WHERE QNANO = #{qnaNo}
+	</delete>
+
 	<!-- 펀딩 목록 조회 : 전체 -->
 	<select id="fundingList" resultType="Application">
 		SELECT FUNDINGTITLE, FUNDINGNO FROM FUNDING WHERE FUNDINGSTATE = '1' ORDER BY FUNDINGNO

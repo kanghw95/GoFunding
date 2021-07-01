@@ -10,10 +10,11 @@ header{
 
 .header {
 	width: 100%;
-	height: 80px;
+	height: 90px;
 	position: fixed;
 	top: 0;
 	left: 0;
+	z-index: 1000;
 	background-color: #fff;
 	border-bottom: 1px solid #025951;
 }
@@ -30,9 +31,8 @@ header{
 
 .logo {
 	float: left;
-	margin-top: 21px;
-	width: 80px;
-	height: 80px;
+	margin-top: 5px;
+
 }
 
 /* navbar */
@@ -40,7 +40,7 @@ header{
 .navbar {
 	display: inline-block;
 	position: absolute;
-	top: 23px;
+	top: 30px;
 	right: 100px;
 	left: 100px;
 	text-align: left;
@@ -84,14 +84,29 @@ header{
 .dropdown-content {
 	display: none;
 	position: absolute;
-	background-color: #f9f9f9;
-	min-width: 1000px;
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	top: 60px;
+	min-width: 800px;
+	height: 250px;
 	z-index: 1;
+    padding: 16px 0 23px;
+    border: 1px solid #f5f5f5;
+    background-color: #fff;
+    box-shadow: 8px 8px 16px 0 rgb(0 0 0 / 10%);
 }
 
 .dropdown:hover .dropdown-content, .dropdown:hover .miniDropdown-content {
   display: block;
+}
+
+.menu1 {
+	float: left;
+	padding-right: 30px;
+}
+
+ul {
+	list-style-type: none;
+	text-align: left;
+	padding-right: 20px;
 }
 
 /* 드롭다운 메뉴 content (펀딩, 커뮤니티, 공지사항) */
@@ -99,6 +114,7 @@ header{
 .miniDropdown-content {
 	display: none;
 	position: absolute;
+	top: 60px;
 	background-color: #f9f9f9;
 	min-width: 150px;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -128,8 +144,8 @@ header{
 #btnLogin {
 	display: inline-block;
 	position: absolute;
-	right: 245px;
-	top: 24px;
+	right: 240px;
+	top: 28px;
 	width: 80px;
 	border: none;
 	padding: 5px;
@@ -150,7 +166,7 @@ header{
 	display: inline-block;
 	position: absolute;
 	right: 150px;
-	top: 24px;
+	top: 28px;
 	width: 80px;
 	border: none;
 	padding: 5px;
@@ -174,9 +190,9 @@ header{
 	top: 24px;
 }
 
-.image {
+.search {
 	position: absolute;
-	top: 24px;
+	top: 28px;
 	right: 10px;
 	width: 35px;
 	height: 35px;
@@ -184,7 +200,7 @@ header{
 
 #createFunding{
 	position: absolute;
-	top: 24px;
+	top: 28px;
 	right: 60px;
 	width: 80px;
 	border: none;

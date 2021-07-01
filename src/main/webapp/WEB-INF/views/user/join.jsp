@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPROUT! 새싹나눔</title>
 <link href="<%=request.getContextPath() %>/resources/css/userdetail_join/join.css" rel="stylesheet" type="text/css" />
-<link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -476,10 +481,12 @@ $(document).ready(function () {
 		
 	
 </script>
-
+</head>
 <body>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
+<div class="wrapper">
 	<div class="joinContainer">
-		<h2>SPROUT! 새싹나눔 회원가입</h2>
+		<h2 class="joinTitle">SPROUT! 새싹나눔 회원가입</h2>
 		<form id="frmJoin">
 			<div class="frmGroup">
 				<div id="idCheck"></div>
@@ -507,8 +514,8 @@ $(document).ready(function () {
 				<div id="nickCheck"></div>
 				<input type="text" class="inputBox" id="nickName" name="userNick" placeholder="사용하실 닉네임을 입력하세요">
 			</div>
-			<div class="frmGroup">
-				<label for="gender">성별</label>
+			<div class="frmGroup" style="margin-top: 10px; margin-bottom: 10px;">
+				<label for="gender" style="font-weight: bold; font-size: 20px;">성별</label>
 				<input type="radio" id="gender1" name="gender" value="m">남
 				<input type="radio" id="gender2" name="gender" value="f">여
 			</div>
@@ -533,8 +540,8 @@ $(document).ready(function () {
 				<input type="button" id="checkCerNumber" class="insideBtn" value="인증하기">
 			</div>
 			
-			<div class="frmGroup">
-				<span style="font-size: 16px; font-weight: bold;">관심사</span><br>
+			<div class="frmGroup" style="margin-top: 15px;">
+				<span style="font-size: 20px; font-weight: bold;">관심사</span><br>
 				<div style="margin-top:5px; margin-bottom: 5px;">
 				<label><input type="checkbox" class="fav" id="interest1" name="interest" value="일자리창출">일자리창출</label>
 				<label><input type="checkbox" class="fav" id="interest2" name="interest" value="친환경">친환경</label>
@@ -554,5 +561,7 @@ $(document).ready(function () {
 
 		</form>
 	</div>
+</div>
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

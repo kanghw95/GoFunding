@@ -125,6 +125,12 @@ public class FundingCtrl {
 		return mv;  // 펀딩 결제 페이지
 	}
 
+	@RequestMapping(value = "funding/fundingresult", method = RequestMethod.GET)
+	public ModelAndView fundingresult(ModelAndView mv) {
+		mv.setViewName("funding/fundingpayResult");
+		return mv;  // 펀딩 결제완료 페이지
+	}
+	
 	@RequestMapping(value = "funinsert", method = RequestMethod.GET)
 	public ModelAndView insertFunding() {
 		return null; // 펀딩 입력

@@ -12,13 +12,17 @@ public class Qna {
 	private int qnaRef; // qna댓글ref
 	private int qnaStep; // qna답글step
 	private int qnaLevel; // qna답글level
+	private String qnaType;
+	private String qnaId;
+	private String qnaMId;
+	private Date qnaADate;
 	
 	public Qna() {
 		
 	}
 	
 	public Qna(int qnaNo, String qnaTitle, String qnaContent, Date qnaDate, int qnaCnt, int qnaRef, int qnaStep,
-			int qnaLevel) {
+			int qnaLevel, String qnaType, String qnaId, String qnaMId, Date qnaADate) {
 		super();
 		this.qnaNo = qnaNo;
 		this.qnaTitle = qnaTitle;
@@ -28,12 +32,17 @@ public class Qna {
 		this.qnaRef = qnaRef;
 		this.qnaStep = qnaStep;
 		this.qnaLevel = qnaLevel;
+		this.qnaType = qnaType;
+		this.qnaId = qnaId;
+		this.qnaMId = qnaMId;
+		this.qnaADate = qnaADate;
 	}
 
 	@Override
 	public String toString() {
 		return "Qna [qnaNo=" + qnaNo + ", qnaTitle=" + qnaTitle + ", qnaContent=" + qnaContent + ", qnaDate=" + qnaDate
-				+ ", qnaCnt=" + qnaCnt + ", qnaRef=" + qnaRef + ", qnaStep=" + qnaStep + ", qnaLevel=" + qnaLevel + "]";
+				+ ", qnaCnt=" + qnaCnt + ", qnaRef=" + qnaRef + ", qnaStep=" + qnaStep + ", qnaLevel=" + qnaLevel
+				+ ", qnaType=" + qnaType + ", qnaId=" + qnaId + ", qnaMId=" + qnaMId + ", qnaADate=" + qnaADate + "]";
 	}
 	
 	public int getQnaNo() {
@@ -83,6 +92,38 @@ public class Qna {
 	}
 	public void setQnaLevel(int qnaLevel) {
 		this.qnaLevel = qnaLevel;
+	}
+
+	public String getQnaType() {
+		return qnaType;
+	}
+
+	public void setQnaType(String qnaType) {
+		this.qnaType = qnaType;
+	}
+
+	public String getQnaId() {
+		return qnaId;
+	}
+
+	public void setQnaId(String qnaId) {
+		this.qnaId = qnaId;
+	}
+
+	public String getQnaMId() {
+		return qnaMId;
+	}
+
+	public void setQnaMId(String qnaMId) {
+		this.qnaMId = qnaMId;
+	}
+
+	public Date getQnaADate() {
+		return qnaADate;
+	}
+
+	public void setQnaADate(Date qnaADate) {
+		this.qnaADate = qnaADate;
 	}
 	
 
