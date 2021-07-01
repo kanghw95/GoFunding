@@ -455,6 +455,12 @@
 		var cheer_pay_price = document.getElementById("cheer_pay_price");
 		
 		cheer_btn1.addEventListener("click",function(){
+			
+			if(funtotalprice == 0 || funtotalnumber == 0){
+				alert("라워드를 하나 이상 선택해주세요!");
+				return;
+			}
+			
 			ul_list.style.display = 'block';
 			listbtn.setAttribute("aria-expanded","false");
 			list.style.display = 'none';

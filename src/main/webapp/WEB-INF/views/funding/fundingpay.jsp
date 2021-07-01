@@ -173,11 +173,15 @@
 						</div>
 					</div>
 				</section>
-				<button type="button" id="FundingDetailApplicationContent_button_join__E6XFt" class="FundingDetailApplicationContent_button_join__E6XFt">펀딩 참여하기</button>
+				<div style="text-align: center;">
+					<button style="margin-right: 50px;" type="button" id="FundingDetailApplicationContent_button_join_card" class="FundingDetailApplicationContent_button_join__E6XFt">펀딩 참여하기<br>(카드결제)</button>
+					<button type="button" id="FundingDetailApplicationContent_button_join_bank" class="FundingDetailApplicationContent_button_join__E6XFt">펀딩 참여하기<br>(계좌이체)</button>
+				</div>
 			</div>
 		</div>
 	</div>
 	<script>
+	var reward = null
 	//배송지 직접입력 
 	var dafault_address_btn = document.getElementById("wa_default_address");
 	var new_address_btn = document.getElementById("wa_new_address");
@@ -281,51 +285,96 @@
 	    IMP.request_pay({ // param
 	        pg: "html5_inicis",
 	        pay_method: "card",
-	        merchant_uid: "ORD20180131-0000012", //new Date().getTime(), 추가예정
-	        name: "${reward[0]}",
+	        merchant_uid: 'merchant_' + new Date().getTime(),
+	        name: reward,
 	        amount: "${funding_pay_price+funding.deliverycharge}",
-	        buyer_email: "gildong@gmail.com",
-	        buyer_name: "강현우",
-	        buyer_tel: "010-4242-4242",
-	        buyer_addr: "서울특별시 강남구 신사동",
+	        buyer_email: "${sessionScope.user.userEmail}",
+	        buyer_name: "${sessionScope.user.userName}",
+	        buyer_tel: "${sessionScope.user.userPhone}",
+	        buyer_addr: "${sessionScope.user.userAddress}",
 	        buyer_postcode: "01181"
 	    }, function (rsp) { // callback
-		    if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-		        // jQuery로 HTTP 요청
-		        	jQuery.ajax({
-		            url: "https://www.myservice.com/payments/complete", // 가맹점 서버
-		            method: "POST",
-		            headers: { "Content-Type": "application/json" },
-		            data: {
-		                imp_uid: rsp.imp_uid,
-		                merchant_uid: rsp.merchant_uid
-		            }
-		        }).done(function(data) {
+	   		 	console.log(rsp);
+	        if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+	            // jQuery로 HTTP 요청
+	           $.ajax({
+	        	type : "POST",
+	        	url : "/verifyIamport/" + rsp.imp_uid 
+	        }).done(function(data) {
 		            //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-		            if ( everythings_fine ) {
-		             var msg = '결제가 완료되었습니다.';
+		            
+		           	if(rsp.paid_amount == data.response.amount){
+		           	 var msg = '결제가 완료되었습니다.';
 		             msg += '\n고유ID : ' + rsp.imp_uid;
 		             msg += '\n상점 거래ID : ' + rsp.merchant_uid;
 		             msg += '\결제 금액 : ' + rsp.paid_amount;
 		             msg += '카드 승인번호 : ' + rsp.apply_num;
-
-		             alert(msg);
-		            } else {
-			              var msg = '결제에 실패하였습니다.';
-			              msg += '에러내용 : ' + rsp.error_msg;
-
-			              alert(msg);
-			          }
-		           });
-		          } 
-		      });
+		             
+					console.log(msg);
+					alert(msg);
+		           	 
+		           	location.href="<%=request.getContextPath()%>/funding/fundingresult"; 
+		        	} else {
+		        		alert("결제 실패");
+		        	}
+		           	
+		           })
+		          }else{
+			          console.log(rsp.error_msg);
+	          		  alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+	          }
+		     });
 	  }
 	
+	function requestBankPay() {
+		 // IMP.request_pay(param, callback) 호출
+	    IMP.request_pay({ // param
+	        pg: "html5_inicis",
+	        pay_method: "vbank",
+	        merchant_uid: 'merchant_' + new Date().getTime(),
+	        name: reward,
+	        amount: "${funding_pay_price+funding.deliverycharge}",
+	        buyer_email: "${sessionScope.user.userEmail}",
+	        buyer_name: "${sessionScope.user.userName}",
+	        buyer_tel: "${sessionScope.user.userPhone}",
+	        buyer_addr: "${sessionScope.user.userAddress}",
+	        buyer_postcode: "01181"
+	    }, function (rsp) { // callback
+	   		 	console.log(rsp);
+	        if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+	            // jQuery로 HTTP 요청
+	           $.ajax({
+	        	type : "POST",
+	        	url : "/verifyIamport/" + rsp.imp_uid 
+	        }).done(function(data) {
+		            //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+		            
+		           	if(rsp.paid_amount == data.response.amount){
+		           	 var msg = '결제가 완료되었습니다.';
+		             msg += '\n고유ID : ' + rsp.imp_uid;
+		             msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+		             msg += '\결제 금액 : ' + rsp.paid_amount;
+		             msg += '카드 승인번호 : ' + rsp.apply_num;
+		             console.log(msg);
+		           	 alert(msg);
+		           	 
+		           	location.href="<%=request.getContextPath()%>/funding/fundingresult"; 
+		        	} else {
+		        		alert("결제 실패");
+		        	}
+		           	
+		           })
+		          }else{
+			          console.log(rsp.error_msg);
+	          		  alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+	          }
+		     });
+	  }
+
 	
 	// 펀딩 참여하기 체크리스트 검사
-	var join_btn =  document.getElementById("FundingDetailApplicationContent_button_join__E6XFt"); 
-
-	join_btn.addEventListener("click",function(){
+	var join_btn_bank =  document.getElementById("FundingDetailApplicationContent_button_join_bank"); 
+	join_btn_bank.addEventListener("click",function(){
 		for(var i = 1; i<4; i++){
 			var check_i = document.getElementById("agree_terms_"+i); 
 				if(check_i.checked != true){
@@ -333,7 +382,44 @@
 					return;
 				}
 			}
-		requestPay()
+		<c:set var="doneLoop" value="false"/>
+			<c:forEach items="${reward}" var="reward" varStatus = "status">
+				<c:if test="${not doneLoop}">
+						<c:if test = "${reward ne '' && reward ne null}">
+							<c:set var="doneLoop" value="true"/>
+								reward = "${reward}";
+						</c:if>
+				</c:if>
+		</c:forEach>
+		
+		requestBankPay();
+});
+	
+	var join_btn_card =  document.getElementById("FundingDetailApplicationContent_button_join_card"); 
+	join_btn_card.addEventListener("click",function(){
+		for(var i = 1; i<4; i++){
+			var check_i = document.getElementById("agree_terms_"+i); 
+				if(check_i.checked != true){
+					alert("필수 약관에 동의해주세요!");
+					return;
+				}
+			}
+
+		<c:set var="doneLoop" value="false"/>
+			<c:forEach items="${reward}" var="reward" varStatus = "status">
+				<c:if test="${not doneLoop}">
+						<c:if test = "${reward ne '' && reward ne null}">
+							<c:set var="doneLoop" value="true"/>
+								reward = "${reward}";
+						</c:if>
+				</c:if>
+		</c:forEach>
+		
+		requestPay();
+		
+		console.log(reward);
+		
+		
 });
 	
 	</script>
@@ -375,6 +461,9 @@ function sample6_execDaumPostcode() {
 				}
 			}).open();
 }
+
+
+
 </script>
 </body>
 </html>

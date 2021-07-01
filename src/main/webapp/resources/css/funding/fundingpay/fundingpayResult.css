@@ -1,0 +1,194 @@
+@charset "UTF-8";
+
+
+.FundingDetailReportContent_wrap__3dTJX {
+    width: 1140px;
+    margin: 0 auto;
+    padding: 0 40px 188px;
+}
+
+.FundingDetailReportContent_title__Ac_gs {
+    padding: 75px 0 73px;
+    font-family: NanumSquareWebFont,dotum,Sans-serif;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1.27;
+    letter-spacing: -.6px;
+    text-align: center;
+}
+
+.FundingDetailReportContent_section__2eXEY {
+    border: 1px solid rgba(0,0,0,.08);
+}
+
+.FundingDetailReportContent_header__fkv3p {
+    position: relative;
+    padding: 25px 260px 23px 39px;
+}
+
+.FundingDetailReportContent_funder__3nM2Q {
+    display: block;
+    font-size: 15px;
+    line-height: 1.13;
+    color: #666;
+    letter-spacing: -.2px;
+}
+
+.FundingDetailReportContent_subject__z9q_J {
+    display: block;
+    margin-top: 8px;
+    font-size: 21px;
+    line-height: 1.35;
+    color: #333;
+    letter-spacing: -.3px;
+}
+
+.FundingDetailReportContent_total__jhdNn {
+    position: absolute;
+    right: 40px;
+    bottom: 28px;
+    font-size: 17px;
+    line-height: 1.11;
+}
+
+.FundingDetailReportContent_total__jhdNn .FundingDetailReportContent_amount__1UFlV {
+    color: #1f9eff;
+}
+
+.FundingDetailReportContent_total__jhdNn .FundingDetailReportContent_number__245_F {
+    display: inline-block;
+    margin: -2px 0 -3px 10px;
+    font-family: NanumSquareWebFont,dotum,Sans-serif;
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    vertical-align: bottom;
+}
+
+.FundingDetailReportContent_header__fkv3p:after {
+    display: table;
+    table-layout: fixed;
+    clear: both;
+    content: "";
+}
+
+.FundingDetailReportContent_list_order__3n7yw {
+    padding: 39px 39px 20px;
+    border-top: 1px solid rgba(0,0,0,.08);
+    font-size: 15px;
+    line-height: 1.33;
+    letter-spacing: -.2px;
+}
+
+.FundingDetailReportContent_list_order__3n7yw .FundingDetailReportContent_name__-jyUO {
+    float: left;
+    width: 117px;
+    margin: 0 28px 18px 0;
+    color: #828282;
+}
+
+.FundingDetailReportContent_list_order__3n7yw .FundingDetailReportContent_description__AL7vy {
+    overflow: hidden;
+    margin-bottom: 18px;
+    color: #1f9eff;
+}
+
+.FundingDetailReportContent_list_order__3n7yw .FundingDetailReportContent_item___GCD9 {
+    color: #000;
+}
+
+.FundingDetailReportContent_list_order__3n7yw .FundingDetailReportContent_item_name__3Ke91 {
+    float: left;
+    max-width: 700px;
+    color: #333;
+}
+
+.FundingDetailReportContent_list_order__3n7yw .FundingDetailReportContent_item_price__12MHY {
+    float: right;
+    color: #828282;
+}
+
+.FundingDetailReportContent_list_order__3n7yw .FundingDetailReportContent_item___GCD9:after {
+    display: table;
+    table-layout: fixed;
+    clear: both;
+    content: "";
+}
+
+.FundingDetailReportContent_list_order__3n7yw .FundingDetailReportContent_item___GCD9+.FundingDetailReportContent_item___GCD9 {
+    margin-top: 6px;
+}
+
+
+.FundingDetailReportContent_list_order__3n7yw:after {
+    display: table;
+    table-layout: fixed;
+    clear: both;
+    content: "";
+}
+
+.FundingDetailReportContent_links__2Rupu {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.FundingDetailReportContent_link_list__CKVq0 {
+    background-color: #1f9eff;
+}
+
+.FundingDetailReportContent_link_my__2ANDe {
+    margin-left: 10px;
+    background-color: #666;
+}
+.FundingDetailReportContent_link_list__CKVq0, .FundingDetailReportContent_link_my__2ANDe {
+    display: inline-block;
+    width: 160px;
+    padding: 13px 0 12px;
+    border: 1px solid rgba(0,0,0,.03);
+    border-radius: 3px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+dl {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+    display: block;
+}
+
+body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, select, table, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    display: block;
+}
+
+body {
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+}
+
+body, button, input, select, table, textarea {
+    font-family: NanumBarunGothic,dotum,Sans-serif;
+    font-size: 14px;
+    line-height: 19px;
+    color: #202020;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}

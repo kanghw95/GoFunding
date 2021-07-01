@@ -68,7 +68,7 @@
     display: inline-block;
     width: 13px;
     height: 10px;
-    background-image: url(../fundingimg/check.svg);
+    background-image: url(../../fundingimg/check.svg);
     content: "";
 }
 .fundingcontent_filter {
