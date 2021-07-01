@@ -47,10 +47,17 @@ public class ApplicationMgtCtrl {
 	
 	@RequestMapping(value = "/fundingListCate")
 	public ModelAndView fundingListCate(@RequestParam() String fundingCategory) { //펀딩 목록 조회 : 카테고리
-		List<Application> list=applicationMgtService.fundingListCate(fundingCategory);
-		System.out.println("목록 "+list);
+		List<Application> vo;
 		ModelAndView mv=new ModelAndView();
-		mv.addObject("fundingList",list);
+		if(fundingCategory==null||fundingCategory=="") {
+			vo=applicationMgtService.fundingList();
+			mv.addObject("fundingList", vo);
+			mv.setViewName("admin/fundingList");
+			return mv;
+		}
+		vo=applicationMgtService.fundingListCate(fundingCategory);
+		System.out.println("목록 "+vo);
+		mv.addObject("fundingList",vo);
 		mv.setViewName("admin/fundingList");
 		
 		return mv;
@@ -154,7 +161,7 @@ public class ApplicationMgtCtrl {
 					try {
 						PrintWriter wr=response.getWriter();
 						wr.println("<script type='text/javascript'>"); 
-						wr.println("location.href='http://localhost:8090/sprout/formList';"); 
+						wr.println("location.href='http://112.221.156.36:8090/sprout/formList';"); 
 						wr.println("</script>");
 						wr.flush();
 					} catch (IOException e) {
@@ -173,7 +180,7 @@ public class ApplicationMgtCtrl {
 				try {
 					PrintWriter wr=response.getWriter();
 					wr.println("<script type='text/javascript'>"); 
-					wr.println("location.href='http://localhost:8090/sprout/formList';"); 
+					wr.println("location.href='http://112.221.156.36:8090/sprout/formList';"); 
 					wr.println("</script>");
 					wr.flush();
 				} catch (IOException e) {

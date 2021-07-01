@@ -33,9 +33,7 @@
 	<input name="makerChk" value="0" type="hidden">
 	<input id="txtMsg" name="msgContent" type="text">
 	<input id="sendBtn" value="전송" type="button"><br>
-</form>
-	</div>
-	</div>
+</form></div></div>
 <script>
 	var webSocket = new WebSocket("ws://localhost:8090/sprout/msgRead");
 	//콘솔 텍스트 에리어 오브젝트

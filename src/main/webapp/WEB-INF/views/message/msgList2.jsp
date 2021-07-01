@@ -27,8 +27,8 @@
 	<script>
     $("body").on("click", "[id^=msgId]", function(event) {
                 var receiverId = $(this).text();
-		    	var pop = window.open("about:blank","content","width=500,height=800");
-       			pop.location.href="http://localhost:8090/sprout/message/msgRead2?receiverId="+receiverId;
+		    	var pop = window.open("about:blank","content","width=430,height=800");
+       			pop.location.href="http://112.221.156.36:8090/sprout/message/msgRead2?receiverId="+receiverId;
             });
 </script>
 </body>

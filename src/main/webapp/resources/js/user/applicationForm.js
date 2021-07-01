@@ -74,8 +74,10 @@ $('#closeInfoBtn').click(function(){ //삭제 버튼 클릭 시 아래 행 부�
 function add_makerInfos() { //메이커 참고 정보 기입 행 추가 생성
 	var tbody = document.getElementById('tbody1');
 	var row = tbody.insertRow(tbody.rows.length);
-	var td = row.insertCell(0);
-	td.innerHTML = '<tr><td></td><td><input type="text" name="makerInfo" placeholder="내용을 입력해주세요."></td></tr>';
+	var td1 = row.insertCell();
+	var td2 = row.insertCell();
+	td1.setAttribute("width","260");
+	td2.innerHTML = '<input type="text" id="addInputInfo" name="makerInfo" class="inputText" placeholder="내용을 입력해주세요.">';
 };
 
 $('#addReward').click(function () { //추가 버튼 클릭 이벤트 아래 메소드 호출
@@ -85,7 +87,6 @@ $('#addReward').click(function () { //추가 버튼 클릭 이벤트 아래 메�
 	} else {
 		alert("입력은 5개까지 가능합니다.");
 	}
-	
 });
 
 $('.closeRewardBtn').click(function(){ //삭제 버튼 클릭 시 아래 행 부터 삭제
@@ -101,10 +102,11 @@ $('.closeRewardBtn').click(function(){ //삭제 버튼 클릭 시 아래 행 부
 function add_rewards() { //리워드 추가 정보 기입 행 추가 생성
 	var tbody = document.getElementById('tbody2');
 	var row = tbody.insertRow(tbody.rows.length);
-	var td = row.insertCell(0);
-	td.innerHTML = '<tr id="rewardInfo'+rewardCnt+'"><input type="text" id="rewardPrice" name="rewardPrice" placeholder="금액">' +
-		'&nbsp;원 달성 시&nbsp;<input type="text" id="rewardTitle" name="rewardTitle" placeholder="리워드 종류">&nbsp;' +
-		'최대&nbsp;<input type="text" name="rewardEA" id="rewardEA" placeholder="개수">개';
+	var td1 = row.insertCell();
+	var td2 = row.insertCell();
+	td1.innerHTML = '<input type="text" id="rewardPrice" class="inputReward" name="rewardPrice" placeholder="금액">' +
+		'&nbsp;원 달성 시&nbsp;<input type="text" id="rewardTitle" class="inputReward" name="rewardTitle" placeholder="리워드 종류">&nbsp;';
+	td2.innerHTML = '최대&nbsp;<input type="text" class="inputReward" name="rewardEA" id="rewardEA" placeholder="개수">개';
 };
 
 $('#addInfo').click(function(){ //세부사항 작성 영역 보이기감추기
@@ -154,6 +156,7 @@ $("#privacyChk").change(function(){ //개인정보 수집 및 이용 동의 체�
 		}
 	} else {
 		isprivacy=false;
+		$("#submitBtn").attr("disabled",true);
 	}
 })
 

@@ -8,30 +8,16 @@
 <meta charset="UTF-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.2/sockjs.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="<%=request.getContextPath() %>/resources/css/message/adminUserRead.css?ver=1.0" rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
-<style type="text/css">
-#text-3{
-	border: 1px solid black;
-	width:400px;
-	height:auto;
-}
-#text-4{
-	border: 1px solid black;
-	width:400px;
-	height:auto;
-	text-align:right;
-}
-.table{
-	width:400px;
-	height:30px;
-}
-</style>
 </head>
 <body>
+	<div id="outer">
+	<div id="inner">
 	<div id="textArea">
-		<table class="table" border="1">
+		<table class="table">
 	<c:forEach var="msg" items="${msg}" varStatus="status">
-			<tr id="text-${msg.msgRoot}">
+			<tr id="text-${msg.msgRoot}" class="textRow">
 				<td>${msg.msgContent}<br>
 				<c:if test="${msg.msgRoot eq '3'.charAt(0)}">
 				${msg.senderName}<br></c:if>
@@ -47,7 +33,7 @@
 	<input name="makerChk" value="1" type="hidden">
 	<input id="txtMsg" name="msgContent" type="text">
 	<input id="sendBtn" value="Send" type="button">
-</form>
+</form></div></div>
 <script>
 	var webSocket = new WebSocket("ws://localhost:8090/sprout/msgRead");
 	//콘솔 텍스트 에리어 오브젝트

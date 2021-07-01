@@ -8,34 +8,18 @@
 <meta charset="UTF-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.2/sockjs.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="<%=request.getContextPath() %>/resources/css/message/userUserRead.css?ver=1.0" rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
-<style type="text/css">
-
-#textArea1{
-	border: 1px solid black;
-	width:400px;
-	height:auto;
-}
-#textArea2{
-	border: 1px solid black;
-	width:400px;
-	height:auto;
-	display:inline-block;
-	text-align:right;
-}
-.table{
-	width:400px;
-	height:30px;
-}
-</style>
 </head>
 <body>
+	<div id="outer">
+	<div id="inner">
 	<c:set var="userId" value="${param.receiverId}"></c:set>
 	<c:forEach var="msg" items="${msg}" varStatus="status">
 	<c:if test="${msg.senderId eq userId}">
 		<div id="textArea1">
 		<table class="table">
-			<tr>
+			<tr class="textRow">
 				<td>
 				${msg.msgContent}<br>
 				${msg.senderName}<br>
@@ -47,8 +31,8 @@
 	</div></c:if>
 	<c:if test="${msg.senderId ne userId}">
 		<div id="textArea2">
-		<table class="table" border="1">
-			<tr>
+		<table class="table">
+			<tr class="textRow">
 				<td>
 				${msg.msgContent}<br>
 				<fmt:formatDate value="${msg.msgDate}" pattern="yy-MM-dd"/></td>
@@ -59,10 +43,10 @@
 	</div></c:if>
 	</c:forEach>
 <form id="frm">
-	<input id="userId2" name="receiverId" value="${param.receiverId}" type="text">
+	<input id="userId2" name="receiverId" value="${param.receiverId}" type="hidden">
 	<input id="txtMsg" name="msgContent" type="text">
-	<input id="sendBtn" value="Send" type="button"><br>
-</form>
+	<input id="sendBtn" value="전송" type="button">
+</form></div></div>
 <script>
 	var webSocket = new WebSocket("ws://localhost:8090/sprout/msgRead");
 	//콘솔 텍스트 에리어 오브젝트

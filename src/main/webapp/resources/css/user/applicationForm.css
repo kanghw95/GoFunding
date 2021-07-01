@@ -1,26 +1,166 @@
 @charset "UTF-8";
 
-			.wrap{
-				position:fixed; 
-				background: rgba(0,0,0,0.8);
-				top: 0; left: 0; bottom: 0; right: 0;
-				display:none;
-			}
-			.modal{
-				position: fixed;
-				top: 50%; left: 50%;
-				width: 500px; height: 500px;
-				-webkit-transform: translate(-50%, -50%);
-				-moz-transform: translate(-50%, -50%);
-				-ms-transform: translate(-50%, -50%);
-				-o-transform: translate(-50%, -50%);
-				transform: translate(-50%, -50%);
-				background-color: white;
-			}
-			#detailTitle{
-				font-size: 20px;
-				text-align: center;
-			}
-			.close{
-				text-align: right;
-			}
+.outer{
+	display: flex;
+	justify-content: center;
+}
+
+.inner{
+	width: 1140px;
+	position: relative;
+	display: inline-block;
+	font-size: 20px;
+	padding: 5% 10%;
+}
+
+.table{
+	border-collapse: collapse;
+}
+
+#notice{
+	border: 1px solid #e2e2e2;
+	padding: 0 20px;
+	font-size: 15px; font-weight: bold;
+	border-radius: 5px;
+}
+
+.noticeColor{
+	color: #79bd9a;
+}
+
+.modalBtn{
+	color: white;
+	border: none;
+	background: rgba( 255, 255, 255, 0 );
+}
+
+#standards{
+	width: 120px; height: 30px;
+	border: none; border-radius: 5px;
+	background: #3498db;
+	color: white; font-size: 15px;
+	cursor: pointer;
+}
+
+.standardsDiv{
+	text-align: right;
+}
+
+.line1{
+	width: 270px;
+	box-sizing: border-box;
+	background: #e2e2e2;
+	text-align: center;
+	padding: 20px;
+	font-size: 18px;
+}
+
+.line2{
+	width: 870px;
+	box-sizing: border-box;
+	padding: 20px;
+	font-size: 15px;
+}
+
+.line3{
+	width: 570px;
+	padding: 0;
+	vertical-align: top;
+}
+
+.line4{
+	width: 570px;
+	padding: 0;
+	vertical-align: top;
+}
+
+#addInputInfo{
+	margin: 10px 0 0 20px;
+}
+
+.inputText{
+	width: 300px; height: 30px;
+}
+
+#chkInform, #openPrivacy{
+	border: none;
+}
+
+#email, .inputReward{
+	height: 30px;
+}
+
+#nameChk, #addInput, #closeInfoBtn{
+	border: none;
+	background: white;
+	height: 30px;
+	cursor: pointer;
+}
+
+.basicInfo{
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+.wrap {
+	position: fixed;
+	background: rgba(0, 0, 0, 0.8);
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	display: none;
+}
+
+.modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 500px;
+	height: 600px;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 30px 20px;
+	font-size: 15px;
+}
+
+#detailTitle {
+	font-size: 20px;
+	text-align: center;
+}
+
+.close {
+	text-align: right;
+}
+
+.btnDiv, .submitBtn{
+	text-align: center;
+}
+
+#addInfo, .closeRewardBtn, #addReward, #submitBtn{
+	width: 250px; height: 50px;
+	font-size:15px;
+	border: none;
+	background: #4d4e4f;
+	color: white;
+	border-radius: 5px;
+}
+
+.projTabs{
+	border-collapse: seperate;
+	border-spacing: 0 30px;
+}
+
+.closeRewardBtn, #addReward{
+	width: auto; height: 30px;
+	padding: 0 15px;
+}
+
+#openPrivacy{
+	background: white;
+	cursor: pointer;
+}
