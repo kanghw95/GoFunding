@@ -13,12 +13,12 @@ public class Board {
 	private Date boardDate; // 글 작성일
 	private int boardCnt; // 글 조회수
 	private String boardId; // 글 작성자
-
+	private int likecnt; // 추천수
 	public Board() {
 
 	}
 
-	public Board(int boardNo, String boardTitle, String boardContent, Date boardDate, int boardCnt, String boardId) {
+	public Board(int boardNo, String boardTitle, String boardContent, Date boardDate, int boardCnt, String boardId, int likecnt) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -26,12 +26,13 @@ public class Board {
 		this.boardDate = boardDate;
 		this.boardCnt = boardCnt;
 		this.boardId = boardId;
+		this.likecnt = likecnt;
 	}
 
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", boardDate=" + boardDate + ", boardCnt=" + boardCnt + ", boardId=" + boardId + "]";
+				+ ", boardDate=" + boardDate + ", boardCnt=" + boardCnt + ", boardId=" + boardId + ", likecnt=" + likecnt + "]";
 	}
 
 	public int getBoardNo() {
@@ -80,6 +81,14 @@ public class Board {
 
 	public void setBoardId(String boardId) {
 		this.boardId = boardId;
+	}
+
+	public int getLikecnt() {
+		return likecnt;
+	}
+
+	public void setLikecnt(int likecnt) {
+		this.likecnt = likecnt;
 	}
 
 }

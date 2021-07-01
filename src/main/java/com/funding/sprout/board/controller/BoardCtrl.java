@@ -46,14 +46,13 @@ public class BoardCtrl {
 			
 			System.out.println("listCount:" + listCount);
 			if (keyword != null && !keyword.equals(""))
-				mv.addObject("list", boService.searchList(keyword));
+				mv.addObject("list", boService.searchList(keyword)); // TODO
 			else {
 				ArrayList<Board> aaa = new ArrayList<Board>(boService.selectList(currentPage, LIMIT));
 				System.out.println("aaa: " + aaa.size());
 				System.out.println("aaa: " + aaa.get(0).toString());
 				mv.addObject("list", aaa);
 			}
-			mv.addObject("list", boService.selectList(currentPage, LIMIT));
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount);
@@ -81,7 +80,6 @@ public class BoardCtrl {
 		// 방법1
 		try {
 			Board data = boService.selectBoard(0, boardNo); // no값넘김 조회수증가
-//	 		boService.getLike(boardNo); // 좋아요
 			System.out.println("data : " + data.toString());
 			int currentPage = page;
 			int likecnt = 0; // 추천수

@@ -8,6 +8,7 @@
 		<result column="FREEDATE" property="boardDate" />
 		<result column="FREECNT" property="boardCnt" />
 		<result column="ID" property="boardId" />
+		<result column="CNT" property="likecnt"/>
 	</resultMap>
 
 	<!-- 게시글 목록 -->
@@ -38,7 +39,12 @@
 
 	<!-- 페이지당 게시글 조회 / 번호정렬 -->
 	<select id="selectList" resultMap="resultBoard">
-		SELECT * FROM BULLETINEBOARD ORDER BY FREENO ASC
+	SELECT B.*,C.CNT
+	FROM BULLETINEBOARD B
+	LEFT OUTER JOIN (SELECT count(*) as CNT,FREENO FROM BULLETINLIKE group by
+	FREENO) C
+	ON B.FREENO = C.FREENO
+	ORDER BY B.FREENO DESC
 	</select>
 	
 	<!-- 글 조회수 증가-->

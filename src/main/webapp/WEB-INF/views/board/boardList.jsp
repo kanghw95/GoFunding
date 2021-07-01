@@ -73,7 +73,7 @@
 					<td align="center">${vo.boardId }</td>
 					
 					<td align="center">${vo.boardCnt }</td>
-					<td align="center">${likenct }</td> <!-- 추천 -->
+					<td align="center">${vo.likecnt }</td> <!-- 추천 -->
 					<td align="center">${vo.boardDate }</td>
 				</tr>
 			</c:forEach>
