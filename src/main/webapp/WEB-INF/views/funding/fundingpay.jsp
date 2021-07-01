@@ -299,19 +299,19 @@
 	            // jQuery로 HTTP 요청
 	           $.ajax({
 	        	type : "POST",
-	        	url : "/verifyIamport/" + rsp.imp_uid 
+	        	url : "<%=request.getContextPath()%>/verifyIamport/" + rsp.imp_uid,
 	        }).done(function(data) {
 		            //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
 		            
 		           	if(rsp.paid_amount == data.response.amount){
-		           	 var msg = '결제가 완료되었습니다.';
-		             msg += '\n고유ID : ' + rsp.imp_uid;
-		             msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-		             msg += '\결제 금액 : ' + rsp.paid_amount;
-		             msg += '카드 승인번호 : ' + rsp.apply_num;
-		             
-					console.log(msg);
-					alert(msg);
+			           	 var msg = '결제가 완료되었습니다.';
+			             msg += '\n고유ID : ' + rsp.imp_uid;
+			             msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+			             msg += '\결제 금액 : ' + rsp.paid_amount;
+			             msg += '카드 승인번호 : ' + rsp.apply_num;
+			             console.log(data);
+			             console.log(msg);
+			           	 alert("결제 완료");
 		           	 
 		           	location.href="<%=request.getContextPath()%>/funding/fundingresult"; 
 		        	} else {
@@ -345,7 +345,7 @@
 	            // jQuery로 HTTP 요청
 	           $.ajax({
 	        	type : "POST",
-	        	url : "/verifyIamport/" + rsp.imp_uid 
+	        	url : "<%=request.getContextPath()%>/verifyIamport/" + rsp.imp_uid,
 	        }).done(function(data) {
 		            //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
 		            
@@ -355,8 +355,9 @@
 		             msg += '\n상점 거래ID : ' + rsp.merchant_uid;
 		             msg += '\결제 금액 : ' + rsp.paid_amount;
 		             msg += '카드 승인번호 : ' + rsp.apply_num;
+		             console.log(data);
 		             console.log(msg);
-		           	 alert(msg);
+		           	 alert("결제 완료");
 		           	 
 		           	location.href="<%=request.getContextPath()%>/funding/fundingresult"; 
 		        	} else {
