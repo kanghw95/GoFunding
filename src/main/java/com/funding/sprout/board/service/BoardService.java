@@ -22,17 +22,32 @@ public interface BoardService {
 	
 	Board selectOne(int boardNo); // 글 가져오기
 	
-
+	
+	
+	
+	
+	
+	
+	
+	
+	int checklike(int boardNo, String userId); // 게시글 추천 여부 검사
+	
+	int insertLike(int boardNo,String userId); // 게시글 추천
+	
+	int deleteLike(int boardNo,String userId); // 게시글 추천 취소
+	
+	int likecnt(int boardNo); // 게시글 추천수
 	
 	
 	
 	
 
+	
 	
 
 	List<Board> searchList(String keyword);
 	
 	int ReportSend(Board b);
 	
-	int getLike(Board b);
+	
 }

@@ -14,9 +14,8 @@ public class CommentServiceImpl implements CommentService {
 	private CommentDao comDao;
 
 	@Override
-	public int CommentWrite() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int CommentWrite(Comment cm) {
+		return comDao.CommentWrite(cm);
 	}
 
 	@Override

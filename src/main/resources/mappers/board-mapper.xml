@@ -51,16 +51,30 @@
 		SELECT * FROM BULLETINEBOARD WHERE FREENO = #{boardNo}
 	</select>
 	
+	<!-- 게시글 추천 여부 검사 -->
+	<select id="checklike" parameterType="hashmap" flushCache="true" statementType="PREPARED" resultType="int">
+		SELECT count(*) FROM BULLETINLIKE WHERE FREENO = #{FREENO} and ID = #{ID}
+	</select>
+	
+	<!-- 게시글 추천 -->
+	<insert id="insertLike" parameterType="hashmap" flushCache="true" statementType="PREPARED" >
+		INSERT INTO BULLETINLIKE VALUES(#{FREENO}, #{ID})
+	</insert>
+	
+	<!-- 게시글 추천 취소 -->
+	<delete id="deleteLike" parameterType="hashmap" flushCache="true" statementType="PREPARED">
+		DELETE FROM BULLETINLIKE WHERE FREENO = #{FREENO} and ID = #{ID}
+	</delete>
+	
+	<!-- 게시글 추천수 -->	
+	<select id="likecnt" parameterType="int" flushCache="true" statementType="PREPARED" resultType="int">
+		SELECT count(*) FROM BULLETINLIKE WHERE FREENO = #{boardNo}
+	</select>
 	
 	
 	
 	
 	<!-- 게시글 신고 -->
-	<!-- 좋아요 -->
-
-
-
-
 	<!-- 검색한 게시글 조회 -->
 	<select id="searchList" parameterType="string"
 		resultType="arraylist" resultMap="resultBoard">

@@ -15,8 +15,8 @@ public class CommentDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public int CommentWrite() {// 댓글 쓰기
-		return 0; 
+	public int CommentWrite(Comment cm) {// 댓글 쓰기
+		return 0;
 		
 	}
 	

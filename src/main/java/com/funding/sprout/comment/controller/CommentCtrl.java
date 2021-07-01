@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.funding.sprout.comment.service.CommentService;
+import com.funding.sprout.vo.Comment;
 
 @Controller
 public class CommentCtrl {
@@ -16,10 +18,10 @@ public class CommentCtrl {
 	private CommentService comService;
 	
 	@RequestMapping(value = "comwrite", method = RequestMethod.GET)
-	public ModelAndView CommentWrite() {// 댓글 쓰기
-		return null; 
-		
+	public ModelAndView CommentWrite() { // 댓글 쓰기
+		return null;
 	}
+		
 	@RequestMapping(value = "comupdate", method = RequestMethod.GET)
 	public ModelAndView CommentUpdate() { // 댓글 수정
 		return null;

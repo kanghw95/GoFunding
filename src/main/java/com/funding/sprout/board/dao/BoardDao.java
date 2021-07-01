@@ -1,6 +1,9 @@
 package com.funding.sprout.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +58,35 @@ public class BoardDao {
 	
 	
 	
+	public int checklike(int boardNo,String userId) { // 게시글 추천 여부 검사
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("FREENO", boardNo);
+		map.put("ID", userId);
+		return sqlSession.selectOne("Board.checklike", map);
+	}
+	
+	public int insertLike(int boardNo, String userId) { // 게시글 추천
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("FREENO", boardNo);
+		map.put("ID", userId);
+		return sqlSession.insert("Board.insertLike",map);
+	}
+	
+	public int deleteLike(int boardNo, String userId) { // 게시글 추천 취소
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("FREENO", boardNo);
+		map.put("ID", userId);
+		return sqlSession.delete("Board.deleteLike",map);
+	}
+	
+	public int likecnt(int boardNo) { // 게시글 추천수
+		return sqlSession.selectOne("Board.likecnt", boardNo);
+	}
+	
+	
+	
+	
+	
 	
 	
 	
@@ -71,8 +103,5 @@ public class BoardDao {
 		
 	}
 	
-	public int getLike(Board b) { //TODO 좋아요 정보 이거는 수정이 필요해보임 추가도
-		return sqlSession.update("Board.updateBoard", b);
 
-	}
 } 

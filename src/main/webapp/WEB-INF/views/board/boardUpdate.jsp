@@ -15,76 +15,90 @@
 </head>
 
 <style>
-#Title {
+/* #title {
 	position: absolute;
 	top: 180px;
 	left: 200px;
 }
+*/
 
 .board {
 	position: absolute;
 	top: 300px;
 	left: 300px;
-}
+} 
+
+
 </style>
 
 <body>
+	<jsp:include page="/WEB-INF/views/header.jsp" />
+	<div class="wrapper">
 
-	<h1 id=Title>자유게시판</h1>
-	<form action= "boardUpdate" method="POST">
-		<input type="hidden" name="boardNo" value = "${data.boardNo }"/>
+	<div>
+		<h1 id=title>자유게시판</h1>
+	</div>
+
+	<form action="boardUpdate" method="POST">
+		<input type="hidden" name="boardNo" value="${data.boardNo }" />
+		
 		<table class="board">
 			<tr>
 				<td id="boardTitle1">제목</td>
-				<td><input type="text" name="boardTitle" style="width: 645px" value = "${data.boardTitle }"/></td>
+				<td><input type="text" name="boardTitle" style="width: 645px"
+					value="${data.boardTitle }" /></td>
 			</tr>
+			
 			<tr>
 				<td id="boardContent1">내용</td>
-				<td><textarea id="ir1" name="boardContent" style="width: 650px; height: 350px;"></textarea></td>
+				<td><textarea id="ir1" name="boardContent"
+						style="width: 650px; height: 350px;">${data.boardContent }</textarea></td>
 				<%-- <input type = "text" id="ir1" style = "width: 650px; height: 350px;" name="boardContent" value = "${data.boardContent }"> --%>
 			</tr>
+			
 			<tr>
-				<td colspan="2">
-				<input type="button" id="writebtn" name="writebtn" value="저장" />
-				<input type="button" value="취소" onclick = "history.back(-1)"/>
-				</td>
+				<td colspan="2"><input type="button" id="writebtn"
+					name="writebtn" value="저장" /> <input type="button" value="취소"
+					onclick="history.back(-1)" /></td>
 			</tr>
 		</table>
 	</form>
-</body>
-	
-<script type="text/javascript">
+		<script type="text/javascript">
 			var oEditors = [];
 			nhn.husky.EZCreator.createInIFrame({
     			oAppRef: oEditors,
     			elPlaceHolder: "ir1",
-    			sSkinURI: "<%=request.getContextPath()%>/smarteditor/SmartEditor2Skin.html",
-				fCreator : "createSEditor2"
-			});
-</script>
+    			sSkinURI: "<%=request.getContextPath()%>
+			/smarteditor/SmartEditor2Skin.html",
+						fCreator : "createSEditor2"
+					});
+		</script>
 
-<script type="text/javascript">
-	window.onload = function() {
-		//버튼을 누를때 실행
-		var btn = document.getElementById("writebtn");
-		btn.onclick = function() {
-			submitContents(btn);
-		}
-	}
+		<script type="text/javascript">
+			window.onload = function() {
+				//버튼을 누를때 실행
+				var btn = document.getElementById("writebtn");
+				btn.onclick = function() {
+					submitContents(btn);
+				}
+			}
 
-	// '저장' 버튼을 누르는 등 저장을 위한 액션을 했을때 submitContents가 호출된다고 가정한다.
-	function submitContents(elClickedObj) {
-		// 에디터의 내용이 textarea에 적용된다.
-		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+			// '저장' 버튼을 누르는 등 저장을 위한 액션을 했을때 submitContents가 호출된다고 가정한다.
+			function submitContents(elClickedObj) {
+				// 에디터의 내용이 textarea에 적용된다.
+				oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 
-		// 에디터의 내용에 대한 값 검증은 이곳에서
-		// document.getElementsById("irl").value를 이용해서 처리한다.
+				// 에디터의 내용에 대한 값 검증은 이곳에서
+				// document.getElementsById("irl").value를 이용해서 처리한다.
 
-		try {
-			// 해당 오브젝터가 위치한 form이 submit이 됨
-			elClickedObj.form.submit();
-		} catch (e) {
-		}
-	}
-</script>
+				try {
+					// 해당 오브젝터가 위치한 form이 submit이 됨
+					elClickedObj.form.submit();
+				} catch (e) {
+				}
+			}
+		</script>
+	</div>
+	<jsp:include page="/WEB-INF/views/footer.jsp" />
+</body>
 </html>

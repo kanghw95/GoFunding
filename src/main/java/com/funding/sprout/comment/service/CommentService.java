@@ -7,7 +7,7 @@ import com.funding.sprout.vo.Comment;
 
 public interface CommentService {
 
-	public int CommentWrite(); // 댓글 쓰기
+	public int CommentWrite(Comment cm); // 댓글 쓰기
 
 	public int CommentUpdate(); // 댓글 수정
 

@@ -8,7 +8,7 @@
 <title>게시판</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
-#select {
+#option {
 	position: absolute;
 	left: 800px;
 }
@@ -20,8 +20,11 @@
 </style>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/header.jsp" />
+	<div class="wrapper">
+
 	<h1>자유게시판</h1>
-	<select id="select">
+	<select id="option">
 		<option value="">자유게시판</option>
 		<option value="">후기게시판</option>
 		<option value="">QnA게시판</option>
@@ -70,8 +73,7 @@
 					<td align="center">${vo.boardId }</td>
 					
 					<td align="center">${vo.boardCnt }</td>
-					<%--	<td align = "center">${vo.getLike }</td> --%>
-					<td align="center">0</td> <!-- 추천 -->
+					<td align="center">${likenct }</td> <!-- 추천 -->
 					<td align="center">${vo.boardDate }</td>
 				</tr>
 			</c:forEach>
@@ -132,5 +134,8 @@
 //			location.href = "boardWrite";
 		})
 	</script>
+	
+	</div>
+	<jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
 </html>

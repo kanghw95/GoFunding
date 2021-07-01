@@ -78,6 +78,48 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	
+	
+	
+	@Override
+	public int checklike(int boardNo, String userId) { // 게시글 추천 여부 검사 비추천0 추천1
+
+		int result = boDao.checklike(boardNo, userId);
+		
+		if(result == 0) {
+			System.out.println("추천가능");
+		} else {
+			System.out.println("이미 추천함");
+		}
+		return result;
+	}
+
+	@Override
+	public int insertLike(int boardNo,String userId) { // 게시글 추천
+		return boDao.insertLike(boardNo,userId);
+	}
+	
+	@Override
+	public int deleteLike(int boardNo, String userId) { // 게시글 추천 취소
+		return boDao.deleteLike(boardNo, userId);
+	}
+
+	@Override
+	public int likecnt(int boardNo) { // 게시글 추천수
+		return boDao.likecnt(boardNo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public List<Board> searchList(String keyword) { // 게시글 검색 조회
@@ -89,8 +131,5 @@ public class BoardServiceImpl implements BoardService {
 		return boDao.insertBoard(b);
 	}
 
-	@Override
-	public int getLike(Board b) { // 좋아요
-		return boDao.updateBoard(b);
-	}
+
 }

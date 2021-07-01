@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Comment">
 	<resultMap type="Comment" id="resultComment">
+		<result column="FREECMTNO" property="CmtNo"/>
+		<result column="FREECMTCONTENT" property="CmtContent"/>
+		<result column="FREECMTDATE" property="CmtDate"/>
+		<result column="FREECMTREF" property="CmtRef"/>
+		<result column="FREECMTSTEP" property="CmtStep"/>
+		<result column="FREECMTLEVEL" property="CmtLevel"/>
 	</resultMap>
+	
+	<insert id="insertcomment" parameterType="Comment" flushCache="true" >
+		INSERT INTO BULLETINEBOARD(FREECMTNO,FREECMTCONTENT,FREECMTDATE,FREECMTREF) 
+		VALUES(1,#{CmtContent}, SYSDATE,#{CmtRef})
+	</insert>
+	
 	
 </mapper>
