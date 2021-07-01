@@ -30,6 +30,10 @@ h2 {
 	font-family: 'TmoneyRoundWindRegular'; 	
 }
 
+:after, :before {
+    box-sizing: border-box;
+}
+
 
 html {
 	height: 100%;

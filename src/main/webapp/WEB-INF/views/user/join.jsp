@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPROUT! 새싹나눔</title>
 <link href="<%=request.getContextPath() %>/resources/css/userdetail_join/join.css" rel="stylesheet" type="text/css" />
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -476,6 +481,7 @@ $(document).ready(function () {
 		
 	
 </script>
+</head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 <div class="wrapper">

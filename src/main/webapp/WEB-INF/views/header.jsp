@@ -2,9 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<title>SPROUT! 새싹나눔</title>
 <link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
-<link href=" <%=request.getContextPath() %>/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/header.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -136,12 +135,6 @@
 	</div>	
 </div>
 </header>
-
-<script>
-
-	
-	
-</script>
 
 
 
