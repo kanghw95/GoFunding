@@ -129,7 +129,7 @@
 
 .SelectArea_select_item {
     display: block;
-    padding: 9px 14px;
+    padding: 9px 12px;
     outline: none;
     line-height: 17px;
     text-align: left;
@@ -157,7 +157,15 @@
     width: 267px;
     height: 363px;
 }
-
+.fundingCard_wrap:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid rgba(0,0,0,.11);
+    content: "";
+}
 .FundingCard_img_wrap {
     position: relative;
     width: 267px;
@@ -183,7 +191,6 @@
     height: 55px;
     border: 1px solid #0f92e0;
     border-radius: 50%;
-    font-family: NanumSquareWebFont,dotum,Sans-serif;
     font-size: 15px;
     line-height: 55px;
     letter-spacing: -.2px;
@@ -207,8 +214,7 @@
     -webkit-box-orient: vertical;
     word-break: keep-all;
     word-wrap: break-word;
-    font-family: NanumSquareWebFont,dotum,Sans-serif;
-    font-size: 17px;
+    font-size: 15px;
     letter-spacing: -.5px;
     color: #333;
 }
@@ -287,6 +293,12 @@
     -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
     content: "";
+}
+
+.SelectArea_button[aria-expanded=true]:after {
+    top: 15px;
+    -ms-transform: rotate(135deg);
+    transform: rotate(135deg);
 }
 
 *, :after, :before {

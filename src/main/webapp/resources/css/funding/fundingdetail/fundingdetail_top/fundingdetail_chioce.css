@@ -118,7 +118,6 @@
 .FundingDetailSummary_total .FundingDetailSummary_amount .FundingDetailSummary_number {
     display: inline-block;
     margin: -2px 1px 0 0;
-    font-family: NanumSquareWebFont,dotum,Sans-serif;
     font-size: 27px;
     font-weight: 800;
     line-height: 1.11;

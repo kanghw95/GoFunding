@@ -15,7 +15,31 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <body>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
+	<div class="wrapper">
 	<div role="main" id="content" class="content">
+	
+		<form action="fundingresult" method="POST" id="fundingpayresult">
+			<c:forEach var="reward" items="${reward}" varStatus="status">
+					<c:if test="${reward ne ''}">
+						<input type="text" name="reward" value="${reward}">
+						<input type="text" name="rewardEA" value="${rewordEA[status.index]}">
+						<input type="text" name="rewardPrice" value="${price[status.index]}">
+					</c:if>
+			</c:forEach>
+			
+			<c:if test="${cheer_pay ne ''}">
+					<input type="text" name="cheer" value="${cheer_pay}">
+					<input type="text" name="cheerEA" value="${cheer_pay_EA}">
+					<input type="text" name="cheerPrice" value="${cheer_pay_price}">
+			</c:if>
+			
+			<input type="text" name="totalPrice" value="${funding_pay_price+funding.deliverycharge}">
+			<input type="text" name="userId" value="${sessionScope.user.userId}">
+			<input type="text" name="fundingno" value="${funding.fundingno}">
+			<input type="text" id="paycat" name="paycat" value="">
+		</form>
+		
 		<div>
 			<div class="FundingDetailApplicationContent_wrap">
 				<section class="FundingDetailApplicationContent_section_title">
@@ -180,8 +204,13 @@
 			</div>
 		</div>
 	</div>
+	</div>
+	<jsp:include page="/WEB-INF/views/footer.jsp"/>
 	<script>
-	var reward = null
+	var reward = null 
+	var payresult = document.getElementById("fundingpayresult"); 
+	var paycat = document.getElementById("paycat"); 
+	
 	//배송지 직접입력 
 	var dafault_address_btn = document.getElementById("wa_default_address");
 	var new_address_btn = document.getElementById("wa_new_address");
@@ -312,10 +341,11 @@
 			             console.log(data);
 			             console.log(msg);
 			           	 alert("결제 완료");
-		           	 
-		           	location.href="<%=request.getContextPath()%>/funding/fundingresult"; 
+		           	 	
+			           	paycat.value = "카드 간편";
+			           	payresult.submit();
 		        	} else {
-		        		alert("결제 실패");
+		        		alert("결제 실패 ");
 		        	}
 		           	
 		           })
@@ -359,7 +389,8 @@
 		             console.log(msg);
 		           	 alert("결제 완료");
 		           	 
-		           	location.href="<%=request.getContextPath()%>/funding/fundingresult"; 
+		           	paycat.value = "계좌 이체";
+		           	payresult.submit();
 		        	} else {
 		        		alert("결제 실패");
 		        	}

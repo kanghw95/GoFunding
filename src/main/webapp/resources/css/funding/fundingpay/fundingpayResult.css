@@ -9,7 +9,6 @@
 
 .FundingDetailReportContent_title__Ac_gs {
     padding: 75px 0 73px;
-    font-family: NanumSquareWebFont,dotum,Sans-serif;
     font-size: 34px;
     font-weight: 400;
     line-height: 1.27;
@@ -58,7 +57,6 @@
 .FundingDetailReportContent_total__jhdNn .FundingDetailReportContent_number__245_F {
     display: inline-block;
     margin: -2px 0 -3px 10px;
-    font-family: NanumSquareWebFont,dotum,Sans-serif;
     font-size: 27px;
     font-weight: 800;
     letter-spacing: -1px;
@@ -183,7 +181,6 @@ body {
 }
 
 body, button, input, select, table, textarea {
-    font-family: NanumBarunGothic,dotum,Sans-serif;
     font-size: 14px;
     line-height: 19px;
     color: #202020;

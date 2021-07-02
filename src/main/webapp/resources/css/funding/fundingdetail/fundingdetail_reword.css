@@ -11,7 +11,6 @@
 }
 
 .FundingDetailRewardList_title {
-    font-family: NanumSquareWebFont,dotum,Sans-serif;
     font-size: 20px;
     font-weight: 800;
     line-height: 1.35;
@@ -31,7 +30,6 @@
     display: block;
     padding: 14px 16px 12px;
     border-bottom: 1px solid rgba(0,0,0,.08);
-    font-family: NanumSquareWebFont,dotum,Sans-serif;
     font-size: 17px;
     line-height: 1.35;
     color: #202020;
@@ -48,7 +46,6 @@
 }
 
 .FundingDetailRewardList_name {
-    font-family: NanumSquareWebFont,dotum,Sans-serif;
     font-size: 17px;
     line-height: 1.29;
     color: #202020;

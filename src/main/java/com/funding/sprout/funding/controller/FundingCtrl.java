@@ -9,17 +9,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.funding.sprout.admin.service.AdminService;
 import com.funding.sprout.funding.service.FundingService;
 import com.funding.sprout.vo.Funding;
 import com.funding.sprout.vo.Reward;
+import com.funding.sprout.vo.User;
 
 @Controller
 public class FundingCtrl {
-
 	
 	@Autowired
 	private FundingService funService;
 
+	@Autowired
+	private AdminService adService;
+	
 	@RequestMapping(value = "funone", method = RequestMethod.GET)
 	public ModelAndView selectOne() {
 		
@@ -27,8 +31,6 @@ public class FundingCtrl {
 		return null; // 펀딩 가져오기
 	}
 	
-
-
 	
 	//펀딩 검색
 	@RequestMapping(value = "funsearch", method = RequestMethod.GET)
@@ -129,8 +131,56 @@ public class FundingCtrl {
 		return mv;  // 펀딩 결제 페이지
 	}
 
-	@RequestMapping(value = "funding/fundingresult", method = RequestMethod.GET)
-	public ModelAndView fundingresult(ModelAndView mv) {
+	@RequestMapping(value = "funding/fundingresult", method = RequestMethod.POST)
+	public ModelAndView fundingresult(
+			@RequestParam(name = "reward") String[] reword,
+			@RequestParam(name = "rewardEA") String[] rewardEA,
+			@RequestParam(name = "rewardPrice") int[] rewardPrice,
+			
+			@RequestParam(name = "cheer") String cheer,
+			@RequestParam(name = "cheerEA") String cheerEA,
+			@RequestParam(name = "cheerPrice") int cheerPrice,
+			
+			@RequestParam(name = "totalPrice") int totalPrice,
+			@RequestParam(name = "userId") String userId,
+			@RequestParam(name = "fundingno") int fundingno,
+			@RequestParam(name = "paycat") String paycat,
+			User user,
+			ModelAndView mv) {
+		try {
+			Funding funding = funService.selectOne(fundingno);	
+			System.out.println("선택한 펀딩 정보 :" + funding);
+			
+			for(int i =0; i<reword.length; i++) {
+				System.out.println(reword[i]);
+				System.out.println(rewardEA[i]);
+				System.out.println(rewardPrice[i]);
+			}
+			
+			user.setUserId(userId); // vo에 아이디를 넣음
+			List<User> searchId = adService.selectUserId(user); // 아이디로 검색한 리스트 가져오기
+			System.out.println(searchId);
+		
+			mv.addObject("funding", funding);
+			mv.addObject("searchId", searchId);
+			
+			mv.addObject("reward", reword);
+			mv.addObject("rewardEA", rewardEA);
+			mv.addObject("rewardPrice", rewardPrice);
+			
+			mv.addObject("cheer", cheer);
+			mv.addObject("cheerEA", cheerEA);
+			mv.addObject("cheerPrice", cheerPrice);
+			
+			mv.addObject("totalPrice", totalPrice);
+			mv.addObject("paycat", paycat);
+			
+			
+			mv.setViewName("funding/fundingpay");
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("errorPage");
+		}
 		mv.setViewName("funding/fundingpayResult");
 		return mv;  // 펀딩 결제완료 페이지
 	}

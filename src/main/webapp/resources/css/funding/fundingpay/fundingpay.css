@@ -12,7 +12,6 @@
 
 .FundingDetailApplicationContent_section_title {
     padding: 65px 0 40px;
-    font-family: NanumSquareWebFont,dotum,Sans-serif;
     text-align: center;
 }
 
@@ -42,8 +41,8 @@
 .FundingDetailApplicationContent_subtitle {
     padding: 26px 39px 24px;
     border-bottom: 1px solid rgba(0,0,0,.08);
-    font-family: NanumSquareWebFont,dotum,Sans-serif;
     font-size: 22px;
+    font-family: 'TmoneyRoundWindRegular';
 }
 
 .FundingDetailApplicationContent_list_order {
@@ -67,7 +66,6 @@
 .FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_number {
     display: inline-block;
     margin: 0 1px 0 0;
-    font-family: NanumSquareWebFont,dotum,Sans-serif;
     font-size: 17px;
     font-weight: 700;
     letter-spacing: -.3px;
@@ -91,7 +89,6 @@
 .FundingDetailApplicationContent_list_order .FundingDetailApplicationContent_number {
     display: inline-block;
     margin: 0 1px 0 0;
-    font-family: NanumSquareWebFont,dotum,Sans-serif;
     font-size: 17px;
     font-weight: 700;
     letter-spacing: -.3px;

@@ -33,7 +33,6 @@ pageEncoding="UTF-8"%>
 		<input type="submit" value="검색" style="border: 1px solid black;" >
 	</form>
 </div>
-<input type="text" >
 <div id="wrap" class="wrap" style="">
 	<div role="main" id="content" class="content">
 		<!-- 메인 슬라이드 -->

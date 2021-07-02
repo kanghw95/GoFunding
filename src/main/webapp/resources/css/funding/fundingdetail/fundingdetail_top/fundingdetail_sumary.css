@@ -3,7 +3,6 @@
 .FundingDetailSummary {
     overflow: hidden;
     position: relative;
-    font-family: NanumSquareWebFont,dotum,Sans-serif;
 }
 .FundingDetailSummary .FundingDetailSummary_dday {
     display: inline-block;

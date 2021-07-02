@@ -81,8 +81,10 @@
 
 
 <body>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
 	<fmt:parseDate value="${funding.fundingfin}" var="paymentday" pattern="yyyy-MM-dd HH:mm:ss"/> 
 	<fmt:formatDate value="${funding.deliverydate}" type="DATE" var="deliverydate" pattern="yyyy년 MM월 dd일"/> 
+	<div class="wrapper">
 	<div class="wrap">
 		<div role="main" id="content" class="content">
 			<div>
@@ -261,22 +263,17 @@
 								</div>
 							</article>
 							<section class="FundingDetailStoryContent_guide">
-								<h4 class="FundingDetailStoryContent_title">결제방법 및 배송 안내</h4>
+								<h4 class="FundingDetailStoryContent_title">배송 안내</h4>
 								<div class="FundingDetailStoryContent_content">
 									<ul class="FundingDetailStoryContent_list_guide">
 										<li class="FundingDetailStoryContent_item">리워드는 해당 프로젝트 개설자가 제공합니다.</li>
-										<li class="FundingDetailStoryContent_item">100% 달성 시에만 아래 지정일에 결제됩니다.</li>
+										<li class="FundingDetailStoryContent_item">100% 달성 시에만 아래 지정일에 배송이 시작됩니다.</li>
 									</ul>
-									<strong class="FundingDetailStoryContent_subtitle__mm0mM"> 결제 및 발송 예정일</strong>
+									<strong class="FundingDetailStoryContent_subtitle__mm0mM">발송 예정일</strong>
 									<ul class="FundingDetailStoryContent_list_date__1xfUX">
 										<li class="FundingDetailStoryContent_item">
 											<span class="FundingDetailStoryContent_text FundingDetailStoryContent_highlight">
-											1차 결제 : <fmt:formatDate value="${paymentday}" pattern="yyyy년 MM월 dd일"/>, 예상 발송일 : ${deliverydate}
-											</span>
-										</li>
-										<li class="FundingDetailStoryContent_item">
-											<span class="FundingDetailStoryContent_text">
-											2차 결제 : 0000년 0월 00일, 예상 발송일 : 0000년 0월 00일
+											 예상 발송일 : ${deliverydate}
 											</span>
 										</li>
 									</ul>
@@ -306,6 +303,29 @@
 								</nav>
 							</section>
 						</div>
+						
+						<div id="wa_reward_tabpanel" class="FundingDetailRewardContent_wrap_content__1zKtY" role="tabpanel" aria-labelledby="wa_reward_tab">
+							<article class="FundingDetailRewardContent_article__1KLwN">
+								<h4 class="blind">리워드 본문</h4>
+								<div class="FundingDetailNoContent_wrap__5UAnm">
+									<div class="FundingDetailNoContent_inner__3g_8U">
+											<p class="FundingDetailNoContent_text__2o3-p">아직 작성된 내용이 없습니다.</p>
+									</div>
+								</div>
+							</article>
+						</div>
+						
+						<div id="wa_review_tabpanel" class="FundingDetailTidingContent_wrap_content__3XgIg" role="tabpanel" aria-labelledby="wa_review_tab">
+							<section class="FundingDetailTidingContent_wrap_list__25ZUN">
+								<h4 class="blind">소식∙후기 목록</h4>
+									<div class="FundingDetailNoContent_wrap__5UAnm">
+										<div class="FundingDetailNoContent_inner__3g_8U">
+										<p class="FundingDetailNoContent_text__2o3-p">아직 작성된 내용이 없습니다.</p>
+										</div>
+									</div>
+								</section>
+						</div>
+						
 						<section class="FundingDetailStoryContent_wrap_reward">
 							<div class="FundingDetailRewardList_wrap">
 								<h4 class="FundingDetailRewardList_title">리워드 안내</h4>
@@ -326,7 +346,7 @@
 												<li class="FundingDetailRewardList_item_information">현재0명 펀딩 참여</li>
 												<li class="FundingDetailRewardList_item_information">
 													<strong class="FundingDetailRewardList_highlight">
-														<span class="FundingDetailRewardList_date">발송예상일</span>0000.0.00
+														<span class="FundingDetailRewardList_date">발송예상일</span>${deliverydate}
 													</strong>
 												</li>
 											</ul>
@@ -346,7 +366,8 @@
 			</div>
 		</div>
 	</div>
-	
+	</div>
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 	<script>
 		//리워드 선택 list 열고 닫기
 		var listbtn = document.getElementById("FundingDetailSummary_button_select");
@@ -363,8 +384,53 @@
 			}
 		});
 		
-		//리워드  선택하기 
+		// 스토리, 리워드, 소식후기 이동 버튼
+		var story_tab = document.getElementById("wa_story_tab");
+		var reward_tap = document.getElementById("wa_reward_tab");
+		var review_tap = document.getElementById("wa_review_tab");
 		
+		//스토리, 리워드, 소식후기 이동 버튼 div
+		var story_tappanel = document.getElementById("wa_story_tabpanel");
+		var reward_tabpanel = document.getElementById("wa_reward_tabpanel");
+		var review_tabpanel = document.getElementById("wa_review_tabpanel");
+		
+		story_tab.addEventListener("click",function(){
+					
+				story_tab.setAttribute("aria-current","true");
+				reward_tap.setAttribute("aria-current","false");
+				review_tap.setAttribute("aria-current","false");
+				
+				story_tappanel.style.display = 'block';
+				reward_tabpanel.style.display = 'none';
+				review_tabpanel.style.display = 'none';
+						
+		});
+		
+		reward_tap.addEventListener("click",function(){
+			
+			story_tab.setAttribute("aria-current","false");
+			reward_tap.setAttribute("aria-current","true");
+			review_tap.setAttribute("aria-current","false");
+			
+			story_tappanel.style.display = 'none';
+			reward_tabpanel.style.display = 'block';
+			review_tabpanel.style.display = 'none';
+			
+		});
+		
+		review_tap.addEventListener("click",function(){
+			
+			story_tab.setAttribute("aria-current","false");
+			reward_tap.setAttribute("aria-current","false");
+			review_tap.setAttribute("aria-current","true");
+			
+			story_tappanel.style.display = 'none';
+			reward_tabpanel.style.display = 'none';
+			review_tabpanel.style.display = 'block';
+			
+		});
+		
+		//리워드  선택하기 
 		<c:forEach var="reward" items="${reward}">
 			var reword_btn${reward.rewardNo} = document.getElementById("reword${reward.rewardNo}");
 			var reword_price${reward.rewardNo} = document.getElementById("rewardPrice${reward.rewardNo}").value;
@@ -506,9 +572,7 @@
 			
 			});
 		
-		// 리워드 +- 버튼 동작
-		
-
+		// 리워드 수량변경  +- 버튼 동작
 		<c:forEach var="reward" items="${reward}">
 			function plus${reward.rewardNo}() {
 				
@@ -674,5 +738,6 @@
 		
 		
 </script>
+
 </body>
 </html>
