@@ -26,11 +26,12 @@ public class Application {
 	private String feedback;
 	private String deliveryCharge;
 	private Date deliveryDate;
-	
+	private String makerName;
 	public Application(int applyNo, String maker, String description, String id, String makerTel, String makerEmail,
 			String makerInfo, String fundingTitle, String fundingCategory, String fundingContent, String fundingPrice,
 			Timestamp fundingStart, Timestamp fundingFin, String fundingPlan, String rewardDesc, String rewardPrice,
-			String rewardTitle, String rewardEA, String feedback, String deliveryCharge, Date deliveryDate) {
+			String rewardTitle, String rewardEA, String feedback, String deliveryCharge, Date deliveryDate,
+			String makerName) {
 		super();
 		this.applyNo = applyNo;
 		this.maker = maker;
@@ -53,12 +54,11 @@ public class Application {
 		this.feedback = feedback;
 		this.deliveryCharge = deliveryCharge;
 		this.deliveryDate = deliveryDate;
+		this.makerName = makerName;
 	}
-	
 	public Application() {
 		super();
 	}
-	
 	public int getApplyNo() {
 		return applyNo;
 	}
@@ -185,7 +185,12 @@ public class Application {
 	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
-	
+	public String getMakerName() {
+		return makerName;
+	}
+	public void setMakerName(String makerName) {
+		this.makerName = makerName;
+	}
 	@Override
 	public String toString() {
 		return "Application [applyNo=" + applyNo + ", maker=" + maker + ", description=" + description + ", id=" + id
@@ -194,7 +199,8 @@ public class Application {
 				+ fundingContent + ", fundingPrice=" + fundingPrice + ", fundingStart=" + fundingStart + ", fundingFin="
 				+ fundingFin + ", fundingPlan=" + fundingPlan + ", rewardDesc=" + rewardDesc + ", rewardPrice="
 				+ rewardPrice + ", rewardTitle=" + rewardTitle + ", rewardEA=" + rewardEA + ", feedback=" + feedback
-				+ ", deliveryCharge=" + deliveryCharge + ", deliveryDate=" + deliveryDate + "]";
+				+ ", deliveryCharge=" + deliveryCharge + ", deliveryDate=" + deliveryDate + ", makerName=" + makerName
+				+ "]";
 	}
 	
 }

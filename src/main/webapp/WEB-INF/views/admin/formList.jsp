@@ -12,6 +12,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
+<div class="wrapper">
 <div class="outer">
 <div class="inner">
 <h3>펀딩 신청관리 목록</h3>
@@ -45,6 +46,7 @@
 		</c:forEach>
 		</tr>
 	</table>
+</div>
 </div>
 </div>
 </div>

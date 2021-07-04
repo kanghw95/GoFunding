@@ -12,6 +12,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
+	<div class="wrapper">
 	<div id="outer">
 	<div class="tabs">
 	<i class="far fa-comments fa-2x"></i>&nbsp;메시지(메이커-회원)
@@ -23,6 +24,7 @@
 					</tr>
 				</c:forEach>
 			</table>
+		</div>
 		</div>
 		</div>
 	<script>

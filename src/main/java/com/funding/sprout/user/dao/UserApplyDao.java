@@ -13,6 +13,7 @@ public class UserApplyDao {
 	private SqlSession sqlSession;
 	
 	public int inputForm(Application app) { //신청 폼 내용 저장
+		System.out.println("dao : "+app);
 		return sqlSession.insert("User.inputForm", app);
 	}
 	

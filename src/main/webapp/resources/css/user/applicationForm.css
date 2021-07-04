@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.wrapper{
+	position: relative;
+}
+
 .outer{
 	display: flex;
 	justify-content: center;
@@ -10,7 +14,7 @@
 	position: relative;
 	display: inline-block;
 	font-size: 20px;
-	padding: 5% 10%;
+	padding: 50px;
 }
 
 .table{
@@ -29,7 +33,6 @@
 }
 
 .modalBtn{
-	color: white;
 	border: none;
 	background: rgba( 255, 255, 255, 0 );
 }
@@ -78,8 +81,17 @@
 	margin: 10px 0 0 20px;
 }
 
+.textArea{
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	outline: none;
+}
+
 .inputText{
 	width: 300px; height: 30px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	outline: none;
 }
 
 #chkInform, #openPrivacy{
@@ -87,7 +99,10 @@
 }
 
 #email, .inputReward{
-	height: 30px;
+	width: 180px; height: 30px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	outline: none;
 }
 
 #nameChk, #addInput, #closeInfoBtn{
@@ -114,10 +129,10 @@
 
 .modal {
 	position: fixed;
-	top: 50%;
+	top: 55%;
 	left: 50%;
 	width: 500px;
-	height: 600px;
+	height: 560px;
 	-webkit-transform: translate(-50%, -50%);
 	-moz-transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);

@@ -1,6 +1,7 @@
 package com.funding.sprout.admin.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,11 @@ public class ApplicationMgtDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<Application> fundingList(){ //펀딩 목록 조회 : 전체
+	public List<Map<String, String>> fundingList(){ //펀딩 목록 조회 : 전체
 		return sqlSession.selectList("Admin.fundingList");
 	}
 	
-	public List<Application> fundingListCate(String fundingCategory){ //펀딩 목록 조회 : 카테고리
+	public List<Map<String, String>> fundingListCate(String fundingCategory){ //펀딩 목록 조회 : 카테고리
 		return sqlSession.selectList("Admin.fundingListCate", fundingCategory);
 	}
 	

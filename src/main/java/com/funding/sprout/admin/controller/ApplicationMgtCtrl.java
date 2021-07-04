@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,7 +37,7 @@ public class ApplicationMgtCtrl {
 	
 	@RequestMapping(value = "/fundingList")
 	public ModelAndView fundingList() { //펀딩 목록 조회 : 전체
-		List<Application> list=applicationMgtService.fundingList();
+		List<Map<String, String>> list=applicationMgtService.fundingList();
 		System.out.println("목록 "+list);
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("fundingList",list);
@@ -47,7 +48,7 @@ public class ApplicationMgtCtrl {
 	
 	@RequestMapping(value = "/fundingListCate")
 	public ModelAndView fundingListCate(@RequestParam() String fundingCategory) { //펀딩 목록 조회 : 카테고리
-		List<Application> vo;
+		List<Map<String, String>> vo;
 		ModelAndView mv=new ModelAndView();
 		if(fundingCategory==null||fundingCategory=="") {
 			vo=applicationMgtService.fundingList();

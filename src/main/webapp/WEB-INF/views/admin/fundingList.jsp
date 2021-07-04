@@ -12,6 +12,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
+	<div class="wrapper">
 	<div class="outer">
 		<div class="inner">
 <h3>펀딩 목록</h3>
@@ -39,8 +40,8 @@
 			</c:if>
 			<td id="formTitle">
 				<i class="fas fa-seedling fa-3x sprout"></i><br>
-				${app.fundingTitle}
-				<input type="hidden" id="fundingNo" value="${app.fundingNo}">
+				${app.FUNDINGTITLE}
+				<input type="hidden" id="fundingNo" value="${app.FUNDINGNO}">
 			</td>
 		</c:forEach>
 		</tr>
@@ -48,9 +49,10 @@
 </div>
 </div>
 </div>
+</div>
 <script>
 $("[id^='formTitle']").click(function(event){
-	var fundingNo=$(this).children().next().val();
+	var fundingNo=$(this).children().next().next().val();
 	window.location.href="http://localhost:8090/sprout/funding/detail?no="+fundingNo;
 });
 

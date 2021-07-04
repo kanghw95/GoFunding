@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.wrapper{
+	position: relative;
+}
+
+.outer{
+	display: flex;
+	justify-content: center;
+}
+
+.inner{
+	width: 1140px;
+	position: relative;
+	display: inline-block;
+	font-size: 20px;
+	padding: 5% 10%;
+}
+
+.other{
+	width: 100%; height: 300px;
+	border: 1px solid black;
+}
+
+.analytics{
+	width: 100%; height: 500px;
+	border: 1px solid black;
+}
+
+.anal{
+	width:25%; height: 300px;
+	float: left;
+	border: 1px solid #ccc;
+	margin: 30px;
+}
+
+.payment{
+	clear: both;
+	display: block;
+}

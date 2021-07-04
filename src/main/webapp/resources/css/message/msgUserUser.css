@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.wrapper{
+	position: relative;
+}
+
 .tabs{
 	font-size: 20px;
 	position: relative;

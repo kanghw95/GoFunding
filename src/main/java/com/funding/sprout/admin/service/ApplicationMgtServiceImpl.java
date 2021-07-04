@@ -1,6 +1,7 @@
 package com.funding.sprout.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,12 @@ public class ApplicationMgtServiceImpl implements ApplicationMgtService {
 	private ApplicationMgtDao applicationMgtDao;
 
 	@Override
-	public List<Application> fundingList() { //펀딩 목록 조회 : 전체
+	public List<Map<String, String>> fundingList() { //펀딩 목록 조회 : 전체
 		return applicationMgtDao.fundingList();
 	}
 	
 	@Override
-	public List<Application> fundingListCate(String fundingCategory) { //펀딩 목록 조회 : 카테고리
+	public List<Map<String, String>> fundingListCate(String fundingCategory) { //펀딩 목록 조회 : 카테고리
 		return applicationMgtDao.fundingListCate(fundingCategory);
 	}
 

@@ -13,6 +13,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
+<div class="wrapper">
 	<div class="outer">
 		<div class="inner">
 			<h3>펀딩 신청관리 상세페이지</h3>
@@ -81,6 +82,7 @@
 							value="${app.deliveryCharge}">
 					</form>
 				</c:forEach>
+			</div>
 			</div>
 			</div>
 			</div>

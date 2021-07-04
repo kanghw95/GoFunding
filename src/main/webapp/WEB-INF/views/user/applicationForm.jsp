@@ -6,14 +6,13 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" href="/resources/demos/style.css">
-		<title>Insert title here</title>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 		<link href="<%=request.getContextPath() %>/resources/css/user/applicationForm.css?ver=1.0" rel="stylesheet" type="text/css" />
+		<title>Insert title here</title>
 	</head>
 	<body>
 	<jsp:include page="/WEB-INF/views/header.jsp"/>
+	<div class="wrapper">
 		<div class="outer">
 		<div class="inner">
 		<i class="far fa-plus-square fa-2x"></i>&nbsp;내 펀딩 개설하기
@@ -21,14 +20,12 @@
 		<button type="button" id="standards">개설 기준 보기</button><br><br>
 		</div>
 		<div class="wrap wrap2">
-			<div id="closeStandardDiv" class="close closeStandard"><button type="button" class="modalBtn">X</button></div>
 			<div id="standardDetail" class="modal">
+			<div id="closeStandardDiv" class="close closeStandard"><button type="button" class="modalBtn">X</button></div>
 				1. 목적<br><br>
 				공공의 가치를 훼손하지 않는 프로젝트이어야 합니다.<br>
 				제품/문화컨텐츠/공익나눔 중 하나 이상의 카테고리에 부합해야 합니다.<br>
-				실제 구현이 가능한 프로젝트여야 합니다.<br><br>
 				2. 내용<br><br>
-				공연, 행사 프로젝트를 진행할 경우 공연, 행사에 대한 정확한 정보 (장소, 공연자)를 밝혀야 합니다.<br>
 				출판 프로젝트의 경우 원고 작성이 완료된 상태에서 출판일정이 확정되어야 프로젝트 오픈이 가능합니다.<br>
 				제품 프로젝트의 경우 시제품이 있어야 하며, 서포터가 어떤 제품인지 인지할 수 있는 형태의 이미지를 공개해야 합니다.<br>
 				웹사이트 또는 어플리케이션 제작이 필요한 프로젝트는 최소 프로토타입 형태의 개발이 완료된 상태에서만 진행이 가능합니다.<br><br>
@@ -36,7 +33,6 @@
 				프로젝트 메이커는 서포터에게 반드시 펀딩 금액에 합당한 보상품(리워드)을 제공해야 합니다.<br>
 				단순히 브랜드, 상품, 행사 정보 등이 나열된 형태인 경우 등록을 제한합니다.<br>
 				보상품(리워드)의 종류에 따라 추가서류를 요청할 수 있으며, 요청한 자료가 증빙되지 않을 경우 오픈이 불가할 수 있습니다.<br>
-				보상품(리워드)은 프로젝트 종료일 기준 3개월 이내에 제공되어야 합니다.<br>
 			</div>
 		</div>
 		
@@ -53,16 +49,17 @@
 						<td class="line1">주체명 (필수)</td>
 						<td class="line2"><input type="text" name="maker" id="maker" class="inputText" placeholder="내용을 입력해주세요." required>
 						&nbsp;<button type="button" id="nameChk">중복체크</button><div id="warning"></div>
-								<div><input type="text" id="chkInform" class="inputText" readonly></div></td>
+								<div><input type="text" id="chkInform" class="inputText" readonly></div>
+								<input type="hidden" name="id"value="${user.userId}"></td>
 					</tr>
 					<tr class="basicInfo">
 						<td class="line1">소개 (필수)</td>
-						<td class="line2"><textarea name="description" id="description" placeholder="내용을 입력해주세요." cols="100"
+						<td class="line2"><textarea name="description" id="description" class="textArea" placeholder="내용을 입력해주세요." cols="100"
 								rows="6" required></textarea></td>
 					</tr>
 					<tr class="basicInfo">
 						<td class="line1">담당자 (필수)</td>
-						<td class="line2"><input type="text" name="id" id="id" class="inputText" placeholder="내용을 입력해주세요." required></td>
+						<td class="line2"><input type="text" name="makerName" id="name" class="inputText" placeholder="내용을 입력해주세요." required></td>
 					</tr>
 					<tr class="basicInfo">
 						<td class="line1">연락처 (필수)</td>
@@ -99,8 +96,8 @@
 							<tr class="projInfo">
 								<td class="line3">
 									1. 펀딩 주제<br>
-									<textarea name="fundingTitle" id="fundingTitle" placeholder="내용을 입력해주세요." cols="50"
-										rows="10" required></textarea>
+									<textarea name="fundingTitle" id="fundingTitle" class="textArea" placeholder="내용을 입력해주세요." cols="30"
+										rows="5" required></textarea>
 								</td>
 								<td class="line4">
 									2. 펀딩 분류<br>
@@ -118,8 +115,8 @@
 							<tr class="projInfo">
 								<td class="line3">
 									3. 펀딩 프로젝트 소개<br>
-									<textarea name="fundingContent" id="fundingContent" placeholder="내용을 입력해주세요."
-										cols="50" rows="10" required></textarea>
+									<textarea name="fundingContent" id="fundingContent" class="textArea" placeholder="내용을 입력해주세요."
+										cols="30" rows="5" required></textarea>
 								</td>
 								<td class="line4">
 									4. 펀딩 목표 금액<br>
@@ -135,8 +132,8 @@
 								</td>
 								<td class="line4">
 									7. 펀딩 후원금 사용 계획<br>
-									<textarea name="fundingPlan" id="fundingPlan" placeholder="내용을 입력해주세요." cols="50"
-										rows="10" required></textarea>
+									<textarea name="fundingPlan" id="fundingPlan" class="textArea" placeholder="내용을 입력해주세요." cols="30"
+										rows="5" required></textarea>
 								</td>
 							</tr>
 						</table>
@@ -145,7 +142,7 @@
 						<table class="projTabs">
 							<tr class="projInfo">
 								<td class="line3">8. 리워드 소개<br>
-									<textarea name="rewardDesc" id="rewardDesc" cols="50" rows="10" 
+									<textarea name="rewardDesc" id="rewardDesc" class="textArea" cols="30" rows="5" 
 										placeholder="내용을 입력해주세요." required></textarea>
 								</td><td class="line4"></td>
 							</tr>
@@ -176,8 +173,8 @@
 						<input type="checkbox" id="privacyChk">개인정보 수집 및 이용에 동의&nbsp;&nbsp;&nbsp;
 						<button type="button" id="openPrivacy">자세히 보기</button>
 						<div class="wrap wrap1">
-							<div id="closePrivacyDiv" class="close closePrivacy"><button type="button" class="modalBtn">X</button></div>
 							<div id="privacyDetail" class="modal">
+							<div id="closePrivacyDiv" class="close closePrivacy"><button type="button" class="modalBtn">X</button></div>
 								<div id="detailTitle">
 									개인정보 수집•이용 동의서
 								</div><br>
@@ -206,7 +203,8 @@
 		</div>
 		</div>
 		</div>
-		<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/user/applicationForm.js"></script>
+	</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp"/>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/user/applicationForm.js"></script>
 	</body>
 	</html>

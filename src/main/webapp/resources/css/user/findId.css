@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+.wrapper{
+	position: relative;
+}
+
+.outer{
+	display: flex;
+	justify-content: center;
+}
+
+.inner{
+	width: 1140px;
+	position: relative;
+	display: inline-block;
+	font-size: 20px;
+	padding: 5% 10%;
+}
+
+.idPwd{
+	text-align: center;
+}
+
+.table{
+	text-align: center;
+	margin: auto;
+}
+
+.table input[type=button]{
+	vertical-align: inherit;
+}
+
+tr{
+	width: 500px;
+}
+
+td{
+}
+
+.btns{
+	height: 40px;
+	border: none; border-radius: 5px;
+	background: white;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+.inputTd{
+	width: 430px; height: 60px;
+	padding-left: 100px;
+	line-height: 0;
+}
+
+.btnTd{
+	width: 100px;
+	line-height: 0;
+}
+
+.joinBtn{
+	text-decoration: none;
+	color: #79bd9a;
+}
+
+#sendBtn, #phoneChkBtn{
+	width: 250px; height: 50px;
+	border: none; border-radius: 5px;
+	background: #3498db;
+	color: white; font-size: 20px;
+	cursor: pointer;
+}
+
+#phoneChkBtn{
+	width: 150px; height: 50px;
+}
+
+.join{
+	text-align: center;
+}
+
+.form{
+	width: 300px; height: 50px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+#chkName, #chkEmail, #chkPhone, #chkId{
+	text-align: left;
+	padding-left: 100px;
+}

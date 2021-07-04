@@ -58,15 +58,21 @@
 	
 	<!-- 아이디 찾기 -->
 	<select id="findId" parameterType="string" resultMap="resultUser">
-		SELECT * FROM USERS WHERE NAME = #{userName} AND EMAIL = #{userEmail} AND PHONE = #{phone}
+		SELECT ID FROM USERS WHERE NAME = #{userName} AND EMAIL = #{userEmail} AND PHONE = #{userPhone}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPwd" parameterType="string" resultMap="resultUser">
+		SELECT PWD FROM USERS WHERE ID = #{userId} AND EMAIL = #{userEmail} AND PHONE = #{userPhone}
 	</select>
 	
 	<!-- 펀딩신청서 저장 -->
 	<insert id="inputForm">
 		INSERT INTO APPLICATION VALUES (SEQ_APPLYNO.NEXTVAL, #{maker}, #{description}, #{id}, #{makerTel},
 		#{makerEmail}, #{makerInfo}, #{fundingTitle}, #{fundingCategory}, #{fundingContent}, #{fundingPrice},
-		#{fundingStart}, #{fundingFin}, #{fundingPlan}, #{rewardDesc}, #{rewardPrice}, #{rewardTitle}, #{rewardEA}, null, #{deliveryCharge}, #{deliveryDate})
-	</insert>
+		#{fundingStart}, #{fundingFin}, #{fundingPlan}, #{rewardDesc}, #{rewardPrice}, #{rewardTitle}, #{rewardEA}, null,
+		#{deliveryCharge}, #{deliveryDate}, #{makerName})
+		</insert>
 	
 	<!-- 메이커명 중복체크 -->
 	<select id="makerChk" parameterType="string" resultType="java.lang.String">

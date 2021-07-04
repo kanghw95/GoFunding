@@ -1,14 +1,15 @@
 package com.funding.sprout.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.funding.sprout.vo.Application;
 
 public interface ApplicationMgtService {
 	
-	public List<Application> fundingList(); //펀딩 목록 조회 : 전체
+	public List<Map<String, String>> fundingList(); //펀딩 목록 조회 : 전체
 	
-	public List<Application> fundingListCate(String fundingCategory); //펀딩 목록 조회 : 카테고리
+	public List<Map<String, String>> fundingListCate(String fundingCategory); //펀딩 목록 조회 : 카테고리
 
 	public List<Application> formList(); //펀딩 신청서 목록 조회 : 전체
 	

@@ -6,47 +6,6 @@ let isprivacy=false;
 var check = 3;
 var warning="중복확인 버튼을 눌러주세요.";
 
-$(".datepick").each(function () { //펀딩 시작~종료 기간 달력 선택
-	$(this).datepicker();
-});
-
-$.datepicker.setDefaults({
-	dateFormat: 'yy-mm-dd',	//날짜 포맷
-	prevText: '이전 달', //마우스 오버시 이전달 텍스트
-	nextText: '다음 달', //마우스 오버시 다음달 텍스트
-	closeText: '닫기', //닫기 버튼 텍스트 변경
-	currentText: '오늘', // 오늘 텍스트 변경
-	monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'], //한글 월 표시
-	monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'], //한글 월 표시
-	dayNames: ['일', '월', '화', '수', '목', '금', '토'], //한글 요일 표시
-	dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'], //한글 요일 표시
-	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], //한글 요일 표시
-	showMonthAfterYear: true, //true : 년 월  false : 월 년 순
-	yearSuffix: '년',	
-	showButtonPanel: true, //오늘 버튼과 달력 닫기 버튼 보기 옵션
-	minDate: 0 //오늘 이전 선택 불가
-});
-
-jQuery.datepicker._gotoToday = function (id) { //오늘 버튼 클릭 시 오늘 날짜 선택
-	var target = jQuery(id);
-	var inst = this._getInst(target[0]);
-	if (this._get(inst, 'gotoCurrent') && inst.currentDay) {
-		inst.selectedDay = inst.currentDay;
-		inst.drawMonth = inst.selectedMonth = inst.currentMonth;
-		inst.drawYear = inst.selectedYear = inst.currentYear;
-	} else {
-		var date = new Date();
-		inst.selectedDay = date.getDate();
-		inst.drawMonth = inst.selectedMonth = date.getMonth();
-		inst.drawYear = inst.selectedYear = date.getFullYear();
-		this._setDateDatepicker(target, date);
-	}
-	this._notifyChange(inst);
-	this._adjustDate(target);
-	this._setDateDatepicker(target, date);
-	this._selectDate(id, this._getDateDatepicker(target));
-}
-
 $("#submitBtn").click(function (msg) { //입력 정보 insert 컨트롤러 전송
 	$('#frm').attr('action', 'formSend');
 	$('#frm').attr('method', 'post');
@@ -134,14 +93,14 @@ $('.closeStandard').click(function(){ //펀딩개설기준 모달창 삭제
 	$('.wrap2').fadeOut();
 });
 
-$(document).ready(function(){
+$(function(){
 	$("#direct").hide();
 })
 
 $(document).on("change", "#email", function(){ //직접입력 선택시 도메인 입력 text 출력 TODO
-	if($("#direct").val()==""){
+	if($("#email").val()==""){
 		$("#direct").show();
-	} else if(("#direct").val()!="") {
+	} else if($("#email").val()!="") {
 		$("#direct").hide();
 	}
 });
@@ -220,3 +179,4 @@ function idChk(msg){ //중복확인 결과 텍스트 생성
 		$("#maker").val("");
 	}
 }
+
