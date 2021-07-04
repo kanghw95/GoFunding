@@ -16,46 +16,46 @@
 		<div class="outer">
 		<div class="inner">
 			<div class="idPwd">
-			<h2>���̵�ã��</h2><br>
+			<h2>아이디찾기</h2><br>
 			<table class=table>
 			<tr class="warning warnName"></tr>
 			<tr>
 				<td class="inputTd">
-				<input type="text" id="userName" class="form inputName" placeholder="�̸�"><br><br>
+				<input type="text" id="userName" class="form inputName" placeholder="이름"><br><br>
 				</td>
 				<td></td>			
 			</tr>
 			<tr class="warning warnEmail"></tr>
 			<tr>
 				<td class="inputTd">		
-				<input type="text" id="userEmail" class="form inputEmail" placeholder="�̸���"><br><br>
+				<input type="text" id="userEmail" class="form inputEmail" placeholder="이메일"><br><br>
 				</td>	
 				<td></td>			
 			</tr>
 			<tr class="warning warnPhone"></tr>
 			<tr>
 				<td class="inputTd">
-				<input type="text" id="phone" class="form inputPhone" placeholder="�ڵ�����ȣ">
+				<input type="text" id="phone" class="form inputPhone" placeholder="전화번호">
 				</td>			
 				<td class="btnTd">
-				<button type="button" id="chkPhoneBtn" class="btns">������ȣ�ޱ�</button><br><br>
+				<button type="button" id="chkPhoneBtn" class="btns">인증번호받기</button><br><br>
 				</td>			
 			</tr>
 			<tr class="warning warnChkNum"></tr>
 			<tr>
 				<td class="inputTd">
-				<input type="text" id="chkNum" class="form chkNum" placeholder="������ȣ">
+				<input type="text" id="chkNum" class="form chkNum" placeholder="인증번호">
 				</td>			
 				<td class="btnTd">
-				<button type="button" id="chkNumBtn" class="btns">������ȣȮ��</button><br><br><br>
+				<button type="button" id="chkNumBtn" class="btns">인증번호확인</button><br><br><br>
 				</td>			
 			</tr>
 			</table>
 			</div>
 			<div class="join">
-			<br><button type="button" id="sendBtn">���������ϱ�</button><br><br><br>
-			��й�ȣ�� ��ﳪ�� �ʴ´ٸ�? <a class="joinBtn" href="<%=request.getContextPath() %>/user/findPwd">��й�ȣã��</a><br>		
-			���� ȸ���� �ƴ϶��? <a class="joinBtn" href="<%=request.getContextPath() %>/user/join">ȸ������</a>			
+			<br><button type="button" id="sendBtn">본인인증하기</button><br><br><br>
+			비밀번호가 기억나지 않는다면? <a class="joinBtn" href="<%=request.getContextPath() %>/user/findPwd">비밀번호찾기</a><br>		
+			아직 회원이 아니라면? <a class="joinBtn" href="<%=request.getContextPath() %>/user/join">회원가입</a>			
 			</div>
 			</div>
 			</div>
