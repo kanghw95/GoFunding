@@ -22,17 +22,6 @@ pageEncoding="UTF-8"%>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 <div class="wrapper">
-<div style="text-align: center; padding-top: 50px;">
-	<form method="get" name="funsearchform" action="funsearch">
-		<select name="serchOption" style=" border: 1px solid black;">
-			<option value="제목" selected="selected">제목</option>
-			<option value="내용">내용</option>
-			<option value="제목내용">제목&내용</option>
-		</select>
-		<input type="text" name="keyword" style="border: 1px solid black;"> 
-		<input type="submit" value="검색" style="border: 1px solid black;" >
-	</form>
-</div>
 <div id="wrap" class="wrap" style="">
 	<div role="main" id="content" class="content">
 		<!-- 메인 슬라이드 -->

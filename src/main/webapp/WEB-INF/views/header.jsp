@@ -6,10 +6,28 @@
 <link href="<%=request.getContextPath() %>/resources/css/header.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#show").val("SHOW");
+	$("#show").click(function(){
+	    if ($(this).val() == "SHOW") {
+	        $(this).val("HIDE");
+	        $("#dropdown-content").css("display", "block");
+	        $("#show").attr("src", "<%=request.getContextPath()%>/resources/img/userhover.png");
+	        $("#picBtn").css("border", "1px solid #1abc9c");
+	    } else {
+	    	$(this).val("SHOW");
+	        $("#dropdown-content").css("display", "none");
+	        $("#show").attr("src", "<%=request.getContextPath()%>/resources/img/user64.png");
+	        $("#picBtn").css("border", "1px solid white");
+	    }
+	})
+});
+</script>
 <header>
 <div class="header">
 	<div class="header_content">	
-		<a href="#"> 
+		<a href="<%=request.getContextPath() %>/funselect"> 
 		<img alt="logo" src="<%=request.getContextPath() %>/resources/bannerimg/logoG80.png" class="logo">
 		</a>	
 		<div class="navbar">
@@ -103,40 +121,40 @@
 				</li>		
 			</ul>
 		</div>
-		<%-- <c:choose> --%>
-			<%-- <c:when test="${user == null }"> --%>
+		<c:choose>
+			<c:when test="${user == null }">
 				<div class="beforeLogin">
 					<button type="button" id="btnLogin" onclick="location.href='<%=request.getContextPath() %>/user/login'">로그인</button>
 					<button type="button" id="btnSignin" onclick="location.href='<%=request.getContextPath() %>/user/join'">회원가입</button>
 				</div>
-		<%-- 	</c:when>
-			<c:when test="${user.autority == '9'}">--%>
-			<%--	<div class="afterLogin">
-					<div class="loginDropdown">
-						<div class="iconBtn" id="iconBtn">
-							<input type="image" src="resources/img/user4.png" /> 
+		 	</c:when>
+			<c:when test="${user.userId eq 'admin' }">
+				<div class="afterLogin">
+					<div class="dropdown">
+						<div class="picBtn" id="picBtn">
+							<input type="image" src="<%=request.getContextPath() %>/images/user64.png" class="pic" width="50" height="50" style="background-color: white" id="show">
 						</div>
-						<div class="loginDropdown-content">
-						<a href="#">관리자 페이지</a>
-						<a href="#">로그아웃</a>
+						<div class="dropdown-content" style="border: 1px solid #1abc9c; display:none" id="dropdown-content">
+							<a href="#">관리자 페이지</a>
+							<a href="<%=request.getContextPath()%>/user/logout">로그아웃</a> 
 						</div>
 					</div>
 				</div>
-			</c:when>--%>
-			<%-- <c:when test="${user != null }">--%>
-				<%-- <div class="afterLogin">
-					<div class="loginDropdown">
-						<div class="iconBtn" id="iconBtn">
-							<input type="image" src="resources/img/user4.png" /> 
-						</div>
-						<div class="loginDropdown-content">
-						<a href="#">마이 페이지</a>
-						<a href="#">로그아웃</a>
+			</c:when>
+			<c:otherwise>
+				<div class="afterLogin">
+					<div class="dropdown">
+						<div class="picBtn" id="picBtn">
+								<input type="image" src="<%=request.getContextPath() %>/resources/img/user64.png" class="pic" width="50" height="50" style="background-color: white" id="show">
+							</div>
+						<div class="dropdown-content" style="border: 1px solid #1abc9c; display:none" id="dropdown-content">
+							<a href="<%=request.getContextPath()%>/myPage">마이페이지</a>
+							<a href="<%=request.getContextPath()%>/user/logout">로그아웃</a> 
 						</div>
 					</div>
-				</div>--%>
-				<%--</c:when>
-		</c:choose> --%>
+				</div>
+				</c:otherwise>
+		</c:choose> 
 		<div class="hold">
 			<button type="button" id="createFunding" onclick="location.href='#'">펀딩 등록</button>		
 			

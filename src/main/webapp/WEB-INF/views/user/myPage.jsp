@@ -21,7 +21,7 @@
 				<div class="myPage_nonMaker">
 					<div class="profileBox">
 						<div class="profileImg">
-							<img alt="profile" src="<%=request.getContextPath() %>/resources/img/user_2.png"/>
+							<img class="imgProfile" alt="profile" src="<%=request.getContextPath() %>/resources/img/user_2.png"/>
 						</div>
 						<div class="profileUser">
 							<span><strong>${user.userName }</strong>님 </span>
