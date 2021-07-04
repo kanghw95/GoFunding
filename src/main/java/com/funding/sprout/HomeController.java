@@ -83,11 +83,20 @@ public class HomeController {
 	
 	@RequestMapping(value = "/footer", method = RequestMethod.GET)
 	public String footertest(Locale locale, Model model) {
-		logger.info("header 테스트", locale);
+		logger.info("footer 테스트", locale);
 
 
 
 		return "footer";
+	}
+	
+	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
+	public String mypagetest(Locale locale, Model model) {
+		logger.info("footer 테스트", locale);
+
+
+
+		return "user/myPage";
 	}
 	
 	@ResponseBody

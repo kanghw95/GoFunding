@@ -27,13 +27,17 @@ header{
 	margin-left: auto;
 	margin-right: auto;
 	width: 1140px;
-	heght: 0;
+	heght: 0 !important;
 }
 
 .logo {
 	float: left;
 	margin-top: 5px;
 
+}
+
+.navbar{
+	border: 0;
 }
 
 .nav-content, .nav-content a, .nav-content ul, .nav-content li, .nav-content div, .nav-content form, .nav-content input {
