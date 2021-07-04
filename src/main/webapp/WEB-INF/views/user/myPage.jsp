@@ -10,9 +10,6 @@
 <%@include file="/WEB-INF/views/header.jsp"%>
 <div class="wrapper">
 	<div class="myPageWrapper">
-		<div class="profileBackground">
-			
-		</div>
 		<div class="myPageInner">
 			<div class="myPageHeader">
 				<div class="makerSwitcher">
@@ -24,10 +21,10 @@
 				<div class="myPage_nonMaker">
 					<div class="profileBox">
 						<div class="profileImg">
-						
+							<img alt="profile" src="<%=request.getContextPath() %>/resources/img/user_2.png"/>
 						</div>
 						<div class="profileUser">
-						
+							<span><strong>${user.userName }</strong>님 </span>
 						</div>
 						<div class="profileInfo">
 							<p class="loginMode">sns / 와디즈 가입 </p>

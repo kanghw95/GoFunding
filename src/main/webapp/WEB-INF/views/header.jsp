@@ -106,15 +106,15 @@
 		<%-- <c:choose> --%>
 			<%-- <c:when test="${user == null }"> --%>
 				<div class="beforeLogin">
-					<button type="button" id="btnLogin" onclick="location.href='#'">로그인</button>
-					<button type="button" id="btnSignin" onclick="location.href='#'">회원가입</button>
+					<button type="button" id="btnLogin" onclick="location.href='<%=request.getContextPath() %>/user/login'">로그인</button>
+					<button type="button" id="btnSignin" onclick="location.href='<%=request.getContextPath() %>/user/join'">회원가입</button>
 				</div>
 		<%-- 	</c:when>
-			<c:when test="${user.autority == '9'}">
-				<div class="afterLogin">
+			<c:when test="${user.autority == '9'}">--%>
+			<%--	<div class="afterLogin">
 					<div class="loginDropdown">
 						<div class="iconBtn" id="iconBtn">
-							<input type="image" src="resources/images/user4.png" /> 
+							<input type="image" src="resources/img/user4.png" /> 
 						</div>
 						<div class="loginDropdown-content">
 						<a href="#">관리자 페이지</a>
@@ -122,20 +122,20 @@
 						</div>
 					</div>
 				</div>
-			</c:when>
-			<c:when test="${user != null }">
-				<div class="afterLogin">
+			</c:when>--%>
+			<%-- <c:when test="${user != null }">--%>
+				<%-- <div class="afterLogin">
 					<div class="loginDropdown">
 						<div class="iconBtn" id="iconBtn">
-							<input type="image" src="resources/images/user4.png" /> 
+							<input type="image" src="resources/img/user4.png" /> 
 						</div>
 						<div class="loginDropdown-content">
 						<a href="#">마이 페이지</a>
 						<a href="#">로그아웃</a>
 						</div>
 					</div>
-				</div>
-			</c:when>
+				</div>--%>
+				<%--</c:when>
 		</c:choose> --%>
 		<div class="hold">
 			<button type="button" id="createFunding" onclick="location.href='#'">펀딩 등록</button>		
