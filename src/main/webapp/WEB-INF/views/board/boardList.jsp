@@ -8,15 +8,23 @@
 <title>게시판</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
-#option {
+.wrapper{
+	margin:30px;
+    padding-left:400px;
+}
+#option{
+	float:right;
 	position: absolute;
-	left: 800px;
+	right:500px;
+	top: 80px;
+}
+#writeBtn2{
+	float:right;
+	position: absolute;
+	right: 500px;
+	top : 150px;
 }
 
-#writeBtn2 {
-	position: absolute;
-	left: 800px;
-}
 </style>
 </head>
 <body>
@@ -48,12 +56,12 @@
 
 	<table>
 		<tr bgcolor="#a8dba8">
-			<td align="center" width="60">NO</td>
-			<td align="center" width="380">제목</td>
-			<td align="center" width="100">작성자</td>
+			<td align="center" width="100">NO</td>
+			<td align="center" width="500">제목</td>
+			<td align="center" width="120">작성자</td>
 			<td align="center" width="100">조회</td>
 			<td align="center" width="100">추천</td>
-			<td align="center" width="100">작성일</td>
+			<td align="center" width="120">작성일</td>
 		</tr>
 
 		<!-- 글이 없을 경우 -->

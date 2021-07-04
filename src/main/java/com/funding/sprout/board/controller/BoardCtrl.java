@@ -1,6 +1,7 @@
 package com.funding.sprout.board.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.funding.sprout.board.service.BoardService;
+import com.funding.sprout.comment.service.CommentService;
 import com.funding.sprout.vo.Board;
+import com.funding.sprout.vo.Comment;
 import com.funding.sprout.vo.User;
 
 @Controller
@@ -27,6 +30,8 @@ public class BoardCtrl {
 
 	@Autowired
 	private BoardService boService;
+	@Autowired
+	private CommentService comService;
 
 	public static final int LIMIT = 10;
 	private static final Logger logger = LoggerFactory.getLogger(BoardCtrl.class);
@@ -73,7 +78,7 @@ public class BoardCtrl {
 	@RequestMapping(value = "boardDetail", method = RequestMethod.GET)
 	public ModelAndView boardDetail(ModelAndView mv, Model model, @RequestParam(name = "boardNo") int boardNo,
 			@RequestParam(name = "page", defaultValue = "1") int page
-			, HttpSession session
+			, HttpSession session, Comment cm
 			) { // 게시글 상세보기
 //	public String boardDetail(ModelAndView mv,Model model, int boardNo) { 
 
@@ -95,6 +100,12 @@ public class BoardCtrl {
 			likecnt = boService.likecnt(boardNo); // 추천수
 			mv.addObject("likecnt", likecnt);
 			
+			List<Comment> commentList = comService.CommentAll(boardNo); // 댓글 목록 리스트
+			mv.addObject("commentList", commentList);
+			
+			int delete = comService.CommentDelete(cm); // 댓글 삭제
+			mv.addObject("delete", delete);
+			 
 			mv.setViewName("board/boardDetail");
 		} catch (Exception e) {
 			e.printStackTrace();

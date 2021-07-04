@@ -4,80 +4,101 @@ import java.sql.Date;
 
 public class Comment {
 
-	private int CmtNo; // 댓글 번호
-	private String CmtContent; // 댓글 내용
-	private Date CmtDate; // 댓글 작성일
-	private int CmtRef; // 댓글 ref
-	private int CmtStep; // 댓글 step
-	private int CmtLevel; // 댓글 level
+	private int cmtNo; // 댓글 번호
+	private String cmtContent; // 댓글 내용
+	private Date cmtDate; // 댓글 작성일
+	private int cmtRef; // 댓글 ref : 원글 혹은 원댓글
+	private int cmtStep; // 댓글 step : 원글에서 몇번째 파생된거
+	private int cmtLevel; // 댓글 level : 원글이면 0 답글이면 1 답답글이면 2
+	private int boardNo; // 원본글 번호
+	private String id; // 로그인한 id = 댓글 남기는 사람
 
 	public Comment() {
 
 	}
 
-	public Comment(int cmtNo, String cmtContent, Date cmtDate, int cmtRef, int cmtStep, int cmtLevel) {
+	public Comment(int cmtNo, String cmtContent, Date cmtDate, int cmtRef, int cmtStep, int cmtLevel, int boardNo,
+			String id) {
 		super();
-		CmtNo = cmtNo;
-		CmtContent = cmtContent;
-		CmtDate = cmtDate;
-		CmtRef = cmtRef;
-		CmtStep = cmtStep;
-		CmtLevel = cmtLevel;
+		this.cmtNo = cmtNo;
+		this.cmtContent = cmtContent;
+		this.cmtDate = cmtDate;
+		this.cmtRef = cmtRef;
+		this.cmtStep = cmtStep;
+		this.cmtLevel = cmtLevel;
+		this.boardNo = boardNo;
+		this.id = id;
 	}
 
 	@Override
 	public String toString() {
-		return "Comment [CmtNo=" + CmtNo + ", CmtContent=" + CmtContent + ", CmtDate=" + CmtDate + ", CmtRef=" + CmtRef
-				+ ", CmtStep=" + CmtStep + ", CmtLevel=" + CmtLevel + "]";
+		return "Comment [cmtNo=" + cmtNo + ", cmtContent=" + cmtContent + ", cmtDate=" + cmtDate + ", cmtRef=" + cmtRef
+				+ ", cmtStep=" + cmtStep + ", cmtLevel=" + cmtLevel + ", boardNo=" + boardNo + ", id=" + id + "]";
 	}
 
-	
 	public int getCmtNo() {
-		return CmtNo;
+		return cmtNo;
 	}
 
 	public void setCmtNo(int cmtNo) {
-		CmtNo = cmtNo;
+		this.cmtNo = cmtNo;
 	}
 
 	public String getCmtContent() {
-		return CmtContent;
+		return cmtContent;
 	}
 
 	public void setCmtContent(String cmtContent) {
-		CmtContent = cmtContent;
+		this.cmtContent = cmtContent;
 	}
 
 	public Date getCmtDate() {
-		return CmtDate;
+		return cmtDate;
 	}
 
 	public void setCmtDate(Date cmtDate) {
-		CmtDate = cmtDate;
+		this.cmtDate = cmtDate;
 	}
 
 	public int getCmtRef() {
-		return CmtRef;
+		return cmtRef;
 	}
 
 	public void setCmtRef(int cmtRef) {
-		CmtRef = cmtRef;
+		this.cmtRef = cmtRef;
 	}
 
 	public int getCmtStep() {
-		return CmtStep;
+		return cmtStep;
 	}
 
 	public void setCmtStep(int cmtStep) {
-		CmtStep = cmtStep;
+		this.cmtStep = cmtStep;
 	}
 
 	public int getCmtLevel() {
-		return CmtLevel;
+		return cmtLevel;
 	}
 
 	public void setCmtLevel(int cmtLevel) {
-		CmtLevel = cmtLevel;
+		this.cmtLevel = cmtLevel;
 	}
+
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 
 }

@@ -9,11 +9,21 @@ public interface CommentService {
 
 	public int CommentWrite(Comment cm); // 댓글 쓰기
 
-	public int CommentUpdate(); // 댓글 수정
-
-	public int CommentDelete(); // 댓글 삭제
-
-	public List<Comment> CommentAll(); // 모든 댓글 조회
+	public List<Comment> CommentAll(int boardNo); // 모든 댓글 조회
+	
+	public int CommentDelete(Comment cm); // 댓글 삭제
+	
+	public int CommentUpdate(Comment cm); // 댓글 수정
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public int CommentCount(); // 댓글 수 조회
 

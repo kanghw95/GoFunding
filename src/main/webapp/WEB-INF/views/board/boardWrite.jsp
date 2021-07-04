@@ -15,38 +15,11 @@
 </head>
 
 <style>
-/* #title {
-	position: absolute;
-	top: 180px;
-	left: 200px;
-}
-
-
-#writebtn{
-	position : absolute;
-	left : 700px;
-	top : 600px; 
-}
-#cancelbtn{
-	position : absolute;
-	left : 770px;
-	top : 600px; 
-} */
-
-.title{
-
-}
-
 .board {
 	position: absolute;
 	top: 300px;
 	left: 300px;
 }
-
-.button{
-	
-}
-
 </style>
 
 <body>
@@ -58,12 +31,11 @@
 	%>
 	<div>
 		<h1 id=title>자유게시판</h1>
+	</div>
+	
 		<form id="boardInsert">
 			<input type="hidden" name="userid" value="<%=user.getUserId()%>">
-	</div>
-
-		<!--  	<input type = "file" id = "File1">
-		<textarea name = "file" placeholder = "파일 이름" rows="2" cols="50" id = "File2"></textarea> -->
+	
 
 		<table class="board">
 			<tr class = "title">
@@ -75,7 +47,6 @@
 				<td id="boardContent1">내용</td>
 				<td>
 				<textarea rows="10" cols="30" id="ir1" name="boardContent" style="width: 650px; height: 350px;"></textarea>
-				<!-- <input type = "text" id="ir1" style = "width: 650px; height: 350px;" name="boardContent"> -->
 				</td>
 			</tr>
 			
@@ -91,10 +62,9 @@
 			nhn.husky.EZCreator.createInIFrame({
     			oAppRef: oEditors,
     			elPlaceHolder: "ir1",
-    			sSkinURI: "<%=request.getContextPath()%>
-			/smarteditor/SmartEditor2Skin.html",
+    			sSkinURI: "<%=request.getContextPath()%>/smarteditor/SmartEditor2Skin.html",
 						fCreator : "createSEditor2"
-					});
+						});
 
 			/* window.onload = function() {  */
 			//버튼을 누를때 실행
@@ -133,27 +103,6 @@
 							frm.submit();
 						});
 			})
-
-			/* 		var btn = document.getElementById("writebtn");
-				btn.onclick = function() {
-					submitContents(btn);
-				}
-			}
-			
-			// '저장' 버튼을 누르는 등 저장을 위한 액션을 했을때 submitContents가 호출된다고 가정한다.
-			function submitContents(elClickedObj) {
-				// 에디터의 내용이 textarea에 적용된다.
-				oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
-
-				// 에디터의 내용에 대한 값 검증은 이곳에서
-				// document.getElementsById("irl").value를 이용해서 처리한다.
-
-				try {
-					// 해당 오브젝터가 위치한 form이 submit이 됨
-					elClickedObj.form.submit();
-				} catch (e) {
-				}
-			} */
 		</script>
 	</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
