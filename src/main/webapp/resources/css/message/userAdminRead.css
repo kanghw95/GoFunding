@@ -13,7 +13,8 @@
 #inner{
 	position: relative;
 	display: inline-block;
-	width: 520px; height: auto;
+	width: auto; height: auto;
+	overflow: hidden;
 	background-color: #e2e2e2;
 }
 
@@ -28,7 +29,7 @@
 }
 
 .table{
-	width: 500px;
+	width: auto;
 	color: #556677;
 	font-size: 20px;
 }

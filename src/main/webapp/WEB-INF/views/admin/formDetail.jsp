@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/header.jsp"/>
+<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"/>
 <div class="wrapper">
 	<div class="outer">
 		<div class="inner">
@@ -113,6 +113,5 @@
 						}
 					});
 				</script>
-<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

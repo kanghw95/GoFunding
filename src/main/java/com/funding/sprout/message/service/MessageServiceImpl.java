@@ -1,5 +1,6 @@
 package com.funding.sprout.message.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class MessageServiceImpl implements MessageService {
 	}
 	
 	@Override
-	public List<Map<String, String>> msgUserList(Map<String, String> vo) {
+	public List<Map<String, String>> msgUserList(HashMap<String, String> vo) {
 		List<Map<String, String>> vo1=null;
 		try {
 			vo1=msgDao.msgUserList(vo);
@@ -37,17 +38,17 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public List<Map<String, String>> getMakerMessage(Map<String, String> id) {
+	public List<Map<String, String>> getMakerMessage(HashMap<String, String> id) {
 		return msgDao.getMakerMessage(id);
 	}
 	
 	@Override
-	public List<Message> getUserMessage(Map<String, String> id) {
+	public List<Message> getUserMessage(HashMap<String, String> id) {
 		return msgDao.getUserMessage(id);
 	}
 	
 	@Override
-	public List<Message> getAdminMessage(Map<String, String> id){
+	public List<Message> getAdminMessage(HashMap<String, String> id){
 		return msgDao.getAdminMessage(id);
 	}
 	
@@ -60,5 +61,5 @@ public class MessageServiceImpl implements MessageService {
 	public int deleteMessage(int msgNo) {
 		return msgDao.deleteMessage(msgNo);
 	}
-	
+
 }

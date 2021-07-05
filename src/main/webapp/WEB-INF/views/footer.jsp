@@ -12,9 +12,21 @@
 		</div>
 	</div>
 		<div class="footer-cont cs">
-				<p class="innerContent"><a href="#"><b>1:1 상담신청 </b>&#x2709;</a></p>
+				<p class="innerContent"><b id="loginId" onclick="userAdminMsg();">1:1 상담신청 </b>&#x2709;</p>
 				<p class="innerContent">관리자에게로의 문의는 1:1 상담을 이용해주세요.</p>
+				<input type="hidden" id="loginId" value="${user.userId}">
 		</div>
 	
-</div>	
+</div>
+<script>
+function userAdminMsg() {
+if($("#loginId").val()==null){
+	alert("로그인 해주세요.");
+} else if($("#loginId").val()!=null) {
+	var receiverId = $("#loginId").val();
+	var pop = window.open("about:blank","content");
+		pop.location.href="http://localhost:8090/sprout/message/msgAdminRead?receiverId="+receiverId;
+}
+};
+</script>	
 </footer>

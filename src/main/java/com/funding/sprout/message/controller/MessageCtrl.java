@@ -91,11 +91,13 @@ public class MessageCtrl {
 		
 		User loginUser=(User)session.getAttribute("user");
 		String receiverId=loginUser.getUserId();
+		System.out.println(loginUser);
 		
 		HashMap<String, String> vo=new HashMap<String, String>();
 		vo.put("senderId", receiverId);
 		vo.put("msgRoot", "4");
 		List<Map<String, String>> msgList = msgService.msgUserList(vo);
+		System.out.println(msgList);
 		mv.addObject("msgList",msgList);
 		mv.setViewName("/message/msgAdminList");
 		
@@ -108,7 +110,7 @@ public class MessageCtrl {
 			HttpSession session) {
 		User loginUser=(User)session.getAttribute("user");
 		String senderId=loginUser.getUserId();
-		Map<String, String> id = new HashMap<String, String>();
+		HashMap<String, String> id = new HashMap<String, String>();
 		id.put("receiverId", receiverId);
 		id.put("senderId", senderId);
 		List<Map<String, String>> ml=msgService.getMakerMessage(id);

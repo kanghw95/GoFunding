@@ -54,7 +54,7 @@
 	</select>
 	<!-- 메시지 발송 -->
 	<insert id="insertMsg"> 
-		INSERT INTO MESSAGE VALUES(SEQ_MSGNO.NEXTVAL, null, #{msgContent}, SYSDATE, #{senderId}, 
+		INSERT INTO MESSAGE VALUES(SEQ_MSGNO.NEXTVAL, #{msgContent}, SYSDATE, #{senderId}, 
 		(SELECT DISTINCT SENDERNAME FROM MESSAGE WHERE SENDERID = #{senderId}), #{receiverId},
 		(SELECT DISTINCT RECEIVERNAME FROM MESSAGE WHERE RECEIVERID = #{receiverId} ), #{msgRoot})
 	</insert>

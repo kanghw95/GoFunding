@@ -5,12 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="google-signin-client_id"
-	content="787043379258-f7m1f543ukem253a55cm7kc569hijh0r.apps.googleusercontent.com">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+<script src="https://apis.google.com/js/api:client.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <link href="<%=request.getContextPath() %>/resources/css/user/login.css?ver=1.0" rel="stylesheet" type="text/css" />
@@ -18,43 +16,43 @@
 </head>
 <body>
 <script>
-   function onSignIn(googleUser) {
-   	// 프로필 가져오기
-   	var profile = googleUser.getBasicProfile();
-   	// 로그인 정보 전달하기
-   	var profile1 = Object.values(profile);
-var userName=profile1[1];
-var userEmail=profile1[5];
-   	console.log(profile);
-   	console.log(userName);
-   	console.log(userEmail);
-   	
-   	$.ajax({
-   		url : 'googleCallback',
-   		data : {
-   			'userName' : userName,
-   			'userEmail' : userEmail
-   		},
-   		method : 'POST'
-   	});
-   	}
-   	function onLoad() {
-   	gapi.load('auth2,signin2', function() {
-   	var auth2 = gapi.auth2.init();
-   	auth2.then(function() {
-   	// 로그인 객체 가져오기
-   	var isSignedIn = auth2.isSignedIn.get();
-   	// 접속되어 있는 유저
-   	var currentUser = auth2.currentUser.get();
-   	gapi.signin2.render('googleSigninButton', {
-   	'onsuccess' : 'onSignIn', // 로그인이 되면 onSignIn 함수를 호출한다.
-   	'longtitle' : true,
-   	'theme' : 'dark',
-   	'width' : '0'
-   	});
-   	});
-   	});
-   	}
+var googleUser = {};
+var startApp = function() {
+  gapi.load('auth2', function(){
+    // Retrieve the singleton for the GoogleAuth library and set up the client.
+    auth2 = gapi.auth2.init({
+      client_id: '787043379258-f7m1f543ukem253a55cm7kc569hijh0r.apps.googleusercontent.com',
+      cookiepolicy: 'single_host_origin',
+      // Request scopes in addition to 'profile' and 'email'
+      //scope: 'additional_scope'
+    });
+    attachSignin(document.getElementById('customBtn'));
+  });
+};
+
+function attachSignin(element) {
+  console.log(element.id);
+  auth2.attachClickHandler(element, {},
+      function(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        var profile1 = Object.values(profile);
+        var userName=profile1[1];
+        var userEmail=profile1[5];
+           	console.log(profile);
+           	console.log(userName);
+           	console.log(userEmail);
+           	$.ajax({
+           		url : 'googleCallback',
+           		data : {
+           			'userName' : userName,
+           			'userEmail' : userEmail
+           		},
+           		method : 'POST'
+           	});
+      }, function(error) {
+        alert(JSON.stringify(error, undefined, 2));
+      });
+	}
    	$(document).ready(function(){
    		var pwdCnt=0;
    	var ischkId=false;
@@ -123,8 +121,8 @@ var userEmail=profile1[5];
 				<button type="submit" class="btns loginBtn">로그인</button><br><br>
 				<hr>
 			</div>
-			<div>
-			<div class="g-signin2" data-onsuccess="onSignIn"><img width="50" height="50"
+			<div id="gSignInWrapper">
+			<div id="customBtn" class="customGPlusSignIn"><img width="50" height="50" class="customBtn"
 					src="<c:url value='/resources/img/google_login.png'/>"></div>
 				<a href="${kakaoAuthUrl}"> <img width="50" height="50"
 					src="<c:url value='/resources/img/kakao_login.png'/>"></a>
@@ -152,5 +150,6 @@ var userEmail=profile1[5];
 	</c:if>
 	</div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
+<script>startApp();</script>
 </body>
 </html>

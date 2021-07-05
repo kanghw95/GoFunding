@@ -23,6 +23,7 @@
 						<td id="msgId">${msg.SENDERID}</td>
 					</tr>
 				</c:forEach>
+				<tr><td>${msgList}</td></tr>
 			</table>
 		</div>
 		</div>
@@ -30,7 +31,7 @@
 	<script>
     $("body").on("click", "[id^=msgId]", function(event) {
                 var receiverId = $(this).text();
-		    	var pop = window.open("about:blank","content","width=430,height=800");
+		    	var pop = window.open("about:blank","content");
        			pop.location.href="http://localhost:8090/sprout/message/msgAdminRead?receiverId="+receiverId;
             });
 </script>

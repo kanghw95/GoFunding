@@ -88,7 +88,7 @@ public class UserLoginCtrl {
 		if(oauthToken == null) {
 			model.addAttribute("msg", "네이버 로그인 access 토큰 발급 오류 입니다.");
 			model.addAttribute("url", "/");
-			return "/user/aaa";
+			return "redirect:/";
 		}
 		
 		// 로그인 사용자 정보를 읽어온다
@@ -130,7 +130,7 @@ public class UserLoginCtrl {
 		if (oauthToken == null) {
 			model.addAttribute("msg", "카카오 로그인 access 토큰 발급 오류 입니다.");
 			model.addAttribute("url", "/");
-			return "/user/aaa";
+			return "redirect:/";
 		}
 		System.out.println("로그인성공");
 
@@ -169,6 +169,7 @@ public class UserLoginCtrl {
 			vo.put("userName", userName);
 			vo.put("userEmail", userEmail);
 			User loginUser = userLoginService.socialLogin(vo);
+			System.out.println("구글로그인"+loginUser);
 			session.setAttribute("user", loginUser);
 		} else {
 			System.out.println("로그인 실패");

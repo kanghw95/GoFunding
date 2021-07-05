@@ -1,5 +1,6 @@
 package com.funding.sprout.message.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,13 +12,13 @@ public interface MessageService {
 
 	public List<Map<String, String>> msgMakerUserList(String receiverId); // 메이커-회원 목록
 	
-	public List<Map<String, String>> msgUserList(Map<String, String> vo); // 회원(관리자)-회원 목록
+	public List<Map<String, String>> msgUserList(HashMap<String, String> vo); // 회원(관리자)-회원 목록
 	
-	public List<Map<String, String>> getMakerMessage(Map<String, String> id); //메이커-회원 상세 조회
+	public List<Map<String, String>> getMakerMessage(HashMap<String, String> id); //메이커-회원 상세 조회
 	
-	public List<Message> getUserMessage(Map<String, String> id); //회원-회원 상세 조회
+	public List<Message> getUserMessage(HashMap<String, String> id); //회원-회원 상세 조회
 	
-	public List<Message> getAdminMessage(Map<String, String> id); //관리자-회원 상세 조회
+	public List<Message> getAdminMessage(HashMap<String, String> id); //관리자-회원 상세 조회
 
 	public int msgInsert(Message msg); //메세지 저장
 

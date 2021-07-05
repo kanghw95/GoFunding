@@ -11,7 +11,7 @@
 <link href="<%=request.getContextPath() %>/resources/css/admin/formList.css?ver=2.0" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/header.jsp"/>
+<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"/>
 <div class="wrapper">
 <div class="outer">
 <div class="inner">
@@ -65,6 +65,5 @@ $("#fundingCategory").change(function(){
 	$("#frm").submit();
 });
 </script>
-<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

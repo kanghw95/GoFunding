@@ -301,7 +301,7 @@
 										</a>
 									</li>
 									<li class="FundingDetailStoryReferenceList_item">
-										<a href="#" class="FundingDetailStoryReferenceList_link" target="_blank">
+										<a href="<%=request.getContextPath() %>/message/msgList1" class="FundingDetailStoryReferenceList_link" target="_blank">
 											<span class="FundingDetailStoryReferenceList_logo">
 
 											</span>

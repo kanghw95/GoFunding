@@ -96,46 +96,60 @@
 				<textarea cols="80" rows="20" id="query-output"></textarea>
 				</div>
 			<div>
-			
+				
 			</div>
 			</div>
+		</div>
+		<div>
+		<input type="text" id="stat1020" value="${stat1020}">
+		<input type="text" id="stat3040" value="${stat3040}">
+		<input type="text" id="stat5060" value="${stat5060}">
+		<input type="text" id="cate1" value="${cate1}">
+		<input type="text" id="cate2" value="${cate2}">
+		<input type="text" id="cate3" value="${cate3}">
+		<input type="text" id="cate4" value="${cate4}">
+		<input type="text" id="cate5" value="${cate5}">
+		<input type="text" id="cate6" value="${cate6}">
+		<input type="text" id="cate7" value="${cate7}">
+		<input type="text" id="male" value="${male}">
+		<input type="text" id="female" value="${female}">
 		</div>
 	</div>
 	<script>
   // Replace with your view ID.
-  var VIEW_ID = 'ga:201236604';
+  //var VIEW_ID = 'ga:201236604';
 
   // Query the API and print the results to the page.
-  function queryReports() {
-    gapi.client.request({
-      path: '/v4/reports:batchGet',
-      root: 'https://analyticsreporting.googleapis.com/',
-      method: 'POST',
-      body: {
-        reportRequests: [
-          {
-            viewId: VIEW_ID,
-            dateRanges: [
-              {
-                startDate: '30daysAgo',
-                endDate: 'today'
-              }
-            ],
-            metrics: [
-              {
-                expression: 'ga:sessions'
-              }
-            ]
-          }
-        ]
-      }
-    }).then(displayResults, console.error.bind(console));
-  }
+  //function queryReports() {
+//    gapi.client.request({
+  //    path: '/v4/reports:batchGet',
+  //    root: 'https://analyticsreporting.googleapis.com/',
+   //   method: 'POST',
+    //  body: {
+     //   reportRequests: [
+//          {
+ //           viewId: VIEW_ID,
+  //          dateRanges: [
+   //           {
+    //            startDate: '30daysAgo',
+     //           endDate: 'today'
+      //        }
+  //          ],
+            //          metrics: [
+            	//            {
+            	  //             expression: 'ga:sessions'
+  //            }
+              //          ]
+              //        }
+            //       ]
+        //      }
+            //  }).then(displayResults, console.error.bind(console));
+    //  }
 
-  function displayResults(response) {
-    var formattedJson = JSON.stringify(response.result, null, 2);
-    document.getElementById('query-output').value = formattedJson;
-  }
+//  function displayResults(response) {
+//    var formattedJson = JSON.stringify(response.result, null, 2);
+ //   document.getElementById('query-output').value = formattedJson;
+//  }
 </script>
 	<!-- Bootstrap core JavaScript-->
 	<script
