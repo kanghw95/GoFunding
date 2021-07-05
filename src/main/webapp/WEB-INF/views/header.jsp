@@ -30,7 +30,7 @@ $(document).ready(function(){
 		<a href="<%=request.getContextPath() %>/funselect"> 
 		<img alt="logo" src="<%=request.getContextPath() %>/resources/bannerimg/logoG80.png" class="logo">
 		</a>	
-		<div class="navbar">
+		<div class="navbox">
 			<ul class="nav-content">
 				<li class="megaTitle">
 					<a href="#">
@@ -88,7 +88,7 @@ $(document).ready(function(){
 					<a href="#" class="subTitle">커뮤니티</a>
 					<div class="subMenu2">
 						<ul>
-							<li><a href="board/boardList">자유게시판</a></li>
+							<li><a href="#">자유게시판</a></li>
 							<li><a href="#">후기</a></li>
 							<li><a href="#">QnA</a></li>
 							<li><a href="#">기부</a></li>
