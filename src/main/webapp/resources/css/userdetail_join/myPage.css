@@ -1,1 +1,100 @@
 @charset "UTF-8";
+
+.myPageContainer {
+	width: 1140ox;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* 마이페이지 프로필 */
+.profileContainer{
+	width: 240px;
+	height: 100%;
+	float: left;
+	background-color: #ededed;
+	text-align: center;
+}
+
+.profileImg, .profileUser {
+	padding: 20px 0;
+}
+
+.imgProfile {
+	width: 78px;
+	height: 78px;
+}
+
+/* 마이페이지 내용 */
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+.contentsBox{
+	width: 900px;
+	height: 100%;
+	margin-left: 240px;
+	background-color: #fcf6c1;
+}
+
+
+
+.tab-main {
+	display: block;
+	margin: 20px 0;
+	width: 900opx;
+}
+
+
+.tab-main>.tab>li {
+	float: right;
+	margin-right: 7px;
+	text-align: center;
+	border-radius: 20px;
+	border: none;
+}
+
+
+.tab-main>.tab .title{
+	display: block;
+	width : 100px;
+	padding: 10px; 
+	text-align: center;
+	background-color: #a8dba8;
+	border-radius: 20px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.tab-main>.tab .on {
+	position: relative;
+}
+
+.tab-main>.tab .on .title{
+	background-color: #79bd9a;
+}
+
+.tab-main>.tab-cont {
+	float: left;
+	width: 1000px;
+	margin-top: 10px;
+	border-radius: 7px;
+	color: black;
+	background: #transparent;
+}
+
+.tab-main>.tab-cont>.cont {
+	padding-top: 20px;
+	background-color: white;
+	border-top: 1px solid black;
+	box-sizing: border-box;
+	width: 900px;
+	background: transparent;
+}
+

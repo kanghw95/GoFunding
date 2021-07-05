@@ -108,9 +108,9 @@ $(document).ready(function(){
 					</div>
 				</li>	
 				
-				<li class="nav-search">
+				<li class="nav-search" style="width: 250px; padding-left: 30px;">
 					<form method="get" name="funsearchform" action="funsearch">
-						<select name="serchOption" style=" border: 1px solid black;">
+						<select name="serchOption">
 							<option value="제목" selected="selected">제목</option>
 							<option value="내용">내용</option>
 							<option value="제목내용">제목&내용</option>

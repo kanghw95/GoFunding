@@ -65,7 +65,7 @@ header{
 	left: 100px;
 	cursor: default;
 	z-index: 500;
-	width: 700px;
+	width: 750px;
 }
 
 .nav-content>li {
@@ -107,6 +107,7 @@ header{
 .nav-content>li.nav-search>form {
 	position: relative;
 	height: 54px;
+	width: 280px;
 	z-index: 510;
 	padding-top: 30px !important;
 }
@@ -120,13 +121,12 @@ header{
 	line-height: 24px;
 	
 	font-family: TmoneyRoundWindRegular;
-	font-weight: bold;
 	font-size: 16px;
 	color: #202020;
 	text-shadow: 0 0 1px rgba(0, 0, 0, .35);
 	vertical-align: middle;
 	
-	background: #ededed;
+	
 	
 	-webkit-transition: all .3s ease 1s;
     -moz-transition: all .3s ease 1s;
@@ -135,14 +135,15 @@ header{
     transition: all .3s ease 1s;
 }
 
-.nav-content>li.nav-search select{
+.nav-content>li.nav-search select {
 	display: block;
 	float: left;
 	width: 0px;
 	height: 24px;
 	padding: 15px 0;
 	line-height: 24px;
-	border : 0;
+	outline: none;
+	border: none;
 	
 	font-family: TmoneyRoundWindRegular;
 	font-size: 16px;
@@ -154,18 +155,38 @@ header{
     -o-transition: all .3s ease 1s;
     -ms-transition: all .3s ease 1s;
     transition: all .3s ease 1s;
+    
+    
 }
 
 .nav-content>li.nav-search input[type="text"]:focus {
 	color: #202020;
 }
 
+
 .nav-content>li.nav-search input[type="text"]:focus, 
-.nav-content>li.nav-search:hover input[type="text"],
-.nav-content>li.nav-search:hover select {
-	widht: 200px;
+.nav-content>li.nav-search:hover input[type="text"] {
+	width: 100px;
 	padding: 15px 20px;
 	vertical-align: middle;
+	border-bottom: #202020 solid 1px;
+	outline: none;
+	
+	-webkit-transition: all .3s ease 1s;
+    -moz-transition: all .3s ease 1s;
+    -o-transition: all .3s ease 1s;
+    -ms-transition: all .3s ease 1s;
+    transition: all .3s ease 1s;	
+}
+
+.nav-content>li.nav-search:hover select:focus,
+.nav-content>li.nav-search:hover select {
+	width: 100px;
+	padding: 15px 20px;
+	margin-right: 10px;
+	vertical-align: middle;
+	border: #202020 solid 1px;
+	outline: none;
 	
 	-webkit-transition: all .3s ease 1s;
     -moz-transition: all .3s ease 1s;
@@ -177,7 +198,7 @@ header{
 .nav-content>li.nav-search input[type="submit"]{
 	display: block;
 	float: left;
-	width: 20px;
+	width: 32px;
 	height: 54px;
 	cursor: pointer;
 	
@@ -305,7 +326,7 @@ header{
 #btnLogin {
 	display: inline-block;
 	position: absolute;
-	right: 240px;
+	right: 190px;
 	top: 28px;
 	width: 80px;
 	border: none;
@@ -327,7 +348,7 @@ header{
 #btnSignin {
 	display: inline-block;
 	position: absolute;
-	right: 150px;
+	right: 100px;
 	top: 28px;
 	width: 80px;
 	border: none;
@@ -364,7 +385,7 @@ header{
 
 .dropdown {
 	position: absolute !important;
-	right: 170px !important;
+	right: 110px !important;
 }
 
 .picBtn {
@@ -388,6 +409,7 @@ header{
 	top: 70px !important;
 	border-radius: 5px;
 	background-color: white;
+	text-align: center;
 }
 
 .dropdown-content a {
@@ -416,13 +438,14 @@ header{
 #createFunding{
 	position: absolute;
 	top: 28px;
-	right: 60px;
+	right: 10px;
 	width: 80px;
 	border: none;
 	padding: 5px;
 	outline: none;
 	border-radius: 5px;
 	color: #202020;
+	font-size: 14px;
 	background-color: transparent;
 	border: 1px solid #79bd9a;	
 }

@@ -59,7 +59,7 @@ a{
 
 .wrapper {
 	position: relative;
-	min-width : 1140px;
+	width : 1140px;
 	margin-left: auto;
 	margin-right: auto;
 	padding-top: 110px; /* header height + 20px */
