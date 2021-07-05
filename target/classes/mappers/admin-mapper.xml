@@ -394,13 +394,13 @@
 	</delete>
 
 	<!-- 펀딩 목록 조회 : 전체 -->
-	<select id="fundingList" resultType="Application">
+	<select id="fundingList" resultType="map">
 		SELECT FUNDINGTITLE, FUNDINGNO FROM FUNDING WHERE FUNDINGSTATE = '1' ORDER BY FUNDINGNO
 	</select>
 	
 	<!-- 펀딩 목록 조회 : 카테고리 -->
-	<select id="fundingListCate" resultType="Application">
-		SELECT FUNDINGNO, FUNDINGTITLE, FUNDINGNO FROM FUNDING WHERE FUNDINGSTATE = '1'
+	<select id="fundingListCate" resultType="map">
+		SELECT FUNDINGNO, FUNDINGTITLE FROM FUNDING WHERE FUNDINGSTATE = '1'
 		AND FUNDINGCATEGORY = #{fundingCategory} ORDER BY FUNDINGNO
 	</select>
 	

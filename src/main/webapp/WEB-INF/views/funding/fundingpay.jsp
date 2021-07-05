@@ -22,22 +22,26 @@
 		<form action="fundingresult" method="POST" id="fundingpayresult">
 			<c:forEach var="reward" items="${reward}" varStatus="status">
 					<c:if test="${reward ne ''}">
-						<input type="text" name="reward" value="${reward}">
-						<input type="text" name="rewardEA" value="${rewordEA[status.index]}">
-						<input type="text" name="rewardPrice" value="${price[status.index]}">
+						<input type="hidden" name="reward" value="${reward}">
+						<input type="hidden" name="rewardEA" value="${rewordEA[status.index]}">
+						<input type="hidden" name="rewardPrice" value="${price[status.index]}">
 					</c:if>
 			</c:forEach>
-			
+
 			<c:if test="${cheer_pay ne ''}">
-					<input type="text" name="cheer" value="${cheer_pay}">
-					<input type="text" name="cheerEA" value="${cheer_pay_EA}">
-					<input type="text" name="cheerPrice" value="${cheer_pay_price}">
+					<input type="hidden" name="cheer" value="${cheer_pay}">
+					<input type="hidden" name="cheerEA" value="${cheer_pay_EA}">
+					<input type="hidden" name="cheerPrice" value="${cheer_pay_price}">
 			</c:if>
 			
-			<input type="text" name="totalPrice" value="${funding_pay_price+funding.deliverycharge}">
-			<input type="text" name="userId" value="${sessionScope.user.userId}">
-			<input type="text" name="fundingno" value="${funding.fundingno}">
-			<input type="text" id="paycat" name="paycat" value="">
+			<input type="hidden" name="totalPrice" value="${funding_pay_price+funding.deliverycharge}">
+			<input type="hidden" name="userId" value="${sessionScope.user.userId}">
+			<input type="hidden" name="userAddr" value="${sessionScope.user.userAddress}">
+			<input type="hidden" name="fundingno" value="${funding.fundingno}">
+			<input type="hidden" id="paycat" name="paycat" value="">
+			<input type="hidden" id="name" name="name" value="${sessionScope.user.userName}">
+			<input type="hidden" id="tel_head" name=tel_head value="${sessionScope.user.userPhone}">
+			<input type="hidden" id="message" name=message value="">
 		</form>
 		
 		<div>
@@ -211,6 +215,16 @@
 	var payresult = document.getElementById("fundingpayresult"); 
 	var paycat = document.getElementById("paycat"); 
 	
+	var input_name = document.getElementById("input_name"); 
+	var name = document.getElementById("name"); 
+	
+	var input_tel_head = document.getElementById("input_tel_head"); 
+	var tel_head = document.getElementById("tel_head"); 
+	
+	var input_message = document.getElementById("input_message"); 
+	var message = document.getElementById("message"); 
+	
+	
 	//배송지 직접입력 
 	var dafault_address_btn = document.getElementById("wa_default_address");
 	var new_address_btn = document.getElementById("wa_new_address");
@@ -343,6 +357,12 @@
 			           	 alert("결제 완료");
 		           	 	
 			           	paycat.value = "카드 간편";
+			           	message.value = input_message.value;
+			          	if(input_name.value != '' &&  input_name.value == null){
+			           	name.value = input_name.value;
+			           	tel_head.value = input_tel_head.value;
+			           	}
+			          	console.log(name.value);
 			           	payresult.submit();
 		        	} else {
 		        		alert("결제 실패 ");
@@ -390,6 +410,12 @@
 		           	 alert("결제 완료");
 		           	 
 		           	paycat.value = "계좌 이체";
+		           	message.value = input_message.value;
+		           	if(input_name.value != '' &&  input_name.value == null){
+		           	name.value = input_name.value;
+		           	tel_head.value = input_tel_head.value;
+		           	}
+		           	console.log(name.value);
 		           	payresult.submit();
 		        	} else {
 		        		alert("결제 실패");

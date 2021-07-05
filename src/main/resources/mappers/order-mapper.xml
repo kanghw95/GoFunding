@@ -2,5 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Order">
 	<resultMap type="Order" id="resultOrder">
+		<!-- property는 필드명, column 은 DB 컬럼 명을 입력한다 -->
+		<id property="orderNo" column="ORDERNO" />
+		<result property="orderTotalPrice" column="ORDERTOTALPRICE" />
+		<result property="deliveryAddr" column="DELIVERYDDR" />
+		<result property="recipient" column="RECIPIENT" />
+		<result property="recipientPhone" column="RECIPIENTPHONE" />
+		<result property="orderDate" column="ORDERDATE" />
+		<result property="fundingNo" column="FUNDINGNO" />
+		<result property="id" column="ID" />
+		<result property="paymentType" column="PAYMENTTYPE" />
+		<result property="deliveryMessage" column="DELIVERYMESSAGE" />
 	</resultMap>
+
+	<!-- 펀딩 주문 입력 -->
+	<insert id="insertOrders">
+		INSERT INTO ORDERS VALUES(SEQ_ORDERSNO.NEXTVAL,
+		#{orderTotalPrice}, #{deliveryAddr}, #{recipient}, #{recipientPhone},
+		SYSDATE, #{fundingNo}, #{id}, #{paymentType}, #{deliveryMessage})
+	</insert>
 </mapper>

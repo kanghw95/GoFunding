@@ -27,17 +27,27 @@
 					<dl class="FundingDetailReportContent_list_order__3n7yw">
 						<dt class="FundingDetailReportContent_name__-jyUO">리워드 내역</dt>
 						<dd class="FundingDetailReportContent_description__AL7vy">
-							<c:forEach var="reward" items="${reward}" varStatus="status">
+						<c:forEach var="reward" items="${reward}" varStatus="status">
 							<div class="FundingDetailReportContent_item___GCD9">
 								<c:if test="${reward ne ''}">
-									<span class="FundingDetailReportContent_item_name__3Ke91">${reward} ${rewardEA[status.index]}개</span>
+									<span class="FundingDetailReportContent_item_name__3Ke91">${reward} </span>
 									<span class="FundingDetailReportContent_item_price__12MHY">
-										<span class="FundingDetailReportContent_number__245_F">${rewardPrice[status.index]}</span>원
+										<span class="FundingDetailReportContent_number__245_F">${rewardEA[status.index]}개 | ${rewardPrice[status.index]}</span>원
 									</span>
 								</c:if>
+										
+
 							</div>
 						</c:forEach>
+
+							
 							<div class="FundingDetailReportContent_item___GCD9">
+								<c:if test="${cheer ne null}">
+									<span class="FundingDetailReportContent_item_name__3Ke91">${cheer}</span>
+									<span class="FundingDetailReportContent_item_price__12MHY">
+										<span class="FundingDetailReportContent_number__245_F">${cheerEA}개 | ${cheerPrice}</span>원
+									</span>
+								</c:if><br><br>
 								<span class="FundingDetailReportContent_item_name__3Ke91">배송비</span>
 									<c:if test="${funding.deliverycharge eq 0}">
 										<span class="FundingDetailReportContent_item_price__12MHY">무료</span>

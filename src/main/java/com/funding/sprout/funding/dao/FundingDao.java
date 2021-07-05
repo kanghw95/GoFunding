@@ -1,6 +1,5 @@
 package com.funding.sprout.funding.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.funding.sprout.vo.Funding;
+import com.funding.sprout.vo.Order;
 import com.funding.sprout.vo.Reward;
 
 
@@ -39,17 +39,16 @@ public class FundingDao {
 		return sqlSession.selectList("Funding.selectfunList",map);
 	} 
 	
-	public List<Reward> selectReward(int fundingno){
+	public List<Reward> selectReward(int fundingno){ // 해당 펀딩 리워드 가져오기 
 		return sqlSession.selectList("Reward.selectrewardlist", fundingno);
-		
+	}
+	
+	public int insertOrders(Order order){ // 주문 입력
+		return sqlSession.insert("Order.insertOrders",order);
 	}
 
 	public int insertFunding() {
 		return 0; // 펀딩 입력
-	}
-
-	public int addReadCount() {
-		return 0; // 펀딩 조회 수 증가
 	}
 
 	public int updateFunding() {

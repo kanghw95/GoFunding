@@ -7,6 +7,10 @@
 <title>에러페이지</title>
 </head>
 <body>
-에러메시지  : ${msg}
+<jsp:include page="/WEB-INF/views/header.jsp"/>
+	<div>
+		에러메시지  : ${msg}
+	</div>
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

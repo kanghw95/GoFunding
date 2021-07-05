@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.funding.sprout.funding.dao.FundingDao;
 import com.funding.sprout.vo.Funding;
+import com.funding.sprout.vo.Order;
 import com.funding.sprout.vo.Reward;
 
 @Service("funService")
-public class FundingServiceImpl implements FundingService{
+public class FundingServiceImpl implements FundingService {
 
 	@Autowired
 	private FundingDao funDao;
@@ -27,9 +28,9 @@ public class FundingServiceImpl implements FundingService{
 		// TODO Auto-generated method stub
 		return funDao.selectOne(fundingno);
 	}
-	
-	public List<Funding> searchList(String serchOption, String keyword){
-		return funDao.searchList(serchOption,keyword);
+
+	public List<Funding> searchList(String serchOption, String keyword) {
+		return funDao.searchList(serchOption, keyword);
 	}
 
 	@Override
@@ -44,15 +45,14 @@ public class FundingServiceImpl implements FundingService{
 		return funDao.selectReward(fundingno);
 	}
 
-	
 	@Override
-	public int insertFunding() {
+	public int insertOrders(Order order) {
 		// TODO Auto-generated method stub
-		return 0;
+		return funDao.insertOrders(order);
 	}
 
 	@Override
-	public int addReadCount() {
+	public int insertFunding() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -74,7 +74,5 @@ public class FundingServiceImpl implements FundingService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 
 }

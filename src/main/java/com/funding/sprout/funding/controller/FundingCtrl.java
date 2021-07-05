@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.funding.sprout.admin.service.AdminService;
 import com.funding.sprout.funding.service.FundingService;
 import com.funding.sprout.vo.Funding;
+import com.funding.sprout.vo.Order;
 import com.funding.sprout.vo.Reward;
 import com.funding.sprout.vo.User;
 
@@ -132,34 +133,50 @@ public class FundingCtrl {
 	}
 
 	@RequestMapping(value = "funding/fundingresult", method = RequestMethod.POST)
+
 	public ModelAndView fundingresult(
 			@RequestParam(name = "reward") String[] reword,
 			@RequestParam(name = "rewardEA") String[] rewardEA,
 			@RequestParam(name = "rewardPrice") int[] rewardPrice,
-			
-			@RequestParam(name = "cheer") String cheer,
-			@RequestParam(name = "cheerEA") String cheerEA,
-			@RequestParam(name = "cheerPrice") int cheerPrice,
+		
+			@RequestParam(name = "cheer",required=false) String cheer,
+			@RequestParam(name = "cheerEA",required=false) String cheerEA,
+			@RequestParam(name = "cheerPrice",required=false) String cheerPrice,
 			
 			@RequestParam(name = "totalPrice") int totalPrice,
 			@RequestParam(name = "userId") String userId,
+			@RequestParam(name = "userAddr") String userAddr,
 			@RequestParam(name = "fundingno") int fundingno,
 			@RequestParam(name = "paycat") String paycat,
+			@RequestParam(name = "name") String name,
+			@RequestParam(name = "tel_head") String tel_head,
+			@RequestParam(name = "message") String message,
 			User user,
+			Order order,
 			ModelAndView mv) {
 		try {
 			Funding funding = funService.selectOne(fundingno);	
 			System.out.println("선택한 펀딩 정보 :" + funding);
-			
-			for(int i =0; i<reword.length; i++) {
-				System.out.println(reword[i]);
-				System.out.println(rewardEA[i]);
-				System.out.println(rewardPrice[i]);
-			}
+			int result = 0;
 			
 			user.setUserId(userId); // vo에 아이디를 넣음
+			user.setUserAddress(userAddr);
 			List<User> searchId = adService.selectUserId(user); // 아이디로 검색한 리스트 가져오기
-			System.out.println(searchId);
+			
+			order.setDeliveryAddr(userAddr);
+			order.setId(userId);
+			order.setOrderTotalPrice(totalPrice);
+			if(paycat.equals("카드 간편")) {
+				order.setPaymentType('0');
+			}else {
+				order.setPaymentType('1');
+			}
+			order.setRecipient(name);
+			order.setRecipientPhone(tel_head);
+			order.setFundingNo(fundingno);
+			order.setDeliveryMessage(message);
+			
+			result = funService.insertOrders(order);
 		
 			mv.addObject("funding", funding);
 			mv.addObject("searchId", searchId);
@@ -174,14 +191,12 @@ public class FundingCtrl {
 			
 			mv.addObject("totalPrice", totalPrice);
 			mv.addObject("paycat", paycat);
+			mv.setViewName("funding/fundingpayResult");
 			
-			
-			mv.setViewName("funding/fundingpay");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");
 		}
-		mv.setViewName("funding/fundingpayResult");
 		return mv;  // 펀딩 결제완료 페이지
 	}
 	

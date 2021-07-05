@@ -38,7 +38,7 @@
 			</if>
 			
 			<if test="serchOption.equals('제목내용')">
-					SELECT * FROM FUNDING WHERE FUNDINGTITLE LIKE '%'||#{keyword}||'%' OR FUNDINGCONTENT LIKE '%'||#{keyword}||'%'
+				SELECT * FROM FUNDING WHERE FUNDINGTITLE LIKE '%'||#{keyword}||'%' OR FUNDINGCONTENT LIKE '%'||#{keyword}||'%'
             </if>
 	</select>
 	
