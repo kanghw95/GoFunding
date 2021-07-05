@@ -15,13 +15,6 @@
 </head>
 
 <style>
-/* #title {
-	position: absolute;
-	top: 180px;
-	left: 200px;
-}
-*/
-
 .board {
 	position: absolute;
 	top: 300px;

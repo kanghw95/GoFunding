@@ -124,9 +124,7 @@
 			
 			if(write1 == true) {
 				var sessionUserId = '${sessionScope.user.userId}';
-				
-				console.log("sessionUserId : " + sessionUserId);
-		
+						
 				if(sessionUserId == 'null' || sessionUserId == ''){
 					alert("로그인 후 글 쓰기가 가능합니다.");
 					return;

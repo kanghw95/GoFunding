@@ -9,6 +9,11 @@
 <title>글 상세 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
+.wrapper{
+	margin:30px;
+    padding-left:400px;
+}
+
 #like{
 	width : 50px;
 	height : 50px;
@@ -82,7 +87,6 @@ button{
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
 	<div class="wrapper">
-
 	<%
 		User user = (User) session.getAttribute("user");
 	%>
@@ -162,7 +166,7 @@ button{
 						                        <button type="button" class="btn btn-outline-primary btn-sm comment-addBtn" id="comment-addBtn">대댓글</button>
 						                        <button type="button" class="btn btn-outline-primary btn-sm comment-modifyBtn" id="comment-modifyBtn">수정</button>
 						                        <button type="button" class="btn btn-outline-primary btn-sm comment-deleteBtn" id="comment-deleteBtn">삭제</button>
-						                        <input type = "hidden" class="cmtno" value="${item.cmtNo}">
+						                        <input type = "hidden" class="cmtNo" value="${item.cmtNo}">
 						                    </div>
 						                </td>
 						            </tr>
@@ -194,7 +198,6 @@ button{
 		// 로드 되면 좋아요 버튼 나타내기
 		let isLiked = '${isliked}';  // 1:좋아요, 0:아님
 		var cnt =  '${likedCnt}';
-		console.log(isLiked);
 		var tagHtml = '';
 		
 		if(isLiked == 1){// 1:좋아요, 0:아님
@@ -221,17 +224,14 @@ button{
 				return false;
 			}
 		}
-
+		
 		// 게시글 수정
 		$("#modify").on("click", function() {	
 			// 수정 아이디 체크
 			var modify1 = confirm("수정하시겠습니까?");
 			var sessionUserId = '${sessionScope.user.userId}';
 			var boardId = '${data.boardId}';
-				
-			console.log("sessionUserId : " + sessionUserId);
-			console.log("boardId : " + boardId);
-			
+							
 			if(modify1){ // 확인누르면
 			if (sessionUserId == 'null' || sessionUserId == '') {
 				alert("로그인 후 수정 가능합니다.");
@@ -252,7 +252,7 @@ button{
 				}else { // 취소누르면
 				return false;
 			}
-	});
+		});
 
 		// 게시글 삭제
 		$("#delete").on("click", function() {		
@@ -260,10 +260,7 @@ button{
 			var delete1 = confirm("삭제하시겠습니까?");
 			var sessionUserId = '${sessionScope.user.userId}';
 			var boardId = '${data.boardId}';
-			
-			console.log("sessionUserId : " + sessionUserId);
-			console.log("boardId : " + boardId);
-			
+						
 			if(delete1){ // 확인누르면 
 			if (sessionUserId == 'null' || sessionUserId == '') {
 				alert("로그인 후 삭제 가능합니다")
@@ -298,12 +295,10 @@ button{
 						boardId : '<%=user.getUserId()%>'
 					},
 					success : function(cnt) {
-						console.log("추천수:"+cnt);
 						$(".board-content-like").empty(); // 기존 image 지우기
 						
 						var tagHtml = '';
 						
-						console.log("클릭 이전 : "+ isLiked);
 						if(isLiked == 0){
 							isLiked = 1;  // 좋아요 상태로 바꾸기
 							tagHtml = '<a><img src = "../resources/img/fullheart.png" id="unlike"><br><span class = "like_cnt">'+cnt+'</span></a>';
@@ -319,126 +314,154 @@ button{
 				});
 			}
 		});
-	});   // on load 되면
 	
+	
+		 
+		function displayCommentList(result){
+			var commentHtml = "";
+			$.each(result, function(i, item) {
+				commentHtml += '<div class = "comment-table">';
+				commentHtml += '<table >';
+				commentHtml += '<tr>';
+				commentHtml += '<td class="comment-id">';
+				commentHtml += '<div class="cmtWriteId">';
+				commentHtml += item.id;
+				commentHtml += '</div>'
+				commentHtml += '</td>';
+				commentHtml += '<td class="comment-date">';
+				commentHtml += item.cmtDate;
+				commentHtml += '</td>';
+				commentHtml += '<td class="comment-button">';
+				commentHtml += '<div>';
+				commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-addBtn" id="comment-addBtn">대댓글</button> ';
+				commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-modifyBtn" id="comment-modifyBtn">수정</button> ';
+				commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-deleteBtn" id="comment-deleteBtn">삭제</button>';
+				commentHtml += '<input type = "hidden" name = "cmtNo" class="cmtNo" value="'+item.cmtNo+'">';
+				commentHtml += '</div>';          
+				commentHtml += '</td>';
+				commentHtml += '</tr>';
+				commentHtml += '<tr>';
+				commentHtml += '<td colspan="3" width="800px" class="comment-content">';
+				commentHtml += item.cmtContent;
+				commentHtml += '</td>';
+				commentHtml += '</tr>';
+				commentHtml += '</table>';
+				commentHtml += '</div>';					
+			});	
+			$("#comment-list").empty();
+			$("#comment-list").append(commentHtml);
 
-		
-	$("#comment-writebtn").click(function() { // 댓글쓰기			
-		var comment = $("#comment-write").val();
-		
-		if(comment == '' || comment == 'null'){
-			alert("댓글을 입력해주세요");
-			} else {
-		console.log(comment);
-		$.ajax({
-			url : "comwrite",
-			type : "POST",
-			data : {
-				boardNo : '${data.boardNo }',
-				cmtContent : comment
-			},
+			$(".comment-deleteBtn").click(function() { // 댓글 삭제
+				var delete2 = confirm("댓글 삭제하시겠습니까?");
 			
-			dataType: "json",
-			success : function(result) {
-				console.log("댓글 입력 성공 후 댓글 목록 json 리스트:" + result);
-				var commentHtml = "";
-				
-				$.each(result, function(i, item) {
-					commentHtml += '<div class = "comment-table">';
-					commentHtml += '<table >';
-					commentHtml += '<tr>';
-					commentHtml += '<td class="comment-id">';
-					commentHtml += item.id;
-					commentHtml += '</td>';
-					commentHtml += '<td class="comment-date">';
-					commentHtml += item.cmtDate;
-					commentHtml += '</td>';
-					commentHtml += '<td class="comment-button">';
-					commentHtml += '<div>';
-					commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-addBtn" id="comment-addBtn">대댓글</button>';
-					commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-modifyBtn" id="comment-modifyBtn">수정</button>';
-					commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-deleteBtn" id="comment-deleteBtn">삭제</button>';
-					commentHtml += '<input type = "hidden" class="cmtno" value="'+item.cmtNo+'">';
-					commentHtml += '</div>';          
-					commentHtml += '</td>';
-					commentHtml += '</tr>';
-					commentHtml += '<tr>';
-					commentHtml += '<td colspan="3" width="800px" class="comment-content">';
-					commentHtml += item.cmtContent;
-					commentHtml += '</td>';
-					commentHtml += '</tr>';
-					commentHtml += '</table>';
-					commentHtml += '</div>';					
-					});	
-				$("#comment-list").empty();
-				$("#comment-list").append(commentHtml);
-				$('textarea').val('');
-			},
-			error : function(e) {
-				alert(e);
-				console.log("댓글 실패");
+				var sessionUserId = '${sessionScope.user.userId}'; // 현재 로그인한 아이디
+				var cmtWriteIdDiv = $(this).parents("tr").find(".cmtWriteId");
+				var Id = cmtWriteIdDiv.text(); // 댓글 쓴 사람 아이디
+				var cmtNo = $(this).next().val();
+				if(delete2){ // 확인누르면
+					if (sessionUserId == 'null' || sessionUserId == '' || sessionUserId != Id) {
+						alert("다른사람이 쓴 댓글은 삭제할 수 없습니다.");
+						return false;
+					}
+					$.ajax({
+						url : "comdelete",
+						type : "POST",
+						data : {
+							cmtNo : cmtNo,
+							boardNo : '${data.boardNo }'
+						},
+						dataType : "JSON",
+						success : displayCommentList,
+						error : function(e){
+							alert(e);
+						}
+					});
 				}
 			});
+			$(".comment-modifyBtn").click(function() { // 댓글 수정
+				$.ajax({
+					url : "comupdate",
+					type : "POST",
+					data : {
+					},
+					dataType: "JSON",
+					success : displayCommentList,
+					error : function(e){
+						alert(e);
+					}
+				});
+			});
 		}
-	});
-	
-	
-	$(".comment-deleteBtn").click(function() { // 댓글 삭제
+
+		$("#comment-writebtn").click(function() { // 댓글쓰기			
+			var comment = $("#comment-write").val();
+			
+			if(comment == '' || comment == 'null'){
+				alert("댓글을 입력해주세요");
+				} else {
+			$.ajax({
+				url : "comwrite",
+				type : "POST",
+				data : {
+					boardNo : '${data.boardNo }',
+					cmtContent : comment
+				},
+				
+				dataType: "JSON",
+				success : function(result) {
+					$('textarea').val('');
+					displayCommentList(result);
+				},
+				error : function(e) {
+					alert(e);
+					}
+				});
+			}
+		});
+		$(".comment-deleteBtn").click(function() { // 댓글 삭제
 			var delete2 = confirm("댓글 삭제하시겠습니까?");
+		
 			var sessionUserId = '${sessionScope.user.userId}'; // 현재 로그인한 아이디
 			var cmtWriteIdDiv = $(this).parents("tr").find(".cmtWriteId");
 			var Id = cmtWriteIdDiv.text(); // 댓글 쓴 사람 아이디
-			
-			console.log("sessionUserId : " + sessionUserId);
-			console.log("Id : " + Id);
-								
+			var cmtNo = $(this).next().val();
 			if(delete2){ // 확인누르면
-			if (sessionUserId == 'null' || sessionUserId == '' || sessionUserId != Id) {
-				alert("다른사람이 쓴 댓글은 삭제할 수 없습니다.");
-				return true;
-			}
+				if (sessionUserId == 'null' || sessionUserId == '' || sessionUserId != Id) {
+					alert("다른사람이 쓴 댓글은 삭제할 수 없습니다.");
+					return false;
+				}
 				$.ajax({
 					url : "comdelete",
 					type : "POST",
 					data : {
-					
-				},
-				success : function(data){
-					console.log("댓글 삭제 성공");
-				},
-				
-				error : function(e){
-					alert(e);
-					console.log("댓글 삭제 실패");
-				}
-			});
-		} else{
-			return false;
-		}
-	});
-	
-	
-	$(".comment-modifyBtn").click(function() { // 댓글 수정
-		
-		console.log("kwon2");
-		
-		$.ajax({
-			url : "comupdate",
-			type : "POST",
-			data : {
-				
-			},
-				
-			success : function(data){
-				console.log("댓글 수정 성공");
-			},
-			
-			error : function(e){
-				alert(e);
-				console.log("댓글 수정 실패");
+						cmtNo : cmtNo,
+						boardNo : '${data.boardNo }'
+					},
+					dataType : "JSON",
+					success : displayCommentList,
+					error : function(e){
+						alert(e);
+					}
+				});
 			}
 		});
-	});
+		$(".comment-modifyBtn").click(function() { // 댓글 수정
+			$.ajax({
+				url : "comupdate",
+				type : "POST",
+				data : {
+				},
+				dataType: "JSON",
+				success : displayCommentList,
+				error : function(e){
+					alert(e);
+				}
+			});
+		});
+
+		
+	
+	});   // on load 되면
 	</script>
 	</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp" />

@@ -49,13 +49,10 @@ public class BoardCtrl {
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 //			int likecnt = 0; // 추천수
 			
-			System.out.println("listCount:" + listCount);
 			if (keyword != null && !keyword.equals(""))
 				mv.addObject("list", boService.searchList(keyword)); // TODO
 			else {
 				ArrayList<Board> aaa = new ArrayList<Board>(boService.selectList(currentPage, LIMIT));
-				System.out.println("aaa: " + aaa.size());
-				System.out.println("aaa: " + aaa.get(0).toString());
 				mv.addObject("list", aaa);
 			}
 			mv.addObject("currentPage", currentPage);
@@ -78,23 +75,18 @@ public class BoardCtrl {
 	@RequestMapping(value = "boardDetail", method = RequestMethod.GET)
 	public ModelAndView boardDetail(ModelAndView mv, Model model, @RequestParam(name = "boardNo") int boardNo,
 			@RequestParam(name = "page", defaultValue = "1") int page
-			, HttpSession session, Comment cm
-			) { // 게시글 상세보기
-//	public String boardDetail(ModelAndView mv,Model model, int boardNo) { 
-
+			, HttpSession session, Comment cm) { // 게시글 상세보기
+		//	public String boardDetail(ModelAndView mv,Model model, int boardNo) { 
 		// 방법1
 		try {
 			Board data = boService.selectBoard(0, boardNo); // no값넘김 조회수증가
-			System.out.println("data : " + data.toString());
 			int currentPage = page;
 			int likecnt = 0; // 추천수
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("data", data);
 			String boardId = ((User)session.getAttribute("user")).getUserId(); 
-			System.out.println("[순찬] session boardId: "+ boardId);
 			
 			int isLiked = boService.checklike(boardNo, boardId);    // 좋아요상태 :1, 아니면 :0
-			System.out.println(boardNo + ":" + isLiked);
 			mv.addObject("isliked", isLiked);   // 좋아요상태 :1, 아니면 :0
 			
 			likecnt = boService.likecnt(boardNo); // 추천수
@@ -102,7 +94,6 @@ public class BoardCtrl {
 			
 			List<Comment> commentList = comService.CommentAll(boardNo); // 댓글 목록 리스트
 			mv.addObject("commentList", commentList);
-			System.out.println(commentList);
 			
 			mv.setViewName("board/boardDetail");
 		} catch (Exception e) {
@@ -126,16 +117,13 @@ public class BoardCtrl {
 			@RequestParam("boardTitle") String boardtitle, @RequestParam("boardContent") String boardcotent,
 			@RequestParam("userid") String userid, HttpServletRequest request, ModelAndView mv, Board vo) { // 게시글 등록
 		int result = 0;
-		System.out.println("제목 : " + boardtitle);
-		System.out.println("내용 : " + boardcotent);
-		System.out.println("작성자 :" + userid);
-
+		
 		vo = new Board();
 		vo.setBoardTitle(boardtitle);
 		vo.setBoardContent(boardcotent);
 		vo.setBoardId(userid);
 		result = boService.insertBoard(vo);
-
+		
 		try {
 			if (result != 0) {
 				mv.setViewName("redirect:boardList");
@@ -154,9 +142,6 @@ public class BoardCtrl {
 	@RequestMapping(value = "boardDelete")
 	public ModelAndView boardDelete(@RequestParam(name = "boardNo") int boardNo,
 			@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) { // 게시글 삭제
-
-		System.out.println("boardNO" + boardNo);
-
 		try {
 //			Board b = boService.selectBoard(1, boardNo);
 			boService.deleteBoard(boardNo);
@@ -173,14 +158,12 @@ public class BoardCtrl {
 	@RequestMapping(value = "bRewrite", method = RequestMethod.POST)
 	public String boardRenew(int boardNo, Model model) { // 게시글 수정 jsp 이동
 		Board data = boService.detail(boardNo);
-		System.out.println("boardRenew:" + data.toString());
 		model.addAttribute("data", data);
 		return "board/boardUpdate";
 	}
 
 	@RequestMapping(value = "boardUpdate", method = RequestMethod.POST)
 	public String boardUpdate(Board b) { // 게시글 수정
-		System.out.println("boardUpdate:" + b.toString());
 		boService.updateBoard(b);
 		return "redirect:boardList";
 	}
@@ -189,29 +172,18 @@ public class BoardCtrl {
 	@ResponseBody
 	public int clickLike(@RequestParam("boardNo") int boardNo, @RequestParam("boardId") String boardId, ModelAndView mv,
 			ModelAndView model) { // 추천
-
-		System.out.println("순찬 : " + boardNo);
-		System.out.println("순찬 : " + boardId);
 		int result = -1;
 		int likecnt = 0;
 		try {
 			result = boService.checklike(boardNo, boardId);
-			System.out.println(result);
 			if (result == 0) { // 추천이 안되어있는 상태라면 클릭했을때 추천
-				System.out.println("추천");
 				boService.insertLike(boardNo, boardId);
 			} else if (result == 1) { // 추천이 되어있는 상태라면 클릭했을때 추천 취소
-				System.out.println("추천취소");
 				boService.deleteLike(boardNo, boardId);
 			} else {
-				System.out.println("추천 기능 확인 바람");
-			}
-			
+				}
 			likecnt = boService.likecnt(boardNo); // 총 추천수
-			System.out.println("likecnt : " + likecnt);
 			//mv.addObject("likecnt", likecnt);
-			
-		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -11,7 +11,7 @@ public interface CommentService {
 
 	public List<Comment> CommentAll(int boardNo); // 모든 댓글 조회
 	
-	public int CommentDelete(Comment cm); // 댓글 삭제
+	public int CommentDelete(int cmtNo); // 댓글 삭제
 	
 	public int CommentUpdate(Comment cm); // 댓글 수정
 	

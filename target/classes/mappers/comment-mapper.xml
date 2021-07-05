@@ -20,17 +20,17 @@
 	
 	<!-- 모든 댓글 조회 -->
 	<select id="CommentAll" parameterType="int" resultMap="resultComment">
-		SELECT * FROM BULLETINECOMMENT WHERE FREENO = #{boardNo}
+		SELECT * FROM BULLETINECOMMENT WHERE FREENO = #{boardNo} ORDER BY FREECMTNO ASC
 	</select>
 	
 	<!-- 댓글 삭제 -->
 	<delete id="CommentDelete" parameterType="int" flushCache="true">
-		DELETE FROM BULLETINECOMMENT WHERE FREECMTNO = #{cmtNo} and ID = #{id}
+		DELETE FROM BULLETINECOMMENT WHERE FREECMTNO = #{cmtNo}
 	</delete>
 	
 	<!-- 댓글 수정 -->
 	<update id="CommentUpdate">
-		UPDATE BULLETINECOMMENT SET FREECMTCONTENT = #{cmtContent} WHERE FREECMTNO = #{cmtNo} and ID = #{id}
+		UPDATE BULLETINECOMMENT SET FREECMTCONTENT = #{cmtContent} WHERE FREECMTNO = #{cmtNo}
 	</update>
 	
 	

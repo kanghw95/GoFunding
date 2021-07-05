@@ -83,17 +83,14 @@
 							if (result == true) {
 								if (title == '' || title == 'null') {
 									alert("제목을 입력해주세요")
-									console.log("순찬1");
 									return;
 								}
 								if (content == '' || content == 'null'
 										|| content == '<p><br></p>') {
 									alert("내용을 입력해주세요")
-									console.log("순찬2");
 									//		 			oEditors.getById["ir1"].exec("FOCUS"); //포커싱
 									return;
 								}
-								console.log("순찬3");
 							} else {
 								return false;
 							}
