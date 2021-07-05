@@ -36,7 +36,7 @@
 			
 			<input type="hidden" name="totalPrice" value="${funding_pay_price+funding.deliverycharge}">
 			<input type="hidden" name="userId" value="${sessionScope.user.userId}">
-			<input type="hidden" name="userAddr" value="${sessionScope.user.userAddress}">
+			<input type="hidden" id="userAddr" name="userAddr" value="${sessionScope.user.userAddress}">
 			<input type="hidden" name="fundingno" value="${funding.fundingno}">
 			<input type="hidden" id="paycat" name="paycat" value="">
 			<input type="hidden" id="name" name="name" value="${sessionScope.user.userName}">
@@ -224,6 +224,10 @@
 	var input_message = document.getElementById("input_message"); 
 	var message = document.getElementById("message"); 
 	
+	var userAddr = document.getElementById("userAddr"); 
+	var input_address1 = document.getElementById("input_address1"); 
+	var input_address2 = document.getElementById("input_address2"); 
+	
 	
 	//배송지 직접입력 
 	var dafault_address_btn = document.getElementById("wa_default_address");
@@ -359,9 +363,14 @@
 			           	paycat.value = "카드 간편";
 			           	message.value = input_message.value;
 			          	if(input_name.value != '' &&  input_name.value == null){
-			           	name.value = input_name.value;
-			           	tel_head.value = input_tel_head.value;
+			          	 	name.value = input_name.value;
+			          	 	tel_head.value = input_tel_head.value;
 			           	}
+			          	if(input_address1.value != '' &&  input_address1.value == null){
+			          		userAddr.value = input_address1.value + input_address2.value;
+				        }
+			          	
+			          	alert(userAddr.value);
 			          	console.log(name.value);
 			           	payresult.submit();
 		        	} else {

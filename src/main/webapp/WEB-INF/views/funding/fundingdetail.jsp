@@ -279,6 +279,39 @@
 									</ul>
 								</div>
 							</section>
+							
+						 <section class="FundingDetailStoryContent_reference">
+							<h4 class="FundingDetailStoryContent_title">참고정보</h4>
+								<ul class="FundingDetailStoryReferenceList_wrap">
+									<li class="FundingDetailStoryReferenceList_item">
+										<a href="#" class="FundingDetailStoryReferenceList_link" target="_blank">
+										<span class="FundingDetailStoryReferenceList_logo">
+										</span>
+										
+										<span class="FundingDetailStoryReferenceList_text">SNS</span>
+										</a>
+									</li>
+									
+									<li class="FundingDetailStoryReferenceList_item">
+										<a href="#" class="FundingDetailStoryReferenceList_link" target="_blank">
+											<span class="FundingDetailStoryReferenceList_logo">
+											</span>
+											
+											<span class="FundingDetailStoryReferenceList_text">홈페이지</span>
+										</a>
+									</li>
+									<li class="FundingDetailStoryReferenceList_item">
+										<a href="#" class="FundingDetailStoryReferenceList_link" target="_blank">
+											<span class="FundingDetailStoryReferenceList_logo">
+
+											</span>
+											
+											<span class="FundingDetailStoryReferenceList_text">문의하기</span>
+										</a>
+									</li>
+								</ul>
+							</section>
+							
 							<section class="FundingDetailStoryParticipationTabPanel_wrap">
 								<h4 class="FundingDetailStoryParticipationTabPanel_title">참여내역</h4>
 								<p class="FundingDetailStoryParticipationList_summary">
@@ -325,7 +358,7 @@
 									</div>
 								</section>
 						</div>
-						
+
 						<section class="FundingDetailStoryContent_wrap_reward">
 							<div class="FundingDetailRewardList_wrap">
 								<h4 class="FundingDetailRewardList_title">리워드 안내</h4>

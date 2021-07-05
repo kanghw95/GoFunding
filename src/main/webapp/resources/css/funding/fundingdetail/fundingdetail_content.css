@@ -299,6 +299,55 @@ button:disabled, input[type=button]:disabled, input[type=checkbox]:disabled+labe
     position: relative;
 }
 
+.FundingDetailStoryContent_reference {
+    padding: 40px 0 48px;
+    border: 1px solid #000;
+    border-width: 1px 0;
+}
+
+.FundingDetailStoryReferenceList_wrap {
+    margin: 14px -8px -8px;
+}
+
+.FundingDetailStoryReferenceList_item {
+    display: inline-block;
+    width: 84px;
+    vertical-align: top;
+    padding: 8px 7px;
+}
+
+.FundingDetailStoryReferenceList_link {
+    display: block;
+    font-size: 0;
+    text-align: center;
+}
+
+.FundingDetailStoryReferenceList_logo {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgba(0,0,0,.08);
+    border-radius: 50%;
+    font-size: 0;
+}
+.FundingDetailStoryReferenceList_logo:before {
+    display: inline-block;
+    width: 1px;
+    height: 100%;
+    margin-left: -1px;
+    vertical-align: middle;
+    content: "";
+}
+
+.FundingDetailStoryReferenceList_text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    margin-top: 5px;
+    font-size: 13px;
+    color: #333;
+}
 
 li {
     display: list-item;
