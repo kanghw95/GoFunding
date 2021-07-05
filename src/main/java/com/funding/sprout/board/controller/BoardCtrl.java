@@ -102,10 +102,8 @@ public class BoardCtrl {
 			
 			List<Comment> commentList = comService.CommentAll(boardNo); // 댓글 목록 리스트
 			mv.addObject("commentList", commentList);
+			System.out.println(commentList);
 			
-			int delete = comService.CommentDelete(cm); // 댓글 삭제
-			mv.addObject("delete", delete);
-			 
 			mv.setViewName("board/boardDetail");
 		} catch (Exception e) {
 			e.printStackTrace();

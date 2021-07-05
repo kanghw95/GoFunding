@@ -9,96 +9,12 @@
 <title>글 상세 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
-/* #title {
-	position: absolute;
-	left: 50px;
-	top: 100px;
-}
-
-#date {
-	position: absolute;
-	left: 50px;
-	top: 160px;
-}
-
-#declaration {
-	position: absolute;
-	left: 650px;
-	top: 160px;
-}
-
-#modify {
-	position: absolute;
-	left: 700px;
-	top: 160px;
-}
-
-#delete {
-	position: absolute;
-	left: 750px;
-	top: 160px;
-}
-
-#boardId {
-	position: absolute;
-	left: 50px;
-	top: 190px;
-}
-
-#cmtcount {
-	position: absolute;
-	left: 100px;
-	top: 190px;
-}
-
-#boardcnt {
-	position: absolute;
-	left: 160px;
-	top: 190px;
-}
-
-#content1 {
-	position: absolute;
-	left: 70px;
-	top: 250px;
-}
-
-#content2 {
-	position: absolute;
-	left: 70px;
-	top: 300px;
-}
-
-#reply {
-	position: absolute;
-	left: 70px;
-	top: 500px;
-}
-
-#button {
-	position: absolute;
-	left: 800px;
-	top: 500px;
-}
-
-#page{
-	position : absolute;
-	left : 800px;
-	top : 650px;
-} */
-
 #like{
-/* 	position : absolute;
-	left : 400px;
-	top : 400px; */
 	width : 50px;
 	height : 50px;
 }
 
 #unlike{
-/* 	position : absolute;
-	left : 400px;
-	top : 400px; */
 	width : 50px;
 	height : 50px;
 }
@@ -196,9 +112,9 @@ button{
 							<input type="hidden" name="boardNo" value="${data.boardNo }">
 							<input type="hidden" name="userId" value="<%=user.getUserId()%>">
 
-							<input type="button" value="신고" id="declaration"> <input
-								type="button" value="수정" id="modify"> <input
-								type="button" value="삭제" id="delete">
+							<input type="button" value="신고" id="declaration"> 
+							<input type="button" value="수정" id="modify"> 
+							<input type="button" value="삭제" id="delete">
 						</form>
 					</div>
 				</div>
@@ -208,33 +124,15 @@ button{
 					<div id="content1">
 						<h3>글 내용</h3>
 					</div>
-					<div id="content2">
-						<!-- <textarea name = "content" rows = "10" cols = "100"> -->
-						${data.boardContent }
-						<!-- </textarea> -->
-					</div>
-
-					<div class="board-content-like">
-
-			<%-- <c:choose>
-				<c:when test = "${isliked eq 0 }">
-					<a><img src = "../resources/img/emptyheart.png" id = "like"><br><span class = "like_cnt">개개개</span></a>
-					
-				</c:when>
-				
-				<c:when test = "${isliked ne 0}">
-					<a><img src = "../resources/img/fullheart.png" id = "unlike"><br><span class = "like_cnt">개개개</span></a>
-				</c:when>
-			</c:choose> --%>
-					</div>
+					<div id="content2">${data.boardContent }</div>
+					<div class="board-content-like"></div>
 				</div>
 
 				<br><hr><br>
 
 				<div>
 					<div class="comment-box">
-						<textarea id="comment-write" name="cmtContent"
-							placeholder="댓글 입력창" rows="3" cols="90" ></textarea>
+						<textarea id="comment-write" name="cmtContent" placeholder="댓글 입력창" rows="3" cols="90" ></textarea>
 					</div>
 
 					<div class="comment-writebutton">
@@ -254,16 +152,17 @@ button{
 						        <table >
 						            <tr>
 						                <td class="comment-id">
-						                    ${item.id}
+						                    <div class="cmtWriteId">${item.id}</div>
 						                </td>
 						                <td class="comment-date">
 						                    ${item.cmtDate}
 						                </td>
 						                <td class="comment-button">
 						                    <div>
-						                        <button type="button" class="btn btn-outline-primary btn-sm" id="comment-addBtn">대댓글</button>
-						                        <button type="button" class="btn btn-outline-primary btn-sm" id="comment-modifyBtn">수정</button>
-						                        <button type="button" class="btn btn-outline-primary btn-sm" id="comment-deleteBtn">삭제</button>
+						                        <button type="button" class="btn btn-outline-primary btn-sm comment-addBtn" id="comment-addBtn">대댓글</button>
+						                        <button type="button" class="btn btn-outline-primary btn-sm comment-modifyBtn" id="comment-modifyBtn">수정</button>
+						                        <button type="button" class="btn btn-outline-primary btn-sm comment-deleteBtn" id="comment-deleteBtn">삭제</button>
+						                        <input type = "hidden" class="cmtno" value="${item.cmtNo}">
 						                    </div>
 						                </td>
 						            </tr>
@@ -297,6 +196,7 @@ button{
 		var cnt =  '${likedCnt}';
 		console.log(isLiked);
 		var tagHtml = '';
+		
 		if(isLiked == 1){// 1:좋아요, 0:아님
 			tagHtml = '<a><img src = "../resources/img/fullheart.png" id="unlike"><br><span class = "like_cnt">${likecnt }</span></a>';
 		} else {// 0:아님
@@ -304,111 +204,100 @@ button{
 		}
 		$(".board-content-like").append(tagHtml);
 
-		
-		
-		
-		
+		// 좋아요 아이디 체크
+		function checkId() {
+			var sessionUserId = '${sessionScope.user.userId}';
+			var boardId = '${data.boardId}';
 
+			if (sessionUserId == 'null' || sessionUserId == '') {
+				alert("로그인 후 추천 가능합니다")
+				return true;
+			}
+
+			if (sessionUserId == boardId) {
+				alert("본인 글에는 추천이 안됩니다.");
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		// 게시글 수정
+		$("#modify").on("click", function() {	
 			// 수정 아이디 체크
-			function modifyId() {
-				var modify1 = confirm("수정하시겠습니까?");
-				var sessionUserId = '${sessionScope.user.userId}';
-				var boardId = '${data.boardId}';
-				console.log("sessionUserId" + sessionUserId);
-				console.log("boardId:" + boardId);
-
-				if (sessionUserId == 'null' || sessionUserId == '') {
-					alert("로그인 후 수정 가능합니다.");
-					return;
-				}
-				if (boardId == 'null' || boardId == '') {
-					alert("작성자가 아니므로 글 수정이 되지 않습니다.");
-					return;
-				}
-				if (boardId != sessionUserId) {
-					alert("작성자가 아니므로 글 수정이 되지 않습니다.");
-					return;
-				} else {
-					return false;
-				}
+			var modify1 = confirm("수정하시겠습니까?");
+			var sessionUserId = '${sessionScope.user.userId}';
+			var boardId = '${data.boardId}';
+				
+			console.log("sessionUserId : " + sessionUserId);
+			console.log("boardId : " + boardId);
+			
+			if(modify1){ // 확인누르면
+			if (sessionUserId == 'null' || sessionUserId == '') {
+				alert("로그인 후 수정 가능합니다.");
+				return false;
 			}
+			if (boardId == 'null' || boardId == '') {
+				alert("작성자가 아니므로 글 수정이 되지 않습니다.");
+				return false;
+			}
+			if (boardId != sessionUserId) {
+				alert("작성자가 아니므로 글 수정이 되지 않습니다.");
+				return false;
+			} 
+			var frm = document.getElementById("frmUpdate");
+			frm.action = "bRewrite";
+			frm.method = "post";
+			frm.submit();
+				}else { // 취소누르면
+				return false;
+			}
+	});
+
+		// 게시글 삭제
+		$("#delete").on("click", function() {		
+			// 삭제 아이디 체크
+			var delete1 = confirm("삭제하시겠습니까?");
+			var sessionUserId = '${sessionScope.user.userId}';
+			var boardId = '${data.boardId}';
+			
+			console.log("sessionUserId : " + sessionUserId);
+			console.log("boardId : " + boardId);
+			
+			if(delete1){ // 확인누르면 
+			if (sessionUserId == 'null' || sessionUserId == '') {
+				alert("로그인 후 삭제 가능합니다")
+				return false;
+			}
+			if (boardId == 'null' || boardId == '') {
+				alert("작성자가 아니므로 글 삭제가 되지 않습니다")
+				return false;
+			}
+			if (boardId != sessionUserId) {
+				alert("작성자가 아니므로 글 삭제가 되지 않습니다")
+				return false;	
+			}
+				var frm = document.getElementById("frmUpdate");
+				frm.action = "boardDelete";
+				frm.method = "post";
+				frm.submit();
+			}else { // 취소누르면
+				return false;
+			}
+		});
 
 		
-			// 삭제 아이디 체크
-			function deleteId() {
-				var delete1 = confirm("삭제하시겠습니까?");
-				var sessionUserId = '${sessionScope.user.userId}';
-				var boardId = '${data.boardId}';
-
-				if (sessionUserId == 'null' || sessionUserId == '') {
-					alert("로그인 후 삭제 가능합니다")
-					return true;
-				}
-				if (boardId == 'null' || boardId == '') {
-					alert("작성자가 아니므로 글 삭제가 되지 않습니다")
-					return true;
-				}
-				if (boardId != sessionUserId) {
-					alert("작성자가 아니므로 글 삭제가 되지 않습니다")
-					return true;
-
-				} else {
-					return false;
-				}
-			}
-
-			// 좋아요 아이디 체크
-			function checkId() {
-				var sessionUserId = '${sessionScope.user.userId}';
-				var boardId = '${data.boardId}';
-
-				if (sessionUserId == 'null' || sessionUserId == '') {
-					alert("로그인 후 추천 가능합니다")
-					return true;
-				}
-
-				if (sessionUserId == boardId) {
-					alert("본인 글에는 추천이 안됩니다.");
-					return true;
-				} else {
-					return false;
-				}
-			}
-
-			
-						
-			// 게시글 수정
-			$("#modify").on("click", function() {
-				if (modifyId() == false) {
-					var frm = document.getElementById("frmUpdate");
-					frm.action = "bRewrite";
-					frm.method = "post";
-					frm.submit();
-				}
-			});
-
-			// 게시글 삭제
-			$("#delete").on("click", function() {
-				if(deleteId() == false) {
-					var frm = document.getElementById("frmUpdate");
-					frm.action = "boardDelete";
-					frm.method = "post";
-					frm.submit();
-				}
-			});
-
-			
-			// 통합 -  좋아요 / 해제
-			$(".board-content-like").click(function() {
-					if (checkId() == false) {
-						$.ajax({
-							url : "clickLike",
-							type : "POST",
-							data : {
-								boardNo : '${data.boardNo }',
-								boardId : '<%=user.getUserId()%>'
-								},
-						success : function(cnt) {
+		// 통합 -  좋아요 / 해제
+		$(".board-content-like").click(function() {
+			if (checkId() == false) {
+				$.ajax({
+					url : "clickLike",
+					type : "POST",
+					data : {
+						boardNo : '${data.boardNo }',
+						boardId : '<%=user.getUserId()%>'
+					},
+					success : function(cnt) {
 						console.log("추천수:"+cnt);
 						$(".board-content-like").empty(); // 기존 image 지우기
 						
@@ -433,8 +322,8 @@ button{
 	});   // on load 되면
 	
 
-	$("#comment-writebtn").click(function() { // 댓글쓰기			
 		
+	$("#comment-writebtn").click(function() { // 댓글쓰기			
 		var comment = $("#comment-write").val();
 		
 		if(comment == '' || comment == 'null'){
@@ -466,9 +355,10 @@ button{
 					commentHtml += '</td>';
 					commentHtml += '<td class="comment-button">';
 					commentHtml += '<div>';
-					commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm" id="comment-addBtn">대댓글</button>';
-					commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm" id="comment-modifyBtn">수정</button>';
-					commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm" id="comment-deleteBtn">삭제</button>';
+					commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-addBtn" id="comment-addBtn">대댓글</button>';
+					commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-modifyBtn" id="comment-modifyBtn">수정</button>';
+					commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-deleteBtn" id="comment-deleteBtn">삭제</button>';
+					commentHtml += '<input type = "hidden" class="cmtno" value="'+item.cmtNo+'">';
 					commentHtml += '</div>';          
 					commentHtml += '</td>';
 					commentHtml += '</tr>';
@@ -493,23 +383,26 @@ button{
 	});
 	
 	
-	$("#comment-deleteBtn").click(function() { // 댓글 삭제
-			
+	$(".comment-deleteBtn").click(function() { // 댓글 삭제
+			var delete2 = confirm("댓글 삭제하시겠습니까?");
 			var sessionUserId = '${sessionScope.user.userId}'; // 현재 로그인한 아이디
-			var Id = '${boardId}'; // 댓글 쓴 사람 아이디
-					
+			var cmtWriteIdDiv = $(this).parents("tr").find(".cmtWriteId");
+			var Id = cmtWriteIdDiv.text(); // 댓글 쓴 사람 아이디
+			
+			console.log("sessionUserId : " + sessionUserId);
+			console.log("Id : " + Id);
+								
+			if(delete2){ // 확인누르면
 			if (sessionUserId == 'null' || sessionUserId == '' || sessionUserId != Id) {
-				alert("다른사람이 쓴 댓글은 삭제할 수 없습니다.")
+				alert("다른사람이 쓴 댓글은 삭제할 수 없습니다.");
 				return true;
-			} else {
-			console.log("kwon1");
-			$.ajax({
-				url : "comdelete",
-				type : "POST",
-				data : {
+			}
+				$.ajax({
+					url : "comdelete",
+					type : "POST",
+					data : {
 					
 				},
-					
 				success : function(data){
 					console.log("댓글 삭제 성공");
 				},
@@ -519,13 +412,15 @@ button{
 					console.log("댓글 삭제 실패");
 				}
 			});
+		} else{
+			return false;
 		}
 	});
 	
 	
-	$("#comment-modifyBtn").click(function() { // 댓글 수정
+	$(".comment-modifyBtn").click(function() { // 댓글 수정
 		
-		console.log("soon1");
+		console.log("kwon2");
 		
 		$.ajax({
 			url : "comupdate",

@@ -62,14 +62,13 @@ public class CommentCtrl {
 	}
 		
 	@RequestMapping(value = "comdelete", method = RequestMethod.POST)
+	@ResponseBody
 	public String CommentDelete(Comment cm, HttpSession session) { // 댓글 삭제
 
 		System.out.println("댓글삭제페이지 넘어오기!!!");
-		String result = "";
-
 		try{
 			String boardId = ((User)session.getAttribute("user")).getUserId(); // 아이디
-			System.out.println("[순찬 07-04] session boardId: "+ boardId); 
+			System.out.println("[순찬 07-05] session boardId: "+ boardId); 
 			cm.setId(boardId);
 			
 			comService.CommentDelete(cm);
@@ -78,7 +77,7 @@ public class CommentCtrl {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return result; 
+		return null; 
 	}
 	
 	@RequestMapping(value = "comupdate", method = RequestMethod.POST)
