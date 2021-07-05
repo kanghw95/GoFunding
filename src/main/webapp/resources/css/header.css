@@ -36,8 +36,10 @@ header{
 
 }
 
-.navbar{
+.navbox{
 	border: 0;
+	height: 0;
+	margin: 0;
 }
 
 .nav-content, .nav-content a, .nav-content ul, .nav-content li, .nav-content div, .nav-content form, .nav-content input {
