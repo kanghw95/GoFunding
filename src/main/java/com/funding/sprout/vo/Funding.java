@@ -10,6 +10,7 @@ public class Funding {
 	private String fundingtitle; // 펀딩제목
 	private String fundingcontent; // 펀딩본문
 	private int fundingprice; // 목표금액
+	private int currentprice; // 현재 금액
 	private Timestamp fundingstart; // 시작일
 	private Timestamp fundingfin; // 종료일
 	private String maker; // 메이커
@@ -21,12 +22,11 @@ public class Funding {
 	public Funding() {
 		
 	}
-
-
+	
 
 	public Funding(int fundingno, char fundingstate, String fundingcategory, String fundingtitle, String fundingcontent,
-			int fundingprice, Timestamp fundingstart, Timestamp fundingfin, String maker, Date fundingchkdate,
-			int deliverycharge, Date deliverydate) {
+			int fundingprice, int currentprice, Timestamp fundingstart, Timestamp fundingfin, String maker,
+			Date fundingchkdate, int deliverycharge, Date deliverydate) {
 		super();
 		this.fundingno = fundingno;
 		this.fundingstate = fundingstate;
@@ -34,6 +34,7 @@ public class Funding {
 		this.fundingtitle = fundingtitle;
 		this.fundingcontent = fundingcontent;
 		this.fundingprice = fundingprice;
+		this.currentprice = currentprice;
 		this.fundingstart = fundingstart;
 		this.fundingfin = fundingfin;
 		this.maker = maker;
@@ -44,14 +45,16 @@ public class Funding {
 
 
 
+
 	@Override
 	public String toString() {
 		return "Funding [fundingno=" + fundingno + ", fundingstate=" + fundingstate + ", fundingcategory="
 				+ fundingcategory + ", fundingtitle=" + fundingtitle + ", fundingcontent=" + fundingcontent
-				+ ", fundingprice=" + fundingprice + ", fundingstart=" + fundingstart + ", fundingfin=" + fundingfin
-				+ ", maker=" + maker + ", fundingchkdate=" + fundingchkdate + ", deliverycharge=" + deliverycharge
-				+ ", deliverydate=" + deliverydate + "]";
+				+ ", fundingprice=" + fundingprice + ", currentprice=" + currentprice + ", fundingstart=" + fundingstart
+				+ ", fundingfin=" + fundingfin + ", maker=" + maker + ", fundingchkdate=" + fundingchkdate
+				+ ", deliverycharge=" + deliverycharge + ", deliverydate=" + deliverydate + "]";
 	}
+
 
 
 
@@ -112,6 +115,16 @@ public class Funding {
 
 	public void setFundingprice(int fundingprice) {
 		this.fundingprice = fundingprice;
+	}
+	
+
+	public int getCurrentprice() {
+		return currentprice;
+	}
+
+
+	public void setCurrentprice(int currentprice) {
+		this.currentprice = currentprice;
 	}
 
 

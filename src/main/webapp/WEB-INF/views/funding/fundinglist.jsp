@@ -125,8 +125,8 @@ pageEncoding="UTF-8"%>
 			
 			<div class="fundingContent_select">
 				<div class="SelectArea_select" style="visibility: visible;">
-					<button class="SelectArea_button" id="SelectArea_button" aria-haspopup="listbox" aria-expanded="false">최신 순</button>
-						<ul class="SelectArea_select_list" id="SelectArea_select_list" role="listbox" aria-hidden="true">
+					<button  class="SelectArea_button" id="SelectArea_button" aria-haspopup="listbox" aria-expanded="false">최신 순</button>
+						<ul style="font-size: 14px;" class="SelectArea_select_list" id="SelectArea_select_list" role="listbox" aria-hidden="true">
 							<li role="option" class="SelectArea_select_item" tabindex="0" data-value="LATEST" aria-selected="true"><span class="SelectArea_text__1tG5r">최신 순</span></li>
 							<li role="option" class="SelectArea_select_item" tabindex="0" data-value="PARTICIPATION_AMOUNT" aria-selected="false"><span class="SelectArea_text__1tG5r">참여금액 순</span></li>
 							<li role="option" class="SelectArea_select_item" tabindex="0" data-value="PARTICIPATION_RATE" aria-selected="false"><span class="SelectArea_text__1tG5r">참여율 순</span></li>
@@ -143,9 +143,12 @@ pageEncoding="UTF-8"%>
 				</tr>
 			</c:if>
 
-
+				<c:forEach items="${totalPrice}" var="list" varStatus="status">
+					<c:forEach items="${list}" var="map">
+					</c:forEach>
+				</c:forEach>
 			<c:if test="${fundinglist ne null}">
-				<c:forEach var="vo" items="${fundinglist}">
+				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<li class="fundingContent_item">
 							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
 								<div class="FundingCard_img_wrap">
@@ -153,7 +156,7 @@ pageEncoding="UTF-8"%>
 								</div>
 									<div class="fundingCard_content">
 										<strong class="fundingCard_percent">
-											<span class="blind">달성률</span><span class="FundingCard_number__n_hbd">3</span>%</strong>
+											<span class="blind">달성률</span><span class="FundingCard_number__n_hbd"><fmt:parseNumber var="percent" value="${(vo.currentprice/vo.fundingprice)*100 }" integerOnly="true" />${percent}</span>%</strong>
 											<strong class="fundingCard_title">${vo.fundingtitle}</strong>
 										<div class="fundingCard_organization">${vo.maker}</div>
 										<div class="fundingCard_figure">
@@ -174,7 +177,7 @@ pageEncoding="UTF-8"%>
 											<span class="fundingCard_date">종료</span>
 											</c:otherwise>
 										</c:choose>
-											<span class="fundingCard_amount"><strong class="FundingCard_number__n_hbd">37,000</strong>원</span>
+											<span class="fundingCard_amount"><strong class="FundingCard_number__n_hbd"> <fmt:formatNumber value="${vo.currentprice}" pattern="#,###,###"/></strong> 원</span>
 										</div>
 									</div>
 							</a>
@@ -185,13 +188,16 @@ pageEncoding="UTF-8"%>
 
 		</ul>
 		<button type="button" class="fundingContent_button_more">더보기<span class="fundingcontent_icon"></span></button>
+		
 		</div>
 		</section>
 	</div>
+
 </div>
 
-	<hr>
-	올라온 펀딩 수 :<input type="text" value="${listcount}" readonly="readonly">
+
+
+
 
 <script>
 
@@ -210,7 +216,18 @@ pageEncoding="UTF-8"%>
 		});
 		
 		
-		
+		$(document).ready(function(){
+			$.ajax({
+				type: "",
+				url: "",
+				data: {},
+				
+				success: function(data){
+					console.log("success data:" + data);
+				} 
+			})
+		});
+
 </script>
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>

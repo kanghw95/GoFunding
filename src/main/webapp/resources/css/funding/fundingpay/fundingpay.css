@@ -41,7 +41,6 @@
 .FundingDetailApplicationContent_subtitle {
     padding: 26px 39px 24px;
     border-bottom: 1px solid rgba(0,0,0,.08);
-    font-size: 22px;
     font-family: 'TmoneyRoundWindRegular';
 }
 
@@ -152,7 +151,6 @@
 
 .FundingDetailApplicationContent_total .FundingDetailApplicationContent_count .FundingDetailApplicationContent_number {
     margin: -4px 2px 0 8px;
-    font-size: 22px;
     line-height: 1.14;
 }
 
@@ -306,7 +304,7 @@
 }
 
 .FundingDetailApplicationContent_address .FundingDetailApplicationContent_input_text {
-    width: 125px;
+    width: 140px;
     height: 38px;
     padding: 0 15px;
     border: 1px solid rgba(0,0,0,.08);

@@ -146,22 +146,22 @@
 						<h3 class="FundingDetailSummary_title">${funding.fundingtitle}</h3>
 						<div class="FundingDetailSummary_graph">
 							<div class="FundingDetailSummary_rate">
-								<strong class="FundingDetailSummary_number">0</strong>%
+								<strong class="FundingDetailSummary_number"><fmt:parseNumber var="percent" value="${(funding.currentprice/funding.fundingprice)*100 }" integerOnly="true" />${percent}</strong>%
 							</div>
 							<div class="FundingDetailSummary_bar">
-								<span class="FundingDetailSummary_current" style="width: 62%;"></span>
+								<span class="FundingDetailSummary_current" style="width: ${percent}%;"></span>
 							</div>
 							<span class="FundingDetailSummary_goal">
 								<span class="FundingDetailSummary_number">${funding.fundingprice}</span>원 목표
 							</span>
 							<span class="FundingDetailSummary_amount">
-								<strong class="FundingDetailSummary_number">0</strong>원
+								<strong class="FundingDetailSummary_number"><fmt:formatNumber value="${funding.currentprice}" pattern="#,###,###"/></strong> 원
 							</span>
 						</div>
 					</div>
 					<div class="FundingDetailSummary_profile">
 						<div class="FundingDetailSummary_thumbnail">
-							<div class="FundingDetailSummary_image" style="background-image: url(&quot;https://happybean-phinf.pstatic.net/20210603_58/1622698284928gx2QN_JPEG/pr.jpg&quot;);"></div>
+							<div class="FundingDetailSummary_image" style="background-image: "></div>
 						</div>
 						<div class="FundingDetailSummary_text">
 							<span class="FundingDetailSummary_name">${funding.maker}</span>

@@ -46,6 +46,10 @@ public class FundingDao {
 	public int insertOrders(Order order){ // 주문 입력
 		return sqlSession.insert("Order.insertOrders",order);
 	}
+	
+	public List<Map<Integer, Integer>> selectTotalPrice(){ // 펀딩별 주문금액  조회
+		return sqlSession.selectList("Order.selectTotalPrice");
+	}
 
 	public int insertFunding() {
 		return 0; // 펀딩 입력
@@ -64,7 +68,5 @@ public class FundingDao {
 		return null;
 
 	}
-
-
 
 }

@@ -39,7 +39,7 @@
 			<input type="hidden" id="userAddr" name="userAddr" value="${sessionScope.user.userAddress}">
 			<input type="hidden" name="fundingno" value="${funding.fundingno}">
 			<input type="hidden" id="paycat" name="paycat" value="">
-			<input type="hidden" id="name" name="name" value="${sessionScope.user.userName}">
+			<input type="hidden" id="payname" name="name" value="${sessionScope.user.userName}">
 			<input type="hidden" id="tel_head" name=tel_head value="${sessionScope.user.userPhone}">
 			<input type="hidden" id="message" name=message value="">
 		</form>
@@ -62,7 +62,7 @@
 									<span class="FundingDetailApplicationContent_count">
 										<em class="FundingDetailApplicationContent_number">${rewordEA[status.index]}</em>개</span>
 										<span class="FundingDetailApplicationContent_amount">
-											<em class="FundingDetailApplicationContent_number">${price[status.index]}</em>원</span>
+											<em class="FundingDetailApplicationContent_number"><fmt:formatNumber value="${price[status.index]}" pattern="#,###,###"/></em>원</span>
 								</li>
 							</c:if>
 
@@ -73,7 +73,7 @@
 									<span class="FundingDetailApplicationContent_count">
 										<em class="FundingDetailApplicationContent_number">${cheer_pay_EA}</em>개</span>
 										<span class="FundingDetailApplicationContent_amount">
-											<em class="FundingDetailApplicationContent_number">${cheer_pay_price}</em>원</span>
+											<em class="FundingDetailApplicationContent_number"><fmt:formatNumber value="${cheer_pay_price}" pattern="#,###,###"/></em>원</span>
 								</li>
 							</c:if>
 							<li class="FundingDetailApplicationContent_item_addition">
@@ -98,7 +98,7 @@
 							<span class="FundingDetailApplicationContent_number">${funding_pay_rewordEA}</span>개</span>
 						</strong>
 						<strong class="FundingDetailApplicationContent_item">총<span class="FundingDetailApplicationContent_amount">
-							<span class="FundingDetailApplicationContent_number">${funding_pay_price+funding.deliverycharge}</span>원</span>
+							<span class="FundingDetailApplicationContent_number"><fmt:formatNumber value="${funding_pay_price+funding.deliverycharge}" pattern="#,###,###"/></span>원</span>
 						</strong>
 					</div>
 				</section>
@@ -140,7 +140,7 @@
 								<label for="input_zipcode"
 									class="FundingDetailApplicationContent_label">주소</label>
 								<div class="FundingDetailApplicationContent_zipcode">
-									<input type="zipcode" id="input_zipcode" class="FundingDetailApplicationContent_input_zipcode" readonly="" value="">
+									<input type="text" id="input_zipcode" class="FundingDetailApplicationContent_input_zipcode" readonly="" value="">
 									<button type="button" onclick="sample6_execDaumPostcode()" class="FundingDetailApplicationContent_button_zipcode__1rDcO">주소검색</button>
 								</div>
 								<input type="text" id="input_address1" class="FundingDetailApplicationContent_input_address" readonly="" value="">
@@ -216,7 +216,7 @@
 	var paycat = document.getElementById("paycat"); 
 	
 	var input_name = document.getElementById("input_name"); 
-	var name = document.getElementById("name"); 
+	var payname = document.getElementById("payname"); 
 	
 	var input_tel_head = document.getElementById("input_tel_head"); 
 	var tel_head = document.getElementById("tel_head"); 
@@ -224,10 +224,14 @@
 	var input_message = document.getElementById("input_message"); 
 	var message = document.getElementById("message"); 
 	
-	var userAddr = document.getElementById("userAddr"); 
+	var userAddr = document.getElementById("userAddr");
+	var zipcode = document.getElementById("input_zipcode");
 	var input_address1 = document.getElementById("input_address1"); 
 	var input_address2 = document.getElementById("input_address2"); 
 	
+	var address_check = 0;
+	
+	var num_regx = /^[0-9]*$/;
 	
 	//배송지 직접입력 
 	var dafault_address_btn = document.getElementById("wa_default_address");
@@ -237,14 +241,14 @@
 	var new_address = document.getElementById("wa_new_address_box");
 	
 	new_address_btn.addEventListener("click",function(){ // 배송지 추가
-		
+		address_check = 1;
 		if(new_address.getAttribute("aria-hidden") == "true"){
 			new_address.setAttribute("aria-hidden","false");
 			dafault_address.setAttribute("aria-hidden","true");
 		}
 	});
 	dafault_address_btn.addEventListener("click",function(){ // 기본 배송지
-		
+		address_check = 0;
 		if(dafault_address.getAttribute("aria-hidden") == "true"){
 			dafault_address.setAttribute("aria-hidden","false");
 			new_address.setAttribute("aria-hidden","true");
@@ -324,10 +328,13 @@
 		}
 	};
 	
+
+	
 	var IMP = window.IMP; // 생략가능
 	IMP.init('imp28987277'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 
 	function requestPay() {
+
 	    // IMP.request_pay(param, callback) 호출
 	    IMP.request_pay({ // param
 	        pg: "html5_inicis",
@@ -362,17 +369,17 @@
 		           	 	
 			           	paycat.value = "카드 간편";
 			           	message.value = input_message.value;
-			          	if(input_name.value != '' &&  input_name.value == null){
-			          	 	name.value = input_name.value;
+			           	
+			          	if(input_name.value != ''){
+			          		payname.value = input_name.value;
 			          	 	tel_head.value = input_tel_head.value;
 			           	}
-			          	if(input_address1.value != '' &&  input_address1.value == null){
-			          		userAddr.value = input_address1.value + input_address2.value;
-				        }
-			          	
-			          	alert(userAddr.value);
-			          	console.log(name.value);
+			          	if(input_address1.value != ''){
+			          		userAddr.value = zipcode.value + input_address1.value + input_address2.value;
+			            }
+			       
 			           	payresult.submit();
+			           	
 		        	} else {
 		        		alert("결제 실패 ");
 		        	}
@@ -420,12 +427,18 @@
 		           	 
 		           	paycat.value = "계좌 이체";
 		           	message.value = input_message.value;
-		           	if(input_name.value != '' &&  input_name.value == null){
-		           	name.value = input_name.value;
-		           	tel_head.value = input_tel_head.value;
+
+		           	
+		          	if(input_name.value != ''){
+		          		payname.value = input_name.value;
+		          	 	tel_head.value = input_tel_head.value;
 		           	}
-		           	console.log(name.value);
+		          	if(input_address1.value != ''){
+		          		userAddr.value = zipcode.value + input_address1.value + input_address2.value;
+		            }
+		           	
 		           	payresult.submit();
+		           	
 		        	} else {
 		        		alert("결제 실패");
 		        	}
@@ -438,9 +451,8 @@
 		     });
 	  }
 
-	
 	// 펀딩 참여하기 체크리스트 검사
-	var join_btn_bank =  document.getElementById("FundingDetailApplicationContent_button_join_bank"); 
+	var join_btn_bank = document.getElementById("FundingDetailApplicationContent_button_join_bank"); 
 	join_btn_bank.addEventListener("click",function(){
 		for(var i = 1; i<4; i++){
 			var check_i = document.getElementById("agree_terms_"+i); 
@@ -458,6 +470,31 @@
 						</c:if>
 				</c:if>
 		</c:forEach>
+		if(address_check == 1){
+			if(input_name.value == '' || input_name.value == null){
+				alert("이름을 입력해주세요")
+				$("#input_name").focus();
+				return false;
+			}
+			
+			if(input_tel_head.value == '' || input_tel_head.value == null){
+				alert("번호를 입력해주세요")
+				$("#input_tel_head").focus();
+				return false;
+			}
+			
+			if (!num_regx.test(input_tel_head)) {
+				alert("휴대폰번호는 숫자만 입력가능합니다");
+				$("#input_tel_head").focus();
+				return false;
+			}
+			
+			if(zipcode.value == '' || zipcode.value == null){
+				alert("주소를 입력해주세요")
+				$("#input_zipcode").focus();
+				return false;
+			}
+		}
 		
 		requestBankPay();
 });
@@ -482,12 +519,37 @@
 				</c:if>
 		</c:forEach>
 		
+		if(address_check == 1){
+			if(input_name.value == '' || input_name.value == null){
+				alert("이름을 입력해주세요")
+				$("#input_name").focus();
+				return false;
+			}
+			
+			if(input_tel_head.value == '' || input_tel_head.value == null){
+				alert("번호를 입력해주세요")
+				$("#input_tel_head").focus();
+				return false;
+			}
+			
+			if (!num_regx.test(input_tel_head)) {
+				alert("휴대폰번호는 숫자만 입력가능합니다");
+				$("#input_tel_head").focus();
+				return false;
+			}
+			
+			if(zipcode.value == '' || zipcode.value == null){
+				alert("주소를 입력해주세요")
+				$("#input_zipcode").focus();
+				return false;
+			}
+		}
+		
 		requestPay();
 		
-		console.log(reward);
-		
-		
 });
+	
+	
 	
 	</script>
 	
@@ -529,8 +591,15 @@ function sample6_execDaumPostcode() {
 			}).open();
 }
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
+function numberDeleteCommas(x) {
+    return x.toString().replace(",", "");
+}
 
 </script>
+
 </body>
 </html>

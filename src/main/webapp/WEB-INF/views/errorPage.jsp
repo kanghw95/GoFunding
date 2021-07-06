@@ -8,7 +8,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
-	<div>
+	<div id="wrap" class="wrap">
 		에러메시지  : ${msg}
 	</div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>

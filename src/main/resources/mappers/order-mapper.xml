@@ -21,4 +21,10 @@
 		#{orderTotalPrice}, #{deliveryAddr}, #{recipient}, #{recipientPhone},
 		SYSDATE, #{fundingNo}, #{id}, #{paymentType}, #{deliveryMessage})
 	</insert>
+	
+		
+	<!-- 펀딩별 주문금액  조회 -->
+	<select id="selectTotalPrice" resultType="Map">
+		SELECT FUNDINGNO,SUM(ORDERTOTALPRICE) AS PRICE FROM ORDERS GROUP BY ROLLUP(FUNDINGNO)
+	</select>
 </mapper>

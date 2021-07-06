@@ -1,6 +1,8 @@
 package com.funding.sprout.funding.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,10 +61,15 @@ public class FundingCtrl {
 		try {
 			int listcount = funService.listCount();
 			List<Funding> fundinglist = funService.selectList();
+			List<Map<Integer,Integer>> totalPrice = funService.selectTotalPrice();
+
 			System.out.println("펀딩리스트 :" + fundinglist);
 			System.out.println("펀딩갯수 :" + listcount);
+			System.out.println("펀딩별 금액 :" + totalPrice);
+			
 			mv.addObject("fundinglist", fundinglist);
 			mv.addObject("listcount", listcount);
+			mv.addObject("totalPrice", totalPrice);
 			mv.setViewName("funding/fundinglist");
 
 		} catch (Exception e) {
@@ -110,6 +117,7 @@ public class FundingCtrl {
 			
 			Funding funding = funService.selectOne(fundingno);	
 			List<Reward> rewardlist = funService.selectReward(fundingno);
+			
 			System.out.println("선택한 펀딩 정보 :" + funding);
 			for(int i=0; i<reword.length; i++) {
 			System.out.println("선택한 리워드 정보 :" + reword[i]);
@@ -133,7 +141,6 @@ public class FundingCtrl {
 	}
 
 	@RequestMapping(value = "funding/fundingresult", method = RequestMethod.POST)
-
 	public ModelAndView fundingresult(
 			@RequestParam(name = "reward") String[] reword,
 			@RequestParam(name = "rewardEA") String[] rewardEA,
@@ -177,7 +184,7 @@ public class FundingCtrl {
 			order.setDeliveryMessage(message);
 			
 			result = funService.insertOrders(order);
-		
+			System.out.println("주문 입력 결과 "+ result);
 			mv.addObject("funding", funding);
 			mv.addObject("searchId", searchId);
 			

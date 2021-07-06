@@ -416,7 +416,6 @@ body {
 }
 
 body, button, input, select, table, textarea {
-	font-family: NanumBarunGothic, dotum, Sans-serif;
 	font-size: 14px;
 	line-height: 19px;
 	color: #202020;

@@ -1,6 +1,8 @@
 package com.funding.sprout.funding.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.funding.sprout.vo.Funding;
 import com.funding.sprout.vo.Order;
@@ -19,6 +21,8 @@ public interface FundingService {
 	public List<Reward> selectReward(int fundingno);// 리워드 가져오기
 	
 	public int insertOrders(Order oder); // 주문입력
+	
+	public List<Map<Integer, Integer>> selectTotalPrice(); // 펀딩별 주문금액  조회
 
 	public int insertFunding(); // 펀딩 입력
 
