@@ -180,3 +180,24 @@ function idChk(msg){ //중복확인 결과 텍스트 생성
 	}
 }
 
+var $j = jQuery.noConflict();
+$(".datepick").datepicker({
+	dateFormat: 'yy-mm-dd',	//날짜 포맷
+	prevText: '이전 달', //마우스 오버시 이전달 텍스트
+	nextText: '다음 달', //마우스 오버시 다음달 텍스트
+	closeText: '닫기', //닫기 버튼 텍스트 변경
+	currentText: '오늘', // 오늘 텍스트 변경
+	monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'], //한글 월 표시
+	monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'], //한글 월 표시
+	dayNames: ['일', '월', '화', '수', '목', '금', '토'], //한글 요일 표시
+	dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'], //한글 요일 표시
+	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], //한글 요일 표시
+	showMonthAfterYear: true, //true : 년 월  false : 월 년 순
+	yearSuffix: '년',	
+	showButtonPanel: true, //오늘 버튼과 달력 닫기 버튼 보기 옵션
+	minDate: 0 //오늘 이전 선택 불가
+});  //펀딩 시작~종료 기간 달력 선택
+
+$.datepicker._gotoToday = function (id) { 
+	$(id).datepicker('setDate', new Date()).datepicker('hide').blur(); 
+	};

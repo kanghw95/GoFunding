@@ -17,7 +17,7 @@
 		ORDER BY B.MSGDATE DESC
 	</select>
 	<!-- 회원-회원 / 관리자-회원 목록 -->
-	<select id="selectUserList" resultType="map"> 
+	<select id="selectUserList" parameterType="hashMap" resultType="hashMap"> 
 		SELECT DISTINCT REPLACE(B.SENDERID, #{senderId}, '') AS SENDERID FROM ( 
 		SELECT CONCAT (A.SENDERID, A.RECEIVERID) AS SENDERID FROM (
 		SELECT * FROM MESSAGE WHERE MSGROOT = #{msgRoot} ) A

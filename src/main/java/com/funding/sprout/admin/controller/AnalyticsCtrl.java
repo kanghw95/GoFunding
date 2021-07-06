@@ -1,5 +1,9 @@
 package com.funding.sprout.admin.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +56,23 @@ public class AnalyticsCtrl {
 		male*=GENDERTOTAL; female*=GENDERTOTAL; //2차이 수정
 		
 		System.out.println(male+female);
+		
+		List<HashMap<String, String>> payment=analyticsService.analPayment();
+//		
+//		HashMap<String, String> payments=new HashMap<String, String>();
+//		String[] days=new String[7];
+//		
+//		for(int i=0;i<7;i++) {
+//			days[i]=payment.get(i).get("AMOUNT");
+//			System.out.println(days[i]);
+//		}
+//		
+		
+//		String[] payments=new String[7];
+//		Iterator<String> keys = map.keySet().iterator();
+//		for(int i=0; i<7; i++) {
+//			payments[i]=keys.next();
+//		}
 		mv.addObject("stat1020", stat1020);
 		mv.addObject("stat3040", stat3040);
 		mv.addObject("stat5060", stat5060);
@@ -64,6 +85,7 @@ public class AnalyticsCtrl {
 		mv.addObject("cate7", cate7);
 		mv.addObject("male", male);
 		mv.addObject("female", female);
+		mv.addObject("days", payment);
 		
 		mv.setViewName("admin/adminMain");
 		

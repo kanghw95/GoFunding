@@ -49,7 +49,7 @@
 								</td>
 							</tr>
 							<tr class=title>
-								<td>
+								<td class="lineBtn">
 									<button type="button" onclick="history.back()" id="list">목록으로</button>
 								</td><td class="titleCenter"></td>
 								<td colspan="2">

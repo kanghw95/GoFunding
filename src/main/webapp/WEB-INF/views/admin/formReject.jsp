@@ -51,6 +51,11 @@
 </div>
 </div>
 <script>
+	$("[id^='formTitle']").click(function(event){
+		var applyNo=$(this).children().next().next().val();
+		console.log(applyNo);
+		window.location.href="http://localhost:8090/sprout/rejectFormDetail?applyNo="+applyNo;
+	});
 	$("#fundingCategory").change(function(){
 		var fundingCategory=$("#fundingCategory option:selected").val();
 		console.log(fundingCategory);

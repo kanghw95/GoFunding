@@ -225,4 +225,16 @@ public class ApplicationMgtCtrl {
 		mv.setViewName("admin/formReject");
 		return mv;
 	}
+	
+	@RequestMapping(value = "/rejectFormDetail", method = RequestMethod.GET)
+	public ModelAndView rejectFormDetail(@RequestParam() String applyNo) { //펀딩 신청서 상세 페이지
+		List<Application> list=applicationMgtService.formDetail(applyNo);
+		System.out.println("상세 "+list);
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("formDetail",list);
+		mv.setViewName("admin/rejectFormDetail");
+		
+		return mv;
+	}
 }
+

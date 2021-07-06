@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,65 +115,26 @@
 		<input type="text" id="female" value="${female}">
 		</div>
 	</div>
-	<script>
-  // Replace with your view ID.
-  //var VIEW_ID = 'ga:201236604';
+	<script language=JavaScript>
+	var days='<c:out value="${days}"/>';
 
-  // Query the API and print the results to the page.
-  //function queryReports() {
-//    gapi.client.request({
-  //    path: '/v4/reports:batchGet',
-  //    root: 'https://analyticsreporting.googleapis.com/',
-   //   method: 'POST',
-    //  body: {
-     //   reportRequests: [
-//          {
- //           viewId: VIEW_ID,
-  //          dateRanges: [
-   //           {
-    //            startDate: '30daysAgo',
-     //           endDate: 'today'
-      //        }
-  //          ],
-            //          metrics: [
-            	//            {
-            	  //             expression: 'ga:sessions'
-  //            }
-              //          ]
-              //        }
-            //       ]
-        //      }
-            //  }).then(displayResults, console.error.bind(console));
-    //  }
-
-//  function displayResults(response) {
-//    var formattedJson = JSON.stringify(response.result, null, 2);
- //   document.getElementById('query-output').value = formattedJson;
-//  }
-</script>
+	</script>
 	<!-- Bootstrap core JavaScript-->
-	<script
-		src="<%=request.getContextPath()%>/sb-admin-2/vendor/jquery/jquery.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="<%=request.getContextPath()%>/sb-admin-2/vendor/jquery/jquery.min.js"></script>
+	<script src="<%=request.getContextPath()%>/sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!-- Core plugin JavaScript-->
-	<script
-		src="<%=request.getContextPath()%>/sb-admin-2/vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script src="<%=request.getContextPath()%>/sb-admin-2/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!-- Custom scripts for all pages-->
-	<script
-		src="<%=request.getContextPath()%>/sb-admin-2/js/sb-admin-2.min.js"></script>
+	<script src="<%=request.getContextPath()%>/sb-admin-2/js/sb-admin-2.min.js"></script>
 
 	<!-- Page level plugins -->
-	<script
-		src="<%=request.getContextPath()%>/sb-admin-2/vendor/chart.js/Chart.min.js"></script>
+	<script src="<%=request.getContextPath()%>/sb-admin-2/vendor/chart.js/Chart.min.js"></script>
 
 	<!-- Page level custom scripts -->
-	<script
-		src="<%=request.getContextPath()%>/sb-admin-2/js/demo/chart-area-demo.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/sb-admin-2/js/demo/chart-pie-demo.js"></script>
+	<script src="<%=request.getContextPath()%>/sb-admin-2/js/demo/chart-area-demo.js"></script>
+	<script src="<%=request.getContextPath()%>/sb-admin-2/js/demo/chart-pie-demo.js"></script>
 	<script src="https://apis.google.com/js/client:platform.js"></script>
 </body>
 </html>

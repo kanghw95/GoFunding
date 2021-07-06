@@ -25,7 +25,7 @@ public class MessageDao {
 	}
 
 	public List<Map<String, String>> msgUserList(HashMap<String, String> vo) { //회원-회원 메세지 목록
-		System.out.println(vo);
+		System.out.println("lll"+vo);
 		return sqlSession.selectList("Message.selectUserList", vo);
 	}
 

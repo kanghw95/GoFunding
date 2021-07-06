@@ -29,10 +29,36 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
+
+var day00=new Date();
+var fmtDay00=(day00.getMonth()+1)+'/'+day00.getDate();
+var day01=new Date(new Date().setDate(new Date().getDate() - 1));
+var fmtDay01=(day01.getMonth()+1)+'/'+day01.getDate();
+var day02=new Date(new Date().setDate(new Date().getDate() - 2));
+var fmtDay02=(day02.getMonth()+1)+'/'+day02.getDate();
+var day03=new Date(new Date().setDate(new Date().getDate() - 3));
+var fmtDay03=(day03.getMonth()+1)+'/'+day03.getDate();
+var day04=new Date(new Date().setDate(new Date().getDate() - 4));
+var fmtDay04=(day04.getMonth()+1)+'/'+day04.getDate();
+var day05=new Date(new Date().setDate(new Date().getDate() - 5));
+var fmtDay05=(day05.getMonth()+1)+'/'+day05.getDate();
+var day06=new Date(new Date().setDate(new Date().getDate() - 6));
+var fmtDay06=(day06.getMonth()+1)+'/'+day06.getDate();
+
+var pay0=days[0];
+var pay1=days[3];
+var pay2=days.AMOUNT;
+var pay3=days.PAYMENTDATE;
+var pay4=days[6];
+var pay5=days[7];
+var pay6=days[8];
+var payments=Object.keys(days);
+var payments1=Object.values(days);
+
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["1/4분기", "2/4분기", "3/4분기", "4/4분기"],
+    labels: [fmtDay06, fmtDay05, fmtDay04, fmtDay03, fmtDay02, fmtDay01, fmtDay00],
     datasets: [{
       label: "수입",
       lineTension: 0.3,
@@ -46,7 +72,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 1000, 5000, 10000],
+      data: [100,500,1000,2000,3000,4000,5000],
     }],
   },
   options: {
@@ -116,3 +142,4 @@ var myLineChart = new Chart(ctx, {
     }
   }
 });
+
