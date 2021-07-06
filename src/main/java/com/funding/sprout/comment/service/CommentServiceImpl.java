@@ -26,8 +26,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	@Override
-	public int CommentDelete(int cmtNo) { // 댓글 삭제
-		return comDao.CommentDelete(cmtNo);
+	public int CommentDelete(Comment cm) { // 댓글 삭제
+		return comDao.CommentDelete(cm);
 	}
 	
 	@Override

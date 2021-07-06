@@ -29,7 +29,7 @@
 	</delete>
 	
 	<!-- 댓글 수정 -->
-	<update id="CommentUpdate">
+	<update id="CommentUpdate" parameterType="Comment">
 		UPDATE BULLETINECOMMENT SET FREECMTCONTENT = #{cmtContent} WHERE FREECMTNO = #{cmtNo}
 	</update>
 	

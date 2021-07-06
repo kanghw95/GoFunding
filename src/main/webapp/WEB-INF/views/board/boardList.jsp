@@ -8,10 +8,6 @@
 <title>게시판</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
-.wrapper{
-	margin:30px;
-    padding-left:400px;
-}
 #option{
 	float:right;
 	position: absolute;

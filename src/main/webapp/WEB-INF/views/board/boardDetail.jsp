@@ -9,11 +9,6 @@
 <title>글 상세 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
-.wrapper{
-	margin:30px;
-    padding-left:400px;
-}
-
 #like{
 	width : 50px;
 	height : 50px;
@@ -131,9 +126,7 @@ button{
 					<div id="content2">${data.boardContent }</div>
 					<div class="board-content-like"></div>
 				</div>
-
-				<br><hr><br>
-
+				<br><br>
 				<div>
 					<div class="comment-box">
 						<textarea id="comment-write" name="cmtContent" placeholder="댓글 입력창" rows="3" cols="90" ></textarea>
@@ -147,32 +140,48 @@ button{
 					<br>
 
 					<div>댓글 목록</div>
-
+					<br><br>
 					<div id="comment-list">
 						<!-- 첫 진입하면 EL tag 사용 ${commentList} 뿌려주기 -->
 						<!-- 추가 댓글 작성시 ajax 를 통해서 이부분 empty(싹 지우고) 다시 뿌려주기 -->
+							 
 						<c:forEach items="${commentList}" var="item"> 
 							 <div class = "comment-table">
 						        <table >
+						    
 						            <tr>
 						                <td class="comment-id">
 						                    <div class="cmtWriteId">${item.id}</div>
 						                </td>
+						                
 						                <td class="comment-date">
 						                    ${item.cmtDate}
 						                </td>
+						                
 						                <td class="comment-button">
-						                    <div>
+					                        <input type="hidden" class="cmtNo" value="${item.cmtNo}">
+						                    <div class="cmtButton normal">
 						                        <button type="button" class="btn btn-outline-primary btn-sm comment-addBtn" id="comment-addBtn">대댓글</button>
 						                        <button type="button" class="btn btn-outline-primary btn-sm comment-modifyBtn" id="comment-modifyBtn">수정</button>
 						                        <button type="button" class="btn btn-outline-primary btn-sm comment-deleteBtn" id="comment-deleteBtn">삭제</button>
-						                        <input type = "hidden" class="cmtNo" value="${item.cmtNo}">
 						                    </div>
-						                </td>
+											<div class="cmtButton fix">						                    	
+					                    		<button class="fix-button">수정하기</button>
+					                    		<button class="fix-button-cancel">취소</button>
+					                    	</div>
+						                </td> 
 						            </tr>
+						            
 						            <tr>
 						                <td colspan="3" width="800px" class="comment-content">
-						                    ${item.cmtContent}
+						                	<div class="cmtTextArea normal">
+						                    	${item.cmtContent}
+						                    </div>
+											<!-- 수정하기 눌럿을때 나오기 -->
+						                    <div class="cmtTextArea fix">
+					                    		<textarea id="fixcomment" rows="3" cols="90"></textarea>
+						                 	</div>
+								            <hr>
 						                </td>
 						            </tr>
 						        </table>
@@ -181,11 +190,10 @@ button{
 						
 					</div>
 				</div>
-
-
-				<br><hr><br>
-				
+					
+				<br><br>
 				<div class="page">
+				
 					<c:url var="boardList" value="boardList">
 						<c:param name="page" value="${currentPage}" />
 					</c:url>
@@ -195,6 +203,12 @@ button{
 		</div>
 	<script>
 	$(function(){ 
+		// 로드 되면 comment의 댓글,수정,삭제 버튼 나타내기
+		$(".cmtButton.normal").show();
+		$(".cmtButton.fix").hide();
+		$(".cmtTextArea.normal").show();
+		$(".cmtTextArea.fix").hide();
+		
 		// 로드 되면 좋아요 버튼 나타내기
 		let isLiked = '${isliked}';  // 1:좋아요, 0:아님
 		var cnt =  '${likedCnt}';
@@ -314,84 +328,62 @@ button{
 				});
 			}
 		});
-	
-	
-		 
+		
+		
 		function displayCommentList(result){
 			var commentHtml = "";
 			$.each(result, function(i, item) {
 				commentHtml += '<div class = "comment-table">';
-				commentHtml += '<table >';
+				commentHtml += '<table>';
 				commentHtml += '<tr>';
-				commentHtml += '<td class="comment-id">';
-				commentHtml += '<div class="cmtWriteId">';
-				commentHtml += item.id;
-				commentHtml += '</div>'
-				commentHtml += '</td>';
-				commentHtml += '<td class="comment-date">';
-				commentHtml += item.cmtDate;
-				commentHtml += '</td>';
-				commentHtml += '<td class="comment-button">';
-				commentHtml += '<div>';
-				commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-addBtn" id="comment-addBtn">대댓글</button> ';
-				commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-modifyBtn" id="comment-modifyBtn">수정</button> ';
-				commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-deleteBtn" id="comment-deleteBtn">삭제</button>';
-				commentHtml += '<input type = "hidden" name = "cmtNo" class="cmtNo" value="'+item.cmtNo+'">';
-				commentHtml += '</div>';          
-				commentHtml += '</td>';
+					commentHtml += '<td class="comment-id">';
+						commentHtml += '<div class="cmtWriteId">';
+						commentHtml += item.id;
+						commentHtml += '</div>'
+					commentHtml += '</td>';
+					commentHtml += '<td class="comment-date">';
+						commentHtml += item.cmtDate;
+					commentHtml += '</td>';
+					commentHtml += '<td class="comment-button">';
+						commentHtml += '<input type = "hidden" name="cmtNo" class="cmtNo" value="'+item.cmtNo+'">';
+						commentHtml += '<div class="cmtButton normal">';
+							commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-addBtn" id="comment-addBtn">대댓글</button> ';
+							commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-modifyBtn" id="comment-modifyBtn">수정</button> ';
+							commentHtml += '<button type="button" class="btn btn-outline-primary btn-sm comment-deleteBtn" id="comment-deleteBtn">삭제</button>';
+						commentHtml += '</div>';
+						commentHtml += '<div class="cmtButton fix">';
+							commentHtml += '<button class="fix-button">수정하기</button> ';
+							commentHtml += '<button class="fix-button-cancel">취소</button>';
+						commentHtml += '</div>';
+					commentHtml += '</td>';
 				commentHtml += '</tr>';
 				commentHtml += '<tr>';
-				commentHtml += '<td colspan="3" width="800px" class="comment-content">';
-				commentHtml += item.cmtContent;
-				commentHtml += '</td>';
+					commentHtml += '<td colspan="3" width="800px" class="comment-content">';
+						commentHtml += '<div class="cmtTextArea normal">';
+							commentHtml += item.cmtContent;
+						commentHtml += '</div>';
+						commentHtml += '<div class="cmtTextArea fix">';
+							commentHtml += '<textarea id="fixcomment"></textarea>';
+						commentHtml += '</div>';
+						commentHtml += '<hr>';
+					commentHtml += '</td>';
 				commentHtml += '</tr>';
 				commentHtml += '</table>';
-				commentHtml += '</div>';					
+				commentHtml += '</div>';
+				
 			});	
 			$("#comment-list").empty();
 			$("#comment-list").append(commentHtml);
-
-			$(".comment-deleteBtn").click(function() { // 댓글 삭제
-				var delete2 = confirm("댓글 삭제하시겠습니까?");
 			
-				var sessionUserId = '${sessionScope.user.userId}'; // 현재 로그인한 아이디
-				var cmtWriteIdDiv = $(this).parents("tr").find(".cmtWriteId");
-				var Id = cmtWriteIdDiv.text(); // 댓글 쓴 사람 아이디
-				var cmtNo = $(this).next().val();
-				if(delete2){ // 확인누르면
-					if (sessionUserId == 'null' || sessionUserId == '' || sessionUserId != Id) {
-						alert("다른사람이 쓴 댓글은 삭제할 수 없습니다.");
-						return false;
-					}
-					$.ajax({
-						url : "comdelete",
-						type : "POST",
-						data : {
-							cmtNo : cmtNo,
-							boardNo : '${data.boardNo }'
-						},
-						dataType : "JSON",
-						success : displayCommentList,
-						error : function(e){
-							alert(e);
-						}
-					});
-				}
-			});
-			$(".comment-modifyBtn").click(function() { // 댓글 수정
-				$.ajax({
-					url : "comupdate",
-					type : "POST",
-					data : {
-					},
-					dataType: "JSON",
-					success : displayCommentList,
-					error : function(e){
-						alert(e);
-					}
-				});
-			});
+			$(".cmtButton.normal").show();
+			$(".cmtButton.fix").hide();
+			$(".cmtTextArea.normal").show();
+			$(".cmtTextArea.fix").hide();
+			
+	 		$(".comment-deleteBtn").click(commentDelete);
+	 		$(".comment-modifyBtn").click(commentModify);
 		}
+		
 
 		$("#comment-writebtn").click(function() { // 댓글쓰기			
 			var comment = $("#comment-write").val();
@@ -418,13 +410,83 @@ button{
 				});
 			}
 		});
-		$(".comment-deleteBtn").click(function() { // 댓글 삭제
-			var delete2 = confirm("댓글 삭제하시겠습니까?");
 		
+		$(".comment-deleteBtn").click(commentDelete);
+ 		$(".comment-modifyBtn").click(commentModify);
+ 		
+		let thisTrElement;
+		let thisTrNextElement;
+		let cmtNo = 0;
+		let comment="";
+		
+ 		function commentModify() { // 댓글 수정
+  			var modify2 = confirm("댓글 수정하시겠습니까?");
+  				
+  			var sessionUserId = '${sessionScope.user.userId}'; // 현재 로그인한 아이디
+  			
+  			thisTrElement = $(this).parents("tr");
+  			thisTrNextElement = $(this).parents("tr").next();
+  			var Id = thisTrElement.find(".cmtWriteId").text(); // 댓글 쓴 사람 아이디
+  			cmtNo = thisTrElement.find(".cmtNo").val();
+  			comment = $.trim(thisTrNextElement.find(".cmtTextArea.normal").text());
+
+	 		if(modify2){ // 확인누르면
+				if (sessionUserId == 'null' || sessionUserId == '' || sessionUserId != Id) {
+					alert("다른사람이 쓴 댓글은 수정할 수 없습니다.");
+					return false;
+				}
+				if(sessionUserId == Id){
+					thisTrElement.find(".cmtButton.normal").hide();
+					thisTrElement.find(".cmtButton.fix").show();
+					thisTrNextElement.find(".cmtTextArea.normal").hide();
+					thisTrNextElement.find(".cmtTextArea.fix").show();
+					thisTrNextElement.find("#fixcomment").focus().text(comment);
+					
+  					console.log(cmtNo);
+  					console.log('${data.boardNo }');
+  					console.log(comment);
+  					
+  			 		$(".fix-button").click(function(){
+  			 			comment= thisTrNextElement.find("#fixcomment").val();
+  			 			commentModifyFixed(cmtNo, comment);
+  			 		});  
+  			 		$(".fix-button-cancel").click(function(){
+  						thisTrElement.find(".cmtButton.fix").hide();
+  			 			thisTrElement.find(".cmtButton.normal").show();
+  						thisTrNextElement.find(".cmtTextArea.fix").hide();
+  						thisTrNextElement.find(".cmtTextArea.normal").show();
+  			 		}); 
+  				}
+			}
+		}
+
+ 		function commentModifyFixed(cmtNo, comment) {
+ 			//수정완료 누르면 
+			$.ajax({
+				url : "comupdate",
+				type : "POST",
+				data : {
+					cmtNo : cmtNo,
+					boardNo : '${data.boardNo }',
+					cmtContent : comment
+				},
+				dataType: "JSON",
+				success : displayCommentList,
+				error : function(e) {
+					alert(e);
+				}
+			});
+ 		}
+ 		function commentDelete() { // 댓글 삭제
+			var delete2 = confirm("댓글 삭제하시겠습니까?");
+			console.log("삭제");
+
+			
 			var sessionUserId = '${sessionScope.user.userId}'; // 현재 로그인한 아이디
 			var cmtWriteIdDiv = $(this).parents("tr").find(".cmtWriteId");
 			var Id = cmtWriteIdDiv.text(); // 댓글 쓴 사람 아이디
-			var cmtNo = $(this).next().val();
+			cmtNo = thisTrElement.find(".cmtNo").val();
+//			var cmtNo = $(this).next().val();
 			if(delete2){ // 확인누르면
 				if (sessionUserId == 'null' || sessionUserId == '' || sessionUserId != Id) {
 					alert("다른사람이 쓴 댓글은 삭제할 수 없습니다.");
@@ -444,23 +506,7 @@ button{
 					}
 				});
 			}
-		});
-		$(".comment-modifyBtn").click(function() { // 댓글 수정
-			$.ajax({
-				url : "comupdate",
-				type : "POST",
-				data : {
-				},
-				dataType: "JSON",
-				success : displayCommentList,
-				error : function(e){
-					alert(e);
-				}
-			});
-		});
-
-		
-	
+		}
 	});   // on load 되면
 	</script>
 	</div>

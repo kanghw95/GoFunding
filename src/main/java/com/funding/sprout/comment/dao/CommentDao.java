@@ -23,8 +23,8 @@ public class CommentDao {
 		return sqlSession.selectList("Comment.CommentAll", boardNo);
 	}
 	
-	public int CommentDelete(int cmtNo) { // 댓글 삭제
-		return sqlSession.delete("Comment.CommentDelete", cmtNo); 
+	public int CommentDelete(Comment cm) { // 댓글 삭제
+		return sqlSession.delete("Comment.CommentDelete", cm); 
 	}
 	
 	public int CommentUpdate(Comment cm) { // 댓글 수정

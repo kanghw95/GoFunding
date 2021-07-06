@@ -43,10 +43,7 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> selectList(int startPage, int limit) { // 번호 정렬
 		List<Board> result = null;
 		try{
-			System.out.println("Aaa"+ startPage );
-			System.out.println("bbb"+ limit );
 			result = boDao.selectList(startPage, limit);
-			System.out.println("result:" + result.toString());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -68,18 +65,6 @@ public class BoardServiceImpl implements BoardService {
 		return boDao.selectOne(boardNo);
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public int checklike(int boardNo, String userId) { // 게시글 추천 여부 검사 비추천0 추천1
 
@@ -88,7 +73,7 @@ public class BoardServiceImpl implements BoardService {
 		if(result == 0) {
 			System.out.println("추천가능");
 		} else {
-			System.out.println("이미 추천함");
+			System.out.println("추천불가능");
 		}
 		return result;
 	}
