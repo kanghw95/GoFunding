@@ -13,7 +13,11 @@
 	width: 240px;
 	height: 100%;
 	float: left;
-	background-color: #ededed;
+	border: 1px solid #ededed;
+	box-shadow: 0 2px 4px 0 rgb(33 37 41 / 11%);
+	padding: 10px;
+	margin-top: 45px;
+	border-radius: 7px;
 	text-align: center;
 }
 
@@ -24,6 +28,16 @@
 .imgProfile {
 	width: 78px;
 	height: 78px;
+}
+
+.profileLogout{
+	diplay: block;
+	font-weight: bold;
+	color: #ff722b;
+}
+
+.profileLogout:hover{
+	cursor: pointer;
 }
 
 /* 마이페이지 내용 */
@@ -64,10 +78,15 @@ a {
 .tab-main>.tab .title{
 	display: block;
 	width : 100px;
-	padding: 10px; 
+	padding: 10px;
 	text-align: center;
 	background-color: #a8dba8;
-	border-radius: 20px;
+
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: -10px;
+	border-bottom-right-radius: -10px;
+	
 	color: #fff;
 	cursor: pointer;
 }
@@ -82,19 +101,147 @@ a {
 
 .tab-main>.tab-cont {
 	float: left;
-	width: 1000px;
-	margin-top: 10px;
+	width: 950px;
+	margin-left: 30px;
 	border-radius: 7px;
 	color: black;
 	background: #transparent;
 }
 
 .tab-main>.tab-cont>.cont {
-	padding-top: 20px;
+	padding: 20px 50px;
 	background-color: white;
-	border-top: 1px solid black;
+	border: 1px solid #79bd9a;
+	box-shadow: 0 2px 4px 0 rgb(33 37 41 / 11%);
+	border-radius: 7px;
 	box-sizing: border-box;
 	width: 900px;
 	background: transparent;
 }
 
+
+/* projectInfo */
+
+.projectInfo {
+    border: 1px solid #cdd3d8;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px 0 rgb(33 37 41 / 11%);
+	width: 800px;
+}
+
+.infoBox {
+	
+   	height: 120px;
+	
+}
+
+.infoBox>li {
+	display: inline-block;
+	width: 32%;
+    text-align: center;
+}
+
+.infoBox>li>a {
+	display: block;
+	position: relative;
+	padding: 22px 0;
+	color: #202020;
+}
+
+.infoBox>li>a:hover, 
+.infoBox>li>a:focus, .infoBox>li>a:visited {
+	color: #202020;
+	
+}
+
+.infoBox>li>a>span{
+	display: block;
+	line-height: 28px;
+    letter-spacing: -.3px;
+    border-left: 1px solid #e9ecef;
+}
+
+.infoBox>li:first-child>a>span{
+	border: none;
+}
+
+.infoBox>li>a>.innerBorder{
+	border-left: 1px solid #e9ecef;
+}
+
+
+.infoBox>li>a>span>b{
+	display: block;
+    padding-top: 10px;
+    padding-left: 4px;
+    letter-spacing: -.6px;
+    font-size: 20px;
+    line-height: 28px;
+} 
+
+
+.logBox>ul>li{
+	display: inline-block;
+	width: 300px;
+	padding-right: 40px;
+	padding-left: 20px;
+}
+
+.logBox>ul>li>a{
+	display: block;
+	position: relative;
+	padding: 12px 0;
+	border-bottom: 1px solid #e9ecef;
+	color: #202020;	
+}
+
+.logBox>ul>li>a>span{
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	
+}
+
+
+.withdrawBtn{
+	diplay:block;
+	margin-top:10px;
+	background:#568C82;
+	color:#fff;
+	border:none;
+	position:relative;
+	height:40px;
+	font-size: 16px;
+	padding:0 1em;
+	cursor:pointer;
+	transition:800ms ease all;
+	outline:none;
+	border-radius:5px;
+}
+
+
+.withdrawBtn:hover{
+	background:#fff;
+	color:#1AAB8A;
+}
+
+.withdrawBtn:before,.withdrawBtn:after{
+	content:'';
+	position:absolute;
+	top:0;
+	right:0;
+	height:2px;
+	width:0;
+	background: #1AAB8A;
+	transition:400ms ease all;
+}
+.withdrawBtn:after{
+	right:inherit;
+	top:inherit;
+	left:0;
+	bottom:0;
+}
+.withdrawBtn:hover:before,.withdrawBtn:hover:after {
+	width:100%;
+	transition:800ms ease all;
+}

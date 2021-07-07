@@ -16,9 +16,6 @@
 
 /* 개별 폰트 설정 */
 
-h2 {
-	font-family: 'TmoneyRoundWindExtraBold' !important;
-}
 
 /*공통*/
 
@@ -129,4 +126,8 @@ footer {
 	width: 400px !important;
 	display: inline-block;
 	
+}
+
+.sendMsg:hover{
+	cursor: pointer;
 }

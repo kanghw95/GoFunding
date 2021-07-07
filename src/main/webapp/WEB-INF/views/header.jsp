@@ -52,7 +52,7 @@ $(document).ready(function(){
 						<div class="nav-column">
 							<h3 class="column-title">커뮤니티</h3>
 							<ul>
-								<li><a href="board/boardList">자유게시판</a></li>
+								<li><a href="<%=request.getContextPath()%>board/boardList">자유게시판</a></li>
 								<li><a href="#">후기</a></li>
 								<li><a href="#">QnA</a></li>
 								<li><a href="#">기부</a></li>
@@ -61,7 +61,7 @@ $(document).ready(function(){
 						</div>
 						<div class="nav-column">
 							<h3 class="column-title">공지사항</h3>
-							<ul>
+							<ul style="width: 150px;">
 								<li><a href="#">공지사항</a></li>
 								<li><a href="#">자주 물어보는 질문</a></li>
 								<li><a href="#">문의하기</a></li>
@@ -88,7 +88,7 @@ $(document).ready(function(){
 					<a href="#" class="subTitle">커뮤니티</a>
 					<div class="subMenu2">
 						<ul>
-							<li><a href="board/boardList">자유게시판</a></li>
+							<li><a href="<%=request.getContextPath()%>board/boardList">자유게시판</a></li>
 							<li><a href="#">후기</a></li>
 							<li><a href="#">QnA</a></li>
 							<li><a href="#">기부</a></li>
@@ -99,7 +99,7 @@ $(document).ready(function(){
 				</li>			
 				<li>
 					<a href="#" class="subTitle">공지사항</a>
-					<div class="subMenu3">
+					<div class="subMenu3" style="width: 180px;">
 						<ul>
 							<li><a href="#">공지사항</a></li>
 							<li><a href="#">자주 물어보는 질문</a></li>

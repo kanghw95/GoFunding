@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="<%=request.getContextPath() %>/resources/css/userdetail_join/myPage.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- 사용자 / 메이커 탭 기능 -->
 <script>
@@ -43,7 +46,7 @@ $(document).ready(
 				
 			</div>
 			<div class="profileInfo">
-				<button type="button" onclick="location.href='<%=request.getContextPath() %>/user/logout'">로그아웃</button>
+				<a href="<%=request.getContextPath() %>/user/logout" class="profileLogout">로그아웃</a>
 			</div>
 		</div>
 	    <div class="contentsBox">
@@ -55,11 +58,75 @@ $(document).ready(
 				<div class="tab-cont">
 					<!-- 메이커 -->
 					<div class="cont" style="display:none">
-						메이커
+						<div class="cont">
+						<div class="projectInfo">
+							<ul class="infoBox">
+								<li>
+									<a href="#"><span>펀딩 개설 횟수<b>0회</b></span></a>
+								</li>
+								<li>
+									<a href="#"><span>메세지<b>0건</b></span></a>
+								</li>
+								<li>
+									<a href="#"><span>포인트<b>${user.point }점</b></span></a>
+								</li>
+							</ul>
+						</div>
+						<br>
+						<br>
+						<br>
+						<br>
+						<div class="actLogInfo">
+							<h2 class="logTitle">나의 활동</h2>
+							<div class="logBox">
+								<ul>
+									<li><a href="#"><span><i class="fas fa-archive"></i>&nbsp; 내가 개설한 펀딩</span></a></li>
+									<li><a href="#"><span><i class="fas fa-folder-plus"></i>&nbsp; 내 펀딩 개설하기</span></a></li>
+								</ul>
+								<ul>
+									<li style="padding-top: 20px;"><a href="#"><span><i class="fas fa-pencil-alt"></i>&nbsp; 내가 쓴 글 목록</span></a></li>
+									<li style="padding-top: 20px;"><a href="#"><span><i class="fas fa-reply"></i>&nbsp; 내가 쓴 댓글 목록</span></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
 					</div>
 					<!-- 사용자 -->
 					<div class="cont">
-						 사용자
+						<div class="projectInfo">
+							<ul class="infoBox">
+								<li>
+									<a href="#"><span>펀딩횟수<b>0회</b></span></a>
+								</li>
+								<li>
+									<a href="#"><span>메세지<b>0건</b></span></a>
+								</li>
+								<li>
+									<a href="#"><span>포인트<b>${user.point }점</b></span></a>
+								</li>
+							</ul>
+						</div>
+						<br>
+						<br>
+						<br>
+						<br>
+						<div class="actLogInfo">
+							<h2 class="logTitle">나의 활동</h2>
+							<div class="logBox">
+								<ul>
+									<li><a href="#"><span><i class="far fa-heart"></i>&nbsp; 관심 펀딩</span></a></li>
+									<li><a href="#"><span><i class="fas fa-clipboard-check"></i>&nbsp; 내가 참여한 펀딩</span></a></li>
+								</ul>
+								<ul>
+									<li style="padding-top: 20px;"><a href="#"><span><i class="fas fa-pencil-alt"></i>&nbsp; 내가 쓴 글 목록</span></a></li>
+									<li style="padding-top: 20px;"><a href="#"><span><i class="fas fa-reply"></i>&nbsp; 내가 쓴 댓글 목록</span></a></li>
+								</ul>
+							</div>
+						</div>
+						<br>
+						<div class="withdraw">
+							<button class="withdrawBtn"><i class="fas fa-user-times"></i>&nbsp; 회원탈퇴</button>
+						</div>
 					</div>
 				</div>
 			</div>
