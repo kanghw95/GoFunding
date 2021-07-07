@@ -47,9 +47,22 @@ public class FundingDao {
 		return sqlSession.insert("Order.insertOrders",order);
 	}
 	
-	public List<Map<Integer, Integer>> selectTotalPrice(){ // 펀딩별 주문금액  조회
-		return sqlSession.selectList("Order.selectTotalPrice");
+	public int selectTotalPrice(int fundingno){ // 펀딩별 주문금액  조회
+		return sqlSession.selectOne("Order.selectTotalPrice",fundingno);
 	}
+	
+	public int priceUpdate(Funding funding) { // 펀딩 현재금액 업데이트
+		return  sqlSession.update("Funding.priceUpdate",funding);
+	}
+	
+	public int selectHistory(int fundingno) { // 펀딩별 참여인원 조회
+		return sqlSession.selectOne("Order.selectHistory",fundingno);
+	}
+	
+	public List<Order> selectHistoryDetail(int fundingno) { // 펀딩별 참여내역 조회
+		return sqlSession.selectList("Order.selectHistoryDetail",fundingno);
+	}
+
 
 	public int insertFunding() {
 		return 0; // 펀딩 입력

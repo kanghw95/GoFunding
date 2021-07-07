@@ -9,6 +9,7 @@
 		<result property="fundingtitle" column="FUNDINGTITLE" />
 		<result property="fundingcontent" column="FUNDINGCONTENT" />
 		<result property="fundingprice" column="FUNDINGPRICE" />
+		<result property="currentprice" column="CURRENTPRICE" />
 		<result property="fundingstart" column="FUNDINGSTRAT" />
 		<result property="fundingfin" column="FUNDINGFIN" />
 		<result property="maker" column="MAKER" />
@@ -46,5 +47,12 @@
 	<select id="selectOne" parameterType="int" resultType="Funding">
 		SELECT * FROM FUNDING WHERE FUNDINGNO = #{fundingno}
 	</select>
+	
+	<!-- 펀딩별 현재금액 업데이트 -->
+	<update id="priceUpdate">
+		UPDATE FUNDING SET CURRENTPRICE = #{currentprice} WHERE FUNDINGNO = #{fundingno}
+	</update>
+	
+
 	
 </mapper>

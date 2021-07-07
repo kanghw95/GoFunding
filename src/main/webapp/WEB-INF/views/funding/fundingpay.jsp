@@ -231,7 +231,8 @@
 	
 	var address_check = 0;
 	
-	var num_regx = /^[0-9]*$/;
+	// 휴대전화 정규식
+	var phoneReg = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 	
 	//배송지 직접입력 
 	var dafault_address_btn = document.getElementById("wa_default_address");
@@ -482,9 +483,8 @@
 				$("#input_tel_head").focus();
 				return false;
 			}
-			
-			if (!num_regx.test(input_tel_head)) {
-				alert("휴대폰번호는 숫자만 입력가능합니다");
+			if (!phoneReg.test(input_tel_head.value)) {
+				alert("전화번호의 형식이 올바르지 않습니다");
 				$("#input_tel_head").focus();
 				return false;
 			}
@@ -532,8 +532,8 @@
 				return false;
 			}
 			
-			if (!num_regx.test(input_tel_head)) {
-				alert("휴대폰번호는 숫자만 입력가능합니다");
+			if (!phoneReg.test(input_tel_head.value)) {
+				alert("전화번호의 형식이 올바르지 않습니다");
 				$("#input_tel_head").focus();
 				return false;
 			}

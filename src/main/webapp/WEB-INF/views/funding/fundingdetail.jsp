@@ -142,7 +142,17 @@
 						<fmt:parseDate value="${funding.fundingfin}" var="endPlanDate" pattern="yyyy-MM-dd" />
 						<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
 
+						<c:if test="${endDate - strDate gt 0}">
+						
 						<strong class="FundingDetailSummary_dday">D-${endDate - strDate}</strong>
+						
+						</c:if>
+						
+						<c:if test="${endDate - strDate le 0}">
+						
+						<strong style="background-color: #ccc;" class="FundingDetailSummary_dday">종료</strong>
+						
+						</c:if>
 						<h3 class="FundingDetailSummary_title">${funding.fundingtitle}</h3>
 						<div class="FundingDetailSummary_graph">
 							<div class="FundingDetailSummary_rate">
@@ -152,7 +162,7 @@
 								<span class="FundingDetailSummary_current" style="width: ${percent}%;"></span>
 							</div>
 							<span class="FundingDetailSummary_goal">
-								<span class="FundingDetailSummary_number">${funding.fundingprice}</span>원 목표
+								<span class="FundingDetailSummary_number"><fmt:formatNumber value="${funding.fundingprice}" pattern="#,###,###"/></span> 원 목표
 							</span>
 							<span class="FundingDetailSummary_amount">
 								<strong class="FundingDetailSummary_number"><fmt:formatNumber value="${funding.currentprice}" pattern="#,###,###"/></strong> 원
@@ -171,10 +181,23 @@
 					<div class="FundingDetailSummary_reward">
 						<div class="FundingDetailSummary_reward_inner">
 							<div class="FundingDetailSummary_select">
+						<c:if test="${endDate - strDate gt 0}">
+						
 								<button type="button" id="FundingDetailSummary_button_select" class="FundingDetailSummary_button_select" aria-expanded="false">
 									리워드 선택하기
 									<span class="FundingDetailSummary_icon"></span>
 								</button>
+						
+						</c:if>
+						
+						<c:if test="${endDate - strDate le 0}">
+						
+								<button disabled="disabled" type="button" id="FundingDetailSummary_button_select" class="FundingDetailSummary_button_select" aria-expanded="false">
+									리워드 선택하기
+									<span class="FundingDetailSummary_icon"></span>
+								</button>
+						
+						</c:if>
 								<ul id="FundingDetailSummary_list_reward__2O_UT" class="FundingDetailSummary_list_reward__2O_UT">
 									<c:forEach var="reward" items="${reward}">
 										<li class="FundingDetailSummary_item__uEGFt">
@@ -207,15 +230,26 @@
 							<div class="FundingDetailSummary_delivery">
 								<span class="FundingDetailSummary_name">배송비</span>
 								<c:if test="${funding.deliverycharge eq 0}">
-									<span class="FundingDetailSummary_amount">무료</span>
+									<span style="font-size: 14px;" class="FundingDetailSummary_amount">무료</span>
 								</c:if>
 								<c:if test="${funding.deliverycharge ne 0}">
-									<span class="FundingDetailSummary_amount">${funding.deliverycharge}원</span>
+									<span style="font-size: 14px;" class="FundingDetailSummary_amount"><fmt:formatNumber value="${funding.deliverycharge}" pattern="#,###,###"/> 원</span>
 								</c:if>	
 							</div>
 						</div>
 						<div class="FundingDetailSummary_button_area">
-							<button type="button" id="FundingDetailSummary_button_join" class="FundingDetailSummary_button_join" aria-expanded="false" aria-controls="wa_option" aria-hidden="false">펀딩 참여하기</button>
+						
+								<c:if test="${endDate - strDate gt 0}">
+								
+								<button type="button" id="FundingDetailSummary_button_join" class="FundingDetailSummary_button_join" aria-expanded="false" aria-controls="wa_option" aria-hidden="false">펀딩 참여하기</button>
+								
+								</c:if>
+								
+								<c:if test="${endDate - strDate le 0}">
+								
+								<button style="background-color: #ccc;" disabled='disabled' type="button" id="FundingDetailSummary_button_join" class="FundingDetailSummary_button_join" aria-expanded="false" aria-controls="wa_option" aria-hidden="false">펀딩 종료</button>
+								
+								</c:if>
 							<a href="#" class="naver-splugin Social_wrap FundingDetailSummary_button_share" role="button" aria-label="공유하기" aria-hidden="false" data-style="unity-v2" data-blog-source-form="2" splugin-id="9881009287">
 								<svg width="25" height="22" viewBox="0 0 25 22"> </svg>
 							</a>
@@ -316,19 +350,23 @@
 								<h4 class="FundingDetailStoryParticipationTabPanel_title">참여내역</h4>
 								<p class="FundingDetailStoryParticipationList_summary">
 									<strong class="FundingDetailStoryParticipationList_number">
-									총 명</strong>이 참여하였습니다.
+									총 ${historyResult} 명</strong>이 참여하였습니다.
 								</p>
+								
+
 								<ul class="FundingDetailStoryParticipationList_wrap">
-									<li class="FundingDetailStoryParticipationList_item">
-										<div class="FundingDetailStoryParticipationList_thumbnail" style="background-image: url(&quot;https://ssl.pstatic.net/happyimg2/img3/social/comment/img/default_profile.jpg&quot;);"></div>
-										<div class="FundingDetailStoryParticipationList_date">9999.99.99 00:00:00</div>
-										<div class="FundingDetailStoryParticipationList_user">
-											<span class="FundingDetailStoryParticipationList_name_">kang님</span>
-											<span class="FundingDetailStoryParticipationList_amount">
-												<strong class="FundingDetailStoryParticipationList_number"></strong>원 참여
-											</span>
-										</div>
-									</li>
+									<c:forEach items="${historyResultDetail}" var="list" >
+										<li class="FundingDetailStoryParticipationList_item">
+												<div class="FundingDetailStoryParticipationList_thumbnail" style="background-color: black; "></div>
+												<div class="FundingDetailStoryParticipationList_date">${list.ORDERDATE}</div>
+												<div class="FundingDetailStoryParticipationList_user">
+													<span class="FundingDetailStoryParticipationList_name_">${list.ID } 님</span>
+													<span class="FundingDetailStoryParticipationList_amount">
+														<strong class="FundingDetailStoryParticipationList_number"></strong>${list.ORDERTOTALPRICE} 원 참여
+													</span>
+												</div>
+										</li>
+									</c:forEach>
 								</ul>
 								<nav class="Pagination_wrap" role="navigation" aria-label="페이지 네비게이션">
 									<button type="button" class="Pagination_previous" aria-label="이전" disabled=""></button>

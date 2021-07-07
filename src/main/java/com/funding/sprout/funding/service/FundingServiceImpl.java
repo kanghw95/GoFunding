@@ -1,9 +1,6 @@
 package com.funding.sprout.funding.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,11 +51,29 @@ public class FundingServiceImpl implements FundingService {
 	}
 	
 	@Override
-	public List<Map<Integer, Integer>> selectTotalPrice() {
+	public int selectTotalPrice(int fundingno) {
 		// TODO Auto-generated method stub
-		return funDao.selectTotalPrice();
+		return funDao.selectTotalPrice(fundingno);
+	}
+	
+	@Override
+	public int priceUpdate(Funding funding) {
+		// TODO Auto-generated method stub
+		return funDao.priceUpdate(funding);
+	}
+	
+
+	@Override
+	public int selectHistory(int fundingno) {
+		// TODO Auto-generated method stub
+		return funDao.selectHistory(fundingno);
 	}
 
+	@Override
+	public List<Order> selectHistoryDetail(int fundingno) {
+		// TODO Auto-generated method stub
+		return funDao.selectHistoryDetail(fundingno);
+	}
 
 	@Override
 	public int insertFunding() {

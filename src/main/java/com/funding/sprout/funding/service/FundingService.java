@@ -22,7 +22,13 @@ public interface FundingService {
 	
 	public int insertOrders(Order oder); // 주문입력
 	
-	public List<Map<Integer, Integer>> selectTotalPrice(); // 펀딩별 주문금액  조회
+	public int selectTotalPrice(int fundingno); // 펀딩별 주문금액  조회
+	
+	public int priceUpdate(Funding funding); // 펀딩 현재금액 업데이트
+	
+	public int selectHistory(int fundingno); // 펀딩별 참여인원 조회
+	
+	public List<Order> selectHistoryDetail(int fundingno); // 펀딩별 참여내역 조회
 
 	public int insertFunding(); // 펀딩 입력
 

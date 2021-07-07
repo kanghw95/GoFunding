@@ -61,15 +61,12 @@ public class FundingCtrl {
 		try {
 			int listcount = funService.listCount();
 			List<Funding> fundinglist = funService.selectList();
-			List<Map<Integer,Integer>> totalPrice = funService.selectTotalPrice();
 
 			System.out.println("펀딩리스트 :" + fundinglist);
 			System.out.println("펀딩갯수 :" + listcount);
-			System.out.println("펀딩별 금액 :" + totalPrice);
 			
 			mv.addObject("fundinglist", fundinglist);
 			mv.addObject("listcount", listcount);
-			mv.addObject("totalPrice", totalPrice);
 			mv.setViewName("funding/fundinglist");
 
 		} catch (Exception e) {
@@ -83,10 +80,20 @@ public class FundingCtrl {
 	@RequestMapping(value = "funding/detail", method = RequestMethod.GET)
 	public ModelAndView fundingDetail(@RequestParam(name = "no") int fundingno, ModelAndView mv) {
 		try {
+			int historyResult = 0;
+			
 			Funding funding = funService.selectOne(fundingno);	
 			List<Reward> rewardlist = funService.selectReward(fundingno);
+			historyResult = funService.selectHistory(fundingno);
+			List<Order>  historyResultDetail = funService.selectHistoryDetail(fundingno);
+			
 			System.out.println("선택한 펀딩 정보 :" + funding);
 			System.out.println("선택한 리워드 정보 :" + rewardlist);
+			System.out.println("참여 인원 :" + historyResult);
+			System.out.println("참여 내역 :" + historyResultDetail);
+			
+			mv.addObject("historyResult", historyResult);
+			mv.addObject("historyResultDetail",historyResultDetail);
 			mv.addObject("funding", funService.selectOne(fundingno));
 			mv.addObject("reward", funService.selectReward(fundingno));
 			
@@ -163,7 +170,19 @@ public class FundingCtrl {
 			ModelAndView mv) {
 		try {
 			Funding funding = funService.selectOne(fundingno);	
+			int sumTotalPrice = funService.selectTotalPrice(fundingno);
+					
 			System.out.println("선택한 펀딩 정보 :" + funding);
+			System.out.println("선택한 펀딩 현재금액  :" + sumTotalPrice);
+			
+			sumTotalPrice += totalPrice;
+			System.out.println("주문후 합계금액  :" + sumTotalPrice);
+			
+			funding.setCurrentprice(sumTotalPrice);
+			funding.setFundingno(fundingno);
+			
+			int sumTotalPriceResult = funService.priceUpdate(funding);
+			System.out.println("주문후 합계금액 결과는  :" + sumTotalPriceResult);
 			int result = 0;
 			
 			user.setUserId(userId); // vo에 아이디를 넣음
