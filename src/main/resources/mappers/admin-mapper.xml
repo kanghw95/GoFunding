@@ -460,8 +460,8 @@
 		UPDATE APPLICATION SET FEEDBACK = #{feedback} WHERE APPLYNO = #{applyNo}
 	</update>
 	
-	<!-- 통계 연령별 : 1020대 -->
-	<select id="analAge1020" resultType="float">
+	<!-- 펀딩 통계 연령별 : 1020대 -->
+	<select id="analAgeF1020" resultType="float">
 		SELECT NVL((SELECT COUNT(*) CNT1  FROM (
 		SELECT DISTINCT O.ID FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
 		JOIN USERS U ON A.ID=U.ID WHERE U.AGE BETWEEN 10 AND 29), 0)/
@@ -470,8 +470,8 @@
 		FROM  DUAL
 	</select>
 	
-	<!-- 통계 연령별 : 3040대 -->
-	<select id="analAge3040" resultType="float">
+	<!-- 펀딩 통계 연령별 : 3040대 -->
+	<select id="analAgeF3040" resultType="float">
 		SELECT NVL((SELECT COUNT(*) CNT1  FROM (
 		SELECT DISTINCT O.ID FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
 		JOIN USERS U ON A.ID=U.ID WHERE U.AGE BETWEEN 30 AND 49), 0)/
@@ -480,8 +480,8 @@
 		FROM  DUAL
 	</select>
 	
-	<!-- 통계 연령별 : 5060대 -->
-	<select id="analAge5060" resultType="float">
+	<!-- 펀딩 통계 연령별 : 5060대 -->
+	<select id="analAgeF5060" resultType="float">
 		SELECT NVL((SELECT COUNT(*) CNT1  FROM (
 		SELECT DISTINCT O.ID FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
 		JOIN USERS U ON A.ID=U.ID WHERE U.AGE BETWEEN 50 AND 69), 0)/
@@ -490,82 +490,177 @@
 		FROM  DUAL
 	</select>
 	
-	<!-- 통계 분류별 : 일자리 창출 -->
-	<select id="analCate1" resultType="Integer">
+	<!-- 펀딩 통계 분류별 : 일자리 창출 -->
+	<select id="analCateF1" resultType="Integer">
 		SELECT COUNT(*) CNT FROM (
 		SELECT F.FUNDINGCATEGORY FROM (
 		SELECT DISTINCT O.FUNDINGNO FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
 		JOIN FUNDING F ON A.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='일자리 창출'
 	</select>
 	
-	<!-- 통계 분류별 : 공정 무역 -->
-	<select id="analCate2" resultType="Integer">
+	<!-- 펀딩 통계 분류별 : 공정 무역 -->
+	<select id="analCateF2" resultType="Integer">
 		SELECT COUNT(*) CNT FROM (
 		SELECT F.FUNDINGCATEGORY FROM (
 		SELECT DISTINCT O.FUNDINGNO FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
 		JOIN FUNDING F ON A.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='공정 무역'
 	</select>
 	
-	<!-- 통계 분류별 : 친환경 -->
-	<select id="analCate3" resultType="Integer">
+	<!-- 펀딩 통계 분류별 : 친환경 -->
+	<select id="analCateF3" resultType="Integer">
 		SELECT COUNT(*) CNT FROM (
 		SELECT F.FUNDINGCATEGORY FROM (
 		SELECT DISTINCT O.FUNDINGNO FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
 		JOIN FUNDING F ON A.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='친환경'
 	</select>
 	
-	<!-- 통계 분류별 : 기부 -->
-	<select id="analCate4" resultType="Integer">
+	<!-- 펀딩 통계 분류별 : 기부 -->
+	<select id="analCateF4" resultType="Integer">
 		SELECT COUNT(*) CNT FROM (
 		SELECT F.FUNDINGCATEGORY FROM (
 		SELECT DISTINCT O.FUNDINGNO FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
 		JOIN FUNDING F ON A.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='기부'
 	</select>
 	
-	<!-- 통계 분류별 : 작은 가게 -->
-	<select id="analCate5" resultType="Integer">
+	<!-- 펀딩 통계 분류별 : 작은 가게 -->
+	<select id="analCateF5" resultType="Integer">
 		SELECT COUNT(*) CNT FROM (
 		SELECT F.FUNDINGCATEGORY FROM (
 		SELECT DISTINCT O.FUNDINGNO FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
 		JOIN FUNDING F ON A.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='작은 가게'
 	</select>
 	
-	<!-- 통계 분류별 : 미디어 -->
-	<select id="analCate6" resultType="Integer">
+	<!-- 펀딩 통계 분류별 : 미디어 -->
+	<select id="analCateF6" resultType="Integer">
 		SELECT COUNT(*) CNT FROM (
 		SELECT F.FUNDINGCATEGORY FROM (
 		SELECT DISTINCT O.FUNDINGNO FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
 		JOIN FUNDING F ON A.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='미디어'
 	</select>
 	
-	<!-- 통계 분류별 : 창작자 -->
-	<select id="analCate7" resultType="Integer">
+	<!-- 펀딩 통계 분류별 : 창작자 -->
+	<select id="analCateF7" resultType="Integer">
 		SELECT COUNT(*) CNT FROM (
 		SELECT F.FUNDINGCATEGORY FROM (
 		SELECT DISTINCT O.FUNDINGNO FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
 		JOIN FUNDING F ON A.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='창작자'
 	</select>
 	
-	<!-- 통계 분류별 : 남성 -->
-	<select id="analGenderM" resultType="Integer">
+	<!-- 펀딩 통계 분류별 : 남성 -->
+	<select id="analFGenderM" resultType="Integer">
 		SELECT COUNT(*) FROM (
 		SELECT DISTINCT O.ID FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
 		JOIN USERS U ON U.ID=A.ID WHERE GENDER='m'
 	</select>
 	
-	<!-- 통계 분류별 : 여성 -->
-	<select id="analGenderF" resultType="Integer">
+	<!-- 펀딩 통계 분류별 : 여성 -->
+	<select id="analFGenderF" resultType="Integer">
 		SELECT COUNT(*) FROM (
 		SELECT DISTINCT O.ID FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
 		JOIN USERS U ON U.ID=A.ID WHERE GENDER='f'
 	</select>
 	
-	<!-- 통계 판매 금액 -->
+	<!-- 커뮤니티 통계 연령별 : 1020대 -->
+	<select id="analAgeC1020" resultType="float">
+		SELECT NVL((SELECT COUNT(*) CNT FROM 
+		(SELECT DISTINCT G.ID FROM
+		(SELECT DISTINCT F.ID FROM
+		(SELECT DISTINCT C.ID FROM
+		(SELECT DISTINCT A.ID FROM 
+		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
+		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
+		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
+		WHERE U.AGE BETWEEN 10 AND 29)), 0) AS RESULT FROM DUAL
+	</select>
+	
+	<!-- 커뮤니티 통계 연령별 : 3040대 -->
+	<select id="analAgeC3040" resultType="float">
+		SELECT NVL((SELECT COUNT(*) CNT FROM 
+		(SELECT DISTINCT G.ID FROM
+		(SELECT DISTINCT F.ID FROM
+		(SELECT DISTINCT C.ID FROM
+		(SELECT DISTINCT A.ID FROM 
+		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
+		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
+		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
+		WHERE U.AGE BETWEEN 30 AND 49)), 0) AS RESULT FROM DUAL
+	</select>
+	
+	<!-- 커뮤니티 통계 연령별 : 5060대 -->
+	<select id="analAgeC5060" resultType="float">
+		SELECT NVL((SELECT COUNT(*) CNT FROM 
+		(SELECT DISTINCT G.ID FROM
+		(SELECT DISTINCT F.ID FROM
+		(SELECT DISTINCT C.ID FROM
+		(SELECT DISTINCT A.ID FROM 
+		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
+		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
+		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
+		WHERE U.AGE BETWEEN 50 AND 69)), 0) AS RESULT FROM DUAL
+	</select>	
+	
+	<!-- 커뮤니티 통계 분류별 : 자유게시판 -->
+	<select id="analCateC1" resultType="Integer">
+		SELECT COUNT(*) CNT FROM BULLETINEBOARD
+	</select>
+	
+	<!-- 커뮤니티 통계 분류별 : 후기게시판 -->
+	<select id="analCateC2" resultType="Integer">
+		SELECT COUNT(*) CNT FROM REVIEWBOARD
+	</select>
+	
+	<!-- 커뮤니티 통계 분류별 : 질답게시판 -->
+	<select id="analCateC3" resultType="Integer">
+		SELECT COUNT(*) CNT FROM QUESTIONBOARD
+	</select>
+	
+	<!-- 커뮤니티 통계 분류별 : 이벤트게시판 -->
+	<select id="analCateC4" resultType="Integer">
+		SELECT COUNT(*) CNT FROM EVENTBOARD
+	</select>
+	
+	<!-- 커뮤니티 통계 분류별 : 정보공유게시판 -->
+	<select id="analCateC5" resultType="Integer">
+		SELECT COUNT(*) CNT FROM SHAREBOARD
+	</select>
+	
+	<!-- 커뮤니티 통계 분류별 : 남성 -->
+	<select id="analCGenderM" resultType="Integer">
+		SELECT NVL((SELECT COUNT(*) CNT FROM 
+		(SELECT DISTINCT G.ID FROM
+		(SELECT DISTINCT F.ID FROM
+		(SELECT DISTINCT C.ID FROM
+		(SELECT DISTINCT A.ID FROM 
+		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
+		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
+		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
+		WHERE U.GENDER ='m')), 0) AS RESULT FROM DUAL   
+	</select>
+	
+	<!-- 커뮤니티 통계 분류별 : 여성 -->
+	<select id="analCGenderF" resultType="Integer">
+		SELECT NVL((SELECT COUNT(*) CNT FROM 
+		(SELECT DISTINCT G.ID FROM
+		(SELECT DISTINCT F.ID FROM
+		(SELECT DISTINCT C.ID FROM
+		(SELECT DISTINCT A.ID FROM 
+		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
+		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
+		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
+		WHERE U.GENDER ='f')), 0) AS RESULT FROM DUAL   
+	</select>
+	
+	<!-- 실 결제 금액 -->
 	<select id="analPayment" resultType="hashMap">
-		SELECT DISTINCT TO_CHAR(A.PAYMENTDATE,'YYYY-MM-DD') PAYMENTDATE,
+		SELECT C.PAYMENTDATE, B.AMOUNT FROM
+		(SELECT DISTINCT TO_CHAR(A.PAYMENTDATE,'YYYY-MM-DD') PAYMENTDATE,
 		LAST_VALUE(TOTAL) OVER(PARTITION BY TO_CHAR(A.PAYMENTDATE,'YYYY-MM-DD') ) AMOUNT
 		FROM (SELECT PAYMENTDATE, TOTALPAYMENT, SUM(TOTALPAYMENT) OVER (ORDER BY PAYMENTDATE
-		ROWS UNBOUNDED PRECEDING) TOTAL FROM PAYMENT ORDER BY PAYMENTDATE) A ORDER BY PAYMENTDATE
+		ROWS UNBOUNDED PRECEDING) TOTAL FROM PAYMENT ORDER BY PAYMENTDATE) A ORDER BY PAYMENTDATE) B
+		JOIN (SELECT TO_CHAR(SYSDATE - (LEVEL - 1), 'YYYY-MM-DD') PAYMENTDATE 
+		<![CDATA[
+		FROM DUAL CONNECT BY LEVEL <= 7) C ON B.PAYMENTDATE=C.PAYMENTDATE
+		]]>
 	</select>
 	
 </mapper>

@@ -30,35 +30,25 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 
-var day00=new Date();
-var fmtDay00=(day00.getMonth()+1)+'/'+day00.getDate();
-var day01=new Date(new Date().setDate(new Date().getDate() - 1));
-var fmtDay01=(day01.getMonth()+1)+'/'+day01.getDate();
-var day02=new Date(new Date().setDate(new Date().getDate() - 2));
-var fmtDay02=(day02.getMonth()+1)+'/'+day02.getDate();
-var day03=new Date(new Date().setDate(new Date().getDate() - 3));
-var fmtDay03=(day03.getMonth()+1)+'/'+day03.getDate();
-var day04=new Date(new Date().setDate(new Date().getDate() - 4));
-var fmtDay04=(day04.getMonth()+1)+'/'+day04.getDate();
-var day05=new Date(new Date().setDate(new Date().getDate() - 5));
-var fmtDay05=(day05.getMonth()+1)+'/'+day05.getDate();
-var day06=new Date(new Date().setDate(new Date().getDate() - 6));
-var fmtDay06=(day06.getMonth()+1)+'/'+day06.getDate();
-
-var pay0=days[0];
-var pay1=days[3];
-var pay2=days.AMOUNT;
-var pay3=days.PAYMENTDATE;
-var pay4=days[6];
-var pay5=days[7];
-var pay6=days[8];
-var payments=Object.keys(days);
-var payments1=Object.values(days);
+var day1=$("#day-1").text();
+var day2=$("#day-2").text();
+var day3=$("#day-3").text();
+var day4=$("#day-4").text();
+var day5=$("#day-5").text();
+var day6=$("#day-6").text();
+var day7=$("#day-7").text();
+var date1=$("#date-1").text();
+var date2=$("#date-2").text();
+var date3=$("#date-3").text();
+var date4=$("#date-4").text();
+var date5=$("#date-5").text();
+var date6=$("#date-6").text();
+var date7=$("#date-7").text();
 
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: [fmtDay06, fmtDay05, fmtDay04, fmtDay03, fmtDay02, fmtDay01, fmtDay00],
+    labels: [date1, date2, date3, date4, date5, date6, date7],
     datasets: [{
       label: "수입",
       lineTension: 0.3,
@@ -72,7 +62,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [100,500,1000,2000,3000,4000,5000],
+      data: [day1,day2,day3,day4,day5,day6,day7],
     }],
   },
   options: {

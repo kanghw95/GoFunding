@@ -16,69 +16,119 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 	private AnalyticsDao analyticsDao;
 
 	@Override
-	public Float analAge1020() { //연령 통계 지표 : 1020대
-		return analyticsDao.analAge1020();
+	public Float analAgeF1020() { //펀딩 연령 통계 지표 : 1020대
+		return analyticsDao.analAgeF1020();
 	}
 
 	@Override
-	public Float analAge3040() { //연령 통계 지표 : 3040대
-		return analyticsDao.analAge3040();
+	public Float analAgeF3040() { //펀딩 연령 통계 지표 : 3040대
+		return analyticsDao.analAgeF3040();
 	}
 
 	@Override
-	public Float analAge5060() { //연령 통계 지표 : 5060대
-		return analyticsDao.analAge5060();
+	public Float analAgeF5060() { //펀딩 연령 통계 지표 : 5060대
+		return analyticsDao.analAgeF5060();
 	}
 
 	@Override
-	public int analCate1() { //분류별 통계 지표 : 일자리 창출
-		return analyticsDao.analCate1();
+	public int analCateF1() { //펀딩 분류별 통계 지표 : 일자리 창출
+		return analyticsDao.analCateF1();
 	}
 
 	@Override
-	public int analCate2() { //분류별 통계 지표 : 공정 무역
-		return analyticsDao.analCate2();
+	public int analCateF2() { //펀딩 분류별 통계 지표 : 공정 무역
+		return analyticsDao.analCateF2();
 	}
 
 	@Override
-	public int analCate3() { //분류별 통계 지표 : 친환경
+	public int analCateF3() { //펀딩 분류별 통계 지표 : 친환경
 		
-		return analyticsDao.analCate3();
+		return analyticsDao.analCateF3();
 	}
 
 	@Override
-	public int analCate4() { //분류별 통계 지표 : 기부
-		return analyticsDao.analCate4();
+	public int analCateF4() { //펀딩 분류별 통계 지표 : 기부
+		return analyticsDao.analCateF4();
 	}
 
 	@Override
-	public int analCate5() { //분류별 통계 지표 : 작은 가게
-		return analyticsDao.analCate5();
+	public int analCateF5() { //펀딩 분류별 통계 지표 : 작은 가게
+		return analyticsDao.analCateF5();
 	}
 
 	@Override
-	public int analCate6() { //분류별 통계 지표 : 미디어
-		return analyticsDao.analCate6();
+	public int analCateF6() { //펀딩 분류별 통계 지표 : 미디어
+		return analyticsDao.analCateF6();
 	}
 
 	@Override
-	public int analCate7() { //분류별 통계 지표 : 창작자
-		return analyticsDao.analCate7();
+	public int analCateF7() { //펀딩 분류별 통계 지표 : 창작자
+		return analyticsDao.analCateF7();
 	}
 
 	@Override
-	public int analGenderM() { //성별 통계 지표 : 남성
-		return analyticsDao.analGenderM();
+	public int analFGenderM() { //펀딩 성별 통계 지표 : 남성
+		return analyticsDao.analFGenderM();
 	}
 
 	@Override
-	public int analGenderF() { //성별 통계 지표 : 여성
-		return analyticsDao.analGenderF();
+	public int analFGenderF() { //펀딩 성별 통계 지표 : 여성
+		return analyticsDao.analFGenderF();
 	}
 
 	@Override
-	public List<HashMap<String, String>> analPayment() {
+	public Float analAgeC1020() { //커뮤니티 연령 통계 지표 : 1020대
+		return analyticsDao.analAgeC1020();
+	}
+
+	@Override
+	public Float analAgeC3040() { //커뮤니티 연령 통계 지표 : 3040대
+		return analyticsDao.analAgeC3040();
+	}
+
+	@Override
+	public Float analAgeC5060() { //커뮤니티 연령 통계 지표 : 5060대
+		return analyticsDao.analAgeC5060();
+	}
+
+	@Override
+	public int analCateC1() { //커뮤니티 분류별 통계 지표 : 자유게시판
+		return analyticsDao.analCateC1();
+	}
+
+	@Override
+	public int analCateC2() { //커뮤니티 분류별 통계 지표 : 후기게시판
+		return analyticsDao.analCateC2();
+	}
+
+	@Override
+	public int analCateC3() { //커뮤니티 분류별 통계 지표 : 질답게시판
+		return analyticsDao.analCateC3();
+	}
+
+	@Override
+	public int analCateC4() { //커뮤니티 분류별 통계 지표 : 이벤트게시판
+		return analyticsDao.analCateC4();
+	}
+
+	@Override
+	public int analCateC5() { //커뮤니티 분류별 통계 지표 : 정보공유게시판
+		return analyticsDao.analCateC5();
+	}
+	
+	@Override
+	public List<HashMap<String, String>> analPayment() { //결제 금액 통계
 		return analyticsDao.analPayment();
+	}
+
+	@Override
+	public int analCGenderM() {
+		return analyticsDao.analCGenderM();
+	}
+
+	@Override
+	public int analCGenderF() {
+		return analyticsDao.analCGenderF();
 	}
 
 }
