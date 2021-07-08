@@ -18,7 +18,6 @@
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 	<div class="wrapper">
 	<div role="main" id="content" class="content">
-	
 		<form action="fundingresult" method="POST" id="fundingpayresult">
 			<c:forEach var="reward" items="${reward}" varStatus="status">
 					<c:if test="${reward ne ''}">
@@ -93,7 +92,6 @@
 					</ul>
 					<fmt:parseDate value="${funding.fundingfin}" var="paymentday" pattern="yyyy-MM-dd HH:mm:ss"/> 
 					<div class="FundingDetailApplicationContent_total">
-						<strong class="FundingDetailApplicationContent_date"><fmt:formatDate value="${paymentday}" pattern="yyyy년 MM월 dd일"/> 결제 예정</strong>
 						<strong class="FundingDetailApplicationContent_item">총<span class="FundingDetailApplicationContent_count">
 							<span class="FundingDetailApplicationContent_number">${funding_pay_rewordEA}</span>개</span>
 						</strong>

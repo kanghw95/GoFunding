@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="OrderRefund">
+	<resultMap type="OrderRefund" id="resultOrderRefund">
+		<!-- property는 필드명, column 은 DB 컬럼 명을 입력한다 -->
+		<id property="refundNo" column="REFUNDNO" />
+		<result property="orderDetailNo" column="ORDERDETAILNO" />
+	</resultMap>
+
+	<!-- 펀딩 주문 입력 -->
+	<insert id="insertOrderRefund">
+		INSERT INTO ORDERSREFUND VALUES(SEQ_ORDERSREFUNDNO.NEXTVAL, #{orderDetailNo})
+	</insert>
+	
+</mapper>

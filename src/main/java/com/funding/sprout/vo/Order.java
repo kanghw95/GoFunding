@@ -19,6 +19,14 @@ public class Order {
 
 	}
 
+	@Override
+	public String toString() {
+		return "Order [orderNo=" + orderNo + ", orderTotalPrice=" + orderTotalPrice + ", deliveryAddr=" + deliveryAddr
+				+ ", recipient=" + recipient + ", recipientPhone=" + recipientPhone + ", orderDate=" + orderDate
+				+ ", paymentType=" + paymentType + ", deliveryMessage=" + deliveryMessage + ", fundingNo=" + fundingNo
+				+ ", id=" + id + "]";
+	}
+
 	public Order(int orderNo, int orderTotalPrice, String deliveryAddr, String recipient, String recipientPhone,
 			Date orderDate, char paymentType, String deliveryMessage, int fundingNo, String id) {
 		super();
@@ -32,14 +40,6 @@ public class Order {
 		this.deliveryMessage = deliveryMessage;
 		this.fundingNo = fundingNo;
 		this.id = id;
-	}
-
-	@Override
-	public String toString() {
-		return "Order [orderNo=" + orderNo + ", orderTotalPrice=" + orderTotalPrice + ", deliveryAddr=" + deliveryAddr
-				+ ", recipient=" + recipient + ", recipientPhone=" + recipientPhone + ", orderDate=" + orderDate
-				+ ", paymentType=" + paymentType + ", deliveryMessage=" + deliveryMessage + ", fundingNo=" + fundingNo
-				+ ", id=" + id + "]";
 	}
 
 	public int getOrderNo() {

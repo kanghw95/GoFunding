@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.funding.sprout.vo.Funding;
 import com.funding.sprout.vo.Order;
+import com.funding.sprout.vo.OrderDetail;
 import com.funding.sprout.vo.Reward;
 
 
@@ -62,24 +63,49 @@ public class FundingDao {
 	public List<Order> selectHistoryDetail(int fundingno) { // 펀딩별 참여내역 조회
 		return sqlSession.selectList("Order.selectHistoryDetail",fundingno);
 	}
-
-
-	public int insertFunding() {
-		return 0; // 펀딩 입력
-	}
-
-	public int updateFunding() {
-		return 0; // 펀딩 수정
-	}
-
-	public int deleteFunding() {
-		return 0; // 펀딩 삭제
+	
+	public int selectOrderCheck(Order order) { // 펀딩별 참여 중복검사
+		return sqlSession.selectOne("Order.selectOrderCheck", order);
 	}
 	
+	public int rewardStock(Reward reward) { // 리워드 수량 조회
+		return sqlSession.selectOne("Reward.rewardStock", reward);
+	}
+	
+	public int rewardStockChange(Reward reward) { // 리워드 수량 변경
+		return sqlSession.update("Reward.rewardStockChange", reward);
+	}
+	
+
+	public int insertOrdersDetail(OrderDetail orderDetail) {  // 주문 상세 입력
+		// TODO Auto-generated method stub
+		return sqlSession.insert("OrderDetail.insertOrdersDetail", orderDetail);
+	}
+	
+	public int selectOrderNo(Order order) { // 주문번호 알아오기
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Order.selectOrderNo", order);
+	}
+	
+	public int selectRewardNo(Reward reward) { // 주문 리워드 알아오기
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Reward.selectRewardNo", reward);
+	}
+	
+	public int rewardCount(Reward reward) { // 리워드 참가 인원알아오기
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Reward.rewardCount", reward);
+	}
+	
+	public int rewardCountIncrease(Reward reward) { // 리워드 참가 인원 증가
+		// TODO Auto-generated method stub
+		return sqlSession.update("Reward.rewardCountIncrease", reward);
+	}
 	
 	public Funding getPreference() {  //TODO 선호하는 펀딩 정보 이거는 수정이 필요해보임 추가도
 		return null;
 
 	}
+
 
 }

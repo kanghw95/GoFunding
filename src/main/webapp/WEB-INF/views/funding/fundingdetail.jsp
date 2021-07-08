@@ -17,40 +17,7 @@
 <link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_reword.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style type="text/css">
-
-.modal {
-
-   position: absolute;
-   overflow: hidden;
-   top: 10px;
-   right: 10px;
-   z-index: 10;
-   font-size: 12px;
-   text-align: center;
-   background: white;
-   border-radius: 12px;
-   border: 3px solid #CFCFCF;
-   
-}
-
-.modal2 {
-   position: absolute;
-   overflow: hidden;
-   top: 10px;
-   right: 70px;	
-   z-index: 10;
-   height : 54px;
-   font-size: 12px;
-   font-weight : bolder;
-   text-align: center;
-   background: white;
-   padding: 0 7 0 7;
-        border-radius: 12px;
-        border: 3px solid #CFCFCF;
-}
-
    .modal_wrap{
-   		
         display: none;
         width: 300px;
         height: 500px;
@@ -62,7 +29,6 @@
         z-index: 2;
         border-radius: 12px;
         border: 3px solid #CFCFCF;
-        
     }
     .black_bg{
         display: none;
@@ -84,38 +50,40 @@
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 	<fmt:parseDate value="${funding.fundingfin}" var="paymentday" pattern="yyyy-MM-dd HH:mm:ss"/> 
 	<fmt:formatDate value="${funding.deliverydate}" type="DATE" var="deliverydate" pattern="yyyy년 MM월 dd일"/> 
+
 	<div class="wrapper">
-	<div class="wrap">
 		<div role="main" id="content" class="content">
 			<div>
 				<div class="black_bg"></div>
-					 <div class="modal_wrap" style="text-align: center;">
-					 펀딩 참여전 확인하세요!
-					 <hr>
-					 지금 신청하고 있는 펀딩은 ${deliverydate} 일에 배송이 시작됩니다.
-					 <hr>
-					 펀딩은 쇼핑과 달리 배송이후 단순 변심으로 인한 취소, 환불이 어려울 수 있습니다.<br>
-					 배송 진행 전 결제 취소는 마이페이지에서 가능합니다.
-					 <br>
-					 <form action="fundingpay" method="POST" id="fundingpay">
-					 <button type="button" id="noagree" style=" border: 1px solid black;">동의 안함</button>
-					 <input type="submit" value="동의" id="agree" style=" border: 1px solid black;" >
-					 <c:forEach var="reward" items="${reward}">
-						 <input type="hidden" id="funding_pay_reword${reward.rewardNo}" name="funding_pay_reword" value="">
-						 <input type="hidden" id="funding_pay_reword_price${reward.rewardNo}" name="funding_pay_price" value="0">
-						 <input type="hidden" id="funding_pay_rewordEA${reward.rewardNo}" name="funding_pay_rewordEA" value="0">
-					</c:forEach>
-					 	
-					 <input type="hidden" id="funding_pay_total_price" name="funding_pay_total_price" value="0">
-					 <input type="hidden" id="funding_pay_total_rewordEA" name="funding_pay_total_rewordEA" value="0">
-					 <input type="hidden" id="deliverycharge" name="deliverycharge" value="${funding.deliverycharge}">
-					 <input type="hidden" id="funding_no" name="funding_no" value="${funding.fundingno}">
-					 
-					 <input type="hidden" id="cheer_pay" name="cheer_pay" value = "">
-					 <input type="hidden" id="cheer_pay_price" name="cheer_pay_price" value = "0">
-					 <input type="hidden" id="cheer_pay_EA" name="cheer_pay_EA" value = "0">
-					 
-					 </form>
+					<div class="modal_wrap" style="text-align: center;">
+						 펀딩 참여전 확인하세요!
+						 <hr>
+						 지금 신청하고 있는 펀딩은 ${deliverydate} 일에 배송이 시작됩니다.
+						 <hr>
+						 펀딩은 쇼핑과 달리 배송이후 단순 변심으로 인한 취소, 환불이 어려울 수 있습니다.<br>
+						 배송 진행 전 결제 취소는 마이페이지에서 가능합니다.
+						 <br>
+						 <form action="fundingpay" method="POST" id="fundingpay">
+						 <button type="button" id="noagree" style=" border: 1px solid black;">동의 안함</button>
+						 <input type="submit" value="동의" id="agree" style=" border: 1px solid black;" >
+						 <c:forEach var="reward" items="${reward}">
+							 <input type="hidden" id="funding_pay_reword${reward.rewardNo}" name="funding_pay_reword" value="">
+							 <input type="hidden" id="funding_pay_reword_price${reward.rewardNo}" name="funding_pay_price" value="0">
+							 <input type="hidden" id="funding_pay_rewordEA${reward.rewardNo}" name="funding_pay_rewordEA" value="0">
+						</c:forEach>
+						 	
+						 <input type="hidden" id="userId" name="userId" value="${sessionScope.user.userId}">
+						 
+						 <input type="hidden" id="funding_pay_total_price" name="funding_pay_total_price" value="0">
+						 <input type="hidden" id="funding_pay_total_rewordEA" name="funding_pay_total_rewordEA" value="0">
+						 <input type="hidden" id="deliverycharge" name="deliverycharge" value="${funding.deliverycharge}">
+						 <input type="hidden" id="funding_no" name="funding_no" value="${funding.fundingno}">
+						 
+						 <input type="hidden" id="cheer_pay" name="cheer_pay" value = "">
+						 <input type="hidden" id="cheer_pay_price" name="cheer_pay_price" value = "0">
+						 <input type="hidden" id="cheer_pay_EA" name="cheer_pay_EA" value = "0">
+						 
+						 </form>
 					</div>
 				<div class="FundingDetailTop_wrap">
 					<div class="FundingDetailCover_wrap">
@@ -362,7 +330,7 @@
 												<div class="FundingDetailStoryParticipationList_user">
 													<span class="FundingDetailStoryParticipationList_name_">${list.ID } 님</span>
 													<span class="FundingDetailStoryParticipationList_amount">
-														<strong class="FundingDetailStoryParticipationList_number"></strong>${list.ORDERTOTALPRICE} 원 참여
+														<strong class="FundingDetailStoryParticipationList_number"></strong><fmt:formatNumber value="${list.ORDERTOTALPRICE}" pattern="#,###,###"/>원 참여
 													</span>
 												</div>
 										</li>
@@ -414,7 +382,7 @@
 												<strong>${reward.rewardEA}</strong> 개 남음
 											</div>
 											<ul class="FundingDetailRewardList_information">
-												<li class="FundingDetailRewardList_item_information">현재0명 펀딩 참여</li>
+												<li class="FundingDetailRewardList_item_information">현재 ${reward.rewardCount}명 펀딩 참여</li>
 												<li class="FundingDetailRewardList_item_information">
 													<strong class="FundingDetailRewardList_highlight">
 														<span class="FundingDetailRewardList_date">발송예상일</span>${deliverydate}
@@ -436,7 +404,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 	<script>
@@ -539,7 +506,7 @@
 				listbtn.setAttribute("aria-expanded","false");
 				list.style.display = 'none';
 				li${reward.rewardNo}.setAttribute('class','FundingDetailRewardCartItem_wrap');
-				li${reward.rewardNo}.innerHTML = "<strong class='FundingDetailRewardCartItem_name'>"+reword_val${reward.rewardNo}+"</strong> <div class='FundingDetailRewardCartItem_counter'> <input id='reward-cart-item-${reward.rewardNo}' type='number' class='FundingDetailRewardCartItem_input_count' value='1'> <label for='reward-cart-item-${reward.rewardNo}' class='blind'>개수</label> <button type='button' onclick='minus${reward.rewardNo}();' class='FundingDetailRewardCartItem_button_minus'> <span class='FundingDetailRewardCartItem_icon_minus_'></span> <span class='blind'>-</span> </button> <button type='button' onclick='plus${reward.rewardNo}();' class='FundingDetailRewardCartItem_button_plus'> <span class='FundingDetailRewardCartItem_icon_plus'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount'><strong id='reword_price_id${reward.rewardNo}'>"+reword_price${reward.rewardNo}+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete${reward.rewardNo}' class='FundingDetailRewardCartItem_button_delete'> <span class='FundingDetailRewardCartItem_icon'></span> <span class='blind'>삭제</span></button>";
+				li${reward.rewardNo}.innerHTML = "<strong class='FundingDetailRewardCartItem_name'>"+reword_val${reward.rewardNo}+"</strong><div class='FundingDetailRewardCartItem_counter'><input id='reward-cart-item-${reward.rewardNo}' type='number' class='FundingDetailRewardCartItem_input_count' value='1'> <label for='reward-cart-item-${reward.rewardNo}' class='blind'>개수</label> <button type='button' onclick='minus${reward.rewardNo}();' class='FundingDetailRewardCartItem_button_minus'> <span class='FundingDetailRewardCartItem_icon_minus_'></span> <span class='blind'>-</span> </button> <button type='button' onclick='plus${reward.rewardNo}();' class='FundingDetailRewardCartItem_button_plus'> <span class='FundingDetailRewardCartItem_icon_plus'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount'><strong id='reword_price_id${reward.rewardNo}'>"+reword_price${reward.rewardNo}+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete${reward.rewardNo}' class='FundingDetailRewardCartItem_button_delete'> <span class='FundingDetailRewardCartItem_icon'></span> <span class='blind'>삭제</span></button>";
 				
 				funtotalprice = parseInt(funtotalprice) + parseInt(reword_price${reward.rewardNo});
 				funding_pay_total_price.value = parseInt(funding_pay_total_price.value) + parseInt(reword_price${reward.rewardNo});
@@ -602,7 +569,7 @@
 			listbtn.setAttribute("aria-expanded","false");
 			list.style.display = 'none';
 			li99.setAttribute('class','FundingDetailRewardCartItem_wrap');
-			li99.innerHTML = "<strong class='FundingDetailRewardCartItem_name'>"+cheer_val+"</strong> <div class='FundingDetailRewardCartItem_counter'> <input id='reward-cart-item-cheer1' type='number' class='FundingDetailRewardCartItem_input_count' value='1'> <label for='reward-cart-item-cheer1' class='blind'>개수</label> <button type='button' onclick='cheer_minus();' class='FundingDetailRewardCartItem_button_minus'> <span class='FundingDetailRewardCartItem_icon_minus_'></span> <span class='blind'>-</span> </button> <button type='button' onclick='cheer_plus();' class='FundingDetailRewardCartItem_button_plus'> <span class='FundingDetailRewardCartItem_icon_plus'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount'><strong id='cheer_price_id'>"+cheer_price1.value+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete_cheer1' class='FundingDetailRewardCartItem_button_delete'> <span class='FundingDetailRewardCartItem_icon'></span> <span class='blind'>삭제</span></button>";
+			li99.innerHTML = "<strong class='FundingDetailRewardCartItem_name'>"+cheer_val+"</strong><div class='FundingDetailRewardCartItem_counter'><input id='reward-cart-item-cheer1' type='number' class='FundingDetailRewardCartItem_input_count' value='1'> <label for='reward-cart-item-cheer1' class='blind'>개수</label> <button type='button' onclick='cheer_minus();' class='FundingDetailRewardCartItem_button_minus'> <span class='FundingDetailRewardCartItem_icon_minus_'></span> <span class='blind'>-</span> </button> <button type='button' onclick='cheer_plus();' class='FundingDetailRewardCartItem_button_plus'> <span class='FundingDetailRewardCartItem_icon_plus'></span> <span class='blind'>+</span> </button></div> <span class='FundingDetailRewardCartItem_amount'><strong id='cheer_price_id'>"+cheer_price1.value+"</strong>원</span> <button id='FundingDetailRewardCartItem_button_delete_cheer1' class='FundingDetailRewardCartItem_button_delete'> <span class='FundingDetailRewardCartItem_icon'></span> <span class='blind'>삭제</span></button>";
 			
 			funtotalprice = parseInt(funtotalprice) + parseInt(cheer_price1.value);
 			funding_pay_total_price.value = parseInt(funding_pay_total_price.value) + parseInt(cheer_price1.value);
@@ -783,6 +750,9 @@
 		var sessionUserId = '${sessionScope.user.userId}';
 	
 		join_btn.addEventListener("click",function(){
+			
+		
+			
 		
 		if(sessionUserId != ''){
 			console.log("sessionUserId : " + sessionUserId);
@@ -792,18 +762,45 @@
 				alert("라워드를 선택해주세요!");
 				return;
 			}
-			
-		        document.querySelector('.modal_wrap').style.display ='block';
-		        document.querySelector('.black_bg').style.display ='block';
-		    function offClick() {
-		        document.querySelector('.modal_wrap').style.display ='none';
-		        document.querySelector('.black_bg').style.display ='none';
-		    }
-		    document.querySelector('#noagree').addEventListener('click', offClick);
+			$.ajax({
+				url: "orderCheck",
+				type: "POST",
+				data: {"userId" : sessionUserId,
+						"fundingno": ${funding.fundingno}
+				},
+				
+				dataType : "text",
+				success : function(data){
+					console.log(data);
+					if(data === "주문 가능"){
+						console.log(data);
+						
+				        document.querySelector('.modal_wrap').style.display ='block';
+				        document.querySelector('.black_bg').style.display ='block';
+				    function offClick() {
+				        document.querySelector('.modal_wrap').style.display ='none';
+				        document.querySelector('.black_bg').style.display ='none';
+				    }
+				    document.querySelector('#noagree').addEventListener('click', offClick);
+				    
+					} else {
+						alert("중복 주문은 불가합니다. 먼저 주문하신 건을 취소해주세요")
+						return;
+					}
+				},
+				error : function(data){
+					console.log("ajax는 일단 들어옴 but 실패");
+					console.log("error data : " + data)
+				}
+				})
+
 		} else if(sessionUserId == ''){
 			alert("로그인 후 참여가 가능합니다.");
 			return;
 		}
+		
+		
+		
 	});
 		
 		

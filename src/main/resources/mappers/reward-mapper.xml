@@ -8,10 +8,37 @@
 		<result property="rewardEA" column="REWARDEA" />
 		<result property="rewardPrice" column="REWARDPRICE" />
 		<result property="fundingNo" column="FUNDINGNO" />
+		<result property="rewardCount" column="REWARDCOUNT" />
 	</resultMap>
 	
 	<!-- 리워드 조회 -->
 	<select id="selectrewardlist"  parameterType="int"  resultMap="resultReward">
 		SELECT * FROM REWARD WHERE FUNDINGNO = #{fundingNo}
 	</select>
+	
+	<!-- 리워드 수량 알아오기 -->
+	<select id="rewardStock" resultType="int">
+		SELECT REWARDEA FROM REWARD WHERE FUNDINGNO = #{fundingNo} AND REWARDTITLE LIKE #{rewardTitle}
+	</select>
+	
+	<!-- 리워드 수량 변경 -->
+	<update id="rewardStockChange">
+		UPDATE REWARD SET REWARDEA = #{rewardEA} WHERE FUNDINGNO = #{fundingNo} AND REWARDTITLE LIKE #{rewardTitle}
+	</update>
+	
+	<!-- 주문한 리워드 알아오기 -->
+	<select id="selectRewardNo" resultType="int">
+		SELECT REWARDNO FROM REWARD WHERE FUNDINGNO = #{fundingNo} AND REWARDTITLE LIKE #{rewardTitle}
+	</select>
+	
+	<!-- 리워드 참가인원 알아오기 -->
+	<select id="rewardCount" resultType="int">
+		SELECT REWARDCOUNT FROM REWARD WHERE REWARDNO = #{rewardNo}
+	</select>
+	
+	<!-- 리워드 참가인원 증가 -->
+	<update id="rewardCountIncrease" >
+		UPDATE REWARD SET REWARDCOUNT = #{rewardCount} WHERE REWARDNO = #{rewardNo}
+	</update>
+	
 </mapper>

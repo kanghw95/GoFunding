@@ -22,7 +22,6 @@ pageEncoding="UTF-8"%>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 <div class="wrapper">
-<div id="wrap" class="wrap" style="">
 	<div role="main" id="content" class="content">
 		<!-- 메인 슬라이드 -->
 		<div class="slideshow-container" style="width: 1140px; 	height: 250px; position: static; margin: auto; margin-top: 50px; text-align: center;" >
@@ -143,10 +142,6 @@ pageEncoding="UTF-8"%>
 				</tr>
 			</c:if>
 
-				<c:forEach items="${totalPrice}" var="list" varStatus="status">
-					<c:forEach items="${list}" var="map">
-					</c:forEach>
-				</c:forEach>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<li class="fundingContent_item">
@@ -193,7 +188,6 @@ pageEncoding="UTF-8"%>
 		</section>
 	</div>
 
-</div>
 
 
 

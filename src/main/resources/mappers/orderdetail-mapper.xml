@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="OrderDetail">
+	<resultMap type="OrderDetail" id="resultOrderDetail">
+		<!-- property는 필드명, column 은 DB 컬럼 명을 입력한다 -->
+		<id property="orderDetailNo" column="ORDERDETAILNO" />
+		<result property="orderNo" column="ORDERNO" />
+		<result property="rewardNo" column="REWARDNO" />
+		<result property="rewardCount" column="REWARDCOUNT" />
+		<result property="rewardPrice" column="REWARDPRICE" />
+		<result property="orderStatus" column="ORDERSTATUS" />
+	</resultMap>
+	
+	<!-- 펀딩 상세 주문 입력 -->
+	<insert id="insertOrdersDetail">
+		INSERT INTO ORDERSDETAIL VALUES(SEQ_ORDERSDETAILNO.NEXTVAL, #{orderNo}, #{rewardNo}, #{rewardCount}, #{rewardPrice}, #{orderStatus})
+	</insert>
+		
+</mapper>

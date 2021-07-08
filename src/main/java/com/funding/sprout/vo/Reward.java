@@ -7,27 +7,33 @@ public class Reward {
 	private int rewardEA; // 수량
 	private int rewardPrice; // 금액 
 	private int fundingNo; // 펀딩번호
+	private int rewardCount; //펀딩참여인원
 	
 	public Reward() {
 		
 	}
 	
-	public Reward(int rewardNo, String rewardTitle, int rewardEA, int rewardPrice, int fundingNo) {
+	
+	
+	public Reward(int rewardNo, String rewardTitle, int rewardEA, int rewardPrice, int fundingNo, int rewardCount) {
 		super();
 		this.rewardNo = rewardNo;
 		this.rewardTitle = rewardTitle;
 		this.rewardEA = rewardEA;
 		this.rewardPrice = rewardPrice;
 		this.fundingNo = fundingNo;
-	} 
-	
-	
+		this.rewardCount = rewardCount;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "Reward [rewardNo=" + rewardNo + ", rewardTitle=" + rewardTitle + ", rewardEA=" + rewardEA
-				+ ", rewardPrice=" + rewardPrice + ", fundingNo=" + fundingNo + "]";
+				+ ", rewardPrice=" + rewardPrice + ", fundingNo=" + fundingNo + ", rewardCount=" + rewardCount + "]";
 	}
+
+
 
 	public int getRewardNo() {
 		return rewardNo;
@@ -68,9 +74,13 @@ public class Reward {
 	public void setFundingNo(int fundingNo) {
 		this.fundingNo = fundingNo;
 	}
-	
-	
-	
-	
 
+	public int getRewardCount() {
+		return rewardCount;
+	}
+
+	public void setRewardCount(int rewardCount) {
+		this.rewardCount = rewardCount;
+	}
+	
 }

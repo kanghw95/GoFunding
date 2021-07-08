@@ -1,5 +1,6 @@
 package com.funding.sprout.funding.controller;
 
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,12 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.funding.sprout.admin.service.AdminService;
 import com.funding.sprout.funding.service.FundingService;
 import com.funding.sprout.vo.Funding;
 import com.funding.sprout.vo.Order;
+import com.funding.sprout.vo.OrderDetail;
+import com.funding.sprout.vo.OrderRefund;
 import com.funding.sprout.vo.Reward;
 import com.funding.sprout.vo.User;
 
@@ -119,15 +123,15 @@ public class FundingCtrl {
 			@RequestParam(name = "cheer_pay") String cheer_pay,
 			@RequestParam(name = "cheer_pay_price") int cheer_pay_price,
 			@RequestParam(name = "cheer_pay_EA") String cheer_pay_EA,
+			@RequestParam(name = "userId") String userId,
 			ModelAndView mv) {
 		try {
 			
 			Funding funding = funService.selectOne(fundingno);	
-			List<Reward> rewardlist = funService.selectReward(fundingno);
-			
 			System.out.println("선택한 펀딩 정보 :" + funding);
 			for(int i=0; i<reword.length; i++) {
 			System.out.println("선택한 리워드 정보 :" + reword[i]);
+			System.out.println("선택한 리워드 갯수정보 :" + rewordEA[i]);
 			}
 			mv.addObject("funding_pay_price",funding_pay_price);
 			mv.addObject("funding_pay_rewordEA",funding_pay_rewordEA);
@@ -146,11 +150,12 @@ public class FundingCtrl {
 		}
 		return mv;  // 펀딩 결제 페이지
 	}
-
-	@RequestMapping(value = "funding/fundingresult", method = RequestMethod.POST)
+	
+	// 펀딩 결제 완료 페이지 이동
+	@RequestMapping(value = "funding/fundingresult", method = RequestMethod.POST) 
 	public ModelAndView fundingresult(
 			@RequestParam(name = "reward") String[] reword,
-			@RequestParam(name = "rewardEA") String[] rewardEA,
+			@RequestParam(name = "rewardEA") int[] rewardEA,
 			@RequestParam(name = "rewardPrice") int[] rewardPrice,
 		
 			@RequestParam(name = "cheer",required=false) String cheer,
@@ -167,10 +172,25 @@ public class FundingCtrl {
 			@RequestParam(name = "message") String message,
 			User user,
 			Order order,
+			Reward reward,
+			OrderDetail orderDetail,
+			OrderRefund orderRefund,
+			
 			ModelAndView mv) {
 		try {
+			int orderResult = 0;
+			int orderDetailResult = 0;
+			int orderRefundResult = 0;
+			int rewardCount = 0;
+			int rewardCountIncrease = 0;
+			
+			int rewardStock = 0;
+			int rewardStockChange = 0;
+			
+			// 펀딩 현재 금액 업데이트
 			Funding funding = funService.selectOne(fundingno);	
-			int sumTotalPrice = funService.selectTotalPrice(fundingno);
+			int sumTotalPrice =  0;
+			sumTotalPrice = funService.selectTotalPrice(fundingno);
 					
 			System.out.println("선택한 펀딩 정보 :" + funding);
 			System.out.println("선택한 펀딩 현재금액  :" + sumTotalPrice);
@@ -181,15 +201,15 @@ public class FundingCtrl {
 			funding.setCurrentprice(sumTotalPrice);
 			funding.setFundingno(fundingno);
 			
-			int sumTotalPriceResult = funService.priceUpdate(funding);
+			int sumTotalPriceResult = funService.priceUpdate(funding); 
 			System.out.println("주문후 합계금액 결과는  :" + sumTotalPriceResult);
-			int result = 0;
 			
-			user.setUserId(userId); // vo에 아이디를 넣음
+			user.setUserId(userId);
 			user.setUserAddress(userAddr);
 			List<User> searchId = adService.selectUserId(user); // 아이디로 검색한 리스트 가져오기
 			
-			order.setDeliveryAddr(userAddr);
+			// 주문 테이블 입력
+			order.setDeliveryAddr(userAddr); 
 			order.setId(userId);
 			order.setOrderTotalPrice(totalPrice);
 			if(paycat.equals("카드 간편")) {
@@ -202,8 +222,65 @@ public class FundingCtrl {
 			order.setFundingNo(fundingno);
 			order.setDeliveryMessage(message);
 			
-			result = funService.insertOrders(order);
-			System.out.println("주문 입력 결과 "+ result);
+			orderResult = funService.insertOrders(order);
+			System.out.println("주문 입력 결과 "+ orderResult);
+			
+			
+			// 리워드 수량 변경
+			for(int i=0; i<reword.length; i++) { 
+				if(reword[i] == null || reword[i].isEmpty()) {
+					break;
+				}
+				
+				System.out.println(reword[i].replaceAll("(^\\p{Z}+|\\p{Z}+$)",""));
+				System.out.println(rewardEA[i]);
+				System.out.println(fundingno);
+				
+				reward.setRewardTitle(reword[i].replaceAll("(^\\p{Z}+|\\p{Z}+$)",""));
+				reward.setFundingNo(fundingno);
+	
+				rewardStock = funService.rewardStock(reward);
+				
+				//주문 상세 입력 시작
+				orderDetail.setOrderNo(funService.selectOrderNo(order));
+				orderDetail.setRewardNo(funService.selectRewardNo(reward));
+				orderDetail.setRewardCount(rewardEA[i]);
+				orderDetail.setRewardPrice(rewardPrice[i]);
+				if(paycat.equals("카드 간편")) {
+					orderDetail.setOrderStatus('1');
+				}else {
+					orderDetail.setOrderStatus('0');
+				}
+				System.out.println("주문번호는 ="+orderDetail.getOrderNo());
+				System.out.println("리워드 번호는 ="+orderDetail.getRewardNo());
+				orderDetailResult = funService.insertOrdersDetail(orderDetail);
+				System.out.println("주문상세 입력결과는 = " + orderDetailResult);
+				// 주문 상세 입력 끝
+				
+				int renewRewardStock = rewardStock - rewardEA[i];
+				System.out.println("리워드의 현재 수량은" + rewardStock + "주문 수량은" + rewardEA[i] + "남은 수량은 " + renewRewardStock);
+				System.out.println("리워드 이름" + reword[i] +"리워드 남은 개수" + renewRewardStock);
+				
+				reward.setRewardEA(renewRewardStock);
+				
+				rewardStockChange = funService.rewardStockChange(reward);
+				
+				if(rewardStockChange >0) {
+					System.out.println("리워드 수량변경 정상적으로 완료");
+				}else {
+					System.out.println("리워드 수량변경 중 오류 발생");
+				}
+				reward.setRewardNo(orderDetail.getRewardNo());
+				rewardCount = funService.rewardCount(reward);
+				System.out.println("리워드 참가 인원은 =" + rewardCount);
+				int Count = rewardCount + 1;
+				
+				reward.setRewardCount(Count);
+				rewardCountIncrease = funService.rewardCountIncrease(reward);
+				System.out.println("리워드 참가인원 변경 결과 =" + rewardCountIncrease);
+			}
+			
+			
 			mv.addObject("funding", funding);
 			mv.addObject("searchId", searchId);
 			
@@ -224,6 +301,40 @@ public class FundingCtrl {
 			mv.setViewName("errorPage");
 		}
 		return mv;  // 펀딩 결제완료 페이지
+	}
+	
+	// 중복 주문 검사
+	@ResponseBody
+	@RequestMapping(value = "funding/orderCheck", method = RequestMethod.POST, produces = "application/text; charset=utf-8")  
+	public String ordersCheck(
+			@RequestParam(name = "userId") String userId,
+			@RequestParam(name = "fundingno") int fundingno,
+			Order orders
+			) {
+	
+			String Check = null;
+			int ordersCheck = 0;
+		try {
+			orders.setFundingNo(fundingno);
+			orders.setId(userId);
+			
+			ordersCheck= funService.selectOrderCheck(orders);
+
+			
+			if(ordersCheck > 0) {
+				System.out.println("result : " + ordersCheck);
+				Check = "중복 주문";
+			}else {
+				System.out.println("result : " + ordersCheck);
+				Check = "주문 가능";
+			}
+			System.out.println("Check : " + Check);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Check;
 	}
 	
 	@RequestMapping(value = "funinsert", method = RequestMethod.GET)
