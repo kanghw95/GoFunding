@@ -15,13 +15,11 @@
 </head>
 
 <style>
-.board {
+/* .board {
 	position: absolute;
-	top: 300px;
-	left: 300px;
-} 
-
-
+	top: 200px;
+	left: 150px;
+} */
 </style>
 
 <body>
@@ -32,7 +30,7 @@
 		<h1 id=title>자유게시판</h1>
 	</div>
 
-	<form action="boardUpdate" method="POST">
+	<form action="update2" method="POST">
 		<input type="hidden" name="boardNo" value="${data.boardNo }" />
 		
 		<table class="board">
@@ -50,9 +48,9 @@
 			</tr>
 			
 			<tr>
-				<td colspan="2"><input type="button" id="writebtn"
-					name="writebtn" value="저장" /> <input type="button" value="취소"
-					onclick="history.back(-1)" /></td>
+				<td colspan="2">
+				<input type="button" id="writebtn" name="writebtn" value="저장" />
+				<input type="button" value="취소" onclick="history.back(-1)" /></td>
 			</tr>
 		</table>
 	</form>

@@ -1,6 +1,5 @@
 package com.funding.sprout.comment.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -31,21 +30,7 @@ public class CommentDao {
 		return sqlSession.update("Comment.CommentUpdate", cm);	
 	}
 	
-	
-	
-	
-	
-	
-	
-
-
-	public int CommentCount() { //댓글 수 조회
-		return 0;
-		
-	}
-
-	public ArrayList<Comment> CommentByPage(){ // 페이지 조회
-		return null;
-		
+	public int CommentCount(Comment cm) { //댓글 수 조회
+		return sqlSession.selectOne("Comment.CommentCount", cm); 		
 	}
 }

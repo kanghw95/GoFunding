@@ -102,7 +102,6 @@ button{
 						<div id="cmtcount">
 							<div id="date">${data.boardDate }</div>
 							<div id="boardcnt">${data.boardCnt }</div>
-
 						</div>
 					</div>
 
@@ -194,10 +193,10 @@ button{
 				<br><br>
 				<div class="page">
 				
-					<c:url var="boardList" value="boardList">
+					<c:url var="list" value="list">
 						<c:param name="page" value="${currentPage}" />
 					</c:url>
-					<a href="${boardList}">목록</a>
+					<a href="${list}">목록</a>
 				</div>
 			</div>
 		</div>
@@ -260,7 +259,7 @@ button{
 				return false;
 			} 
 			var frm = document.getElementById("frmUpdate");
-			frm.action = "bRewrite";
+			frm.action = "update";
 			frm.method = "post";
 			frm.submit();
 				}else { // 취소누르면
@@ -289,7 +288,7 @@ button{
 				return false;	
 			}
 				var frm = document.getElementById("frmUpdate");
-				frm.action = "boardDelete";
+				frm.action = "delete";
 				frm.method = "post";
 				frm.submit();
 			}else { // 취소누르면
@@ -363,7 +362,7 @@ button{
 							commentHtml += item.cmtContent;
 						commentHtml += '</div>';
 						commentHtml += '<div class="cmtTextArea fix">';
-							commentHtml += '<textarea id="fixcomment"></textarea>';
+							commentHtml += '<textarea id="fixcomment" rows="3" cols="90"></textarea>';
 						commentHtml += '</div>';
 						commentHtml += '<hr>';
 					commentHtml += '</td>';
@@ -384,7 +383,6 @@ button{
 	 		$(".comment-modifyBtn").click(commentModify);
 		}
 		
-
 		$("#comment-writebtn").click(function() { // 댓글쓰기			
 			var comment = $("#comment-write").val();
 			
@@ -419,6 +417,37 @@ button{
 		let cmtNo = 0;
 		let comment="";
 		
+ 		function commentDelete() { // 댓글 삭제
+			var delete2 = confirm("댓글 삭제하시겠습니까?");
+			console.log("삭제");
+			var sessionUserId = '${sessionScope.user.userId}'; // 현재 로그인한 아이디
+
+			thisTrElement = $(this).parents("tr");
+  			thisTrNextElement = $(this).parents("tr").next();
+			var Id = thisTrElement.find(".cmtWriteId").text(); // 댓글 쓴 사람 아이디
+  			cmtNo = thisTrElement.find(".cmtNo").val(); // 댓글 번호
+			
+			if(delete2){ // 확인누르면
+				if (sessionUserId == 'null' || sessionUserId == '' || sessionUserId != Id) {
+					alert("다른사람이 쓴 댓글은 삭제할 수 없습니다.");
+					return false;
+				}
+				$.ajax({
+					url : "comdelete",
+					type : "POST",
+					data : {
+						cmtNo : cmtNo,
+						boardNo : '${data.boardNo }'
+					},
+					dataType : "JSON",
+					success : displayCommentList,
+					error : function(e){
+						alert(e);
+					}
+				});
+			}
+		}
+		
  		function commentModify() { // 댓글 수정
   			var modify2 = confirm("댓글 수정하시겠습니까?");
   				
@@ -427,8 +456,9 @@ button{
   			thisTrElement = $(this).parents("tr");
   			thisTrNextElement = $(this).parents("tr").next();
   			var Id = thisTrElement.find(".cmtWriteId").text(); // 댓글 쓴 사람 아이디
-  			cmtNo = thisTrElement.find(".cmtNo").val();
-  			comment = $.trim(thisTrNextElement.find(".cmtTextArea.normal").text());
+  			cmtNo = thisTrElement.find(".cmtNo").val(); // 댓글 번호
+  			
+  			comment = $.trim(thisTrNextElement.find(".cmtTextArea.normal").text()); // 댓글 내용
 
 	 		if(modify2){ // 확인누르면
 				if (sessionUserId == 'null' || sessionUserId == '' || sessionUserId != Id) {
@@ -459,7 +489,6 @@ button{
   				}
 			}
 		}
-
  		function commentModifyFixed(cmtNo, comment) {
  			//수정완료 누르면 
 			$.ajax({
@@ -477,36 +506,6 @@ button{
 				}
 			});
  		}
- 		function commentDelete() { // 댓글 삭제
-			var delete2 = confirm("댓글 삭제하시겠습니까?");
-			console.log("삭제");
-
-			
-			var sessionUserId = '${sessionScope.user.userId}'; // 현재 로그인한 아이디
-			var cmtWriteIdDiv = $(this).parents("tr").find(".cmtWriteId");
-			var Id = cmtWriteIdDiv.text(); // 댓글 쓴 사람 아이디
-			cmtNo = thisTrElement.find(".cmtNo").val();
-//			var cmtNo = $(this).next().val();
-			if(delete2){ // 확인누르면
-				if (sessionUserId == 'null' || sessionUserId == '' || sessionUserId != Id) {
-					alert("다른사람이 쓴 댓글은 삭제할 수 없습니다.");
-					return false;
-				}
-				$.ajax({
-					url : "comdelete",
-					type : "POST",
-					data : {
-						cmtNo : cmtNo,
-						boardNo : '${data.boardNo }'
-					},
-					dataType : "JSON",
-					success : displayCommentList,
-					error : function(e){
-						alert(e);
-					}
-				});
-			}
-		}
 	});   // on load 되면
 	</script>
 	</div>

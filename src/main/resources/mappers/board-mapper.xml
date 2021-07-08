@@ -9,6 +9,7 @@
 		<result column="FREECNT" property="boardCnt" />
 		<result column="ID" property="boardId" />
 		<result column="CNT" property="likecnt"/>
+		<result column="CMT" property="cmt"/>		
 	</resultMap>
 
 	<!-- 게시글 목록 -->
@@ -41,8 +42,7 @@
 	<select id="selectList" resultMap="resultBoard">
 	SELECT B.*,C.CNT
 	FROM BULLETINEBOARD B
-	LEFT OUTER JOIN (SELECT count(*) as CNT,FREENO FROM BULLETINLIKE group by
-	FREENO) C
+	LEFT OUTER JOIN (SELECT count(*) as CNT,FREENO FROM BULLETINLIKE group by FREENO) C
 	ON B.FREENO = C.FREENO
 	ORDER BY B.FREENO DESC
 	</select>
@@ -76,6 +76,17 @@
 	<select id="likecnt" parameterType="int" flushCache="true" statementType="PREPARED" resultType="int">
 		SELECT count(*) FROM BULLETINLIKE WHERE FREENO = #{boardNo}
 	</select>
+	
+	<!-- 댓글 수 조회 -->
+	<select id="CommentCount" resultType="int">
+		SELECT C.CMT 
+		FROM BULLETINEBOARD B
+		LEFT OUTER JOIN(SELECT COUNT(*) as CMT ,FREENO FROM BULLETINECOMMENT group by FREENO) C
+		ON B.FREENO = C.FREENO
+		ORDER BY B.FREENO DESC
+	</select>
+	
+	
 	
 	
 	

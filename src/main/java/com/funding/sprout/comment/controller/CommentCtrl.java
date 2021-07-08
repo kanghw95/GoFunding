@@ -47,14 +47,12 @@ public class CommentCtrl {
 	@RequestMapping(value = "comdelete", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String CommentDelete(Comment cm, HttpSession session) { // 댓글 삭제
-		System.out.println("삭제페이지넘어오기");
 		String result = "";
 		try{
 			String boardId = ((User)session.getAttribute("user")).getUserId(); // 아이디
 			cm.setId(boardId);
 			
 			comService.CommentDelete(cm); // 댓글 삭제할 댓글 번호
-			System.out.println("cm : " + cm);
 			
 			int boardNo = cm.getBoardNo();
 			List<Comment> commentList = comService.CommentAll(boardNo); // 댓글 목록 리스트

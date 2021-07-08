@@ -36,34 +36,37 @@ public class BoardCtrl {
 	public static final int LIMIT = 10;
 	private static final Logger logger = LoggerFactory.getLogger(BoardCtrl.class);
 
-	@RequestMapping(value = "boardList", method = RequestMethod.GET)
-	public ModelAndView boardList( // 게시글 목록
-//			@RequestParam(name = "boardNo") int boardNo,
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public ModelAndView list( // 게시글 목록
 			@RequestParam(name = "page", defaultValue = "1") int page,
-			@RequestParam(name = "keyword", required = false) String keyword, ModelAndView mv) {
-
-		logger.info("boardList()");
+			@RequestParam(name = "keyword", required = false) String keyword, ModelAndView mv, Board vo) {
+		logger.info("list()");
 		try {
-			int currentPage = page; // 한 페이지당 출력할 목록 갯수
-			int listCount = boService.totalCount();
-			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
-//			int likecnt = 0; // 추천수
 			
-			if (keyword != null && !keyword.equals(""))
-				mv.addObject("list", boService.searchList(keyword)); // TODO
-			else {
+			
+			int currentPage = page; // 한 페이지당 출력할 목록 갯수
+			mv.addObject("currentPage", currentPage);
+			
+			int listCount = boService.totalCount(); // 게시글 목록
+			mv.addObject("listCount", listCount);
+			
+			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+			mv.addObject("maxPage", maxPage);
+			
+			if (keyword != null && !keyword.equals("")) {
+				mv.addObject("list", boService.searchList(keyword));
+				List<Board> setcmt = boService.CommentCount(vo.getCmt()); // 리스트에 보여줄 댓글수
+				mv.addObject("cmt",setcmt);
+			}else {
 				ArrayList<Board> aaa = new ArrayList<Board>(boService.selectList(currentPage, LIMIT));
 				mv.addObject("list", aaa);
+				
+				List<Board> setcmt = boService.CommentCount(vo.getCmt()); // 리스트에 보여줄 댓글수
+				mv.addObject("cmt",setcmt);
+				System.out.println(setcmt);
 			}
-			mv.addObject("currentPage", currentPage);
-			mv.addObject("maxPage", maxPage);
-			mv.addObject("listCount", listCount);
-			logger.info("boardList()aaaa: ");
-			
-//			likecnt = boService.likecnt(boardNo); // 추천수
-//			mv.addObject("likecnt", likecnt);
-			
-			mv.setViewName("board/boardList");
+			logger.info("list()aaaa: ");
+			mv.setViewName("board/list");
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", e.getMessage());
@@ -72,48 +75,47 @@ public class BoardCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "boardDetail", method = RequestMethod.GET)
-	public ModelAndView boardDetail(ModelAndView mv, Model model, @RequestParam(name = "boardNo") int boardNo,
-			@RequestParam(name = "page", defaultValue = "1") int page
-			, HttpSession session, Comment cm) { // 게시글 상세보기
-		//	public String boardDetail(ModelAndView mv,Model model, int boardNo) { 
+	@RequestMapping(value = "detail", method = RequestMethod.GET)
+	public ModelAndView detail(ModelAndView mv, @RequestParam(name = "boardNo") int boardNo,
+			@RequestParam(name = "page", defaultValue = "1") int page, HttpSession session, Comment cm) { // 게시글 상세보기
 		// 방법1
-		try {
-			Board data = boService.selectBoard(0, boardNo); // no값넘김 조회수증가
-			int currentPage = page;
-			int likecnt = 0; // 추천수
-			mv.addObject("currentPage", currentPage);
-			mv.addObject("data", data);
+		try {	
 			String boardId = ((User)session.getAttribute("user")).getUserId(); 
 			
-			int isLiked = boService.checklike(boardNo, boardId);    // 좋아요상태 :1, 아니면 :0
-			mv.addObject("isliked", isLiked);   // 좋아요상태 :1, 아니면 :0
+			Board data = boService.selectBoard(0, boardNo); // 조회수증가
+			mv.addObject("data", data);
 			
-			likecnt = boService.likecnt(boardNo); // 추천수
+			int currentPage = page;
+			mv.addObject("currentPage", currentPage);
+			
+			int isLiked = boService.checklike(boardNo, boardId);    // 좋아요상태 :1, 아니면 :0
+			mv.addObject("isliked", isLiked);
+			
+			int likecnt = boService.likecnt(boardNo); // 추천수
 			mv.addObject("likecnt", likecnt);
+		
+		
 			
 			List<Comment> commentList = comService.CommentAll(boardNo); // 댓글 목록 리스트
-			mv.addObject("commentList", commentList);
-			
-			mv.setViewName("board/boardDetail");
-		} catch (Exception e) {
+			mv.addObject("commentList", commentList);	
+			} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");
-		}
+			}	
 		return mv;
 		// 방법2
 //		model.addAttribute("data", data);
-//		return "board/boardDetail";	 
+//		return "board/detail";	 
 	}
 
-	@RequestMapping(value = "boardWrite", method = RequestMethod.GET)
+	@RequestMapping(value = "write", method = RequestMethod.GET)
 	public String write() { // write로 이동
-		return "board/boardWrite";
+		return "board/write";
 	}
 
-	@RequestMapping(value = "boardInsert", method = RequestMethod.POST)
-	public ModelAndView boardInsert(Board b, @RequestParam(name = "upfile", required = false) MultipartFile report,
+	@RequestMapping(value = "insert", method = RequestMethod.POST)
+	public ModelAndView insert(Board b, @RequestParam(name = "upfile", required = false) MultipartFile report,
 			@RequestParam("boardTitle") String boardtitle, @RequestParam("boardContent") String boardcotent,
 			@RequestParam("userid") String userid, HttpServletRequest request, ModelAndView mv, Board vo) { // 게시글 등록
 		int result = 0;
@@ -126,7 +128,7 @@ public class BoardCtrl {
 		
 		try {
 			if (result != 0) {
-				mv.setViewName("redirect:boardList");
+				mv.setViewName("redirect:list");
 			} else {
 				mv.addObject("msg", "글 등록 실패");
 				mv.setViewName("errorPage");
@@ -139,14 +141,13 @@ public class BoardCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "boardDelete")
-	public ModelAndView boardDelete(@RequestParam(name = "boardNo") int boardNo,
+	@RequestMapping(value = "delete")
+	public ModelAndView delete(@RequestParam(name = "boardNo") int boardNo,
 			@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) { // 게시글 삭제
 		try {
-//			Board b = boService.selectBoard(1, boardNo);
 			boService.deleteBoard(boardNo);
 			mv.addObject("currentPage", page);
-			mv.setViewName("redirect:boardList");
+			mv.setViewName("redirect:list");
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", e.getMessage());
@@ -155,17 +156,17 @@ public class BoardCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "bRewrite", method = RequestMethod.POST)
+	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String boardRenew(int boardNo, Model model) { // 게시글 수정 jsp 이동
 		Board data = boService.detail(boardNo);
 		model.addAttribute("data", data);
-		return "board/boardUpdate";
+		return "board/update";
 	}
 
-	@RequestMapping(value = "boardUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "update2", method = RequestMethod.POST)
 	public String boardUpdate(Board b) { // 게시글 수정
 		boService.updateBoard(b);
-		return "redirect:boardList";
+		return "redirect:list";
 	}
 
 	@RequestMapping(value = "clickLike", method = RequestMethod.POST)
@@ -183,7 +184,6 @@ public class BoardCtrl {
 			} else {
 				}
 			likecnt = boService.likecnt(boardNo); // 총 추천수
-			//mv.addObject("likecnt", likecnt);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

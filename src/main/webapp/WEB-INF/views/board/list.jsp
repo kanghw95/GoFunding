@@ -5,29 +5,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판</title>
+<title>자유게시판</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
+#list{
+	width : 50px;
+	height : 50px;
+}
+
 #option{
 	float:right;
 	position: absolute;
-	right:500px;
-	top: 80px;
+	right:100px;
+	top: 200px;
 }
 #writeBtn2{
 	float:right;
 	position: absolute;
-	right: 500px;
-	top : 150px;
+	right: 100px;
+	top : 250px;
 }
-
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
+	
 	<div class="wrapper">
-
+	
+	<img src="../resources/img/admin/list.png" id="list">
 	<h1>자유게시판</h1>
+	
 	<select id="option">
 		<option value="">자유게시판</option>
 		<option value="">후기게시판</option>
@@ -70,12 +77,20 @@
 		</c:if>
 
 		<c:if test="${listCount ne 0 }">
-			<c:forEach var="vo" items="${list}">
+			<c:forEach var="vo" items="${list}" varStatus="status">
 				<tr>
 					<td align="center">${vo.boardNo }</td>
-					<td align="left"><a href="boardDetail?boardNo=${vo.boardNo }&page=${currentPage}">&nbsp;${vo.boardTitle }</a></td>
-					<td align="center">${vo.boardId }</td>
+					<td align="left"><a href="detail?boardNo=${vo.boardNo }&page=${currentPage}" class="title">${vo.boardTitle }</a>
+					&nbsp;
+					<c:if test="${cmt[status.index] ne null }">
+					<small>(${cmt[status.index] })</small>
+					</c:if>
+					<c:if test="${cmt[status.index] eq null}">
+					<small></small>
+					</c:if>
+					</td>
 					
+					<td align="center">${vo.boardId }</td>
 					<td align="center">${vo.boardCnt }</td>
 					<td align="center">${vo.likecnt }</td> <!-- 추천 -->
 					<td align="center">${vo.boardDate }</td>
@@ -83,22 +98,21 @@
 			</c:forEach>
 		</c:if>
 		
-		
 		<!-- 앞 페이지 번호 처리 -->
 		<tr align="center" height="20">
 			<td colspan="5"><c:if test="${currentPage <= 1}"> < </c:if>
 				<c:if test="${currentPage > 1}">
-					<c:url var="blistST" value="boardList">
+					<c:url var="blistST" value="list">
 						<c:param name="page" value="${currentPage-1}" />
 					</c:url>
 					<a href="${blistST}"> < </a>
 				</c:if> <!-- 끝 페이지 번호 처리 --> <c:set var="endPage" value="${maxPage}" /> 
 				<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
 					<c:if test="${p eq currentPage}">
-						<font color="red" size="4"><b>[${p}]</b></font>
+						<font color="red" size="4"><b>${p}</b></font>
 					</c:if>
 					<c:if test="${p ne currentPage}">
-						<c:url var="blistchk" value="boardList">
+						<c:url var="blistchk" value="list">
 							<c:param name="page" value="${p}" />
 						</c:url>
 						<a href="${blistchk}">${p}</a>
@@ -106,7 +120,7 @@
 				</c:forEach> 
 				<c:if test="${currentPage >= maxPage}"> > </c:if> 
 				<c:if test="${currentPage < maxPage}">
-					<c:url var="blistEND" value="boardList">
+					<c:url var="blistEND" value="list">
 						<c:param name="page" value="${currentPage+1}" />
 					</c:url>
 					<a href="${blistEND}"> > </a>
@@ -130,13 +144,12 @@
 			}
 			
 			var frm = document.getElementById("writeBtn2");
-			frm.action = "boardWrite";
+			frm.action = "write";
 			frm.method = "get";
 			frm.submit();
-//			location.href = "boardWrite";
-		})
+//			location.href = "write";
+		});
 	</script>
-	
 	</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>

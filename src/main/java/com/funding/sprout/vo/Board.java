@@ -14,81 +14,67 @@ public class Board {
 	private int boardCnt; // 글 조회수
 	private String boardId; // 글 작성자
 	private int likecnt; // 추천수
+	private int cmt; // 리스트에 보일 댓글 수
 	public Board() {
 
 	}
-
-	public Board(int boardNo, String boardTitle, String boardContent, Date boardDate, int boardCnt, String boardId, int likecnt) {
-		super();
-		this.boardNo = boardNo;
-		this.boardTitle = boardTitle;
-		this.boardContent = boardContent;
-		this.boardDate = boardDate;
-		this.boardCnt = boardCnt;
-		this.boardId = boardId;
-		this.likecnt = likecnt;
-	}
-
+	
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", boardDate=" + boardDate + ", boardCnt=" + boardCnt + ", boardId=" + boardId + ", likecnt=" + likecnt + "]";
+				+ ", boardDate=" + boardDate + ", boardCnt=" + boardCnt + ", boardId=" + boardId + ", likecnt="
+				+ likecnt + ", cmt=" + cmt + "]";
 	}
 
 	public int getBoardNo() {
 		return boardNo;
 	}
-
 	public void setBoardNo(int boardNo) {
 		this.boardNo = boardNo;
 	}
-
 	public String getBoardTitle() {
 		return boardTitle;
 	}
-
 	public void setBoardTitle(String boardTitle) {
 		this.boardTitle = boardTitle;
 	}
-
 	public String getBoardContent() {
 		return boardContent;
 	}
-
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
-
 	public Date getBoardDate() {
 		return boardDate;
 	}
-
 	public void setBoardDate(Date boardDate) {
 		this.boardDate = boardDate;
 	}
-
 	public int getBoardCnt() {
 		return boardCnt;
 	}
-
 	public void setBoardCnt(int boardCnt) {
 		this.boardCnt = boardCnt;
 	}
-
 	public String getBoardId() {
 		return boardId;
 	}
-
 	public void setBoardId(String boardId) {
 		this.boardId = boardId;
 	}
-
 	public int getLikecnt() {
 		return likecnt;
 	}
-
 	public void setLikecnt(int likecnt) {
 		this.likecnt = likecnt;
 	}
+	public int getCmt() {
+		return cmt;
+	}
+	public void setCmt(int cmt) {
+		this.cmt = cmt;
+	}
+
+
 
 }

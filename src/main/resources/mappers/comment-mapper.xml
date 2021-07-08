@@ -33,13 +33,5 @@
 		UPDATE BULLETINECOMMENT SET FREECMTCONTENT = #{cmtContent} WHERE FREECMTNO = #{cmtNo}
 	</update>
 	
-	
-	
-	
-	<!-- 댓글 수 조회 -->
-	
-	<!-- 페이지 조회 -->
-	
-	
-	
+
 </mapper>

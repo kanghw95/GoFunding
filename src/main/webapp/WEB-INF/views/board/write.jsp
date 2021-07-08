@@ -15,11 +15,11 @@
 </head>
 
 <style>
-.board {
+/* .board {
 	position: absolute;
-	top: 300px;
-	left: 300px;
-}
+	top: 200px;
+	left: 150px;
+} */
 </style>
 
 <body>
@@ -31,9 +31,8 @@
 	%>
 	<div>
 		<h1 id=title>자유게시판</h1>
-	</div>
-	
-		<form id="boardInsert">
+
+		<form id="insert" >
 			<input type="hidden" name="userid" value="<%=user.getUserId()%>">
 	
 
@@ -94,14 +93,15 @@
 							} else {
 								return false;
 							}
-							var frm = document.getElementById("boardInsert");
-							frm.action = "boardInsert";
+							var frm = document.getElementById("insert");
+							frm.action = "insert";
 							frm.method = "post";
 							frm.submit();
 						});
 			})
 		</script>
 	</div>
+		</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
 </html>

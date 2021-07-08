@@ -41,8 +41,6 @@ public class BoardDao {
 	public List<Board> selectList(int startPage, int limit) { // 번호 정렬
 		int startRow = (startPage - 1) * limit;
 		RowBounds row = new RowBounds(startRow, limit);
-		System.out.println("startRow:"+ startRow);
-		System.out.println("limit:"+ limit);
 		return sqlSession.selectList("Board.selectList" , null, row);
 	}
 	
@@ -53,10 +51,6 @@ public class BoardDao {
 	public Board selectOne(int boardNo) {
 		return sqlSession.selectOne("Board.selectOne" , boardNo); // 글 가져오기
 	}
-	
-	
-	
-	
 	
 	public int checklike(int boardNo,String userId) { // 게시글 추천 여부 검사
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -83,6 +77,9 @@ public class BoardDao {
 		return sqlSession.selectOne("Board.likecnt", boardNo);
 	}
 	
+	public List<Board> CommentCount(int cmt) { // 댓글 수 조회
+		return sqlSession.selectList("Board.CommentCount", cmt);
+	}
 	
 	
 	

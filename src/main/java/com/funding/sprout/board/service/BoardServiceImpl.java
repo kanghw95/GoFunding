@@ -47,7 +47,6 @@ public class BoardServiceImpl implements BoardService {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("Aaa");
 		return result;
 	}
 			
@@ -71,10 +70,8 @@ public class BoardServiceImpl implements BoardService {
 		int result = boDao.checklike(boardNo, userId);
 		
 		if(result == 0) {
-			System.out.println("추천가능");
 		} else {
-			System.out.println("추천불가능");
-		}
+			}
 		return result;
 	}
 
@@ -93,7 +90,10 @@ public class BoardServiceImpl implements BoardService {
 		return boDao.likecnt(boardNo);
 	}
 	
-	
+	@Override
+	public List<Board> CommentCount(int cmt) { // 댓글 수 조회
+		return boDao.CommentCount(cmt);
+	}
 	
 	
 	
@@ -115,6 +115,8 @@ public class BoardServiceImpl implements BoardService {
 	public int ReportSend(Board b) { // 게시글 신고
 		return boDao.insertBoard(b);
 	}
+
+
 
 
 }

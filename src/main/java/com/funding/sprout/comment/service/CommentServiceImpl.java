@@ -35,25 +35,8 @@ public class CommentServiceImpl implements CommentService {
 		return comDao.CommentUpdate(cm);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	@Override
-	public int CommentCount() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int CommentCount(Comment cm) { // 댓글 수 조회
+		return comDao.CommentCount(cm);
 	}
-
-	@Override
-	public ArrayList<Comment> CommentByPage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
