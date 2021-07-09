@@ -203,8 +203,8 @@ body {
 		console.log(data);
 		$.each(data, function(i, list) {
 			cv += "<tr class='cmtList'>"
-			cv += "<td>" + data[i].CmtContent + "</td>"
-			cv += "<td class='replyDate'>" + data[i].CmtDate + "</td>"
+			cv += "<td>" + data[i].cmtContent + "</td>"
+			cv += "<td class='replyDate'>" + data[i].cmtDate + "</td>"
 			cv += "</tr>"
 		});
 		$("#cmt").append(cv);
