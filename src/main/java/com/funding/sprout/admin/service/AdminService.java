@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.funding.sprout.vo.Admin;
 import com.funding.sprout.vo.Board;
+import com.funding.sprout.vo.Comment;
 import com.funding.sprout.vo.Criteria;
 import com.funding.sprout.vo.Faq;
 import com.funding.sprout.vo.Notifiy;
@@ -40,6 +41,8 @@ public interface AdminService {
 	public List<Board> noticeList(Criteria cri) throws Exception; // 공지사항 조회
 	
 	public List<Qna> qnaList(Criteria cri) throws Exception; // Qna 조회
+	
+	public List<Qna> qnaReply(Qna qna) throws Exception; // QnaReply 조회
 	
 	public int freeBoardCount() throws Exception; // 자유 게시판 글 수 조회
 	
@@ -111,18 +114,44 @@ public interface AdminService {
 
 	public List<Qna> getQNAByPage(); // qna 리스트 조회
 
-
-	public int qnaInsert(); // qna 답변 쓰기
-
+	public int qnaInsert(Comment cmt) throws Exception; // Qna 답글 추가
+	
+	public List<Comment> qnaCmt(Comment cmt) throws Exception; // qna 답글 조회
+	
+	public List<Comment> qnaOne(Comment cmt) throws Exception; // qna 답글 하나만 조회
+	
+	public int replyUpdate(Comment cmt) throws Exception; // qna 답글 수 추가
+	
+	public int replyCount(Comment cmt) throws Exception; // qna 특정 답글 조회
 
 	public int getQNACount(); // qna수 조회
 
-
 	public int qnaUpdate();// qna 답변수정
 
+	public List<Report> report() throws Exception; // 전체 신고내역 조회
+	
+	public List<Report> bReport(Report rpt) throws Exception; // 게시글 신고 상세 조회
+	
+	public List<Report> cReport(Report rpt) throws Exception; // 댓글 신고 상세 조회
+	
+	public int userStop(User user) throws Exception; // 회원 정지일 설정
+	
+	public int bReportState(Report rpt) throws Exception; // 게시글 신고 상태 변경
+	
+	public int cReportState(Report rpt) throws Exception; // 댓글 신고 상태 변경
+	
+	public int reportCnt(User user) throws Exception; // 회원 정지 횟수 추가
+	
+	public int reportStop() throws Exception; // 회원 정지 해제
+	
+	public List<Report> reportSelect(Report rpt) throws Exception; // 신고 내역 검색
+	
 	public List<Faq> getFAQByPage();// faq 리스트 조회
 
-
+	public void deleteCReport(String reportNo); // 댓글 신고내역 삭제
+	
+	public void deleteBReport(String reportNo); // 게시글 신고내역 삭제
+	
 	public int getFAQCount(); // 공지사항 수 조회
 
 
@@ -153,5 +182,6 @@ public interface AdminService {
 
 
 	public int getReportCount(); // 신고 리스트 수  조회
+
 
 }

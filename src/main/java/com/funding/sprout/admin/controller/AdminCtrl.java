@@ -1,5 +1,10 @@
 package com.funding.sprout.admin.controller;
 
+
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,14 +17,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.funding.sprout.admin.service.AdminService;
 import com.funding.sprout.vo.Board;
+import com.funding.sprout.vo.Comment;
 import com.funding.sprout.vo.Criteria;
 import com.funding.sprout.vo.PageMaker;
 import com.funding.sprout.vo.Qna;
+import com.funding.sprout.vo.Report;
 import com.funding.sprout.vo.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -803,7 +811,7 @@ public class AdminCtrl {
 	}
 	
 	@RequestMapping(value = "qna", method = RequestMethod.GET)
-	public String qndList(Model model, Criteria cri) throws Exception { // qna 리스트 조회
+	public String qndList(Comment cmt, Model model, Criteria cri) throws Exception { // qna 리스트 조회
 		
 		List<Qna> qnaList = adService.qnaList(cri); // Qna 리스트 가져오기
 		int qnaCount = adService.qnaCount(); // Qna 총 수 가져오기
@@ -816,28 +824,287 @@ public class AdminCtrl {
 		pageMaker.setCri(cri);
 		System.out.println(pageMaker.getCri());
 		pageMaker.setTotalCount(adService.qnaCount());
-		
 		model.addAttribute("pageMaker", pageMaker);
 		
 		return "admin/qna";
 	}
 	
-	@RequestMapping(value = "qnaReply", method = RequestMethod.GET)
-	public String qnaReply(Model model, HttpServletRequest request) throws Exception {
+	@RequestMapping(value = "qnaReply", method = RequestMethod.POST)
+	public String qnaReply(Comment cmt, Qna qna, Model model, HttpServletRequest request) throws Exception {
+		String qNo = request.getParameter("qna");
+		int qnaCount = adService.qnaCount(); // Qna 총 수 가져오기
+		System.out.println("큐엔에이 번호는 : "+ qNo);
+		System.out.println("문의내역 수 : " + qnaCount);
 		
-		String[] qnaNo = request.getParameterValues("qnaNo");
-		System.out.println("qnaNo : " + qnaNo[0]);
-		System.out.println("qnaNo : " + qnaNo[1]);
-		System.out.println("qnaNo : " + qnaNo[2]);
+		qna.setqNo(qNo);
+		String getqNo = qna.getqNo();
+		System.out.println("getNo : " + getqNo);
+		
+		List<Qna> qnaReply = adService.qnaReply(qna);
+		System.out.println("qnaReply : " + qnaReply);
+		model.addAttribute("qnaReply", qnaReply);
+		
+		// 답글 가져오기
+		String no = request.getParameter("qna");
+		int cmtNo = Integer.parseInt(no);
+		System.out.println("답글 글 번호는 : " + cmtNo);
+		
+		cmt.setCmtNo(cmtNo);
+		int getCmtNo = cmt.getCmtNo();
+		System.out.println("mapper로 넘어갈 답글 글 번호는 : " + getCmtNo);
+		List<Comment> replyList = adService.qnaCmt(cmt);
+		System.out.println("replyList : " + replyList);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		String jsonOutput = gson.toJson(replyList);
+		System.out.println("jsonOutput : "+ jsonOutput);
+		
 		return "admin/qnaReply";
 	}
 	
-	@RequestMapping(value = "qnainsert", method = RequestMethod.GET)
-	public String qnaInsert() { // qna 답변 쓰기
-		return "admin/qnaReply";
+	@RequestMapping(value = "printCmt", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String printReply(Comment cmt, HttpServletRequest request) throws Exception { // qna 답변 확인
 		
+		request.setCharacterEncoding("UTF-8");
+		
+		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
+		System.out.println("넘어온 번호 : " + qnaNo);
+		cmt.setCmtNo(qnaNo);
+		int no = cmt.getCmtNo();
+		System.out.println("mapper로 넘어갈 qnaNo 값 : " + no); // 답변 글 번호
+		List<Comment> reply = adService.qnaCmt(cmt);
+		System.out.println("reply : " + reply); // 답변 내용 
+		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		String jsonOutput = gson.toJson(reply);
+		System.out.println("jsonOutput : "+ jsonOutput);
+		
+		
+		return jsonOutput;
+	}
+	
+	@RequestMapping(value = "qnainsert", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String qnaInsert(Comment cmt, Model model, HttpServletRequest request) throws Exception { // qna 답변 쓰기
+		
+		request.setCharacterEncoding("UTF-8");
+		// 답변 입력
+		String tValue = request.getParameter("tValue"); // 답변 내용
+		int qnaNo = Integer.parseInt(request.getParameter("qnaNo")); // 답변 글 번호
+		System.out.println("넘어온 답변 : " + tValue);
+		System.out.println("넘어온 번호 : " + qnaNo);
+		cmt.setCmtContent(tValue);
+		cmt.setCmtNo(qnaNo);
+		String content = cmt.getCmtContent();
+		int no = cmt.getCmtNo();
+		System.out.println("mapper로 넘어갈 Content 값 : " + content); // 답변 내용
+		System.out.println("mapper로 넘어갈 qnaNo 값 : " + no); // 답변 글 번호
+		int insert = adService.qnaInsert(cmt); // 답변 입력
+		System.out.println(insert);		
+
+		// 답변 출력
+		cmt.setCmtNo(qnaNo);
+		List<Comment> reply = adService.qnaOne(cmt);
+		System.out.println("reply : " + reply); // 답변 내용 
+		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		String jsonOutput = gson.toJson(reply);
+		System.out.println("jsonOutput : "+ jsonOutput);
+		
+		// 답변 수 추가
+		System.out.println("답변 수 추가 : " + qnaNo);
+		cmt.setCmtNo(qnaNo);
+		int replyCnt = adService.replyUpdate(cmt);
+		System.out.println("답변 수 추가 mapper : " + replyCnt);
+		
+		return jsonOutput;
+	}
+	
+	@RequestMapping(value = "report", method = RequestMethod.GET) 
+	public String report(Model model) throws Exception { // 모든 신고내역 조회
+		
+		List<Report> report = adService.report();
+		System.out.println("report : " + report);
+		model.addAttribute("report", report); // 신고내역 jsp로
+		
+		return "admin/report";
+	}
+	
+	@RequestMapping(value = "reportDetail", method = RequestMethod.POST)
+	public String reportDetail(Report rpt, Model model, HttpServletRequest request) throws Exception {
+		
+		String title = request.getParameter("title");
+		int no = Integer.parseInt(request.getParameter("no"));
+		System.out.println("title : " + title);
+		System.out.println("no : " + no);
+		rpt.setReportNo(no);
+		if (title == "") {
+			System.out.println("댓글입니다.");
+			List<Report> crpt = adService.cReport(rpt);
+			System.out.println("댓글 신고 내역 : " + crpt);
+			rpt.setReportTitle(title);
+			model.addAttribute("rDetail", crpt);
+		} else {
+			System.out.println("게시글입니다.");
+			List<Report> brpt = adService.bReport(rpt);
+			System.out.println("게시글 신고 내역 : " + brpt);
+			model.addAttribute("rDetail", brpt);
+		}
+	
+		return "admin/reportDetail";
+	}
+	
+	@RequestMapping(value = "userStop", method = RequestMethod.POST)
+	@ResponseBody
+	public String userStop(User user, Report rpt, HttpServletRequest request) throws Exception {
+		
+		System.out.println("회원 정지 시작");
+		String stopId = request.getParameter("stopId");
+		// 테이블에 날짜 삽입
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.add(Calendar.DATE, 7);
+		String after = format.format(cal.getTime()); // 일주일 뒤 시간
+		String today = format.format(date); // 현재 시간
+		System.out.println("7일 뒤 날짜 : " + after);
+		System.out.println("오늘 날짜 : "	 + today);
+		System.out.println("정지 아이디 : " + stopId);
+		user.setSuspensionStart(today);
+		user.setSuspensionFin(after);
+		user.setUserId(stopId);
+		System.out.println("시작일 : " + user.getSuspensionStart());
+		System.out.println("종료일 : " + user.getSuspensionFin());
+		System.out.println("아이디 : " + user.getUserId());
+		int stop = adService.userStop(user); // mapper
+		System.out.println("정지일 설정 : " + stop);
+		
+		// 회원 정지 횟수 추가
+		int cnt = adService.reportCnt(user);
+		System.out.println("정지 횟수 추가  : " + cnt);
+		
+		// 신고 상태 변경
+		String title = request.getParameter("title");
+		int no = Integer.parseInt(request.getParameter("no"));
+		System.out.println("신고 제목 : " + title);
+		System.out.println("신고 번호 : " + no);
+		if (title == "") {
+			System.out.println("댓글");
+			rpt.setReportNo(no);
+			System.out.println("댓글 신고 번호 : " + rpt.getReportNo());
+			int cmt = adService.cReportState(rpt);
+			System.out.println("댓글 신고 상태 변경 : " + cmt);
+		} else {
+			System.out.println("게시글");
+			rpt.setReportNo(no);
+			System.out.println("게시글 신고 번호 : " + rpt.getReportNo());
+			int board = adService.bReportState(rpt);
+			System.out.println("게시글 신고 상태 변경 : " + board);
+		}
+		
+		return "admin/reportDetail";
 	}
 
+	@RequestMapping(value = "userPass", method = RequestMethod.POST)
+	public String userPass(Report rpt, HttpServletRequest request) throws Exception {
+		
+		String title = request.getParameter("title");
+		int no = Integer.parseInt(request.getParameter("no"));
+		System.out.println("신고 제목 : " + title);
+		System.out.println("신고 번호 : " + no);
+		if (title == "") {
+			System.out.println("댓글");
+			rpt.setReportNo(no);
+			System.out.println("댓글 신고 번호 : " + rpt.getReportNo());
+			int cmt = adService.cReportState(rpt);
+			System.out.println("댓글 신고 상태 변경 : " + cmt);
+		} else {
+			System.out.println("게시글");
+			rpt.setReportNo(no);
+			System.out.println("게시글 신고 번호 : " + rpt.getReportNo());
+			int board = adService.bReportState(rpt);
+			System.out.println("게시글 신고 상태 변경 : " + board);
+		}
+		
+		return "admin/reportDetail";
+	}
+	
+	@RequestMapping(value = "reportSelect", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String reportSelect(Report rpt, HttpServletRequest request) throws Exception { // Qna 특정 글 조회
+		request.setCharacterEncoding("UTF-8");
+		
+		int value = Integer.parseInt(request.getParameter("account"));
+		System.out.println("value" + value);
+		
+		if (value == 1) { 
+			System.out.println("욕설");
+			rpt.setReportType("욕설");
+			System.out.println("Type : " + rpt.getReportType());
+			List<Report> select = adService.reportSelect(rpt);
+			System.out.println("select : " + select);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(select);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		} else if (value == 2) {
+			System.out.println("도배");
+			rpt.setReportType("도배");
+			System.out.println("Type : " + rpt.getReportType());
+			List<Report> select = adService.reportSelect(rpt);
+			System.out.println("select : " + select);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(select);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		} else if (value == 3) {
+			System.out.println("성적발언");
+			rpt.setReportType("성적발언");
+			System.out.println("Type : " + rpt.getReportType());
+			List<Report> select = adService.reportSelect(rpt);
+			System.out.println("select : " + select);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(select);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		} else if (value == 4) {
+			System.out.println("기타");
+			rpt.setReportType("기타");
+			System.out.println("Type : " + rpt.getReportType());
+			List<Report> select = adService.reportSelect(rpt);
+			System.out.println("select : " + select);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(select);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		}
+		
+		return null;
+	}
+	
+	
+	@RequestMapping(value = "reportStop", method = RequestMethod.POST)
+	@ResponseBody
+	public String reportStop() throws Exception {
+		
+		System.out.println("정지 해제");
+		int reportStop = adService.reportStop();
+		System.out.println("정지 해제 된 수" + reportStop);
+		
+		return "admin/userlist";
+	}
+	
+	@RequestMapping(value = "deleteReport", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteReport(Report rpt, HttpServletRequest request) throws Exception {
+		String[] deleteList = request.getParameterValues("reportNo"); // 체크된 유저 번호 리스트에 넣기
+		System.out.println("deleteList 길이 : " + deleteList.length);
+		for (int i = 0; i < deleteList.length; i++) { // for문 사용해서 deleteList[0]부터 삭제
+			System.out.println("deleteList index " + i + " : " + deleteList[i]);
+			adService.userStop(deleteList[i]); // report 번호 검색해서 해당 유저 삭제
+		}
+		return "admin/report";
+	}
+	
 	@RequestMapping(value = "qnaupdate", method = RequestMethod.GET)
 	public ModelAndView qnaUpdate() { // qna 답변수정
 		return null;

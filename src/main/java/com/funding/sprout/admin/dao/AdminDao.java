@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.funding.sprout.vo.Admin;
 import com.funding.sprout.vo.Board;
+import com.funding.sprout.vo.Comment;
 import com.funding.sprout.vo.Criteria;
 import com.funding.sprout.vo.Faq;
 import com.funding.sprout.vo.Qna;
@@ -78,6 +79,10 @@ public class AdminDao {
 	
 	public List<Qna> qnaList(Criteria cri) throws Exception { // Qna 조회
 		return sqlSession.selectList("Admin.selectQna", cri);
+	}
+	
+	public List<Qna> qnaReply(Qna qna) throws Exception { // QnaReply 조회
+		return sqlSession.selectList("Admin.selectQnaReply", qna);
 	}
 	
 	public int freeBoardCount() throws Exception { // 자유 게시판 글 수 조회
@@ -256,6 +261,71 @@ public class AdminDao {
 	
 	public void deleteQna(String qnaNo) { // Qna 글 삭제
 		sqlSession.delete("Admin.deleteQna", qnaNo);
+	}
+	
+	public int qnaInsert(Comment cmt) throws Exception { // Qna 답글 추가
+		return sqlSession.insert("Admin.qnaInsert", cmt);
+	}
+	
+	public List<Comment> qnaCmt(Comment cmt) throws Exception { // Qna 답글 조회
+		return sqlSession.selectList("Admin.qnaCmt", cmt);
+	}
+	
+	public List<Comment> qnaOne(Comment cmt) throws Exception { // Qna 답글 하나만 조회
+		return sqlSession.selectList("Admin.qnaOne", cmt);
+	}
+	
+	public int replyUpdate(Comment cmt) throws Exception { // Qna 답글 수 추가
+		System.out.println("replyUpdate 실행");
+		return sqlSession.update("Admin.replyUpdate", cmt);
+	}
+	
+	public int replyCount(Comment cmt) throws Exception { // Qna 특정 답글 조회
+		return sqlSession.selectOne("Admin.replyCount", cmt); 
+	}
+	
+	public List<Report> report() throws Exception { // 전체 신고내역 조회
+		return sqlSession.selectList("Admin.report");
+	}
+	
+	public List<Report> bReport(Report rpt) throws Exception { // 게시글 신고 상세 조회
+		return sqlSession.selectList("Admin.bReport", rpt);
+	}
+	
+	public List<Report> cReport(Report rpt) throws Exception { // 댓글 신고 상세 조회
+		return sqlSession.selectList("Admin.cReport", rpt);
+	}
+	
+	public int userStop(User user) throws Exception { // 회원 정지일 설정
+		return sqlSession.update("Admin.userStop", user);
+	}
+	
+	public int bReportState(Report rpt) throws Exception { // 게시글 신고 상태 변경
+		return sqlSession.update("Admin.bReportState", rpt);
+	}
+	
+	public int cReportState(Report rpt) throws Exception { // 댓글 신고 상태 변경
+		return sqlSession.update("Admin.cReportState", rpt);
+	}
+	
+	public int reportCnt(User user) throws Exception { // 회원 신고 횟수 추가
+		return sqlSession.update("Admin.reportCnt", user);
+	}
+	
+	public int reportStop() throws Exception { // 회원 정지 해제
+		return sqlSession.update("Admin.reportStop");
+	}
+	
+	public List<Report> reportSelect(Report rpt) throws Exception { // 신고 내역 검색
+		return sqlSession.selectList("Admin.reportSelect", rpt);
+	}
+	
+	public void deleteCReport(String reportNo) { // 댓글 신고내역 삭제
+		sqlSession.delete("Admin.deleteCReport", reportNo); 
+	}
+	
+	public void deleteBReport(String reportNo) { // 게시글 신고내역 삭제
+		sqlSession.delete("Admin.deleteBReport", reportNo);
 	}
 	
 	public int userStart() { // 회원 권한 복원

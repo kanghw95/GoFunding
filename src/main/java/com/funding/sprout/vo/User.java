@@ -16,8 +16,8 @@ public class User {
 	private String userFav; // 관심사
 	private int point; // 포인트
 	private char authority; // 권한
-	private Timestamp suspensionStart; // 정지시작일
-	private Timestamp suspensionFin; // 정지종료일
+	private String suspensionStart; // 정지시작일
+	private String suspensionFin; // 정지종료일
 	private int reportCnt; // 신고누적횟수
 	private Date joinDate; // 가입일
 	private Date loginDate; // 최근로그인일자
@@ -28,7 +28,7 @@ public class User {
 
 	public User(String userId, String userPwd, String userName, String userNick, String userPhone, String userAddress,
 			String userEmail, char gender, int userAge, String userFav, int point, char authority,
-			Timestamp suspensionStart, Timestamp suspensionFin, int reportCnt, Date joinDate, Date loginDate, int userNo) {
+			String suspensionStart, String suspensionFin, int reportCnt, Date joinDate, Date loginDate, int userNo) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -146,19 +146,19 @@ public class User {
 		this.authority = authority;
 	}
 
-	public Timestamp getSuspensionStart() {
+	public String getSuspensionStart() {
 		return suspensionStart;
 	}
 
-	public void setSuspensionStart(Timestamp suspensionStart) {
+	public void setSuspensionStart(String suspensionStart) {
 		this.suspensionStart = suspensionStart;
 	}
 
-	public Timestamp getSuspensionFin() {
+	public String getSuspensionFin() {
 		return suspensionFin;
 	}
 
-	public void setSuspensionFin(Timestamp suspensionFin) {
+	public void setSuspensionFin(String suspensionFin) {
 		this.suspensionFin = suspensionFin;
 	}
 

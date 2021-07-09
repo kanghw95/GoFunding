@@ -7,9 +7,63 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%=request.getContextPath() %>/resources/css/admin/userList.css?ver=1.0" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/admin/userList.css?ver=1.1" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/userList.js"></script>
+<style>
+	.no {
+		width: 35px;
+	}
+	
+	.box {
+		width: 35px;
+	}
+	
+	.id {
+		width: 80px;
+	}
+	
+	.name {
+		width: 88px;
+	}
+	
+	.nick {
+		width: 100px;
+	}
+	
+	.phone {
+		width: 110px;
+	}
+	
+	.gender {
+		width: 35px;
+	}
+	
+	.age {
+		width: 35px;
+	}
+	
+	.point {
+		width: 80px;
+	}
+	
+	.reportCnt {
+		width: 70px;
+	}
+	 
+</style>
+<script>
+	window.onload = function() {
+		console.log("회원 정지 해제 시작");
+		$.ajax({
+			url : "reportStop",
+			type : "POST",
+			success : function(data) {
+				console.log("성공");
+			}
+		})
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
@@ -28,16 +82,18 @@
 	<div id="userInfo">
 		<table class="tg" border="1" id="tr">
 			<tr>
-				<th>NO</th>
-				<th><input type="checkbox" id="checkAll" onclick="checkAll()"></th>
-				<th>이메일</th>
-				<th>이름</th>
-				<th>닉네임</th>
-				<th>전화번호</th>
-				<th>성별</th>
-				<th>나이</th>
-				<th>포인트</th>
-				<th>신고누적횟수</th>
+				<th class="no">NO</th>
+				<th class="box"><input type="checkbox" id="checkAll" onclick="checkAll()"></th>
+				<th class="id">아이디</th>
+				<th class="name">이름</th>
+				<th class="nick">닉네임</th>
+				<th class="phone">전화번호</th>
+				<th class="gender">성별</th>
+				<th class="age">나이</th>
+				<th class="point">포인트</th>
+				<th class="reportCnt">신고횟수</th>
+				<th class="start">정지 시작일</th>
+				<th class="fin">정지 종료일</th>
 			</tr>
 			<c:if test="${!empty userlist }">
 				<c:forEach var="user" items="${userlist }" varStatus="status">
@@ -52,6 +108,14 @@
 						<td>${user.userAge}</td>
 						<td>${user.point}</td>
 						<td>${user.reportCnt}</td>
+						<c:if test="${!empty user.suspensionStart }">
+							<td>${user.suspensionStart }</td>
+							<td>${user.suspensionFin }</td>
+						</c:if>
+						<c:if test="${empty user.suspensionFin }">
+							<td>-</td>
+							<td>-</td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</c:if>

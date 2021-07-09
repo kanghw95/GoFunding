@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+body {
+    font-family: 'NanumSquare', sans-serif !important;
+}
+
+.space {
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 80px;
+}
+
+.wrapper {
+	display: table;
+	margin-bottom: 80px;
+}
+
+.list {
+	width: 35px;
+	line-height: 40px;
+}
+
+.reportDetail {
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 20px;
+}
+
+.back {
+	float: right;
+    margin-left: 703px;
+    box-shadow: none;
+    border-radius: 10px;
+    height: 30px;
+}
+
+td, th, tr {
+	border: 1px solid #ccc;
+}
+
+table {
+	border-collapse: collapse;
+	text-align: center;
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+	border-color: #ccc;
+}
+
+th {
+	background-color: #e6e6e6;
+}
+
+.th {
+	height: 100px;
+	width: 200px;
+}
+
+.stopId {
+	border: none;
+	text-align: center;
+	outline: none;
+	width: 20px;
+}
+
+.reason {
+	width: 200px;
+	height: 100px;
+}
+
+.title {
+	width: 200px;
+	height: 100px;
+}
+
+.content {
+	width: 200px;
+	height: 200px;
+}
+
+.pass {
+    margin-left: 800px;
+    box-shadow: none;
+    border-radius: 10px;
+    height: 30px;
+}
+
+.stop {
+	float: right;
+    background-color: rgb(255, 72, 0);
+	color: white;
+    box-shadow: none;
+    border-radius: 10px;
+    height: 30px;
+}
+
+.footer {
+	height: 200px;
+}

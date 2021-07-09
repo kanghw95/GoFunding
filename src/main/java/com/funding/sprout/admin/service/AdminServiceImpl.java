@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.funding.sprout.admin.dao.AdminDao;
 import com.funding.sprout.vo.Admin;
 import com.funding.sprout.vo.Board;
+import com.funding.sprout.vo.Comment;
 import com.funding.sprout.vo.Criteria;
 import com.funding.sprout.vo.Faq;
 import com.funding.sprout.vo.Notifiy;
@@ -90,6 +91,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Qna> qnaList(Criteria cri) throws Exception { // Qna 조회
 		return adDao.qnaList(cri);
+	}
+	
+	@Override
+	public List<Qna> qnaReply(Qna qna) throws Exception { // qnaReply 조회
+		return adDao.qnaReply(qna);
 	}
 
 	@Override
@@ -258,6 +264,86 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	public int qnaInsert(Comment cmt) throws Exception { // Qna 답글 추가
+		return adDao.qnaInsert(cmt);
+	}
+	
+	@Override
+	public List<Comment> qnaCmt(Comment cmt) throws Exception { // Qna 답글 조회
+		return adDao.qnaCmt(cmt);
+	}
+	
+	@Override
+	public List<Comment> qnaOne(Comment cmt) throws Exception { // Qna 답글 하나만 조회
+		return adDao.qnaOne(cmt);
+	}
+	
+	@Override
+	public int replyUpdate(Comment cmt) throws Exception { // Qna 답글 수 추가
+		return adDao.replyUpdate(cmt);
+	}
+	
+	@Override
+	public int replyCount(Comment cmt) throws Exception { // Qna 특정 답글 조회
+		return adDao.replyCount(cmt);
+	}
+	
+	@Override
+	public List<Report> report() throws Exception { // 전체 신고내역 조회
+		return adDao.report();
+	}
+	
+	@Override
+	public List<Report> bReport(Report rpt) throws Exception { // 게시글 신고 상세 조회
+		return adDao.bReport(rpt);
+	}
+	
+	@Override
+	public List<Report> cReport(Report rpt) throws Exception { // 댓글 신고 상세 조회
+		return adDao.cReport(rpt);
+	}
+	
+	@Override
+	public int userStop(User user) throws Exception { // 회원 정지일 설정
+		return adDao.userStop(user);
+	}
+	
+	@Override
+	public int bReportState(Report rpt) throws Exception { // 게시글 신고 상태 변경
+		return adDao.bReportState(rpt);
+	}
+	
+	@Override
+	public int cReportState(Report rpt) throws Exception { // 댓글 신고 상태 변경
+		return adDao.cReportState(rpt);
+	}
+	
+	@Override
+	public int reportCnt(User user) throws Exception { // 회원 신고 횟수 추가
+		return adDao.reportCnt(user);
+	}
+	
+	@Override
+	public int reportStop() throws Exception { // 회원 정지 해제
+		return adDao.reportStop();
+	}
+	
+	@Override
+	public List<Report> reportSelect(Report rpt) throws Exception { // 신고 내역 검색
+		return adDao.reportSelect(rpt);
+	}
+	
+	@Override
+	public void deleteCReport(String reportNo) { // 댓글 신고내역 삭제
+		adDao.deleteCReport(reportNo);
+	}
+	
+	@Override
+	public void deleteBReport(String reportNo) { // 게시글 신고내역 삭제
+		adDao.deleteBReport(reportNo);
+	}
+	
+	@Override
 	public int userStart() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -267,12 +353,6 @@ public class AdminServiceImpl implements AdminService {
 	public List<Qna> getQNAByPage() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public int qnaInsert() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override

@@ -4,26 +4,29 @@ import java.sql.Date;
 
 public class Qna {
 	
+	private String qNo; // qnaReply qna번호
 	private int qnaNo; // qna번호
 	private String qnaTitle; // qna제목
 	private String qnaContent; // qna내용
+	private String qnaType;
 	private Date qnaDate; // qna작성일
 	private int qnaCnt; // qna조회수
 	private int qnaRef; // qna댓글ref
 	private int qnaStep; // qna답글step
 	private int qnaLevel; // qna답글level
-	private String qnaType;
 	private String qnaId;
 	private String qnaMId;
 	private Date qnaADate;
+	private int replyCnt; // qna답글 수
 	
 	public Qna() {
 		
 	}
 	
-	public Qna(int qnaNo, String qnaTitle, String qnaContent, Date qnaDate, int qnaCnt, int qnaRef, int qnaStep,
-			int qnaLevel, String qnaType, String qnaId, String qnaMId, Date qnaADate) {
+	public Qna(String qNo, int qnaNo, String qnaTitle, String qnaContent, Date qnaDate, int qnaCnt, int qnaRef, int qnaStep,
+			int qnaLevel, String qnaType, String qnaId, String qnaMId, Date qnaADate, int replyCnt) {
 		super();
+		this.qNo = qNo;
 		this.qnaNo = qnaNo;
 		this.qnaTitle = qnaTitle;
 		this.qnaContent = qnaContent;
@@ -36,13 +39,15 @@ public class Qna {
 		this.qnaId = qnaId;
 		this.qnaMId = qnaMId;
 		this.qnaADate = qnaADate;
+		this.replyCnt = replyCnt;
 	}
 
 	@Override
 	public String toString() {
-		return "Qna [qnaNo=" + qnaNo + ", qnaTitle=" + qnaTitle + ", qnaContent=" + qnaContent + ", qnaDate=" + qnaDate
-				+ ", qnaCnt=" + qnaCnt + ", qnaRef=" + qnaRef + ", qnaStep=" + qnaStep + ", qnaLevel=" + qnaLevel
-				+ ", qnaType=" + qnaType + ", qnaId=" + qnaId + ", qnaMId=" + qnaMId + ", qnaADate=" + qnaADate + "]";
+		return "Qna [qNo=" + qNo + ", qnaNo=" + qnaNo + ", qnaTitle=" + qnaTitle + ", qnaContent=" + qnaContent
+				+ ", qnaType=" + qnaType + ", qnaDate=" + qnaDate + ", qnaCnt=" + qnaCnt + ", qnaRef=" + qnaRef
+				+ ", qnaStep=" + qnaStep + ", qnaLevel=" + qnaLevel + ", qnaId=" + qnaId + ", qnaMId=" + qnaMId
+				+ ", qnaADate=" + qnaADate + ", replyCnt=" + replyCnt + "]";
 	}
 	
 	public int getQnaNo() {
@@ -124,6 +129,22 @@ public class Qna {
 
 	public void setQnaADate(Date qnaADate) {
 		this.qnaADate = qnaADate;
+	}
+
+	public String getqNo() {
+		return qNo;
+	}
+
+	public void setqNo(String qNo) {
+		this.qNo = qNo;
+	}
+
+	public int getReplyCnt() {
+		return replyCnt;
+	}
+
+	public void setReplyCnt(int replyCnt) {
+		this.replyCnt = replyCnt;
 	}
 	
 

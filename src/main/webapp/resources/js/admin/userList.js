@@ -123,6 +123,8 @@ var cv = "";
 			cv += "<td>" + data[i].userAge + "</td>"
 			cv += "<td>" + data[i].point + "</td>"
 			cv += "<td>" + data[i].reportCnt + "</td>"
+			cv += "<td>" + data[i].suspensionStart + "</td>"
+			cv += "<td>" + data[i].suspensionFin + "</td>"
 			cv += "</tr>"
 		});
 		$("#tr").append(cv);
@@ -149,6 +151,8 @@ var cv = "";
 			cv += "<td>" + data[i].userAge + "</td>"
 			cv += "<td>" + data[i].point + "</td>"
 			cv += "<td>" + data[i].reportCnt + "</td>"
+			cv += "<td>" + data[i].suspensionStart + "</td>"
+			cv += "<td>" + data[i].suspensionFin + "</td>"
 			cv += "</tr>"
 		});
 		$("#tr").append(cv);
@@ -175,6 +179,8 @@ var cv = "";
 			cv += "<td>" + data[i].userAge + "</td>"
 			cv += "<td>" + data[i].point + "</td>"
 			cv += "<td>" + data[i].reportCnt + "</td>"
+			cv += "<td>" + data[i].suspensionStart + "</td>"
+			cv += "<td>" + data[i].suspensionFin + "</td>"
 			cv += "</tr>"
 		});
 		$("#tr").append(cv);
