@@ -27,10 +27,12 @@ public class MessageServiceImpl implements MessageService {
 	}
 	
 	@Override
-	public List<Map<String, String>> msgUserList(HashMap<String, String> vo) {
-		List<Map<String, String>> vo1=null;
+	public List<HashMap<String, String>> msgUserList(HashMap<String, String> vo) {
+		List<HashMap<String, String>> vo1=null;
 		try {
 			vo1=msgDao.msgUserList(vo);
+			System.out.println("들어옴~~");
+			System.out.println(vo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -12,7 +12,7 @@ public interface MessageService {
 
 	public List<Map<String, String>> msgMakerUserList(String receiverId); // 메이커-회원 목록
 	
-	public List<Map<String, String>> msgUserList(HashMap<String, String> vo); // 회원(관리자)-회원 목록
+	public List<HashMap<String, String>> msgUserList(HashMap<String, String> vo); // 회원(관리자)-회원 목록
 	
 	public List<Map<String, String>> getMakerMessage(HashMap<String, String> id); //메이커-회원 상세 조회
 	

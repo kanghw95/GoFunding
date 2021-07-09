@@ -5,12 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <link
-	href="<%=request.getContextPath() %>/resources/css/admin/adminMain.css?ver=1.0"
-	rel="stylesheet" type="text/css" />
+	href="<%=request.getContextPath() %>/resources/css/admin/adminMain.css?ver=1.0" rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
 <!-- Custom fonts for this template-->
 <link
-	href="../../../resources/sb-admin-2/vendor/fontawesome-free/css/all.min.css"
+	href="<%=request.getContextPath() %>/sb-admin-2/vendor/fontawesome-free/css/all.min.css"
 	rel="stylesheet" type="text/css">
 <link
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -28,25 +27,30 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"/>
 	<div class="wrapper">
 		<div class="outer">
 			<div class="inner">
 				<div class="notice">
 					<h3>알림 모아보기</h3>
 				<div class="fundingDiv">
-					<span>펀딩 신청 관리</span><button class="detailBtn funding">상세보기</button>
-					<a>1</a>
-					<a>2</a>
-				</div>
-				<div class="communityDiv">
-					<span>펀딩 신청 관리</span><button class="detailBtn community">상세보기</button>
-					<a>1</a>				
-					<a>2</a>				
-				</div>
-				<div class="qnaDiv">
-					<span>펀딩 신청 관리</span><button class="detailBtn qna">상세보기</button>
-					<a>1</a>				
-					<a>2</a>				
+				<table class="noticeTab" >
+				<tr class=noticeTitle>
+					<td><span>펀딩 신청 관리</span>&nbsp;&nbsp;<button class="detailBtn funding">상세보기</button></td>
+					<td><span>커뮤니티 관리</span>&nbsp;&nbsp;<button class="detailBtn community">상세보기</button></td>
+					<td><span>펀딩 신청 관리</span>&nbsp;&nbsp;<button class="detailBtn qna">상세보기</button></td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>2</td>
+					<td>2</td>
+				</tr>
+				</table>
 				</div>
 				</div>
 				<div class="analytics analFunding">
@@ -54,39 +58,42 @@
 					<div class="anal age">
 						<div class="card-body">
 							<div class="chart-pie pt-4 pb-2">
+							<h5>연령별</h5>
 								<canvas id="myPieChart"></canvas>
 							</div>
 							<div class="mt-4 text-center small">
-								<span class="mr-2"> <i class="fas fa-circle text-primary"></i>10-20대</span>
-								<span class="mr-2"> <i class="fas fa-circle text-success"></i>30-40대</span> 
-								<span class="mr-2"> <i class="fas fa-circle text-info"></i>50-60대</span>
+								<span class="mr-2"> <i class="fas fa-circle icon1"></i>10-20대</span><br>
+								<span class="mr-2"> <i class="fas fa-circle icon2"></i>30-40대</span><br>
+								<span class="mr-2"> <i class="fas fa-circle icon3"></i>50-60대</span>
 							</div>
 						</div>
 					</div>
 					<div class="anal category">
     			        <div class="card-body">
 							<div class="chart-pie pt-4 pb-2">
+							<h5>분류별</h5>
 								<canvas id="myPieChart1"></canvas>
 							</div>
 							<div class="mt-4 text-center small">
-								<span class="mr-2"> <i class="fas fa-circle text-primary"></i>일자리 창출</span>
-								<span class="mr-2"> <i class="fas fa-circle text-success"></i>공정 무역</span>
-								<span class="mr-2"> <i class="fas fa-circle text-info"></i>친환경</span>
-								<span class="mr-2"> <i class="fas fa-circle text-primary"></i>기부</span>
-								<span class="mr-2"> <i class="fas fa-circle text-success"></i>작은 가게</span>
-								<span class="mr-2"> <i class="fas fa-circle text-info"></i>미디어</span>
-								<span class="mr-2"> <i class="fas fa-circle text-info"></i>창작자</span>
+								<span class="mr-2"> <i class="fas fa-circle icon1"></i>일자리 창출</span>
+								<span class="mr-2"> <i class="fas fa-circle icon2"></i>공정 무역</span><br>
+								<span class="mr-2"> <i class="fas fa-circle icon3"></i>친환경</span>
+								<span class="mr-2"> <i class="fas fa-circle icon4"></i>기부</span>
+								<span class="mr-2"> <i class="fas fa-circle icon5"></i>작은 가게</span><br>
+								<span class="mr-2"> <i class="fas fa-circle icon6"></i>미디어</span>
+								<span class="mr-2"> <i class="fas fa-circle icon7"></i>창작자</span>
 							</div>
 						</div>
 					</div>
 					<div class="anal gender">
             			<div class="card-body">
 							<div class="chart-pie pt-4 pb-2">
+							<h5>성별</h5>
 								<canvas id="myPieChart2"></canvas>
 							</div>
 							<div class="mt-4 text-center small">
-								<span class="mr-2"> <i class="fas fa-circle text-primary"></i>남자</span>
-								<span class="mr-2"> <i class="fas fa-circle text-success"></i>여자</span>
+								<span class="mr-2"> <i class="fas fa-circle icon1"></i>남자</span><br>
+								<span class="mr-2"> <i class="fas fa-circle icon2"></i>여자</span><br><br>
 							</div>
 						</div>
 					</div>
@@ -96,49 +103,172 @@
 					<div class="anal age">
 						<div class="card-body">
 							<div class="chart-pie pt-4 pb-2">
+							<h5>연령별</h5>
 								<canvas id="myPieChart3"></canvas>
 							</div>
 							<div class="mt-4 text-center small">
-								<span class="mr-2"> <i class="fas fa-circle text-primary"></i>10-20대</span>
-								<span class="mr-2"> <i class="fas fa-circle text-success"></i>30-40대</span> 
-								<span class="mr-2"> <i class="fas fa-circle text-info"></i>50-60대</span>
+								<span class="mr-2"> <i class="fas fa-circle icon1"></i>10-20대</span><br>
+								<span class="mr-2"> <i class="fas fa-circle icon2"></i>30-40대</span><br>
+								<span class="mr-2"> <i class="fas fa-circle icon3"></i>50-60대</span>
 							</div>
 						</div>
 					</div>
 					<div class="anal category">
     			        <div class="card-body">
 							<div class="chart-pie pt-4 pb-2">
+							<h5>분류별</h5>
 								<canvas id="myPieChart4"></canvas>
 							</div>
 							<div class="mt-4 text-center small">
-								<span class="mr-2"> <i class="fas fa-circle text-primary"></i>자유게시판</span>
-								<span class="mr-2"> <i class="fas fa-circle text-success"></i>후기게시판</span>
-								<span class="mr-2"> <i class="fas fa-circle text-info"></i>질답게시판</span>
-								<span class="mr-2"> <i class="fas fa-circle text-primary"></i>이벤트게시판</span>
-								<span class="mr-2"> <i class="fas fa-circle text-success"></i>정보공유게시판</span>
+								<span class="mr-2"> <i class="fas fa-circle icon1"></i>자유게시판</span>
+								<span class="mr-2"> <i class="fas fa-circle icon2"></i>후기게시판</span><br>
+								<span class="mr-2"> <i class="fas fa-circle icon3"></i>질답게시판</span>
+								<span class="mr-2"> <i class="fas fa-circle icon4"></i>이벤트게시판</span><br>
+								<span class="mr-2"> <i class="fas fa-circle icon5"></i>정보공유게시판</span>
 							</div>
 						</div>
 					</div>
 					<div class="anal gender">
             			<div class="card-body">
 							<div class="chart-pie pt-4 pb-2">
+							<h5>성별</h5>
 								<canvas id="myPieChart5"></canvas>
 							</div>
 							<div class="mt-4 text-center small">
-								<span class="mr-2"> <i class="fas fa-circle text-primary"></i>남자</span>
-								<span class="mr-2"> <i class="fas fa-circle text-success"></i>여자</span>
+								<span class="mr-2"> <i class="fas fa-circle icon1"></i>남자</span><br>
+								<span class="mr-2"> <i class="fas fa-circle icon2"></i>여자</span><br><br>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="analytics ">
+				<div class="analytics analPayment">
 					<div class="payment">
                          <div class="chart-area">
+                         <h3>펀딩 결제 현황</h3>
                           <canvas id="myAreaChart"></canvas>
                         </div>
 					</div>
 					</div>
-				<div class="analytics">
+					<div class="analytics paymentTabs">
+					<div class="paymentTab">
+					<h5 class="divTitle">펀딩 금액</h5>
+					<table id="fundingTab1">
+					<tr class="tabTitle">
+					<td>상태</td>
+					<td>건수</td>
+					<td>금액</td>
+					</tr>
+					<c:forEach var="order" items="${order1}">
+					<tr>
+					<td>주문</td>
+					<td>${order.ORDERCNT}</td>
+					<td>${order.ORDERTOTALPRICE}</td>
+					</tr>
+					</c:forEach>
+					<c:forEach  var="payment" items="${payment1}">
+					<tr>
+					<td>결제</td>
+					<td>${payment.PAYMENTCNT}</td>
+					<td>${payment.TOTALPAYMENT}</td>
+					</tr>
+					</c:forEach>
+					</table>
+					</div>
+					<div class="paymentTab">
+					<h5 class="divTitle">펀딩 현황</h5>
+					<table id="fundingTab2">
+					<tr class="tabTitle">
+					<td>진행</td>
+					<td>신청</td>
+					<td>반려</td>
+					<td>종료</td>
+					</tr>
+					<c:forEach var="funding" items="${funding}">
+					<tr>
+					<td>${funding.PROCEEDING}</td>
+					<td>${funding.APPLY}</td>
+					<td>${funding.REJECT}</td>
+					<td>${funding.FINISH}</td>
+					</tr>
+					</c:forEach>
+					</table>
+					</div>
+					</div>
+					<div class="analytics paymentTabs">
+					<div class="totalTab">
+					<h5 class="divTitle">펀딩 총 현황</h5>
+					<table id="fundingTab3">
+					<tr class="tabTitle">
+					<td colspan="3">금액</td>
+					<td colspan="3">건수</td>
+					<td colspan="4">펀딩</td>
+					</tr>
+					<tr>
+					<td>주문</td>					
+					<td>결제</td>					
+					<td>총 결제 금액</td>					
+					<td>주문</td>					
+					<td>결제</td>					
+					<td>총 결제 건수</td>					
+					<td>진행</td>					
+					<td>신청</td>					
+					<td>반려</td>					
+					<td>종료</td>					
+					</tr>
+					<tr>
+					<c:forEach var="order" items="${order1}" varStatus="status">
+					<td>
+					<c:out value="${order.ORDERTOTALPRICE}"></c:out>
+					</td>
+					</c:forEach>					
+					<c:forEach var="payment" items="${payment1}" varStatus="status">
+					<td>
+					<c:out value="${payment.TOTALPAYMENT}"></c:out>
+					</td>					
+					</c:forEach>					
+					<c:forEach var="order1" items="${order1}" varStatus="status">
+					<td>
+					<c:forEach var="payment" items="${payment1}" varStatus="status">
+					<c:out value="${order1.ORDERTOTALPRICE+payment.TOTALPAYMENT}"></c:out>
+					</c:forEach>					
+					</td>					
+					</c:forEach>					
+					<c:forEach var="order2" items="${order1}" varStatus="status">
+					<td>
+					<c:out value="${order2.ORDERCNT}"></c:out>
+					</td>					
+					</c:forEach>					
+					<c:forEach var="payment1" items="${payment1}" varStatus="status">
+					<td>
+					<c:out value="${payment1.PAYMENTCNT}"></c:out>
+					</td>					
+					</c:forEach>					
+					<c:forEach var="payment2" items="${payment1}" varStatus="status">
+					<td>
+					<c:forEach var="order3" items="${order1}" varStatus="status">
+					<c:out value="${order3.ORDERCNT+payment2.PAYMENTCNT}"></c:out> <!-- TODO -->
+					</c:forEach>					
+					</td>					
+					</c:forEach>					
+					<c:forEach var="funding" items="${funding}" varStatus="status">
+					<td>
+					<c:out value="${funding.PROCEEDING}"></c:out>
+					</td>
+					<td>
+					<c:out value="${funding.APPLY}"></c:out>
+					</td>
+					<td>
+					<c:out value="${funding.REJECT}"></c:out>
+					</td>
+					<td>
+					<c:out value="${funding.FINISH}"></c:out>
+					</td>					
+					</c:forEach>					
+					</tr>
+					</table>
+					</div> 
+					</div>
+				<div class="analytics hidden">
 				<!-- The Sign-in button. This will run `queryReports()` on success. -->
 				<p class="g-signin2" data-onsuccess="queryReports"></p>
 
@@ -150,7 +280,7 @@
 			</div>
 			</div>
 		</div>
-		<div id="hidden">
+		<div class="hidden">
 		<input type="text" id="statF1020" value="${statF1020}">
 		<input type="text" id="statF3040" value="${statF3040}">
 		<input type="text" id="statF5060" value="${statF5060}">
@@ -172,7 +302,8 @@
 		<input type="text" id="maleF" value="${maleF}">
 		<input type="text" id="femaleF" value="${femaleF}">
 		<input type="text" id="maleC" value="${maleC}">
-		<input type="text" id="femaleC" value="${femaleC}"><br><br><br>
+		<input type="text" id="femaleC" value="${femaleC}">
+		<input type="text" id="111" value="${order1}">
 		<c:forEach var="days" items="${days}" varStatus="status">
 			<span id="day-${status.count}">${days.AMOUNT}</span>
 			<span id="date-${status.count}">${days.PAYMENTDATE}</span>

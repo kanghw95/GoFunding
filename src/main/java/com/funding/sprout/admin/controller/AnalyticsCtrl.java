@@ -2,7 +2,6 @@ package com.funding.sprout.admin.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,6 +87,10 @@ public class AnalyticsCtrl {
 		maleC*=GENDERTOTALC; femaleC*=GENDERTOTALC;
 
 		List<HashMap<String, String>> payment=analyticsService.analPayment();
+		List<HashMap<String, String>> payment1=analyticsService.analPaymentTab();
+		List<HashMap<String, String>> order1=analyticsService.analPaymentTab();
+		List<HashMap<String, String>> funding=analyticsService.analFundingTab();
+		
 		
 		mv.addObject("statF1020", statF1020);
 		mv.addObject("statF3040", statF3040);
@@ -112,6 +115,9 @@ public class AnalyticsCtrl {
 		mv.addObject("maleC", maleC);
 		mv.addObject("femaleC", femaleC);
 		mv.addObject("days", payment);
+		mv.addObject("payment1", payment1);
+		mv.addObject("order1", order1);
+		mv.addObject("funding", funding);
 		
 		mv.setViewName("admin/adminMain");
 		

@@ -52,7 +52,7 @@ public class MessageCtrl {
 		vo.put("senderId", senderId);
 		vo.put("msgRoot", "2");
 		
-		List<Map<String, String>> msgList = msgService.msgUserList(vo);
+		List<HashMap<String, String>> msgList = msgService.msgUserList(vo);
 		mv.addObject("msgList2",msgList);
 		mv.setViewName("/message/msgList2");
 		
@@ -79,7 +79,7 @@ public class MessageCtrl {
 		vo.put("senderId", "admin");
 		vo.put("msgRoot", "3");
 
-		List<Map<String, String>> msgList = msgService.msgUserList(vo);
+		List<HashMap<String, String>> msgList = msgService.msgUserList(vo);
 		mv.addObject("msgList",msgList);
 		mv.setViewName("/message/msgUserList");
 		
@@ -96,8 +96,8 @@ public class MessageCtrl {
 		HashMap<String, String> vo=new HashMap<String, String>();
 		vo.put("senderId", receiverId);
 		vo.put("msgRoot", "4");
-		List<Map<String, String>> msgList = msgService.msgUserList(vo);
-		System.out.println(msgList);
+		List<HashMap<String, String>> msgList = msgService.msgUserList(vo);
+		System.out.println("외않나와"+msgList);
 		mv.addObject("msgList",msgList);
 		mv.setViewName("/message/msgAdminList");
 		

@@ -17,24 +17,125 @@
 	padding: 5% 10%;
 }
 
-.other{
-	width: 100%; height: 300px;
-	border: 1px solid black;
-}
-
 .analytics{
-	width: 100%; height: 500px;
-	border: 1px solid black;
+	width: 850px; height: 600px;
+	padding: 20px;
+	text-align: center;
 }
 
 .anal{
-	width:25%; height: 300px;
-	float: left;
+	width:250px; height: 450px;
+	top: 100px;
+	display: inline-block;
 	border: 1px solid #ccc;
-	margin: 30px;
+	margin: auto;
+}
+
+.analPayment{
+	height: 500px;
+	line-height: 500px;
 }
 
 .payment{
 	clear: both;
 	display: block;
+}
+
+.paymentTabs{
+	height: 300px;
+	text-align: center;
+}
+
+.paymentTab{
+	width: 350px;
+	display: inline-block;
+	padding: 20px;
+}
+
+.totalTab{
+	width:100%;
+}
+
+#fundingTab1, #fundingTab2, #fundingTab3{
+	width: 100%;
+	margin: auto;
+}
+
+td{
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+.tabTitle{
+	background: #e2e2e2;
+}
+
+.mr-2{
+	font-size: 14px;
+}
+
+.icon1{
+	color: #4e73df;
+}
+
+.icon2{
+	color: #1cc88a;
+}
+
+.icon3{
+	color: #36b9cc;
+}
+
+.icon4{
+	color: #cff09e;
+}
+
+.hidden{
+	display: none;
+}
+
+.icon5{
+	color: #79bd9a;
+}
+
+.icon6{
+	color: #3CB371;
+}
+
+.icon7{
+	color: #40E0D0;
+}
+
+.divTitle{
+	text-align: left;
+}
+
+h3{
+	padding-bottom: 30px;
+	text-align: left;
+}
+
+h5{
+	padding-bottom: 10px;
+}
+
+.noticeTab{
+	width: 100%;
+	margin: auto;
+}
+
+.noticeTitle{
+	text-align: center;
+}
+
+.detailBtn{
+	border: none; border-radius: 5px;
+	background: #4d4e4f;
+	color: white;
+	font-size: 12px;
+	height: 30px;
+}
+
+.notice{
+	padding: 30px;
 }

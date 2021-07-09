@@ -12,7 +12,7 @@
 		</div>
 	</div>
 		<div class="footer-cont cs">
-				<p class="innerContent sendMsg"><b id="loginId" onclick="userAdminMsg();">1:1 상담신청 </b>&#x2709;</p>
+				<p class="innerContent sendMsg"><b onclick="userAdminMsg();">1:1 상담신청 </b>&#x2709;</p>
 				<p class="innerContent">관리자에게로의 문의는 1:1 상담을 이용해주세요.</p>
 				<input type="hidden" id="loginId" value="${user.userId}">
 		</div>

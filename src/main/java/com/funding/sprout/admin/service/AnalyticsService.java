@@ -51,4 +51,7 @@ public interface AnalyticsService {
 	
 	public List<HashMap<String, String>> analPayment(); //결제 금액 통계
 	
+	public List<HashMap<String, String>> analPaymentTab(); //결제 금액 통계 표 : 주문 대비 결제
+	
+	public List<HashMap<String, String>> analFundingTab(); //펀딩 현황 표 
 }

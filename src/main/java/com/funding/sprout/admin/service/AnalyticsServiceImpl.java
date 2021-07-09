@@ -117,11 +117,6 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 	}
 	
 	@Override
-	public List<HashMap<String, String>> analPayment() { //결제 금액 통계
-		return analyticsDao.analPayment();
-	}
-
-	@Override
 	public int analCGenderM() {
 		return analyticsDao.analCGenderM();
 	}
@@ -129,6 +124,21 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 	@Override
 	public int analCGenderF() {
 		return analyticsDao.analCGenderF();
+	}
+
+	@Override
+	public List<HashMap<String, String>> analPayment() { //결제 금액 통계
+		return analyticsDao.analPayment();
+	}
+	
+	@Override
+	public List<HashMap<String, String>> analPaymentTab() { //결제 금액 통계 표 : 주문 대비 결제
+		return analyticsDao.analPaymentTab();
+	}
+
+	@Override
+	public List<HashMap<String, String>> analFundingTab() {  //펀딩 현황 표 
+		return analyticsDao.analFundingTab();
 	}
 
 }

@@ -43,9 +43,11 @@
 	</div></c:if>
 	</c:forEach>
 <form id="frm">
+	<div class="inputTxt">
 	<input id="userId2" name="receiverId" value="${param.receiverId}" type="hidden">
 	<input id="txtMsg" name="msgContent" type="text">
 	<input id="sendBtn" value="전송" type="button">
+	</div>
 </form></div></div>
 <script>
 	var webSocket = new WebSocket("ws://localhost:8090/sprout/msgRead");

@@ -101,8 +101,16 @@ public class AnalyticsDao {
 		return sqlSession.selectOne("Admin.analCGenderF");
 	}
 	
-	public List<HashMap<String, String>> analPayment() { //결제 금액 통계
+	public List<HashMap<String, String>> analPayment() { //결제 금액 통계 차트
 		return sqlSession.selectList("Admin.analPayment");
+	}
+	
+	public List<HashMap<String, String>> analPaymentTab() { //결제 금액 통계 표 : 주문 대비 결제
+		return sqlSession.selectList("Admin.analPaymentTab");
+	}
+	
+	public List<HashMap<String, String>> analFundingTab() { //펀딩 현황 표 
+		return sqlSession.selectList("Admin.analFundingTab");
 	}
 	
 }
