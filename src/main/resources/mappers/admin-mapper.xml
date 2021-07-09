@@ -441,13 +441,13 @@
 	<insert id="makeFunding">
 		INSERT INTO FUNDING VALUES(SEQ_FUNDINGNO.NEXTVAL, 1, #{fundingCategory},
 		#{fundingTitle}, #{fundingPrice}, #{fundingStart}, #{fundingFin}, #{maker},
-		SYSDATE, #{fundingContent}, #{deliveryCharge}, #{deliveryDate})
+		SYSDATE, #{fundingContent}, #{deliveryCharge}, #{deliveryDate}, 0)
 	</insert>
 	
 	<!-- 신청 승인 / 리워드 생성 -->
 	<insert id="makeReward">
 		INSERT INTO REWARD VALUES (SEQ_REWARDNO.NEXTVAL, #{rewardTitle}, #{rewardEA},
-		#{rewardPrice}, (SELECT FUNDINGNO FROM FUNDING WHERE MAKER = #{maker}) )
+		#{rewardPrice}, (SELECT FUNDINGNO FROM FUNDING WHERE MAKER = #{maker}), 0 )
 	</insert>
 	
 	<!-- 신청 승인 / 신청서 confirmed 입력 -->
@@ -460,4 +460,209 @@
 		UPDATE APPLICATION SET FEEDBACK = #{feedback} WHERE APPLYNO = #{applyNo}
 	</update>
 	
+	<!-- 펀딩 통계 연령별 : 1020대 -->
+	<select id="analAgeF1020" resultType="float">
+        SELECT NVL ((SELECT NVL((SELECT COUNT(*)
+        FROM (SELECT DISTINCT O.ID FROM ORDERS O JOIN USERS U ON O.ID=U.ID WHERE U.AGE BETWEEN 10 AND 29)),0) /
+        NVL((SELECT COUNT(*) FROM ORDERS),0) CNT2 FROM DUAL), 0) CNT FROM DUAL
+	</select>
+	
+	<!-- 펀딩 통계 연령별 : 3040대 -->
+	<select id="analAgeF3040" resultType="float">
+        SELECT NVL ((SELECT NVL((SELECT COUNT(*)
+        FROM (SELECT DISTINCT O.ID FROM ORDERS O JOIN USERS U ON O.ID=U.ID WHERE U.AGE BETWEEN 30 AND 49)),0) /
+        NVL((SELECT COUNT(*) FROM ORDERS),0) CNT2 FROM DUAL), 0) CNT FROM DUAL;
+	</select>
+	
+	<!-- 펀딩 통계 연령별 : 5060대 -->
+	<select id="analAgeF5060" resultType="float">
+        SELECT NVL ((SELECT NVL((SELECT COUNT(*)
+        FROM (SELECT DISTINCT O.ID FROM ORDERS O JOIN USERS U ON O.ID=U.ID WHERE U.AGE BETWEEN 50 AND 69)),0) /
+        NVL((SELECT COUNT(*) FROM ORDERS),0) CNT2 FROM DUAL), 0) CNT FROM DUAL;
+	</select>
+	
+	<!-- 펀딩 통계 분류별 : 일자리 창출 -->
+	<select id="analCateF1" resultType="Integer">
+		SELECT COUNT(*) CNT FROM (
+		SELECT F.FUNDINGCATEGORY FROM ORDERS O JOIN FUNDING F 
+        ON O.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='일자리 창출'
+	</select>
+	
+	<!-- 펀딩 통계 분류별 : 공정 무역 -->
+	<select id="analCateF2" resultType="Integer">
+		SELECT COUNT(*) CNT FROM (
+		SELECT F.FUNDINGCATEGORY FROM ORDERS O JOIN FUNDING F 
+        ON O.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='공정 무역'
+	</select>
+	
+	<!-- 펀딩 통계 분류별 : 친환경 -->
+	<select id="analCateF3" resultType="Integer">
+		SELECT COUNT(*) CNT FROM (
+		SELECT F.FUNDINGCATEGORY FROM ORDERS O JOIN FUNDING F 
+        ON O.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='친환경'
+	</select>
+	
+	<!-- 펀딩 통계 분류별 : 기부 -->
+	<select id="analCateF4" resultType="Integer">
+		SELECT COUNT(*) CNT FROM (
+		SELECT F.FUNDINGCATEGORY FROM ORDERS O JOIN FUNDING F 
+        ON O.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='기부'
+	</select>
+	
+	<!-- 펀딩 통계 분류별 : 작은 가게 -->
+	<select id="analCateF5" resultType="Integer">
+		SELECT COUNT(*) CNT FROM (
+		SELECT F.FUNDINGCATEGORY FROM ORDERS O JOIN FUNDING F 
+        ON O.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='작은 가게'
+	</select>
+	
+	<!-- 펀딩 통계 분류별 : 미디어 -->
+	<select id="analCateF6" resultType="Integer">
+		SELECT COUNT(*) CNT FROM (
+		SELECT F.FUNDINGCATEGORY FROM ORDERS O JOIN FUNDING F 
+        ON O.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='미디어'
+	</select>
+	
+	<!-- 펀딩 통계 분류별 : 창작자 -->
+	<select id="analCateF7" resultType="Integer">
+		SELECT COUNT(*) CNT FROM (
+		SELECT F.FUNDINGCATEGORY FROM ORDERS O JOIN FUNDING F 
+        ON O.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='창작자'
+	</select>
+	
+	<!-- 펀딩 통계 분류별 : 남성 -->
+	<select id="analFGenderM" resultType="Integer">
+		SELECT COUNT(*) FROM (
+		SELECT DISTINCT U.ID FROM ORDERS O JOIN USERS U ON U.ID=O.ID WHERE GENDER='m')
+	</select>
+	
+	<!-- 펀딩 통계 분류별 : 여성 -->
+	<select id="analFGenderF" resultType="Integer">
+		SELECT COUNT(*) FROM (
+		SELECT DISTINCT U.ID FROM ORDERS O JOIN USERS U ON U.ID=O.ID WHERE GENDER='f')
+	</select>
+	
+	<!-- 커뮤니티 통계 연령별 : 1020대 -->
+	<select id="analAgeC1020" resultType="float">
+		SELECT NVL((SELECT COUNT(*) CNT FROM 
+		(SELECT DISTINCT G.ID FROM
+		(SELECT DISTINCT F.ID FROM
+		(SELECT DISTINCT C.ID FROM
+		(SELECT DISTINCT A.ID FROM 
+		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
+		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
+		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
+		WHERE U.AGE BETWEEN 10 AND 29)), 0) AS RESULT FROM DUAL
+	</select>
+	
+	<!-- 커뮤니티 통계 연령별 : 3040대 -->
+	<select id="analAgeC3040" resultType="float">
+		SELECT NVL((SELECT COUNT(*) CNT FROM 
+		(SELECT DISTINCT G.ID FROM
+		(SELECT DISTINCT F.ID FROM
+		(SELECT DISTINCT C.ID FROM
+		(SELECT DISTINCT A.ID FROM 
+		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
+		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
+		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
+		WHERE U.AGE BETWEEN 30 AND 49)), 0) AS RESULT FROM DUAL
+	</select>
+	
+	<!-- 커뮤니티 통계 연령별 : 5060대 -->
+	<select id="analAgeC5060" resultType="float">
+		SELECT NVL((SELECT COUNT(*) CNT FROM 
+		(SELECT DISTINCT G.ID FROM
+		(SELECT DISTINCT F.ID FROM
+		(SELECT DISTINCT C.ID FROM
+		(SELECT DISTINCT A.ID FROM 
+		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
+		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
+		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
+		WHERE U.AGE BETWEEN 50 AND 69)), 0) AS RESULT FROM DUAL
+	</select>	
+	
+	<!-- 커뮤니티 통계 분류별 : 자유게시판 -->
+	<select id="analCateC1" resultType="Integer">
+		SELECT COUNT(*) CNT FROM BULLETINEBOARD
+	</select>
+	
+	<!-- 커뮤니티 통계 분류별 : 후기게시판 -->
+	<select id="analCateC2" resultType="Integer">
+		SELECT COUNT(*) CNT FROM REVIEWBOARD
+	</select>
+	
+	<!-- 커뮤니티 통계 분류별 : 질답게시판 -->
+	<select id="analCateC3" resultType="Integer">
+		SELECT COUNT(*) CNT FROM QUESTIONBOARD
+	</select>
+	
+	<!-- 커뮤니티 통계 분류별 : 이벤트게시판 -->
+	<select id="analCateC4" resultType="Integer">
+		SELECT COUNT(*) CNT FROM EVENTBOARD
+	</select>
+	
+	<!-- 커뮤니티 통계 분류별 : 정보공유게시판 -->
+	<select id="analCateC5" resultType="Integer">
+		SELECT COUNT(*) CNT FROM SHAREBOARD
+	</select>
+	
+	<!-- 커뮤니티 통계 분류별 : 남성 -->
+	<select id="analCGenderM" resultType="Integer">
+		SELECT NVL((SELECT COUNT(*) CNT FROM 
+		(SELECT DISTINCT G.ID FROM
+		(SELECT DISTINCT F.ID FROM
+		(SELECT DISTINCT C.ID FROM
+		(SELECT DISTINCT A.ID FROM 
+		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
+		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
+		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
+		WHERE U.GENDER ='m')), 0) AS RESULT FROM DUAL   
+	</select>
+	
+	<!-- 커뮤니티 통계 분류별 : 여성 -->
+	<select id="analCGenderF" resultType="Integer">
+		SELECT NVL((SELECT COUNT(*) CNT FROM 
+		(SELECT DISTINCT G.ID FROM
+		(SELECT DISTINCT F.ID FROM
+		(SELECT DISTINCT C.ID FROM
+		(SELECT DISTINCT A.ID FROM 
+		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
+		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
+		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
+		WHERE U.GENDER ='f')), 0) AS RESULT FROM DUAL   
+	</select>
+	
+	<!-- 실 결제 금액 차트 -->
+	<select id="analPayment" resultType="hashMap">
+		SELECT C.PAYMENTDATE, B.AMOUNT FROM
+		(SELECT DISTINCT TO_CHAR(A.PAYMENTDATE,'YYYY-MM-DD') PAYMENTDATE,
+		LAST_VALUE(TOTAL) OVER(PARTITION BY TO_CHAR(A.PAYMENTDATE,'YYYY-MM-DD') ) AMOUNT
+		FROM (SELECT PAYMENTDATE, TOTALPAYMENT, SUM(TOTALPAYMENT) OVER (ORDER BY PAYMENTDATE
+		ROWS UNBOUNDED PRECEDING) TOTAL FROM PAYMENT ORDER BY PAYMENTDATE) A ORDER BY PAYMENTDATE) B
+		JOIN (SELECT TO_CHAR(SYSDATE - (LEVEL - 1), 'YYYY-MM-DD') PAYMENTDATE 
+		<![CDATA[
+		FROM DUAL CONNECT BY LEVEL <= 7) C ON B.PAYMENTDATE=C.PAYMENTDATE
+		]]>
+	</select>
+	
+	<!-- 실 결제 금액 표 -->
+	<select id="analPaymentTab" resultType="hashMap">
+		SELECT A.*, B.* FROM
+        (SELECT COUNT(*) PAYMENTCNT, SUM(TOTALPAYMENT) TOTALPAYMENT FROM PAYMENT) A
+        CROSS JOIN
+        (SELECT COUNT(*) ORDERCNT, SUM(ORDERTOTALPRICE) ORDERTOTALPRICE FROM ORDERS) B
+	</select>
+	
+	<!-- 펀딩 현황 표 -->
+	<select id="analFundingTab" resultType="hashMap">
+      	SELECT A.*, B.*, C.*, D.* FROM
+        (SELECT COUNT(*) PROCEEDING FROM FUNDING WHERE FUNDINGSTATE=1) A
+        CROSS JOIN
+        (SELECT COUNT(*) APPLY FROM APPLICATION WHERE FEEDBACK IS NULL) B
+        CROSS JOIN
+        (SELECT COUNT(*) REJECT FROM APPLICATION WHERE FEEDBACK IS NOT NULL AND FEEDBACK != 'approved') C
+        CROSS JOIN
+        (SELECT COUNT(*) FINISH FROM FUNDING WHERE FUNDINGSTATE = 0) D		
+	</select>
+		
 </mapper>
