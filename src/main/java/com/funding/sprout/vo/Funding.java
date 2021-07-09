@@ -1,8 +1,11 @@
 package com.funding.sprout.vo;
 
 import java.sql.Timestamp;
+
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+@Component
 public class Funding {
 	private int fundingno; // 펀딩번호
 	private char fundingstate; // 펀딩진행상태

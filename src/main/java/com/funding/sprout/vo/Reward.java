@@ -1,6 +1,8 @@
 package com.funding.sprout.vo;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class Reward {
 	private int rewardNo; //리워드 번호
 	private String rewardTitle; // 리워드명

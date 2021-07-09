@@ -1,6 +1,8 @@
 package com.funding.sprout.vo;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderRefund {
 	private int refundNo; // 환불 번호
 	private int orderDetailNo; // 주문 상세 번호

@@ -2,6 +2,8 @@ package com.funding.sprout.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+@Component
 public class Order {
 
 	private int orderNo; // 주문번호

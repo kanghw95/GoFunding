@@ -1,6 +1,8 @@
 package com.funding.sprout.vo;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderDetail {
 	private int orderDetailNo; // 주문 상세 번호
 	private int orderNo; // 주문 번호
