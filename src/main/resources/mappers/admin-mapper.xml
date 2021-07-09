@@ -11,8 +11,6 @@
 		<result property="point" column="point"/>
 		<result property="reportCnt" column="reportcnt"/>
 		<result property="userNo" column="userno"/>
-		<result property="suspensionStart" column="suspensionstart"/>
-		<result property="suspensionFin" column="suspensionfin"/>
 	</resultMap>
 	<resultMap type="Board" id="freeBoard"> <!-- 자유 게시판 -->
 		<id property="boardNo" column="freeno"/>
@@ -72,49 +70,14 @@
 		<result property="qnaId" column="id"/>
 		<result property="qnaMId" column="mid"/>
 		<result property="qnaADate" column="adate"/>
-		<result property="replyCnt" column="replycnt"/>
-	</resultMap>
-	<resultMap type="Comment" id="cmt">
-		<id property="cmtNo" column="qnacmtno"/>
-		<result property="cmtContent" column="qnacmtcontent"/>
-		<result property="cmtDate" column="qnacmtdate"/>
-	</resultMap>
-	<resultMap type="Report" id="rpt">
-		<result property="reportNo" column="reportno"/>
-		<result property="reportId" column="reportid"/>
-		<result property="reportType" column="reporttype"/>
-		<result property="reportWr" column="reportwr"/>
-		<result property="reportTitle" column="reporttitle"/>
-		<result property="reportContent" column="reportcontent"/>
-		<result property="id" column="id"/>
-		<result property="reportState" column="reportstate"/>
-	</resultMap>
-	<resultMap type="Report" id="brpt">
-		<result property="reportNo" column="breportno"/>
-		<result property="reportId" column="breportid"/>
-		<result property="reportType" column="breporttype"/>
-		<result property="reportWr" column="breportwr"/>
-		<result property="reportTitle" column="breporttitle"/>
-		<result property="reportContent" column="breportcontent"/>
-		<result property="id" column="id"/>
-		<result property="reportState" column="breportstate"/>
-	</resultMap>
-	<resultMap type="Report" id="crpt">
-		<result property="reportNo" column="creportno"/>
-		<result property="reportId" column="creportid"/>
-		<result property="reportType" column="creporttype"/>
-		<result property="reportWr" column="creportwr"/>
-		<result property="reportContent" column="creportcontent"/>
-		<result property="id" column="id"/>
-		<result property="reportState" column="creportstate"/>
 	</resultMap>
 	
 	<!-- 페이징 + 사용자 조회 -->
 	<select id="selectUser" resultType="arraylist" resultMap="resultUser">
-        SELECT * FROM (SELECT ID, NAME, NICKNAME, PHONE, GENDER, AGE, POINT, REPORTCNT, USERNO, SUSPENSIONSTART, SUSPENSIONFIN
+        SELECT * FROM (SELECT ID, NAME, NICKNAME, PHONE, GENDER, AGE, POINT, REPORTCNT, USERNO
 		, ROW_NUMBER() OVER (ORDER BY USERNO ASC) AS RNUM FROM USERS) MP
 		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
-		ORDER BY USERNO ASC
+		ORDER BY USERNO ASC;
 	</select>
 	
 	<!-- 사용자 수 조회 -->
@@ -192,15 +155,10 @@
 	
 	<!-- 페이징 + Qna 조회 -->
 	<select id="selectQna" resultType="arraylist" resultMap="qna">
-		SELECT * FROM (SELECT QNANO, QNATITLE, QNACONTENT, QNATYPE, QNADATE, QNACNT, ID, MID, ADATE, REPLYCNT
+		SELECT * FROM (SELECT QNANO, QNATITLE, QNACONTENT, QNATYPE, QNADATE, QNACNT, ID, MID, ADATE
 		, ROW_NUMBER() OVER (ORDER BY QNANO ASC) AS RNUM FROM QNA) MP
 		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 		ORDER BY QNANO ASC
-	</select>
-	
-	<!-- QnaReply qNo 조회 -->
-	<select id="selectQnaReply" resultMap="qna">
-		SELECT * FROM QNA WHERE QNANO = #{qNo}
 	</select>
 	
 	<!-- 자유 게시판 제목 조회 -->
@@ -434,106 +392,7 @@
 	<delete id="deleteQna">
 		DELETE FROM QNA WHERE QNANO = #{qnaNo}
 	</delete>
-	
-	<!-- Qna 답글 추가 -->
-	<insert id="qnaInsert">
-		INSERT INTO QNACOMMENT VALUES (QNACMT_SEQ.NEXTVAL, #{cmtContent}, SYSDATE, 0, 0, 0
-		, 'park', #{cmtNo})
-	</insert>
-	
-	<!-- Qna 특정 답글 수 -->
-	<update id="replyUpdate" parameterType="qna">
-		UPDATE QNA SET REPLYCNT=(SELECT COUNT(*) FROM QNACOMMENT WHERE QNANO=#{cmtNo}) WHERE QNANO=#{cmtNo}
-	</update>
-	
-	<!-- Qna 답글 조회 -->
-	<select id="qnaCmt" resultType="arraylist" resultMap="cmt">
-		SELECT * FROM QNACOMMENT WHERE QNANO = #{cmtNo} ORDER BY QNACMTNO
-	</select>
-	
-	<!-- Qna 답글 하나만 조회 -->
-	<select id="qnaOne" resultType="arraylist" resultMap="cmt">
-		SELECT * FROM QNACOMMENT WHERE QNACMTNO = (SELECT max(QNACMTNO) FROM QNACOMMENT) AND QNANO = #{cmtNo}
-	</select>
-	
-	<!-- Qna 특정 답글 수 -->
-	<select id="replyCount" resultMap="cmt">
-		SELECT COUNT(*) FROM QNACOMMENT WHERE QNANO = #{cmtNo}
-	</select>
 
-	<!-- 신고 내역 조회 -->
-	<select id="report" resultMap="rpt">
-		SELECT REPORTNO, REPORTID, REPORTTYPE, REPORTWR, REPORTTITLE, REPORTCONTENT, ID, REPORTSTATE
-		FROM (
-		SELECT BREPORTNO AS REPORTNO, BREPORTID AS REPORTID
-		, BREPORTTYPE AS REPORTTYPE, BREPORTWR AS REPORTWR
-		, BREPORTTITLE AS REPORTTITLE, BREPORTCONTENT AS REPORTCONTENT
-		, ID, BREPORTSTATE AS REPORTSTATE FROM BOARDREPORT
-		UNION ALL
-		SELECT CREPORTNO AS REPORTNO, CREPORTID AS REPORTID
-		, CREPORTTYPE AS REPORTTYPE, CREPORTWR AS REPORTWR
-		, '' AS REPORTTITLE, CREPORTCONTENT AS REPORTCONTENT
-		, ID, CREPORTSTATE AS REPORTSTATE FROM COMMENTREPORT
-		) ORDER BY REPORTNO DESC
-	</select>
-	
-	<!-- 게시글 신고 상세 조회 -->
-	<select id="bReport" resultMap="brpt">
-		SELECT * FROM BOARDREPORT WHERE BREPORTNO = #{reportNo}
-	</select>
-	
-	<!-- 댓글 신고 상세 조회 -->
-	<select id="cReport" resultMap="crpt">
-		SELECT * FROM COMMENTREPORT WHERE CREPORTNO = #{reportNo}
-	</select>
-
-	<!-- 회원 정지일 설정 -->
-	<update id="userStop">
-		UPDATE USERS SET SUSPENSIONSTART = #{suspensionStart}, SUSPENSIONFIN = #{suspensionFin} WHERE ID = #{userId}
-	</update>
-	
-	<!-- 게시글 신고 상태 변경 -->
-	<update id="bReportState">
-		UPDATE BOARDREPORT SET BREPORTSTATE = 'Y' WHERE BREPORTNO = #{reportNo}
-	</update>
-	
-	<!-- 댓글 신고 상태 변경 -->
-	<update id="cReportState">
-		UPDATE COMMENTREPORT SET CREPORTSTATE = 'Y' WHERE CREPORTNO = #{reportNo}
-	</update>
-	
-	<!-- 회원 정지 횟수 추가 -->
-	<update id="reportCnt">
-		UPDATE USERS SET REPORTCNT = REPORTCNT + 1 WHERE ID = #{userId}
-	</update>
-	
-	<!-- 정지 해제 -->
-	<update id="reportStop">
-		<![CDATA[UPDATE USERS SET REPORTCNT = 0, SUSPENSIONSTART = NULL, SUSPENSIONFIN = NULL WHERE SUSPENSIONFIN <= SYSTIMESTAMP]]>
-	</update>
-	
-	<!-- 댓글 신고 내역 삭제 -->
-	<delete id="deleteCReport">
-		DELETE FROM COMMENTREPORT WHERE CREPORTNO = #{reportNo}
-	</delete>
-	
-	<!-- 게시글 신고 내역 삭제 -->
-	<delete id="deleteBReport">
-		DELETE FROM BOARDREPORT WHERE BREPORTNO = #{reportNo}
-	</delete>
-	
-	<!-- 신고 내역 검색 -->
-	<select id="reportSelect" resultMap="rpt">
-		SELECT * FROM (SELECT REPORTNO, REPORTID, REPORTTYPE, REPORTWR, REPORTTITLE, REPORTCONTENT, ID, REPORTSTATE 
-		FROM (
-		SELECT BREPORTNO AS REPORTNO, BREPORTID AS REPORTID, BREPORTTYPE AS REPORTTYPE, BREPORTWR AS REPORTWR, BREPORTTITLE AS REPORTTITLE, BREPORTCONTENT AS REPORTCONTENT
-		, ID, BREPORTSTATE AS REPORTSTATE FROM BOARDREPORT
-		UNION ALL
-		SELECT CREPORTNO AS REPORTNO, CREPORTID AS REPORTID, CREPORTTYPE AS REPORTTYPE, CREPORTWR AS REPORTWR, '' AS REPORTTITLE, CREPORTCONTENT AS REPORTCONTENT
-		, ID, CREPORTSTATE AS REPORTSTATE FROM COMMENTREPORT 
-		) ORDER BY REPORTNO DESC) WHERE REPORTTYPE = #{reportType}
-	</select>
-	
 	<!-- 펀딩 목록 조회 : 전체 -->
 	<select id="fundingList" resultType="map">
 		SELECT FUNDINGTITLE, FUNDINGNO FROM FUNDING WHERE FUNDINGSTATE = '1' ORDER BY FUNDINGNO
@@ -600,208 +459,5 @@
 	<update id="formReject">
 		UPDATE APPLICATION SET FEEDBACK = #{feedback} WHERE APPLYNO = #{applyNo}
 	</update>
-	
-	<!-- 펀딩 통계 연령별 : 1020대 -->
-	<select id="analAgeF1020" resultType="float">
-		SELECT NVL((SELECT COUNT(*) CNT1  FROM (
-		SELECT DISTINCT O.ID FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
-		JOIN USERS U ON A.ID=U.ID WHERE U.AGE BETWEEN 10 AND 29), 0)/
-		NVL((SELECT COUNT(*) CNT2 FROM (SELECT DISTINCT O.ID 
-		FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO)), 0) AS RESULT
-		FROM  DUAL
-	</select>
-	
-	<!-- 펀딩 통계 연령별 : 3040대 -->
-	<select id="analAgeF3040" resultType="float">
-		SELECT NVL((SELECT COUNT(*) CNT1  FROM (
-		SELECT DISTINCT O.ID FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
-		JOIN USERS U ON A.ID=U.ID WHERE U.AGE BETWEEN 30 AND 49), 0)/
-		NVL((SELECT COUNT(*) CNT2 FROM (SELECT DISTINCT O.ID 
-		FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO)), 0) AS RESULT
-		FROM  DUAL
-	</select>
-	
-	<!-- 펀딩 통계 연령별 : 5060대 -->
-	<select id="analAgeF5060" resultType="float">
-		SELECT NVL((SELECT COUNT(*) CNT1  FROM (
-		SELECT DISTINCT O.ID FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
-		JOIN USERS U ON A.ID=U.ID WHERE U.AGE BETWEEN 50 AND 69), 0)/
-		NVL((SELECT COUNT(*) CNT2 FROM (SELECT DISTINCT O.ID 
-		FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO)), 0) AS RESULT
-		FROM  DUAL
-	</select>
-	
-	<!-- 펀딩 통계 분류별 : 일자리 창출 -->
-	<select id="analCateF1" resultType="Integer">
-		SELECT COUNT(*) CNT FROM (
-		SELECT F.FUNDINGCATEGORY FROM (
-		SELECT DISTINCT O.FUNDINGNO FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
-		JOIN FUNDING F ON A.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='일자리 창출'
-	</select>
-	
-	<!-- 펀딩 통계 분류별 : 공정 무역 -->
-	<select id="analCateF2" resultType="Integer">
-		SELECT COUNT(*) CNT FROM (
-		SELECT F.FUNDINGCATEGORY FROM (
-		SELECT DISTINCT O.FUNDINGNO FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
-		JOIN FUNDING F ON A.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='공정 무역'
-	</select>
-	
-	<!-- 펀딩 통계 분류별 : 친환경 -->
-	<select id="analCateF3" resultType="Integer">
-		SELECT COUNT(*) CNT FROM (
-		SELECT F.FUNDINGCATEGORY FROM (
-		SELECT DISTINCT O.FUNDINGNO FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
-		JOIN FUNDING F ON A.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='친환경'
-	</select>
-	
-	<!-- 펀딩 통계 분류별 : 기부 -->
-	<select id="analCateF4" resultType="Integer">
-		SELECT COUNT(*) CNT FROM (
-		SELECT F.FUNDINGCATEGORY FROM (
-		SELECT DISTINCT O.FUNDINGNO FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
-		JOIN FUNDING F ON A.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='기부'
-	</select>
-	
-	<!-- 펀딩 통계 분류별 : 작은 가게 -->
-	<select id="analCateF5" resultType="Integer">
-		SELECT COUNT(*) CNT FROM (
-		SELECT F.FUNDINGCATEGORY FROM (
-		SELECT DISTINCT O.FUNDINGNO FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
-		JOIN FUNDING F ON A.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='작은 가게'
-	</select>
-	
-	<!-- 펀딩 통계 분류별 : 미디어 -->
-	<select id="analCateF6" resultType="Integer">
-		SELECT COUNT(*) CNT FROM (
-		SELECT F.FUNDINGCATEGORY FROM (
-		SELECT DISTINCT O.FUNDINGNO FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
-		JOIN FUNDING F ON A.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='미디어'
-	</select>
-	
-	<!-- 펀딩 통계 분류별 : 창작자 -->
-	<select id="analCateF7" resultType="Integer">
-		SELECT COUNT(*) CNT FROM (
-		SELECT F.FUNDINGCATEGORY FROM (
-		SELECT DISTINCT O.FUNDINGNO FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
-		JOIN FUNDING F ON A.FUNDINGNO=F.FUNDINGNO) WHERE FUNDINGCATEGORY='창작자'
-	</select>
-	
-	<!-- 펀딩 통계 분류별 : 남성 -->
-	<select id="analFGenderM" resultType="Integer">
-		SELECT COUNT(*) FROM (
-		SELECT DISTINCT O.ID FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
-		JOIN USERS U ON U.ID=A.ID WHERE GENDER='m'
-	</select>
-	
-	<!-- 펀딩 통계 분류별 : 여성 -->
-	<select id="analFGenderF" resultType="Integer">
-		SELECT COUNT(*) FROM (
-		SELECT DISTINCT O.ID FROM ORDERS O JOIN PAYMENT P ON O.ORDERNO=P.ORDERNO) A
-		JOIN USERS U ON U.ID=A.ID WHERE GENDER='f'
-	</select>
-	
-	<!-- 커뮤니티 통계 연령별 : 1020대 -->
-	<select id="analAgeC1020" resultType="float">
-		SELECT NVL((SELECT COUNT(*) CNT FROM 
-		(SELECT DISTINCT G.ID FROM
-		(SELECT DISTINCT F.ID FROM
-		(SELECT DISTINCT C.ID FROM
-		(SELECT DISTINCT A.ID FROM 
-		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
-		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
-		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
-		WHERE U.AGE BETWEEN 10 AND 29)), 0) AS RESULT FROM DUAL
-	</select>
-	
-	<!-- 커뮤니티 통계 연령별 : 3040대 -->
-	<select id="analAgeC3040" resultType="float">
-		SELECT NVL((SELECT COUNT(*) CNT FROM 
-		(SELECT DISTINCT G.ID FROM
-		(SELECT DISTINCT F.ID FROM
-		(SELECT DISTINCT C.ID FROM
-		(SELECT DISTINCT A.ID FROM 
-		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
-		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
-		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
-		WHERE U.AGE BETWEEN 30 AND 49)), 0) AS RESULT FROM DUAL
-	</select>
-	
-	<!-- 커뮤니티 통계 연령별 : 5060대 -->
-	<select id="analAgeC5060" resultType="float">
-		SELECT NVL((SELECT COUNT(*) CNT FROM 
-		(SELECT DISTINCT G.ID FROM
-		(SELECT DISTINCT F.ID FROM
-		(SELECT DISTINCT C.ID FROM
-		(SELECT DISTINCT A.ID FROM 
-		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
-		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
-		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
-		WHERE U.AGE BETWEEN 50 AND 69)), 0) AS RESULT FROM DUAL
-	</select>	
-	
-	<!-- 커뮤니티 통계 분류별 : 자유게시판 -->
-	<select id="analCateC1" resultType="Integer">
-		SELECT COUNT(*) CNT FROM BULLETINEBOARD
-	</select>
-	
-	<!-- 커뮤니티 통계 분류별 : 후기게시판 -->
-	<select id="analCateC2" resultType="Integer">
-		SELECT COUNT(*) CNT FROM REVIEWBOARD
-	</select>
-	
-	<!-- 커뮤니티 통계 분류별 : 질답게시판 -->
-	<select id="analCateC3" resultType="Integer">
-		SELECT COUNT(*) CNT FROM QUESTIONBOARD
-	</select>
-	
-	<!-- 커뮤니티 통계 분류별 : 이벤트게시판 -->
-	<select id="analCateC4" resultType="Integer">
-		SELECT COUNT(*) CNT FROM EVENTBOARD
-	</select>
-	
-	<!-- 커뮤니티 통계 분류별 : 정보공유게시판 -->
-	<select id="analCateC5" resultType="Integer">
-		SELECT COUNT(*) CNT FROM SHAREBOARD
-	</select>
-	
-	<!-- 커뮤니티 통계 분류별 : 남성 -->
-	<select id="analCGenderM" resultType="Integer">
-		SELECT NVL((SELECT COUNT(*) CNT FROM 
-		(SELECT DISTINCT G.ID FROM
-		(SELECT DISTINCT F.ID FROM
-		(SELECT DISTINCT C.ID FROM
-		(SELECT DISTINCT A.ID FROM 
-		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
-		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
-		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
-		WHERE U.GENDER ='m')), 0) AS RESULT FROM DUAL   
-	</select>
-	
-	<!-- 커뮤니티 통계 분류별 : 여성 -->
-	<select id="analCGenderF" resultType="Integer">
-		SELECT NVL((SELECT COUNT(*) CNT FROM 
-		(SELECT DISTINCT G.ID FROM
-		(SELECT DISTINCT F.ID FROM
-		(SELECT DISTINCT C.ID FROM
-		(SELECT DISTINCT A.ID FROM 
-		(SELECT DISTINCT B.ID FROM BULLETINEBOARD B LEFT OUTER JOIN REVIEWBOARD R ON B.ID=R.ID) A
-		JOIN QUESTIONBOARD Q ON A.ID=Q.ID) C LEFT OUTER JOIN EVENTBOARD E ON C.ID=E.ID) F
-		LEFT OUTER JOIN SHAREBOARD S ON F.ID=S.ID) G LEFT OUTER JOIN USERS U ON G.ID=U.ID
-		WHERE U.GENDER ='f')), 0) AS RESULT FROM DUAL   
-	</select>
-	
-	<!-- 실 결제 금액 -->
-	<select id="analPayment" resultType="hashMap">
-		SELECT C.PAYMENTDATE, B.AMOUNT FROM
-		(SELECT DISTINCT TO_CHAR(A.PAYMENTDATE,'YYYY-MM-DD') PAYMENTDATE,
-		LAST_VALUE(TOTAL) OVER(PARTITION BY TO_CHAR(A.PAYMENTDATE,'YYYY-MM-DD') ) AMOUNT
-		FROM (SELECT PAYMENTDATE, TOTALPAYMENT, SUM(TOTALPAYMENT) OVER (ORDER BY PAYMENTDATE
-		ROWS UNBOUNDED PRECEDING) TOTAL FROM PAYMENT ORDER BY PAYMENTDATE) A ORDER BY PAYMENTDATE) B
-		JOIN (SELECT TO_CHAR(SYSDATE - (LEVEL - 1), 'YYYY-MM-DD') PAYMENTDATE 
-		<![CDATA[
-		FROM DUAL CONNECT BY LEVEL <= 7) C ON B.PAYMENTDATE=C.PAYMENTDATE
-		]]>
-	</select>
 	
 </mapper>
