@@ -296,7 +296,25 @@ button{
 			}
 		});
 
-		
+		$("#declaration").on("click", function(){
+			// 신고 아이디 체크
+			var delete1 = confirm("신고하시겠습니까?");
+			var sessionUserId = '${sessionScope.user.userId}';
+			var boardId = '${data.boardId}';
+						
+			if(delete1){ // 확인누르면 
+			if (sessionUserId == 'null' || sessionUserId == '') {
+				alert("로그인 후 신고 가능합니다")
+				return false;
+			} 
+				var frm = document.getElementById("frmUpdate");
+				frm.action = "reportsend";
+				frm.method = "post";
+				frm.submit();
+			}else{
+				return false;	
+			}
+		});
 		// 통합 -  좋아요 / 해제
 		$(".board-content-like").click(function() {
 			if (checkId() == false) {

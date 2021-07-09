@@ -1,9 +1,12 @@
 package com.funding.sprout.board.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -21,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.funding.sprout.board.service.BoardService;
 import com.funding.sprout.comment.service.CommentService;
 import com.funding.sprout.vo.Board;
+import com.funding.sprout.vo.BoardReport;
 import com.funding.sprout.vo.Comment;
 import com.funding.sprout.vo.User;
 
@@ -39,33 +43,24 @@ public class BoardCtrl {
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ModelAndView list( // 게시글 목록
 			@RequestParam(name = "page", defaultValue = "1") int page,
-			@RequestParam(name = "keyword", required = false) String keyword, ModelAndView mv, Board vo) {
+			@RequestParam(name = "keyword", required = false) String keyword, ModelAndView mv, Comment cm, Board vo) {
 		logger.info("list()");
 		try {
-			
-			
 			int currentPage = page; // 한 페이지당 출력할 목록 갯수
-			mv.addObject("currentPage", currentPage);
-			
-			int listCount = boService.totalCount(); // 게시글 목록
-			mv.addObject("listCount", listCount);
-			
+			int listCount = boService.totalCount();
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
-			mv.addObject("maxPage", maxPage);
-			
+					
 			if (keyword != null && !keyword.equals("")) {
 				mv.addObject("list", boService.searchList(keyword));
-				List<Board> setcmt = boService.CommentCount(vo.getCmt()); // 리스트에 보여줄 댓글수
-				mv.addObject("cmt",setcmt);
 			}else {
 				ArrayList<Board> aaa = new ArrayList<Board>(boService.selectList(currentPage, LIMIT));
 				mv.addObject("list", aaa);
-				
-				List<Board> setcmt = boService.CommentCount(vo.getCmt()); // 리스트에 보여줄 댓글수
-				mv.addObject("cmt",setcmt);
-				System.out.println(setcmt);
 			}
 			logger.info("list()aaaa: ");
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("listCount", listCount);
+			mv.addObject("maxPage", maxPage);
+ 			
 			mv.setViewName("board/list");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -77,31 +72,40 @@ public class BoardCtrl {
 
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
 	public ModelAndView detail(ModelAndView mv, @RequestParam(name = "boardNo") int boardNo,
-			@RequestParam(name = "page", defaultValue = "1") int page, HttpSession session, Comment cm) { // 게시글 상세보기
+			@RequestParam(name = "page", defaultValue = "1") int page, HttpSession session,HttpServletResponse response){ // 게시글 상세보기
 		// 방법1
-		try {	
-			String boardId = ((User)session.getAttribute("user")).getUserId(); 
-			
+		try {		
 			Board data = boService.selectBoard(0, boardNo); // 조회수증가
+			int currentPage = page;
+			int likecnt = 0; // 추천수
+			mv.addObject("currentPage", currentPage);
 			mv.addObject("data", data);
 			
-			int currentPage = page;
-			mv.addObject("currentPage", currentPage);
-			
+			String boardId = ((User)session.getAttribute("user")).getUserId(); 
 			int isLiked = boService.checklike(boardNo, boardId);    // 좋아요상태 :1, 아니면 :0
-			mv.addObject("isliked", isLiked);
+			mv.addObject("isliked", isLiked);   // 좋아요상태 :1, 아니면 :0
 			
-			int likecnt = boService.likecnt(boardNo); // 추천수
+			likecnt = boService.likecnt(boardNo); // 추천수
 			mv.addObject("likecnt", likecnt);
 		
-		
-			
 			List<Comment> commentList = comService.CommentAll(boardNo); // 댓글 목록 리스트
 			mv.addObject("commentList", commentList);	
+			
 			} catch (Exception e) {
 			e.printStackTrace();
-			mv.addObject("msg", e.getMessage());
-			mv.setViewName("errorPage");
+//			mv.addObject("msg", e.getMessage());
+
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out;
+				out = response.getWriter();
+				out.println("<script>alert('로그인 후 상세보기가 가능합니다.');</script>");			 
+				out.flush();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				}
+			System.out.println("로그인 해야 상세보기가 가능합니다.");
+			mv.setViewName("user/login");
 			}	
 		return mv;
 		// 방법2
@@ -145,6 +149,7 @@ public class BoardCtrl {
 	public ModelAndView delete(@RequestParam(name = "boardNo") int boardNo,
 			@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) { // 게시글 삭제
 		try {
+//			Board b = boService.selectBoard(1, boardNo);
 			boService.deleteBoard(boardNo);
 			mv.addObject("currentPage", page);
 			mv.setViewName("redirect:list");
@@ -184,13 +189,30 @@ public class BoardCtrl {
 			} else {
 				}
 			likecnt = boService.likecnt(boardNo); // 총 추천수
+			//mv.addObject("likecnt", likecnt);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return likecnt;
 	}
 	
-	
+	@RequestMapping(value = "reportsend", method = RequestMethod.POST)
+	public String ReportSend(HttpSession session, Board vo, BoardReport br, ModelAndView mv) { // 게시글 신고
+		try{
+			String boardId = ((User)session.getAttribute("user")).getUserId(); // 신고할 아이디 = 게시글 작성자 인데 / 이건 로그인한아이디
+			System.out.println("[순찬 07-09]boardId : " + boardId);
+			
+	 		int result = boService.ReportSend(br);
+	 		mv.addObject("result",result);
+//	 		mv.setViewName("board/reportsend");
+			}catch(Exception e) {
+				e.printStackTrace();
+				mv.addObject("msg", e.getMessage());
+				mv.setViewName("errorPage");
+		}
+		return "board/reportsend";
+	}
+
 	
 	
 	
@@ -207,12 +229,6 @@ public class BoardCtrl {
 	@RequestMapping(value = "boardRead", method = RequestMethod.GET)
 	public ModelAndView boarRead() { // 게시글 읽기
 		return null;
-
-	}
-
-	@RequestMapping(value = "reportSend", method = RequestMethod.GET)
-	public int ReportSend() { // 게시글 신고
-		return 0;
 
 	}
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.funding.sprout.board.dao.BoardDao;
 import com.funding.sprout.vo.Board;
+import com.funding.sprout.vo.BoardReport;
 
 @Service("boService")
 public class BoardServiceImpl implements BoardService {
@@ -91,14 +92,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<Board> CommentCount(int cmt) { // 댓글 수 조회
-		return boDao.CommentCount(cmt);
+	public int ReportSend(BoardReport br) { // 게시글 신고
+		return boDao.ReportSend(br);
 	}
-	
-	
-	
-	
-	
 	
 	
 	
@@ -111,10 +107,7 @@ public class BoardServiceImpl implements BoardService {
 		return boDao.searchList(keyword);
 	}
 
-	@Override
-	public int ReportSend(Board b) { // 게시글 신고
-		return boDao.insertBoard(b);
-	}
+
 
 
 

@@ -3,6 +3,7 @@ package com.funding.sprout.board.service;
 import java.util.List;
 
 import com.funding.sprout.vo.Board;
+import com.funding.sprout.vo.BoardReport;
 
 public interface BoardService {
 	
@@ -30,17 +31,11 @@ public interface BoardService {
 	
 	int likecnt(int boardNo); // 게시글 추천수
 	
-	List<Board> CommentCount(int cmt); // 댓글 수 조회
-	
-
+	int ReportSend(BoardReport br); // 게시글 신고
 	
 	
 	
 	
 
 	List<Board> searchList(String keyword);
-	
-	int ReportSend(Board b);
-	
-	
 }

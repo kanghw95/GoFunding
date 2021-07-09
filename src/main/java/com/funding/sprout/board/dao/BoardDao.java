@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.funding.sprout.vo.Board;
+import com.funding.sprout.vo.BoardReport;
 
 
 @Repository("boDao")
@@ -76,14 +77,10 @@ public class BoardDao {
 	public int likecnt(int boardNo) { // 게시글 추천수
 		return sqlSession.selectOne("Board.likecnt", boardNo);
 	}
-	
-	public List<Board> CommentCount(int cmt) { // 댓글 수 조회
-		return sqlSession.selectList("Board.CommentCount", cmt);
+
+	public int ReportSend(BoardReport br) { //게시글 신고
+		return sqlSession.insert("Board.ReportSend", br);	
 	}
-	
-	
-	
-	
 	
 	
 	
@@ -95,10 +92,7 @@ public class BoardDao {
 		return sqlSession.selectList("Board.searchList" , keyword); // 게시글 검색 조회
 	}
 
-	public int ReportSend(Board b) { //게시글 신고
-		return sqlSession.insert("Board.insertBoard", b);
-		
-	}
+
 	
 
 } 

@@ -82,12 +82,18 @@
 					<td align="center">${vo.boardNo }</td>
 					<td align="left"><a href="detail?boardNo=${vo.boardNo }&page=${currentPage}" class="title">${vo.boardTitle }</a>
 					&nbsp;
-					<c:if test="${cmt[status.index] ne null }">
-					<small>(${cmt[status.index] })</small>
+					
+					<!-- 제목 옆에 댓글수 -->
+						<c:if test="${vo.cmt ne 0}">
+							<small>(${vo.cmt})</small>
 					</c:if>
-					<c:if test="${cmt[status.index] eq null}">
-					<small></small>
+					
+					<c:if test="${vo.cmt eq 0}">
+						<small></small>
 					</c:if>
+					
+					
+				
 					</td>
 					
 					<td align="center">${vo.boardId }</td>
