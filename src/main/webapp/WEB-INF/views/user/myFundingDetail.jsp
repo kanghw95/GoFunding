@@ -15,6 +15,9 @@
 				<p class="fundingTitle"><b>펀딩 이름: </b>${fundingDetail.fundingTitle }</p>
 				<p class="maker"><b>메이커: </b>${fundingDetail.maker }</p>
 				<p class="orderNo"><b>주문 번호: </b>${fundingDetail.orderNo }</p>
+				<p class="orderStatus"><b>주문 상태: </b>
+				
+				</p>
 			</div>
 			
 			<div class="fundingDetail" style="border: 1px solid #ededed">

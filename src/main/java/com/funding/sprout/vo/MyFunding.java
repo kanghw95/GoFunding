@@ -7,6 +7,7 @@ public class MyFunding {
 	private int orderNo;
 	private int orderDetailNo;
 	private int fundingNo;
+	private char orderStatus;
 	private String userId;
 	private String fundingTitle;
 	private String maker;
@@ -19,6 +20,12 @@ public class MyFunding {
 	private Timestamp fundingfin;
 	
 	
+	public char getOrderStatus() {
+		return orderStatus;
+	}
+	public void setOrderStatus(char orderStatus) {
+		this.orderStatus = orderStatus;
+	}
 	public int getFundingNo() {
 		return fundingNo;
 	}
@@ -100,18 +107,19 @@ public class MyFunding {
 	@Override
 	public String toString() {
 		return "MyFunding [orderNo=" + orderNo + ", orderDetailNo=" + orderDetailNo + ", fundingNo=" + fundingNo
-				+ ", userId=" + userId + ", fundingTitle=" + fundingTitle + ", maker=" + maker + ", orderDate="
-				+ orderDate + ", rewardTitle=" + rewardTitle + ", rewardPrice=" + rewardPrice + ", rewardCount="
-				+ rewardCount + ", rTotalPrice=" + rTotalPrice + ", fundingstart=" + fundingstart + ", fundingfin="
-				+ fundingfin + "]";
+				+ ", orderStatus=" + orderStatus + ", userId=" + userId + ", fundingTitle=" + fundingTitle + ", maker="
+				+ maker + ", orderDate=" + orderDate + ", rewardTitle=" + rewardTitle + ", rewardPrice=" + rewardPrice
+				+ ", rewardCount=" + rewardCount + ", rTotalPrice=" + rTotalPrice + ", fundingstart=" + fundingstart
+				+ ", fundingfin=" + fundingfin + "]";
 	}
-	public MyFunding(int orderNo, int orderDetailNo, int fundingNo, String userId, String fundingTitle, String maker,
-			Date orderDate, String rewardTitle, int rewardPrice, int rewardCount, int rTotalPrice,
-			Timestamp fundingstart, Timestamp fundingfin) {
+	public MyFunding(int orderNo, int orderDetailNo, int fundingNo, char orderStatus, String userId,
+			String fundingTitle, String maker, Date orderDate, String rewardTitle, int rewardPrice, int rewardCount,
+			int rTotalPrice, Timestamp fundingstart, Timestamp fundingfin) {
 		super();
 		this.orderNo = orderNo;
 		this.orderDetailNo = orderDetailNo;
 		this.fundingNo = fundingNo;
+		this.orderStatus = orderStatus;
 		this.userId = userId;
 		this.fundingTitle = fundingTitle;
 		this.maker = maker;
@@ -125,6 +133,7 @@ public class MyFunding {
 	}
 	public MyFunding() {
 	}
+	
 	
 	
 	 

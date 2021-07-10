@@ -26,6 +26,7 @@
 	<resultMap type="MyFunding" id="resultMyFunding">
 		<result property="orderNo" column="ORDERNO" />
 		<result property="orderDetailNo" column="ORDERDETAILNO" />
+		<result property="orderStatus" column="ORDERSTATUS" />
 		<result property="fundingNo" column="FUNDINGNO" />
 		<result property="userId" column="ID" />
 		<result property="fundingTitle" column="FUNDINGTITLE" />
@@ -127,9 +128,9 @@
 	<!-- 내가 참여한 펀딩 상세 -->
 	<select id="myFundingReward" parameterType="string" resultType="myFunding">
 		<![CDATA[
-			SELECT B.FUNDINGNO, R.REWARDTITLE, R.REWARDPRICE, B.REWARDCOUNT, B.REWARDPRICE AS RTOTALPRICE, B.ORDERNO, B.ORDERDETAILNO 
+			SELECT B.FUNDINGNO, R.REWARDTITLE, R.REWARDPRICE, B.REWARDCOUNT, B.REWARDPRICE AS RTOTALPRICE, B.ORDERNO, B.ORDERDETAILNO, B.ORDERSTATUS 
 			FROM REWARD R JOIN (
-			    SELECT O.FUNDINGNO, O.ID, D.REWARDNO, D.REWARDPRICE, D.REWARDCOUNT, D.ORDERNO, D.ORDERDETAILNO
+			    SELECT O.FUNDINGNO, O.ID, D.REWARDNO, D.REWARDPRICE, D.REWARDCOUNT, D.ORDERNO, D.ORDERDETAILNO, D.ORDERSTATUS
 			    FROM ORDERS O JOIN ORDERSDETAIL D
 			    ON O.ORDERNO = D.ORDERNO
 			    WHERE O.ID = #{userId}
