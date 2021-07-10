@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,47 +13,54 @@
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
+	
 
-	<button type="button" onclick="requestPay();">결제하기</button>
+			<c:if test="${fundinglist eq null}">
+				<tr>
+					<td colspan="6" align="center"><br><br>펀딩이 존재하지않습니다.<br><br></td>
+				</tr>
+			</c:if>
 
+			<c:if test="${fundinglist ne null}">
+				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
+					<li class="fundingContent_item">
+							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+								<div class="FundingCard_img_wrap">
+									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
+								</div>
+									<div class="fundingCard_content">
+										<strong class="fundingCard_percent">
+											<span class="blind">달성률</span><span class="FundingCard_number__n_hbd"><fmt:parseNumber var="percent" value="${(vo.currentprice/vo.fundingprice)*100 }" integerOnly="true" />${percent}</span>%</strong>
+											<strong class="fundingCard_title">${vo.fundingtitle}</strong>
+										<div class="fundingCard_organization">${vo.maker}</div>
+										<div class="fundingCard_figure">
+										<jsp:useBean id="currTime" class="java.util.Date" />
 
-<script>
-var IMP = window.IMP; // 생략가능
-IMP.init('imp28987277'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+										<jsp:useBean id="now" class="java.util.Date" />
+										<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+										<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
+										<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+										<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
+										<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+										
+										<c:choose>
+											<c:when test="${(endDate-strDate) gt 0 }">
+												<span class="fundingCard_date">${endDate - strDate } 일 남음</span>
+											</c:when>
+											<c:otherwise>
+											<span class="fundingCard_date">종료</span>
+											</c:otherwise>
+										</c:choose>
+											<span class="fundingCard_amount"><strong class="FundingCard_number__n_hbd"> <fmt:formatNumber value="${vo.currentprice}" pattern="#,###,###"/></strong> 원</span>
+										</div>
+									</div>
+							</a>
+					</li>
+					
+				</c:forEach>
+			</c:if>
+			
 
-
-function requestPay() {
-    // IMP.request_pay(param, callback) 호출
-    IMP.request_pay({ // param
-        pg: "html5_inicis",
-        pay_method: "card",
-        merchant_uid: "ORD20180131-0000011",
-        name: "노르웨이 회전 의자",
-        amount: 64900,
-        buyer_email: "gildong@gmail.com",
-        buyer_name: "홍길동",
-        buyer_tel: "010-4242-4242",
-        buyer_addr: "서울특별시 강남구 신사동",
-        buyer_postcode: "01181"
-    }, function (rsp) { // callback
-	    if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-	        // jQuery로 HTTP 요청
-	        jQuery.ajax({
-	            url: "https://www.myservice.com/payments/complete", // 가맹점 서버
-	            method: "POST",
-	            headers: { "Content-Type": "application/json" },
-	            data: {
-	                imp_uid: rsp.imp_uid,
-	                merchant_uid: rsp.merchant_uid
-	            }
-	        }).done(function (data) {
-	          // 가맹점 서버 결제 API 성공시 로직
-	        })
-	      } else {
-	        alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-	      }
-	    });
-  }
-</script>
+				
 </body>
 </html>

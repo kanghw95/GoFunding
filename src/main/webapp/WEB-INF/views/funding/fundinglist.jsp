@@ -122,10 +122,19 @@ pageEncoding="UTF-8"%>
 				<div class="SelectArea_select" style="visibility: visible;">
 					<button  class="SelectArea_button" id="SelectArea_button" aria-haspopup="listbox" aria-expanded="false">최신 순</button>
 						<ul style="font-size: 14px;" class="SelectArea_select_list" id="SelectArea_select_list" role="listbox" aria-hidden="true">
-							<li role="option" class="SelectArea_select_item" tabindex="0" data-value="LATEST" aria-selected="true"><span class="SelectArea_text__1tG5r">최신 순</span></li>
-							<li role="option" class="SelectArea_select_item" tabindex="0" data-value="PARTICIPATION_AMOUNT" aria-selected="false"><span class="SelectArea_text__1tG5r">참여금액 순</span></li>
-							<li role="option" class="SelectArea_select_item" tabindex="0" data-value="PARTICIPATION_RATE" aria-selected="false"><span class="SelectArea_text__1tG5r">참여율 순</span></li>
-							<li role="option" class="SelectArea_select_item" tabindex="0" data-value="END_APPROACH" aria-selected="false"><span class="SelectArea_text__1tG5r">종료 임박 순</span></li>
+						
+							<li role="option" class="SelectArea_select_item" id="LATEST" tabindex="0" data-value="LATEST" aria-selected="true">
+								<span class="SelectArea_text__1tG5r">최신 순</span>
+							</li>
+							
+							<li role="option" class="SelectArea_select_item" id="PARTICIPATION_AMOUNT" tabindex="0" data-value="PARTICIPATION_AMOUNT" aria-selected="false">
+								<span class="SelectArea_text__1tG5r">참여금액 순</span>
+							</li>
+							
+							<li role="option" class="SelectArea_select_item" id="END_APPROACH" tabindex="0" data-value="END_APPROACH" aria-selected="false">
+								<span class="SelectArea_text__1tG5r">종료임박 순</span>
+							</li>
+							
 						</ul>
 				</div>
 			</div>
@@ -541,6 +550,16 @@ pageEncoding="UTF-8"%>
 
 <script>
 
+
+		// 뒤로가기 버튼시 작동
+		window.onpageshow = function(event) {
+		if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+		// Back Forward Cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
+				$("input:radio[id='funding_home_tab_all']").prop("checked", true);  // 전체 선택하기
+						
+		        }
+		}
+
 		//종류별 보기 탭
 		var listbtn = document.getElementById("SelectArea_button");
 		var list = document.getElementById("SelectArea_select_list");
@@ -555,20 +574,98 @@ pageEncoding="UTF-8"%>
 				list.setAttribute("aria-hidden","true");
 			}
 		});
-		
-		
-		
+
+		// 종류별 보기 탭 기능
+			var LATEST = $("#LATEST").children('.SelectArea_text__1tG5r').html();
+			var PARTICIPATION_AMOUNT = $("#PARTICIPATION_AMOUNT").children('.SelectArea_text__1tG5r').html();
+			var END_APPROACH = $("#END_APPROACH").children('.SelectArea_text__1tG5r').html();
+
+			
+			 function checkList1(){
+					var cat = null;
+					console.log(LATEST);
+						cat = $("#LATEST").children('.SelectArea_text__1tG5r').html();
+						$.ajax({
+							url: "funselectCat",
+							type: "POST",
+							dataType : "text",
+							data: {"cat" : cat},
+
+							success : function(data){
+									console.log(data);
+									$("#SelectArea_button").text(cat);
+									listbtn.setAttribute("aria-expanded","false");
+									list.setAttribute("aria-hidden","true");
+									$("#tab_all").html(data);
+
+							},
+							error : function(data){
+								console.log("ajax는 일단 들어옴 but 실패");
+								console.log("error data : " + data)
+							}
+							})
+						}
+			 
+			 
+			 function checkList2(){
+				var formData = new FormData();
+				var cat = null;
+				cat = $("#PARTICIPATION_AMOUNT").children('.SelectArea_text__1tG5r').html();
+				console.log(PARTICIPATION_AMOUNT);
+				
+					$.ajax({
+						url: "funselectCat",
+						type: "POST",
+						dataType : "text",
+						data: {"cat" : cat},
+
+						success : function(data){
+								console.log(data);
+								$("#SelectArea_button").text(cat);
+								listbtn.setAttribute("aria-expanded","false");
+								list.setAttribute("aria-hidden","true");
+								$("#tab_all").html(data);
+
+						},
+						error : function(data){
+							console.log("ajax는 일단 들어옴 but 실패");
+							console.log("error data : " + data)
+						}
+						})
+					}
+					
+					
+					
+					
+			 function checkList3(){
+					var cat = null;
+					console.log(END_APPROACH);
+						cat = $("#END_APPROACH").children('.SelectArea_text__1tG5r').html();
+						$.ajax({
+							url: "funselectCat",
+							type: "POST",
+							dataType : "text",
+							data: {"cat" : cat},
+
+							success : function(data){
+									console.log(data);
+									$("#SelectArea_button").text(cat);
+									listbtn.setAttribute("aria-expanded","false");
+									list.setAttribute("aria-hidden","true");
+									$("#tab_all").html(data);
+							},
+							error : function(data){
+								console.log("ajax는 일단 들어옴 but 실패");
+								console.log("error data : " + data)
+							}
+							})
+						}
+
+			$("#LATEST").on("click", checkList1);
+			$("#PARTICIPATION_AMOUNT").on("click", checkList2);
+			$("#END_APPROACH").on("click", checkList3);
 		// 카테고리 이동 버튼
 
-
-		
-		window.onpageshow = function(event) {
-				if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
-				// Back Forward Cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
-						$("input:radio[id='funding_home_tab_all']").prop("checked", true);  // 전체 선택하기
-							
-				        }
-				}
 		$("input:radio[id='funding_home_tab_all']").prop("checked", true);  // 전체 선택하기
 		let funding_home_tab_all = document.getElementById("funding_home_tab_all");
 
@@ -685,6 +782,8 @@ pageEncoding="UTF-8"%>
 			
 			tab_all.style.display = 'none';
 	});
+		
+		
 		
 
 		

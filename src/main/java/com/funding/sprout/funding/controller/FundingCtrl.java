@@ -5,8 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +25,8 @@ import com.funding.sprout.vo.OrderDetail;
 import com.funding.sprout.vo.OrderRefund;
 import com.funding.sprout.vo.Reward;
 import com.funding.sprout.vo.User;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Controller
 public class FundingCtrl {
@@ -60,9 +66,11 @@ public class FundingCtrl {
 	}
 
 	// 전체 펀딩 조회
+	@ResponseBody
 	@RequestMapping(value = "funselect", method = RequestMethod.GET)
 	public ModelAndView selectList(ModelAndView mv) {
 		try {
+
 			int listcount = funService.listCount();
 			List<Funding> fundinglist = funService.selectList();
 
@@ -79,6 +87,27 @@ public class FundingCtrl {
 		}
 		return mv;
 	}
+	
+	@RequestMapping(value = "funselectCat")  
+	public String catCheck(HttpServletRequest request,Model mv,@RequestParam(name = "cat") String cat) {
+		
+		try {
+			if(cat != "") {
+				System.out.println("변경을 원하는 순서는 = " + cat);
+				
+				List<Funding> fundinglist = funService.selectCatList(cat);
+				System.out.println(fundinglist);
+				mv.addAttribute("fundinglist", fundinglist);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/funding/paytest";
+		
+	}
+	
+	
 
 	// 펀딩 상세 페이지
 	@RequestMapping(value = "funding/detail", method = RequestMethod.GET)

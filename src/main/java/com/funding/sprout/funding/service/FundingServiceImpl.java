@@ -30,6 +30,12 @@ public class FundingServiceImpl implements FundingService {
 	public List<Funding> searchList(String serchOption, String keyword) {
 		return funDao.searchList(serchOption, keyword);
 	}
+	
+	@Override
+	public List<Funding> selectCatList(String serchOption) {
+		// TODO Auto-generated method stub
+		return funDao.selectCatList(serchOption);
+	}
 
 	@Override
 	public List<Funding> selectList() {
@@ -115,11 +121,6 @@ public class FundingServiceImpl implements FundingService {
 	public Funding getPreference() {
 		return null;
 	}
-
-
-
-
-
 
 
 }

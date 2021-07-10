@@ -26,7 +26,22 @@
 	
 	<!-- 펀딩  전체  조회 -->
 	<select id="selectlist" resultType="arraylist" resultMap="resultFunding">
-		SELECT * FROM FUNDING  order by fundingstate desc
+		SELECT * FROM FUNDING  order by FUNDINGFIN desc
+	</select>
+	
+	<!-- 펀딩  원하는 순서로  조회 -->
+	<select id="selectCatList" resultType="arraylist" resultMap="resultFunding">
+	
+			<if test="serchOption.equals('최신 순')">
+				SELECT * FROM FUNDING  order by FUNDINGFIN desc
+			</if>
+			<if test="serchOption.equals('참여금액 순')">
+				SELECT * FROM FUNDING  order by CURRENTPRICE desc
+			</if>
+			
+			<if test="serchOption.equals('종료임박 순')">
+				SELECT * FROM FUNDING WHERE FUNDINGSTATE = 1 order by FUNDINGFIN asc
+            </if>
 	</select>
 	
 	<!-- 펀딩  제목&내용 검색 -->

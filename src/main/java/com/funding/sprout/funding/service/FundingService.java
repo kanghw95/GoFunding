@@ -14,6 +14,8 @@ public interface FundingService {
 	public Funding selectOne(int fundingno); // 펀딩 상세페이지
 
 	public List<Funding> searchList(String serchOption, String keyword); // 펀딩 제목&내용 검색
+	
+	public List<Funding> selectCatList(String serchOption); // 펀딩 분류별 검색
 
 	public List<Funding> selectList();// 전체 펀딩 조회
 
