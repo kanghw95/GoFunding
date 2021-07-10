@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+
+h2 {
+	margin-left: 15px; 
+}
+
+ul, li {
+	list-style-type: none;
+	padding: 0;
+}
+
+
+
+.withdrawlContainer {
+	width: 700px;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.withdrawlReason {
+	border: 1px solid #ededed;
+	border-radius: 7px;
+	padding: 30px;
+	margin: 15px;
+}
+
+
+.caution {
+	border: 1px solid #ededed;
+	border-radius: 7px;
+	padding: 30px;
+	margin: 15px;
+}
+
+
+
+
+.btnContainer {
+	margin: 15px;
+	text-align: center;
+}
+
+.withdrawlBtn{
+	diplay:block;
+	margin-top:10px;
+	background:#568C82;
+	color:#fff;
+	border:none;
+	position:relative;
+	height:40px;
+	font-size: 16px;
+	padding:0 1em;
+	cursor:pointer;
+	transition:800ms ease all;
+	outline:none;
+	border-radius:5px;
+}
+
+
+.withdrawlBtn:hover{
+	background:#fff;
+	color:#1AAB8A;
+}
+
+.withdrawlBtn:before,.withdrawlBtn:after{
+	content:'';
+	position:absolute;
+	top:0;
+	right:0;
+	height:2px;
+	width:0;
+	background: #1AAB8A;
+	transition:400ms ease all;
+}
+.withdrawlBtn:after{
+	right:inherit;
+	top:inherit;
+	left:0;
+	bottom:0;
+}
+.withdrawlBtn:hover:before,.withdrawlBtn:hover:after {
+	width:100%;
+	transition:800ms ease all;
+}

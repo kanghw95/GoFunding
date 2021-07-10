@@ -25,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.funding.sprout.HomeController;
-import com.funding.sprout.user.service.UserInsertService;
+import com.funding.sprout.user.service.UserInfoService;
 import com.funding.sprout.user.service.UserSMSService;
 import com.funding.sprout.vo.User;
 
@@ -33,28 +33,15 @@ import net.nurigo.java_sdk.Coolsms;
 
 @Controller
 @RequestMapping("/user")
-public class UserInsertCtrl {
+public class UserInfoCtrl {
 	
 	@Autowired
-	private UserInsertService userService;
+	private UserInfoService userService;
 	
 	@Autowired
 	private UserSMSService smsService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	@RequestMapping(value = "selectAll", method = RequestMethod.GET)  
-	public ModelAndView selectAll() {
-		return null; // 전체 회원 조회
-		
-	}
-	
-	@RequestMapping(value = "searchUser", method = RequestMethod.GET)  
-	public ModelAndView searchUser() {
-		return null; // 회원 검색
-		
-	}
-	
 	
 	
 	// 회원가입 페이지
@@ -173,8 +160,25 @@ public class UserInsertCtrl {
 	}
 
 	
-	@RequestMapping(value = "drawlUser", method = RequestMethod.GET)  
-	public ModelAndView drawlUser() {
+	
+	@RequestMapping(value = "/withdrawl", method = RequestMethod.GET)  
+	public String withdrawlUser() {
+		
+		
+		return "user/withdrawl"; // 회원 탈퇴 페이지로 이동
+		
+	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/drawlUser", method = RequestMethod.POST)  
+	public String drawlUser(@RequestParam("userId") String userId) {
+		System.out.println("drawl 컨트롤러 들어옴");
+		
+		
+		
+		
 		return null; // 회원 탈퇴
 		
 	}

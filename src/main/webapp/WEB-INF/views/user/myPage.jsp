@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%=request.getContextPath() %>/resources/css/userdetail_join/myPage.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/user/myPage.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
@@ -31,6 +31,9 @@ $(document).ready(
 										.eq(index).show();
 							});
 		});
+		
+
+		
 </script>
 </head>
 <body>
@@ -115,7 +118,7 @@ $(document).ready(
 							<div class="logBox">
 								<ul>
 									<li><a href="#"><span><i class="far fa-heart"></i>&nbsp; 관심 펀딩</span></a></li>
-									<li><a href="#"><span><i class="fas fa-clipboard-check"></i>&nbsp; 내가 참여한 펀딩</span></a></li>
+									<li><a href="<%=request.getContextPath() %>/myfundinglist"><span><i class="fas fa-clipboard-check"></i>&nbsp; 내가 참여한 펀딩</span></a></li>
 								</ul>
 								<ul>
 									<li style="padding-top: 20px;"><a href="#"><span><i class="fas fa-pencil-alt"></i>&nbsp; 내가 쓴 글 목록</span></a></li>
@@ -125,7 +128,9 @@ $(document).ready(
 						</div>
 						<br>
 						<div class="withdraw">
-							<button class="withdrawBtn"><i class="fas fa-user-times"></i>&nbsp; 회원탈퇴</button>
+							<c:if test="${user.userId ne null }">
+							<button class="withdrawlBtn" onclick="location.href='<%= request.getContextPath()%>/user/withdrawl'"><i class="fas fa-user-times"></i>&nbsp; 회원탈퇴</button>
+							</c:if>
 						</div>
 					</div>
 				</div>

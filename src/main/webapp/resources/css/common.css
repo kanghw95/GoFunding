@@ -43,6 +43,8 @@ body {
 	min-height: 100%;
 	font-size: 18px;
 	font-family: 'TmoneyRoundWindRegular'; 	
+	-ms-overflow-style: none;
+ }
 } 
 
 a{
@@ -60,7 +62,7 @@ a{
 	margin-left: auto;
 	margin-right: auto;
 	padding-top: 110px; /* header height + 20px */
-	padding-bottom: 200px; /* footer height + 20px */
+	padding-bottom: 220px; /* footer height + 20px */
     color: #202020;
 }
 

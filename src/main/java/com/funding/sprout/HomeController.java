@@ -90,15 +90,7 @@ public class HomeController {
 		return "footer";
 	}
 	
-	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
-	public String mypagetest(Locale locale, Model model) {
-		logger.info("footer 테스트", locale);
 
-
-
-		return "user/myPage";
-	}
-	
 	@ResponseBody
 	@RequestMapping(value="/verifyIamport/{imp_uid}")
 	public IamportResponse<Payment> paymentByImpUid(

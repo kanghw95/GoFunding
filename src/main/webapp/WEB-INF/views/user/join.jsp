@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SPROUT! 새싹나눔</title>
-<link href="<%=request.getContextPath() %>/resources/css/userdetail_join/join.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/user/join.css" rel="stylesheet" type="text/css" />
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -474,7 +474,7 @@ $(document).ready(function () {
 				text: '데이터를 다시 입력해주세요'
 			})
 		}
-	});		
+	});
 
 	
 });

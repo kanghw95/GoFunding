@@ -31,25 +31,16 @@
 }
 
 
-.join-bodyContent {
-	justify-content: center;
-
-}
 
 .joinContainer {
 	width: 500px;
-	align-itms: center !important;
 	padding-right: 15px;
 	padding-left: 15px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.join-title {
-	margin-top: 144px;
-	margin-bottom: 44px;
-	font-size: 30px;
-}
+
 
 .insideBtn {
 	width: 85px;

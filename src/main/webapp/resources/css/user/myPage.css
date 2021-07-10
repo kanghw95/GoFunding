@@ -101,8 +101,8 @@ a {
 
 .tab-main>.tab-cont {
 	float: left;
-	width: 950px;
-	margin-left: 30px;
+	width: 850px;
+	margin-left: 15px;
 	border-radius: 7px;
 	color: black;
 	background: #transparent;
@@ -182,7 +182,7 @@ a {
 
 .logBox>ul>li{
 	display: inline-block;
-	width: 300px;
+	width: 360px;
 	padding-right: 40px;
 	padding-left: 20px;
 }
@@ -203,7 +203,7 @@ a {
 }
 
 
-.withdrawBtn{
+.withdrawlBtn{
 	diplay:block;
 	margin-top:10px;
 	background:#568C82;
@@ -220,12 +220,12 @@ a {
 }
 
 
-.withdrawBtn:hover{
+.withdrawlBtn:hover{
 	background:#fff;
 	color:#1AAB8A;
 }
 
-.withdrawBtn:before,.withdrawBtn:after{
+.withdrawlBtn:before,.withdrawlBtn:after{
 	content:'';
 	position:absolute;
 	top:0;
@@ -235,13 +235,13 @@ a {
 	background: #1AAB8A;
 	transition:400ms ease all;
 }
-.withdrawBtn:after{
+.withdrawlBtn:after{
 	right:inherit;
 	top:inherit;
 	left:0;
 	bottom:0;
 }
-.withdrawBtn:hover:before,.withdrawBtn:hover:after {
+.withdrawlBtn:hover:before,.withdrawlBtn:hover:after {
 	width:100%;
 	transition:800ms ease all;
 }

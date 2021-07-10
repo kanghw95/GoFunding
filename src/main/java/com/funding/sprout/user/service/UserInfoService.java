@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.funding.sprout.vo.User;
 
-public interface UserInsertService {
+public interface UserInfoService {
 
 	public ArrayList<User> selectAll(); // 전체 회원 조회
 	
@@ -20,6 +20,6 @@ public interface UserInsertService {
 	
 	public int modifyUser(); // 내 정보 수정
 
-	public int drawlUser(); // 회원 탈퇴
+	public int drawlUser(String userId); // 회원 탈퇴
 	
 }

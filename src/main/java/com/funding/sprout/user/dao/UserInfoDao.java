@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.funding.sprout.vo.User;
 
 @Repository("userDao")
-public class UserInsertDao {
+public class UserInfoDao {
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -48,8 +48,8 @@ public class UserInsertDao {
 		
 	}
 	
-	public int drawlUser() { // 회원 탈퇴
-		return 0;
+	public int drawlUser(String userId) { // 회원 탈퇴
+		return sqlSession.delete("User.deleteUser", userId);
 		
 	}
 	
