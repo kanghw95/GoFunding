@@ -18,6 +18,8 @@ public interface FundingService {
 	public List<Funding> selectCatList(String serchOption); // 펀딩 분류별 검색
 	
 	public List<Funding> selectFinList(String serchOption); // 종료 펀딩검색
+	
+	public List<Funding> selectCatFinList(String serchOption); // 펀딩  원하는 순서 + 종료만  조회 
 
 	public List<Funding> selectList();// 전체 펀딩 조회
 

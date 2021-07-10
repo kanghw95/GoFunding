@@ -42,6 +42,12 @@ public class FundingServiceImpl implements FundingService {
 		// TODO Auto-generated method stub
 		return  funDao.selectFinList(serchOption);
 	}
+	
+	@Override
+	public List<Funding> selectCatFinList(String serchOption) {
+		// TODO Auto-generated method stub
+		return funDao.selectCatFinList(serchOption);
+	}
 
 	@Override
 	public List<Funding> selectList() {

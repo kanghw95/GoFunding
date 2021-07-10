@@ -94,10 +94,19 @@ public class FundingCtrl {
 		try {
 			System.out.println("cat = " + cat);
 			System.out.println("fin = " + fin);
-
+			
+			if(cat != "" && fin != 0) {
+				System.out.println("변경을 원하는 순서는 = " + cat + ", 종료펀딩 =" + fin);
+				
+				List<Funding> fundinglist = funService.selectCatFinList(cat);
+				System.out.println(fundinglist);
+				mv.addAttribute("fundinglist", fundinglist);
+				return "/funding/paytest";
+				
+			}
 			
 			if(cat != "") {
-				System.out.println("변경을 원하는 순서는 = " + cat);
+				System.out.println("변경을 원하는 순서는 = " + cat + ", 종료펀딩 =" + fin);
 				
 				List<Funding> fundinglist = funService.selectCatList(cat);
 				System.out.println(fundinglist);
@@ -106,7 +115,7 @@ public class FundingCtrl {
 			}
 			
 			if(fin != 0) {
-				System.out.println("변경을 원하는 순서는 = " + fin);
+				System.out.println("변경을 원하는 순서는 = " + cat + ", 종료펀딩 =" + fin);;
 				cat = "종료 펀딩";
 				List<Funding> fundinglist = funService.selectFinList(cat);
 				System.out.println(fundinglist);
@@ -115,7 +124,7 @@ public class FundingCtrl {
 			}
 			
 			if(fin == 0) {
-				System.out.println("변경을 원하는 순서는 = " + fin);
+				System.out.println("변경을 원하는 순서는 = " + cat + ", 종료펀딩 =" + fin);
 				cat = "종료 아닌거";
 				List<Funding> fundinglist = funService.selectFinList(cat);
 				System.out.println(fundinglist);

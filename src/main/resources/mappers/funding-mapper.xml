@@ -44,7 +44,22 @@
             </if>
 	</select>
 	
-	<!-- 펀딩  원하는 순서로  조회 -->
+	<!-- 펀딩  원하는 순서 + 종료만  조회 -->
+	<select id="selectCatFinList" resultType="arraylist" resultMap="resultFunding">
+	
+			<if test="serchOption.equals('최신 순')">
+				SELECT * FROM FUNDING WHERE FUNDINGSTATE = 0 order by FUNDINGFIN desc
+			</if>
+			<if test="serchOption.equals('참여금액 순')">
+				SELECT * FROM FUNDING WHERE FUNDINGSTATE = 0 order by CURRENTPRICE desc
+			</if>
+			
+			<if test="serchOption.equals('종료임박 순')">
+				SELECT * FROM FUNDING WHERE FUNDINGSTATE = 0 order by FUNDINGFIN asc
+            </if>
+	</select>
+	
+	<!-- 펀딩 종료만  조회 -->
 	<select id="selectFinList" resultType="arraylist" resultMap="resultFunding">
 	
 			<if test="serchOption.equals('종료 아닌거')">

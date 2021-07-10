@@ -139,7 +139,7 @@ pageEncoding="UTF-8"%>
 				</div>
 			</div>
 		</div>
-		
+		<div id="test123">
 		<ul id="tab_all" class="fundingContent_list">
 			<c:if test="${fundinglist eq null}">
 				<tr>
@@ -311,7 +311,7 @@ pageEncoding="UTF-8"%>
 										<jsp:useBean id="currTime3" class="java.util.Date" />
 
 										<jsp:useBean id="now3" class="java.util.Date" />
-										<fmt:formatDate value="${now2}" pattern="yyyy-MM-dd" var="today" />
+										<fmt:formatDate value="${now3}" pattern="yyyy-MM-dd" var="today" />
 										<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
 										<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
 										<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
@@ -411,7 +411,7 @@ pageEncoding="UTF-8"%>
 										<jsp:useBean id="currTime5" class="java.util.Date" />
 
 										<jsp:useBean id="now5" class="java.util.Date" />
-										<fmt:formatDate value="${now2}" pattern="yyyy-MM-dd" var="today" />
+										<fmt:formatDate value="${now5}" pattern="yyyy-MM-dd" var="today" />
 										<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
 										<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
 										<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
@@ -536,6 +536,7 @@ pageEncoding="UTF-8"%>
 
 		</ul>
 		
+		</div>
 		
 		<button type="button" class="fundingContent_button_more">더보기<span class="fundingcontent_icon"></span></button>
 		
@@ -550,7 +551,7 @@ pageEncoding="UTF-8"%>
 
 <script>
 		var fin = 0; // 종료 펀딩만 보기
-
+		var cat = null; // 펀딩 순서 정해서 보기
 		// 뒤로가기 버튼시 작동
 		window.onpageshow = function(event) {
 		if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
@@ -582,7 +583,6 @@ pageEncoding="UTF-8"%>
 
 			
 			 function checkList1(){
-					var cat = null;
 					console.log(LATEST);
 						cat = $("#LATEST").children('.SelectArea_text__1tG5r').html();
 						$.ajax({
@@ -596,8 +596,9 @@ pageEncoding="UTF-8"%>
 									$("#SelectArea_button").text(cat);
 									listbtn.setAttribute("aria-expanded","false");
 									list.setAttribute("aria-hidden","true");
-									$("#tab_all").html(data);
-
+									$("#test123").html(data);
+									$("input:radio[id='funding_home_tab_all']").prop("checked", true);
+									
 							},
 							error : function(data){
 								console.log("ajax는 일단 들어옴 but 실패");
@@ -609,7 +610,6 @@ pageEncoding="UTF-8"%>
 			 
 			 function checkList2(){
 				var formData = new FormData();
-				var cat = null;
 				cat = $("#PARTICIPATION_AMOUNT").children('.SelectArea_text__1tG5r').html();
 				console.log(PARTICIPATION_AMOUNT);
 				
@@ -624,8 +624,9 @@ pageEncoding="UTF-8"%>
 								$("#SelectArea_button").text(cat);
 								listbtn.setAttribute("aria-expanded","false");
 								list.setAttribute("aria-hidden","true");
-								$("#tab_all").html(data);
-
+								$("#test123").html(data);
+								$("input:radio[id='funding_home_tab_all']").prop("checked", true);
+								
 						},
 						error : function(data){
 							console.log("ajax는 일단 들어옴 but 실패");
@@ -638,7 +639,6 @@ pageEncoding="UTF-8"%>
 					
 					
 			 function checkList3(){
-					var cat = null;
 					console.log(END_APPROACH);
 						cat = $("#END_APPROACH").children('.SelectArea_text__1tG5r').html();
 						$.ajax({
@@ -652,7 +652,8 @@ pageEncoding="UTF-8"%>
 									$("#SelectArea_button").text(cat);
 									listbtn.setAttribute("aria-expanded","false");
 									list.setAttribute("aria-hidden","true");
-									$("#tab_all").html(data);
+									$("#test123").html(data);
+									$("input:radio[id='funding_home_tab_all']").prop("checked", true);
 							},
 							error : function(data){
 								console.log("ajax는 일단 들어옴 but 실패");
@@ -670,7 +671,6 @@ pageEncoding="UTF-8"%>
 		$("#showendfunding").on("click", checkfin);
 		
 		 function checkfin(){
-				var cat = null;
 					if(fin == 0){
 						fin = 1;
 					}else{
@@ -684,7 +684,9 @@ pageEncoding="UTF-8"%>
 
 						success : function(data){
 								console.log(data);
-								$("#tab_all").html(data);
+								$("#test123").html(data);
+								$("input:radio[id='funding_home_tab_all']").prop("checked", true);
+
 						},
 						error : function(data){
 							console.log("ajax는 일단 들어옴 but 실패");
@@ -695,16 +697,10 @@ pageEncoding="UTF-8"%>
 		
 		// 카테고리 이동 버튼
 		$("input:radio[id='funding_home_tab_all']").prop("checked", true);  // 전체 선택하기
-		let funding_home_tab_all = document.getElementById("funding_home_tab_all");
+		var funding_home_tab_all = document.getElementById("funding_home_tab_all");
 
 		<c:forEach var = "i" begin = "1" end = "7">
-		let funding_home_tab_${i} = document.getElementById("funding_home_tab_${i}");
-		</c:forEach>
-		
-		let tab_all = document.getElementById("tab_all");
-		
-		<c:forEach var = "i" begin = "1" end = "7">
-		let tab_${i} = document.getElementById("tab_${i}");
+		var funding_home_tab_${i} = document.getElementById("funding_home_tab_${i}");
 		</c:forEach>
 		
 		//카테고리 이동 버튼
@@ -713,102 +709,103 @@ pageEncoding="UTF-8"%>
 		funding_home_tab_all.addEventListener("click",function(){
 					
 				funding_tab_panel.setAttribute("aria-labelledby","funding_home_tab_all");
-				tab_all.style.display = 'block';	
+				$("#tab_all").css('display', 'block');
 				<c:forEach var = "i" begin = "1" end = "7">
-				tab_${i}.style.display = 'none';
+					$("#tab_${i}").css('display', 'none');
 				</c:forEach>
 		});
 		
 		funding_home_tab_1.addEventListener("click",function(){
 			
 			funding_tab_panel.setAttribute("aria-labelledby","funding_home_tab_1");
-			tab_1.style.display = 'block';	
+			$("#tab_all").css('display', 'none');
+			
+			$("#tab_1").css('display', 'block');
 			<c:forEach var = "i" begin = "2" end = "7">
-			tab_${i}.style.display = 'none';
+				$("#tab_${i}").css('display', 'none');
 			</c:forEach>
 			
-			tab_all.style.display = 'none';
 	});
 		
 		funding_home_tab_2.addEventListener("click",function(){
 			
 			funding_tab_panel.setAttribute("aria-labelledby","funding_home_tab_2");
-			tab_1.style.display = 'none';	
-			tab_2.style.display = 'block';
+			$("#tab_1").css('display', 'none');
+			$("#tab_2").css('display', 'block');
 			<c:forEach var = "i" begin = "3" end = "7">
-			tab_${i}.style.display = 'none';
+				$("#tab_${i}").css('display', 'none');
 			</c:forEach>
 			
-			tab_all.style.display = 'none';
+			$("#tab_all").css('display', 'none');
 	});
 		
 		funding_home_tab_3.addEventListener("click",function(){
 			
 			funding_tab_panel.setAttribute("aria-labelledby","funding_home_tab_3");
-			tab_1.style.display = 'none';	
-			tab_2.style.display = 'none';
-			tab_3.style.display = 'block';
+			$("#tab_1").css('display', 'none');	
+			$("#tab_2").css('display', 'none');
+			$("#tab_3").css('display', 'block');
 			<c:forEach var = "i" begin = "4" end = "7">
-			tab_${i}.style.display = 'none';
+				$("#tab_${i}").css('display', 'none');
 			</c:forEach>
 			
-			tab_all.style.display = 'none';
+			$("#tab_all").css('display', 'none');
 	});
 		
 		funding_home_tab_4.addEventListener("click",function(){
 			
 			funding_tab_panel.setAttribute("aria-labelledby","funding_home_tab_4");
-			tab_1.style.display = 'none';	
-			tab_2.style.display = 'none';
-			tab_3.style.display = 'none';
-			tab_4.style.display = 'block';
+			$("#tab_1").css('display', 'none');	
+			$("#tab_2").css('display', 'none');	
+			$("#tab_3").css('display', 'none');	
+			$("#tab_1").css('display', 'block');	
 			<c:forEach var = "i" begin = "5" end = "7">
-			tab_${i}.style.display = 'none';
+				$("#tab_${i}").css('display', 'none');
 			</c:forEach>
 			
-			tab_all.style.display = 'none';
+			$("#tab_all").css('display', 'none');
 	});
 		
 		funding_home_tab_5.addEventListener("click",function(){
 			
 			funding_tab_panel.setAttribute("aria-labelledby","funding_home_tab_5");
-			tab_1.style.display = 'none';	
-			tab_2.style.display = 'none';
-			tab_3.style.display = 'none';
-			tab_4.style.display = 'none';
-			tab_5.style.display = 'block';
-			tab_6.style.display = 'none';
-			tab_7.style.display = 'none';
+			$("#tab_1").css('display', 'none');
+			$("#tab_2").css('display', 'none');
+			$("#tab_3").css('display', 'none');
+			$("#tab_4").css('display', 'none');
+			$("#tab_5").css('display', 'block');
+			$("#tab_6").css('display', 'none');
+			$("#tab_7").css('display', 'none');
 
-			tab_all.style.display = 'none';
+			$("#tab_all").css('display', 'none');
 	});
 		
 		funding_home_tab_6.addEventListener("click",function(){
 			
 			funding_tab_panel.setAttribute("aria-labelledby","funding_home_tab_6");
-			tab_1.style.display = 'none';	
-			tab_2.style.display = 'none';
-			tab_3.style.display = 'none';
-			tab_4.style.display = 'none';
-			tab_5.style.display = 'none';
-			tab_6.style.display = 'block';
-			tab_7.style.display = 'none';
+			$("#tab_1").css('display', 'none');
+			$("#tab_2").css('display', 'none');
+			$("#tab_3").css('display', 'none');
+			$("#tab_4").css('display', 'none');
+			$("#tab_5").css('display', 'none');
+			$("#tab_6").css('display', 'block');
+			$("#tab_7").css('display', 'none');
 
-			tab_all.style.display = 'none';
+			$("#tab_all").css('display', 'none');
 	});
 		
 		funding_home_tab_7.addEventListener("click",function(){
 			
 			funding_tab_panel.setAttribute("aria-labelledby","funding_home_tab_7");
-			tab_1.style.display = 'none';	
-			tab_2.style.display = 'none';
-			tab_3.style.display = 'none';
-			tab_4.style.display = 'none';
-			tab_5.style.display = 'none';
-			tab_6.style.display = 'none';
-			tab_7.style.display = 'block';
+			$("#tab_1").css('display', 'none');
+			$("#tab_2").css('display', 'none');
+			$("#tab_3").css('display', 'none');
+			$("#tab_4").css('display', 'none');
+			$("#tab_5").css('display', 'none');
+			$("#tab_6").css('display', 'none');
+			$("#tab_7").css('display', 'block');
 			
-			tab_all.style.display = 'none';
+			$("#tab_all").css('display', 'none');
 	});
 		
 		
