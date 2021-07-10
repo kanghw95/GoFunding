@@ -42,11 +42,19 @@ public class FundingDao {
 	} 
 	
 
-	public List<Funding> selectCatList(String serchOption) {
+	public List<Funding> selectCatList(String serchOption) { // 펀딩 분류별 검색
 		Map<String, String> map = new HashMap<String, String>();
 		System.out.println("검색옵션"+serchOption);
 		map.put("serchOption", serchOption);
 		return sqlSession.selectList("Funding.selectCatList",map);
+	}
+	
+
+	public List<Funding> selectFinList(String serchOption) { // 종료 펀딩 검색
+		Map<String, String> map = new HashMap<String, String>();
+		System.out.println("검색옵션"+serchOption);
+		map.put("serchOption", serchOption);
+		return sqlSession.selectList("Funding.selectFinList",map);
 	}
 	
 	public List<Reward> selectReward(int fundingno){ // 해당 펀딩 리워드 가져오기 
@@ -115,5 +123,6 @@ public class FundingDao {
 		return null;
 
 	}
+
 
 }

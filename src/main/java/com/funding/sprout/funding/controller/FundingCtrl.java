@@ -89,15 +89,38 @@ public class FundingCtrl {
 	}
 	
 	@RequestMapping(value = "funselectCat")  
-	public String catCheck(HttpServletRequest request,Model mv,@RequestParam(name = "cat") String cat) {
+	public String catCheck(HttpServletRequest request,Model mv,@RequestParam(name = "cat") String cat,@RequestParam(name = "fin") int fin) {
 		
 		try {
+			System.out.println("cat = " + cat);
+			System.out.println("fin = " + fin);
+
+			
 			if(cat != "") {
 				System.out.println("변경을 원하는 순서는 = " + cat);
 				
 				List<Funding> fundinglist = funService.selectCatList(cat);
 				System.out.println(fundinglist);
 				mv.addAttribute("fundinglist", fundinglist);
+				return "/funding/paytest";
+			}
+			
+			if(fin != 0) {
+				System.out.println("변경을 원하는 순서는 = " + fin);
+				cat = "종료 펀딩";
+				List<Funding> fundinglist = funService.selectFinList(cat);
+				System.out.println(fundinglist);
+				mv.addAttribute("fundinglist", fundinglist);
+				cat = "";
+			}
+			
+			if(fin == 0) {
+				System.out.println("변경을 원하는 순서는 = " + fin);
+				cat = "종료 아닌거";
+				List<Funding> fundinglist = funService.selectFinList(cat);
+				System.out.println(fundinglist);
+				mv.addAttribute("fundinglist", fundinglist);
+				cat = "";
 			}
 			
 		} catch (Exception e) {

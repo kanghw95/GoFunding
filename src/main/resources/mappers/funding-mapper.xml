@@ -44,6 +44,18 @@
             </if>
 	</select>
 	
+	<!-- 펀딩  원하는 순서로  조회 -->
+	<select id="selectFinList" resultType="arraylist" resultMap="resultFunding">
+	
+			<if test="serchOption.equals('종료 아닌거')">
+				SELECT * FROM FUNDING  WHERE FUNDINGSTATE = 1 order by FUNDINGFIN desc
+			</if>
+			<if test="serchOption.equals('종료 펀딩')">
+				SELECT * FROM FUNDING  WHERE FUNDINGSTATE = 0 order by FUNDINGFIN desc
+			</if>
+
+	</select>
+	
 	<!-- 펀딩  제목&내용 검색 -->
 	<select id="selectfunList" resultType="arraylist" resultMap="resultFunding">
 			<if test="serchOption.equals('제목')">

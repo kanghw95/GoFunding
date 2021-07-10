@@ -549,7 +549,7 @@ pageEncoding="UTF-8"%>
 
 
 <script>
-
+		var fin = 0; // 종료 펀딩만 보기
 
 		// 뒤로가기 버튼시 작동
 		window.onpageshow = function(event) {
@@ -589,7 +589,7 @@ pageEncoding="UTF-8"%>
 							url: "funselectCat",
 							type: "POST",
 							dataType : "text",
-							data: {"cat" : cat},
+							data: {"fin" : fin, "cat" : cat},
 
 							success : function(data){
 									console.log(data);
@@ -617,7 +617,7 @@ pageEncoding="UTF-8"%>
 						url: "funselectCat",
 						type: "POST",
 						dataType : "text",
-						data: {"cat" : cat},
+						data: {"fin" : fin, "cat" : cat},
 
 						success : function(data){
 								console.log(data);
@@ -645,7 +645,7 @@ pageEncoding="UTF-8"%>
 							url: "funselectCat",
 							type: "POST",
 							dataType : "text",
-							data: {"cat" : cat},
+							data: {"fin" : fin, "cat" : cat},
 
 							success : function(data){
 									console.log(data);
@@ -664,8 +664,36 @@ pageEncoding="UTF-8"%>
 			$("#LATEST").on("click", checkList1);
 			$("#PARTICIPATION_AMOUNT").on("click", checkList2);
 			$("#END_APPROACH").on("click", checkList3);
-		// 카테고리 이동 버튼
+	
 
+		
+		$("#showendfunding").on("click", checkfin);
+		
+		 function checkfin(){
+				var cat = null;
+					if(fin == 0){
+						fin = 1;
+					}else{
+						fin = 0;
+					}
+					$.ajax({
+						url: "funselectCat",
+						type: "POST",
+						dataType : "text",
+						data: {"fin" : fin, "cat" : cat},
+
+						success : function(data){
+								console.log(data);
+								$("#tab_all").html(data);
+						},
+						error : function(data){
+							console.log("ajax는 일단 들어옴 but 실패");
+							console.log("error data : " + data)
+						}
+						})
+					}
+		
+		// 카테고리 이동 버튼
 		$("input:radio[id='funding_home_tab_all']").prop("checked", true);  // 전체 선택하기
 		let funding_home_tab_all = document.getElementById("funding_home_tab_all");
 
@@ -679,7 +707,7 @@ pageEncoding="UTF-8"%>
 		let tab_${i} = document.getElementById("tab_${i}");
 		</c:forEach>
 		
-		//스토리, 리워드, 소식후기 이동 버튼 div
+		//카테고리 이동 버튼
 		var funding_tab_panel = document.getElementById("funding_tab_panel");
 		
 		funding_home_tab_all.addEventListener("click",function(){

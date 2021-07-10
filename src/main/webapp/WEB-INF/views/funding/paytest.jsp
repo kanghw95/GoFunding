@@ -13,8 +13,6 @@ pageEncoding="UTF-8"%>
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
-	
-
 			<c:if test="${fundinglist eq null}">
 				<tr>
 					<td colspan="6" align="center"><br><br>펀딩이 존재하지않습니다.<br><br></td>
