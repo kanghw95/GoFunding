@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%=request.getContextPath() %>/resources/css/user/myPage.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/userdetail_join/myPage.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
@@ -31,9 +31,6 @@ $(document).ready(
 										.eq(index).show();
 							});
 		});
-		
-
-		
 </script>
 </head>
 <body>
@@ -68,7 +65,7 @@ $(document).ready(
 									<a href="#"><span>펀딩 개설 횟수<b>0회</b></span></a>
 								</li>
 								<li>
-									<a href="#"><span>메세지<b>0건</b></span></a>
+									<a href="<%=request.getContextPath() %>/message/msgList3"><span>메세지<b>${makerCnt}건</b></span></a>
 								</li>
 								<li>
 									<a href="#"><span>포인트<b>${user.point }점</b></span></a>
@@ -102,7 +99,7 @@ $(document).ready(
 									<a href="#"><span>펀딩횟수<b>0회</b></span></a>
 								</li>
 								<li>
-									<a href="#"><span>메세지<b>0건</b></span></a>
+									<a href="<%=request.getContextPath() %>/message/msgList2"><span>메세지<b>${userCnt}건</b></span></a>
 								</li>
 								<li>
 									<a href="#"><span>포인트<b>${user.point }점</b></span></a>
@@ -118,7 +115,7 @@ $(document).ready(
 							<div class="logBox">
 								<ul>
 									<li><a href="#"><span><i class="far fa-heart"></i>&nbsp; 관심 펀딩</span></a></li>
-									<li><a href="<%=request.getContextPath() %>/myfundinglist"><span><i class="fas fa-clipboard-check"></i>&nbsp; 내가 참여한 펀딩</span></a></li>
+									<li><a href="#"><span><i class="fas fa-clipboard-check"></i>&nbsp; 내가 참여한 펀딩</span></a></li>
 								</ul>
 								<ul>
 									<li style="padding-top: 20px;"><a href="#"><span><i class="fas fa-pencil-alt"></i>&nbsp; 내가 쓴 글 목록</span></a></li>
@@ -128,9 +125,7 @@ $(document).ready(
 						</div>
 						<br>
 						<div class="withdraw">
-							<c:if test="${user.userId ne null }">
-							<button class="withdrawlBtn" onclick="location.href='<%= request.getContextPath()%>/user/withdrawl'"><i class="fas fa-user-times"></i>&nbsp; 회원탈퇴</button>
-							</c:if>
+							<button class="withdrawBtn"><i class="fas fa-user-times"></i>&nbsp; 회원탈퇴</button>
 						</div>
 					</div>
 				</div>
@@ -141,3 +136,7 @@ $(document).ready(
 <%@include file="/WEB-INF/views/footer.jsp"%>
 </body>
 </html>
+
+
+
+

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Message">
+
+	<!-- 회원-회원 메시지 개수 -->
+	<select id="countUserUserMsg" parameterType="string" resultType="string">
+        SELECT NVL((SELECT COUNT(*) FROM MESSAGE WHERE RECEIVERID = #{loginId} AND MSGROOT=2), 0) CNT FROM DUAL
+	</select>
+	<!-- 메이커-회원 메시지 개수 -->
+	<select id="countMakerUserMsg" parameterType="string" resultType="string">
+        SELECT NVL((SELECT COUNT(*) FROM MESSAGE WHERE RECEIVERID = #{loginId} 
+	<![CDATA[        
+        AND MSGROOT=0), 0) CNT FROM DUAL
+    ]]>	
+	</select>
 	<!-- 회원-메이커 목록 -->
 	<select id="selectMakerList" parameterType="string" resultType="MessageList"> 
 		SELECT B.FUNDINGTITLE, B.MAKER, B.RECEIVERID, B.MSGDATE, B.MSGCONTENT, B.MSGNO
@@ -18,23 +30,34 @@
 	</select>
 	<!-- 회원-회원 / 관리자-회원 목록 -->
 	<select id="selectUserList" parameterType="string" resultType="hashMap"> 
-		SELECT DISTINCT REPLACE(B.SENDERID, #{senderId}, '') AS SENDERID FROM ( 
-		SELECT CONCAT (A.SENDERID, A.RECEIVERID) AS SENDERID FROM (
-		SELECT * FROM MESSAGE WHERE MSGROOT = #{msgRoot} ) A
-		WHERE A.SENDERID = #{senderId} OR A.RECEIVERID = #{senderId} ) B
+		SELECT DISTINCT RECEIVERID AS SENDERID FROM MESSAGE WHERE MSGROOT = #{msgRoot} AND SENDERID = #{senderId}
+		UNION
+        SELECT DISTINCT SENDERID AS SENDERID FROM MESSAGE WHERE MSGROOT = #{msgRoot} AND RECEIVERID = #{senderId}
 	</select>
 	<!-- 메이커-회원 목록 -->
 	<select id="selectMakerUserList" parameterType="string" resultType="map"> 
-		SELECT DISTINCT SENDERID FROM MESSAGE WHERE MSGROOT = 1 AND RECEIVERID= #{receiverId}
+	<![CDATA[		
+		SELECT DISTINCT SENDERID FROM MESSAGE WHERE MSGROOT < 2 
+	]]>		
+		AND RECEIVERID= #{receiverId}
 	</select>
 	<!-- 회원-메이커 상세 -->
-	<select id="selectMakerRead" parameterType="string" resultType="map"> 
+	<select id="selectUserMakerRead" parameterType="string" resultType="map"> 
+        SELECT MS.MSGNO, MS.MSGCONTENT, MS.MSGDATE, MS.SENDERID, MS.SENDERNAME, MS.RECEIVERID, MS.MSGROOT, A.MAKER
+        FROM (SELECT ID, MAKER FROM MAKER WHERE MAKER = #{maker}) A JOIN MESSAGE MS ON A.ID=MS.RECEIVERID 
+	<![CDATA[	
+        WHERE SENDERID = #{senderId} AND MSGROOT<2 
+	]]>
+        ORDER BY MS.MSGNO
+	</select>
+	<!-- 메이커-회원 상세 -->
+	<select id="selectMakerUserRead" parameterType="string" resultType="map"> 
 		SELECT MS.MSGNO, MS.MSGCONTENT, MS.MSGDATE, MS.SENDERID, MS.SENDERNAME, MS.RECEIVERID, MS.MSGROOT, M.MAKER
 		FROM MESSAGE MS JOIN MAKER M ON MS.RECEIVERID = M.ID AND 
 	<![CDATA[	
 		MS.MSGROOT < 2
 	]]>
-		WHERE SENDERID = #{senderId} AND RECEIVERID = #{receiverId} ORDER BY MS.MSGNO
+		WHERE SENDERID = #{senderId} AND RECEIVERID = #{receiverId} ORDER BY MS.MSGNO 
 	</select>
 	<!-- 회원-회원 상세 -->
 	<select id="selectUserRead" resultType="Message"> 
@@ -52,11 +75,15 @@
 	    SELECT * FROM MESSAGE WHERE SENDERID = #{userId} AND RECEIVERID = #{loginId} ) A
 	    ORDER BY MSGNO
 	</select>
+	<!-- 메이커 아이디 확인 -->
+	<select id="findMaker" resultType="string"> 
+		SELECT ID FROM MAKER WHERE MAKER = #{maker}
+	</select>
 	<!-- 메시지 발송 -->
 	<insert id="insertMsg"> 
 		INSERT INTO MESSAGE VALUES(SEQ_MSGNO.NEXTVAL, #{msgContent}, SYSDATE, #{senderId}, 
-		(SELECT DISTINCT SENDERNAME FROM MESSAGE WHERE SENDERID = #{senderId}), #{receiverId},
-		(SELECT DISTINCT RECEIVERNAME FROM MESSAGE WHERE RECEIVERID = #{receiverId} ), #{msgRoot})
+		(SELECT DISTINCT NAME FROM USERS WHERE ID = #{senderId}), #{receiverId},
+		(SELECT DISTINCT NAME FROM USERS WHERE ID = #{receiverId} ), #{msgRoot})
 	</insert>
 	<!-- 메시지 삭제 -->
 	<delete id="msgDelete">

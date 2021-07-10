@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="<%=request.getContextPath() %>/resources/css/admin/adminMain.css?ver=1.0" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/admin/adminMain.css?ver=1.0" rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
 <!-- Custom fonts for this template-->
 <link
@@ -19,12 +19,6 @@
 <link href="<%=request.getContextPath()%>/sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">
 <meta name="google-signin-client_id" content="787043379258-f7m1f543ukem253a55cm7kc569hijh0r.apps.googleusercontent.com">
 <meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"/>
@@ -149,7 +143,7 @@
                         </div>
 					</div>
 					</div>
-					<div class="analytics paymentTabs">
+					<div class="analytics paymentTabs paymentTab1">
 					<div class="paymentTab">
 					<h5 class="divTitle">펀딩 금액</h5>
 					<table id="fundingTab1">
@@ -160,18 +154,18 @@
 					</tr>
 					<c:forEach var="order" items="${order1}">
 					<tr>
-					<td>주문</td>
-					<td>${order.ORDERCNT}</td>
-					<td>${order.ORDERTOTALPRICE}</td>
-					</tr>
-					</c:forEach>
-					<c:forEach  var="payment" items="${payment1}">
-					<tr>
 					<td>결제</td>
-					<td>${payment.PAYMENTCNT}</td>
-					<td>${payment.TOTALPAYMENT}</td>
+					<td>${order.ORDERCNT}</td>
+					<td><fmt:formatNumber value="${order.ORDERTOTALPRICE}" pattern="#,###" /></td>
 					</tr>
 					</c:forEach>
+					<!--<c:forEach  var="payment" items="${payment1}">-->
+					<tr>
+					<td>환불</td>
+					<td></td>
+					<td></td>
+					</tr>
+					<!--</c:forEach>-->
 					</table>
 					</div>
 					<div class="paymentTab">
@@ -194,7 +188,7 @@
 					</table>
 					</div>
 					</div>
-					<div class="analytics paymentTabs">
+					<div class="analytics paymentTabs paymentTab2">
 					<div class="totalTab">
 					<h5 class="divTitle">펀딩 총 현황</h5>
 					<table id="fundingTab3">
@@ -204,11 +198,11 @@
 					<td colspan="4">펀딩</td>
 					</tr>
 					<tr>
-					<td>주문</td>					
 					<td>결제</td>					
+					<td>환불</td>					
 					<td>총 결제 금액</td>					
-					<td>주문</td>					
 					<td>결제</td>					
+					<td>환불</td>					
 					<td>총 결제 건수</td>					
 					<td>진행</td>					
 					<td>신청</td>					
@@ -218,19 +212,19 @@
 					<tr>
 					<c:forEach var="order" items="${order1}" varStatus="status">
 					<td>
-					<c:out value="${order.ORDERTOTALPRICE}"></c:out>
+					<fmt:formatNumber value="${order.ORDERTOTALPRICE}" pattern="#,###" />
 					</td>
 					</c:forEach>					
-					<c:forEach var="payment" items="${payment1}" varStatus="status">
+					<!--<c:forEach var="payment" items="${payment1}" varStatus="status">-->
 					<td>
-					<c:out value="${payment.TOTALPAYMENT}"></c:out>
+					<c:out value=""></c:out>
 					</td>					
-					</c:forEach>					
+					<!--</c:forEach>-->					
 					<c:forEach var="order1" items="${order1}" varStatus="status">
 					<td>
-					<c:forEach var="payment" items="${payment1}" varStatus="status">
-					<c:out value="${order1.ORDERTOTALPRICE+payment.TOTALPAYMENT}"></c:out>
-					</c:forEach>					
+					<!--<c:forEach var="payment" items="${payment1}" varStatus="status">-->
+					<c:out value=""></c:out>
+					<!--</c:forEach>-->					
 					</td>					
 					</c:forEach>					
 					<c:forEach var="order2" items="${order1}" varStatus="status">
@@ -238,18 +232,18 @@
 					<c:out value="${order2.ORDERCNT}"></c:out>
 					</td>					
 					</c:forEach>					
-					<c:forEach var="payment1" items="${payment1}" varStatus="status">
+					<!--<c:forEach var="payment1" items="${payment1}" varStatus="status">-->
 					<td>
-					<c:out value="${payment1.PAYMENTCNT}"></c:out>
+					<c:out value=""></c:out>
 					</td>					
-					</c:forEach>					
-					<c:forEach var="payment2" items="${payment1}" varStatus="status">
+					<!--</c:forEach>-->					
+					<!--<c:forEach var="payment2" items="${payment1}" varStatus="status">-->
 					<td>
 					<c:forEach var="order3" items="${order1}" varStatus="status">
-					<c:out value="${order3.ORDERCNT+payment2.PAYMENTCNT}"></c:out> <!-- TODO -->
+					<c:out value="${order3.ORDERCNT}"></c:out> <!-- TODO -->
 					</c:forEach>					
 					</td>					
-					</c:forEach>					
+					<!--</c:forEach>-->					
 					<c:forEach var="funding" items="${funding}" varStatus="status">
 					<td>
 					<c:out value="${funding.PROCEEDING}"></c:out>
@@ -305,8 +299,8 @@
 		<input type="text" id="femaleC" value="${femaleC}">
 		<input type="text" id="111" value="${order1}">
 		<c:forEach var="days" items="${days}" varStatus="status">
-			<span id="day-${status.count}">${days.AMOUNT}</span>
-			<span id="date-${status.count}">${days.PAYMENTDATE}</span>
+			<span id="day-${status.count}">${days.TOTAL}</span>
+			<span id="date-${status.count}">${days.ORDERDATE}</span>
 		</c:forEach>
 		</div>
 	</div>

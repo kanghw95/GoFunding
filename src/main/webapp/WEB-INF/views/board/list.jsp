@@ -25,6 +25,9 @@
 	right: 100px;
 	top : 250px;
 }
+#writer{
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -96,7 +99,7 @@
 				
 					</td>
 					
-					<td align="center">${vo.boardId }</td>
+					<td align="center" id="writer">${vo.boardId }</td>
 					<td align="center">${vo.boardCnt }</td>
 					<td align="center">${vo.likecnt }</td> <!-- 추천 -->
 					<td align="center">${vo.boardDate }</td>
@@ -155,6 +158,13 @@
 			frm.submit();
 //			location.href = "write";
 		});
+		
+	    $("body").on("click", "[id^=writer]", function(event) {
+            var receiverId = $(this).text();
+            console.log(receiverId);
+	    	var pop = window.open("about:blank","content");
+   			pop.location.href="http://localhost:8090/sprout/message/msgRead2?receiverId="+receiverId;
+        });
 	</script>
 	</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp" />

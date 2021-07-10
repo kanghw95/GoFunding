@@ -195,4 +195,6 @@ public class UserLoginCtrl {
 		mv.setViewName("user/inputJoin");
 		return "user/inputJoin";
 	}
+	
+	
 }

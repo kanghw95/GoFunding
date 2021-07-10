@@ -16,6 +16,14 @@ public class MessageDao {
 	@Autowired
 	private SqlSession sqlSession;
 
+	public String userUserMsgCnt(String loginId) { //회원-회원 메세지 개수
+		return sqlSession.selectOne("Message.countUserUserMsg", loginId);
+	}
+	
+	public String makerUserMsgCnt(String loginId) { //메이커-회원 메세지 개수
+		return sqlSession.selectOne("Message.countMakerUserMsg", loginId);
+	}
+	
 	public List<Map<String, String>> msgMakerList(String senderId) { //회원-메이커 메세지 목록
 		return sqlSession.selectList("Message.selectMakerList", senderId);
 	}
@@ -29,8 +37,12 @@ public class MessageDao {
 		return sqlSession.selectList("Message.selectUserList", vo);
 	}
 
-	public List<Map<String, String>> getMakerMessage(HashMap<String, String> id) { //메이커-회원 상세 조회
-		return sqlSession.selectList("Message.selectMakerRead", id);
+	public List<Map<String, String>> getUserMakerMessage(HashMap<String, String> id) { //회원-메이커 상세 조회
+		return sqlSession.selectList("Message.selectUserMakerRead", id);
+	}
+	
+	public List<Map<String, String>> getMakerUserMessage(HashMap<String, String> id) { //메이커-회원 상세 조회
+		return sqlSession.selectList("Message.selectMakerUserRead", id);
 	}
 	
 	public List<Message> getUserMessage(HashMap<String, String> id) { //회원-회원 상세 조회
@@ -39,6 +51,10 @@ public class MessageDao {
 	
 	public List<Message> getAdminMessage(HashMap<String, String> id) { //관리자-회원 상세 조회
 		return sqlSession.selectList("Message.selectAdminRead", id);
+	}
+	
+	public String findMaker(String maker) { //메이커 아이디 찾기
+		return sqlSession.selectOne("Message.findMaker", maker);
 	}
 	
 	public int msgInsert(Message msg) {// 추가

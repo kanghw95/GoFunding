@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.funding.sprout.funding.service.FundingService;
+import com.funding.sprout.message.service.MessageService;
 import com.funding.sprout.vo.Funding;
+import com.funding.sprout.vo.User;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.IamportResponse;
@@ -33,6 +35,8 @@ import com.siot.IamportRestClient.response.Payment;
 public class HomeController {
 	@Autowired
 	private FundingService funService;
+	@Autowired
+	private MessageService msgService;
 	
 	private IamportClient api;
 	
@@ -90,7 +94,22 @@ public class HomeController {
 		return "footer";
 	}
 	
+	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
+	public ModelAndView mypagetest(Locale locale, Model model, HttpSession session) {
+		logger.info("footer 테스트", locale);
 
+		ModelAndView mv=new ModelAndView();
+		User loginUser=(User)session.getAttribute("user");
+		String loginId=loginUser.getUserId();
+		String userCnt=msgService.userUserMsgCnt(loginId);
+		String makerCnt=msgService.makerUserMsgCnt(loginId);
+		mv.addObject("userCnt", userCnt);
+		mv.addObject("makerCnt", makerCnt);
+		mv.setViewName("user/myPage");
+		
+		return mv;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/verifyIamport/{imp_uid}")
 	public IamportResponse<Payment> paymentByImpUid(
@@ -103,3 +122,4 @@ public class HomeController {
 	}
 
 }
+

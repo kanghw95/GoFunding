@@ -30,7 +30,7 @@
 	</div>
 <form id="frm">
 	<div class="inputTxt">
-	<input name="receiverId" value="${param.receiverId}" type="hidden">
+	<input name="maker" value="${param.maker}" type="hidden">
 	<input name="makerChk" value="0" type="hidden">
 	<input id="txtMsg" name="msgContent" type="text">
 	<input id="sendBtn" value="전송" type="button"><br>

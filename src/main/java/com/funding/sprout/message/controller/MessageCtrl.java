@@ -53,6 +53,7 @@ public class MessageCtrl {
 		vo.put("msgRoot", "2");
 		
 		List<HashMap<String, String>> msgList = msgService.msgUserList(vo);
+		System.out.println(msgList);
 		mv.addObject("msgList2",msgList);
 		mv.setViewName("/message/msgList2");
 		
@@ -64,8 +65,10 @@ public class MessageCtrl {
 		
 		User loginUser = (User)session.getAttribute("user");
 		String receiverId=loginUser.getUserId();
+		System.out.println(receiverId);
 		
 		List<Map<String, String>> msgList = msgService.msgMakerUserList(receiverId);
+		System.out.println(msgList);
 		mv.addObject("msgList3",msgList);
 		mv.setViewName("/message/msgList3");
 		
@@ -97,7 +100,6 @@ public class MessageCtrl {
 		vo.put("senderId", receiverId);
 		vo.put("msgRoot", "4");
 		List<HashMap<String, String>> msgList = msgService.msgUserList(vo);
-		System.out.println("외않나와"+msgList);
 		mv.addObject("msgList",msgList);
 		mv.setViewName("/message/msgAdminList");
 		
@@ -106,14 +108,14 @@ public class MessageCtrl {
 
 	@RequestMapping(value = "/msgRead1", method = RequestMethod.GET) // 회원-메이커 메세지 상세
 	public ModelAndView msgRead1 (
-			@RequestParam(name="receiverId") String receiverId, 
+			@RequestParam(name="maker") String maker, 
 			HttpSession session) {
 		User loginUser=(User)session.getAttribute("user");
 		String senderId=loginUser.getUserId();
 		HashMap<String, String> id = new HashMap<String, String>();
-		id.put("receiverId", receiverId);
+		id.put("maker", maker);
 		id.put("senderId", senderId);
-		List<Map<String, String>> ml=msgService.getMakerMessage(id);
+		List<Map<String, String>> ml=msgService.getUserMakerMessage(id);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", ml);
 		mv.setViewName("/message/msgRead1");
@@ -148,7 +150,7 @@ public class MessageCtrl {
 		HashMap<String, String> id=new HashMap<String, String>();
 		id.put("senderId", receiverId);
 		id.put("receiverId", loginId);
-		List<Map<String, String>> ml=msgService.getMakerMessage(id);
+		List<Map<String, String>> ml=msgService.getMakerUserMessage(id);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", ml);
 		mv.setViewName("/message/msgRead3");
@@ -186,27 +188,36 @@ public class MessageCtrl {
 		return mv;
 	}
 	
-	@RequestMapping(value = "msgInsert1", method = RequestMethod.POST) // 메이커-회원 발송 메시지 저장 (회원 root0 메이커 root1)
+	@RequestMapping(value = "msgInsert1", method = RequestMethod.POST) // 회원-메이커-회원 발송 메시지 저장 (회원 root0 메이커 root1)
 	public void msgInsert1(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
 		int result=0;
 		User loginUser=(User)session.getAttribute("user");
-		char maker=request.getParameter("makerChk").charAt(0);
-		
 		String senderId=loginUser.getUserId();
+		String maker=request.getParameter("maker");
+		String receiverId;
+		System.out.println("maker  "+maker);
 		Message msg = new Message();
 		
 		msg.setMsgContent(request.getParameter("msgContent"));
-		if(maker=='0') {
-			msg.setMsgRoot(maker);
-			msg.setReceiverId(request.getParameter("receiverId"));
-			msg.setSenderId(senderId);
-		} else if(maker=='1') {
-			msg.setMsgRoot(maker);
+		if(maker==null) {
+			receiverId=request.getParameter("receiverId");
+			System.out.println("receiverId  "+receiverId);
+			msg.setSenderId(receiverId);
 			msg.setReceiverId(senderId);
-			msg.setSenderId(request.getParameter("receiverId"));
+			msg.setMsgRoot('1');
+		} else if(maker!=null) {
+			receiverId=msgService.findMaker(maker);
+			System.out.println(receiverId);
+			msg.setReceiverId(receiverId);
+			msg.setSenderId(senderId);
+			msg.setMsgRoot('0');
 		}
+		System.out.println(msg);
 		result=msgService.msgInsert(msg);
+		
+		System.out.println(msg);
 		System.out.println(result);
+		
 		response.setContentType("text/html; charset=UTF-8");
 		try {
 			PrintWriter wr=response.getWriter();
@@ -291,5 +302,5 @@ public class MessageCtrl {
 		}
 		return result;
 	}
-
+	
 }

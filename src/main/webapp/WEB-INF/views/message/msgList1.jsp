@@ -36,7 +36,7 @@
     $("body").on("click", "[id^=msgTitle]", function(event) {
                 var receiverId = $(this).next().children().val();
                 console.log(receiverId);
-		    	var pop = window.open("about:blank","content","width=430,height=800");
+		    	var pop = window.open("about:blank","content");
        			pop.location.href="http://localhost:8090/sprout/message/msgRead1?receiverId="+receiverId;
             });
 </script>

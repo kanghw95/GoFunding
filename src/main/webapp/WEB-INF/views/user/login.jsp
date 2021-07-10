@@ -140,10 +140,6 @@ function attachSignin(element) {
 	<c:if test="${!empty user}">
 		<div class="login">
 			<a href="<%=request.getContextPath() %>/user/logout">로그아웃</a>
-			<a href="<%=request.getContextPath() %>/message/msgList1">회원-메이커메세지</a>
-			<a href="<%=request.getContextPath() %>/message/msgList3">메이커-회원메세지</a>
-			<a href="<%=request.getContextPath() %>/message/msgList2">회원-회원메세지</a>
-			<a href="<%=request.getContextPath() %>/message/msgAdminList">회원-관리자메세지</a>
 			<c:if test="${user.userId eq 'admin'}">
 			<a href="<%=request.getContextPath() %>/message/msgUserList">관리자-회원메세지</a></c:if>
 		</div>

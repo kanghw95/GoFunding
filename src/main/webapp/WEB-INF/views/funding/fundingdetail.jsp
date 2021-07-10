@@ -142,7 +142,7 @@
 							<div class="FundingDetailSummary_image" style="background-image: "></div>
 						</div>
 						<div class="FundingDetailSummary_text">
-							<span class="FundingDetailSummary_name">${funding.maker}</span>
+							<span class="FundingDetailSummary_name" id="maker">${funding.maker}</span>
 							<span class="FundingDetailSummary_introduction">소셜벤처 점프와 신발연구소의 콜라보</span>
 						</div>
 					</div>
@@ -303,7 +303,7 @@
 										</a>
 									</li>
 									<li class="FundingDetailStoryReferenceList_item">
-										<a href="<%=request.getContextPath() %>/message/msgList1" class="FundingDetailStoryReferenceList_link" target="_blank">
+										<a onclick="makerMsg();" class="FundingDetailStoryReferenceList_link" target="_blank">
 											<span class="FundingDetailStoryReferenceList_logo">
 
 											</span>
@@ -803,6 +803,12 @@
 		
 	});
 		
+	function makerMsg(event){
+        var maker = $("#maker").text();
+        console.log(maker);
+    	var pop = window.open("about:blank","content");
+		pop.location.href="http://localhost:8090/sprout/message/msgRead1?maker="+maker;		
+	}
 		
 		
 </script>

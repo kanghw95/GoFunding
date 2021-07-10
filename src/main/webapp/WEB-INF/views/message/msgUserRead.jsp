@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.2/sockjs.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link href="<%=request.getContextPath() %>/resources/css/message/adminUserRead.css?ver=1.0" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/message/adminUserRead.css?ver=2.0" rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
 </head>
 <body>

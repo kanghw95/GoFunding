@@ -90,7 +90,7 @@ public class AnalyticsCtrl {
 		List<HashMap<String, String>> payment1=analyticsService.analPaymentTab();
 		List<HashMap<String, String>> order1=analyticsService.analPaymentTab();
 		List<HashMap<String, String>> funding=analyticsService.analFundingTab();
-		
+		System.out.println(payment);
 		
 		mv.addObject("statF1020", statF1020);
 		mv.addObject("statF3040", statF3040);

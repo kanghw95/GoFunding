@@ -65,11 +65,12 @@
 					</tr>
 					<tr class="basicInfo">
 						<td class="line1">연락처 (필수)</td>
-						<td class="line2"><input type="tel" name="makerTel" id="makerTel" class="inputText" placeholder="내용을 입력해주세요." required></td>
+						<td class="line2"><input type="tel" name="makerTel" id="makerTel" class="inputText" placeholder="내용을 입력해주세요." onblur="phoneCheck()" required>
+						<div id="phoneCheck"></div></td>
 					</tr>
 					<tr class="basicInfo">
 						<td class="line1">이메일</td>
-						<td class="line2"><input type="text" name="makerEmail" class="inputText" id="makerEmail"> @
+						<td class="line2"><input type="text" name="makerEmail" class="inputText" id="makerEmail" onblur="emailCheck()" > @
 							<select id="email" name="domain">
 								<option value="naver.com">naver.com</option>
 								<option value="daum.net">daum.net</option>
@@ -77,6 +78,7 @@
 								<option value="">직접입력</option>
 							</select>
 							&nbsp;<input type="text" id="direct" class="inputText" name="domain">
+							<div id="emailCheck"></div>
 						</td>
 					</tr>
 						<tr class="basicInfo">

@@ -16,6 +16,16 @@ public class MessageServiceImpl implements MessageService {
 	@Autowired
 	private MessageDao msgDao;
 
+	
+	@Override
+	public String userUserMsgCnt(String loginId) {
+		return msgDao.userUserMsgCnt(loginId);
+	}
+	
+	@Override
+	public String makerUserMsgCnt(String loginId) {
+		return msgDao.makerUserMsgCnt(loginId);
+	}
 	@Override
 	public List<Map<String, String>> msgMakerList(String senderId) {
 		return msgDao.msgMakerList(senderId);
@@ -38,10 +48,15 @@ public class MessageServiceImpl implements MessageService {
 		}
 		return vo1;
 	}
-
+	
 	@Override
-	public List<Map<String, String>> getMakerMessage(HashMap<String, String> id) {
-		return msgDao.getMakerMessage(id);
+	public List<Map<String, String>> getUserMakerMessage(HashMap<String, String> id) {
+		return msgDao.getUserMakerMessage(id);
+	}
+	
+	@Override
+	public List<Map<String, String>> getMakerUserMessage(HashMap<String, String> id) {
+		return msgDao.getMakerUserMessage(id);
 	}
 	
 	@Override
@@ -52,6 +67,11 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public List<Message> getAdminMessage(HashMap<String, String> id){
 		return msgDao.getAdminMessage(id);
+	}
+	
+	@Override
+	public String findMaker(String maker) {
+		return msgDao.findMaker(maker);
 	}
 	
 	@Override

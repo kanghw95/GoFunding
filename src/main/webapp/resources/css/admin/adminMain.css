@@ -1,5 +1,19 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: 'TmoneyRoundWindExtraBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindExtraBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TmoneyRoundWindRegular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .wrapper{
 	position: relative;
 }
@@ -14,12 +28,12 @@
 	position: relative;
 	display: inline-block;
 	font-size: 20px;
-	padding: 5% 10%;
+	padding: 5% 0;
 }
 
 .analytics{
-	width: 850px; height: 600px;
-	padding: 20px;
+	width: 1100px; height: 600px;
+	margin: 100px auto;
 	text-align: center;
 }
 
@@ -28,7 +42,7 @@
 	top: 100px;
 	display: inline-block;
 	border: 1px solid #ccc;
-	margin: auto;
+	margin: auto 50px;
 }
 
 .analPayment{
@@ -44,26 +58,25 @@
 .paymentTabs{
 	height: 300px;
 	text-align: center;
+	display: inline-block;
 }
 
 .paymentTab{
-	width: 350px;
+	width: 430px; height: 200px;
 	display: inline-block;
-	padding: 20px;
+	padding: 0 50px 80px 50px;
+	margin-top: 0;
 }
 
 .totalTab{
 	width:100%;
+	display: block;
+	padding: 0 40px;
 }
 
 #fundingTab1, #fundingTab2, #fundingTab3{
-	width: 100%;
+	width: 100%; 
 	margin: auto;
-}
-
-td{
-	border: 1px solid black;
-	border-collapse: collapse;
 }
 
 .tabTitle{
@@ -72,6 +85,7 @@ td{
 
 .mr-2{
 	font-size: 14px;
+	font-family: 'TmoneyRoundWindRegular'; 	
 }
 
 .icon1{
@@ -113,10 +127,12 @@ td{
 h3{
 	padding-bottom: 30px;
 	text-align: left;
+	font-family: 'TmoneyRoundWindRegular'; 	
 }
 
 h5{
 	padding-bottom: 10px;
+	font-family: 'TmoneyRoundWindRegular'; 	
 }
 
 .noticeTab{
@@ -133,9 +149,25 @@ h5{
 	background: #4d4e4f;
 	color: white;
 	font-size: 12px;
+	font-family: 'TmoneyRoundWindRegular'; 	
 	height: 30px;
 }
 
 .notice{
 	padding: 30px;
+}
+
+td{
+	height: 50px;
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+	font-family: 'TmoneyRoundWindRegular'; 	
+}
+
+.paymentTab1{
+	margin-top: 0;
+}
+
+.paymentTab2{
+	margin-top: 20px;
 }

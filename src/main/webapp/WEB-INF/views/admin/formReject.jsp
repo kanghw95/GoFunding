@@ -31,8 +31,8 @@
 	</select>
 </form>
 </div>
-<div>
-	<table class="tabDiv">
+<div class="tabDiv">
+	<table class="table">
 		<tr>
 			<c:forEach var="app" items="${formReject}" varStatus="status">
 			<c:if test="${status.index%4==0}">

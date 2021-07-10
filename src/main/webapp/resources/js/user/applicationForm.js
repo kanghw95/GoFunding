@@ -5,6 +5,12 @@ let ischkid=false;
 let isprivacy=false;
 var check = 3;
 var warning="중복확인 버튼을 눌러주세요.";
+// 이메일 정규식
+var emailReg = /^[a-zA-Z0-9]{4,12}$/;
+// 휴대전화 정규식
+var phoneReg = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
+var isPassEmail = false;
+var isPassPhone = false;
 
 $("#submitBtn").click(function (msg) { //입력 정보 insert 컨트롤러 전송
 	$('#frm').attr('action', 'formSend');
@@ -97,7 +103,7 @@ $(function(){
 	$("#direct").hide();
 })
 
-$(document).on("change", "#email", function(){ //직접입력 선택시 도메인 입력 text 출력 TODO
+$(document).on("change", "#email", function(){ //직접입력 선택시 도메인 입력 text 출력
 	if($("#email").val()==""){
 		$("#direct").show();
 	} else if($("#email").val()!="") {
@@ -108,7 +114,7 @@ $(document).on("change", "#email", function(){ //직접입력 선택시 도메�
 $("#privacyChk").change(function(){ //개인정보 수집 및 이용 동의 체크박스 : 체크 되어야만 프로젝트 개설 버튼 활성화
 	if($("#privacyChk").is(":checked")){
 		isprivacy=true;
-		if(ischkid==true){
+		if(isprivacy==true&&ischkid==true&&isPassPhone==true&&isPassEmail==true&&check==0){
 			$("#submitBtn").attr("disabled",false);
 		} else {
 			$("#submitBtn").attr("disabled",true);
@@ -144,7 +150,7 @@ function removeWarn(){ //중복확인 버튼 클릭 요청 문구 삭제
 	$("#warning").empty();
 	if($("#chkInform").val()=="사용할 수 있는 아이디 입니다."){
 		ischkid=true;
-		if(isprivacy==true&&check == 0){
+		if(ischkid==true&&isprivacy==true&&isPassPhone==true&&isPassEmail==true&&check == 0){
 			$("#submitBtn").attr("disabled",false);
 		} else {
 			$("#submitBtn").attr("disabled",true);
@@ -161,7 +167,7 @@ $("#maker").blur(function(event){ //중복확인 하지 않았을때 submit 비�
 		check = 2;
 		console.log(check);
 		
-		if(isprivacy==true&&check == 0){
+		if(ischkid==true&&isprivacy==true&&isPassPhone==true&&isPassEmail==true&&check == 0){
 			$("#submitBtn").attr("disabled",false);
 		} else {
 			$("#submitBtn").attr("disabled",true);
@@ -179,6 +185,40 @@ function idChk(msg){ //중복확인 결과 텍스트 생성
 		$("#maker").val("");
 	}
 }
+
+function emailCheck(event){ //이메일 정규식 확인
+	if(emailReg.test($("#makerEmail").val())){
+		$("#emailCheck").text("사용 가능한 이메일입니다");
+		isPassEmail = true;
+		console.log("isPassEmail: " + isPassEmail);
+		if(isPassEmail==true&&isprivacy==true&&isPassPhone==true&&ischkid==true&&check == 0){
+			$("#submitBtn").attr("disabled",false);
+		} else {
+			$("#submitBtn").attr("disabled",true);
+		}
+	}else {
+		$("#emailCheck").text("이메일 형식을 확인해주세요");
+		isPassEmail = false;
+		console.log("isPassEmail: " + isPassEmail);
+	}
+};
+
+function phoneCheck (event){ //연락처 정규식 확인
+	if(phoneReg.test($("#makerTel").val())){
+		$("#phoneCheck").text("사용 가능한 전화번호입니다");
+		isPassPhone = true;
+		console.log("isPassPhone: " + isPassPhone);
+		if(isPassPhone==true&&isprivacy==true&&isPassEmail==true&&ischkid==true&&check == 0){
+			$("#submitBtn").attr("disabled",false);
+		} else {
+			$("#submitBtn").attr("disabled",true);
+		}
+	}else {
+		$("#phoneCheck").text("전화번호 형식을 확인해주세요");
+		isPassPhone = false;
+		console.log("isPassPhone: " + isPassPhone);
+	}
+};
 
 var $j = jQuery.noConflict();
 $(".datepick").datepicker({
