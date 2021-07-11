@@ -10,8 +10,8 @@ public interface UserMyPageService {
 	
 	public int cntMyFunding(String id) throws Exception;
 	
-	public List<MyFunding> rewardList(String id) throws Exception;
+	public List<MyFunding> rewardList(MyFunding vo) throws Exception;
 	
-	public MyFunding fundingDetail(MyFunding vo) throws Exception;
+	public List<MyFunding> fundingDetail(MyFunding vo) throws Exception;
 	
 }

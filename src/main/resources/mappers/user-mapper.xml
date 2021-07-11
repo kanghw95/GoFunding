@@ -201,14 +201,14 @@
 	</select>
 	
 	<!-- 내가 참여한 펀딩 상세 -->
-	<select id="myFundingReward" parameterType="string" resultType="myFunding">
+	<select id="myFundingReward" parameterType="myFunding" resultType="myFunding">
 		<![CDATA[
 			SELECT R.REWARDTITLE, R.REWARDPRICE, B.REWARDCOUNT, B.REWARDPRICE AS RTOTALPRICE, B.ORDERNO, B.ORDERDETAILNO, B.FUNDINGNO, B.ID, B.ORDERDATE, B.ORDERTOTALPRICE AS TOTALPRICE, B.ORDERSTATUS
 			FROM REWARD R JOIN (
 			    SELECT O.ORDERNO, O.FUNDINGNO, O.ID, O.ORDERDATE, O.ORDERTOTALPRICE, D.ORDERDETAILNO, D.ORDERSTATUS, D.REWARDNO, D.REWARDPRICE, D.REWARDCOUNT
 			    FROM ORDERS O JOIN ORDERSDETAIL D
 			    ON O.ORDERNO = D.ORDERNO
-			    WHERE O.ID = #{userId}
+			    WHERE O.ID = #{userId}  AND O.FUNDINGNO = #{fundingNo}
 			    ) B
 			ON R.REWARDNO = B.REWARDNO	
 		]]>

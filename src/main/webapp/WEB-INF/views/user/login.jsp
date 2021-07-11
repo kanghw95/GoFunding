@@ -47,7 +47,10 @@ function attachSignin(element) {
            			'userName' : userName,
            			'userEmail' : userEmail
            		},
-           		method : 'POST'
+           		method : 'POST',
+           		success : function(date){
+           			window.location.href = '/sprout/funselect';           			
+           		}
            	});
       }, function(error) {
         alert(JSON.stringify(error, undefined, 2));
@@ -139,7 +142,6 @@ function attachSignin(element) {
 	</form>
 	<c:if test="${!empty user}">
 		<div class="login">
-			<a href="<%=request.getContextPath() %>/user/logout">로그아웃</a>
 			<c:if test="${user.userId eq 'admin'}">
 			<a href="<%=request.getContextPath() %>/message/msgUserList">관리자-회원메세지</a></c:if>
 		</div>

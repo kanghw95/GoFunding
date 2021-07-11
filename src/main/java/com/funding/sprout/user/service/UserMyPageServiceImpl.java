@@ -29,13 +29,13 @@ public class UserMyPageServiceImpl implements UserMyPageService{
 
 
 	@Override
-	public List<MyFunding> rewardList(String id) throws Exception {
-		return myDao.rewardList(id);
+	public List<MyFunding> rewardList(MyFunding vo) throws Exception {
+		return myDao.rewardList(vo);
 	}
 
 
 	@Override
-	public MyFunding fundingDetail(MyFunding vo) throws Exception {
+	public List<MyFunding> fundingDetail(MyFunding vo) throws Exception {
 		return myDao.fundingDetail(vo);
 	}
 

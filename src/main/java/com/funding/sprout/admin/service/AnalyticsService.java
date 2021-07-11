@@ -57,5 +57,9 @@ public interface AnalyticsService {
 	
 	public List<HashMap<String, String>> analFundingTab(); //펀딩 현황 표 
 	
-	public List<Application> adminMainFundingNotice(); //관리자 메인 페이지 : 펀딩 신청 관리
+	public List<HashMap<String, String>> adminFormList(); //관리자 메인 페이지 : 펀딩 관리
+	
+	public List<HashMap<String, String>> userBoardList(); //관리자 메인 페이지 : 회원 게시판
+	
+	public List<HashMap<String, String>> adminBoardList(); //관리자 메인 페이지 : 관리자 게시판
 }

@@ -143,8 +143,18 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 	}
 
 	@Override
-	public List<Application> adminMainFundingNotice() {
-		return analyticsDao.adminMainFundingNotice();
+	public List<HashMap<String, String>> adminFormList() { //관리자 메인 페이지 : 신청펀딩
+		return analyticsDao.adminFormList();
+	}
+
+	@Override
+	public List<HashMap<String, String>> userBoardList() { //관리자 메인 페이지 : 회원 게시판 
+		return analyticsDao.userBoardList();
+	}
+
+	@Override
+	public List<HashMap<String, String>> adminBoardList() { //관리자 메인 페이지 : 관리자 게시판
+		return analyticsDao.adminBoardList();
 	}
 
 }

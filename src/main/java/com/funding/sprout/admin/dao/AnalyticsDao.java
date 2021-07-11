@@ -115,8 +115,16 @@ public class AnalyticsDao {
 		return sqlSession.selectList("Admin.analFundingTab");
 	}
 	
-	public List<Application> adminMainFundingNotice(){ //관리자 메인 페이지 : 펀딩 신청 관리
-		return sqlSession.selectList("Admin.adminMainFundingNotice");
+	public List<HashMap<String, String>> adminFormList(){ //관리자 메인 페이지 : 펀딩 관리
+		return sqlSession.selectList("Admin.adminFormList");
+	}
+	
+	public List<HashMap<String, String>> userBoardList(){ //관리자 메인 페이지 : 회원 게시판 
+		return sqlSession.selectList("Admin.userBoardList");
+	}
+	
+	public List<HashMap<String, String>> adminBoardList(){ //관리자 메인 페이지 : 관리자 게시판 
+		return sqlSession.selectList("Admin.adminBoardList");
 	}
 	
 }

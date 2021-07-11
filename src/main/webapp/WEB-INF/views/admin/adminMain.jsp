@@ -28,20 +28,31 @@
 				<table class="noticeTab" >
 				<tr class=noticeTitle>
 					<td><span>펀딩 신청 관리</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<select class="detailBtn funding" name="category">
-					<option value="#" disabled>상세보기</option>
-					<option value="formList">신청펀딩</option>
-					<option value="fundingList">승인펀딩</option>
-					<option value="formReject">반려펀딩</option>
+					<select class="detailBtn funding" id="" name="category">
+					<option value="신청펀딩">신청펀딩</option>
+					<option value="승인펀딩">승인펀딩</option>
+					<option value="반려펀딩">반려펀딩</option>
 					</select></td>
-					<td><span>커뮤니티 관리</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="detailBtn community">상세보기</button></td>
-					<td><span>문의사항 관리</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="detailBtn qna">상세보기</button></td>
+					<td><span>커뮤니티 관리</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<select class="detailBtn community" name="category">
+					<option value="자유게시판">자유게시판</option>
+					<option value="후기게시판">후기게시판</option>
+					<option value="질답게시판">질답게시판</option>
+					<option value="이벤트게시판">이벤트게시판</option>
+					<option value="정보공유게시판">정보공유게시판</option>
+					</select></td>
+					<td><span>공지/문의사항 관리</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<select class="detailBtn qna" name="category">
+					<option value="공지사항">공지사항</option>
+					<option value="FAQ">FAQ</option> 
+					<option value="QNA">QNA</option> 
+					</select></td>
 				</tr>
-				<c:forEach var="fn" items="${fundingNotice}" varStatus="status">
+				<c:forEach var="formList1" items="${formList1}" varStatus="status">
 				<tr>
-					<td id="app-${status.count}"><input type="hidden" value="${fn.applyNo}">${fn.fundingTitle}</td>
-					<td>1</td>
-					<td>1</td>
+					<td id="app-${status.count}" class="goToDetail">${formList1.APPL}</td>
+					<td id="comm-${status.count}" class="goToDetail">${formList2[status.index].FREE}</td>
+					<td id="noti-${status.count}" class="goToDetail">${formList3[status.index].NOTICE}</td>
 				</tr>
 				</c:forEach>
 				</table>
@@ -288,6 +299,23 @@
 			<span id="day-${status.count}">${days.TOTAL}</span>
 			<span id="date-${status.count}">${days.ORDERDATE}</span>
 		</c:forEach>
+		<c:forEach var="formList1" items="${formList1}" varStatus="status">
+			<span id="fnd-${status.count}">${formList1.FND}</span>
+			<span id="appl-${status.count}">${formList1.APPL}</span>
+			<span id="rjc-${status.count}">${formList1.RJC}</span>
+		</c:forEach>
+		<c:forEach var="formList2" items="${formList2}" varStatus="status">
+			<span id="free-${status.count}">${formList2.FREE}</span>
+			<span id="review-${status.count}">${formList2.REVIEW}</span>
+			<span id="question-${status.count}">${formList2.QUESTION}</span>
+			<span id="event-${status.count}">${formList2.EVENT}</span>
+			<span id="sha-${status.count}">${formList2.SHA}</span>
+		</c:forEach>
+		<c:forEach var="formList3" items="${formList3}" varStatus="status">
+			<span id="notice-${status.count}">${formList3.NOTICE}</span>
+			<span id="faq-${status.count}">${formList3.FAQ}</span>
+			<span id="qna-${status.count}">${formList3.QNA}</span>
+		</c:forEach>
 		</div>
 	</div>
 	<!-- Bootstrap core JavaScript-->
@@ -309,16 +337,83 @@
 	<script src="https://apis.google.com/js/client:platform.js"></script>
 <script>
 	$(".funding").change(function(){
-		var fundingCategory=$(".funding option:selected").val();
-		console.log(fundingCategory);
-		$("#frm").attr("action","adminMainCate");
-		$("#frm").attr("method","get");
-		$("#frm").submit();
+		var category=$(".funding option:selected").val();
+		if(category=="반려펀딩"){
+			var rjc1=$("#rjc-1").text(); var rjc2=$("#rjc-2").text();
+			$("#app-1").text(rjc1); $("#app-2").text(rjc2);
+		} else if(category=="승인펀딩"){
+			var fnd1=$("#fnd-1").text(); var fnd2=$("#fnd-2").text();
+			$("#app-1").text(fnd1); $("#app-2").text(fnd2);
+		} else if(category=="신청펀딩"){
+			var appl1=$("#appl-1").text(); var appl2=$("#appl-2").text();
+			$("#app-1").text(appl1); $("#app-2").text(appl2);
+		}
+	});	
+	$(".community").change(function(){
+		var category=$(".community option:selected").val();
+		if(category=="후기게시판"){
+			var review1=$("#review-1").text(); var review2=$("#review-2").text();
+			$("#comm-1").text(review1); $("#comm-2").text(review2);
+		} else if(category=="질답게시판"){
+			var question1=$("#question-1").text(); var question2=$("#question-2").text();
+			$("#comm-1").text(question1); $("#comm-2").text(question2);
+		} else if(category=="이벤트게시판"){
+			var event1=$("#event-1").text(); var event2=$("#event-2").text();
+			$("#comm-1").text(event1); $("#comm-2").text(event2);
+		} else if(category=="정보공유게시판"){
+			var sha1=$("#sha-1").text(); var sha2=$("#sha-2").text();
+			$("#comm-1").text(sha1); $("#comm-2").text(sha2);
+		} else if(category=="자유게시판"){
+			var free1=$("#free-1").text(); var free2=$("#free-2").text();
+			$("#comm-1").text(free1); $("#comm-2").text(free2);
+		}
+	});	
+	$(".qna").change(function(){
+		var category=$(".qna option:selected").val();
+		if(category=="FAQ"){
+			var faq1=$("#faq-1").text(); var faq2=$("#faq-2").text();
+			$("#noti-1").text(faq1); $("#noti-2").text(faq2);
+		} else if(category=="QNA"){
+			var qna1=$("#qna-1").text(); var qna2=$("#qna-2").text();
+			$("#noti-1").text(qna1); $("#noti-2").text(qna2);
+		} else if(category=="공지사항"){
+			var notice1=$("#notice-1").text(); var notice2=$("#notice-2").text();
+			$("#noti-1").text(notice1); $("#noti-2").text(notice2);
+		}
 	});	
     $("body").on("click", "[id^=app-]", function(event) {
-        var applyNo = $(this).children().val();
-        console.log(applyNo);
-    	location.href="<%=request.getContextPath()%>/formDetail?applyNo="+applyNo;
+    	var category=$(".funding option:selected").val();
+		if(category=="반려펀딩"){
+			location.href='<%=request.getContextPath()%>/formReject';
+		} else if(category=="승인펀딩"){
+			location.href='<%=request.getContextPath()%>/fundingList';
+		} else if(category=="신청펀딩"){
+			location.href='<%=request.getContextPath()%>/formList';
+		}
+    });
+    $("body").on("click", "[id^=comm-]", function(event) {
+		var category=$(".community option:selected").val();
+		if(category=="후기게시판"){
+			location.href='<%=request.getContextPath()%>/reviewboardlist';
+		} else if(category=="질답게시판"){
+			location.href='<%=request.getContextPath()%>/questionboardlist';
+		} else if(category=="이벤트게시판"){
+			location.href='<%=request.getContextPath()%>/eventboardlist';
+		} else if(category=="정보공유게시판"){
+			location.href='<%=request.getContextPath()%>/shareboardlist';
+		} else if(category=="자유게시판"){
+			location.href='<%=request.getContextPath()%>/freeboardlist';
+		}
+    });
+    $("body").on("click", "[id^=noti-]", function(event) {
+		var category=$(".qna option:selected").val();
+		if(category=="FAQ"){
+			location.href='<%=request.getContextPath()%>/faq';
+		} else if(category=="QNA"){
+			location.href='<%=request.getContextPath()%>/qna';
+		} else if(category=="공지사항"){
+			location.href='<%=request.getContextPath()%>/notice';
+		}
     });
 </script>
 </body>
