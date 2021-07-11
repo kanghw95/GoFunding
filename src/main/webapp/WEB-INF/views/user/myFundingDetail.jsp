@@ -10,7 +10,7 @@
 <body>
 	<%@include file="/WEB-INF/views/header.jsp"%>
 	<div class="wrapper">
-	<c:forEach var="fundingDetail" items="${fundingDetail }" varStatus="status">
+	<c:forEach var="fundingDetail" items="${fundingDetail }" varStatus="status" begin="1" end="1">
 		<div class="fundingContainer">
 			<div class="orderInfoContainer" style="border: 1px solid #ededed">
 				<p class="fundingStatus">${fundingStatus }</p>
