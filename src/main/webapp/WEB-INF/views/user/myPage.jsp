@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%=request.getContextPath() %>/resources/css/userdetail_join/myPage.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/user/myPage.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
