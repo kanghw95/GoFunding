@@ -413,33 +413,11 @@ pageEncoding="UTF-8"%>
 </body>
 <script>
 // 더 보기 버튼
-$(".fundingContent_itemAll").slice(0, 8).show(); 
+$(".fundingContent_itemAll").slice(0, 12).show(); 
 
 <c:forEach var = "i" begin = "1" end = "7">
-	$(".fundingContent_item${i}").slice(0, 8).show(); 
+	$(".fundingContent_item${i}").slice(0, 12).show(); 
 </c:forEach>
-
-
-    $("#load").click(function(e){
-	    <c:forEach var = "i" begin = "1" end = "7">
-    	if($("input:radio[id='funding_home_tab_${i}']").prop("checked") == true){
-	    	console.log($(".fundingContent_item${i}:hidden").length)
-	        if($(".fundingContent_item${i}:hidden").length == 0){ 
-	            alert("더이상 펀딩이 존재하지 않습니다."); 
-	        }
-	        $(".fundingContent_item${i}:hidden").slice(0, 8).show(); 
-    	}
-		</c:forEach>
-
-        
-    	if($("input:radio[id='funding_home_tab_all']").prop("checked") == true){
-	    	console.log($(".fundingContent_itemAll:hidden").length)
-    	if($(".fundingContent_itemAll:hidden").length == 0){ 
-            alert("더이상 펀딩이 존재하지 않습니다."); 
-        }
-        $(".fundingContent_itemAll:hidden").slice(0, 8).show();
-    	}
-    });
 
 </script>
 </html>
