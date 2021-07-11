@@ -868,13 +868,81 @@
         (SELECT COUNT(*) FINISH FROM FUNDING WHERE FUNDINGSTATE = 0) D		
 	</select>
 	
-	<!-- 관리자 메인 페이지 : 펀딩 신청 관리 -->
-	<select id="adminMainFundingNotice" resultType="Application">
-        SELECT A.* FROM
+	<!-- 관리자 메인 페이지 : 펀딩 관리 -->
+	<select id="adminFormList" resultType="hashMap">
+       	SELECT E.FND, E.FNDNO, E.APPL, E.APPNO, G.RJC, G.RJCNO FROM
+        (SELECT B.FND, B.FNDNO, D.APPL, D.APPNO, D.RNUM FROM
+        (SELECT A.FUNDINGTITLE FND, A.APPLYNO FNDNO, A.RNUM FROM
         (SELECT ROW_NUMBER() OVER (ORDER BY APPLYNO DESC) RNUM, FUNDINGTITLE, APPLYNO FROM APPLICATION
-        WHERE FEEDBACK IS NULL ORDER BY APPLYNO) A WHERE A.RNUM
+        WHERE FEEDBACK = 'approved' ORDER BY APPLYNO) A WHERE A.RNUM
 		<![CDATA[        
-        < 3 ORDER BY A.RNUM	
+        < 3 ORDER BY A.RNUM	) B JOIN
+        ]]>
+        (SELECT C.* FROM
+        (SELECT ROW_NUMBER() OVER (ORDER BY APPLYNO DESC) RNUM, FUNDINGTITLE APPL, APPLYNO APPNO FROM APPLICATION
+        WHERE FEEDBACK IS NULL ORDER BY APPLYNO) C WHERE C.RNUM
+		<![CDATA[        
+        < 3 ORDER BY C.RNUM) D ON B.RNUM=D.RNUM) E JOIN
+        ]]>
+        (SELECT F.* FROM
+        (SELECT ROW_NUMBER() OVER (ORDER BY APPLYNO DESC) RNUM, FUNDINGTITLE RJC, APPLYNO RJCNO FROM APPLICATION
+        WHERE FEEDBACK IS NOT NULL AND FEEDBACK != 'approved' ORDER BY APPLYNO) F WHERE F.RNUM
+		<![CDATA[        
+        < 3 ORDER BY F.RNUM) G ON E.RNUM=G.RNUM
+        ]]>
+	</select>
+	
+	<!-- 관리자 메인 페이지 : 회원 게시판 -->
+	<select id="userBoardList" resultType="hashMap">
+        select k.free, k.review, k.question, k.event, m.sha, m.rnum from
+        (select h.free, h.review, h.question, j.event, j.rnum from
+        (select e.free, e.review, g.question, g.rnum from
+        (select d.free, c.review, c.rnum from
+        (select a.free, a.rnum from
+        (select row_number() over(order by freeno desc) rnum, freetitle free from bulletineboard) a where 
+		<![CDATA[        
+        rnum<3) d join
+        ]]>
+       	(select b.review, b.rnum from 
+        (select row_number() over(order by reviewno desc) rnum, reviewtitle review from reviewboard) b where
+		<![CDATA[        
+        rnum<3) c on d.rnum=c.rnum) e join
+        ]]>
+        (select f.question, f.rnum from 
+        (select row_number() over(order by qboardno desc) rnum, qboardtitle question from questionboard) f where
+		<![CDATA[        
+        rnum<3) g on e.rnum=g.rnum) h join
+        ]]>
+        (select i.event, i.rnum from 
+        (select row_number() over(order by eventno desc) rnum, eventtitle event from eventboard) i where
+		<![CDATA[        
+        rnum<3) j on h.rnum=j.rnum) k join
+        ]]>
+        (select l.sha, l.rnum from 
+        (select row_number() over(order by shareno desc) rnum, sharetitle sha from shareboard) l where
+		<![CDATA[        
+        rnum<3) m on m.rnum=k.rnum
+        ]]>
+	</select>
+	
+	<!-- 관리자 메인 페이지 : 회원 게시판 -->
+	<select id="adminBoardList" resultType="hashMap">
+		select e.noticeno, e.notice, e.faqno, e.faq, g.qnano, g.qna from
+      	(select b.noticeno, b.notice, d.faqno, d.faq, d.rnum from
+       	(select a.noticeno, a.notice, a.rnum from 
+       	(select row_number() over(order by noticeno desc) rnum, noticetitle notice, noticeno from notice) a 
+		<![CDATA[        
+       	where a.rnum<3) b join
+        ]]>
+       	(select c.faqno, c.faq, c.rnum from
+       	(select row_number() over(order by faqno desc) rnum, faqtitle faq, faqno from faq) c where 
+		<![CDATA[        
+       	c.rnum<3) d on b.rnum=d.rnum) e join
+        ]]>
+       	(select f.qnano, f.qna, f.rnum from
+       	(select row_number() over(order by qnano desc) rnum, qnatitle qna, qnano from qna) f where 
+		<![CDATA[        
+       	f.rnum<3) g on e.rnum=g.rnum order by g.rnum
         ]]>
 	</select>
 		

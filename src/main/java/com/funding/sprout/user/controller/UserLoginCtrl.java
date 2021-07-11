@@ -1,5 +1,6 @@
 package com.funding.sprout.user.controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,29 +56,51 @@ public class UserLoginCtrl {
 	}
 	
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)  
-	public String loginPost (User user, HttpSession session, Model model) throws Exception {
+	public void loginPost (User user, HttpSession session, Model model, HttpServletResponse response) throws Exception {
 		logger.info("loginPost들어옴");
 		User loginUser=userLoginService.login(user);
+		response.setContentType("text/html; charset=UTF-8");
 		
-		String pw1=user.getUserPwd();
-		String pw2=loginUser.getUserPwd();
+		PrintWriter wr=response.getWriter();
 		
-		if(loginUser==null || !pw1.equals(pw2)) { // TODO bcrypt 추가
-			System.out.println("실패");
-			return "redirect:/"; // err500 처리 추가
+		if(loginUser!=null) {
+			String id1=user.getUserId();
+			String id2=loginUser.getUserId();
+			String pw1=user.getUserPwd();
+			String pw2=loginUser.getUserPwd();
+			
+			if(id2.equals("")&&pw2.equals("")) {
+				wr.println("<script type='text/javascript'>"); 
+				wr.println("alert('아이디와 비밀번호를 확인해주세요.'); window.location = document.referrer;"); 
+				wr.println("</script>");
+				wr.flush();
+			} else if(!id2.equals("")&&!pw2.equals("")) {
+				if(id1.equals(id2)&&pw1.equals(pw2)) {
+					session.setAttribute("user", loginUser);
+					wr.println("<script type='text/javascript'>"); 
+					wr.println("window.location.href = '/sprout/funselect';"); 
+					wr.println("</script>");
+					wr.flush();
+				} else {
+					wr.println("<script type='text/javascript'>"); 
+					wr.println("alert('아이디와 비밀번호를 확인해주세요.'); window.location = document.referrer;"); 
+					wr.println("</script>");
+					wr.flush();
+				}
+			}
+		} else if(loginUser==null) {
+			wr.println("<script type='text/javascript'>"); 
+			wr.println("alert('아이디와 비밀번호를 확인해주세요.'); window.location = document.referrer;"); 
+			wr.println("</script>");
+			wr.flush();
 		}
 		
-		System.out.println(loginUser);
-		
-		session.setAttribute("user", loginUser);
-		System.out.println("성공");
-		return "redirect:/";
 	}
 	
 	// 네이버 로그인 성공시 callback
 	@RequestMapping(value = "/naverCallback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String naverOauth2ClientCallback(HttpServletRequest request, HttpServletResponse response, Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws Exception {
-
+		
 		String serverUrl = request.getScheme()+"://"+request.getServerName();
 		if(request.getServerPort() != 80) {
 			serverUrl = serverUrl + ":" + request.getServerPort();
@@ -88,7 +111,6 @@ public class UserLoginCtrl {
 		if(oauthToken == null) {
 			model.addAttribute("msg", "네이버 로그인 access 토큰 발급 오류 입니다.");
 			model.addAttribute("url", "/");
-			return "redirect:/";
 		}
 		
 		// 로그인 사용자 정보를 읽어온다
@@ -113,7 +135,7 @@ public class UserLoginCtrl {
 		// 세션에 사용자 정보 등록
 		session.setAttribute("user", loginUser);
 		
-		return "redirect:/";
+		return "redirect:../funselect";
 	}
 	
 	// 카카오 로그인 성공시 callback
@@ -156,12 +178,13 @@ public class UserLoginCtrl {
 		// 세션에 사용자 정보 등록
 		session.setAttribute("user", loginUser);
 		
-		return "redirect:/";
+		return "redirect:../funselect";
 	}
 	
 	// 구글 로그인 성공시 callback
 	@RequestMapping(value = "/googleCallback", method = { RequestMethod.GET, RequestMethod.POST })
-	public String googleOauth2ClientCallback(User user, HttpSession session, Model model) throws Exception {
+	public String googleOauth2ClientCallback(User user, HttpSession session, Model model, HttpServletResponse response) throws Exception {
+		
 		if(user!=null) {
 			String userName=user.getUserName();
 			String userEmail=user.getUserEmail();
@@ -171,10 +194,11 @@ public class UserLoginCtrl {
 			User loginUser = userLoginService.socialLogin(vo);
 			System.out.println("구글로그인"+loginUser);
 			session.setAttribute("user", loginUser);
+			return "redirect:../funselect"; 
 		} else {
 			System.out.println("로그인 실패");
 		}
-		return "redirect:/";
+		return "redirect:../funselect"; 
 	}
 	
 	// 로그아웃
@@ -185,7 +209,7 @@ public class UserLoginCtrl {
 		System.out.println("로그아웃");
 		session.removeAttribute("user");
 		
-		return "redirect:/";
+		return "redirect:../funselect";
 		
 	}
 	

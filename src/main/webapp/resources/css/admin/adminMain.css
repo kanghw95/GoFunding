@@ -150,7 +150,10 @@ h5{
 	color: white;
 	font-size: 12px;
 	font-family: 'TmoneyRoundWindRegular'; 	
-	height: 30px;
+	height: 30px; 
+	text-align: center;
+	padding: 0 5px;
+	outline: none;
 }
 
 .notice{
@@ -180,4 +183,8 @@ td{
 
 #menuBtn{
 	margin-top: 40px !important;
+}
+
+.goToDetail{
+	cursor: pointer;
 }
