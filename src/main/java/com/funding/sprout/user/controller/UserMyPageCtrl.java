@@ -23,6 +23,7 @@ import com.funding.sprout.user.service.UserMyPageService;
 import com.funding.sprout.vo.Criteria;
 import com.funding.sprout.vo.MyFunding;
 import com.funding.sprout.vo.PageMaker;
+import com.funding.sprout.vo.Reward;
 import com.funding.sprout.vo.User;
 
 @Controller
@@ -86,9 +87,10 @@ public class UserMyPageCtrl {
 		
 		vo.setUserId(id);
 		vo.setFundingNo(fundingNo);
+		System.out.println(vo.getFundingNo());
 		
-		List<MyFunding> fundingReward = myService.rewardList(id);
-		MyFunding fundingDetail = myService.fundingDetail(vo);
+		List<MyFunding> fundingReward = myService.rewardList(vo);
+		List<MyFunding> fundingDetail = myService.fundingDetail(vo);
 		
 		System.out.println("fundingNo"+ fundingNo);
 		System.out.println(loginUser);

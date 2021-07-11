@@ -96,7 +96,7 @@ $(document).ready(
 						<div class="projectInfo">
 							<ul class="infoBox">
 								<li>
-									<a href="#"><span>펀딩횟수<b>0회</b></span></a>
+									<a href="#"><span>펀딩횟수<b>${fundingCount }회</b></span></a>
 								</li>
 								<li>
 									<a href="<%=request.getContextPath() %>/message/msgList2"><span>메세지<b>${userCnt}건</b></span></a>

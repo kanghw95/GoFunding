@@ -10,6 +10,7 @@
 <body>
 	<%@include file="/WEB-INF/views/header.jsp"%>
 	<div class="wrapper">
+	<c:forEach var="fundingDetail" items="${fundingDetail }" varStatus="status">
 		<div class="fundingContainer">
 			<div class="orderInfoContainer" style="border: 1px solid #ededed">
 				<p class="fundingStatus">${fundingStatus }</p>
@@ -42,7 +43,7 @@
 				<button class="refundBtn">결제 취소</button>
 			</div>
 		</div>
-	
+	</c:forEach>
 	</div>
 	<%@include file="/WEB-INF/views/footer.jsp"%>
 </body>

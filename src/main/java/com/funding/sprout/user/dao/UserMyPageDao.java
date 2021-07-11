@@ -22,12 +22,12 @@ public class UserMyPageDao {
 		return sqlSession.selectOne("User.cntMyFunding", id);
 	}
 	
-	public List<MyFunding> rewardList(String id) throws Exception{ // 참여한 펀딩 상세 조회
-		return sqlSession.selectList("User.myFundingReward", id);
+	public List<MyFunding> rewardList(MyFunding vo) throws Exception{ // 참여한 펀딩 상세 조회
+		return sqlSession.selectList("User.myFundingReward", vo);
 	}
 	
-	public MyFunding fundingDetail(MyFunding vo) throws Exception{ // 참여한 펀딩 하나
-		return sqlSession.selectOne("User.myFundingDetail", vo);
+	public List<MyFunding> fundingDetail(MyFunding vo) throws Exception{ // 참여한 펀딩 하나
+		return sqlSession.selectList("User.myFundingDetail", vo);
 	}
 	
 }
