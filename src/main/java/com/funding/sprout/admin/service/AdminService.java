@@ -3,7 +3,6 @@ package com.funding.sprout.admin.service;
 import java.util.List;
 
 import com.funding.sprout.vo.Admin;
-import com.funding.sprout.vo.Application;
 import com.funding.sprout.vo.Board;
 import com.funding.sprout.vo.Comment;
 import com.funding.sprout.vo.Criteria;
@@ -146,15 +145,34 @@ public interface AdminService {
 	public int reportStop() throws Exception; // 회원 정지 해제
 	
 	public List<Report> reportSelect(Report rpt) throws Exception; // 신고 내역 검색
-	
-	public List<Faq> getFAQByPage();// faq 리스트 조회
 
 	public void deleteCReport(String reportNo); // 댓글 신고내역 삭제
 	
 	public void deleteBReport(String reportNo); // 게시글 신고내역 삭제
 	
-	public int getFAQCount(); // 공지사항 수 조회
+	public List<Faq> faq() throws Exception; // faq 조회
+	
+	public List<Faq> selectFaq(Faq faq) throws Exception; // faq 검색
+	
+	public void deleteFaq(String faqNo); // faq 삭제
+	
+	public int insertFaq(Faq faq) throws Exception; // faq 추가
+	
+	public int insertNotice(Board board) throws Exception; // 공지사항 추가
+	
+	public List<Board> noticeDetail(Board board) throws Exception; // 공지사항 상세보기
+	
+	public List<Board> freeDetail(Board board) throws Exception; // 자유게시판 상세보기
+	
+	public List<Board> reviewDetail(Board board) throws Exception; // 자유게시판 상세보기
+	
+	public List<Board> questionDetail(Board board) throws Exception; // 자유게시판 상세보기
+	
+	public List<Board> shareDetail(Board board) throws Exception; // 자유게시판 상세보기
+	
+	public List<Board> eventDetail(Board board) throws Exception; // 자유게시판 상세보기
 
+	public int getFAQCount(); // 공지사항 수 조회
 
 	public int FAQInsert(); // FAQ 쓰기
 
@@ -175,7 +193,6 @@ public interface AdminService {
 
 	public int Notifydelete(); // 공지사항 삭제
 
-
 	public int NotifyUpdate(); // 공지사항 수정
 
 
@@ -183,5 +200,6 @@ public interface AdminService {
 
 
 	public int getReportCount(); // 신고 리스트 수  조회
+
 
 }

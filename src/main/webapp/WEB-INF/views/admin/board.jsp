@@ -10,6 +10,44 @@
 <link href="<%=request.getContextPath() %>/resources/css/admin/adminBoard.css?ver=1.0" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/adminBoard.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<style>
+body {
+    font-family: 'NanumSquare', sans-serif !important;
+}
+
+a {
+	text-decoration-line: none;
+	color: black;
+}
+
+a:hover {color:#00BFFF;}
+a:active {color:#00BFFF;}
+
+.no {
+	width: 40px;
+}
+
+.box {
+	width: 40px;
+}
+
+.title {
+	width: 500px;
+}
+
+.id {
+	width: 75px;
+}
+
+.cnt {
+	width: 55px;
+}
+
+.like {
+	width: 55px;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
@@ -66,12 +104,12 @@
 	<div id="userInfo">
 		<table class="tg" border="1" id="tr">
 			<tr>
-				<th>NO</th>
-				<th><input type="checkbox" id="checkAll" onclick="checkAll()"></th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>조회</th>
-				<th>추천</th>
+				<th class="no">NO</th>
+				<th class="box"><input type="checkbox" id="checkAll" onclick="checkAll()"></th>
+				<th class="title">제목</th>
+				<th class="id">작성자</th>
+				<th class="cnt">조회</th>
+				<th class="like">추천</th>
 				<th>작성일</th>
 			</tr>
 			<c:if test="${!empty freeboard }">
@@ -79,7 +117,7 @@
 					<tr name="boardList" id="boardList" class="search">
 						<td class="noBox"><input type="text" name="boardNo" class="boardNo" value=${free.boardNo } readonly></td>
 						<td><input type="checkbox" name="check" onclick='checkOne()'></td>
-						<td>${free.boardTitle}</td>
+						<td><a href="freeDetail?no=${free.boardNo }">${free.boardTitle}</a></td>
 						<td>${free.boardId}</td>
 						<td>${free.boardCnt}</td>
 						<td>0</td>
@@ -92,7 +130,7 @@
 					<tr name="boardList" id="boardList" class="search">
 						<td class="noBox"><input type="text" name="boardNo" class="boardNo" value=${review.boardNo } readonly></td>
 						<td><input type="checkbox" name="check" onclick='checkOne()'></td>
-						<td>${review.boardTitle}</td>
+						<td><a href="reviewDetail?no=${review.boardNo }">${review.boardTitle}</a></td>
 						<td>${review.boardId}</td>
 						<td>${review.boardCnt}</td>
 						<td>0</td>
@@ -105,7 +143,7 @@
 					<tr name="boardList" id="boardList" class="search">
 						<td class="noBox"><input type="text" name="boardNo" class="boardNo" value=${question.boardNo } readonly></td>
 						<td><input type="checkbox" name="check" onclick='checkOne()'></td>
-						<td>${question.boardTitle}</td>
+						<td><a href="questionDetail?no=${question.boardNo }">${question.boardTitle}</a></td>
 						<td>${question.boardId}</td>
 						<td>${question.boardCnt}</td>
 						<td>0</td>
@@ -118,7 +156,7 @@
 					<tr name="boardList" id="boardList" class="search">
 						<td class="noBox"><input type="text" name="boardNo" class="boardNo" value=${share.boardNo } readonly></td>
 						<td><input type="checkbox" name="check" onclick='checkOne()'></td>
-						<td>${share.boardTitle}</td>
+						<td><a href="shareDetail?no=${share.boardNo }">${share.boardTitle}</a></td>
 						<td>${share.boardId}</td>
 						<td>${share.boardCnt}</td>
 						<td>0</td>
@@ -131,7 +169,7 @@
 					<tr name="boardList" id="boardList" class="search">
 						<td class="noBox"><input type="text" name="boardNo" class="boardNo" value=${event.boardNo } readonly></td>
 						<td><input type="checkbox" name="check" onclick='checkOne()'></td>
-						<td>${event.boardTitle}</td>
+						<td><a href="eventDetail?no=${event.boardNo }">${event.boardTitle}</a></td>
 						<td>${event.boardId}</td>
 						<td>${event.boardCnt}</td>
 						<td>0</td>

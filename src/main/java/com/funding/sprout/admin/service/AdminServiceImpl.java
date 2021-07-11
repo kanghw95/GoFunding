@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.funding.sprout.admin.dao.AdminDao;
 import com.funding.sprout.vo.Admin;
-import com.funding.sprout.vo.Application;
 import com.funding.sprout.vo.Board;
 import com.funding.sprout.vo.Comment;
 import com.funding.sprout.vo.Criteria;
@@ -345,6 +344,61 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	public List<Faq> faq() throws Exception { // feq 조회
+		return adDao.faq();
+	}
+	
+	@Override
+	public List<Faq> selectFaq(Faq faq) throws Exception { // faq 검색
+		return adDao.selectFaq(faq);
+	}
+	
+	@Override
+	public void deleteFaq(String faqNo) { // faq 삭제
+		adDao.deleteFaq(faqNo);
+	}
+	
+	@Override
+	public int insertFaq(Faq faq) throws Exception { // faq 추가
+		return adDao.insertFaq(faq);
+	}
+	
+	@Override
+	public int insertNotice(Board board) throws Exception { // 공지사항 추가
+		return adDao.insertNotice(board);
+	}
+	
+	@Override
+	public List<Board> noticeDetail(Board board) throws Exception { // 공지사항 상세보기
+		return adDao.noticeDetail(board);
+	}
+	
+	@Override
+	public List<Board> freeDetail(Board board) throws Exception { // 자유게시판 상세보기
+		return adDao.freeDetail(board);
+	}
+	
+	@Override
+	public List<Board> reviewDetail(Board board) throws Exception { // 자유게시판 상세보기
+		return adDao.reviewDetail(board);
+	}
+	
+	@Override
+	public List<Board> questionDetail(Board board) throws Exception { // 자유게시판 상세보기
+		return adDao.questionDetail(board);
+	}
+	
+	@Override
+	public List<Board> shareDetail(Board board) throws Exception { // 자유게시판 상세보기
+		return adDao.shareDetail(board);
+	}
+	
+	@Override
+	public List<Board> eventDetail(Board board) throws Exception { // 자유게시판 상세보기
+		return adDao.eventDetail(board);
+	}
+	
+	@Override
 	public int userStart() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -366,12 +420,6 @@ public class AdminServiceImpl implements AdminService {
 	public int qnaUpdate() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public List<Faq> getFAQByPage() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

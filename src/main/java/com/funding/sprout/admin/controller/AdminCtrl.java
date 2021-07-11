@@ -25,6 +25,7 @@ import com.funding.sprout.admin.service.AdminService;
 import com.funding.sprout.vo.Board;
 import com.funding.sprout.vo.Comment;
 import com.funding.sprout.vo.Criteria;
+import com.funding.sprout.vo.Faq;
 import com.funding.sprout.vo.PageMaker;
 import com.funding.sprout.vo.Qna;
 import com.funding.sprout.vo.Report;
@@ -1105,16 +1106,165 @@ public class AdminCtrl {
 		return "admin/report";
 	}
 	
-	@RequestMapping(value = "qnaupdate", method = RequestMethod.GET)
-	public ModelAndView qnaUpdate() { // qna 답변수정
-		return null;
+	@RequestMapping(value = "faq", method = RequestMethod.GET)
+	public String qnaUpdate(Faq faq, Model model) throws Exception { // qna 답변수정
+		
+		System.out.println("feq 조회");
+		List<Faq> faqList = adService.faq();
+		System.out.println("faqList : " + faqList);
+		model.addAttribute("faq", faqList);
+		
+		return "admin/faq";
 
 	}
+	
+	@RequestMapping(value = "selectFaq", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String selectFaq(Faq faq, HttpServletRequest request) throws Exception { // faq 제목 검색
+		
+		String title = request.getParameter("title");
+		System.out.println("title : " + title);
+		faq.setFaqTitle(title);
+		System.out.println("get 값 : " + faq.getFaqTitle());
+		List<Faq> selectFaq = adService.selectFaq(faq);
+		System.out.println("검색 값 : " + selectFaq);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		String jsonOutput = gson.toJson(selectFaq);
+		System.out.println("jsonOutput : "+ jsonOutput);
+		
+		return jsonOutput;
+	}
+	
+	@RequestMapping(value = "deleteFaq", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteFaq(HttpServletRequest request) { // FAQ 글 삭제
+		String[] deleteList = request.getParameterValues("no"); // 체크된 FAQ 글 번호 리스트에 넣기
+		System.out.println("deleteList 길이 : " + deleteList.length);
+		System.out.println("deleteList : " + deleteList);
+		for (int i = 0; i < deleteList.length; i++) { // for문 사용해서 deleteList[0]부터 삭제
+			System.out.println("deleteList index " + i + " : " + deleteList[i]);
+			adService.deleteFaq(deleteList[i]); // FAQ 글 번호 검색해서 해당 유저 삭제 
+		}
+		return "admin/userList";
+	}
 
-	@RequestMapping(value = "faqall", method = RequestMethod.GET)
-	public ModelAndView getFAQByPage() { // faq 리스트 조회
-		return null;
+	@RequestMapping(value = "faqWrt", method = RequestMethod.GET)
+	public String faqWrt() { // FAQ 글쓰기 페이지 이동
+		return "admin/faqInput";
 
+	}
+	
+	@RequestMapping(value = "faqInput", method = RequestMethod.POST)
+	public String faqInput(Faq faq, Model model, HttpServletRequest request) throws Exception { // FAQ 글쓰기 
+		System.out.println("해윙~");
+		
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		System.out.println("title : " + title);
+		System.out.println("content : " + content);
+		faq.setFaqTitle(title);
+		faq.setFaqContent(content);
+		System.out.println("faq 제목 : " + faq.getFaqTitle());
+		System.out.println("faq 내용 : " + faq.getFaqContent());
+		int result = adService.insertFaq(faq);
+		System.out.println("result : " + result);
+		
+		return "admin/faq";
+
+	}
+	
+	@RequestMapping(value = "noticeWrt", method = RequestMethod.GET)
+	public String noticeWrt() {
+		return "admin/noticeInput";
+	}
+	
+	@RequestMapping(value = "noticeInput", method = RequestMethod.POST)
+	public String noticeInput(Board board, Model model, HttpServletRequest request) throws Exception { // 공지사항 글쓰기 
+		
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		System.out.println("title : " + title);
+		System.out.println("content : " + content);
+		board.setBoardTitle(title);
+		board.setBoardContent(content);
+		System.out.println("notice 제목 : " + board.getBoardTitle());
+		System.out.println("notice 내용 : " + board.getBoardContent());
+		int result = adService.insertNotice(board);
+		System.out.println("result : " + result);
+		
+		return "admin/notice";
+	}
+	
+	@RequestMapping(value = "noticeDetail", method = RequestMethod.GET)
+	public String noticeDetail(int no, Board board, Model model) throws Exception {
+		System.out.println(no);
+		board.setBoardNo(no);
+		System.out.println("notice 번호는 : " + board.getBoardNo());
+		List<Board> notice = adService.noticeDetail(board);
+		System.out.println("notice : " + notice);
+		model.addAttribute("notice", notice);
+		
+		return "admin/noticeDetail";
+	}
+	
+	@RequestMapping(value = "freeDetail", method = RequestMethod.GET)
+	public String freeDetail(int no, Board board, Model model) throws Exception {
+		System.out.println(no);
+		board.setBoardNo(no);
+		System.out.println("free 번호는 : " + board.getBoardNo());
+		List<Board> free = adService.freeDetail(board);
+		System.out.println("free : " + free);
+		model.addAttribute("free", free);
+		
+		return "admin/boardDetail";
+	}
+	
+	@RequestMapping(value = "reviewDetail", method = RequestMethod.GET)
+	public String reviewDetail(int no, Board board, Model model) throws Exception {
+		System.out.println(no);
+		board.setBoardNo(no);
+		System.out.println("review 번호는 : " + board.getBoardNo());
+		List<Board> review = adService.reviewDetail(board);
+		System.out.println("review : " + review);
+		model.addAttribute("review", review);
+		
+		return "admin/boardDetail";
+	}
+	
+	@RequestMapping(value = "questionDetail", method = RequestMethod.GET)
+	public String questionDetail(int no, Board board, Model model) throws Exception {
+		System.out.println(no);
+		board.setBoardNo(no);
+		System.out.println("notice 번호는 : " + board.getBoardNo());
+		List<Board> question = adService.questionDetail(board);
+		System.out.println("question : " + question);
+		model.addAttribute("question", question);
+		
+		return "admin/boardDetail";
+	}
+	
+	@RequestMapping(value = "shareDetail", method = RequestMethod.GET)
+	public String shareDetail(int no, Board board, Model model) throws Exception {
+		System.out.println(no);
+		board.setBoardNo(no);
+		System.out.println("notice 번호는 : " + board.getBoardNo());
+		List<Board> share = adService.shareDetail(board);
+		System.out.println("share : " + share);
+		model.addAttribute("share", share);
+		
+		return "admin/boardDetail";
+	}
+	
+	@RequestMapping(value = "eventDetail", method = RequestMethod.GET)
+	public String eventDetail(int no, Board board, Model model) throws Exception {
+		System.out.println(no);
+		board.setBoardNo(no);
+		System.out.println("event 번호는 : " + board.getBoardNo());
+		List<Board> event = adService.eventDetail(board);
+		System.out.println("event : " + event);
+		model.addAttribute("event", event);
+		
+		return "admin/boardDetail";
 	}
 	
 	@RequestMapping(value = "faqcount", method = RequestMethod.GET)

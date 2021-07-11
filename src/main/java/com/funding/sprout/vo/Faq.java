@@ -9,25 +9,26 @@ public class Faq {
 	private String faqContent; // faq 내용
 	private Date faqDate; // faq 작성일
 	private int faqCnt; // faq 조회수
-	
+	private String id; // 작성자 아이디
 	
 	public Faq() {
 		
 	}
 	
-	public Faq(int faqNo, String faqTitle, String faqContent, Date faqDate, int faqCnt) {
+	public Faq(int faqNo, String faqTitle, String faqContent, Date faqDate, int faqCnt, String id) {
 		super();
 		this.faqNo = faqNo;
 		this.faqTitle = faqTitle;
 		this.faqContent = faqContent;
 		this.faqDate = faqDate;
 		this.faqCnt = faqCnt;
+		this.id = id;
 	}
 
 	@Override
 	public String toString() {
 		return "Faq [faqNo=" + faqNo + ", faqTitle=" + faqTitle + ", faqContent=" + faqContent + ", faqDate=" + faqDate
-				+ ", faqCnt=" + faqCnt + "]";
+				+ ", faqCnt=" + faqCnt + ", id=" + id + "]";
 	}
 	
 	public int getFaqNo() {
@@ -59,6 +60,14 @@ public class Faq {
 	}
 	public void setFaqCnt(int faqCnt) {
 		this.faqCnt = faqCnt;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	

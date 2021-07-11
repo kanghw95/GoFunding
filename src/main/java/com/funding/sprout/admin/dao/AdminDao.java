@@ -328,6 +328,50 @@ public class AdminDao {
 		sqlSession.delete("Admin.deleteBReport", reportNo);
 	}
 	
+	public List<Faq> faq() throws Exception { // faq 조회
+		return sqlSession.selectList("Admin.faq");
+	}
+	
+	public List<Faq> selectFaq(Faq faq) throws Exception { // faq 검색
+		return sqlSession.selectList("Admin.selectFaq", faq);
+	}
+	
+	public void deleteFaq(String faqNo) { // faq 삭제
+		sqlSession.delete("Admin.deleteFaq", faqNo);
+	}
+	
+	public int insertFaq(Faq faq) throws Exception { // faq 추가
+		return sqlSession.insert("Admin.insertFaq", faq);
+	}
+	
+	public int insertNotice(Board board) throws Exception { // 공지사항 추가
+		return sqlSession.insert("Admin.insertNotice", board);
+	}
+	
+	public List<Board> noticeDetail(Board board) throws Exception { // 공지사항 상세보기
+		return sqlSession.selectList("Admin.noticeDetail", board);
+	}
+	
+	public List<Board> freeDetail(Board board) throws Exception { // 자유게시판 상세보기
+		return sqlSession.selectList("Admin.freeDetail", board);
+	}
+	
+	public List<Board> reviewDetail(Board board) throws Exception { // 후기게시판 상세보기
+		return sqlSession.selectList("Admin.reviewDetail", board);
+	}
+	
+	public List<Board> questionDetail(Board board) throws Exception { // 질의응답게시판 상세보기
+		return sqlSession.selectList("Admin.questionDetail", board);
+	}
+	
+	public List<Board> shareDetail(Board board) throws Exception { // 정보공유게시판 상세보기
+		return sqlSession.selectList("Admin.shareDetail", board);
+	}
+	
+	public List<Board> eventDetail(Board board) throws Exception { // 이벤트게시판 상세보기
+		return sqlSession.selectList("Admin.eventDetail", board);
+	}
+	
 	public int userStart() { // 회원 권한 복원
 		return 0;
 
