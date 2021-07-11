@@ -13,7 +13,11 @@ pageEncoding="UTF-8"%>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <link href="<%=request.getContextPath() %>/resources/css/funding/fundinglist.css" rel="stylesheet" type="text/css" />
-
+<style >
+li {
+display: none;
+}
+</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
@@ -149,8 +153,16 @@ pageEncoding="UTF-8"%>
 
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
-					<li class="fundingContent_item">
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+					<li class="fundingContent_itemAll">
+							<form action="funding/detail" id="detail${vo.fundingno}" method="get">
+							<a href="#" onclick="detail${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="admin">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -181,6 +193,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 					</li>
 					
 				</c:forEach>
@@ -198,7 +211,7 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '일자리 창출'}">
-						<li class="fundingContent_item" >
+						<li class="fundingContent_item1" >
 							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
@@ -247,7 +260,7 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '공정 무역'}">
-						<li class="fundingContent_item" >
+						<li class="fundingContent_item2" >
 							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
@@ -297,7 +310,7 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '친환경'}">
-						<li class="fundingContent_item" >
+						<li class="fundingContent_item3" >
 							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
@@ -347,7 +360,7 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '기부'}">
-						<li class="fundingContent_item" >
+						<li class="fundingContent_item4" >
 							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
@@ -397,7 +410,7 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '작은 가게'}">
-						<li class="fundingContent_item" >
+						<li class="fundingContent_item5" >
 							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
@@ -447,7 +460,7 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '미디어'}">
-						<li class="fundingContent_item" >
+						<li class="fundingContent_item6" >
 							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
@@ -496,7 +509,7 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '창작자'}">
-						<li class="fundingContent_item" >
+						<li class="fundingContent_item7" >
 							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
@@ -533,12 +546,11 @@ pageEncoding="UTF-8"%>
 				</c:forEach>
 			</c:if>
 			
-
 		</ul>
 		
 		</div>
 		
-		<button type="button" class="fundingContent_button_more">더보기<span class="fundingcontent_icon"></span></button>
+		<button type="button" id="load" class="fundingContent_button_more">더보기<span class="fundingcontent_icon"></span></button>
 		
 		</div>
 		</section>
@@ -713,6 +725,11 @@ pageEncoding="UTF-8"%>
 				<c:forEach var = "i" begin = "1" end = "7">
 					$("#tab_${i}").css('display', 'none');
 				</c:forEach>
+				
+				<c:forEach var = "i" begin = "1" end = "7">
+					$(".fundingContent_item${i}").slice(12).hide(); 
+				</c:forEach>
+
 		});
 		
 		funding_home_tab_1.addEventListener("click",function(){
@@ -724,6 +741,9 @@ pageEncoding="UTF-8"%>
 			<c:forEach var = "i" begin = "2" end = "7">
 				$("#tab_${i}").css('display', 'none');
 			</c:forEach>
+			
+		    $(".fundingContent_itemAll").slice(12).hide(); 
+			
 			
 	});
 		
@@ -737,6 +757,8 @@ pageEncoding="UTF-8"%>
 			</c:forEach>
 			
 			$("#tab_all").css('display', 'none');
+			
+			$(".fundingContent_itemAll").slice(12).hide(); 
 	});
 		
 		funding_home_tab_3.addEventListener("click",function(){
@@ -750,6 +772,7 @@ pageEncoding="UTF-8"%>
 			</c:forEach>
 			
 			$("#tab_all").css('display', 'none');
+			$(".fundingContent_itemAll").slice(12).hide(); 
 	});
 		
 		funding_home_tab_4.addEventListener("click",function(){
@@ -758,12 +781,13 @@ pageEncoding="UTF-8"%>
 			$("#tab_1").css('display', 'none');	
 			$("#tab_2").css('display', 'none');	
 			$("#tab_3").css('display', 'none');	
-			$("#tab_1").css('display', 'block');	
+			$("#tab_4").css('display', 'block');	
 			<c:forEach var = "i" begin = "5" end = "7">
 				$("#tab_${i}").css('display', 'none');
 			</c:forEach>
 			
 			$("#tab_all").css('display', 'none');
+			$(".fundingContent_itemAll").slice(12).hide(); 
 	});
 		
 		funding_home_tab_5.addEventListener("click",function(){
@@ -778,6 +802,7 @@ pageEncoding="UTF-8"%>
 			$("#tab_7").css('display', 'none');
 
 			$("#tab_all").css('display', 'none');
+			$(".fundingContent_itemAll").slice(12).hide(); 
 	});
 		
 		funding_home_tab_6.addEventListener("click",function(){
@@ -792,6 +817,7 @@ pageEncoding="UTF-8"%>
 			$("#tab_7").css('display', 'none');
 
 			$("#tab_all").css('display', 'none');
+			$(".fundingContent_itemAll").slice(12).hide(); 
 	});
 		
 		funding_home_tab_7.addEventListener("click",function(){
@@ -806,12 +832,40 @@ pageEncoding="UTF-8"%>
 			$("#tab_7").css('display', 'block');
 			
 			$("#tab_all").css('display', 'none');
+			$(".fundingContent_itemAll").slice(12).hide(); 
 	});
 		
+		// 더 보기 버튼
+	    $(".fundingContent_itemAll").slice(0, 12).show(); 
+
+		<c:forEach var = "i" begin = "1" end = "7">
+			$(".fundingContent_item${i}").slice(0, 12).show(); 
+		</c:forEach>
 		
+		
+		    $("#load").click(function(e){
+			    <c:forEach var = "i" begin = "1" end = "7">
+		    	if($("input:radio[id='funding_home_tab_${i}']").prop("checked") == true){
+			    	console.log($(".fundingContent_item${i}:hidden").length)
+			        if($(".fundingContent_item${i}:hidden").length == 0){ 
+			            alert("더이상 펀딩이 존재하지 않습니다."); 
+			        }
+			        $(".fundingContent_item${i}:hidden").slice(0, 12).show(); 
+		    	}
+				</c:forEach>
+
+		        
+		    	if($("input:radio[id='funding_home_tab_all']").prop("checked") == true){
+			    	console.log($(".fundingContent_itemAll:hidden").length)
+		    	if($(".fundingContent_itemAll:hidden").length == 0){ 
+		            alert("더이상 펀딩이 존재하지 않습니다."); 
+		        }
+		        $(".fundingContent_itemAll:hidden").slice(0, 12).show();
+		    	}
+		    });
 		
 
-		
+
 </script>
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>

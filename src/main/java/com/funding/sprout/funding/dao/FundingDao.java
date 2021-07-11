@@ -127,6 +127,32 @@ public class FundingDao {
 		return sqlSession.update("Reward.rewardCountIncrease", reward);
 	}
 	
+	
+	public int checklike(int fundingno,String Id) { // 펀딩 좋아요 여부 검사
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("fundingno", fundingno);
+		map.put("ID", Id);
+		return sqlSession.selectOne("Funding.checklike", map);
+	}
+	
+	public int insertLike(int fundingno, String Id) { // 펀딩 좋아요
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("fundingno", fundingno);
+		map.put("ID", Id);
+		return sqlSession.insert("Funding.insertLike",map);
+	}
+	
+	public int deleteLike(int fundingno, String Id) { // 펀딩 좋아요 취소
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("fundingno", fundingno);
+		map.put("ID", Id);
+		return sqlSession.delete("Funding.deleteLike",map);
+	}
+	
+	public int likecnt(int fundingno) { // 펀딩 좋아요수
+		return sqlSession.selectOne("Funding.likecnt", fundingno);
+	}
+	
 	public Funding getPreference() {  //TODO 선호하는 펀딩 정보 이거는 수정이 필요해보임 추가도
 		return null;
 

@@ -41,6 +41,50 @@
 		<result property="fundingfin" column="FUNDINGFIN" />
 	</resultMap>
 
+
+	<resultMap type="Board" id="freeBoard"> <!-- 자유 게시판 -->
+		<id property="boardNo" column="freeno"/>
+		<result property="boardTitle" column="freetitle"/>		
+		<result property="boardContent" column="freecontent"/>		
+		<result property="boardDate" column="freedate"/>		
+		<result property="boardCnt" column="freecnt"/>		
+		<result property="boardId" column="id"/>		
+	</resultMap>
+	<resultMap type="Board" id="reviewBoard"> <!-- 후기 게시판 -->
+		<id property="boardNo" column="reviewno"/>
+		<result property="boardTitle" column="reviewtitle"/>		
+		<result property="boardContent" column="reviewcontent"/>		
+		<result property="boardDate" column="reviewdate"/>		
+		<result property="boardCnt" column="reviewcnt"/>		
+		<result property="boardId" column="id"/>
+	</resultMap>
+	<resultMap type="Board" id="questionBoard"> <!-- 질의응답 게시판 -->
+ 		<id property="boardNo" column="qboardno"/>
+		<result property="boardTitle" column="qboardtitle"/>		
+		<result property="boardContent" column="qboardcontent"/>		
+		<result property="boardDate" column="qboarddate"/>		
+		<result property="boardCnt" column="qboardcnt"/>		
+		<result property="boardId" column="id"/>
+	</resultMap>
+	<resultMap type="Board" id="shareBoard"> <!-- 정보공유 게시판 -->
+		<id property="boardNo" column="shareno"/>
+		<result property="boardTitle" column="sharetitle"/>		
+		<result property="boardContent" column="sharecontent"/>		
+		<result property="boardDate" column="sharedate"/>		
+		<result property="boardCnt" column="sharecnt"/>		
+		<result property="boardId" column="id"/>
+	</resultMap>
+	<resultMap type="Board" id="eventBoard"> <!-- 이벤트 게시판 -->
+		<id property="boardNo" column="eventno"/>
+		<result property="boardTitle" column="eventtitle"/>		
+		<result property="boardContent" column="eventcontent"/>		
+		<result property="boardDate" column="eventdate"/>		
+		<result property="boardCnt" column="eventcnt"/>		
+		<result property="boardId" column="id"/>
+	</resultMap>
+	
+
+
 		
 	<!-- 회원가입 -->
 	<insert id="insertUser" parameterType="User">
@@ -92,7 +136,34 @@
 		DELETE FROM USERS WHERE ID = #{userId}	
 	</delete>
 	
-	<!-- 회원 탈퇴 정보 저장 -->
+	
+	
+	<!-- 내가 쓴 글 불러오기 : 자유게시판 -->
+	<select id="selectFree" parameterType="string" resultMap="freeBoard">
+		SELECT * FROM (SELECT FREENO, FREETITLE, FREECONTENT, FREEDATE, FREECNT, ID
+		, ROW_NUMBER() OVER (ORDER BY FREENO ASC) AS RNUM FROM BULLETINEBOARD) MP
+		WHERE (RNUM BETWEEN 1 AND 3) AND ID = #{userId} 
+		ORDER BY FREENO ASC
+	</select>
+	
+	<!-- 내가 쓴 글 불러오기 : 자유게시판 더보기-->
+	<select id="selectFreeMore" parameterType="string" resultMap="freeBoard">
+		SELECT * FROM FROM BULLETINEBOARD
+		WHERE ID = #{userId} 
+		ORDER BY FREENO ASC
+	</select>
+	
+	<!-- 내가 쓴 글 불러오기 : 후기게시판 -->
+	
+	
+	<!-- 내가 쓴 글 불러오기 : QnA게시판 -->
+	
+	
+	<!-- 내가 쓴 글 불러오기 : 정보공유게시판 -->
+	
+	
+	<!-- 내가 쓴 글 불러오기 : 이벤트게시판 -->
+	
 	
 	
 	<!-- 내가 참여한 펀딩 전체 -->

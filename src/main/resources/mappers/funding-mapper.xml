@@ -95,6 +95,24 @@
 		UPDATE FUNDING SET CURRENTPRICE = #{currentprice} WHERE FUNDINGNO = #{fundingno}
 	</update>
 	
-
+	<!-- 펀딩 좋아요 여부 검사 -->
+	<select id="checklike" parameterType="hashmap" flushCache="true" statementType="PREPARED" resultType="int">
+		SELECT count(*) FROM PREFERENCE WHERE FUNDINGNO = #{fundingno} and ID = #{ID}
+	</select>
+	
+	<!-- 펀딩 좋아요 -->
+	<insert id="insertLike" parameterType="hashmap" flushCache="true" statementType="PREPARED" >
+		INSERT INTO PREFERENCE VALUES(#{fundingno}, #{ID})
+	</insert>
+	
+	<!-- 펀딩 좋아요 취소 -->
+	<delete id="deleteLike" parameterType="hashmap" flushCache="true" statementType="PREPARED">
+		DELETE FROM PREFERENCE WHERE FUNDINGNO = #{fundingno} and ID = #{ID}
+	</delete>
+	
+	<!-- 펀딩 좋아요수 -->	
+	<select id="likecnt" parameterType="int" flushCache="true" statementType="PREPARED" resultType="int">
+		SELECT count(*) FROM PREFERENCE WHERE FUNDINGNO = #{fundingno}
+	</select>
 	
 </mapper>
