@@ -23,9 +23,20 @@ body {
 	margin-top: 80px;
 }
 
-.wrapper {
+#wrapper {
 	display: table;
 	margin-bottom: 80px;
+	position: relative;
+	padding-top: 110px;
+	color: #202020;
+}
+
+th {
+	font-size: 15px;
+}
+
+td {
+	font-size: 16px;
 }
 
 .list {
@@ -214,7 +225,7 @@ body {
 <body>
 <jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
 	<div class="space">
-		<div class="wrapper">
+		<div id="wrapper">
 			<img src="resources/img/admin/list.png" class="list">&nbsp;
 			<p class="qnaList">문의 답글</p>
 			<button class="back" onclick="back()">목록으로</button>

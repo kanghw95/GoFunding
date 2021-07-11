@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%=request.getContextPath() %>/resource	s/css/admin/reportDetail.css?ver=1.0" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resource	s/css/admin/reportDetail.css?ver=1.1" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/reportDetail.js"></script>
@@ -71,7 +71,7 @@ function userPass() {
 <body>
 <jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
 	<div class="space">
-		<div class="wrapper">
+		<div id="wrapper">
 			<img src="resources/img/admin/list.png" class="list">&nbsp;
 			<p class="reportDetail">신고 상세</p>
 			<button class="back" onclick="back()">목록으로</button>

@@ -19,9 +19,20 @@ body {
 	margin-top: 80px;
 }
 
-.wrapper {
+#wrapper {
 	display: table;
 	margin-bottom: 80px;
+	position: relative;
+	padding-top: 110px;
+	color: #202020;
+}
+
+th {
+	font-size: 15px;
+}
+
+td {
+	font-size: 16px;
 }
 
 .list {
@@ -95,7 +106,7 @@ function insertNotice() {
 <body>
 <jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
 <div class="space">
-	<div class="wrapper">
+	<div id="wrapper">
 		<img src="resources/img/admin/list.png" class="list">&nbsp;
 		<p class="userManage">공지사항</p>
 	</div>

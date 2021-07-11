@@ -22,6 +22,14 @@ td, th, tr {
 	border: 1px solid #ccc;
 }
 
+th {
+	font-size: 15px;
+}
+
+td {
+	font-size: 16px;
+}
+
 #list {
 	width: 35px;
 	line-height: 40px;
@@ -37,6 +45,9 @@ td, th, tr {
 #wrapper {
 	display: table;
 	margin-bottom: 80px;
+	position: relative;
+	padding-top: 110px;
+	color: #202020;
 }
 
 #userManage {
@@ -55,14 +66,14 @@ td, th, tr {
 }
 
 #text {
-	height: 24px;
+	height: 30px;
 	width: 150px;
 	margin-left: 5px;
 	float: left;
 }
 
 #searchBtn {
-	margin-left: 75px;
+	margin-left: 85px;
 	box-shadow: none;
 	border-radius: 10px;
 	height: 30px;

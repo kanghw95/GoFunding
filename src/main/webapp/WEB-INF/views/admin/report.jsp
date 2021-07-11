@@ -16,7 +16,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
 	<div class="space">
-		<div class="wrapper">
+		<div id="wrapper">
 			<img src="resources/img/admin/list.png" class="list">&nbsp;
 			<p class="reportList">신고내역</p>
 		</div> 

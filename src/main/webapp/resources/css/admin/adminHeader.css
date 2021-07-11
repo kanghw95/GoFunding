@@ -1,0 +1,479 @@
+@charset "UTF-8";
+
+/* header 기본 세팅*/
+header{
+	dispaly: block;
+	z-index: 1000;
+	font-family: 'TmoneyRoundWindRegular';
+	
+}
+
+.header {
+	display: inline-block;
+	width: 100%;
+	height: 90px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	background-color: #fff;
+	border-bottom: 1px solid #025951;
+}
+
+.header_content {
+	position: relative;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1140px;
+	heght: 0 !important;
+}
+
+.logo {
+	float: left;
+	margin-top: 5px;
+
+}
+
+.navbox{
+	border: 0;
+	height: 0;
+	margin: 0;
+}
+
+.nav-content, .nav-content a, .nav-content ul, .nav-content li, .nav-content div, .nav-content form, .nav-content input {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+}
+
+.nav-content a{
+	text-decoration: none;
+}
+
+.nav-content li {
+	list-style: none;
+}
+
+.nav-content {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	right: 100px;
+	left: 100px;
+	cursor: default;
+	z-index: 500;
+	width: 750px;
+}
+
+.nav-content>li {
+	display: block;
+	float: left;
+}
+
+.nav-content>li>a{
+	position: relative;
+	display: block;
+	z-index: 510;
+	height: 89px;
+	padding: 0 30px;
+	line-height: 89px;
+	
+	font-family: TmoneyRoundWindRegular;
+	font-size: 20px;
+	color: #202020;
+	text-shadow: 0 0 1px rgba(0, 0, 0, 35);
+	
+	background-color: #ccc;
+
+	-webkit-transition: all .3s ease;
+	-moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.nav-content>li:hover>a {
+	color: #038c65;
+}
+
+.nav-content>li:first-child>a{
+	border-raidus: 3px 0 0 3px;
+	border-left: none;
+}
+
+.nav-content>li.nav-search>form {
+	position: relative;
+	height: 54px;
+	width: 280px;
+	z-index: 510;
+	padding-top: 30px !important;
+}
+
+.nav-content>li.nav-search input[type="text"]{
+	display: block;
+	float: left;
+	width: 0px;
+	height: 24px;
+	padding: 15px 0;
+	line-height: 24px;
+	
+	font-family: TmoneyRoundWindRegular;
+	font-size: 16px;
+	color: #202020;
+	text-shadow: 0 0 1px rgba(0, 0, 0, .35);
+	vertical-align: middle;
+	
+	
+	
+	-webkit-transition: all .3s ease 1s;
+    -moz-transition: all .3s ease 1s;
+    -o-transition: all .3s ease 1s;
+    -ms-transition: all .3s ease 1s;
+    transition: all .3s ease 1s;
+}
+
+.nav-content>li.nav-search select {
+	display: block;
+	float: left;
+	width: 0px;
+	height: 24px;
+	padding: 15px 0;
+	line-height: 24px;
+	outline: none;
+	border: none;
+	
+	font-family: TmoneyRoundWindRegular;
+	font-size: 16px;
+	color: #202020;
+	vertical-align: middle;
+	
+	-webkit-transition: all .3s ease 1s;
+    -moz-transition: all .3s ease 1s;
+    -o-transition: all .3s ease 1s;
+    -ms-transition: all .3s ease 1s;
+    transition: all .3s ease 1s;
+    
+    
+}
+
+.nav-content>li.nav-search input[type="text"]:focus {
+	color: #202020;
+}
+
+
+.nav-content>li.nav-search input[type="text"]:focus, 
+.nav-content>li.nav-search:hover input[type="text"] {
+	width: 100px;
+	padding: 15px 20px;
+	vertical-align: middle;
+	border-bottom: #202020 solid 1px;
+	outline: none;
+	
+	-webkit-transition: all .3s ease 1s;
+    -moz-transition: all .3s ease 1s;
+    -o-transition: all .3s ease 1s;
+    -ms-transition: all .3s ease 1s;
+    transition: all .3s ease 1s;	
+}
+
+.nav-content>li.nav-search:hover select:focus,
+.nav-content>li.nav-search:hover select {
+	width: 100px;
+	padding: 15px 20px;
+	margin-right: 10px;
+	vertical-align: middle;
+	border: #202020 solid 1px;
+	outline: none;
+	
+	-webkit-transition: all .3s ease 1s;
+    -moz-transition: all .3s ease 1s;
+    -o-transition: all .3s ease 1s;
+    -ms-transition: all .3s ease 1s;
+    transition: all .3s ease 1s;	
+}
+
+.nav-content>li.nav-search input[type="submit"]{
+	display: block;
+	float: left;
+	width: 32px;
+	height: 54px;
+	cursor: pointer;
+	
+	
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+
+
+/*.nav-content>li.nav-search input[type="submit"]:hover {
+	background-color: #cff09e;
+}
+	
+/*메가 메뉴 드롭다운*/
+.nav-content>li>div{
+	position: absolute;
+	display: none;
+	width: 100%;
+	top: 90px !important;
+	left: 0;
+	
+	/*opacity: 0;
+	visibility: hidden;
+	overflow: hidden;*/
+	
+	background: #fff;
+	border-radius: 0 0 3px 3px;
+	
+}
+
+.nav-content>li:hover>div{
+	display: block;
+	
+	/*opacity: 1;
+	visibility: visible;
+	overflow: visible;*/
+}
+
+
+.nav-content .nav-column{
+	float: left;
+	width: 20%;
+	padding: 2.5%;
+}
+
+.nav-content .nav-column .column-title{
+	margin: 10px 0 10px 0;
+	line-height: 18px;
+	
+	font-family: TmoneyRoundWindRegular;
+	font-weight: bold;
+	font-size: 18px;
+	color: #00BFFF;
+	text-transform: uppercase;
+}
+
+.nav-content .nav-column li a,
+.nav-content .subMenu1 li a,
+.nav-content .subMenu2 li a,
+.nav-content .subMenu3 li a,   
+.nav-content .subMenu4 li a {
+	display: block;
+	line-height: 26px;
+	
+	font-weight: bold;
+	font-size: 16px;
+	color: #888888; 
+}
+
+.nav-content .nav-column li a:hover,
+.nav-content .subMenu1 li a:hover,
+.nav-content .subMenu2 li a:hover,
+.nav-content .subMenu3 li a:hover, 
+.nav-content .subMenu4 li a:hover {
+	color: #666666;
+}
+
+.nav-content .subMenu1{
+	position: absolute;
+	top: 90px;
+	left: 100px !important;
+	width: 130px !important;
+	
+	border: 1px solid #ededed;
+}
+
+.nav-content .subMenu2{
+	position: absolute;
+	top: 90px;
+	left: 260px !important;
+	width: 130px !important;
+	
+	border: 1px solid #ededed;
+}
+
+.nav-content .subMenu3{
+	position: absolute;
+	top: 90px;
+	left: 435px !important;
+	width: 180px !important;
+	
+	border: 1px solid #ededed;
+}
+
+.nav-content .subMenu4{
+	position: absolute;
+	top: 90px;
+	left: 620px !important;
+	width: 180px !important;
+	
+	border: 1px solid #ededed;
+}
+
+.nav-content .subMenu1 ul,
+.nav-content .subMenu2 ul,
+.nav-content .subMenu3 ul 
+.nav-content .subMenu4 ul {
+	padding: 15px 10px 15px 10px;
+}
+
+
+
+
+
+/* 헤더 버튼 */
+/* 로그인 전 */
+.beforeLogin {
+	display: inline-block;
+	text-align: right;
+	top: 24px;
+}
+
+#btnLogin {
+	display: inline-block;
+	position: absolute;
+	right: 190px;
+	top: 28px;
+	width: 80px;
+	border: none;
+	padding: 5px;
+	outline: none;
+	border-radius: 5px;
+	color: #202020;
+	background-color: transparent;
+	border: 1px solid #79bd9a;
+}
+
+#btnLogin:hover{
+	color: white;
+	background-color: #79bd9a;
+	cursor: pointer;
+}
+
+
+#btnSignin {
+	display: inline-block;
+	position: absolute;
+	right: 100px;
+	top: 28px;
+	width: 80px;
+	border: none;
+	padding: 5px;
+	outline: none;
+	border-radius: 5px;
+	color: #202020;
+	background-color: transparent;
+	border: 1px solid #79bd9a;
+	
+}
+
+#btnSignin:hover{
+	color: white;
+	background-color: #79bd9a;
+	cursor: pointer;
+}
+
+/* 로그인 후 */
+
+.afterLogin {
+	display: inline-block !important;
+	text-align: right !important;
+}
+
+.afterLogin a{
+	color: #202020;
+	
+}
+.afterLogin a:visited{
+	color: #202020;
+	
+}
+
+.dropdown {
+	position: absolute !important;
+	right: 110px !important;
+}
+
+.picBtn {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	border: 1px solid white;
+	overflow: hidden;
+}
+
+.pic {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute !important;
+	width: 130px;
+	top: 70px !important;
+	border-radius: 5px;
+	background-color: white;
+	text-align: center;
+}
+
+.dropdown-content a {
+	display: block;
+	margin: 10px;
+	line-height: 1;
+	text-decoration: none;
+}
+.dropdown-content a:visited {
+	color: #202020;
+}
+
+.dropdown-content a:hover {
+	color: #038c65;
+}
+
+
+/* 로그인 여부 관계없이 고정 */
+.hold{
+	display: inline-block;
+	text-align: right;
+	top: 24px;
+}
+
+
+#createFunding{
+	position: absolute;
+	top: 28px;
+	right: 10px;
+	width: 80px;
+	border: none;
+	padding: 5px;
+	outline: none;
+	border-radius: 5px;
+	color: #202020;
+	font-size: 15px;
+	background-color: transparent;
+	border: 1px solid #79bd9a;	
+}
+
+#createFunding:hover{
+	color: white;
+	background-color: #79bd9a;
+	cursor: pointer;
+}
+
+
+a {
+	text-decoration: none;
+}
+
+img {
+	border: 0;
+	vertical-align: middle;
+}

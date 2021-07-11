@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%=request.getContextPath() %>/resource	s/css/admin/qna.css?ver=1.6" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resource	s/css/admin/qna.css?ver=1.7" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <style>
 	.cmt {
@@ -129,7 +129,18 @@
 			cv += "<td>n</td>"
 			cv += "<td>" + data[i].qnaId + "</td>"
 			cv += "<td>" + data[i].qnaDate + "</td>"
-			cv += "<td>처리여부</td>"
+			if (data[i].replyCnt != 0) {
+				cv += "<td>"
+				cv += "<span class='cmt'>답변완료 :</span>"
+				cv += "<span class=cnt>" + data[i].replyCnt + "</span><br>"
+				cv += "<input type='button' value='답변추가' class='reply' id = " + data[i].qnaNo + " onclick='reply(this.id)'>"
+				cv += "</td>"
+			} else {
+				cv += "<td>"
+				cv += "<span class='wait'>답변대기</span><br>"
+				cv += "<input type='button' value='답변하기' class='reply' id = " + data[i].qnaNo + " onclick='reply(this.id)'>"
+				cv += "</td>"
+			}
 			cv += "<td>" + data[i].qnaMId + "</td>"
 			cv += "<td>" + data[i].qnaADate + "</td>"
 			cv += "<td>" + data[i].qnaCnt + "</td>"

@@ -21,9 +21,16 @@ body {
 	margin-top: 80px;
 }
 
-.wrapper {
+#wrapper {
 	display: table;
 	margin-bottom: 80px;
+	position: relative;
+	padding-top: 110px;
+	color: #202020;
+}
+
+td {
+	font-size: 16px;
 }
 
 .list {
@@ -39,7 +46,7 @@ body {
 
 .backFree {
 	float: right;
-    margin-left: 700px;
+    margin-left: 698px;
     box-shadow: none;
     border-radius: 10px;
     height: 30px;
@@ -47,7 +54,7 @@ body {
 
 .backReview {
 	float: right;
-    margin-left: 700px;
+    margin-left: 698px;
     box-shadow: none;
     border-radius: 10px;
     height: 30px;
@@ -56,7 +63,7 @@ body {
 
 .backQuestion {
 	float: right;
-        margin-left: 664px;
+    margin-left: 660px;
     box-shadow: none;
     border-radius: 10px;
     height: 30px;
@@ -65,7 +72,7 @@ body {
 
 .backShare {
 	float: right;
-    margin-left: 664px;
+    margin-left: 660px;
     box-shadow: none;
     border-radius: 10px;
     height: 30px;
@@ -74,7 +81,7 @@ body {
 
 .backEvent {
 	float: right;
-    margin-left: 680px;
+    margin-left: 679px;
     box-shadow: none;
     border-radius: 10px;
     height: 30px;
@@ -111,7 +118,7 @@ body {
 	border: none;
 	text-align: center;
 	outline: none;
-	width: 20px;
+	width: 40px;
 }
 
 .qnaCon {
@@ -149,7 +156,7 @@ function backEvent() {
 <body>
 <jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
 <div class="space">
-	<div class="wrapper">
+	<div id="wrapper">
 		<img src="resources/img/admin/list.png" class="list">&nbsp;
 		<c:if test="${!empty free }">
 			<p class="qnaList">자유게시판</p>

@@ -135,7 +135,7 @@ $(document).ready(function(){
 							<input type="image" src="<%=request.getContextPath() %>/images/user64.png" class="pic" width="50" height="50" style="background-color: white" id="show">
 						</div>
 						<div class="dropdown-content" style="border: 1px solid #1abc9c; display:none" id="dropdown-content">
-							<a href="#">관리자 페이지</a>
+							<a href="<%=request.getContextPath()%>/adminMain">관리자 페이지</a>
 							<a href="<%=request.getContextPath()%>/user/logout">로그아웃</a> 
 						</div>
 					</div>

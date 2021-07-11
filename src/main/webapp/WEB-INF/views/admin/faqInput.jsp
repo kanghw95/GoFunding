@@ -19,11 +19,21 @@ body {
 	margin-top: 80px;
 }
 
-.wrapper {
+#wrapper {
 	display: table;
 	margin-bottom: 80px;
+	position: relative;
+	padding-top: 110px;
+	color: #202020;
 }
 
+th {
+	font-size: 15px;
+}
+
+td {
+	font-size: 16px;
+}
 .list {
 	width: 35px;
 	line-height: 40px;
@@ -64,6 +74,14 @@ body {
 .footer {
 	height: 200px;
 }
+
+.back {
+	float: right;
+    margin-left: 751px;
+    box-shadow: none;
+    border-radius: 10px;
+    height: 30px;
+}
 </style>
 <script>
 function insertFaq() {
@@ -90,14 +108,19 @@ function insertFaq() {
 	})
 	faqForm.submit();
 }
+
+function back() {
+	location.href="faq";
+}
 </script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
 <div class="space">
-	<div class="wrapper">
+	<div id="wrapper">
 		<img src="resources/img/admin/list.png" class="list">&nbsp;
 		<p class="userManage">FAQ</p>
+		<button class="back" onclick="back()">뒤로가기</button>
 	</div>
 </div> 
 <div class="input">
