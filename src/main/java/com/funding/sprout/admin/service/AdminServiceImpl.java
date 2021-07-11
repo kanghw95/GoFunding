@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.funding.sprout.admin.dao.AdminDao;
 import com.funding.sprout.vo.Admin;
+import com.funding.sprout.vo.Application;
 import com.funding.sprout.vo.Board;
 import com.funding.sprout.vo.Comment;
 import com.funding.sprout.vo.Criteria;

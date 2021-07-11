@@ -156,11 +156,21 @@ $(document).ready(function(){
 				</c:otherwise>
 		</c:choose> 
 		<div class="hold">
-			<button type="button" id="createFunding" onclick="location.href='#'">펀딩 등록</button>		
+			<button type="button" id="createFunding">펀딩 등록</button>		
 			
 		</div>
 	</div>	
 </div>
+<script>
+$("#createFunding").click(function(){
+	var userIdChk="${user.userId}";
+	if(userIdChk=='null'||userIdChk==''){
+		alert('로그인 해주세요.');
+	} else if(userIdChk!='null'||userIdChk!='') {
+		location.href='<%=request.getContextPath()%>/user/applicationForm';
+	}
+});
+</script>
 </header>
 
 

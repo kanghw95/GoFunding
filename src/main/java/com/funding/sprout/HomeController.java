@@ -35,8 +35,6 @@ import com.siot.IamportRestClient.response.Payment;
 public class HomeController {
 	@Autowired
 	private FundingService funService;
-	@Autowired
-	private MessageService msgService;
 	
 	private IamportClient api;
 	
@@ -94,20 +92,12 @@ public class HomeController {
 		return "footer";
 	}
 	
-	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
-	public ModelAndView mypagetest(Locale locale, Model model, HttpSession session) {
+	@RequestMapping(value = "/mypagetest", method = RequestMethod.GET)
+	public String mypagetest(Locale locale, Model model) {
 		logger.info("footer 테스트", locale);
 
-		ModelAndView mv=new ModelAndView();
-		User loginUser=(User)session.getAttribute("user");
-		String loginId=loginUser.getUserId();
-		String userCnt=msgService.userUserMsgCnt(loginId);
-		String makerCnt=msgService.makerUserMsgCnt(loginId);
-		mv.addObject("userCnt", userCnt);
-		mv.addObject("makerCnt", makerCnt);
-		mv.setViewName("user/myPage");
 		
-		return mv;
+		return "user/mypagetest";
 	}
 	
 	@ResponseBody

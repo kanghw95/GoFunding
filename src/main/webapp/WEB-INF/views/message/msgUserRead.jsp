@@ -37,9 +37,6 @@
 	</div>
 </form></div></div>
 <script>
-	var webSocket = new WebSocket("ws://localhost:8090/sprout/msgRead");
-	//콘솔 텍스트 에리어 오브젝트
-
 	$('#sendBtn').click(function(){
 		var text=$('#txtMsg').val();
 		if(text==''){

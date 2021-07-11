@@ -662,5 +662,15 @@
         CROSS JOIN
         (SELECT COUNT(*) FINISH FROM FUNDING WHERE FUNDINGSTATE = 0) D		
 	</select>
+	
+	<!-- 관리자 메인 페이지 : 펀딩 신청 관리 -->
+	<select id="adminMainFundingNotice" resultType="Application">
+        SELECT A.* FROM
+        (SELECT ROW_NUMBER() OVER (ORDER BY APPLYNO DESC) RNUM, FUNDINGTITLE, APPLYNO FROM APPLICATION
+        WHERE FEEDBACK IS NULL ORDER BY APPLYNO) A WHERE A.RNUM
+		<![CDATA[        
+        < 3 ORDER BY A.RNUM	
+        ]]>
+	</select>
 		
 </mapper>

@@ -14,11 +14,8 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
 	rel="stylesheet">
-
 <!-- Custom styles for this template-->
 <link href="<%=request.getContextPath()%>/sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">
-<meta name="google-signin-client_id" content="787043379258-f7m1f543ukem253a55cm7kc569hijh0r.apps.googleusercontent.com">
-<meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"/>
@@ -30,20 +27,23 @@
 				<div class="fundingDiv">
 				<table class="noticeTab" >
 				<tr class=noticeTitle>
-					<td><span>펀딩 신청 관리</span>&nbsp;&nbsp;<button class="detailBtn funding">상세보기</button></td>
-					<td><span>커뮤니티 관리</span>&nbsp;&nbsp;<button class="detailBtn community">상세보기</button></td>
-					<td><span>펀딩 신청 관리</span>&nbsp;&nbsp;<button class="detailBtn qna">상세보기</button></td>
+					<td><span>펀딩 신청 관리</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<select class="detailBtn funding" name="category">
+					<option value="#" disabled>상세보기</option>
+					<option value="formList">신청펀딩</option>
+					<option value="fundingList">승인펀딩</option>
+					<option value="formReject">반려펀딩</option>
+					</select></td>
+					<td><span>커뮤니티 관리</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="detailBtn community">상세보기</button></td>
+					<td><span>문의사항 관리</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="detailBtn qna">상세보기</button></td>
 				</tr>
+				<c:forEach var="fn" items="${fundingNotice}" varStatus="status">
 				<tr>
-					<td>1</td>
+					<td id="app-${status.count}"><input type="hidden" value="${fn.applyNo}">${fn.fundingTitle}</td>
 					<td>1</td>
 					<td>1</td>
 				</tr>
-				<tr>
-					<td>2</td>
-					<td>2</td>
-					<td>2</td>
-				</tr>
+				</c:forEach>
 				</table>
 				</div>
 				</div>
@@ -214,24 +214,19 @@
 					<td>
 					<fmt:formatNumber value="${order.ORDERTOTALPRICE}" pattern="#,###" />
 					</td>
-					</c:forEach>					
 					<!--<c:forEach var="payment" items="${payment1}" varStatus="status">-->
 					<td>
 					<c:out value=""></c:out>
 					</td>					
 					<!--</c:forEach>-->					
-					<c:forEach var="order1" items="${order1}" varStatus="status">
 					<td>
 					<!--<c:forEach var="payment" items="${payment1}" varStatus="status">-->
 					<c:out value=""></c:out>
 					<!--</c:forEach>-->					
 					</td>					
-					</c:forEach>					
-					<c:forEach var="order2" items="${order1}" varStatus="status">
 					<td>
-					<c:out value="${order2.ORDERCNT}"></c:out>
+					<c:out value="${order.ORDERCNT}"></c:out>
 					</td>					
-					</c:forEach>					
 					<!--<c:forEach var="payment1" items="${payment1}" varStatus="status">-->
 					<td>
 					<c:out value=""></c:out>
@@ -239,10 +234,9 @@
 					<!--</c:forEach>-->					
 					<!--<c:forEach var="payment2" items="${payment1}" varStatus="status">-->
 					<td>
-					<c:forEach var="order3" items="${order1}" varStatus="status">
-					<c:out value="${order3.ORDERCNT}"></c:out> <!-- TODO -->
-					</c:forEach>					
+					<c:out value="${order.ORDERCNT}"></c:out> <!-- TODO -->
 					</td>					
+					</c:forEach>					
 					<!--</c:forEach>-->					
 					<c:forEach var="funding" items="${funding}" varStatus="status">
 					<td>
@@ -262,15 +256,7 @@
 					</table>
 					</div> 
 					</div>
-				<div class="analytics hidden">
-				<!-- The Sign-in button. This will run `queryReports()` on success. -->
-				<p class="g-signin2" data-onsuccess="queryReports"></p>
-
-				<!-- The API response will be printed here. -->
-				<textarea cols="80" rows="20" id="query-output"></textarea>
-				</div>
 			<div>
-				
 			</div>
 			</div>
 		</div>
@@ -321,5 +307,19 @@
 	<script src="<%=request.getContextPath()%>/sb-admin-2/js/demo/chart-area-demo.js"></script>
 	<script src="<%=request.getContextPath()%>/sb-admin-2/js/demo/chart-pie-demo.js"></script>
 	<script src="https://apis.google.com/js/client:platform.js"></script>
+<script>
+	$(".funding").change(function(){
+		var fundingCategory=$(".funding option:selected").val();
+		console.log(fundingCategory);
+		$("#frm").attr("action","adminMainCate");
+		$("#frm").attr("method","get");
+		$("#frm").submit();
+	});	
+    $("body").on("click", "[id^=app-]", function(event) {
+        var applyNo = $(this).children().val();
+        console.log(applyNo);
+    	location.href="<%=request.getContextPath()%>/formDetail?applyNo="+applyNo;
+    });
+</script>
 </body>
 </html>

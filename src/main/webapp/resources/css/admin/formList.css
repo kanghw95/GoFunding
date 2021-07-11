@@ -64,3 +64,17 @@
 h3{
 	font-family: 'TmoneyRoundWindRegular'; 		
 }
+
+.btnDiv{
+	text-align: right;
+	height: 50px;
+}
+
+#mainBtn{
+	
+	font-family: 'TmoneyRoundWindRegular'; 		
+	border: none;
+	background-color: #3b8686;
+	color: white;
+	
+}

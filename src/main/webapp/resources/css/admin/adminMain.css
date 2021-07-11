@@ -79,8 +79,8 @@
 	margin: auto;
 }
 
-.tabTitle{
-	background: #e2e2e2;
+.tabTitle, .noticeTitle{
+	background: #ccc;
 }
 
 .mr-2{
@@ -162,6 +162,7 @@ td{
 	border: 1px solid #ccc;
 	border-collapse: collapse;
 	font-family: 'TmoneyRoundWindRegular'; 	
+	padding: 0 20px;
 }
 
 .paymentTab1{
@@ -170,4 +171,13 @@ td{
 
 .paymentTab2{
 	margin-top: 20px;
+}
+
+#logo{
+	line-height: 100% !Important;
+	
+}
+
+#menuBtn{
+	margin-top: 40px !important;
 }

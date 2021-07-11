@@ -3,6 +3,7 @@ package com.funding.sprout.admin.service;
 import java.util.List;
 
 import com.funding.sprout.vo.Admin;
+import com.funding.sprout.vo.Application;
 import com.funding.sprout.vo.Board;
 import com.funding.sprout.vo.Comment;
 import com.funding.sprout.vo.Criteria;
@@ -182,6 +183,5 @@ public interface AdminService {
 
 
 	public int getReportCount(); // 신고 리스트 수  조회
-
 
 }

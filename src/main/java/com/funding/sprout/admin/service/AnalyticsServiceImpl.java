@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.funding.sprout.admin.dao.AnalyticsDao;
+import com.funding.sprout.vo.Application;
 
 @Service("analyticsService")
 public class AnalyticsServiceImpl implements AnalyticsService {
@@ -139,6 +140,11 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 	@Override
 	public List<HashMap<String, String>> analFundingTab() {  //펀딩 현황 표 
 		return analyticsDao.analFundingTab();
+	}
+
+	@Override
+	public List<Application> adminMainFundingNotice() {
+		return analyticsDao.adminMainFundingNotice();
 	}
 
 }

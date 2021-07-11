@@ -50,7 +50,7 @@ var myLineChart = new Chart(ctx, {
   data: {
     labels: [date1, date2, date3, date4, date5, date6, date7],
     datasets: [{
-      label: "수입",
+      label: "매출누계",
       lineTension: 0.3,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",

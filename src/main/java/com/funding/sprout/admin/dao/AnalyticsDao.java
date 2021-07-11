@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.funding.sprout.vo.Application;
+
 @Repository("analyticsDao")
 public class AnalyticsDao {
 	
@@ -111,6 +113,10 @@ public class AnalyticsDao {
 	
 	public List<HashMap<String, String>> analFundingTab() { //펀딩 현황 표 
 		return sqlSession.selectList("Admin.analFundingTab");
+	}
+	
+	public List<Application> adminMainFundingNotice(){ //관리자 메인 페이지 : 펀딩 신청 관리
+		return sqlSession.selectList("Admin.adminMainFundingNotice");
 	}
 	
 }

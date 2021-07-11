@@ -8,10 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.funding.sprout.HomeController;
 import com.funding.sprout.admin.service.AnalyticsService;
+import com.funding.sprout.vo.Application;
 
 @Controller
 public class AnalyticsCtrl {
@@ -90,7 +92,8 @@ public class AnalyticsCtrl {
 		List<HashMap<String, String>> payment1=analyticsService.analPaymentTab();
 		List<HashMap<String, String>> order1=analyticsService.analPaymentTab();
 		List<HashMap<String, String>> funding=analyticsService.analFundingTab();
-		System.out.println(payment);
+		List<Application> fundingNotice=analyticsService.adminMainFundingNotice();
+		System.out.println(fundingNotice);
 		
 		mv.addObject("statF1020", statF1020);
 		mv.addObject("statF3040", statF3040);
@@ -118,15 +121,20 @@ public class AnalyticsCtrl {
 		mv.addObject("payment1", payment1);
 		mv.addObject("order1", order1);
 		mv.addObject("funding", funding);
+		mv.addObject("fundingNotice", fundingNotice);
 		
 		mv.setViewName("admin/adminMain");
 		
 		return mv;
 	}
 	
-	@RequestMapping(value = "/index")
-	public String index() { //테스트용
-		
-		return "admin/index";
+	@RequestMapping(value = "/adminMainCate")
+	public ModelAndView adminMainCate(@RequestParam() String category) {  //펀딩 신청서 목록 조회 : 카테고리
+		System.out.println(category);
+		ModelAndView mv=new ModelAndView();
+		List<HashMap<String, String>> list;
+		if(category=="신청승인"||category=="승인펀딩"||category=="반려펀딩") {
+		}
+		return mv;
 	}
 }

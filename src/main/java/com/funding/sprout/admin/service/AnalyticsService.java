@@ -3,6 +3,8 @@ package com.funding.sprout.admin.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.funding.sprout.vo.Application;
+
 public interface AnalyticsService {
 	
 	public Float analAgeF1020(); //연령 통계 지표 : 1020대
@@ -54,4 +56,6 @@ public interface AnalyticsService {
 	public List<HashMap<String, String>> analPaymentTab(); //결제 금액 통계 표 : 주문 대비 결제
 	
 	public List<HashMap<String, String>> analFundingTab(); //펀딩 현황 표 
+	
+	public List<Application> adminMainFundingNotice(); //관리자 메인 페이지 : 펀딩 신청 관리
 }
