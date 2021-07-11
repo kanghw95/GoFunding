@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +12,17 @@
 	<div class="wrapper">
 		<div class="fundingContainer">
 			<div class="orderInfoContainer" style="border: 1px solid #ededed">
-				<p class="fundingStatus"></p>
+				<p class="fundingStatus">${fundingStatus }</p>
 				<p class="fundingTitle"><b>펀딩 이름: </b>${fundingDetail.fundingTitle }</p>
 				<p class="maker"><b>메이커: </b>${fundingDetail.maker }</p>
 				<p class="orderNo"><b>주문 번호: </b>${fundingDetail.orderNo }</p>
 				<p class="orderStatus"><b>주문 상태: </b>
-				
+				<c:if test="${orderStatus eq '0' }">
+					<b>주문 확인</b>
+				</c:if>
+				<c:if test="${orderStatus eq '1' }">
+					<b>결제 완료</b>
+				</c:if>
 				</p>
 			</div>
 			
@@ -27,7 +33,7 @@
 						<p class="rewardOption">
 							<span class="rewardPrice"> ${rewardDetail.rewardPrice }원</span>
 							<span class="rewardCount"> ${rewardDetail.rewardCount }개</span>
-							<span class="rTotalPrice"> ${rewardDetail.rewardCount }원</span>
+							<span class="rTotalPrice"> ${rewardDetail.rTotalPrice }원</span>
 						</p>
 					</c:forEach>
 				</c:if>

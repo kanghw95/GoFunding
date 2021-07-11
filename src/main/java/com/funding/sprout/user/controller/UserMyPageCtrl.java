@@ -1,5 +1,8 @@
 package com.funding.sprout.user.controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -43,7 +46,7 @@ public class UserMyPageCtrl {
 	
 	
 	@RequestMapping(value = "/myfundinglist", method = RequestMethod.GET) 
-	public String myFundingList(Model model, HttpSession session) throws Exception { // 내가 참여한 전체 펀딩 조회 페이지
+	public String myFundingList(Model model, HttpSession session, MyFunding vo) throws Exception { // 내가 참여한 전체 펀딩 조회 페이지
 		System.out.println("fundinglist 컨트롤러 들어옴");
 		
 		User loginUser = (User)session.getAttribute("user");
@@ -51,6 +54,12 @@ public class UserMyPageCtrl {
 		
 		List<MyFunding> fundingList = myService.list(id); // 펀딩 리스트
 		int fundingCount = myService.cntMyFunding(id); // 펀딩 참여 횟수
+		
+		Date now = new Date();
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String today = dateFormat.format(now);
+		
 		
 		System.out.println(loginUser);
 		System.out.println("id: " + id);
@@ -60,6 +69,7 @@ public class UserMyPageCtrl {
 		
 		model.addAttribute("fundingList", fundingList); 
 		model.addAttribute("fundingCount", fundingCount);
+		model.addAttribute("today", today);
 		
 		
 		return "user/myFundingList";
@@ -77,18 +87,43 @@ public class UserMyPageCtrl {
 		vo.setUserId(id);
 		vo.setFundingNo(fundingNo);
 		
-		List<MyFunding> fundingReward = myService.rewardList(id);
 		MyFunding fundingDetail = myService.fundingDetail(vo);
+		List<MyFunding> fundingReward = myService.rewardList(id);
+		
+		System.out.println("fundingDetail: " + fundingDetail);
+
+		String orderStatus = fundingDetail.getOrderStatus();
+		Date today = new Date();
+		Date fin = fundingDetail.getFundingfin();
+		System.out.println("fin: " + fin);
+		
+		int compare = today.compareTo(fin);
+		String fundingStatus = "";
+		
+		if(compare > 0) {
+			System.out.println("today > fin");
+			fundingStatus = "펀딩 종료";
+		}else if(compare < 0) {
+			System.out.println("today < fin");
+			fundingStatus = "펀딩 진행 중";
+		}else {
+			System.out.println("today = fin");
+			fundingStatus = "펀딩 종료 D-Day";
+		}
+		
+		
 		
 		System.out.println("fundingNo"+ fundingNo);
 		System.out.println(loginUser);
 		System.out.println("id: " + id);
 		System.out.println("fundingDetail: " + fundingDetail);
 		System.out.println("fundingReward : " + fundingReward);
-
+		
+		System.out.println("orderStatus: " + fundingDetail.getOrderStatus());
 		mv.addObject("fundingDetail", fundingDetail);
 		mv.addObject("fundingReward", fundingReward);
-		
+		mv.addObject("orderStatus", orderStatus);
+		mv.addObject("fundingStatus", fundingStatus);
 		
 		mv.setViewName("user/myFundingDetail");
 		

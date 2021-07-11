@@ -3,14 +3,19 @@ package com.funding.sprout.vo;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import org.springframework.stereotype.Component;
+
+
+@Component
 public class MyFunding {
 	private int orderNo;
 	private int orderDetailNo;
 	private int fundingNo;
-	private char orderStatus;
+	private String orderStatus;
 	private String userId;
 	private String fundingTitle;
 	private String maker;
+	private String paymentType;
 	private Date orderDate;
 	private String rewardTitle;
 	private int rewardPrice;
@@ -20,10 +25,19 @@ public class MyFunding {
 	private Timestamp fundingfin;
 	
 	
-	public char getOrderStatus() {
+	
+	
+	
+	public String getPaymentType() {
+		return paymentType;
+	}
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
+	}
+	public String getOrderStatus() {
 		return orderStatus;
 	}
-	public void setOrderStatus(char orderStatus) {
+	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 	public int getFundingNo() {
@@ -104,17 +118,10 @@ public class MyFunding {
 	public void setFundingfin(Timestamp fundingfin) {
 		this.fundingfin = fundingfin;
 	}
-	@Override
-	public String toString() {
-		return "MyFunding [orderNo=" + orderNo + ", orderDetailNo=" + orderDetailNo + ", fundingNo=" + fundingNo
-				+ ", orderStatus=" + orderStatus + ", userId=" + userId + ", fundingTitle=" + fundingTitle + ", maker="
-				+ maker + ", orderDate=" + orderDate + ", rewardTitle=" + rewardTitle + ", rewardPrice=" + rewardPrice
-				+ ", rewardCount=" + rewardCount + ", rTotalPrice=" + rTotalPrice + ", fundingstart=" + fundingstart
-				+ ", fundingfin=" + fundingfin + "]";
-	}
-	public MyFunding(int orderNo, int orderDetailNo, int fundingNo, char orderStatus, String userId,
-			String fundingTitle, String maker, Date orderDate, String rewardTitle, int rewardPrice, int rewardCount,
-			int rTotalPrice, Timestamp fundingstart, Timestamp fundingfin) {
+	
+	public MyFunding(int orderNo, int orderDetailNo, int fundingNo, String orderStatus, String userId,
+			String fundingTitle, String maker, String paymentType, Date orderDate, String rewardTitle, int rewardPrice,
+			int rewardCount, int rTotalPrice, Timestamp fundingstart, Timestamp fundingfin) {
 		super();
 		this.orderNo = orderNo;
 		this.orderDetailNo = orderDetailNo;
@@ -123,6 +130,7 @@ public class MyFunding {
 		this.userId = userId;
 		this.fundingTitle = fundingTitle;
 		this.maker = maker;
+		this.paymentType = paymentType;
 		this.orderDate = orderDate;
 		this.rewardTitle = rewardTitle;
 		this.rewardPrice = rewardPrice;
@@ -130,6 +138,14 @@ public class MyFunding {
 		this.rTotalPrice = rTotalPrice;
 		this.fundingstart = fundingstart;
 		this.fundingfin = fundingfin;
+	}
+	@Override
+	public String toString() {
+		return "MyFunding [orderNo=" + orderNo + ", orderDetailNo=" + orderDetailNo + ", fundingNo=" + fundingNo
+				+ ", orderStatus=" + orderStatus + ", userId=" + userId + ", fundingTitle=" + fundingTitle + ", maker="
+				+ maker + ", paymentType=" + paymentType + ", orderDate=" + orderDate + ", rewardTitle=" + rewardTitle
+				+ ", rewardPrice=" + rewardPrice + ", rewardCount=" + rewardCount + ", rTotalPrice=" + rTotalPrice
+				+ ", fundingstart=" + fundingstart + ", fundingfin=" + fundingfin + "]";
 	}
 	public MyFunding() {
 	}
