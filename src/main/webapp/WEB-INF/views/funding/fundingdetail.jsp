@@ -41,6 +41,15 @@
         left: 0;
         z-index: 1;
     }
+    #like{
+	width : 24px;
+	height : 24px;
+}
+
+#unlike{
+	width : 24px;
+	height : 24px;
+}
 </style>
 
 </head>
@@ -218,9 +227,10 @@
 								<button style="background-color: #ccc;" disabled='disabled' type="button" id="FundingDetailSummary_button_join" class="FundingDetailSummary_button_join" aria-expanded="false" aria-controls="wa_option" aria-hidden="false">펀딩 종료</button>
 								
 								</c:if>
-							<a href="#" class="naver-splugin Social_wrap FundingDetailSummary_button_share" role="button" aria-label="공유하기" aria-hidden="false" data-style="unity-v2" data-blog-source-form="2" splugin-id="9881009287">
-								<svg width="25" height="22" viewBox="0 0 25 22"> </svg>
+								
+							<a href="#" id="likeButton" onclick="checkId();"  class="naver-splugin Social_wrap FundingDetailSummary_button_share">
 							</a>
+
 						</div>
 					</div>
 				</div>
@@ -809,9 +819,69 @@
     	var pop = window.open("about:blank","content");
 		pop.location.href="http://localhost:8090/sprout/message/msgRead1?maker="+maker;		
 	}
+	var isLiked = '${isliked}';  // 1:좋아요, 0:아님
+	var cnt =  '${likedCnt}';
+	// 좋아요 아이디 체크
+	function checkId() {
+		var sessionUserId = '${sessionScope.user.userId}';
+			console.log("좋아요 버튼 작동");
+			
+		if (sessionUserId == 'null' || sessionUserId == '') {
+			alert("로그인 후 좋아요가 가능합니다");
+			return;
+		}
 		
+		 console.log("펀딩 번호" + ${funding.fundingno} )
+		 console.log("아이디" + sessionUserId )
+		$.ajax({
+			url : "clickLike",
+			type : "POST",
+			data : {
+				fundingno : ${funding.fundingno},
+				Id : sessionUserId
+			},
+			success : function(cnt) {
+				$("#likeButton").empty(); // 기존 image 지우기
+				
+				var tagHtml = '';
+				
+				if(isLiked == 0){
+					isLiked = 1;  // 좋아요 상태로 바꾸기
+					tagHtml = '<a><img src = "../resources/img/fullheart.png" id="unlike">';
+				} else {
+					isLiked = 0; // 해제 상태로 바꾸기
+					tagHtml = '<a><img src = "../resources/img/emptyheart.png" id="like">';
+				}
+				$("#likeButton").append(tagHtml);
+			},
+			error:function(e){
+				console.log("ajax는 일단 들어옴 but 실패");
+				console.log("error data : " + e)
+			}
+		});
+		
+	}
 		
 </script>
 
+<script>
+
+$(function(){ 
+	
+	// 로드 되면 좋아요 버튼 나타내기
+	var isLiked = '${isliked}';  // 1:좋아요, 0:아님
+	var cnt =  '${likedCnt}';
+	var tagHtml = '';
+	
+	if(isLiked == 1){// 1:좋아요, 0:아님
+		tagHtml = '<img src = "../resources/img/fullheart.png" id="unlike">';
+	} else {// 0:아님
+		tagHtml = '<img src = "../resources/img/emptyheart.png" id="like">';
+	}
+	$("#likeButton").append(tagHtml);
+	
+	
+});
+</script>
 </body>
 </html>

@@ -130,6 +130,29 @@ public class FundingServiceImpl implements FundingService {
 	}
 	
 	@Override
+	public int checklike(int fundingno, String Id) { // 게시글 추천 여부 검사 비추천0 추천1
+
+		int result = funDao.checklike(fundingno, Id);
+		
+		return result;
+	}
+
+	@Override
+	public int insertLike(int fundingno,String Id) { // 게시글 추천
+		return funDao.insertLike(fundingno,Id);
+	}
+	
+	@Override
+	public int deleteLike(int fundingno, String Id) { // 게시글 추천 취소
+		return funDao.deleteLike(fundingno, Id);
+	}
+
+	@Override
+	public int likecnt(int fundingno) { // 게시글 추천수
+		return funDao.likecnt(fundingno);
+	}
+	
+	@Override
 	public Funding getPreference() {
 		return null;
 	}

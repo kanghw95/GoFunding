@@ -51,6 +51,14 @@ public interface FundingService {
 	
 	public int rewardCountIncrease(Reward reward); // 리워드 참가 인원 증가
 	
+	int checklike(int fundingno, String Id); // 펀딩 좋아요 검사
+	
+	int insertLike(int fundingno,String Id); // 펀딩 좋아요
+	
+	int deleteLike(int fundingno,String Id); // 펀딩 좋아요 취소
+	
+	int likecnt(int fundingno); // 펀딩 좋아요수
+	
 	public Funding getPreference(); // TODO 선호하는 펀딩 정보 이거는 수정이 필요해보임 추가도
 
 }

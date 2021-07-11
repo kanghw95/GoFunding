@@ -1,16 +1,14 @@
 package com.funding.sprout.funding.controller;
 
-import java.io.Reader;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,8 +23,6 @@ import com.funding.sprout.vo.OrderDetail;
 import com.funding.sprout.vo.OrderRefund;
 import com.funding.sprout.vo.Reward;
 import com.funding.sprout.vo.User;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 @Controller
 public class FundingCtrl {
@@ -143,7 +139,7 @@ public class FundingCtrl {
 
 	// 펀딩 상세 페이지
 	@RequestMapping(value = "funding/detail", method = RequestMethod.GET)
-	public ModelAndView fundingDetail(@RequestParam(name = "no") int fundingno, ModelAndView mv) {
+	public ModelAndView fundingDetail(@RequestParam(name = "no") int fundingno, ModelAndView mv,@RequestParam(name = "Id") String Id) {
 		try {
 			int historyResult = 0;
 			
@@ -151,6 +147,15 @@ public class FundingCtrl {
 			List<Reward> rewardlist = funService.selectReward(fundingno);
 			historyResult = funService.selectHistory(fundingno);
 			List<Order>  historyResultDetail = funService.selectHistoryDetail(fundingno);
+			
+			int likecnt = 0; // 추천수
+            int isLiked = funService.checklike(fundingno, Id);    // 좋아요상태 :1, 아니면 :0
+            System.out.println("좋아요 상태 = " + isLiked);
+			mv.addObject("isliked", isLiked);   // 좋아요상태 :1, 아니면 :0
+			
+			likecnt = funService.likecnt(fundingno); // 추천수
+			System.out.println("좋아요 수 = " + likecnt);
+			mv.addObject("likecnt", likecnt);
 			
 			System.out.println("선택한 펀딩 정보 :" + funding);
 			System.out.println("선택한 리워드 정보 :" + rewardlist);
@@ -396,6 +401,30 @@ public class FundingCtrl {
 			e.printStackTrace();
 		}
 		return Check;
+	}
+	
+	@RequestMapping(value = "funding/clickLike", method = RequestMethod.POST)
+	@ResponseBody
+	public int clickLike(@RequestParam("fundingno") int fundingno, @RequestParam("Id") String Id, ModelAndView mv,
+			ModelAndView model) { // 추천
+		int result = -1;
+		int likecnt = 0;
+		try {
+			result = funService.checklike(fundingno, Id);
+			if (result == 0) { // 좋아요 안되어있는 상태라면 클릭했을때 좋아요
+				funService.insertLike(fundingno, Id);
+				System.out.println("좋아요 완료");
+			} else if (result == 1) { // 좋아요 되어있는 상태라면 클릭했을때 좋아요 취소
+				funService.deleteLike(fundingno, Id);
+				System.out.println("좋아요 해제");
+			} else {
+				}
+			likecnt = funService.likecnt(fundingno); // 총 좋아요 수
+			System.out.println("총 추천수=" + likecnt);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return likecnt;
 	}
 	
 	@RequestMapping(value = "funinsert", method = RequestMethod.GET)
