@@ -130,6 +130,33 @@ td {
     border-radius: 10px;
     height: 30px;
 }
+
+td, th, tr {
+   	border: 1px solid #ccc;
+}
+
+td {
+	border: none;
+	color: #757575;
+   	height: 45px;
+}
+
+th {
+	border: none;
+	height: 45px;
+}
+
+.boardNo {
+	color: #757575;
+}
+
+a {
+	text-decoration-line: none;
+	color: black;
+}
+
+a:hover {color:#00BFFF;}
+a:active {color:#00BFFF;}
 </style>
 <script>
 	var cv = "";
@@ -289,7 +316,7 @@ td {
 				<tr name="boardList" id="boardList" class="search">
 					<td class="noBox"><input type="text" name="boardNo" class="boardNo" value=${faq.faqNo } readonly></td>
 					<td><input type="checkbox" name="check" onclick='checkOne()'></td>
-					<td>${faq.faqTitle }</td>
+					<td><a href="faqDetail?no=${faq.faqNo }">${faq.faqTitle }</a></td>
 					<td>${faq.id }</td>
 					<td>${faq.faqCnt }</td>
 					<td>${faq.faqDate }</td>

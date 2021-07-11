@@ -50,7 +50,21 @@
 	.reportCnt {
 		width: 70px;
 	}
-	 
+	
+	td {
+		border: none;
+		color: #757575;
+    	height: 45px;
+	}
+	
+	th {
+		border: none;
+		height: 45px;
+	}
+	
+	.userNo {
+		color: #757575;
+	}
 </style>
 <script>
 	window.onload = function() {

@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="<%=request.getContextPath() %>/resource	s/css/admin/qna.css?ver=1.6" rel="stylesheet" type="text/css" />
-<link href="<%=request.getContextPath() %>/resource	s/css/admin/report.css?ver=1.0" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resource	s/css/admin/report.css?ver=1.1" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/report.js"></script>

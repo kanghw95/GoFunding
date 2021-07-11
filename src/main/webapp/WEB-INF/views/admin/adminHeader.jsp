@@ -138,7 +138,7 @@ $(document).ready(function(){
 				<div class="afterLogin">
 					<div class="dropdown">
 						<div class="picBtn" id="picBtn">
-							<input type="image" src="<%=request.getContextPath() %>/images/user64.png" class="pic" width="50" height="50" style="background-color: white" id="show">
+							<input type="image" src="<%=request.getContextPath() %>/resources/img/user64.png" class="pic" width="50" height="50" style="background-color: white" id="show">
 						</div>
 						<div class="dropdown-content" style="border: 1px solid #1abc9c; display:none" id="dropdown-content">
 							<a href="<%=request.getContextPath()%>/">메인 페이지</a>

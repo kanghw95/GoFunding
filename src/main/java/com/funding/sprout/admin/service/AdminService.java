@@ -171,6 +171,18 @@ public interface AdminService {
 	public List<Board> shareDetail(Board board) throws Exception; // 자유게시판 상세보기
 	
 	public List<Board> eventDetail(Board board) throws Exception; // 자유게시판 상세보기
+	
+	public List<Faq> faqDetail(Faq faq) throws Exception; // faq 상세보기 
+	
+	public List<Comment> freeCmt(Comment comment) throws Exception; // 자유게시판 댓글
+	
+	public List<Comment> reviewCmt(Comment comment) throws Exception; // 후기게시판 댓글
+	
+	public List<Comment> questionCmt(Comment comment) throws Exception; // 질의응답게시판 댓글
+	
+	public List<Comment> shareCmt(Comment comment) throws Exception; // 정보공유게시판 댓글
+	
+	public List<Comment> eventCmt(Comment comment) throws Exception; // 이벤트게시판 댓글
 
 	public int getFAQCount(); // 공지사항 수 조회
 

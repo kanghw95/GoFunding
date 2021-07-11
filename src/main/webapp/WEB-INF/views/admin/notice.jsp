@@ -55,6 +55,25 @@ a:active {color:#00BFFF;}
 .like {
 	width: 55px;
 }
+
+td, th, tr {
+   	border: 1px solid #ccc;
+}
+
+td {
+	border: none;
+	color: #757575;
+   	height: 45px;
+}
+
+th {
+	border: none;
+	height: 45px;
+}
+
+.boardNo {
+	color: #757575;
+}
 </style>
 <script>
 function input() {

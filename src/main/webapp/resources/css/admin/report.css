@@ -101,3 +101,22 @@ body {
 	border-radius: 10px;
 	height: 30px;
 }
+
+td, th, tr {
+   	border: 1px solid #ccc;
+}
+
+td {
+	border: none;
+	color: #757575;
+   	height: 45px;
+}
+
+th {
+	border: none;
+	height: 45px;
+}
+
+.boardNo {
+	color: #757575;
+}

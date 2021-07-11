@@ -117,6 +117,36 @@
 		<result property="faqTitle" column="faqtitle"/>
 		<result property="id" column="id"/>
 	</resultMap>
+	<resultMap type="Comment" id="freeCmt">
+		<id property="cmtNo" column="freecmtno"/>
+		<result property="cmtContent" column="freecmtcontent"/>
+		<result property="id" column="id"/>
+		<result property="cmtDate" column="freecmtdate"/>
+	</resultMap>
+		<resultMap type="Comment" id="reviewCmt">
+		<id property="cmtNo" column="reviewcmtno"/>
+		<result property="cmtContent" column="reviewcmtcontent"/>
+		<result property="id" column="id"/>
+		<result property="cmtDate" column="reviewcmtdate"/>
+	</resultMap>
+		<resultMap type="Comment" id="questionCmt">
+		<id property="cmtNo" column="qcmtno"/>
+		<result property="cmtContent" column="qcmtcontent"/>
+		<result property="id" column="id"/>
+		<result property="cmtDate" column="qcmtdate"/>
+	</resultMap>
+		<resultMap type="Comment" id="shareCmt">
+		<id property="cmtNo" column="sharecmtno"/>
+		<result property="cmtContent" column="sharecmtcontent"/>
+		<result property="id" column="id"/>
+		<result property="cmtDate" column="sharecmtdate"/>
+	</resultMap>
+		<resultMap type="Comment" id="eventCmt">
+		<id property="cmtNo" column="eventcmtno"/>
+		<result property="cmtContent" column="eventcmtcontent"/>
+		<result property="id" column="id"/>
+		<result property="cmtDate" column="eventcmtdate"/>
+	</resultMap>
 	
 	<!-- 페이징 + 사용자 조회 -->
 	<select id="selectUser" resultType="arraylist" resultMap="resultUser">
@@ -596,6 +626,36 @@
 	<!-- 이벤트게시판 상세보기 -->
 	<select id="eventDetail" resultMap="eventBoard">
 		SELECT * FROM EVENTBOARD WHERE EVENTNO = #{boardNo}
+	</select>
+	
+	<!-- faq 상세보기 -->
+	<select id="faqDetail" resultMap="faq">
+		SELECT * FROM FAQ WHERE FAQNO = #{faqNo}
+	</select>
+	
+	<!-- 자유게시판 댓글보기 -->
+	<select id="freeCmt" resultMap="freeCmt">
+		SELECT * FROM BULLETINECOMMENT WHERE FREENO = #{cmtNo} ORDER BY FREECMTDATE ASC
+	</select>
+	
+	<!-- 후기게시판 댓글보기 -->
+	<select id="reviewCmt" resultMap="reviewCmt">
+		SELECT * FROM REVIEWCOMMENT WHERE REVIEWNO = #{cmtNo} ORDER BY REVIEWCMTDATE ASC
+	</select>
+	
+	<!-- 질의응답게시판 댓글보기 -->
+	<select id="questionCmt" resultMap="questionCmt">
+		SELECT * FROM QUESTIONCOMMENT WHERE QBOARDNO = #{cmtNo} ORDER BY QCMTDATE ASC
+	</select>
+	
+	<!-- 정보공유게시판 댓글보기 -->
+	<select id="shareCmt" resultMap="shareCmt">
+		SELECT * FROM SHARECOMMENT WHERE SHARENO = #{cmtNo} ORDER BY SHARECMTDATE ASC
+	</select>
+	
+	<!-- 이벤트게시판 댓글보기 -->
+	<select id="eventCmt" resultMap="eventCmt">
+		SELECT * FROM EVENTCOMMENT WHERE EVENTNO = #{cmtNo} ORDER BY EVENTCMTDATE ASC
 	</select>
 	
 	<!-- 펀딩 목록 조회 : 전체 -->

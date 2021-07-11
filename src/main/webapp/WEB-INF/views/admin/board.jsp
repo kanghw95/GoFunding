@@ -47,6 +47,25 @@ a:active {color:#00BFFF;}
 .like {
 	width: 55px;
 }
+
+td, th, tr {
+   	border: 1px solid #ccc;
+}
+
+td {
+	border: none;
+	color: #757575;
+   	height: 45px;
+}
+
+th {
+	border: none;
+	height: 45px;
+}
+
+.boardNo {
+	color: #757575;
+}
 </style>
 </head>
 <body>
@@ -72,33 +91,23 @@ a:active {color:#00BFFF;}
 		</div>
 		<c:if test="${!empty freeboard }">
 			<input type="radio" name="radio" id="free" value="new" onclick="boardRadio()">최신순
-			<input type="radio" name="radio" id="free" value="like" onclick="boardRadio()">추천순
 			<input type="radio" name="radio" id="free" value="cnt" onclick="boardRadio()">조회순
-			<input type="radio" name="radio" id="free" value="cmt" onclick="boardRadio()">댓글순
 		</c:if>
 		<c:if test="${!empty reviewboard }">
-			<input type="radio" name="radio" id="review" value="new" onclick="boardRadio()">최신순
-			<input type="radio" name="radio" id="review" value="like" onclick="boardRadio()">추천순
-			<input type="radio" name="radio" id="review" value="cnt" onclick="boardRadio()">조회순
-			<input type="radio" name="radio" id="review" value="cmt" onclick="boardRadio()">댓글순
+			<input type="radio" name="radio" id="free" value="new" onclick="boardRadio()">최신순
+			<input type="radio" name="radio" id="free" value="cnt" onclick="boardRadio()">조회순
 		</c:if>
 		<c:if test="${!empty questionboard }">
-			<input type="radio" name="radio" id="question" value="new" onclick="boardRadio()">최신순
-			<input type="radio" name="radio" id="question" value="like" onclick="boardRadio()">추천순
-			<input type="radio" name="radio" id="question" value="cnt" onclick="boardRadio()">조회순
-			<input type="radio" name="radio" id="question" value="cmt" onclick="boardRadio()">댓글순
+			<input type="radio" name="radio" id="free" value="new" onclick="boardRadio()">최신순
+			<input type="radio" name="radio" id="free" value="cnt" onclick="boardRadio()">조회순
 		</c:if>
 		<c:if test="${!empty shareboard }">
-			<input type="radio" name="radio" id="share" value="new" onclick="boardRadio()">최신순
-			<input type="radio" name="radio" id="share" value="like" onclick="boardRadio()">추천순
-			<input type="radio" name="radio" id="share" value="cnt" onclick="boardRadio()">조회순
-			<input type="radio" name="radio" id="share" value="cmt" onclick="boardRadio()">댓글순
+			<input type="radio" name="radio" id="free" value="new" onclick="boardRadio()">최신순
+			<input type="radio" name="radio" id="free" value="cnt" onclick="boardRadio()">조회순
 		</c:if>
 		<c:if test="${!empty eventboard }">
-			<input type="radio" name="radio" id="event" value="new" onclick="boardRadio()">최신순
-			<input type="radio" name="radio" id="event" value="like" onclick="boardRadio()">추천순
-			<input type="radio" name="radio" id="event" value="cnt" onclick="boardRadio()">조회순
-			<input type="radio" name="radio" id="event" value="cmt" onclick="boardRadio()">댓글순
+			<input type="radio" name="radio" id="free" value="new" onclick="boardRadio()">최신순
+			<input type="radio" name="radio" id="free" value="cnt" onclick="boardRadio()">조회순
 		</c:if>
 	</div>
 	<div id="userInfo">

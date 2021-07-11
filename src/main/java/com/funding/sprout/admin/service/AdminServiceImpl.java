@@ -379,23 +379,53 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public List<Board> reviewDetail(Board board) throws Exception { // 자유게시판 상세보기
+	public List<Board> reviewDetail(Board board) throws Exception { // 리뷰게시판 상세보기
 		return adDao.reviewDetail(board);
 	}
 	
 	@Override
-	public List<Board> questionDetail(Board board) throws Exception { // 자유게시판 상세보기
+	public List<Board> questionDetail(Board board) throws Exception { // 질의응답게시판 상세보기
 		return adDao.questionDetail(board);
 	}
 	
 	@Override
-	public List<Board> shareDetail(Board board) throws Exception { // 자유게시판 상세보기
+	public List<Board> shareDetail(Board board) throws Exception { // 정보공유게시판 상세보기
 		return adDao.shareDetail(board);
 	}
 	
 	@Override
-	public List<Board> eventDetail(Board board) throws Exception { // 자유게시판 상세보기
+	public List<Board> eventDetail(Board board) throws Exception { // 이벤트게시판 상세보기
 		return adDao.eventDetail(board);
+	}
+	
+	@Override
+	public List<Faq> faqDetail(Faq faq) throws Exception { // faq 상세보기
+		return adDao.faqDetail(faq);
+	}
+	
+	@Override
+	public List<Comment> freeCmt(Comment comment) throws Exception { // 자유게시판 댓글
+		return adDao.freeCmt(comment);
+	}
+	
+	@Override
+	public List<Comment> reviewCmt(Comment comment) throws Exception { // 후기게시판 댓글
+		return adDao.reviewCmt(comment);
+	}
+	
+	@Override
+	public List<Comment> questionCmt(Comment comment) throws Exception { // 질의응답게시판 댓글
+		return adDao.questionCmt(comment);
+	}
+	
+	@Override
+	public List<Comment> shareCmt(Comment comment) throws Exception { // 정보공유게시판 댓글
+		return adDao.shareCmt(comment);
+	}
+	
+	@Override
+	public List<Comment> eventCmt(Comment comment) throws Exception { // 이벤트게시판 댓글
+		return adDao.eventCmt(comment);
 	}
 	
 	@Override

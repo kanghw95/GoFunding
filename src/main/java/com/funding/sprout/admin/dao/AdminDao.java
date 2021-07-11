@@ -372,6 +372,30 @@ public class AdminDao {
 		return sqlSession.selectList("Admin.eventDetail", board);
 	}
 	
+	public List<Faq> faqDetail(Faq faq) throws Exception { // faq 상세보기
+		return sqlSession.selectList("Admin.faqDetail", faq);
+	}
+	
+	public List<Comment> freeCmt(Comment comment) throws Exception { // 자유게시판 댓글
+		return sqlSession.selectList("Admin.freeCmt", comment);
+	}
+	
+	public List<Comment> reviewCmt(Comment comment) throws Exception { // 후기게시판 댓글
+		return sqlSession.selectList("Admin.reviewCmt", comment);
+	}
+	
+	public List<Comment> questionCmt(Comment comment) throws Exception { // 질의응답게시판 댓글
+		return sqlSession.selectList("Admin.questionCmt", comment);
+	}
+	
+	public List<Comment> shareCmt(Comment comment) throws Exception { // 정보공유게시판 댓글
+		return sqlSession.selectList("Admin.shareCmt", comment);
+	}
+	
+	public List<Comment> eventCmt(Comment comment) throws Exception { // 이벤트게시판 댓글
+		return sqlSession.selectList("Admin.eventCmt", comment);
+	}
+	
 	public int userStart() { // 회원 권한 복원
 		return 0;
 

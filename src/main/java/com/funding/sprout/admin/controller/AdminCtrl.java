@@ -1208,7 +1208,7 @@ public class AdminCtrl {
 	}
 	
 	@RequestMapping(value = "freeDetail", method = RequestMethod.GET)
-	public String freeDetail(int no, Board board, Model model) throws Exception {
+	public String freeDetail(int no, Board board, Comment comment, Model model) throws Exception {
 		System.out.println(no);
 		board.setBoardNo(no);
 		System.out.println("free 번호는 : " + board.getBoardNo());
@@ -1216,11 +1216,17 @@ public class AdminCtrl {
 		System.out.println("free : " + free);
 		model.addAttribute("free", free);
 		
+		comment.setCmtNo(no);
+		System.out.println("free 번호는 : " + comment.getCmtNo());
+		List<Comment> cmt = adService.freeCmt(comment);
+		System.out.println("cmt : " + cmt);
+		model.addAttribute("freeCmt", cmt);
+		
 		return "admin/boardDetail";
 	}
 	
 	@RequestMapping(value = "reviewDetail", method = RequestMethod.GET)
-	public String reviewDetail(int no, Board board, Model model) throws Exception {
+	public String reviewDetail(int no, Board board, Comment comment, Model model) throws Exception {
 		System.out.println(no);
 		board.setBoardNo(no);
 		System.out.println("review 번호는 : " + board.getBoardNo());
@@ -1228,11 +1234,17 @@ public class AdminCtrl {
 		System.out.println("review : " + review);
 		model.addAttribute("review", review);
 		
+		comment.setCmtNo(no);
+		System.out.println("free 번호는 : " + comment.getCmtNo());
+		List<Comment> cmt = adService.reviewCmt(comment);
+		System.out.println("cmt : " + cmt);
+		model.addAttribute("reviewCmt", cmt);
+		
 		return "admin/boardDetail";
 	}
 	
 	@RequestMapping(value = "questionDetail", method = RequestMethod.GET)
-	public String questionDetail(int no, Board board, Model model) throws Exception {
+	public String questionDetail(int no, Board board, Comment comment, Model model) throws Exception {
 		System.out.println(no);
 		board.setBoardNo(no);
 		System.out.println("notice 번호는 : " + board.getBoardNo());
@@ -1240,11 +1252,17 @@ public class AdminCtrl {
 		System.out.println("question : " + question);
 		model.addAttribute("question", question);
 		
+		comment.setCmtNo(no);
+		System.out.println("free 번호는 : " + comment.getCmtNo());
+		List<Comment> cmt = adService.questionCmt(comment);
+		System.out.println("cmt : " + cmt);
+		model.addAttribute("questionCmt", cmt);
+		
 		return "admin/boardDetail";
 	}
 	
 	@RequestMapping(value = "shareDetail", method = RequestMethod.GET)
-	public String shareDetail(int no, Board board, Model model) throws Exception {
+	public String shareDetail(int no, Board board, Comment comment, Model model) throws Exception {
 		System.out.println(no);
 		board.setBoardNo(no);
 		System.out.println("notice 번호는 : " + board.getBoardNo());
@@ -1252,11 +1270,17 @@ public class AdminCtrl {
 		System.out.println("share : " + share);
 		model.addAttribute("share", share);
 		
+		comment.setCmtNo(no);
+		System.out.println("free 번호는 : " + comment.getCmtNo());
+		List<Comment> cmt = adService.shareCmt(comment);
+		System.out.println("cmt : " + cmt);
+		model.addAttribute("shareCmt", cmt);
+		
 		return "admin/boardDetail";
 	}
 	
 	@RequestMapping(value = "eventDetail", method = RequestMethod.GET)
-	public String eventDetail(int no, Board board, Model model) throws Exception {
+	public String eventDetail(int no, Board board, Comment comment, Model model) throws Exception {
 		System.out.println(no);
 		board.setBoardNo(no);
 		System.out.println("event 번호는 : " + board.getBoardNo());
@@ -1264,7 +1288,25 @@ public class AdminCtrl {
 		System.out.println("event : " + event);
 		model.addAttribute("event", event);
 		
+		comment.setCmtNo(no);
+		System.out.println("free 번호는 : " + comment.getCmtNo());
+		List<Comment> cmt = adService.eventCmt(comment);
+		System.out.println("cmt : " + cmt);
+		model.addAttribute("eventCmt", cmt);
+		
 		return "admin/boardDetail";
+	}
+	
+	@RequestMapping(value = "faqDetail", method = RequestMethod.GET)
+	public String faqDetail(int no, Faq faq, Model model) throws Exception {
+		System.out.println(no);
+		faq.setFaqNo(no);
+		System.out.println("faq 번호는 : " + faq.getFaqNo());
+		List<Faq> faqList = adService.faqDetail(faq);
+		System.out.println("faqList : " + faqList);
+		model.addAttribute("faq", faqList);
+		
+		return "admin/faqDetail";
 	}
 	
 	@RequestMapping(value = "faqcount", method = RequestMethod.GET)

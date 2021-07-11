@@ -130,6 +130,26 @@ td {
 	width: 700px;
     margin: auto;
 }
+
+.replyTable {
+	height: auto;
+    width: 900px;
+	border-color: #ccc;
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin: auto;
+	border: none;
+}
+
+.replyDate {
+	text-align: right;
+	width: 150px;
+}
+
+.replyId {
+	text-align: right;
+	width: 150px;
+}
 </style>
 <script>
 function backFree() {
@@ -257,5 +277,51 @@ function backEvent() {
 		</c:forEach>
 	</c:if>
 </table><br>
-
+<table class="replyTable" id="cmt">
+	<c:if test="${!empty freeCmt }">
+		<c:forEach var="cmt" items="${freeCmt }" varStatus="status">
+			<tr class="cmtList">
+				<td>${cmt.cmtContent }</td>
+				<td class="replyId">${cmt.id }</td>
+				<td class="replyDate">${cmt.cmtDate }</td>
+			</tr>
+		</c:forEach>
+	</c:if>
+	<c:if test="${!empty reviewCmt }">
+		<c:forEach var="cmt" items="${reviewCmt }" varStatus="status">
+			<tr class="cmtList">
+				<td>${cmt.cmtContent }</td>
+				<td class="replyId">${cmt.id }</td>
+				<td class="replyDate">${cmt.cmtDate }</td>
+			</tr>
+		</c:forEach>
+	</c:if>
+	<c:if test="${!empty questionCmt }">
+		<c:forEach var="cmt" items="${questionCmt }" varStatus="status">
+			<tr class="cmtList">
+				<td>${cmt.cmtContent }</td>
+				<td class="replyId">${cmt.id }</td>
+				<td class="replyDate">${cmt.cmtDate }</td>
+			</tr>
+		</c:forEach>
+	</c:if>
+	<c:if test="${!empty shareCmt }">
+		<c:forEach var="cmt" items="${shareCmt }" varStatus="status">
+			<tr class="cmtList">
+				<td>${cmt.cmtContent }</td>
+				<td class="replyId">${cmt.id }</td>
+				<td class="replyDate">${cmt.cmtDate }</td>
+			</tr>
+		</c:forEach>
+	</c:if>
+	<c:if test="${!empty eventCmt }">
+		<c:forEach var="cmt" items="${eventCmt }" varStatus="status">
+			<tr class="cmtList">
+				<td>${cmt.cmtContent }</td>
+				<td class="replyId">${cmt.id }</td>
+				<td class="replyDate">${cmt.cmtDate }</td>
+			</tr>
+		</c:forEach>
+	</c:if>
+</table>
 </body>
