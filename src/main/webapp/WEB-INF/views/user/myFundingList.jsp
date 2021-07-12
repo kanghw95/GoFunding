@@ -37,10 +37,22 @@
 								<br>
 								<b class="orderStatus">
 									<c:if test="${myFunding.paymentType eq '1'}">
-										주문 확인
+										결제 완료
 									</c:if>
 									<c:if test="${myFunding.paymentType eq '0'}">
-										결제 완료
+										주문 완료
+									</c:if>
+									<c:if test="${myFunding.paymentType eq '2'}">
+										배송 준비중
+									</c:if>
+									<c:if test="${myFunding.paymentType eq '3'}">
+										배송 중
+									</c:if>
+									<c:if test="${myFunding.paymentType eq '4'}">
+										배송 완료
+									</c:if>
+									<c:if test="${myFunding.paymentType eq '5'}">
+										환불 완료
 									</c:if>
 								</b>
 								<input type="hidden" name="fundingNo" value="${myFunding.fundingNo }">

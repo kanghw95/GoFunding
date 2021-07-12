@@ -136,34 +136,97 @@
 		DELETE FROM USERS WHERE ID = #{userId}	
 	</delete>
 	
+	<!-- 회원 정보 수정 -->
+	<update id="updateUser" parameterType="User">
+		UPDATE USERS SET PWD = #{userPwd}, NICKNAME = #{userNick}, PHONE = #{userPhone}, EMAIL = #{userEmail}, GENDER = #{gender}, AGE = #{userAge}, FAV = #{userFav} WHERE ID = #{userId} 
+	</update>
+	
+	<!-- 회원 정보 수정 - 주소 -->
+	<update id="updateAddr" parameterType="User">
+		UPDATE USERS SET ADDRESS = #{userAddress} WHERE ID = #{userId} 
+	</update>
 	
 	
 	<!-- 내가 쓴 글 불러오기 : 자유게시판 -->
 	<select id="selectFree" parameterType="string" resultMap="freeBoard">
-		SELECT * FROM (SELECT FREENO, FREETITLE, FREECONTENT, FREEDATE, FREECNT, ID
-		, ROW_NUMBER() OVER (ORDER BY FREENO ASC) AS RNUM FROM BULLETINEBOARD) MP
-		WHERE (RNUM BETWEEN 1 AND 3) AND ID = #{userId} 
-		ORDER BY FREENO ASC
+		SELECT ROWNUM, A.*
+		FROM (SELECT * FROM BULLETINEBOARD
+		WHERE ID = #{boardId}
+		ORDER BY FREENO DESC) A
+		WHERE ROWNUM BETWEEN 1 AND 3
 	</select>
 	
 	<!-- 내가 쓴 글 불러오기 : 자유게시판 더보기-->
 	<select id="selectFreeMore" parameterType="string" resultMap="freeBoard">
-		SELECT * FROM FROM BULLETINEBOARD
-		WHERE ID = #{userId} 
-		ORDER BY FREENO ASC
+		SELECT * FROM BULLETINEBOARD
+		WHERE ID = #{boardId}
+		ORDER BY FREENO DESC
 	</select>
 	
 	<!-- 내가 쓴 글 불러오기 : 후기게시판 -->
+	<select id="selectReview" parameterType="string" resultMap="reviewBoard">
+		SELECT ROWNUM, A.*
+		FROM (SELECT * FROM REVIEWBOARD
+		WHERE ID = #{boardId}
+		ORDER BY REVIEWNO DESC) A
+		WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
+		
+	<!-- 내가 쓴 글 불러오기 : 후기게시판 더보기-->
+	<select id="selectReviewMore" parameterType="string" resultMap="reviewBoard">
+		SELECT * FROM REVIEWBOARD
+		WHERE ID = #{boardId}
+		ORDER BY REVIEWNO DESC
+	</select>
 	
-	
-	<!-- 내가 쓴 글 불러오기 : QnA게시판 -->
-	
-	
+	<!-- 내가 쓴 글 불러오기 : 질의응답게시판 -->
+	<select id="selectQuestion" parameterType="string" resultMap="questionBoard">
+		SELECT ROWNUM, A.*
+		FROM (SELECT * FROM QUESTIONBOARD
+		WHERE ID = #{boardId}
+		ORDER BY QBOARDNO DESC) A
+		WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
+		
+	<!-- 내가 쓴 글 불러오기 : 질의응답게시판 더보기-->
+	<select id="selectQuestionMore" parameterType="string" resultMap="questionBoard">
+		SELECT * FROM QUESTIONBOARD
+		WHERE ID = #{boardId}
+		ORDER BY QBOARDNO DESC
+	</select>
+		
 	<!-- 내가 쓴 글 불러오기 : 정보공유게시판 -->
+	<select id="selectShare" parameterType="string" resultMap="shareBoard">
+		SELECT ROWNUM, A.*
+		FROM (SELECT * FROM SHAREBOARD
+		WHERE ID = #{boardId}
+		ORDER BY SHARENO DESC) A
+		WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
+		
+	<!-- 내가 쓴 글 불러오기 : 정보공유게시판 더보기-->
+	<select id="selectShareMore" parameterType="string" resultMap="shareBoard">
+		SELECT * FROM SHAREBOARD
+		WHERE ID = #{boardId}
+		ORDER BY SHARENO DESC
+	</select>
 	
 	
 	<!-- 내가 쓴 글 불러오기 : 이벤트게시판 -->
-	
+	<select id="selectEvent" parameterType="string" resultMap="eventBoard">
+		SELECT ROWNUM, A.*
+		FROM (SELECT * FROM EVENTBOARD
+		WHERE ID = #{boardId}
+		ORDER BY EVENTNO DESC) A
+		WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
+		
+	<!-- 내가 쓴 글 불러오기 : 이벤트게시판 더보기-->
+	<select id="selectEventMore" parameterType="string" resultMap="eventBoard">
+		SELECT * FROM EVENTBOARD
+		WHERE ID = #{boardId}
+		ORDER BY EVENTNO DESC
+	</select>
 	
 	
 	<!-- 내가 참여한 펀딩 전체 -->

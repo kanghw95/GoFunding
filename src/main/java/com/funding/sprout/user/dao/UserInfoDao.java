@@ -43,9 +43,13 @@ public class UserInfoDao {
 		
 	}
 	
-	public int modifyUser() {
-		return 0; // 내 정보 수정
+	public int modifyUser(User user) {
+		return sqlSession.update("User.updateUser", user); // 내 정보 수정
 		
+	}
+	
+	public int modifyAddr(User user) {
+		return sqlSession.update("User.updateAddr", user);
 	}
 	
 	public int drawlUser(String userId) { // 회원 탈퇴

@@ -18,7 +18,9 @@ public interface UserInfoService {
 
 	public int emailCheck(String userEmail); // 이메일 중복체크
 	
-	public int modifyUser(); // 내 정보 수정
+	public int modifyUser(User user); // 내 정보 수정
+	
+	public int modifyAddr(User user); // 내 정보 - 주소 수정
 
 	public int drawlUser(String userId); // 회원 탈퇴
 	

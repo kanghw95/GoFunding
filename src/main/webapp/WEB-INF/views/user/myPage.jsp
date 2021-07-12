@@ -7,8 +7,8 @@
 <title>SPROUT! 새싹나눔</title>
 <link href="<%=request.getContextPath() %>/resources/css/user/myPage.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- 사용자 / 메이커 탭 기능 -->
 <script>
@@ -46,6 +46,8 @@ $(document).ready(
 				
 			</div>
 			<div class="profileInfo">
+				<a href="<%=request.getContextPath() %>/user/modifyUser" class="ModifyProfile">회원정보 수정</a>
+				<br>
 				<a href="<%=request.getContextPath() %>/user/logout" class="profileLogout">로그아웃</a>
 			</div>
 		</div>
@@ -118,7 +120,7 @@ $(document).ready(
 									<li><a href="<%=request.getContextPath() %>/myfundinglist"><span><i class="fas fa-clipboard-check"></i>&nbsp; 내가 참여한 펀딩</span></a></li>
 								</ul>
 								<ul>
-									<li style="padding-top: 20px;"><a href="#"><span><i class="fas fa-pencil-alt"></i>&nbsp; 내가 쓴 글 목록</span></a></li>
+									<li style="padding-top: 20px;"><a href="<%=request.getContextPath() %>/myboardlist"><span><i class="fas fa-pencil-alt"></i>&nbsp; 내가 쓴 글 목록</span></a></li>
 									<li style="padding-top: 20px;"><a href="#"><span><i class="fas fa-reply"></i>&nbsp; 내가 쓴 댓글 목록</span></a></li>
 								</ul>
 							</div>

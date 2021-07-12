@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+.joinTitle {
+	margin-bottom: 20px;	
+}
+
+[type='text'], [type='password'] {
+	width: 400px;
+	height: 40px;
+	font-size: 17px;
+	padding: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px; 
+	border-radius: 5px;
+	border: 1px solid #ddd;
+}
+
+[type='checkbox']{
+	margin-top: 10px;
+	margin-bottom: 10px; 
+}
+
+
+.inputPost{
+	width: 200px; 
+}
+
+
+.inputPhone{
+	width: 310px;
+}
+
+
+
+.joinContainer {
+	width: 500px;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+
+.insideBtn {
+	width: 85px;
+	height: 40px;
+	border: none;
+	padding: 5px;
+	outline: none;
+	border-radius: 5px;
+	color: #1e1e1e;
+	background-color: #cff09e;
+	border: 1px solid #cff09e;
+	font-size: 15px;
+}
+
+.findPostCode:hover {
+	color: #1abc9c;
+}
+
+.btnJoin {
+	width: 85px;
+	height: 40px;
+	border: none;
+	padding: 5px;
+	outline: none;
+	border-radius: 5px;
+	color: #1e1e1e;
+	background-color: #a8dba8;
+	border: 1px solid #a8dba8;
+	font-size: 15px;
+}
+
+h2 {
+	font-family: 'TmoneyRoundWindExtraBold' !important;
+}

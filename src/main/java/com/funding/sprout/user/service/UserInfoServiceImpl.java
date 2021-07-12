@@ -47,14 +47,19 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public int modifyUser() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int modifyUser(User user) {
+		return userDao.modifyUser(user);
+	}
+	
+	@Override
+	public int modifyAddr(User user) {
+		return userDao.modifyAddr(user);
 	}
 
 	@Override
 	public int drawlUser(String userId) {
 		return userDao.drawlUser(userId);
 	}
+
 
 }

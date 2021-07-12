@@ -153,13 +153,37 @@ public class UserInfoCtrl {
 	
 	
 
-	@RequestMapping(value = "modifyUser", method = RequestMethod.GET)  
-	public ModelAndView modifyUser() {
-		return null; // 내 정보 수정
+	@RequestMapping(value = "/modifyUser", method = RequestMethod.GET, produces = "application/text; charset=utf-8")  
+	public String modifyUser() {
+		
+		
+		
+		return "user/modify"; 
 		
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/domodify", method = RequestMethod.POST, produces = "application/text; charset=utf-8")  
+	public void updateUser(User user) { // 내 정보 수정 ajax
+		System.out.println("수정 컨트롤 들어옴");
+		System.out.println("user:" + user);
+		int result = 0;
+		result = userService.modifyUser(user);
+		System.out.println("컨트롤 result" + result);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/modifyaddr", method = RequestMethod.GET, produces = "application/text; charset=utf-8")  
+	public void updateUserAddr(User user) { // 주소 정보 수정
 	
+		System.out.println("주소 수정 컨트롤 들어옴");
+		System.out.println("user:" + user);
+		int result = 0;
+		result = userService.modifyAddr(user);
+		System.out.println("컨트롤 result" + result);
+		
+	}
+
 	
 	@RequestMapping(value = "/withdrawl", method = RequestMethod.GET)  
 	public String withdrawlUser() {
