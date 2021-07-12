@@ -108,10 +108,11 @@ td {
 }
 
 .searchBtn {
-	margin-left: 75px;
+	margin-left: 90px;
 	box-shadow: none;
 	border-radius: 10px;
 	height: 30px;
+	border: 1px;
 }
 
 .deleteBtn {
@@ -121,6 +122,7 @@ td {
 	box-shadow: none;
 	border-radius: 10px;
 	height: 30px;
+	border: 1px;
 }
 
 .input {
@@ -129,6 +131,7 @@ td {
     box-shadow: none;
     border-radius: 10px;
     height: 30px;
+    border: 1px;
 }
 
 td, th, tr {
@@ -160,6 +163,19 @@ a:active {color:#00BFFF;}
 </style>
 <script>
 	var cv = "";
+	
+	jQuery(function($) {
+	    $("body").css("display", "none");
+	    $("body").fadeIn(800);
+	    $("a.transition").click(function(event){
+	        event.preventDefault();
+	        linkLocation = this.href;
+	        $("body").fadeOut(1000, redirectPage);
+	    });
+	    function redirectPage() {
+	    window.location = linkLocation;
+	    }
+	});
 	
 	function input() {
 		location.href="faqWrt"

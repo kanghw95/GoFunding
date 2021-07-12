@@ -249,6 +249,7 @@ public class AdminCtrl {
 			List<Board> searchTitle = adService.selectFBoardTitle(board); // 제목으로 검색한 리스트 가져오기
 			System.out.println("searchTitle : " + searchTitle);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(searchTitle);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -259,6 +260,7 @@ public class AdminCtrl {
 			List<Board> searchId = adService.selectFBoardId(board); // 이름으로 검색한 리스트 가져오기
 			System.out.println("searchId : " + searchId);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(searchId);
 			System.out.println("jsonOutput : " + jsonOutput);
 			return jsonOutput;
@@ -278,6 +280,8 @@ public class AdminCtrl {
 		System.out.println("mapper로 넘길 값은 : " + boardTitle);
 		System.out.println("mapper로 넘길 값은 : " + boardId);
 		
+
+		
 		if (boardTitle != null) { // select에서 제목을 선택했을 때
 			board.setBoardTitle(boardTitle); // vo에 제목을 넣음
 			String getBoardTitle = board.getBoardTitle();			
@@ -285,6 +289,7 @@ public class AdminCtrl {
 			List<Board> searchTitle = adService.selectRBoardTitle(board); // 제목으로 검색한 리스트 가져오기
 			System.out.println("searchTitle : " + searchTitle);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(searchTitle);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -295,6 +300,7 @@ public class AdminCtrl {
 			List<Board> searchId = adService.selectRBoardId(board); // 작성자로 검색한 리스트 가져오기
 			System.out.println("searchId : " + searchId);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(searchId);
 			System.out.println("jsonOutput : " + jsonOutput);
 			return jsonOutput;
@@ -321,6 +327,7 @@ public class AdminCtrl {
 			List<Board> searchTitle = adService.selectQBoardTitle(board); // 제목으로 검색한 리스트 가져오기
 			System.out.println("searchTitle : " + searchTitle);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(searchTitle);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -331,6 +338,7 @@ public class AdminCtrl {
 			List<Board> searchId = adService.selectQBoardId(board); // 작성자로 검색한 리스트 가져오기
 			System.out.println("searchId : " + searchId);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(searchId);
 			System.out.println("jsonOutput : " + jsonOutput);
 			return jsonOutput;
@@ -357,6 +365,7 @@ public class AdminCtrl {
 			List<Board> searchTitle = adService.selectSBoardTitle(board); // 제목으로 검색한 리스트 가져오기
 			System.out.println("searchTitle : " + searchTitle);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(searchTitle);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -367,6 +376,7 @@ public class AdminCtrl {
 			List<Board> searchId = adService.selectSBoardId(board); // 작성자로 검색한 리스트 가져오기
 			System.out.println("searchId : " + searchId);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(searchId);
 			System.out.println("jsonOutput : " + jsonOutput);
 			return jsonOutput;
@@ -393,6 +403,7 @@ public class AdminCtrl {
 			List<Board> searchTitle = adService.selectEBoardTitle(board); // 제목으로 검색한 리스트 가져오기
 			System.out.println("searchTitle : " + searchTitle);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(searchTitle);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -403,6 +414,7 @@ public class AdminCtrl {
 			List<Board> searchId = adService.selectEBoardId(board); // 작성자로 검색한 리스트 가져오기
 			System.out.println("searchId : " + searchId);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(searchId);
 			System.out.println("jsonOutput : " + jsonOutput);
 			return jsonOutput;
@@ -429,6 +441,7 @@ public class AdminCtrl {
 			List<Board> searchTitle = adService.selectNBoardTitle(board); // 제목으로 검색한 리스트 가져오기
 			System.out.println("searchTitle : " + searchTitle);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(searchTitle);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -439,6 +452,7 @@ public class AdminCtrl {
 			List<Board> searchId = adService.selectNBoardId(board); // 이름으로 검색한 리스트 가져오기
 			System.out.println("searchId : " + searchId);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(searchId);
 			System.out.println("jsonOutput : " + jsonOutput);
 			return jsonOutput;
@@ -470,6 +484,7 @@ public class AdminCtrl {
 			List<Qna> selectType = adService.selectQnaType(qna);
 			System.out.println("selectType : " + selectType);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(selectType);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -481,6 +496,7 @@ public class AdminCtrl {
 			List<Qna> selectType = adService.selectQnaType(qna);
 			System.out.println("selectType : " + selectType);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(selectType);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -492,6 +508,7 @@ public class AdminCtrl {
 			List<Qna> selectType = adService.selectQnaType(qna);
 			System.out.println("selectType : " + selectType);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(selectType);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -503,6 +520,7 @@ public class AdminCtrl {
 			List<Qna> selectType = adService.selectQnaType(qna);
 			System.out.println("selectType : " + selectType);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(selectType);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -615,6 +633,7 @@ public class AdminCtrl {
 				List<Board> selectFRadio = adService.selectFRadio(board);
 				System.out.println("radioList : " + selectFRadio);
 				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 				String jsonOutput = gson.toJson(selectFRadio);
 				System.out.println("jsonOutput : "+ jsonOutput);
 				return jsonOutput;
@@ -629,6 +648,7 @@ public class AdminCtrl {
 				List<Board> selectFRadio = adService.selectFRadio(board);
 				System.out.println("radioList : " + selectFRadio);
 				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 				String jsonOutput = gson.toJson(selectFRadio);
 				System.out.println("jsonOutput : "+ jsonOutput);
 				return jsonOutput;
@@ -646,6 +666,7 @@ public class AdminCtrl {
 				List<Board> selectRRadio = adService.selectRRadio(board);
 				System.out.println("radioList : " + selectRRadio);
 				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 				String jsonOutput = gson.toJson(selectRRadio);
 				System.out.println("jsonOutput : "+ jsonOutput);
 				return jsonOutput;
@@ -660,6 +681,7 @@ public class AdminCtrl {
 				List<Board> selectRRadio = adService.selectRRadio(board);
 				System.out.println("radioList : " + selectRRadio.get(0).toString());
 				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 				String jsonOutput = gson.toJson(selectRRadio);
 				System.out.println("jsonOutput : "+ jsonOutput);
 				return jsonOutput;
@@ -677,6 +699,7 @@ public class AdminCtrl {
 				List<Board> selectQRadio = adService.selectQRadio(board);
 				System.out.println("radioList : " + selectQRadio);
 				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 				String jsonOutput = gson.toJson(selectQRadio);
 				System.out.println("jsonOutput : "+ jsonOutput);
 				return jsonOutput;
@@ -691,6 +714,7 @@ public class AdminCtrl {
 				List<Board> selectQRadio = adService.selectQRadio(board);
 				System.out.println("radioList : " + selectQRadio);
 				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 				String jsonOutput = gson.toJson(selectQRadio);
 				System.out.println("jsonOutput : "+ jsonOutput);
 				return jsonOutput;
@@ -708,6 +732,7 @@ public class AdminCtrl {
 				List<Board> selectSRadio = adService.selectSRadio(board);
 				System.out.println("radioList : " + selectSRadio);
 				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 				String jsonOutput = gson.toJson(selectSRadio);
 				System.out.println("jsonOutput : "+ jsonOutput);
 				return jsonOutput;
@@ -722,6 +747,7 @@ public class AdminCtrl {
 				List<Board> selectSRadio = adService.selectSRadio(board);
 				System.out.println("radioList : " + selectSRadio);
 				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 				String jsonOutput = gson.toJson(selectSRadio);
 				System.out.println("jsonOutput : "+ jsonOutput);
 				return jsonOutput;
@@ -739,6 +765,7 @@ public class AdminCtrl {
 				List<Board> selectERadio = adService.selectERadio(board);
 				System.out.println("radioList : " + selectERadio);
 				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 				String jsonOutput = gson.toJson(selectERadio);
 				System.out.println("jsonOutput : "+ jsonOutput);
 			} else if (value.equals("like")) {
@@ -752,6 +779,7 @@ public class AdminCtrl {
 				List<Board> selectERadio = adService.selectERadio(board);
 				System.out.println("radioList : " + selectERadio);
 				Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+				gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 				String jsonOutput = gson.toJson(selectERadio);
 				System.out.println("jsonOutput : "+ jsonOutput);
 			} else if (value.equals("cmt")) {
@@ -781,6 +809,7 @@ public class AdminCtrl {
 			List<Board> selectFRadio = adService.selectNRadio(board);
 			System.out.println("radioList : " + selectFRadio);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(selectFRadio);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -795,6 +824,7 @@ public class AdminCtrl {
 			List<Board> selectNRadio = adService.selectNRadio(board);
 			System.out.println("radioList : " + selectNRadio);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(selectNRadio);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -856,6 +886,7 @@ public class AdminCtrl {
 		List<Comment> replyList = adService.qnaCmt(cmt);
 		System.out.println("replyList : " + replyList);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		String jsonOutput = gson.toJson(replyList);
 		System.out.println("jsonOutput : "+ jsonOutput);
 		
@@ -876,6 +907,7 @@ public class AdminCtrl {
 		List<Comment> reply = adService.qnaCmt(cmt);
 		System.out.println("reply : " + reply); // 답변 내용 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		String jsonOutput = gson.toJson(reply);
 		System.out.println("jsonOutput : "+ jsonOutput);
 		
@@ -907,6 +939,7 @@ public class AdminCtrl {
 		List<Comment> reply = adService.qnaOne(cmt);
 		System.out.println("reply : " + reply); // 답변 내용 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		String jsonOutput = gson.toJson(reply);
 		System.out.println("jsonOutput : "+ jsonOutput);
 		
@@ -1044,6 +1077,7 @@ public class AdminCtrl {
 			List<Report> select = adService.reportSelect(rpt);
 			System.out.println("select : " + select);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(select);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -1054,6 +1088,7 @@ public class AdminCtrl {
 			List<Report> select = adService.reportSelect(rpt);
 			System.out.println("select : " + select);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(select);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -1064,6 +1099,7 @@ public class AdminCtrl {
 			List<Report> select = adService.reportSelect(rpt);
 			System.out.println("select : " + select);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(select);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -1074,6 +1110,7 @@ public class AdminCtrl {
 			List<Report> select = adService.reportSelect(rpt);
 			System.out.println("select : " + select);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String jsonOutput = gson.toJson(select);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
@@ -1129,6 +1166,7 @@ public class AdminCtrl {
 		List<Faq> selectFaq = adService.selectFaq(faq);
 		System.out.println("검색 값 : " + selectFaq);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		gson = new  GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		String jsonOutput = gson.toJson(selectFaq);
 		System.out.println("jsonOutput : "+ jsonOutput);
 		

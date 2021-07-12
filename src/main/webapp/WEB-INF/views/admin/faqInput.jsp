@@ -69,6 +69,7 @@ td {
 	box-shadow: none;
 	border-radius: 10px;
 	height: 30px;
+	border: 1px;
 }
 
 .footer {
@@ -81,9 +82,23 @@ td {
     box-shadow: none;
     border-radius: 10px;
     height: 30px;
+    border: 1px;
 }
 </style>
 <script>
+jQuery(function($) {
+    $("body").css("display", "none");
+    $("body").fadeIn(800);
+    $("a.transition").click(function(event){
+        event.preventDefault();
+        linkLocation = this.href;
+        $("body").fadeOut(1000, redirectPage);
+    });
+    function redirectPage() {
+    window.location = linkLocation;
+    }
+});
+
 function insertFaq() {
 	console.log("아아");
 	var title = document.getElementById("title").value;

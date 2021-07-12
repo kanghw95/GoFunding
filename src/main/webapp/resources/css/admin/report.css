@@ -91,6 +91,7 @@ body {
 	box-shadow: none;
 	border-radius: 10px;
 	height: 30px;
+	border: 1px;
 }
 
 .deleteBtn {

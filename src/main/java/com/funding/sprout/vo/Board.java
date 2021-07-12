@@ -15,7 +15,6 @@ public class Board {
 	private String boardId; // 글 작성자
 	private int likecnt; // 추천수
 	private int cmt; // 리스트에 보일 댓글 수
-	
 	public Board() {
 
 	}

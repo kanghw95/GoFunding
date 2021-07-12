@@ -50,6 +50,7 @@ td {
     box-shadow: none;
     border-radius: 10px;
     height: 30px;
+    border: 1px;
 }
 
 .backReview {
@@ -58,6 +59,7 @@ td {
     box-shadow: none;
     border-radius: 10px;
     height: 30px;
+    border: 1px;
 }
 
 
@@ -67,6 +69,7 @@ td {
     box-shadow: none;
     border-radius: 10px;
     height: 30px;
+    border: 1px;
 }
 
 
@@ -76,6 +79,7 @@ td {
     box-shadow: none;
     border-radius: 10px;
     height: 30px;
+    border: 1px;
 }
 
 
@@ -85,6 +89,7 @@ td {
     box-shadow: none;
     border-radius: 10px;
     height: 30px;
+    border: 1px;
 }
 
 
@@ -152,6 +157,19 @@ td {
 }
 </style>
 <script>
+jQuery(function($) {
+    $("body").css("display", "none");
+    $("body").fadeIn(800);
+    $("a.transition").click(function(event){
+        event.preventDefault();
+        linkLocation = this.href;
+        $("body").fadeOut(1000, redirectPage);
+    });
+    function redirectPage() {
+    window.location = linkLocation;
+    }
+});
+
 function backFree() {
 	location.href="freeboardlist";
 }

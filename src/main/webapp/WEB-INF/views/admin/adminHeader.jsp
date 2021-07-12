@@ -33,7 +33,7 @@ $(document).ready(function(){
 <header>
 <div class="header">
 	<div class="header_content">	
-		<a href="<%=request.getContextPath() %>/funselect"> 
+		<a href="<%=request.getContextPath() %>/adminMain"> 
 		<img alt="logo" src="<%=request.getContextPath() %>/resources/bannerimg/logoG80.png" class="logo">
 		</a>
 		<div class="navbox">

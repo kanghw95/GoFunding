@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%=request.getContextPath() %>/resources/css/admin/notice.css?ver=1.0" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/admin/notice.css?ver=1.2" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/notice.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
@@ -18,10 +18,11 @@ body {
 
 .input {
 	float: right;
-    margin-left: 720px;
+    margin-left: 730px;
     box-shadow: none;
     border-radius: 10px;
     height: 30px;
+    border: 1px;
 }
 
 a {
@@ -76,6 +77,19 @@ th {
 }
 </style>
 <script>
+jQuery(function($) {
+    $("body").css("display", "none");
+    $("body").fadeIn(800);
+    $("a.transition").click(function(event){
+        event.preventDefault();
+        linkLocation = this.href;
+        $("body").fadeOut(1000, redirectPage);
+    });
+    function redirectPage() {
+    window.location = linkLocation;
+    }
+});
+
 function input() {
 	location.href="noticeWrt"
 }
@@ -94,9 +108,7 @@ function tag(no) {
 			<button class="input" onclick="input()">글쓰기</button>
 		</div>
 		<input type="radio" name="radio" id="event" value="new" onclick="noticeRadio()">최신순
-		<input type="radio" name="radio" id="event" value="like" onclick="noticeRadio()">추천순
 		<input type="radio" name="radio" id="event" value="cnt" onclick="noticeRadio()">조회순
-		<input type="radio" name="radio" id="event" value="cmt" onclick="noticeRadio()">댓글순
 	</div> 
 	<div id="userInfo">
 		<table class="tg" border="1" id="tr">

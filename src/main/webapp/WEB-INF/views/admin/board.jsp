@@ -7,9 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%=request.getContextPath() %>/resources/css/admin/adminBoard.css?ver=1.1" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/admin/adminBoard.css?ver=1.2" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/adminBoard.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <style>
 body {
@@ -67,6 +68,69 @@ th {
 	color: #757575;
 }
 </style>
+<script>
+jQuery(function($) {
+    $("body").css("display", "none");
+    $("body").fadeIn(800);
+    $("a.transition").click(function(event){
+        event.preventDefault();
+        linkLocation = this.href;
+        $("body").fadeOut(1000, redirectPage);
+    });
+    function redirectPage() {
+    window.location = linkLocation;
+    }
+});
+
+function selectRadio(data) {
+	cv = "",
+	$(".search").remove();
+	var elements = document.getElementsByName("boardList");
+	for (var k = 0; k < elements.length; k++) {
+		elements[k].style.display = "none";
+	}
+	console.log("게시판 검색 함수 진입");
+	console.log(data);
+	
+	$.each(data, function(i, list) {
+		cv += "<tr class='search'>"
+		cv += "<td><input type='text' name='boardNo' class='boardNo' value='"+data[i].boardNo+"' readonly/></td>"
+		cv += "<td><input type='checkbox' name='check' onclick='checkOne()'></td>"
+		cv += "<td>" + data[i].boardTitle + "</td>"
+		cv += "<td>" + data[i].boardId + "</td>"
+		cv += "<td>" + data[i].boardCnt + "</td>"
+		cv += "<td>0</td>"
+		cv += "<td id='date'>" + data[i].boardDate + "</td>"
+		cv += "</tr>"
+	});
+	$("#tr").append(cv);
+	$("#page").remove();
+}
+
+function searchBoard(data) { // 모든 게시판 검색 sucess
+	cv = "",
+	$(".search").remove();
+	var elements = document.getElementsByName("boardList");
+	for (var k = 0; k < elements.length; k++) {
+		elements[k].style.display = "none";
+	}
+	console.log("게시판 검색 함수 진입");
+	console.log(data);
+	$.each(data, function(i, list) {
+		cv += "<tr class='search'>"
+		cv += "<td><input type='text' name='boardNo' class='boardNo' value='"+data[i].boardNo+"' readonly/></td>"
+		cv += "<td><input type='checkbox' name='check' onclick='checkOne()'></td>"
+		cv += "<td>" + data[i].boardTitle + "</td>"
+		cv += "<td>" + data[i].boardId + "</td>"
+		cv += "<td>" + data[i].boardCnt + "</td>"
+		cv += "<td>0</td>"
+		cv += "<td>" + data[i].boardDate + "</td>"
+		cv += "</tr>"
+	});
+	$("#tr").append(cv);
+	$("#page").remove();
+}
+</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
@@ -195,7 +259,7 @@ th {
 			<option value="2">작성자</option>
 		</select> <input type="text" id="text" name="userId">
 		<div id="paging">
-			<ul>
+			<ul id="page">
 				<c:if test="${!empty freeboard }">
 					<c:if test="${pageMaker.prev}">
 						<li><a href="freeboardlist${pageMaker.makeQuery(pageMaker.startPage - 1)}" id="num"><</a></li>

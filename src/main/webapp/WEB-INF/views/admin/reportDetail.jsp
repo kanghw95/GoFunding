@@ -11,7 +11,35 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/reportDetail.js"></script>
+<style>
+	.back {
+		border: 1px;
+	}
+	
+	.pass {
+		border: 1px;
+	}
+	
+	.stop {
+		border: 1px;
+	}
+</style>
 <script>
+
+
+jQuery(function($) {
+    $("body").css("display", "none");
+    $("body").fadeIn(800);
+    $("a.transition").click(function(event){
+        event.preventDefault();
+        linkLocation = this.href;
+        $("body").fadeOut(1000, redirectPage);
+    });
+    function redirectPage() {
+    window.location = linkLocation;
+    }
+});
+
 function back() {
 	location.href="report"
 }

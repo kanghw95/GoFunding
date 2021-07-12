@@ -70,13 +70,37 @@ td {
 	box-shadow: none;
 	border-radius: 10px;
 	height: 30px;
+	border: 1px;
 }
 
 .footer {
 	height: 200px;
 }
+
+.back {
+	float: right;
+    margin-left: 720px;
+    box-shadow: none;
+    border-radius: 10px;
+    height: 30px;
+    border: 1px;
+}
 </style>
 <script>
+
+jQuery(function($) {
+    $("body").css("display", "none");
+    $("body").fadeIn(800);
+    $("a.transition").click(function(event){
+        event.preventDefault();
+        linkLocation = this.href;
+        $("body").fadeOut(1000, redirectPage);
+    });
+    function redirectPage() {
+    window.location = linkLocation;
+    }
+});
+
 function insertNotice() {
 	console.log("해윙~");
 	var title = document.getElementById("title").value;
@@ -109,6 +133,7 @@ function insertNotice() {
 	<div id="wrapper">
 		<img src="resources/img/admin/list.png" class="list">&nbsp;
 		<p class="userManage">공지사항</p>
+		<button class="back" onclick="back()">뒤로가기</button>
 	</div>
 </div> 
 <div class="input">

@@ -137,3 +137,58 @@ li {
 .noBox {
 	width: 30px;
 }
+
+.no {
+	width: 35px;
+}
+
+.box {
+	width: 35px;
+}
+
+.id {
+	width: 80px;
+}
+
+.name {
+	width: 88px;
+}
+
+.nick {
+	width: 100px;
+}
+
+.phone {
+	width: 110px;
+}
+
+.gender {
+	width: 35px;
+}
+
+.age {
+	width: 35px;
+}
+
+.point {
+	width: 80px;
+}
+
+.reportCnt {
+	width: 70px;
+}
+
+td {
+	border: none;
+	color: #757575;
+   	height: 45px;
+}
+
+th {
+	border: none;
+	height: 45px;
+}
+
+.userNo {
+	color: #757575;
+}

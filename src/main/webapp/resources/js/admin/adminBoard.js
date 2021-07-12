@@ -423,28 +423,7 @@
 			
 	}
 	
-	function searchBoard(data) { // 모든 게시판 검색 sucess
-		cv = "",
-		$(".search").remove();
-		var elements = document.getElementsByName("boardList");
-		for (var k = 0; k < elements.length; k++) {
-			elements[k].style.display = "none";
-		}
-		console.log("게시판 검색 함수 진입");
-		console.log(data);
-		$.each(data, function(i, list) {
-			cv += "<tr class='search'>"
-			cv += "<td><input type='text' name='boardNo' class='boardNo' value='"+data[i].boardNo+"' readonly/></td>"
-			cv += "<td><input type='checkbox' name='check' onclick='checkOne()'></td>"
-			cv += "<td>" + data[i].boardTitle + "</td>"
-			cv += "<td>" + data[i].boardId + "</td>"
-			cv += "<td>" + data[i].boardCnt + "</td>"
-			cv += "<td>0</td>"
-			cv += "<td>" + data[i].boardDate + "</td>"
-			cv += "</tr>"
-		});
-		$("#tr").append(cv);
-	}
+
 	
 	function boardRadio() { // 라디보 박스 체크 시 게시판 조회
 		var name = document.getElementsByName("radio");
@@ -474,28 +453,7 @@
 		});
 	}
 	
-	function selectRadio(data) {
-		cv = "",
-		$(".search").remove();
-		var elements = document.getElementsByName("boardList");
-		for (var k = 0; k < elements.length; k++) {
-			elements[k].style.display = "none";
-		}
-		console.log("게시판 검색 함수 진입");
-		console.log(data);
-		$.each(data, function(i, list) {
-			cv += "<tr class='search'>"
-			cv += "<td><input type='text' name='boardNo' class='boardNo' value='"+data[i].boardNo+"' readonly/></td>"
-			cv += "<td><input type='checkbox' name='check' onclick='checkOne()'></td>"
-			cv += "<td>" + data[i].boardTitle + "</td>"
-			cv += "<td>" + data[i].boardId + "</td>"
-			cv += "<td>" + data[i].boardCnt + "</td>"
-			cv += "<td>0</td>"
-			cv += "<td>" + data[i].boardDate + "</td>"
-			cv += "</tr>"
-		});
-		$("#tr").append(cv);
-	}
+
 	
 	function checkAll() { // 체크박스 전체 체크, 해제
 		console.log("체크박스 함수 진입");

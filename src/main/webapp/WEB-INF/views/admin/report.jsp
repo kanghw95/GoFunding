@@ -8,10 +8,33 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="<%=request.getContextPath() %>/resource	s/css/admin/qna.css?ver=1.6" rel="stylesheet" type="text/css" />
-<link href="<%=request.getContextPath() %>/resource	s/css/admin/report.css?ver=1.1" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resource	s/css/admin/report.css?ver=1.3" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/report.js"></script>
+<style>
+.deal {
+	border: 1px;
+}
+
+.deal:hover, .reply:active {
+	color:#00BFFF;
+}
+</style>
+<script>
+jQuery(function($) {
+    $("body").css("display", "none");
+    $("body").fadeIn(800);
+    $("a.transition").click(function(event){
+        event.preventDefault();
+        linkLocation = this.href;
+        $("body").fadeOut(1000, redirectPage);
+    });
+    function redirectPage() {
+    window.location = linkLocation;
+    }
+});
+</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>

@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%=request.getContextPath() %>/resource	s/css/admin/qna.css?ver=1.7" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resource	s/css/admin/qna.css?ver=1.9" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <style>
 	.cmt {
@@ -46,11 +46,28 @@
 	.boardNo {
 		color: #757575;
 	}
+	
+	.reply:hover, .reply:active {
+		color:#00BFFF;
+	}
+
 </style>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/qna.js"></script>
 <script>
-	
+	jQuery(function($) {
+	    $("body").css("display", "none");
+	    $("body").fadeIn(800);
+	    $("a.transition").click(function(event){
+	        event.preventDefault();
+	        linkLocation = this.href;
+	        $("body").fadeOut(1000, redirectPage);
+	    });
+	    function redirectPage() {
+	    window.location = linkLocation;
+	    }
+	});
+
 	function reply(replyInfo) {
 		var rep = replyInfo;
 		console.log(rep);
@@ -58,9 +75,9 @@
 		qNo.value = rep;
 		qnaform.submit();
 	}
-	
+
 	var cv = "";
-	
+
 	function searchQna() {
 		console.log("검색 시작");
 		var target = document.getElementById("select");
@@ -90,7 +107,7 @@
 			$.ajax({
 				url : "qnaSelect",
 				type : "POST",
-				data : { 
+				data : {
 					payment : sValue
 				},
 				dataType : "JSON",
@@ -104,7 +121,7 @@
 			$.ajax({
 				url : "qnaSelect",
 				type : "POST",
-				data : { 
+				data : {
 					account : sValue
 				},
 				dataType : "JSON",
@@ -118,7 +135,7 @@
 			$.ajax({
 				url : "qnaSelect",
 				type : "POST",
-				data : { 
+				data : {
 					etc : sValue
 				},
 				dataType : "JSON",
@@ -129,9 +146,9 @@
 			});
 		}
 	}
-	
+
 	function selectQna(data) {
-		cv = "",
+		cv = "", 
 		$(".search").remove();
 		var elements = document.getElementsByName("boardList");
 		for (var k = 0; k < elements.length; k++) {
@@ -151,13 +168,18 @@
 			if (data[i].replyCnt != 0) {
 				cv += "<td>"
 				cv += "<span class='cmt'>답변완료 :</span>"
-				cv += "<span class=cnt>" + data[i].replyCnt + "</span><br>"
-				cv += "<input type='button' value='답변추가' class='reply' id = " + data[i].qnaNo + " onclick='reply(this.id)'>"
+				cv += "<span class=cnt>" + data[i].replyCnt
+						+ "</span><br>"
+				cv += "<input type='button' value='답변추가' class='reply' id = "
+						+ data[i].qnaNo
+						+ " onclick='reply(this.id)'>"
 				cv += "</td>"
 			} else {
 				cv += "<td>"
 				cv += "<span class='wait'>답변대기</span><br>"
-				cv += "<input type='button' value='답변하기' class='reply' id = " + data[i].qnaNo + " onclick='reply(this.id)'>"
+				cv += "<input type='button' value='답변하기' class='reply' id = "
+						+ data[i].qnaNo
+						+ " onclick='reply(this.id)'>"
 				cv += "</td>"
 			}
 			cv += "<td>" + data[i].qnaMId + "</td>"
@@ -166,12 +188,13 @@
 			cv += "</tr>"
 		});
 		$("#tr").append(cv);
+		$("#page").remove();
 	}
-	
+
 	function deleteQna() { // 공지사항 글 삭제
 		console.log("공지사항 글 삭제 입니다.");
 		var checked = document.getElementsByName("check");
-		var boardNo = document.getElementsByName("boardNo"); 
+		var boardNo = document.getElementsByName("boardNo");
 		var deleteList = new Array();
 		for (var i = 0; i < checked.length; i++) {
 			if (checked[i].checked == false) {
@@ -184,30 +207,30 @@
 				console.log("체크된 Qna 글 번호 리스트 : " + deleteList);
 			}
 		}
-			console.log("체크된 체크박스 갯수 : " + deleteList.length);
-			if (deleteList.length == 0) {
-				alert("하나 이상의 글을 체크해주세요.");
-			} else {
-				alert("Qna 글을 삭제하시겠습니까?");
-				$.ajax({
-					url : "deleteQna",
-					type : "POST",
-					traditional : true,
-					data : {
-						qnaNo : deleteList
-					},
-					success : function(data) {
-						console.log("success 진입");
-						console.log(data);
-						location.replace("qna");
-					},
-					error : function(error) {
-						console.log("error 발생");
-					}
-				});
-			}
-			
-	}	
+		console.log("체크된 체크박스 갯수 : " + deleteList.length);
+		if (deleteList.length == 0) {
+			alert("하나 이상의 글을 체크해주세요.");
+		} else {
+			alert("Qna 글을 삭제하시겠습니까?");
+			$.ajax({
+				url : "deleteQna",
+				type : "POST",
+				traditional : true,
+				data : {
+					qnaNo : deleteList
+				},
+				success : function(data) {
+					console.log("success 진입");
+					console.log(data);
+					location.replace("qna");
+				},
+				error : function(error) {
+					console.log("error 발생");
+				}
+			});
+		}
+
+	}
 
 	function checkAll() { // 체크박스 전체 체크, 해제
 		console.log("체크박스 함수 진입");
@@ -307,7 +330,7 @@
 		</select>
 		<button id="searchBtn" onclick="searchQna()">검색</button>
 		<div id="paging">
-			<ul>
+			<ul id="page">
 				<c:if test="${pageMaker.prev}">
 					<li><a href="qna${pageMaker.makeQuery(pageMaker.startPage - 1)}" id="num"><</a></li>
 				</c:if>

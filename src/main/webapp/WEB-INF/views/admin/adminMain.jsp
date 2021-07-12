@@ -336,6 +336,20 @@
 	<script src="<%=request.getContextPath()%>/sb-admin-2/js/demo/chart-pie-demo.js"></script>
 	<script src="https://apis.google.com/js/client:platform.js"></script>
 <script>
+
+	jQuery(function($) {
+		$("body").css("display", "none");
+		$("body").fadeIn(2000);
+		$("a.transition").click(function(event) {
+			event.preventDefault();
+			linkLocation = this.href;
+			$("body").fadeOut(1000, redirectPage);
+		});
+		function redirectPage() {
+			window.location = linkLocation;
+		}
+	});
+
 	$(".funding").change(function(){
 		var category=$(".funding option:selected").val();
 		if(category=="반려펀딩"){
