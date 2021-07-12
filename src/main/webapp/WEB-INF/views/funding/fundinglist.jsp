@@ -558,6 +558,17 @@ pageEncoding="UTF-8"%>
 
 
 <script>
+		window.onload = function() {
+			console.log("회원 정지 해제 시작");
+			$.ajax({
+				url : "reportStop",
+				type : "POST",
+				success : function(data) {
+					console.log("성공");
+				}
+			})
+		}
+
 		var fin = 0; // 종료 펀딩만 보기
 		var cat = null; // 펀딩 순서 정해서 보기
 		// 뒤로가기 버튼시 작동
@@ -568,6 +579,8 @@ pageEncoding="UTF-8"%>
 						
 		        }
 		}
+		
+		
 
 		//종류별 보기 탭
 		var listbtn = document.getElementById("SelectArea_button");

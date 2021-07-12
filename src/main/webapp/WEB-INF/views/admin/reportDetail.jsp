@@ -53,7 +53,7 @@ function userStop() {
 	console.log("조회할 번호 : " + no);
 	if (confirm("정말 계정을 정지하겠습니까?")) {
 		$.ajax({
-			url : "userStop",
+			url : "userReport",
 			type : "POST",
 			traditional : true,
 			data : {

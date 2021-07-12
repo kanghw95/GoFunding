@@ -134,7 +134,9 @@ public interface AdminService {
 	
 	public List<Report> cReport(Report rpt) throws Exception; // 댓글 신고 상세 조회
 	
-	public int userStop(User user) throws Exception; // 회원 정지일 설정
+	public int userReport(User user) throws Exception; // 회원 정지일 설정
+	
+	public int userAuthority(User user) throws Exception; // 회원 권한 정지
 	
 	public int bReportState(Report rpt) throws Exception; // 게시글 신고 상태 변경
 	
@@ -150,7 +152,9 @@ public interface AdminService {
 	
 	public void deleteBReport(String reportNo); // 게시글 신고내역 삭제
 	
-	public List<Faq> faq() throws Exception; // faq 조회
+	public List<Faq> faq(Criteria cri) throws Exception; // faq 조회
+	
+	public int faqCount() throws Exception; // faq 수 조회
 	
 	public List<Faq> selectFaq(Faq faq) throws Exception; // faq 검색
 	

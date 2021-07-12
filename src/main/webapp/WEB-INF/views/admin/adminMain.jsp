@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="<%=request.getContextPath() %>/resources/css/admin/adminMain.css?ver=1.0" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/admin/adminMain.css?ver=1.1" rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
 <!-- Custom fonts for this template-->
 <link
@@ -27,13 +27,13 @@
 				<div class="fundingDiv">
 				<table class="noticeTab" >
 				<tr class=noticeTitle>
-					<td><span>펀딩 신청 관리</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<td class="collect"><span>펀딩 신청 관리</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<select class="detailBtn funding" id="" name="category">
 					<option value="신청펀딩">신청펀딩</option>
 					<option value="승인펀딩">승인펀딩</option>
 					<option value="반려펀딩">반려펀딩</option>
 					</select></td>
-					<td><span>커뮤니티 관리</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<td class="collect"><span>커뮤니티 관리</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<select class="detailBtn community" name="category">
 					<option value="자유게시판">자유게시판</option>
 					<option value="후기게시판">후기게시판</option>
@@ -41,7 +41,7 @@
 					<option value="이벤트게시판">이벤트게시판</option>
 					<option value="정보공유게시판">정보공유게시판</option>
 					</select></td>
-					<td><span>공지/문의사항 관리</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<td class="collect"><span>공지/문의사항 관리</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<select class="detailBtn qna" name="category">
 					<option value="공지사항">공지사항</option>
 					<option value="FAQ">FAQ</option> 
@@ -350,6 +350,17 @@
 		}
 	});
 
+	window.onload = function() {
+		console.log("회원 정지 해제 시작");
+		$.ajax({
+			url : "reportStop",
+			type : "POST",
+			success : function(data) {
+				console.log("성공");
+			}
+		})
+	}
+	
 	$(".funding").change(function(){
 		var category=$(".funding option:selected").val();
 		if(category=="반려펀딩"){

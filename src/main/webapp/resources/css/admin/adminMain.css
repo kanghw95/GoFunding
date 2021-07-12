@@ -187,6 +187,11 @@ td{
 
 .goToDetail{
 	cursor: pointer;
+	font-size: 15px;
+}
+
+.collect {
+	width: 33%;
 }
 
 body{

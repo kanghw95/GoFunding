@@ -477,7 +477,7 @@
 	<!-- Qna 답글 추가 -->
 	<insert id="qnaInsert">
 		INSERT INTO QNACOMMENT VALUES (QNACMT_SEQ.NEXTVAL, #{cmtContent}, SYSDATE, 0, 0, 0
-		, 'park', #{cmtNo})
+		, 'admin', #{cmtNo})
 	</insert>
 	
 	<!-- Qna 특정 답글 수 -->
@@ -546,9 +546,14 @@
 		UPDATE USERS SET REPORTCNT = REPORTCNT + 1 WHERE ID = #{userId}
 	</update>
 	
+	<!-- 회원 권한 정지 -->
+	<update id="userAuthority">
+		UPDATE USERS SET AUTHORITY = 3 WHERE ID = #{userId}
+	</update>
+	
 	<!-- 정지 해제 -->
 	<update id="reportStop">
-		<![CDATA[UPDATE USERS SET REPORTCNT = 0, SUSPENSIONSTART = NULL, SUSPENSIONFIN = NULL WHERE SUSPENSIONFIN <= SYSTIMESTAMP]]>
+		<![CDATA[UPDATE USERS SET AUTHORITY = 1, SUSPENSIONSTART = NULL, SUSPENSIONFIN = NULL WHERE SUSPENSIONFIN <= SYSTIMESTAMP]]>
 	</update>
 	
 	<!-- 댓글 신고 내역 삭제 -->
@@ -575,7 +580,15 @@
 	
 	<!-- fqa 조회 -->
 	<select id="faq" resultMap="faq">
-		SELECT * FROM FAQ ORDER BY FAQNO DESC
+		SELECT * FROM (SELECT FAQNO, FAQTITLE, FAQCONTENT, FAQDATE, FAQCNT, ID
+		, ROW_NUMBER() OVER (ORDER BY FAQNO DESC) AS RNUM FROM FAQ) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY FAQNO DESC
+	</select>
+	
+	<!-- faq 수 조회 -->
+	<select id="faqCount" resultType="int">
+		SELECT COUNT(*) FROM FAQ
 	</select>
 	
 	<!-- faq 검색 -->
@@ -590,12 +603,12 @@
 	
 	<!-- faq 글 등록 -->
 	<insert id="insertFaq">
-		INSERT INTO FAQ VALUES (FAQ_SEQ.NEXTVAL, #{faqTitle}, #{faqContent}, SYSDATE, 0, 'park')
+		INSERT INTO FAQ VALUES (FAQ_SEQ.NEXTVAL, #{faqTitle}, #{faqContent}, SYSDATE, 0, 'admin')
 	</insert>	
 	
 	<!-- 공지사항 글 등록 -->
 	<insert id="insertNotice">
-		INSERT INTO NOTICE VALUES (NOTICE_SEQ.NEXTVAL, #{boardTitle}, #{boardContent}, SYSDATE, 0, 'park' )
+		INSERT INTO NOTICE VALUES (NOTICE_SEQ.NEXTVAL, #{boardTitle}, #{boardContent}, SYSDATE, 0, 'admin' )
 	</insert>
 	
 	<!-- 공지사항 상세보기 -->

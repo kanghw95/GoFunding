@@ -986,9 +986,9 @@ public class AdminCtrl {
 		return "admin/reportDetail";
 	}
 	
-	@RequestMapping(value = "userStop", method = RequestMethod.POST)
+	@RequestMapping(value = "userReport", method = RequestMethod.POST)
 	@ResponseBody
-	public String userStop(User user, Report rpt, HttpServletRequest request) throws Exception {
+	public String userReport(User user, Report rpt, HttpServletRequest request) throws Exception {
 		
 		System.out.println("회원 정지 시작");
 		String stopId = request.getParameter("stopId");
@@ -1009,12 +1009,16 @@ public class AdminCtrl {
 		System.out.println("시작일 : " + user.getSuspensionStart());
 		System.out.println("종료일 : " + user.getSuspensionFin());
 		System.out.println("아이디 : " + user.getUserId());
-		int stop = adService.userStop(user); // mapper
+		int stop = adService.userReport(user); // mapper
 		System.out.println("정지일 설정 : " + stop);
 		
 		// 회원 정지 횟수 추가
 		int cnt = adService.reportCnt(user);
 		System.out.println("정지 횟수 추가  : " + cnt);
+		
+		// 회원 권한 정지 변경
+		int authority = adService.userAuthority(user);
+		System.out.println("회원 권한 정지 : " + authority);
 		
 		// 신고 상태 변경
 		String title = request.getParameter("title");
@@ -1144,12 +1148,20 @@ public class AdminCtrl {
 	}
 	
 	@RequestMapping(value = "faq", method = RequestMethod.GET)
-	public String qnaUpdate(Faq faq, Model model) throws Exception { // qna 답변수정
+	public String qnaUpdate(Faq faq, Model model, Criteria cri) throws Exception { // qna 답변수정
 		
 		System.out.println("feq 조회");
-		List<Faq> faqList = adService.faq();
+		List<Faq> faqList = adService.faq(cri);
 		System.out.println("faqList : " + faqList);
 		model.addAttribute("faq", faqList);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		System.out.println(pageMaker.getCri());
+		pageMaker.setTotalCount(adService.faqCount());
+		System.out.println(adService.faqCount());
+		
+		model.addAttribute("pageMaker", pageMaker);
 		
 		return "admin/faq";
 

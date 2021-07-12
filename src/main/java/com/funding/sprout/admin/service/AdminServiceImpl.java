@@ -304,8 +304,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public int userStop(User user) throws Exception { // 회원 정지일 설정
-		return adDao.userStop(user);
+	public int userReport(User user) throws Exception { // 회원 정지일 설정
+		return adDao.userReport(user);
 	}
 	
 	@Override
@@ -329,6 +329,11 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	public int userAuthority(User user) throws Exception { // 회원 권한 정지
+		return adDao.userAuthority(user);
+	}
+	
+	@Override
 	public List<Report> reportSelect(Report rpt) throws Exception { // 신고 내역 검색
 		return adDao.reportSelect(rpt);
 	}
@@ -344,8 +349,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public List<Faq> faq() throws Exception { // feq 조회
-		return adDao.faq();
+	public List<Faq> faq(Criteria cri) throws Exception { // feq 조회
+		return adDao.faq(cri);
+	}
+	
+	@Override
+	public int faqCount() throws Exception { // faq 수 조회
+		return adDao.faqCount();
 	}
 	
 	@Override

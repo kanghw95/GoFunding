@@ -229,6 +229,7 @@ a:active {color:#00BFFF;}
 			cv += "</tr>"
 		});
 		$("#tr").append(cv);
+		$("#page").remove();
 	} 
 
 	function deleteFaq() { // 자유게시판 글 삭제
@@ -345,7 +346,19 @@ a:active {color:#00BFFF;}
 			<option value="0">--선택--</option>
 			<option value="1">제목</option>
 		</select> <input type="text" id="text" name="userId">
-		<div class="paging">	
+		<div id="paging">
+			<ul id="page">
+				<c:if test="${pageMaker.prev}">
+					<li><a href="faq${pageMaker.makeQuery(pageMaker.startPage - 1)}" id="num"><</a></li>
+				</c:if>
+				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
+					var="idx">
+					<li><a href="faq${pageMaker.makeQuery(idx)}" id="num">${idx}</a></li>
+				</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+					<li><a href="faq${pageMaker.makeQuery(pageMaker.endPage + 1)}" id="num">></a></li>
+				</c:if>
+			</ul>
 		</div>
 		<br>
 		<button class="searchBtn" onclick="searchFaq()">검색</button>

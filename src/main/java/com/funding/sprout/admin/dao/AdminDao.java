@@ -296,8 +296,12 @@ public class AdminDao {
 		return sqlSession.selectList("Admin.cReport", rpt);
 	}
 	
-	public int userStop(User user) throws Exception { // 회원 정지일 설정
+	public int userReport(User user) throws Exception { // 회원 정지일 설정
 		return sqlSession.update("Admin.userStop", user);
+	}
+	
+	public int userAuthority(User user) throws Exception { // 회원 권한 정지
+		return sqlSession.update("Admin.userAuthority", user);
 	}
 	
 	public int bReportState(Report rpt) throws Exception { // 게시글 신고 상태 변경
@@ -328,8 +332,12 @@ public class AdminDao {
 		sqlSession.delete("Admin.deleteBReport", reportNo);
 	}
 	
-	public List<Faq> faq() throws Exception { // faq 조회
-		return sqlSession.selectList("Admin.faq");
+	public List<Faq> faq(Criteria cri) throws Exception { // faq 조회
+		return sqlSession.selectList("Admin.faq", cri);
+	}
+	
+	public int faqCount() throws Exception {
+		return sqlSession.selectOne("Admin.faqCount");
 	}
 	
 	public List<Faq> selectFaq(Faq faq) throws Exception { // faq 검색
