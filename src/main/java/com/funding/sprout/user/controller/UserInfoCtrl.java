@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
@@ -172,11 +173,28 @@ public class UserInfoCtrl {
 		System.out.println("컨트롤 result" + result);
 	}
 
+	
+	@RequestMapping(value = "/addrpopup", method = RequestMethod.GET, produces = "application/text; charset=utf-8")  
+	public String addrPopup() {
+		
+		
+		
+		return "user/myAddressPopup"; 
+		
+	}
+	
 	@ResponseBody
-	@RequestMapping(value = "/modifyaddr", method = RequestMethod.GET, produces = "application/text; charset=utf-8")  
-	public void updateUserAddr(User user) { // 주소 정보 수정
+	@RequestMapping(value = "/modifyaddr", method = RequestMethod.POST, produces = "application/text; charset=utf-8")  
+	public void updateUserAddr(User user, HttpSession session, @RequestParam(name = "userAddress") String address) { // 주소 정보 수정
 	
 		System.out.println("주소 수정 컨트롤 들어옴");
+		User loginUser = (User) session.getAttribute("user");
+		
+		String loginId = loginUser.getUserId();
+		
+		user.setUserId(loginId);
+		user.setUserAddress(address);
+		
 		System.out.println("user:" + user);
 		int result = 0;
 		result = userService.modifyAddr(user);
@@ -197,13 +215,14 @@ public class UserInfoCtrl {
 	
 	@ResponseBody
 	@RequestMapping(value = "/drawlUser", method = RequestMethod.POST)  
-	public String drawlUser(@RequestParam("userId") String userId) {
+	public void drawlUser(HttpSession session) {
 		System.out.println("drawl 컨트롤러 들어옴");
 		
+		User loginUser = (User) session.getAttribute("user");
+		String loginId = loginUser.getUserId();
 		
-		
-		
-		return null; // 회원 탈퇴
+		int result = userService.drawlUser(loginId);
+		System.out.println("탈퇴 결과 : " + result);
 		
 	}
 	

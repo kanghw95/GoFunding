@@ -84,4 +84,46 @@ public class UserMyPageDao {
 	public List<Board> eBoardListMore(String id) throws Exception { // 이벤트 게시판 조회 (더보기)
 		return sqlSession.selectList("User.selectEventMore", id);
 	}
+	
+	public List<Board> freeBoardCmtList(String id) throws Exception { // 자유 게시판 댓글 조회 (3개까지)
+		return sqlSession.selectList("User.selectFreeCmt", id);
+	}
+	
+	public List<Board> freeBoardCmtListMore(String id) throws Exception { // 자유 게시판 댓글 조회 (더보기)
+		return sqlSession.selectList("User.selectFreeCmtMore", id);
+	}
+	
+	public List<Board> rBoardCmtList(String id) throws Exception { // 후기 게시판 댓글 조회 (3개까지)
+		return sqlSession.selectList("User.selectReviewCmt", id);
+	}
+	
+	public List<Board> rBoardCmtListMore(String id) throws Exception { // 후기 게시판 댓글 조회 (더보기)
+		return sqlSession.selectList("User.selectReviewCmtMore", id);
+	}
+	
+	public List<Board> qBoardCmtList(String id) throws Exception { // 질의응답 게시판 댓글 조회 (3개까지)
+		return sqlSession.selectList("User.selectQuestionCmt", id);
+	}
+	
+	public List<Board> qBoardCmtListMore(String id) throws Exception { // 질의응답 게시판 댓글 조회 (더보기)
+		return sqlSession.selectList("User.selectQuestionCmtMore", id);
+	}
+	
+	public List<Board> sBoardCmtList(String id) throws Exception { // 정보공유 게시판 댓글 조회 (3개까지)
+		return sqlSession.selectList("User.selectShareCmt", id);
+	}
+	
+	public List<Board> sBoardCmtListMore(String id) throws Exception { // 정보공유 게시판 댓글 조회 (더보기)
+		return sqlSession.selectList("User.selectShareCmtMore", id);
+	}
+	
+	public List<Board> eBoardCmtList(String id) throws Exception { // 이벤트 게시판 댓글 조회 (3개까지)
+		return sqlSession.selectList("User.selectEventCmt", id);
+	}
+	
+	public List<Board> eBoardCmtListMore(String id) throws Exception { // 이벤트 게시판 댓글 조회 (더보기)
+		return sqlSession.selectList("User.selectEventCmtMore", id);
+	}
+	
+	
 }

@@ -83,11 +83,11 @@ $(document).ready(
 							<div class="logBox">
 								<ul>
 									<li><a href="#"><span><i class="fas fa-archive"></i>&nbsp; 내가 개설한 펀딩</span></a></li>
-									<li><a href="#"><span><i class="fas fa-folder-plus"></i>&nbsp; 내 펀딩 개설하기</span></a></li>
+									<li><a href="<%=request.getContextPath()%>/user/applicationForm"><span><i class="fas fa-folder-plus"></i>&nbsp; 내 펀딩 개설하기</span></a></li>
 								</ul>
 								<ul>
-									<li style="padding-top: 20px;"><a href="#"><span><i class="fas fa-pencil-alt"></i>&nbsp; 내가 쓴 글 목록</span></a></li>
-									<li style="padding-top: 20px;"><a href="#"><span><i class="fas fa-reply"></i>&nbsp; 내가 쓴 댓글 목록</span></a></li>
+									<li style="padding-top: 20px;"><a href="<%=request.getContextPath() %>/myboardlist"><span><i class="fas fa-pencil-alt"></i>&nbsp; 내가 쓴 글 목록</span></a></li>
+									<li style="padding-top: 20px;"><a href="<%=request.getContextPath() %>/mycmtlist"><span><i class="fas fa-reply"></i>&nbsp; 내가 쓴 댓글 목록</span></a></li>
 								</ul>
 							</div>
 						</div>
@@ -121,7 +121,7 @@ $(document).ready(
 								</ul>
 								<ul>
 									<li style="padding-top: 20px;"><a href="<%=request.getContextPath() %>/myboardlist"><span><i class="fas fa-pencil-alt"></i>&nbsp; 내가 쓴 글 목록</span></a></li>
-									<li style="padding-top: 20px;"><a href="#"><span><i class="fas fa-reply"></i>&nbsp; 내가 쓴 댓글 목록</span></a></li>
+									<li style="padding-top: 20px;"><a href="<%=request.getContextPath() %>/mycmtlist"><span><i class="fas fa-reply"></i>&nbsp; 내가 쓴 댓글 목록</span></a></li>
 								</ul>
 							</div>
 						</div>

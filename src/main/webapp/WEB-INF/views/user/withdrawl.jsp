@@ -18,19 +18,73 @@
   
   
 <script>
-	
-
-	
-	function deleteUser(){
-		console.log("delete 함수 들어옴");
+$(document).ready(function () {
+	//휴대폰 번호 인증
+	$("#checkPhoneNumber").click(function(){
+		var phoneNumber = $("#phone").val();
+		Swal.fire("인증번호 발송 완료!");
 		
-		var userId = $("#userId").val();
-		console.log("input hidden 이용 userId: " + userId);
+		$.ajax({
+			type: "POST",
+			url: "sendSMS",
+			data: {"phoneNumber" : phoneNumber},
+			
+			success: function(data){
+				console.log("성공!!");
+				console.log("success data:" + data);
+				$("#checkCerNumber").click(function(){
+					if($.trim(data) == $("#certification").val()){
+						Swal.fire(
+							'인증 성공!',
+							'휴대폰 인증이 정상적으로 완료되었습니다',
+							'success'
+						)
+						certifyPhoneNumber = true;
+						console.log("certifyPhoneNumber : " + certifyPhoneNumber );
+					}else{
+						Swal.fire({
+							icon: 'error',
+							title: '인증 오류',
+							text: '인증번호가 올바르지 않습니다'
+						})
+					}
+				})
+			} // 번호인증 버튼 success 끝
+		})
 		
-	}
+	}) // 번호인증 버튼 click 끝
+	
+	$("#withdrawal").on("click", function(){
+		
+		if(certifyPhoneNumber){
+			console.log("핸드폰 인증"+ certifyPhoneNumber)
+			
+			$.ajax({
+				url : "drawlUser",
+				type : "POST",
+				
+				success : function(data) {
+					console.log("success 진입");
+					console.log(data);
+					location.href = "<%=request.getContextPath() %>/user/logout";
+				},
+				error : function(error) {
+					console.log("error 발생");
+				}
+			
+				})
+			}else{
+				Swal.fire({
+					icon: 'error',
+					title: '본인 인증 실패',
+					text: '데이터를 다시 입력해주세요'
+				
+			})
+			}
+	});
+});	
 
 
-/**/
 </script>
 </head>
 <body>
@@ -74,7 +128,6 @@
 		</div>
 		<div class="btnContainer">
 			<button class="withdrawlBtn btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fas fa-user-times"></i>&nbsp; 회원탈퇴</button>
-			<input type="hidden" id="userId" name="userId" value="${user.userId }">
 			<!-- 본인인증 모달 -->
 			  <!-- The Modal -->
 			 <div class="modal" id="myModal">
@@ -91,22 +144,25 @@
 			       <div class="modal-body">
 			         	안전한 회원탈퇴 절차를 위하여 본인 인증 절차를 거치고 있습니다.
 			         	회원가입 시 입력한 휴대폰 번호를 입력 후 인증절차를 진행해주세요.
-			         	<label for="phone">Phone Number</label>
-			         	<input type="text" class="phoneNumber" name="phone" id="phone">
+		 				<div class="frmGroup">
+							<label for="phone">전화번호</label>
+							<input type="text" class="phoneNumber" name="phone" id="phone">
+							<input type="button" id="checkPhoneNumber" class="insideBtn" value="인증번호 전송"><br>
+							<input type="text" id="certification" class="inputPhone" name="certification" placeholder="인증번호를 입력해주세요">
+							<input type="button" id="checkCerNumber" class="insideBtn" value="인증하기">
+						</div>
 			       </div>
 			        
 			        <!-- Modal footer -->
 			       <div class="modal-footer">
-			         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			         <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+			         <button type="button" class="insideBtn" id="withdrawal">탈퇴하기</button>
 			       </div>
 			        
 			     </div>
 			   </div>
 			 </div>		
 		</div>
-		
-		
-		
 		
 		
 	</div>

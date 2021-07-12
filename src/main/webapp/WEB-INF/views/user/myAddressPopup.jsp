@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,32 +55,56 @@ function sample6_execDaumPostcode() {
 $(document).ready(function() {
 
 // 주소 하나로 합치기 
-	
-	$('form').on('submit',function(){
-	if($("#sample6_postcode").val() == ""){
-		$("#usercheck").attr("disabled", true);
-		Swal.fire({
-			icon: 'error',
-			title: '주소 오류',
-			text: '주소를 다시 검색해주세요'
-		})
-	}else{
-		$("#address").val( $("#sample6_postcode").val() + "," 
-				+ $("#sample6_address").val() + "," 
-				+ $("#sample6_detailAddress").val() + "," 
-				+ $("#sample6_extraAddress").val());
-		Swal.fire(
-				'수정 성공!',
-				'주소가 정상적으로 수정되었습니다',
-				'success'
-			)
+	var mergeAddr = function(){
+		if($("#sample6_postcode").val() == ""){
+			Swal.fire({
+				icon: 'error',
+				title: '주소 오류',
+				text: '주소를 다시 검색해주세요'
+			})
+		}else{
+			$("#address").val( $("#sample6_postcode").val() + "," 
+					+ $("#sample6_address").val() + "," 
+					+ $("#sample6_detailAddress").val() + "," 
+					+ $("#sample6_extraAddress").val());
 		
-		$("#usercheck").attr("disabled", false);
-
-	}
+		}
+}
+	
+	
+	$("#merge").on('click', mergeAddr);
+	$('#merge').on('click', function(){
+		var userAddress = $("#address").val();
+		console.log(userAddress);
+		
+		$.ajax({
+			url: "modifyaddr",
+			type: "POST",
+			data: {"userAddress" : userAddress },
+			
+			success: function(data){
+				console.log(data);
+				console.log("정보수정 성공성공");
+				Swal.fire(
+						'수정 성공!',
+						'주소가 정상적으로 수정되었습니다',
+						'success'
+					);
+				$("#currentAddr").val(userAddress);					
+			},
+			error: function(data){
+				Swal.fire({
+					icon: 'error',
+					title: '주소 오류',
+					text: '주소 수정에 실패했습니다'
+				})
+			}
+		})
 	
 	
 	});
+	
+	
 });
 
 </script>
@@ -87,16 +112,20 @@ $(document).ready(function() {
 <body>
 <div class="wrapper">
 	<div class="joinContainer">
+		
 		<h3>주소 수정하기</h3>
-		<form id="addrCheck" action="<%=request.getContextPath()%>/user/modifyaddr" method="post">	
+		<h4>현재 주소</h4>
+		<input type="text" id="currentAddr" value="${user.userAddress }" style="border: none;">
+
+		<form id="addrCheck">	
 			<input type="text" class="inputPost" id="sample6_postcode" name="postcode" readonly  placeholder="우편번호">
 			<input type="button" class="insideBtn" onclick="sample6_execDaumPostcode()" value="주소 검색" >
 			<input type="text" class="inputBox" id="sample6_address" name="address1" readonly  placeholder="주소">
 			<input type="text" class="inputBox" id="sample6_detailAddress" name="address2"  placeholder="상세주소">
 			<input type="text" class="inputBox" id="sample6_extraAddress" name="address3" readonly  placeholder="참고항목">
-			<input type="hidden" id="address" name="userAddress">
-			
-			<input type="submit" class="insideBtn" onclick="mergeAddress();">
+			<input type="hidden" id="address" name="userAddress" >
+				
+			<input type="button" id="merge" class="insideBtn" value="수정하기">
 		</form>
 	</div>
 </div>

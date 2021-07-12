@@ -13,24 +13,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-	function myflist() {
-		window.open("<%=request.getContextPath()%>/myflist", "myFree", "width=1000px, height=500px, resizable = no, left= 490, top=140");
+	function myfCmtlist() {
+		window.open("<%=request.getContextPath()%>/myfcmtlist", "myFree", "width=1000px, height=500px, resizable = no, left= 490, top=140");
 	};
 	
-	function myrlist() {
-		window.open("<%=request.getContextPath()%>/myrlist", "myReview", "width=1000px, height=500px, resizable = no, left= 490, top=140");
+	function myrCmtlist() {
+		window.open("<%=request.getContextPath()%>/myrcmtlist", "myReview", "width=1000px, height=500px, resizable = no, left= 490, top=140");
 	};
 		
-	function myqlist() {
-		window.open("<%=request.getContextPath()%>/myqlist", "myQuestion", "width=1000px, height=500px, resizable = no, left= 490, top=140");
+	function myqCmtlist() {
+		window.open("<%=request.getContextPath()%>/myqcmtlist", "myQuestion", "width=1000px, height=500px, resizable = no, left= 490, top=140");
 	};
 	
-	function myslist() {
-		window.open("<%=request.getContextPath()%>/myslist", "myShare", "width=1000px, height=500px, resizable = no, left= 490, top=140");
+	function mysCmtlist() {
+		window.open("<%=request.getContextPath()%>/myscmtlist", "myShare", "width=1000px, height=500px, resizable = no, left= 490, top=140");
 	};
 	
-	function myelist() {
-		window.open("<%=request.getContextPath()%>/myelist", "myEvent", "width=1000px, height=500px, resizable = no, left= 490, top=140");
+	function myeCmtlist() {
+		window.open("<%=request.getContextPath()%>/myecmtlist", "myEvent", "width=1000px, height=500px, resizable = no, left= 490, top=140");
 	};
 	
 
@@ -43,16 +43,16 @@
 			<div class="freeContainer" style="border: 1px solid #ededed; display: inline-block;">
 				<div> 
 					<span>자유 게시판</span>
-					<a href="#" onclick="myflist();"><span>더보기</span></a>
+					<a href="#" onclick="myfCmtlist();"><span>더보기</span></a>
 				</div>
 				<div class="freeContent">
 					<table>
-						<c:if test="${!empty freeBoardList }">
-							<c:forEach var="free" items="${freeBoardList }" varStatus="status">
+						<c:if test="${!empty freeBoardCmtMore }">
+							<c:forEach var="free" items="${freeBoardCmtMore }" varStatus="status">
 								<tr>
-									<td>${free.boardNo }</td>
-									<td>${free.boardTitle}</td>
-									<td>${free.boardDate}</td>
+									<td>${free.cmtNo }</td>
+									<td>${free.cmtContent}</td>
+									<td>${free.cmtDate}</td>
 								</tr>
 							</c:forEach>
 						</c:if>
@@ -63,16 +63,16 @@
 			<div class="reviewContainer" style="border: 1px solid #ededed; display: inline-block;">
 				<div> 
 					<span>후기 게시판</span>
-					<a href="#" onclick="myrlist();"><span>더보기</span></a>
+					<a href="#" onclick="myrCmtlist();"><span>더보기</span></a>
 				</div>
 				<div class="reviewContent">
 					<table>
-						<c:if test="${!empty reviewBoardList }">
-							<c:forEach var="review" items="${reviewBoardList }" varStatus="status">
+						<c:if test="${!empty rBoardCmtMore }">
+							<c:forEach var="review" items="${rBoardCmtMore }" varStatus="status">
 								<tr>
-									<td>${review.boardNo }</td>
-									<td>${review.boardTitle}</td>
-									<td>${review.boardDate}</td>
+									<td>${review.cmtNo }</td>
+									<td>${review.cmtContent}</td>
+									<td>${review.cmtDate}</td>
 								</tr>
 							</c:forEach>
 						</c:if>
@@ -83,16 +83,16 @@
 			<div class="questionContainer" style="border: 1px solid #ededed; display: inline-block;">
 				<div> 
 					<span>질의응답 게시판</span>
-					<a href="#" onclick="myqlist();"><span>더보기</span></a>
+					<a href="#" onclick="myqCmtlist();"><span>더보기</span></a>
 				</div>
 				<div class="questionContent">
 					<table>
-						<c:if test="${!empty qBoardList }">
-							<c:forEach var="q" items="${qBoardList }" varStatus="status">
+						<c:if test="${!empty qBoardCmtMore }">
+							<c:forEach var="q" items="${qBoardCmtMore }" varStatus="status">
 								<tr>
-									<td>${q.boardNo }</td>
-									<td>${q.boardTitle}</td>
-									<td>${q.boardDate}</td>
+									<td>${q.cmtNo }</td>
+									<td>${q.cmtContent}</td>
+									<td>${q.cmtDate}</td>
 								</tr>
 							</c:forEach>
 						</c:if>
@@ -103,16 +103,16 @@
 			<div class="shareContainer" style="border: 1px solid #ededed; display: inline-block;">
 				<div> 
 					<span>정보공유 게시판</span>
-					<a href="#" onclick="myslist();"><span>더보기</span></a>
+					<a href="#" onclick="mysCmtlist();"><span>더보기</span></a>
 				</div>
 				<div class="shareContent">
 					<table>
-						<c:if test="${!empty sBoardList }">
-							<c:forEach var="s" items="${sBoardList }" varStatus="status">
+						<c:if test="${!empty sBoardCmtMore }">
+							<c:forEach var="s" items="${sBoardCmtMore }" varStatus="status">
 								<tr>
-									<td>${s.boardNo }</td>
-									<td>${s.boardTitle}</td>
-									<td>${s.boardDate}</td>
+									<td>${s.cmtNo }</td>
+									<td>${s.cmtContent}</td>
+									<td>${s.cmtDate}</td>
 								</tr>
 							</c:forEach>
 						</c:if>
@@ -123,16 +123,16 @@
 			<div class="eventContainer" style="border: 1px solid #ededed; display: inline-block;">
 				<div> 
 					<span>이벤트 게시판</span>
-					<a href="#" onclick="myelist();"><span>더보기</span></a>
+					<a href="#" onclick="myeCmtlist();"><span>더보기</span></a>
 				</div>
 				<div class="eventContent">
 					<table>
-						<c:if test="${!empty eBoardList }">
-							<c:forEach var="e" items="${eBoardList }" varStatus="status">
+						<c:if test="${!empty eBoardCmtMore }">
+							<c:forEach var="e" items="${eBoardCmtMore }" varStatus="status">
 								<tr>
-									<td>${e.boardNo }</td>
-									<td>${e.boardTitle}</td>
-									<td>${e.boardDate}</td>
+									<td>${e.cmtNo }</td>
+									<td>${e.cmtContent}</td>
+									<td>${e.cmtDate}</td>
 								</tr>
 							</c:forEach>
 						</c:if>

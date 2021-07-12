@@ -419,6 +419,7 @@ $(document).ready(function () {
 	}) // 번호인증 버튼 click 끝
 	
 	
+	
 
 	
 	 
@@ -438,9 +439,25 @@ $(document).ready(function () {
 	$(".btnJoin").on("click", mergeFav);
 
 	
+	
+	
 		
 	$(".btnJoin").on("click", function(){
-			
+		
+
+		for(var i = 1; i<4; i++){
+			var check_i = document.getElementById("agree_terms_"+i); 
+				if(check_i.checked != true){
+					
+					Swal.fire({
+						icon: 'error',
+						text: '필수 약관에 동의해주세요!'
+					})
+					return;
+				}
+			}
+		
+		
 		if(isPassId && isPassName && isPassPw && isPassEmail && isPassNickName && isPassPhone && idCheck && nickCheck
 				&& emailCheck && pwCheck && certifyPhoneNumber){
 			console.log("id 유효성" + isPassId + "\n이름 유효성" + isPassName + "\n비번 유효성" + isPassPw + "\n이메일 유효성" + isPassEmail 
@@ -475,6 +492,65 @@ $(document).ready(function () {
 			})
 		}
 	});
+
+	
+	var agree_terms_all = document.getElementById("agree_terms_all");
+
+	agree_terms_all.addEventListener("click",function(){ 
+		
+		if(agree_terms_all.getAttribute("aria-hidden") == "false"){
+			agree_terms_all.setAttribute("aria-hidden","true");
+			$("input:checkbox[name='agree']").prop("checked",true);
+			$(".FundingDetailApplicationContent_icon").css(
+					{'background-color' : '#1f9eff'});
+
+		}else{
+			agree_terms_all.setAttribute("aria-hidden","false");
+			 $("input:checkbox[name='agree']").prop("checked",false);
+			 $(".FundingDetailApplicationContent_icon").css(
+						{'background-color' : ''});
+		}
+	});
+	
+	
+	function checkSelectAll()  {
+		
+		var agree_span0 = document.getElementById("agree_span0");
+		  // 전체 체크박스
+		  var checkboxes = document.querySelectorAll('input[name="agree"]');
+		  // 선택된 체크박스
+		  var checked = document.querySelectorAll('input[name="agree"]:checked');
+		  // select all 체크박스
+		  var selectAll = document.querySelector('input[name="all_agree"]');
+		  
+		  if(checkboxes.length === checked.length)  {
+		    selectAll.checked = true;
+		    agree_terms_all.setAttribute("aria-hidden","true");
+		    agree_span0.style.backgroundColor = "#1f9eff"
+		  }else {
+		    selectAll.checked = false;
+		    agree_terms_all.setAttribute("aria-hidden","false");
+		    agree_span0.style.backgroundColor = ""
+		    
+		  }
+
+		}
+	
+	function checkColorChange(number)  {
+		
+		var i = number;
+		
+		var agree_span = document.getElementById("agree_span"+number);
+		
+		console.log(agree_span);
+		
+		if(agree_span.style.backgroundColor == ""){
+			agree_span.style.backgroundColor = "#1f9eff"
+		}else if(agree_span.style.backgroundColor = "#1f9eff"){
+			agree_span.style.backgroundColor = ""
+		}
+	};
+	
 
 	
 });
@@ -554,6 +630,48 @@ $(document).ready(function () {
 				<input type="hidden" id="favorite" name="userFav">
 				</div>
 			</div>
+			
+			<section class="FundingDetailApplicationContent_section">
+				<h3 class="FundingDetailApplicationContent_subtitle">약관 동의</h3>
+				<div class="FundingDetailApplicationContent_terms">
+					<div class="FundingDetailApplicationContent_bundle">
+						<div class="FundingDetailApplicationContent_checkbox undefined">
+							<input id="agree_terms_all" type="checkbox" aria-hidden="false" name="all_agree" class="FundingDetailApplicationContent_input">
+								<label for="agree_terms_all" class="FundingDetailApplicationContent_label">
+								<span  id="agree_span0" class="FundingDetailApplicationContent_icon"></span>
+								약관 및 개인정보 관련 사항(선택 동의 포함)에 모두 동의합니다.
+								</label>
+						</div>
+					</div>
+					<div class="FundingDetailApplicationContent_group__292es">
+						<div class="FundingDetailApplicationContent_checkbox">
+							<input name="agree" id="agree_terms_1" type="checkbox" class="FundingDetailApplicationContent_input" onclick="checkSelectAll(); checkColorChange(1);">
+								<label for="agree_terms_1" class="FundingDetailApplicationContent_label">
+									<span id="agree_span1" class="FundingDetailApplicationContent_icon"></span>(필수) 개인정보의 수집 및 이용에 동의합니다. </label>
+								<a href="#" class="FundingDetailApplicationContent_link">자세히 보기</a>
+						</div>
+						<div class="FundingDetailApplicationContent_checkbox">
+							<input id="agree_terms_2" type="checkbox" name="agree" onclick="checkSelectAll(); checkColorChange(2); " class="FundingDetailApplicationContent_input">
+								<label for="agree_terms_2" class="FundingDetailApplicationContent_label">
+									<span id="agree_span2" class="FundingDetailApplicationContent_icon"></span>(필수) 개인정보의 제3자 제공에 동의합니다.</label>
+								<a href="#" class="FundingDetailApplicationContent_link">자세히 보기</a>
+						</div>
+						<div class="FundingDetailApplicationContent_checkbox">
+							<input id="agree_terms_3" type="checkbox" name="agree" onclick="checkSelectAll(); checkColorChange(3);" class="FundingDetailApplicationContent_input">
+								<label for="agree_terms_3" class="FundingDetailApplicationContent_label">
+									<span id="agree_span3" class="FundingDetailApplicationContent_icon"></span>(필수) ‘새싹나눔 펀딩 약관’에 동의합니다.</label>
+								<a href="#" class="FundingDetailApplicationContent_link">자세히 보기</a>
+						</div>
+						<div class="FundingDetailApplicationContent_checkbox">
+							<input id="agree_terms_4" type="checkbox" name="agree" onclick="checkSelectAll(); checkColorChange(4);" class="FundingDetailApplicationContent_input">
+								<label for="agree_terms_4" class="FundingDetailApplicationContent_label">
+									<span id="agree_span4" class="FundingDetailApplicationContent_icon"></span>(선택) 새싹나눔 마케팅 알림 수신에 동의합니다.</label>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			
 			<div class="frmGroup">
 				<button type="reset" class="insideBtn">취소</button>
 				<button type="button" class="btnJoin">회원가입</button>

@@ -388,7 +388,133 @@ public class UserMyPageCtrl {
 		return mv;
 	}
 	
-
+	
+	//내가 쓴  댓글 조회
+	@RequestMapping(value = "/mycmtlist", method = RequestMethod.GET)
+	public ModelAndView myCommentList(ModelAndView mv, HttpSession session) throws Exception{
+		System.out.println("mycmtlist 들어옴");
+		
+		User loginUser = (User)session.getAttribute("user");
+		String id = loginUser.getUserId();
+		
+		List<Board> freeBoardCmtList = myService.freeBoardCmtList(id);
+		List<Board> rBoardCmtList = myService.rBoardCmtList(id);
+		List<Board> qBoardCmtList = myService.qBoardCmtList(id);
+		List<Board> sBoardCmtList = myService.sBoardCmtList(id);
+		List<Board> eBoardCmtList = myService.eBoardCmtList(id);
+		
+		System.out.println("freeBoardCmtList : " + freeBoardCmtList);
+		System.out.println("rBoardCmtList : " + rBoardCmtList);
+		System.out.println("qBoardCmtList : " + qBoardCmtList);
+		System.out.println("sBoardCmtList : " + sBoardCmtList);
+		System.out.println("eBoardCmtList : " + eBoardCmtList);
+		
+		mv.addObject("freeBoardCmtList", freeBoardCmtList);
+		mv.addObject("rBoardCmtList", rBoardCmtList);
+		mv.addObject("qBoardCmtList", qBoardCmtList);
+		mv.addObject("sBoardCmtList", sBoardCmtList);
+		mv.addObject("eBoardCmtList", eBoardCmtList);
+		
+		mv.setViewName("user/myCommentList");
+		
+		return mv;
+	}
+	
+	//내가 쓴 자유 게시판 글 조회 더보기
+	@RequestMapping(value = "/myfcmtlist", method = RequestMethod.GET)
+	public ModelAndView myFreeBoardCmtMore(ModelAndView mv, HttpSession session) throws Exception{
+		System.out.println("myfcmtlist 들어옴");
+		
+		User loginUser = (User)session.getAttribute("user");
+		String id = loginUser.getUserId();
+		
+		List<Board> freeBoardCmtMore = myService.freeBoardCmtListMore(id);
+		
+		System.out.println("freeBoardCmtMore : " + freeBoardCmtMore);
+		
+		mv.addObject("freeBoardCmtMore", freeBoardCmtMore);
+		
+		mv.setViewName("user/myFreeCmtPopup");
+		
+		return mv;
+	}
+	
+	//내가 쓴 후기 게시판 글 조회 더보기
+	@RequestMapping(value = "/myrcmtlist", method = RequestMethod.GET)
+	public ModelAndView myRBoardCmtMore(ModelAndView mv, HttpSession session) throws Exception{
+		System.out.println("myrcmtlist 들어옴");
+		
+		User loginUser = (User)session.getAttribute("user");
+		String id = loginUser.getUserId();
+		
+		List<Board> rBoardCmtMore = myService.rBoardCmtListMore(id);
+		
+		System.out.println("rBoardCmtMore : " + rBoardCmtMore);
+		
+		mv.addObject("rBoardCmtMore", rBoardCmtMore);
+		
+		mv.setViewName("user/myReviewCmtPopup");
+		
+		return mv;
+	}
+	
+	//내가 쓴 질의응답 게시판 글 조회 더보기
+	@RequestMapping(value = "/myqcmtlist", method = RequestMethod.GET)
+	public ModelAndView myQBoardCmtMore(ModelAndView mv, HttpSession session) throws Exception{
+		System.out.println("myqcmtlist 들어옴");
+		
+		User loginUser = (User)session.getAttribute("user");
+		String id = loginUser.getUserId();
+		
+		List<Board> qBoardCmtMore = myService.qBoardCmtListMore(id);
+		
+		System.out.println("qBoardCmtMore : " + qBoardCmtMore);
+		
+		mv.addObject("qBoardCmtMore", qBoardCmtMore);
+		
+		mv.setViewName("user/myQuestionCmtPopup");
+		
+		return mv;
+	}
+	
+	//내가 쓴 정보공유 게시판 글 조회 더보기
+	@RequestMapping(value = "/myscmtlist", method = RequestMethod.GET)
+	public ModelAndView mySBoardCmtMore(ModelAndView mv, HttpSession session) throws Exception{
+		System.out.println("myscmtlist 들어옴");
+		
+		User loginUser = (User)session.getAttribute("user");
+		String id = loginUser.getUserId();
+		
+		List<Board> sBoardCmtMore = myService.sBoardCmtListMore(id);
+		
+		System.out.println("sBoardCmtMore : " + sBoardCmtMore);
+		
+		mv.addObject("sBoardCmtMore", sBoardCmtMore);
+		
+		mv.setViewName("user/myShareCmtPopup");
+		
+		return mv;
+	}
+	
+	//내가 쓴 이벤트 게시판 글 조회 더보기
+	@RequestMapping(value = "/myecmtlist", method = RequestMethod.GET)
+	public ModelAndView myEBoardCmtMore(ModelAndView mv, HttpSession session) throws Exception{
+		System.out.println("myecmtlist 들어옴");
+		
+		User loginUser = (User)session.getAttribute("user");
+		String id = loginUser.getUserId();
+		
+		List<Board> eBoardCmtMore = myService.eBoardCmtListMore(id);
+		
+		System.out.println("eBoardCmtMore : " + eBoardCmtMore);
+		
+		mv.addObject("eBoardCmtMore", eBoardCmtMore);
+		
+		mv.setViewName("user/myEventCmtPopup");
+		
+		return mv;
+	}
+	
 	
 	
 }

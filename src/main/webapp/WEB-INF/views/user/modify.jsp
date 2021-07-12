@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -339,8 +340,8 @@ $(document).ready(function () {
 });
 		
 		
-function modifyAddr() {
-	window.open("<%=request.getContextPath()%>/user/modifyaddr", "myAddress", "width=1000px, height=500px, resizable = no, left= 490, top=140");
+function modifyAddress() {
+	window.open("<%=request.getContextPath()%>/user/addrpopup", "myAddress", "width=1000px, height=500px, resizable = no, left= 490, top=140");
 };
 
 
@@ -353,30 +354,35 @@ function modifyAddr() {
 		<h2 class="modifyTitle">SPROUT! 새싹나눔 회원 정보 수정</h2>
 		<form id="frmModify">
 			<div class="frmGroup">
-				<div id="idCheck"></div>
+				<label for="id" style="font-weight: bold; font-size: 20px;">아이디</label>
 				<input type="text" class="inputBox" id="id" name="userId" value="${user.userId }" readonly> 
+				<div id="idCheck"></div>
 			</div>
 			<div class="frmGroup">
-				<div id="nameCheck"></div>
+				<label for="name" style="font-weight: bold; font-size: 20px;">이름</label>
 				<input type="text" class="inputBox" id="name" name="userName" value="${user.userName }" readonly>
+				<div id="nameCheck"></div>
 			</div>
 			<div class="frmGroup">
-				<div id="pwCheck"></div>
+				<label for="pw" style="font-weight: bold; font-size: 20px;">비밀번호</label>
 				<input type="password" class="inputBox" id="pw" name="userPwd" placeholder="비밀번호를 입력해주세요">
+				<div id="pwCheck"></div>
 			</div>
 			
 			<div class="frmGroup">
-				<div id="pw2Check"></div>
 				<input type="password" class="inputBox" id="pw2" name="userPwd2" placeholder="비밀번호를 다시 한번 입력해주세요">
+				<div id="pw2Check"></div>
 			</div>
 
 			<div class="frmGroup">
-				<div id="emailCheck"></div>
+				<label for="email" style="font-weight: bold; font-size: 20px;">이메일</label>
 				<input type="text" class="inputBox" id="email" name="userEmail" value="${user.userEmail }">
+				<div id="emailCheck"></div>
 			</div>
 			<div class="frmGroup">
-				<div id="nickCheck"></div>
+				<label for="nickName" style="font-weight: bold; font-size: 20px;">닉네임</label>
 				<input type="text" class="inputBox" id="nickName" name="userNick" value="${user.userNick }">
+				<div id="nickCheck"></div>
 			</div>
 			<div class="frmGroup" style="margin-top: 10px; margin-bottom: 10px;">
 				<label for="gender" style="font-weight: bold; font-size: 20px;">성별</label>
@@ -387,17 +393,15 @@ function modifyAddr() {
 				<input type="text" id="age" name="userAge" value="${user.userAge }">
 			</div>
 			<div class="frmGroup">
-				<label for="address" style="font-weight: bold; font-size: 20px;">주소</label>
-				<input type="button" class="insideBtn" onclick="modifyAddr();" value="주소 수정" >
-				<input type="text" value="${user.userAddress }" readonly>
-				
+				<label for="address" style="font-weight: bold; font-size: 20px;">주소</label>&nbsp;&nbsp;
+				<input type="button" class="insideBtn" onclick="modifyAddress();" value="수정하기" ><br>
 			</div>
 			
 			<div class="frmGroup">
-				
+				<label for="phone" style="font-weight: bold; font-size: 20px;">전화번호</label>
 				<div id="phoneCheck"></div>
 				<input type="text" id="phone" class="inputPhone" name="userPhone" value="${user.userPhone }">
-				<input type="button" id="checkPhoneNumber" class="insideBtn" value="번호확인">
+				<input type="button" id="checkPhoneNumber" class="insideBtn" value="번호확인"><br>
 				<input type="text" id="certification" class="inputPhone" name="certification" placeholder="인증번호를 입력해주세요">
 				<input type="button" id="checkCerNumber" class="insideBtn" value="인증하기">
 			</div>

@@ -53,7 +53,7 @@ public class UserInfoDao {
 	}
 	
 	public int drawlUser(String userId) { // 회원 탈퇴
-		return sqlSession.delete("User.deleteUser", userId);
+		return sqlSession.update("User.deleteUser", userId);
 		
 	}
 	

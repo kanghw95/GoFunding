@@ -19,15 +19,16 @@ public class UserMyPageServiceImpl implements UserMyPageService{
 	@Autowired
 	private UserMyPageDao myDao;
 	
+	// 내가 참여한 펀딩
 	@Override
 	public List<MyFunding> list(String id) throws Exception {
-		return myDao.list(id); // 내가 참여한 펀딩 조회
+		return myDao.list(id);
 	}
 
 
 	@Override
 	public int cntMyFunding(String id) throws Exception {
-		return myDao.cntMyFunding(id); // 내가 참여한 펀딩 수
+		return myDao.cntMyFunding(id);
 	}
 
 
@@ -60,7 +61,8 @@ public class UserMyPageServiceImpl implements UserMyPageService{
 		return myDao.orderDetailStausChange(orDetail);
 	}
 
-
+	
+	// 내가 쓴 글 조회
 	@Override
 	public List<Board> freeBoardList(String id) throws Exception {
 		return myDao.freeBoardList(id);
@@ -117,6 +119,66 @@ public class UserMyPageServiceImpl implements UserMyPageService{
 	@Override
 	public List<Board> eBoardListMore(String id) throws Exception {
 		return myDao.eBoardListMore(id);
+	}
+
+	// 내가 쓴 댓글
+	@Override
+	public List<Board> freeBoardCmtList(String id) throws Exception {
+		return myDao.freeBoardCmtList(id);
+	}
+
+
+	@Override
+	public List<Board> freeBoardCmtListMore(String id) throws Exception {
+		return myDao.freeBoardCmtListMore(id);
+	}
+
+
+	@Override
+	public List<Board> rBoardCmtList(String id) throws Exception {
+		return myDao.rBoardCmtList(id);
+	}
+
+
+	@Override
+	public List<Board> rBoardCmtListMore(String id) throws Exception {
+		return myDao.rBoardCmtListMore(id);
+	}
+
+
+	@Override
+	public List<Board> qBoardCmtList(String id) throws Exception {
+		return myDao.qBoardCmtList(id);
+	}
+
+
+	@Override
+	public List<Board> qBoardCmtListMore(String id) throws Exception {
+		return myDao.qBoardCmtListMore(id);
+	}
+
+
+	@Override
+	public List<Board> sBoardCmtList(String id) throws Exception {
+		return myDao.sBoardCmtList(id);
+	}
+
+
+	@Override
+	public List<Board> sBoardCmtListMore(String id) throws Exception {
+		return myDao.sBoardCmtListMore(id);
+	}
+
+
+	@Override
+	public List<Board> eBoardCmtList(String id) throws Exception {
+		return myDao.eBoardCmtList(id);
+	}
+
+
+	@Override
+	public List<Board> eBoardCmtListMore(String id) throws Exception {
+		return myDao.eBoardCmtListMore(id);
 	}
 
 

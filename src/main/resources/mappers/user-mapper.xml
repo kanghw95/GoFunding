@@ -41,7 +41,6 @@
 		<result property="fundingfin" column="FUNDINGFIN" />
 	</resultMap>
 
-
 	<resultMap type="Board" id="freeBoard"> <!-- 자유 게시판 -->
 		<id property="boardNo" column="freeno"/>
 		<result property="boardTitle" column="freetitle"/>		
@@ -83,7 +82,58 @@
 		<result property="boardId" column="id"/>
 	</resultMap>
 	
+	<resultMap type="Comment" id="freeComment"> <!-- 자유 게시판 댓글 -->
+		<result property="cmtNo" column="FREECMTNO" />
+		<result property="cmtContent" column="FREECMTCONTENT" />
+		<result property="cmtDate" column="FREECMTDATE" />
+		<result property="cmtRef" column="FREECMTREF" />
+		<result property="cmtStep" column="FREECMTSTEP" />
+		<result property="cmtLevel" column="FREECMTLEVEL" />
+		<result property="boardNo" column="FREENO" />
+		<result property="id" column="ID" />
+	</resultMap>	
 
+	<resultMap type="Comment" id="reviewComment"> <!-- 후기 게시판 댓글 -->
+		<result property="cmtNo" column="REVIEWCMTNO" />
+		<result property="cmtContent" column="REVIEWCMTCONTENT" />
+		<result property="cmtDate" column="REVIEWCMTDATE" />
+		<result property="cmtRef" column="REVIEWCMTREF" />
+		<result property="cmtStep" column="REVIEWCMTSTEP" />
+		<result property="cmtLevel" column="REVIEWCMTLEVEL" />
+		<result property="id" column="ID" />
+	</resultMap>	
+	
+	<resultMap type="Comment" id="questionComment"> <!-- 질의응답 게시판 댓글 -->
+		<result property="cmtNo" column="QCMTNO" />
+		<result property="cmtContent" column="QCMTCONTENT" />
+		<result property="cmtDate" column="QCMTDATE" />
+		<result property="cmtRef" column="QCMTREF" />
+		<result property="cmtStep" column="QCMTSTEP" />
+		<result property="cmtLevel" column="QCMTLEVEL" />
+		<result property="boardNo" column="QBOARDNO" />
+		<result property="id" column="ID" />
+	</resultMap>	
+	
+	<resultMap type="Comment" id="shareComment"> <!-- 정보공유 게시판 댓글 -->
+		<result property="cmtNo" column="SHARECMTNO" />
+		<result property="cmtContent" column="SHARECMTCONTENT" />
+		<result property="cmtDate" column="SHARECMTDATE" />
+		<result property="cmtRef" column="SHARECMTREF" />
+		<result property="cmtStep" column="SHARECMTSTEP" />
+		<result property="cmtLevel" column="SHARECMTLEVEL" />
+		<result property="id" column="ID" />
+		<result property="boardNo" column="SHARENO" />
+	</resultMap>	
+	
+	<resultMap type="Comment" id="eventComment"> <!-- 이벤트 게시판 댓글 -->
+		<result property="cmtNo" column="EVENTCMTNO" />
+		<result property="cmtContent" column="EVENTCMTCONTENT" />
+		<result property="cmtDate" column="EVENTCMTDATE" />
+		<result property="cmtRef" column="EVENTCMTREF" />
+		<result property="cmtStep" column="EVENTCMTSTEP" />
+		<result property="cmtLevel" column="EVENTCMTLEVEL" />
+		<result property="id" column="ID" />
+	</resultMap>	
 
 		
 	<!-- 회원가입 -->
@@ -132,9 +182,9 @@
 	</select>
 	
 	<!-- 회원 탈퇴 -->
-	<delete id="deleteUser" parameterType="string">
-		DELETE FROM USERS WHERE ID = #{userId}	
-	</delete>
+	<update id="deleteUser" parameterType="string">
+		UPDATE USERS SET AUTHORITY = 4 WHERE ID = #{userId}
+	</update>
 	
 	<!-- 회원 정보 수정 -->
 	<update id="updateUser" parameterType="User">
@@ -228,6 +278,92 @@
 		ORDER BY EVENTNO DESC
 	</select>
 	
+
+
+	<!-- 내가 쓴 댓글 불러오기 : 자유게시판 -->
+	<select id="selectFreeCmt" parameterType="string" resultMap="freeComment">
+		SELECT ROWNUM, A.*
+		FROM (SELECT * FROM BULLETINECOMMENT
+		WHERE ID = #{id}
+		ORDER BY FREECMTNO DESC) A
+		WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
+	
+	<!-- 내가 쓴 댓글 불러오기 : 자유게시판 더보기-->
+	<select id="selectFreeCmtMore" parameterType="string" resultMap="freeComment">
+		SELECT * FROM BULLETINECOMMENT
+		WHERE ID = #{id}
+		ORDER BY FREECMTNO DESC
+	</select>
+	
+	<!-- 내가 쓴 댓글 불러오기 : 후기게시판 -->
+	<select id="selectReviewCmt" parameterType="string" resultMap="reviewComment">
+		SELECT ROWNUM, A.*
+		FROM (SELECT * FROM REVIEWCOMMENT
+		WHERE ID = #{id}
+		ORDER BY REVIEWCMTNO DESC) A
+		WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
+		
+	<!-- 내가 쓴 댓글 불러오기 : 후기게시판 더보기-->
+	<select id="selectReviewCmtMore" parameterType="string" resultMap="reviewComment">
+		SELECT * FROM REVIEWCOMMENT
+		WHERE ID = #{id}
+		ORDER BY REVIEWCMTNO DESC
+	</select>
+	
+	<!-- 내가 쓴 댓글 불러오기 : 질의응답게시판 -->
+	<select id="selectQuestionCmt" parameterType="string" resultMap="questionComment">
+		SELECT ROWNUM, A.*
+		FROM (SELECT * FROM QUESTIONCOMMENT
+		WHERE ID = #{id}
+		ORDER BY QCMTNO DESC) A
+		WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
+		
+	<!-- 내가 쓴 댓글 불러오기 : 질의응답게시판 더보기-->
+	<select id="selectQuestionCmtMore" parameterType="string" resultMap="questionComment">
+		SELECT * FROM QUESTIONCOMMENT
+		WHERE ID = #{id}
+		ORDER BY QCMTNO DESC
+	</select>
+		
+	<!-- 내가 쓴 댓글 불러오기 : 정보공유게시판 -->
+	<select id="selectShareCmt" parameterType="string" resultMap="shareComment">
+		SELECT ROWNUM, A.*
+		FROM (SELECT * FROM SHARECOMMENT
+		WHERE ID = #{id}
+		ORDER BY SHARECMTNO DESC) A
+		WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
+		
+	<!-- 내가 쓴 댓글 불러오기 : 정보공유게시판 더보기-->
+	<select id="selectShareCmtMore" parameterType="string" resultMap="shareComment">
+		SELECT * FROM SHARECOMMENT
+		WHERE ID = #{id}
+		ORDER BY SHARECMTNO DESC
+	</select>
+	
+	
+	<!-- 내가 쓴 댓글 불러오기 : 이벤트게시판 -->
+	<select id="selectEventCmt" parameterType="string" resultMap="eventComment">
+		SELECT ROWNUM, A.*
+		FROM (SELECT * FROM EVENTCOMMENT
+		WHERE ID = #{id}
+		ORDER BY EVENTCMTNO DESC) A
+		WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
+		
+	<!-- 내가 쓴 댓글 불러오기 : 이벤트게시판 더보기-->
+	<select id="selectEventCmtMore" parameterType="string" resultMap="eventComment">
+		SELECT * FROM EVENTCOMMENT
+		WHERE ID = #{id}
+		ORDER BY EVENTCMTNO DESC
+	</select>
+
+
+
+
 	
 	<!-- 내가 참여한 펀딩 전체 -->
 	<select id="myFunding" parameterType="string" resultType="myFunding">
