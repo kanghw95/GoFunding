@@ -15,5 +15,10 @@
 	<insert id="insertOrdersDetail">
 		INSERT INTO ORDERSDETAIL VALUES(SEQ_ORDERSDETAILNO.NEXTVAL, #{orderNo}, #{rewardNo}, #{rewardCount}, #{rewardPrice}, #{orderStatus})
 	</insert>
-		
+	
+	<!-- 주문 상세 상태 변경 -->
+	<update id="orderDetailStausChange">
+		UPDATE ORDERSDETAIL SET orderstatus = 5 WHERE ORDERNO = #{orderNo}
+	</update>
+
 </mapper>

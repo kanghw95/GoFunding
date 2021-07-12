@@ -338,7 +338,7 @@
 	    IMP.request_pay({ // param
 	        pg: "html5_inicis",
 	        pay_method: "card",
-	        merchant_uid: 'merchant_' + new Date().getTime(),
+	        merchant_uid: 'merchant_' + new Date().getFullYear()+(new Date().getMonth()+1)+ new Date().getDate() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds(),
 	        name: reward,
 	        amount: "${funding_pay_price+funding.deliverycharge}",
 	        buyer_email: "${sessionScope.user.userEmail}",
@@ -396,7 +396,7 @@
 	    IMP.request_pay({ // param
 	        pg: "html5_inicis",
 	        pay_method: "vbank",
-	        merchant_uid: 'merchant_' + new Date().getTime(),
+	        merchant_uid: 'merchant_' + new Date().getFullYear()+(new Date().getMonth()+1)+ new Date().getDate() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds(),
 	        name: reward,
 	        amount: "${funding_pay_price+funding.deliverycharge}",
 	        buyer_email: "${sessionScope.user.userEmail}",

@@ -30,22 +30,28 @@
 	
 	<!-- 펀딩별 참여인원 조회 -->
 	<select id="selectHistory" resultType="int" >
-		SELECT COUNT(DISTINCT ID) FROM ORDERS WHERE FUNDINGNO = #{fundingNo}
+		SELECT COUNT(DISTINCT ID) FROM ORDERS WHERE FUNDINGNO = #{fundingNo} AND (PAYMENTTYPE = 1 OR PAYMENTTYPE = 0)
 	</select>
 	
 	<!-- 펀딩별 참여내역 조회 -->
 	<select id="selectHistoryDetail" resultType="Map" >
-		SELECT ID,ORDERTOTALPRICE,ORDERDATE FROM ORDERS WHERE FUNDINGNO = #{fundingNo}
+		SELECT ID,ORDERTOTALPRICE,ORDERDATE FROM ORDERS WHERE FUNDINGNO = #{fundingNo} AND (PAYMENTTYPE = 1 OR PAYMENTTYPE = 0)
 	</select>
 	
 	<!-- 펀딩별 참여 중복검사  -->
 	<select id="selectOrderCheck" resultType="int" >
-		SELECT COUNT(ID) FROM ORDERS WHERE ID = #{id} AND FUNDINGNO = #{fundingNo}
+		SELECT COUNT(ID) FROM ORDERS WHERE ID = #{id} AND FUNDINGNO = #{fundingNo} AND (PAYMENTTYPE = 1 OR PAYMENTTYPE = 0)
 	</select>
 	
 	<!-- 주문번호 불러오기  -->
 	<select id="selectOrderNo" resultType="int" >
 		SELECT ORDERNO FROM ORDERS WHERE FUNDINGNO = #{fundingNo} AND ID = #{id}
 	</select>
+	
+	<!-- 주문상태 변경 -->
+	<update id="orderStausChange">
+		UPDATE ORDERS SET PAYMENTTYPE = 5 WHERE ORDERNO = #{orderNo}
+	</update>
+	
 	
 </mapper>
