@@ -2,17 +2,7 @@
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-</head>
-<body>
+
 		<ul id="tab_all" class="fundingContent_list">
 			<c:if test="${fundinglist eq null}">
 				<tr>
@@ -23,7 +13,15 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<li class="fundingContent_itemAll">
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+							<form action="funding/detail" id="detail${vo.fundingno}" method="get">
+							<a href="#" onclick="detail${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -54,6 +52,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 					</li>
 					
 				</c:forEach>
@@ -72,7 +71,15 @@ pageEncoding="UTF-8"%>
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '일자리 창출'}">
 						<li class="fundingContent_item1" >
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+							<form action="funding/detail" id="detail1${vo.fundingno}" method="get">
+							<a href="#" onclick="detail1${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -103,6 +110,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -121,7 +129,15 @@ pageEncoding="UTF-8"%>
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '공정 무역'}">
 						<li class="fundingContent_item2" >
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+							<form action="funding/detail" id="detail2${vo.fundingno}" method="get">
+							<a href="#" onclick="detail2${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -152,6 +168,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -171,7 +188,15 @@ pageEncoding="UTF-8"%>
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '친환경'}">
 						<li class="fundingContent_item3" >
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+							<form action="funding/detail" id="detail3${vo.fundingno}" method="get">
+							<a href="#" onclick="detail3${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -202,6 +227,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -221,7 +247,15 @@ pageEncoding="UTF-8"%>
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '기부'}">
 						<li class="fundingContent_item4" >
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+						<form action="funding/detail" id="detail4${vo.fundingno}" method="get">
+							<a href="#" onclick="detail4${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -242,7 +276,7 @@ pageEncoding="UTF-8"%>
 										
 										<c:choose>
 											<c:when test="${(endDate-strDate) gt 0 }">
-											<span class="fundingCard_date">${endDate - strDate } 일 남음</span>
+												<span class="fundingCard_date">${endDate - strDate } 일 남음</span>
 											</c:when>
 											<c:otherwise>
 											<span class="fundingCard_date">종료</span>
@@ -252,6 +286,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -271,7 +306,15 @@ pageEncoding="UTF-8"%>
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '작은 가게'}">
 						<li class="fundingContent_item5" >
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+						<form action="funding/detail" id="detail5${vo.fundingno}" method="get">
+							<a href="#" onclick="detail5${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -302,6 +345,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -321,7 +365,15 @@ pageEncoding="UTF-8"%>
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '미디어'}">
 						<li class="fundingContent_item6" >
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+						<form action="funding/detail" id="detail6${vo.fundingno}" method="get">
+							<a href="#" onclick="detail6${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -352,6 +404,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -370,7 +423,15 @@ pageEncoding="UTF-8"%>
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '창작자'}">
 						<li class="fundingContent_item7" >
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+						<form action="funding/detail" id="detail7${vo.fundingno}" method="get">
+							<a href="#" onclick="detail7${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -401,16 +462,15 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 						</li>
 					</c:if>
 				</c:forEach>
 			</c:if>
 			
-
 		</ul>
 		
 				
-</body>
 <script>
 // 더 보기 버튼
 $(".fundingContent_itemAll").slice(0, 12).show(); 

@@ -40,7 +40,7 @@
 			</if>
 			
 			<if test="serchOption.equals('종료임박 순')">
-				SELECT * FROM FUNDING WHERE FUNDINGSTATE = 1 order by FUNDINGFIN asc
+				SELECT * FROM FUNDING  order by FUNDINGFIN asc
             </if>
 	</select>
 	

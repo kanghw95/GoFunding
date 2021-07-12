@@ -12,8 +12,82 @@ pageEncoding="UTF-8"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <link href="<%=request.getContextPath() %>/resources/css/funding/fundinglist.css" rel="stylesheet" type="text/css" />
+<style>
+.swal2-title {
+    position: relative;
+    max-width: 100%;
+    margin: 0 0 .4em;
+    padding: 0;
+    color: #595959;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: none;
+    word-wrap: break-word;
+}
+.swal2-actions {
+    display: flex;
+    z-index: 1;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 1.25em auto 0;
+    line-height: 10px;
+}
+.swal2-popup {
+    display: none;
+    position: relative;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: center;
+    width: 50em;
+    max-width: 100%;
+    padding: 1.25em;
+    border: none;
+    border-radius: .3125em;
+    background: #fff;
+    font-size: 1rem;
+}
 
+.swal2-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 0.8em;
+}
+
+.swal2-styled {
+    margin: 0.3125em;
+    padding: 0.625em 2em;
+    box-shadow: none;
+    font-weight: 500;
+}
+
+.swal2-styled.swal2-confirm {
+    border: 0;
+    border-radius: .25em;
+    background: initial;
+    background-color: #3085d6;
+    color: #fff;
+    font-size: 20px;
+}
+
+.swal2-content {
+    z-index: 1;
+    justify-content: center;
+    margin: 0;
+    padding: 0 1.6em;
+    color: #545454;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+    word-wrap: break-word;
+}
+</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
@@ -157,7 +231,7 @@ pageEncoding="UTF-8"%>
 									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
 								</c:if>
 								<c:if test="${sessionScope.user.userId eq null}">
-									<input type="hidden" name="Id" value="admin">
+									<input type="hidden" name="Id" value="">
 								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
@@ -208,7 +282,15 @@ pageEncoding="UTF-8"%>
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '일자리 창출'}">
 						<li class="fundingContent_item1" >
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+							<form action="funding/detail" id="detail1${vo.fundingno}" method="get">
+							<a href="#" onclick="detail1${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -239,6 +321,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -257,7 +340,15 @@ pageEncoding="UTF-8"%>
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '공정 무역'}">
 						<li class="fundingContent_item2" >
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+							<form action="funding/detail" id="detail2${vo.fundingno}" method="get">
+							<a href="#" onclick="detail2${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -288,6 +379,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -307,7 +399,15 @@ pageEncoding="UTF-8"%>
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '친환경'}">
 						<li class="fundingContent_item3" >
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+							<form action="funding/detail" id="detail3${vo.fundingno}" method="get">
+							<a href="#" onclick="detail3${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -338,6 +438,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -357,7 +458,15 @@ pageEncoding="UTF-8"%>
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '기부'}">
 						<li class="fundingContent_item4" >
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+						<form action="funding/detail" id="detail4${vo.fundingno}" method="get">
+							<a href="#" onclick="detail4${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -388,6 +497,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -407,7 +517,15 @@ pageEncoding="UTF-8"%>
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '작은 가게'}">
 						<li class="fundingContent_item5" >
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+						<form action="funding/detail" id="detail5${vo.fundingno}" method="get">
+							<a href="#" onclick="detail5${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -438,6 +556,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -457,7 +576,15 @@ pageEncoding="UTF-8"%>
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '미디어'}">
 						<li class="fundingContent_item6" >
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+						<form action="funding/detail" id="detail6${vo.fundingno}" method="get">
+							<a href="#" onclick="detail6${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -488,6 +615,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -506,7 +634,15 @@ pageEncoding="UTF-8"%>
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '창작자'}">
 						<li class="fundingContent_item7" >
-							<a href="funding/detail?no=${vo.fundingno}" class="fundingCard_wrap">
+						<form action="funding/detail" id="detail7${vo.fundingno}" method="get">
+							<a href="#" onclick="detail7${vo.fundingno}.submit()" class="fundingCard_wrap">
+								<input type="hidden" name="no" value="${vo.fundingno}">
+								<c:if test="${sessionScope.user.userId ne null}">
+									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
+								</c:if>
+								<c:if test="${sessionScope.user.userId eq null}">
+									<input type="hidden" name="Id" value="">
+								</c:if>
 								<div class="FundingCard_img_wrap">
 									<img loading="lazy" src="resources/fundingimg/${vo.fundingtitle}.jpg" alt="${vo.fundingtitle}" width="267" height="200" class="fundingCard_img">
 								</div>
@@ -537,6 +673,7 @@ pageEncoding="UTF-8"%>
 										</div>
 									</div>
 							</a>
+							</form>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -579,8 +716,6 @@ pageEncoding="UTF-8"%>
 						
 		        }
 		}
-		
-		
 
 		//종류별 보기 탭
 		var listbtn = document.getElementById("SelectArea_button");
@@ -844,20 +979,23 @@ pageEncoding="UTF-8"%>
 			$(".fundingContent_itemAll").slice(12).hide(); 
 	});
 		
-		// 더 보기 버튼
-	    $(".fundingContent_itemAll").slice(0, 12).show(); 
+		//더 보기 버튼
+		$(".fundingContent_itemAll").slice(0, 12).show(); 
 
 		<c:forEach var = "i" begin = "1" end = "7">
 			$(".fundingContent_item${i}").slice(0, 12).show(); 
 		</c:forEach>
-		
-		
+
+
 		    $("#load").click(function(e){
 			    <c:forEach var = "i" begin = "1" end = "7">
 		    	if($("input:radio[id='funding_home_tab_${i}']").prop("checked") == true){
 			    	console.log($(".fundingContent_item${i}:hidden").length)
 			        if($(".fundingContent_item${i}:hidden").length == 0){ 
-			            alert("더이상 펀딩이 존재하지 않습니다."); 
+			             Swal.fire({
+				           	  icon: 'question',
+				           	  text: '더이상 펀딩이 존재하지 않습니다.',
+				           	})
 			        }
 			        $(".fundingContent_item${i}:hidden").slice(0, 12).show(); 
 		    	}
@@ -867,13 +1005,14 @@ pageEncoding="UTF-8"%>
 		    	if($("input:radio[id='funding_home_tab_all']").prop("checked") == true){
 			    	console.log($(".fundingContent_itemAll:hidden").length)
 		    	if($(".fundingContent_itemAll:hidden").length == 0){ 
-		            alert("더이상 펀딩이 존재하지 않습니다."); 
+		             Swal.fire({
+			           	  icon: 'question',
+			           	  text: '더이상 펀딩이 존재하지 않습니다.',
+			           	})
 		        }
 		        $(".fundingContent_itemAll:hidden").slice(0, 12).show();
 		    	}
 		    });
-		
-
 
 </script>
 </div>

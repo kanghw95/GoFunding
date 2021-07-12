@@ -14,6 +14,8 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link href="<%=request.getContextPath() %>/resources/css/sweetalert2.css" rel="stylesheet" type="text/css" />
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 	<div class="wrapper">
@@ -364,7 +366,11 @@
 			             msg += '카드 승인번호 : ' + rsp.apply_num;
 			             console.log(data);
 			             console.log(msg);
-			           	 alert("결제 완료");
+			           	Swal.fire({
+			           	  icon: 'success',
+			           	  title: '결제 성공!',
+			           	  text: '주문 결과 페이지로 이동합니다',
+			           	})
 		           	 	
 			           	paycat.value = "카드 간편";
 			           	message.value = input_message.value;
@@ -380,13 +386,21 @@
 			           	payresult.submit();
 			           	
 		        	} else {
-		        		alert("결제 실패 ");
+			           	Swal.fire({
+				           	  icon: 'error',
+				           	  title: '결제 실패!',
+				           	  text: '결제 과정에서 오류가 발생했습니다.',
+				           	})
 		        	}
 		           	
 		           })
 		          }else{
 			          console.log(rsp.error_msg);
-	          		  alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+			           	Swal.fire({
+				           	  icon: 'error',
+				           	  title: '결제 실패!',
+				           	  text: '결제 과정에서 오류가 발생했습니다.' +  rsp.error_msg,
+				           	})
 	          }
 		     });
 	  }
@@ -422,7 +436,11 @@
 		             msg += '카드 승인번호 : ' + rsp.apply_num;
 		             console.log(data);
 		             console.log(msg);
-		           	 alert("결제 완료");
+		             Swal.fire({
+			           	  icon: 'success',
+			           	  title: '결제 성공!',
+			           	  text: '주문 결과 페이지로 이동합니다',
+			           	})
 		           	 
 		           	paycat.value = "계좌 이체";
 		           	message.value = input_message.value;
@@ -439,13 +457,21 @@
 		           	payresult.submit();
 		           	
 		        	} else {
-		        		alert("결제 실패");
+			           	Swal.fire({
+				           	  icon: 'error',
+				           	  title: '결제 실패!',
+				           	  text: '결제 과정에서 오류가 발생했습니다.',
+				           	})
 		        	}
 		           	
 		           })
 		          }else{
 			          console.log(rsp.error_msg);
-	          		  alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+			           	Swal.fire({
+				           	  icon: 'error',
+				           	  title: '결제 실패!',
+				           	  text: '결제 과정에서 오류가 발생했습니다.' +  rsp.error_msg,
+				           	})
 	          }
 		     });
 	  }
@@ -456,7 +482,10 @@
 		for(var i = 1; i<4; i++){
 			var check_i = document.getElementById("agree_terms_"+i); 
 				if(check_i.checked != true){
-					alert("필수 약관에 동의해주세요!");
+		           	Swal.fire({
+			           	  icon: 'warning',
+			           	  text: '필수 약관에 동의해주세요!',
+			           	})
 					return;
 				}
 			}
@@ -471,24 +500,36 @@
 		</c:forEach>
 		if(address_check == 1){
 			if(input_name.value == '' || input_name.value == null){
-				alert("이름을 입력해주세요")
+				Swal.fire({
+			          icon: 'info',
+			          text: '이름을 입력해주세요!',
+			         })
 				$("#input_name").focus();
 				return false;
 			}
 			
 			if(input_tel_head.value == '' || input_tel_head.value == null){
-				alert("번호를 입력해주세요")
+				Swal.fire({
+			          icon: 'info',
+			          text: '번호를 입력해주세요!',
+			         })
 				$("#input_tel_head").focus();
 				return false;
 			}
 			if (!phoneReg.test(input_tel_head.value)) {
-				alert("전화번호의 형식이 올바르지 않습니다");
+				Swal.fire({
+			          icon: 'warning',
+			          text: '전화번호의 형식이 올바르지 않습니다!',
+			         })
 				$("#input_tel_head").focus();
 				return false;
 			}
 			
 			if(zipcode.value == '' || zipcode.value == null){
-				alert("주소를 입력해주세요")
+				Swal.fire({
+			          icon: 'info',
+			          text: '주소를 입력해주세요!',
+			         })
 				$("#input_zipcode").focus();
 				return false;
 			}
@@ -502,7 +543,10 @@
 		for(var i = 1; i<4; i++){
 			var check_i = document.getElementById("agree_terms_"+i); 
 				if(check_i.checked != true){
-					alert("필수 약관에 동의해주세요!");
+		           	Swal.fire({
+			           	  icon: 'warning',
+			           	  text: '필수 약관에 동의해주세요!',
+			           	})
 					return;
 				}
 			}
@@ -519,25 +563,36 @@
 		
 		if(address_check == 1){
 			if(input_name.value == '' || input_name.value == null){
-				alert("이름을 입력해주세요")
+				Swal.fire({
+			          icon: 'info',
+			          text: '이름을 입력해주세요!',
+			         })
 				$("#input_name").focus();
 				return false;
 			}
 			
 			if(input_tel_head.value == '' || input_tel_head.value == null){
-				alert("번호를 입력해주세요")
+				Swal.fire({
+			          icon: 'info',
+			          text: '번호를 입력해주세요!',
+			         })
 				$("#input_tel_head").focus();
 				return false;
 			}
-			
 			if (!phoneReg.test(input_tel_head.value)) {
-				alert("전화번호의 형식이 올바르지 않습니다");
+				Swal.fire({
+			          icon: 'warning',
+			          text: '전화번호의 형식이 올바르지 않습니다!',
+			         })
 				$("#input_tel_head").focus();
 				return false;
 			}
 			
 			if(zipcode.value == '' || zipcode.value == null){
-				alert("주소를 입력해주세요")
+				Swal.fire({
+			          icon: 'info',
+			          text: '주소를 입력해주세요!',
+			         })
 				$("#input_zipcode").focus();
 				return false;
 			}

@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -8,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>상세페이지</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_top/fundingdetail_cover.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_top/fundingdetail_sumary.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_top/fundingdetail_profile.css" rel="stylesheet" type="text/css" />
@@ -15,7 +16,7 @@
 <link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_tap.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_content.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_reword.css" rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link href="<%=request.getContextPath() %>/resources/css/sweetalert2.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
    .modal_wrap{
         display: none;
@@ -36,7 +37,7 @@
         content: "";
         width: 100%;
         height: 100%;
-        background-color:rgba(0, 0,0, 0.5);
+        background-color:rgba(0, 0,0, 0);
         top:0;
         left: 0;
         z-index: 1;
@@ -54,8 +55,8 @@
 
 </head>
 
-
 <body>
+
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 	<fmt:parseDate value="${funding.fundingfin}" var="paymentday" pattern="yyyy-MM-dd HH:mm:ss"/> 
 	<fmt:formatDate value="${funding.deliverydate}" type="DATE" var="deliverydate" pattern="yyyy년 MM월 dd일"/> 
@@ -571,7 +572,8 @@
 		cheer_btn1.addEventListener("click",function(){
 			
 			if(funtotalprice == 0 || funtotalnumber == 0){
-				alert("라워드를 하나 이상 선택해주세요!");
+				Swal.fire('라워드를 하나 이상 선택해주세요!')
+				
 				return;
 			}
 			
@@ -769,7 +771,7 @@
 			console.log("funtotalprice : " + funtotalprice);
 			
 			if(funtotalprice == 0 || funtotalnumber == 0){
-				alert("라워드를 선택해주세요!");
+				Swal.fire('라워드를 선택해주세요!')
 				return;
 			}
 			$.ajax({
@@ -794,7 +796,7 @@
 				    document.querySelector('#noagree').addEventListener('click', offClick);
 				    
 					} else {
-						alert("중복 주문은 불가합니다. 먼저 주문하신 건을 취소해주세요")
+						Swal.fire('중복 주문은 불가합니다. 먼저 주문하신 건을 취소해주세요')
 						return;
 					}
 				},
@@ -805,7 +807,7 @@
 				})
 
 		} else if(sessionUserId == ''){
-			alert("로그인 후 참여가 가능합니다.");
+			Swal.fire('로그인 후 참여가 가능합니다.')
 			return;
 		}
 		
@@ -827,7 +829,7 @@
 			console.log("좋아요 버튼 작동");
 			
 		if (sessionUserId == 'null' || sessionUserId == '') {
-			alert("로그인 후 좋아요가 가능합니다");
+			Swal.fire('로그인 후 좋아요가 가능합니다')
 			return;
 		}
 		
