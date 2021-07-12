@@ -142,8 +142,6 @@ function attachSignin(element) {
 	</form>
 	<c:if test="${!empty user}">
 		<div class="login">
-			<c:if test="${user.userId eq 'admin'}">
-			<a href="<%=request.getContextPath() %>/message/msgUserList">관리자-회원메세지</a></c:if>
 		</div>
 	</c:if>
 	</div>

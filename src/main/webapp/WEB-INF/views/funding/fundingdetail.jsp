@@ -810,8 +810,8 @@ function makerMsg(event){ //문의하기 클릭 시 메이커와 대화창으로
 	} else {
 	var maker = $("#maker").text();
 	console.log(maker);
-	var pop = window.open("about:blank","content");
-	pop.location.href="http://localhost:8090/sprout/message/msgRead1?maker="+maker;		
+	var pop = window.open("about:blank","content","width=518, height=600");
+	pop.location.href="<%=request.getContextPath() %>/message/msgRead1?maker="+maker;		
 	}
 }
 	

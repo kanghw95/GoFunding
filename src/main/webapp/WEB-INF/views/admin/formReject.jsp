@@ -47,6 +47,7 @@
 		</tr>
 	</table>
 </div>
+<div class="btnDiv"><button type="button" id="mainBtn">메인으로</button></div>
 </div>
 </div>
 </div>
@@ -56,6 +57,7 @@
 		console.log(applyNo);
 		window.location.href="http://localhost:8090/sprout/rejectFormDetail?applyNo="+applyNo;
 	});
+	
 	$("#fundingCategory").change(function(){
 		var fundingCategory=$("#fundingCategory option:selected").val();
 		console.log(fundingCategory);
@@ -63,6 +65,10 @@
 		$("#frm").attr("method","get");
 		$("#frm").submit();
 	});
+
+	$("#mainBtn").click(function(){
+		window.location.href="<%=request.getContextPath() %>/adminMain";
+	})	
 </script>
 </body>
 </html>

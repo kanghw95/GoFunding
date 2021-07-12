@@ -25,8 +25,8 @@ function userAdminMsg() {
 	if(receiverId==""){
 		alert('로그인해주세요.');
 	} else if(receiverId!="") {
-	var pop = window.open("about:blank","content");
-		pop.location.href="http://localhost:8090/sprout/message/msgAdminRead?receiverId=admin";
+	var pop = window.open("about:blank","content","width=518, height=500");
+		pop.location.href="<%=request.getContextPath() %>/message/msgAdminRead?receiverId=admin";
 }
 };
 </script>	

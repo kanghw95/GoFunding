@@ -47,6 +47,7 @@
 		</tr>
 	</table>
 </div>
+<div class="btnDiv"><button type="button" id="mainBtn">메인으로</button></div>
 </div>
 </div>
 </div>
@@ -63,6 +64,11 @@ $("#fundingCategory").change(function(){
 	$("#frm").attr("method","get");
 	$("#frm").submit();
 });
+
+$("#mainBtn").click(function(){
+	window.location.href="<%=request.getContextPath() %>/adminMain";
+})	
+$("#")
 </script>
 </body>
 </html>

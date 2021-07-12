@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/header.jsp"/>
+<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"/>
 	<div class="wrapper">
 	<div id="outer">
 	<div class="tabs">
@@ -30,10 +30,9 @@
 	<script>
     $("body").on("click", "[id^=msgId]", function(event) {
                 var receiverId = $(this).text();
-		    	var pop = window.open("about:blank","content","width=500,height=800");
-       			pop.location.href="http://localhost:8090/sprout/message/msgUserRead?receiverId="+receiverId;
+		    	var pop = window.open("about:blank","content","width=518, height=600");
+       			pop.location.href="<%=request.getContextPath() %>/message/msgUserRead?receiverId="+receiverId;
             });
 </script>
-<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

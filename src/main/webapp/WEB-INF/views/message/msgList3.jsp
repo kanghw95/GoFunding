@@ -30,8 +30,8 @@
 	<script>
     $("body").on("click", "[id^=msgId]", function(event) {
                 var receiverId = $(this).text();
-		    	var pop = window.open("about:blank","content");
-       			pop.location.href="http://localhost:8090/sprout/message/msgRead3?receiverId="+receiverId;
+		    	var pop = window.open("about:blank","content","width=518, height=600");
+       			pop.location.href="<%=request.getContextPath() %>/message/msgRead3?receiverId="+receiverId;
             });
 </script>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>

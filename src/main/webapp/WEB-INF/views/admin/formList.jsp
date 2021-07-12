@@ -55,7 +55,7 @@
 $("[id^='formTitle']").click(function(event){
 	var applyNo=$(this).children().next().next().val();
 	console.log(applyNo);
-	window.location.href="http://localhost:8090/sprout/formDetail?applyNo="+applyNo;
+	window.location.href="<%=request.getContextPath() %>/formDetail?applyNo="+applyNo;
 });
 
 $("#fundingCategory").change(function(){
@@ -65,6 +65,10 @@ $("#fundingCategory").change(function(){
 	$("#frm").attr("method","get");
 	$("#frm").submit();
 });
+
+$("#mainBtn").click(function(){
+	window.location.href="<%=request.getContextPath() %>/adminMain";
+})
 </script>
 </body>
 </html>

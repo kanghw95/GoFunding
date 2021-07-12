@@ -37,7 +37,7 @@
                 var receiverId = $(this).next().children().val();
                 console.log(receiverId);
 		    	var pop = window.open("about:blank","content");
-       			pop.location.href="http://localhost:8090/sprout/message/msgRead1?receiverId="+receiverId;
+       			pop.location.href="<%=request.getContextPath() %>/message/msgRead1?receiverId="+receiverId;
             });
 </script>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>

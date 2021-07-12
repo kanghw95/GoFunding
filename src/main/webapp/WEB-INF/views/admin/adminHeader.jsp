@@ -46,9 +46,9 @@ $(document).ready(function(){
 						<div class="nav-column">
 							<h3 class="column-title">펀딩 관리</h3>
 							<ul>
-								<li><a href="#">펀딩신청내역</a></li>
-								<li><a href="#">펀딩반려내역</a></li>
-								<li><a href="#">펀딩내역</a></li>
+								<li><a href="<%=request.getContextPath()%>/formList">펀딩신청내역</a></li>
+								<li><a href="<%=request.getContextPath()%>/formReject">펀딩반려내역</a></li>
+								<li><a href="<%=request.getContextPath()%>/fundingList">펀딩내역</a></li>
 							</ul>
 						</div>
 						<div class="nav-column">
@@ -82,9 +82,9 @@ $(document).ready(function(){
 					<a href="#" class="subTitle">펀딩 관리</a>
 					<div class="subMenu1">
 						<ul>
-							<li><a href="#">펀딩신청내역</a></li>
-							<li><a href="#">펀딩반려내역</a></li>
-							<li><a href="#">펀딩내역</a></li>
+							<li><a href="<%=request.getContextPath()%>/formList">펀딩신청내역</a></li>
+							<li><a href="<%=request.getContextPath()%>/formReject">펀딩반려내역</a></li>
+							<li><a href="<%=request.getContextPath()%>/fundingList">펀딩내역</a></li>
 						</ul>
 					</div>	
 				</li>
@@ -118,6 +118,7 @@ $(document).ready(function(){
 						<ul>
 							<li><a href="<%=request.getContextPath()%>/userlist">회원조회</a></li>
 							<li><a href="<%=request.getContextPath()%>/report">회원신고내역</a></li>
+							<li><a href="<%=request.getContextPath()%>/message/msgUserList">회원메시지</a></li>
 						</ul>
 					</div>
 				</li>	
