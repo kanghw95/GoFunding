@@ -70,9 +70,8 @@ public class UserLoginCtrl {
 			String pw2=loginUser.getUserPwd();
 			String authority1 = String.valueOf(user.getAuthority());
 			String authority2 = String.valueOf(loginUser.getAuthority());
-			String num = "3";
-			System.out.println("1 : " + authority1);
-			System.out.println("2 : " + authority2);
+			String stop = "3";
+			String drop = "4";
 			
 			if(id2.equals("")&&pw2.equals("")) {
 				wr.println("<script type='text/javascript'>"); 
@@ -81,18 +80,25 @@ public class UserLoginCtrl {
 				wr.flush();
 			} else if(!id2.equals("")&&!pw2.equals("")) {
 				if(id1.equals(id2)&&pw1.equals(pw2)) {	
-					if (!authority2.equals(num)) {
+					if (authority2.equals(stop)) {
+						wr.println("<script type='text/javascript'>"); 
+						wr.println("alert('정지된 회원입니다.'); window.location = document.referrer;"); 
+						wr.println("</script>");
+						wr.flush();
+						System.out.println("정지 회원 로그인");
+					} else if (authority2.equals(drop)) {
+						wr.println("<script type='text/javascript'>"); 
+						wr.println("alert('아이디와 비밀번호를 확인해주세요.'); window.location = document.referrer;"); 
+						wr.println("</script>");
+						wr.flush();
+						System.out.println("탈퇴 회원 로그인");
+					} else {
 						session.setAttribute("user", loginUser);
 						wr.println("<script type='text/javascript'>"); 
 						wr.println("window.location.href = '/sprout/funselect';"); 
 						wr.println("</script>");
 						wr.flush();
-					} else {
-						wr.println("<script type='text/javascript'>"); 
-						wr.println("alert('정지된 회원입니다.'); window.location = document.referrer;"); 
-						wr.println("</script>");
-						wr.flush();
-						System.out.println("여기로 들어온건가?");
+						System.out.println("정상 로그인");
 					}
 				} else {
 					wr.println("<script type='text/javascript'>"); 

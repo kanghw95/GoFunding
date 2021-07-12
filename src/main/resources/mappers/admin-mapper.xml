@@ -177,9 +177,9 @@
 	</select>
 	
 	<!-- 사용자 삭제 -->
-	<delete id="deleteUser">
-		DELETE FROM USERS WHERE USERNO = #{userNo}
-	</delete>
+	<update id="deleteUser">
+		UPDATE USERS SET AUTHORITY = 4 WHERE USERNO = #{userNo}
+	</update>
 	
 	<!-- 페이징 + 자유 게시판 조회 -->
 	<select id="selectFree" resultType="arraylist" resultMap="freeBoard">

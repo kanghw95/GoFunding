@@ -50,7 +50,7 @@ public class AdminDao {
 	}
 
 	public void userStop(String userNo) { // 회원 권한 박탈
-		sqlSession.delete("Admin.deleteUser", userNo);
+		sqlSession.update("Admin.deleteUser", userNo);
 	}
 
 	public List<Board> freeBoardList(Criteria cri) throws Exception { // 자유 게시판 조회
