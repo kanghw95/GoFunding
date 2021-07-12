@@ -13,18 +13,17 @@
 		<result column="CMT" property="cmt"/>		
 	</resultMap>
 	
-	<!-- 자유게시판 신고 -->
-	<resultMap type="BoardReport" id="boardreport">
-		<id column="BREPORTNO" property="bReportNo"/>
-		<result column="BREPORTID" property="bReportId"/>
-		<result column="BREPORTTYPE" property="bReportType"/>
-		<result column="BREPORTWR" property="bReportWr"/>
-		<result column="BREPORTTITLE" property="bReportTitle"/>
-		<result column="BREPORTCONTENT" property="bReportContent"/>
-		<result column="BREPORTADD" property="bReportAdd"/>
-		<result column="BREPORTSTATE" property="bReportState"/>
-		<result column="ID" property="id"/>
-	</resultMap>	
+	<!-- 리뷰게시판 -->
+	<resultMap type="Board" id="reviewBoard">
+		<id column="REVIEWNO" property="boardNo" />
+		<result column="REVIEWTITLE" property="boardTitle" />
+		<result column="REVIEWCONTENT" property="boardContent" />
+		<result column="REVIEWDATE" property="boardDate" />
+		<result column="REVIEWCNT" property="boardCnt" />
+		<result column="ID" property="boardId" />
+		<result column="CNT" property="likecnt"/>
+		<result column="CMT" property="cmt"/>		
+	</resultMap>
 	
 	<!-- 게시글 목록 -->
 	<select id="listCount" resultType="int">
@@ -93,17 +92,19 @@
 		SELECT count(*) FROM BULLETINLIKE WHERE FREENO = #{boardNo}
 	</select>
 		
-	<!-- 게시글 신고 -->
-	<insert id="ReportSend" parameterType="boardreport">
-		INSERT INTO BOARDREPORT VALUES(SEQ_BOARDREPORT.NEXTVAL, <!-- #{bReportId} --> #{boardId}, #{bReportType}, #{bReportWr}, #{bReportTitle}, #{bReportContent}, #{bReportAdd}, #{bReportState}, #{id})
-	</insert>
-
-
-
-
-	
-	
-	
+<!-- 자유 게시판 라디오박스 조회 
+	<select id="selectFRadio"  resultMap="resultBoard">
+		SELECT * FROM BULLETINEBOARD 
+		<choose>
+			<when test="date != null">
+				ORDER BY FREEDATE DESC
+			</when>
+			<when test="cnt != null">
+				ORDER BY FREECNT DESC
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select> -->
 
 	<!-- 검색한 게시글 조회 -->
 	<select id="searchList" parameterType="string"
@@ -113,4 +114,97 @@
 		#{keyword} ||'%'
 		ORDER BY REGDATE DESC
 	</select>
+	
+	
+	
+<!-- 후기게시판 
+	게시글 목록
+	<select id="reviewCount" resultType="int">
+	    SELECT count(*) FROM REVIEWBOARD 
+	</select>
+	
+	게시글 상세보기
+	<select id="reviewDetail" resultMap="reviewBoard" parameterType="int">
+		SELECT * FROM REVIEWBOARD WHERE REVIEWNO  = #{boardNo}
+	</select>
+
+	게시글 등록
+	<insert id="reviewInsertBoard" parameterType="Board" flushCache="true" statementType="PREPARED">
+		INSERT INTO REVIEWBOARD  (REVIEWNO  , REVIEWTITLE , REVIEWCONTENT , REVIEWDATE , REVIEWCNT , ID)
+		VALUES(REVIEWBOARD.NEXTVAL, #{boardTitle}, #{boardContent}, SYSDATE, 0, #{boardId})
+	</insert>
+
+	게시글 삭제
+	<delete id="reviewDeleteBoard" parameterType="int" flushCache="true" statementType="PREPARED">
+		DELETE FROM REVIEWBOARD WHERE REVIEWNO = #{boardNo}
+	</delete>
+
+	게시글 수정
+	<update id="reviewUpdateBoard" parameterType="Board" flushCache="true" statementType="PREPARED">
+		UPDATE REVIEWBOARD SET REVIEWTITLE = #{boardTitle}, REVIEWCONTENT =#{boardContent} WHERE REVIEWNO = #{boardNo}
+	</update>
+
+	페이지당 게시글 조회 / 번호정렬
+	<select id="reviewSelectList" resultMap="reviewBoard">
+    SELECT B.*,C.CNT, D.CMT
+	FROM REVIEWBOARD B
+	LEFT OUTER JOIN(SELECT count(*) as CNT,REVIEWNO FROM REVIEWLIKE  group by REVIEWNO) C 
+    ON B.REVIEWNO = C.REVIEWNO
+	LEFT OUTER JOIN(SELECT COUNT(*) as CMT ,REVIEWNO FROM REVIEWCOMMENT  group by REVIEWNO) D 
+    ON B.REVIEWNO = D.REVIEWNO
+	ORDER BY B.REVIEWNO DESC
+	</select>
+	
+	글 조회수 증가
+  	<update id="reviewAddReadCount" parameterType="int" flushCache="true" statementType="PREPARED">
+  		UPDATE REVIEWBOARD SET FREECNT = FREECNT+1 WHERE REVIEWNO = #{boardNo}
+  	</update>
+	
+	게시글 단일 조회
+	<select id="reviewSelectOne" parameterType="int" resultMap="resultBoard">
+		SELECT * FROM REVIEWBOARD WHERE REVIEWNO = #{boardNo}
+	</select>
+	
+	게시글 추천 여부 검사
+	<select id="reviewChecklike" parameterType="hashmap" flushCache="true" statementType="PREPARED" resultType="int">
+		SELECT count(*) FROM REVIEWBOARD WHERE REVIEWNO = #{FREENO} and ID = #{ID}
+	</select>
+	
+	게시글 추천
+	<insert id="reviewInsertLike" parameterType="hashmap" flushCache="true" statementType="PREPARED" >
+		INSERT INTO REVIEWBOARD VALUES(#{REVIEWNO}, #{ID})
+	</insert>
+	
+	게시글 추천 취소
+	<delete id="reviewDeleteLike" parameterType="hashmap" flushCache="true" statementType="PREPARED">
+		DELETE FROM REVIEWBOARD WHERE REVIEWNO = #{FREENO} and ID = #{ID}
+	</delete>
+	
+	게시글 추천수	
+	<select id="reviewLikecnt" parameterType="int" flushCache="true" statementType="PREPARED" resultType="int">
+		SELECT count(*) FROM REVIEWBOARD WHERE REVIEWNO = #{boardNo}
+	</select>
+		
+자유 게시판 라디오박스 조회 
+	<select id="selectFRadio"  resultMap="resultBoard">
+		SELECT * FROM BULLETINEBOARD 
+		<choose>
+			<when test="date != null">
+				ORDER BY FREEDATE DESC
+			</when>
+			<when test="cnt != null">
+				ORDER BY FREECNT DESC
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+
+	검색한 게시글 조회
+	<select id="reviewSearchList" parameterType="string"
+		resultType="arraylist" resultMap="resultBoard">
+		SELECT * FROM BULLETINEBOARD WHERE
+		BOARD_TITLE LIKE '%'|| #{keyword} ||'%' OR BOARD_CONTENT LIKE '%'||
+		#{keyword} ||'%'
+		ORDER BY REGDATE DESC
+	</select> -->
 </mapper>

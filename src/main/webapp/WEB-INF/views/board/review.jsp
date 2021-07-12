@@ -5,29 +5,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판</title>
+<title>후기게시판</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
-.list{
+#list{
 	width : 50px;
 	height : 50px;
-	margin-left: 10px;
+	float: left;
+	position: absolute;
+	top:100px;
+	left:10px;
 }
-
 .free{
-	margin-left: 70px;
-	margin-top: -50px;
+	position: absolute;
+	top:80px;
+	left:70px;
 }
 
-.write-button{
-	margin-left: 1050px;
-	margin-bottom: 20px;
+#option{
+	float:right;
+}
+.radio{
+	position: absolute;
+	top:170px;
 }
 
-.table{
-	margin-left: 10px;
-	margin-top: 50px;
+#writeBtn2{
+	float:right;
 }
+
 </style>
 </head>
 <body>
@@ -35,39 +41,40 @@
 	
 	<div class="wrapper">
 	
-	<img src="../resources/img/admin/list.png" class="list">
+	<img src="../resources/img/admin/list.png" id="list">
 	<h1 class="free">자유게시판</h1>
 	
-<!-- 	<select id="option" onChange="window.location.href=this.value">
-		<option value="http://localhost:8090/sprout/board/list">자유게시판 이동</option>
-		<option value="http://localhost:8090/sprout/board/review">후기게시판 이동</option>
+	<select id="option"onChange="window.location.href=this.value">
+		<option value="http://localhost:8090/sprout/board/list">자유게시판</option>
+		<option value="http://localhost:8090/sprout/board/review">후기게시판</option>
 		<option value="">QnA게시판</option>
 		<option value="">기부게시판</option>
 		<option value="">정보공유게시판</option>
-	</select> -->
-	
-<!-- 	<div class="radio">
+	</select>
+	<div class="radio">
 	<input type="radio" name="radio">최신순
 	<input type="radio" name="radio">추천순
 	<input type="radio" name="radio">조회순
 	<input type="radio" name="radio">댓글순
-	</div> -->
-	
-	<div class="write-button">
-	<form id="writeBtn2">
-	<button type="button">글쓰기</button>
-	</form>
 	</div>
+	<br>
+	<br>
 	
-	<div class="table">
-	<table width="1100" height="800">
+	<form id="writeBtn2">
+	<input type="button" value="글쓰기" id="writing">
+	</form>
+	
+	<br>
+	<br>
+
+	<table width="1140" height="800">
 		<tr bgcolor="#a8dba8">
-			<td align="center" width="80">NO</td>
-			<td align="center" width="400">제목</td>
+			<td align="center" width="100">NO</td>
+			<td align="center" width="500">제목</td>
 			<td align="center" width="120">작성자</td>
-			<td align="center" width="80">조회</td>
-			<td align="center" width="80">추천</td>
-			<td align="center" width="100">작성일</td>
+			<td align="center" width="100">조회</td>
+			<td align="center" width="100">추천</td>
+			<td align="center" width="120">작성일</td>
 		</tr>
 
 		<!-- 글이 없을 경우 -->
@@ -131,15 +138,11 @@
 					</c:url>
 					<a href="${blistEND}"> > </a>
 				</c:if></td>
-			</tr>
-		</table>
-		</div>
-	</div>
-	<jsp:include page="/WEB-INF/views/footer.jsp" />
-</body>
+		</tr>
+	</table>
 
 	<script>
-		$(".write-button").on("click", function() {
+		$("#writing").on("click", function() {
 			var write1 = confirm("글 쓰기 하시겠습니까?");
 			
 			if(write1 == true) {
@@ -159,4 +162,7 @@
 			frm.submit();
 		});
 	</script>
+	</div>
+	<jsp:include page="/WEB-INF/views/footer.jsp" />
+</body>
 </html>

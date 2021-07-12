@@ -1,3 +1,4 @@
+<%@page import="com.funding.sprout.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,20 +11,29 @@
 .table{
 	position: absolute;
 	top:200px;
-	left:600px;
-	width:50%;
-	height:50%;
+	left:900px;
+}
+.button{
+	position: absolute;
+	top:1050px;
+	left:1950px;
+}
+.textarea1, .textarea2, .textarea3{
+	resize:none;
 }
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
-	
-	
-		<table class="table" border="1"><!-- align="center" -->
+	<%
+		request.setCharacterEncoding("UTF-8");
+		User user = (User) session.getAttribute("user");
+	//	String boardId = request.getParameter("boardId");
+	%>
+		<table class="table" border="1" width="1140" height="800"><!-- align="center" -->
 		  <thead>
 		    <tr>
 		      <th>신고할 아이디</th>
-		      <td><input type="text" placeholder="내용을 입력해주세요"></td>
+		      	<td>${reportBoardId }</td>
 		    </tr>
 		  </thead>
 		  
@@ -31,29 +41,50 @@
 		    <tr>
 		      <th>신고 유형</th>
 		      	<td>	
-		      <select id="option">
-				<option value="">욕설</option>
-				<option value="">도배</option>
-				<option value="">도배</option>
-				<option value="">도배</option>
-				<option value="">도배</option>
-			  </select>
+		      		<select id="option">
+						<option value="">욕설</option>
+						<option value="">도배</option>
+						<option value="">광고</option>
+						<option value="">기타</option>
+			  		</select>
 				</td>
 		    </tr>
 		    
-		    <tr>
-		      <th>신고 사유</th>
-		      <td><input type="text" placeholder="내용을 입력해주세요"></td>
-		 
-		    </tr>
-		    <tr>
-		      <th>추가 신고 사항</th>
-		      <td>신고할 아이디에 관해 추가적으로 더 신고할 게시글이 있다면<br>아래에 해당 게시글의 링크를 적어주세요<br><br><br>
-		      <textarea placeholder="내용을 입력해주세요" rows="3" cols="90"></textarea>
-		      <button type="button">추가하기</button></td>
-		    </tr>
+		       <tr>
+		          <th>신고 사유</th>
+		          	<td><textarea class="textarea1" style="width:100%; height:100%; border:0;"></textarea></td>
+		       </tr>
+		      
+		        <tr>
+		          <th>신고 글 제목</th>
+		          <td>${reportBoardTitle }</td>
+		        </tr>
+		        
+		        <tr>
+		          <th>신고 글 내용</th>
+		       		<td>${reportBoardCotent }</td>
+		        </tr>
+		        
+			    <tr>
+			      <th>신고 사유</th>
+			    	<td><textarea class="textarea2" style="width:100%; height:100%; border:0;"></textarea></td>
+			    </tr>
+			    
+			    <tr>
+			      	<th>추가 신고 사항</th>
+			      	<td><textarea class="textarea3" style="width:100%; height:100%; border:0;"></textarea></td>
+			    </tr>	
+		    	<tr>
+		    		<th>신고자아이디</th>
+		    			<td><%=user.getUserId()%></td>
+		   	 	</tr>
 		  </tbody>
 		</table>
+		
+		<div class="button">
+		<button type="button">등록</button>
+		<button type="button" onclick="history.back(-1)">취소</button>
+		</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
 </html>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 수정</title>
+<title>후기게시글 수정</title>
 <!-- 스마트 에디터 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript"
@@ -15,30 +15,24 @@
 </head>
 
 <style>
-.list{
+#list{
 	width : 50px;
 	height : 50px;
-	margin-left: 10px;
-}
-
-.free{
-	margin-left: 70px;
-	margin-top: -50px;
+	float: left;
 }
 
 .board{
-	margin-top: 50px;
+	margin-top: 100px;
 	margin-bottom: 100px;
-	margin-left: 20px; 
+	margin-right: 100px;
+	margin-left: 100px;
 	width: 100%;
 }
 
 .button{
-	margin-top: -30px;
-	margin-left: 1030px;
-}
-.title{
-	resize: none;
+	position: absolute;
+	right:5px;
+	bottom:200px;	
 }
 </style>
 
@@ -47,8 +41,8 @@
 	<div class="wrapper">
 
 	<div>
-		<img src="../resources/img/admin/list.png" class="list">
-		<h1 class=free>자유게시판</h1>
+		<img src="../resources/img/admin/list.png" id="list">
+		<h1 id=title>자유게시판</h1>
 	</div>
 
 	<form action="update2" method="POST">
@@ -57,22 +51,21 @@
 		<table class="board">
 			<tr>
 				<td id="boardTitle1">제목</td>
-				<td><textarea class="title" name="boardTitle" rows="3" cols="150" value="${data.boardTitle }">${data.boardTitle }</textarea></td>
+				<td><textarea name="boardTitle" rows="3" cols="150" value="${data.boardTitle }">${data.boardTitle }</textarea></td>
 			</tr>
 			
 			<tr>
 				<td id="boardContent1">내용</td>
-				<td><textarea id="ir1" name="boardContent" rows="35" cols="150">${data.boardContent }</textarea></td>
+				<td><textarea id="ir1" name="boardContent" rows="40" cols="150">${data.boardContent }</textarea></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2" class="button">
+				<input type="button" id="writebtn" name="writebtn" value="저장"/>
+				<input type="button" value="취소" onclick="history.back(-1)"/></td>
 			</tr>
 		</table>
 	</form>
-		<div class="button">
-			<button type="button" id="writebtn" name="writebtn">저장</button>
-			<button type="button" onclick="history.back(-1)">취소</button>			
-		</div>
-	</div>
-	<jsp:include page="/WEB-INF/views/footer.jsp" />
-</body>
 		<script type="text/javascript">
 			var oEditors = [];
 			nhn.husky.EZCreator.createInIFrame({
@@ -107,4 +100,7 @@
 				}
 			}
 		</script>
+	</div>
+	<jsp:include page="/WEB-INF/views/footer.jsp" />
+</body>
 </html>

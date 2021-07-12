@@ -20,7 +20,7 @@
 		<typeAlias type="com.funding.sprout.vo.User" alias="User" />
 		<typeAlias type="com.funding.sprout.vo.MessageList" alias="MessageList" />
 		<typeAlias type="com.funding.sprout.vo.Application" alias="Application" />
-		<typeAlias type="com.funding.sprout.vo.BoardReport" alias="BoardReport" />
+		<typeAlias type="com.funding.sprout.vo.Report" alias="Report" />
 		<typeAlias type="com.funding.sprout.vo.MyFunding" alias="MyFunding" />
 	</typeAliases>
 

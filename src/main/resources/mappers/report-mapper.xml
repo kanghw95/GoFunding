@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Report">
+	<!-- 자유게시판 신고 -->
 	<resultMap type="Report" id="resultReport">
-	</resultMap>
+		<id column="BREPORTNO" property="reportNo"/>
+		<result column="BREPORTID" property="reportId"/>
+		<result column="BREPORTTYPE" property="reportType"/>
+		<result column="BREPORTWR" property="reportWr"/>
+		<result column="BREPORTTITLE" property="reportTitle"/>
+		<result column="BREPORTCONTENT" property="reportContent"/>
+		<result column="BREPORTADD" property="reportAdd"/>
+		<result column="BREPORTSTATE" property="reportState"/>
+		<result column="ID" property="id"/>	
+	</resultMap>	
+	
+	<!-- 게시글 신고 -->
+	<insert id="ReportSend" parameterType="Report">
+		INSERT INTO BOARDREPORT VALUES(SEQ_BOARDREPORT.NEXTVAL, #{reportId}, #{reportType}, #{reportWr}, #{reportTitle}, #{reportContent}, #{reportAdd}, #{reportState}, #{id})
+	</insert>
 </mapper>

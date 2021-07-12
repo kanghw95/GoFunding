@@ -8,61 +8,43 @@ public class Report {
 	private String reportWr; // 신고 사유 
 	private String reportTitle; // 신고제목
 	private String reportContent; // 신고내용
+	private String reportAdd; // 추가신고사항
+	private char reportState; // 글 신고처리상태
 	private String id; // 아이디
-	private char reportState;
 	
 	public Report() {
 		
-	}
-	
-	public Report(int reportNo, String reportId, String reportType, String reportWr, String reportTitle, String reportContent, String id, char reportState) {
-		super();
-		this.reportNo = reportNo;
-		this.reportId = reportId;
-		this.reportType = reportType;
-		this.reportWr = reportWr;
-		this.reportTitle = reportTitle;
-		this.reportContent = reportContent;
-		this.id = id;
-		this.reportState = reportState;
 	}
 
 	@Override
 	public String toString() {
 		return "Report [reportNo=" + reportNo + ", reportId=" + reportId + ", reportType=" + reportType + ", reportWr="
-				+ reportWr + ", reportTitle=" + reportTitle + ", reportContent=" + reportContent + ", id=" + id
-				+ ", reportState=" + reportState + "]";
+				+ reportWr + ", reportTitle=" + reportTitle + ", reportContent=" + reportContent + ", reportAdd="
+				+ reportAdd + ", reportState=" + reportState + ", id=" + id + "]";
 	}
 	
 	public int getReportNo() {
 		return reportNo;
 	}
+
 	public void setReportNo(int reportNo) {
 		this.reportNo = reportNo;
 	}
+
 	public String getReportId() {
 		return reportId;
 	}
+
 	public void setReportId(String reportId) {
 		this.reportId = reportId;
 	}
+
 	public String getReportType() {
 		return reportType;
 	}
+
 	public void setReportType(String reportType) {
 		this.reportType = reportType;
-	}
-	public String getReportTitle() {
-		return reportTitle;
-	}
-	public void setReportTitle(String reportTitle) {
-		this.reportTitle = reportTitle;
-	}
-	public String getReportContent() {
-		return reportContent;
-	}
-	public void setReportContent(String reportContent) {
-		this.reportContent = reportContent;
 	}
 
 	public String getReportWr() {
@@ -73,12 +55,28 @@ public class Report {
 		this.reportWr = reportWr;
 	}
 
-	public String getId() {
-		return id;
+	public String getReportTitle() {
+		return reportTitle;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setReportTitle(String reportTitle) {
+		this.reportTitle = reportTitle;
+	}
+
+	public String getReportContent() {
+		return reportContent;
+	}
+
+	public void setReportContent(String reportContent) {
+		this.reportContent = reportContent;
+	}
+
+	public String getReportAdd() {
+		return reportAdd;
+	}
+
+	public void setReportAdd(String reportAdd) {
+		this.reportAdd = reportAdd;
 	}
 
 	public char getReportState() {
@@ -88,5 +86,14 @@ public class Report {
 	public void setReportState(char reportState) {
 		this.reportState = reportState;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	
 }

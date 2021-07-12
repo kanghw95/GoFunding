@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 등록</title>
+<title>후기게시글 등록</title>
 <!-- 스마트 에디터 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript"
@@ -15,32 +15,33 @@
 </head>
 
 <style>
-.list{
+#list{
 	width : 50px;
 	height : 50px;
-	margin-left: 10px;
+	float: left;
+	position: absolute;
+	top:100px;
+	left:10px;
 }
-
 .free{
-	margin-left: 70px;
-	margin-top: -50px;
-}
-
-.title{
-	resize: none;
+	position: absolute;
+	top:80px;
+	left:70px;
 }
 
 .board{
-	margin-top: 50px;
+	margin-top: 100px;
 	margin-bottom: 100px;
-	margin-left: 20px; 
+	margin-right: 100px;
+	margin-left: 100px;
 	width: 100%;
 }
 
 .button{
-	margin-top: -30px;
-	margin-left: 1030px;
-} 
+	position: absolute;
+	right:5px;
+	bottom:200px;	
+}
 </style>
 
 <body>
@@ -50,34 +51,32 @@
 	<%
 		User user = (User) session.getAttribute("user");
 	%>
-		<div>
-			<img src="../resources/img/admin/list.png" class="list">
+	<div>
+			<img src="../resources/img/admin/list.png" id="list">
 			<h1 class=free>자유게시판</h1>
 		
-				<form id="insert" >
-					<input type="hidden" name="userid" value="<%=user.getUserId()%>">
-						<table class="board" style="width=1100 height=600;">
-							<tr>
-								<td>제목</td>
-								<td><textarea rows="3" cols="150" class = "title" name="boardTitle" id="boardTitle"></textarea></td>
-							</tr>
-					
-							<tr>
-								<td id="boardContent1">내용</td>
-								<td><textarea rows="35" cols="150" id="ir1" name="boardContent"></textarea></td>
-							</tr>			
-						</table>
-				</form>
-				
-				<div class="button">
-					<button type="button" id="writebtn" name="writebtn" class="btn btn-primary btn-lg">글등록</button>
-					<button type="button" id="cancelbtn" onclick="history.back(-1)" class="btn btn-secondary btn-lg">취소</button>
-				</div>
-			</div>
-		</div>
-	<jsp:include page="/WEB-INF/views/footer.jsp" />
-</body>
+		<form id="insert" >
+			<input type="hidden" name="userid" value="<%=user.getUserId()%>">
+	
 
+		<table class="board">
+			<tr class = "title">
+				<td>제목</td>
+				<td><textarea rows="3" cols="150" name="boardTitle" id="boardTitle"></textarea></td>
+			</tr>
+			
+			<tr>
+				<td id="boardContent1">내용</td>
+				<td><textarea rows="40" cols="150" id="ir1" name="boardContent"></textarea></td>
+			</tr>
+			
+			<tr class = "button">
+				<td colspan="2">
+				<button type="button" id="writebtn" name="writebtn" class="btn btn-primary btn-lg">글등록</button>
+				<button type="button" id="cancelbtn" onclick="history.back(-1)" class="btn btn-secondary btn-lg">취소</button></td>
+			</tr>
+		</table>
+	</form>
 		<script type="text/javascript">
 			var oEditors=[];
 			nhn.husky.EZCreator.createInIFrame({
@@ -122,4 +121,8 @@
 						});
 			})
 		</script>
+	</div>
+		</div>
+	<jsp:include page="/WEB-INF/views/footer.jsp" />
+</body>
 </html>
