@@ -78,6 +78,7 @@
 						<input type="hidden" name="rewardPrice" value="${app.rewardPrice}">
 						<input type="hidden" name="rewardEA" value="${app.rewardEA}">
 						<input type="hidden" name="delivery" value="${app.deliveryDate}">
+						<input type="hidden" name="fundingPlan" value="${app.fundingPlan}">
 						<input type="hidden" name="deliveryCharge"
 							value="${app.deliveryCharge}">
 					</form>

@@ -20,7 +20,7 @@ public class Funding {
 	private Date fundingchkdate; //펀딩 승인 일자
 	private int deliverycharge; // 배송비
 	private Date deliverydate; // 배송일자
-	
+	private String fundingPlan; //후원금 사용계획
 	
 	public Funding() {
 		
@@ -196,6 +196,16 @@ public class Funding {
 
 	public void setDeliverydate(Date deliverydate) {
 		this.deliverydate = deliverydate;
+	}
+
+
+	public String getFundingPlan() {
+		return fundingPlan;
+	}
+
+
+	public void setFundingPlan(String fundingPlan) {
+		this.fundingPlan = fundingPlan;
 	}
 
 	

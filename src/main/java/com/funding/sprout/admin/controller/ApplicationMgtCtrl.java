@@ -102,7 +102,7 @@ public class ApplicationMgtCtrl {
 	
 	@RequestMapping(value = "/formPermit", method = RequestMethod.POST)
 	public void formPermit(Application app, @RequestParam() String start, @RequestParam() String end,
-			 @RequestParam() String delivery, HttpServletResponse response) { //펀딩 신청서 승인 : 펀딩, 메이커, 리워드 생성
+			 @RequestParam() String delivery, @RequestParam(name = "fundingPlan") String fundingPlan, HttpServletResponse response) { //펀딩 신청서 승인 : 펀딩, 메이커, 리워드 생성
 		Timestamp fundingStart=new Timestamp(0);
 		Timestamp fundingFin=new Timestamp(0);
 		Date dd= new Date();
@@ -123,6 +123,7 @@ public class ApplicationMgtCtrl {
 		app.setFundingStart(fundingStart);
 		app.setFundingFin(fundingFin);
 		app.setDeliveryDate(deliveryDate);
+		app.setFundingPlan(fundingPlan);
 		int applyNo=app.getApplyNo();
 
 		int cnt=0, result=0, sum=0;

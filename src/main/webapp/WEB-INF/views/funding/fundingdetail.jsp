@@ -153,7 +153,6 @@
 						</div>
 						<div class="FundingDetailSummary_text">
 							<span class="FundingDetailSummary_name" id="maker">${funding.maker}</span>
-							<span class="FundingDetailSummary_introduction">소셜벤처 점프와 신발연구소의 콜라보</span>
 						</div>
 					</div>
 					<div class="FundingDetailSummary_reward">
@@ -271,7 +270,7 @@
 										<strong class="FundingDetailEditorTitle_text">펀딩 후원금 사용계획</strong>
 									</div>
 									<p class="FundingDetailEditorParagraph_content">
-									후원금 사용 계획 적는곳
+										${funding.fundingPlan}
 									</p>
 								</div>
 							</article>
@@ -383,7 +382,7 @@
 								<c:forEach var="reward" items="${reward}">
 									<li class="FundingDetailRewardList_item">
 									<strong class="FundingDetailRewardList_amount_">
-										<span class="FundingDetailRewardList_number">${reward.rewardPrice}원</span>펀딩참여
+										<span class="FundingDetailRewardList_number"><fmt:formatNumber value="${reward.rewardPrice}" pattern="#,###,###"/>원</span>펀딩참여
 									</strong>
 									<div class="FundingDetailRewardList_text_">
 											<strong class="FundingDetailRewardList_name">

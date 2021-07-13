@@ -16,6 +16,7 @@
 		<result property="fundingchkdate" column="FUNDINGCHKDATE" />
 		<result property="deliverycharge" column="DELIVERYCHARGE" />
 		<result property="deliverydate" column="DELIVERYDATE" />
+		<result property="fundingPlan" column="FUNDINGPLAN" />
 	</resultMap>
 	
 	

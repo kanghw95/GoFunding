@@ -719,7 +719,7 @@
 	<insert id="makeFunding">
 		INSERT INTO FUNDING VALUES(SEQ_FUNDINGNO.NEXTVAL, 1, #{fundingCategory},
 		#{fundingTitle}, #{fundingPrice}, #{fundingStart}, #{fundingFin}, #{maker},
-		SYSDATE, #{fundingContent}, #{deliveryCharge}, #{deliveryDate}, 0)
+		SYSDATE, #{fundingContent}, #{deliveryCharge}, #{deliveryDate}, 0, #{fundingPlan})
 	</insert>
 	
 	<!-- 신청 승인 / 리워드 생성 -->

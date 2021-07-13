@@ -170,7 +170,7 @@
 									</td>
 									<td class="line4">
 										11. 배송비<br>
-										<input type="text" id="deliveryCharge" name="deliveryCharge" class="inputText" placeholder="배송비" pattern="[1-9][0-9]{0,10}" required>원
+										<input type="text" id="deliveryCharge" name="deliveryCharge" class="inputText" placeholder="배송비" pattern="[0-9][0-9]{0,10}" required>원
 									</td>
 								</tr>
 						</table>
