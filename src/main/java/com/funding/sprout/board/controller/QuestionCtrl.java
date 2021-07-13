@@ -55,6 +55,7 @@ public class QuestionCtrl {
 			}else {
 				ArrayList<Board> aaa = new ArrayList<Board>(boService.questionSelectList(currentPage, LIMIT));
 				mv.addObject("list", aaa);
+				System.out.println("sss"+aaa);
 			}
 			logger.info("list()aaaa: ");
 			mv.addObject("currentPage", currentPage);
@@ -74,6 +75,7 @@ public class QuestionCtrl {
 	public ModelAndView questiondetail(ModelAndView mv, @RequestParam(name = "boardNo") int boardNo,
 			@RequestParam(name = "page", defaultValue = "1") int page, HttpSession session,HttpServletResponse response){ // 게시글 상세보기
 		// 방법1
+		System.out.println("질의응답 게시판 상세보기들어온다!!");
 		try {		
 			Board data = boService.questionAddReadCount(0, boardNo); // 조회수증가
 			int currentPage = page;
@@ -82,7 +84,7 @@ public class QuestionCtrl {
 			mv.addObject("data", data);
 			
 			String boardId = ((User)session.getAttribute("user")).getUserId(); 
-			int isLiked = boService.questionInsertLike(boardNo, boardId);    // 좋아요상태 :1, 아니면 :0
+			int isLiked = boService.questionChecklike(boardNo, boardId);    // 좋아요상태 :1, 아니면 :0
 			mv.addObject("isliked", isLiked);   // 좋아요상태 :1, 아니면 :0
 			
 			likecnt = boService.questionLikecnt(boardNo); // 추천수

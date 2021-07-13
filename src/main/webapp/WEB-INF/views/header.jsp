@@ -53,10 +53,10 @@ $(document).ready(function(){
 							<h3 class="column-title">커뮤니티</h3>
 							<ul>
 								<li><a href="<%=request.getContextPath()%>/board/list">자유게시판</a></li>
-								<li><a href="#">후기</a></li>
-								<li><a href="#">QnA</a></li>
-								<li><a href="#">기부</a></li>
-								<li><a href="#">정보 공유</a></li>
+								<li><a href="<%=request.getContextPath()%>/board/review">후기</a></li>
+								<li><a href="<%=request.getContextPath()%>/board/question">QnA</a></li>
+								<li><a href="<%=request.getContextPath()%>/board/event">이벤트</a></li>
+								<li><a href="<%=request.getContextPath()%>/board/share">정보 공유</a></li>
 							</ul>
 						</div>
 						<div class="nav-column">
@@ -88,11 +88,11 @@ $(document).ready(function(){
 					<a href="#" class="subTitle">커뮤니티</a>
 					<div class="subMenu2">
 						<ul>
-							<li><a href="<%=request.getContextPath()%>/board/list">자유게시판</a></li>
-							<li><a href="#">후기</a></li>
-							<li><a href="#">QnA</a></li>
-							<li><a href="#">기부</a></li>
-							<li><a href="#">정보 공유</a></li>
+								<li><a href="<%=request.getContextPath()%>/board/list">자유게시판</a></li>
+								<li><a href="<%=request.getContextPath()%>/board/review">후기</a></li>
+								<li><a href="<%=request.getContextPath()%>/board/question">QnA</a></li>
+								<li><a href="<%=request.getContextPath()%>/board/event">이벤트</a></li>
+								<li><a href="<%=request.getContextPath()%>/board/share">정보 공유</a></li>
 						</ul>
 					</div>
 				

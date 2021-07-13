@@ -179,20 +179,20 @@ public class ReviewCtrl {
 	public int reviewclickLike(@RequestParam("boardNo") int boardNo, @RequestParam("boardId") String boardId, ModelAndView mv,
 			ModelAndView model) { // 추천
 		int result = -1;
-		int reviewlikecnt = 0;
+		int likecnt = 0;
 		try {
-			result = boService.reviewInsertLike(boardNo, boardId);
+			result = boService.reviewChecklike(boardNo, boardId);
 			if (result == 0) { // 추천이 안되어있는 상태라면 클릭했을때 추천
-				boService.insertLike(boardNo, boardId);
+				boService.reviewInsertLike(boardNo, boardId);
 			} else if (result == 1) { // 추천이 되어있는 상태라면 클릭했을때 추천 취소
 				boService.reviewDeleteLike(boardNo, boardId);
 			} else {
 				}
-			reviewlikecnt = boService.reviewLikecnt(boardNo); // 총 추천수
+			likecnt = boService.reviewLikecnt(boardNo); // 총 추천수
 			//mv.addObject("likecnt", likecnt);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return reviewlikecnt;
+		return likecnt;
 	}
 }

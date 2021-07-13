@@ -202,9 +202,9 @@
 		var tagHtml = '';
 		
 		if(isLiked == 1){// 1:좋아요, 0:아님
-			tagHtml = '<a><img src = "../resources/img/fullheart.png" id="unlike"><br><span class = "like_cnt">${reviewlikecnt }</span></a>';
+			tagHtml = '<a><img src = "../resources/img/fullheart.png" id="unlike"><br><span class = "like_cnt">${likecnt }</span></a>';
 		} else {// 0:아님
-			tagHtml = '<a><img src = "../resources/img/emptyheart.png" id="like"><br><span class = "like_cnt">${reviewlikecnt }</span></a>';
+			tagHtml = '<a><img src = "../resources/img/emptyheart.png" id="like"><br><span class = "like_cnt">${likecnt }</span></a>';
 		}
 		$(".board-content-like").append(tagHtml);
 

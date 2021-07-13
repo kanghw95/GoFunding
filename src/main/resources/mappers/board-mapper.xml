@@ -26,8 +26,8 @@
 	</resultMap>
 	
 	<!-- 질의응답게시판 -->
-		<resultMap type="Board" id="questionBoard">
-		<id column="QBOARDNO " property="boardNo" />
+	<resultMap type="Board" id="questionBoard">
+		<id column="QBOARDNO" property="boardNo" />
 		<result column="QBOARDTITLE" property="boardTitle" />
 		<result column="QBOARDCONTENT" property="boardContent" />
 		<result column="QBOARDDATE" property="boardDate" />
@@ -37,10 +37,9 @@
 		<result column="CMT" property="cmt"/>		
 	</resultMap>
 	
-	
 	<!-- 이벤트게시판 -->
 	<resultMap type="Board" id="eventBoard">
-		<id column="EVENTNO " property="boardNo" />
+		<id column="EVENTNO" property="boardNo" />
 		<result column="EVENTTITLE" property="boardTitle" />
 		<result column="EVENTCONTENT" property="boardContent" />
 		<result column="EVENTDATE" property="boardDate" />
@@ -52,7 +51,7 @@
 	
 	<!-- 정보공유게시판 -->
 	<resultMap type="Board" id="shareBoard">
-		<id column="SHARENO " property="boardNo" />
+		<id column="SHARENO" property="boardNo" />
 		<result column="SHARETITLE" property="boardTitle" />
 		<result column="SHARECONTENT" property="boardContent" />
 		<result column="SHAREDATE" property="boardDate" />
@@ -423,21 +422,21 @@
 	
 	<!-- 게시글 추천 여부 검사 -->
 	<select id="shareChecklike" parameterType="hashmap" flushCache="true" statementType="PREPARED" resultType="int">
-		SELECT count(*) FROM SHARELIKE WHERE SHAREBOARDNO = #{boardNo} and ID = #{ID}
+		SELECT count(*) FROM SHARELIKE WHERE SHARENO = #{boardNo} and ID = #{ID}
 	</select>
 	
 	<!-- 게시글 추천 -->
 	<insert id="shareInsertLike" parameterType="hashmap" flushCache="true" statementType="PREPARED" >
-		INSERT INTO SHARELIKE VALUES(#{SHAREBOARDNO}, #{ID})
+		INSERT INTO SHARELIKE VALUES(#{SHARENO}, #{ID})
 	</insert>
 	
 	<!-- 게시글 추천 취소 -->
 	<delete id="shareDeleteLike" parameterType="hashmap" flushCache="true" statementType="PREPARED">
-		DELETE FROM SHARELIKE WHERE SHAREBOARDNO = #{boardNo} and ID = #{ID}
+		DELETE FROM SHARELIKE WHERE SHARENO = #{boardNo} and ID = #{ID}
 	</delete>
 	
 	<!-- 게시글 추천수 -->	
 	<select id="shareLikecnt" parameterType="int" flushCache="true" statementType="PREPARED" resultType="int">
-		SELECT count(*) FROM SHARELIKE WHERE SHAREBOARDNO = #{boardNo}
+		SELECT count(*) FROM SHARELIKE WHERE SHARENO = #{boardNo}
 	</select>
 </mapper>
