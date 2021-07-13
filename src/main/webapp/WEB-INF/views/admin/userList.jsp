@@ -105,52 +105,56 @@
 			
 			console.log("컨트롤러로 넘길 값은 : " + search);
 			console.log("셀렉트 values는 " + sValue);
-
-			if (sValue == 0) { // 선택된 option이 없는 경우
-				console.log("선택 해야된다.");
-				alert("검색 항목을 선택해주세요.");
-			} else if (sValue == 1) { // 아이디 검색
-				console.log("이메일 입니다.");
-				$.ajax({
-					url : "userselect",
-					type : "POST",
-					data : {
-						userId : search
-					},
-					dataType : "JSON",
-					success : searchId,
-					error : function(error) {
-						console.log("이메일 error 발생");
-					}
-				});
-			} else if (sValue == 2) { // 이름 검색
-				console.log("이름 입니다.");
-				$.ajax({
-					url : "userselect",
-					type : "POST",
-					data : {
-						userName : search
-					},
-					dataType : "JSON",
-					success : searchName,
-					error : function(error) {
-						console.log("이름 error 발생");
-					}
-				});
-			} else if (sValue == 3) { // 닉네임 검색
-				console.log("닉네임 입니다.");
-				$.ajax({
-					url : "userselect",
-					type : "POST",
-					data : {
-						userNick : search
-					},
-					dataType : "JSON",
-					success : searchNick,
-					error : function(error) {
-						console.log("이름 error 발생");
-					}
-				})
+			
+			if (search == "%%") {
+				alert("검색할 정보를 입력해주세요.");
+			} else {
+				if (sValue == 0) { // 선택된 option이 없는 경우
+					console.log("선택 해야된다.");
+					alert("검색 항목을 선택해주세요.");
+				} else if (sValue == 1) { // 아이디 검색
+					console.log("이메일 입니다.");
+					$.ajax({
+						url : "userselect",
+						type : "POST",
+						data : {
+							userId : search
+						},
+						dataType : "JSON",
+						success : searchId,
+						error : function(error) {
+							console.log("이메일 error 발생");
+						}
+					});
+				} else if (sValue == 2) { // 이름 검색
+					console.log("이름 입니다.");
+					$.ajax({
+						url : "userselect",
+						type : "POST",
+						data : {
+							userName : search
+						},
+						dataType : "JSON",
+						success : searchName,
+						error : function(error) {
+							console.log("이름 error 발생");
+						}
+					});
+				} else if (sValue == 3) { // 닉네임 검색
+					console.log("닉네임 입니다.");
+					$.ajax({
+						url : "userselect",
+						type : "POST",
+						data : {
+							userNick : search
+						},
+						dataType : "JSON",
+						success : searchNick,
+						error : function(error) {
+							console.log("이름 error 발생");
+						}
+					})
+				}
 			}
 		}
 		

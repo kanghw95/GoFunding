@@ -76,7 +76,19 @@ $("#fundingCategory").change(function(){
 $("#mainBtn").click(function(){
 	window.location.href="<%=request.getContextPath() %>/adminMain";
 })	
-$("#")
+
+jQuery(function($) { // 페이지 이동 효과
+    $("body").css("display", "none");
+    $("body").fadeIn(800);
+    $("a.transition").click(function(event){
+        event.preventDefault();
+        linkLocation = this.href;
+        $("body").fadeOut(1000, redirectPage);
+    });
+    function redirectPage() {
+    window.location = linkLocation;
+    }
+});
 </script>
 </body>
 </html>

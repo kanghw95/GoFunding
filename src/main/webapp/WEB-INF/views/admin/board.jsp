@@ -130,6 +130,241 @@ function searchBoard(data) { // 모든 게시판 검색 sucess
 	$("#tr").append(cv);
 	$("#page").remove();
 }
+
+function searchFreeBoard() { // 자유 게시판 검색
+	console.log("검색 시작");
+	var target = document.getElementById("select");
+	var sValue = target.options[target.selectedIndex].value;
+	var search = "%" + document.getElementById("text").value + "%";
+	
+	console.log("컨트롤러로 넘길 값은 : " + search);
+	console.log("셀렉트 values는 " + sValue);
+	
+	if (search == "%%") {
+		alert("검색할 정보를 입력해주세요.");
+	} else {
+		if (sValue == 0) { // 선택된 option이 없는 경우
+			console.log("선택 해야된다.");
+			alert("검색 항목을 선택해주세요.");
+		} else if (sValue == 1) { // 제목 검색
+			console.log("제목 입니다.");
+			$.ajax({
+				url : "fboardselect",
+				type : "POST",
+				data : {
+					boardTitle : search
+				},
+				dataType : "JSON",
+				success : searchBoard,
+				error : function(error) {
+					console.log("자유 게시판 제목 error 발생");
+				}
+			});
+		} else if (sValue == 2) { // 이름 검색
+			console.log("작성자 입니다.");
+			$.ajax({
+				url : "fboardselect",
+				type : "POST",
+				data : {
+					boardId : search
+				},
+				dataType : "JSON",
+				success : searchBoard,
+				error : function(error) {
+					console.log("자유 게시판 작성자 error 발생");
+				}
+			});
+		}
+	}
+}
+
+function searchReviewBoard() { // 후기 게시판 검색
+	console.log("검색 시작");
+	var target = document.getElementById("select");
+	var sValue = target.options[target.selectedIndex].value;
+	var search = "%" + document.getElementById("text").value + "%";
+	
+	console.log("컨트롤러로 넘길 값은 : " + search);
+	console.log("셀렉트 values는 " + sValue);
+
+	if (search == "%%") {
+		alert("검색할 정보를 입력해주세요.");
+	} else {
+		if (sValue == 0) { // 선택된 option이 없는 경우
+			console.log("선택 해야된다.");
+			alert("검색 항목을 선택해주세요.");
+		} else if (sValue == 1) { // 제목 검색
+			console.log("제목 입니다.");
+			$.ajax({
+				url : "rboardselect",
+				type : "POST",
+				data : {
+					boardTitle : search
+				},
+				dataType : "JSON",
+				success : searchBoard,
+				error : function(error) {
+					console.log("자유 게시판 제목 error 발생");
+				}
+			});
+		} else if (sValue == 2) { // 이름 검색
+			console.log("작성자 입니다.");
+			$.ajax({
+				url : "rboardselect",
+				type : "POST",
+				data : {
+					boardId : search
+				},
+				dataType : "JSON",
+				success : searchBoard,
+				error : function(error) {
+					console.log("자유 게시판 작성자 error 발생");
+				}
+			});
+		}
+	}
+}
+
+function searchQuestionBoard() { // 질의응답 게시판 검색
+	console.log("검색 시작");
+	var target = document.getElementById("select");
+	var sValue = target.options[target.selectedIndex].value;
+	var search = "%" + document.getElementById("text").value + "%";
+	
+	console.log("컨트롤러로 넘길 값은 : " + search);
+	console.log("셀렉트 values는 " + sValue);
+
+	if (search == "%%") {
+		alert("검색할 정보를 입력해주세요.");
+	} else {
+		if (sValue == 0) { // 선택된 option이 없는 경우
+			console.log("선택 해야된다.");
+			alert("검색 항목을 선택해주세요.");
+		} else if (sValue == 1) { // 제목 검색
+			console.log("제목 입니다.");
+			$.ajax({
+				url : "qboardselect",
+				type : "POST",
+				data : {
+					boardTitle : search
+				},
+				dataType : "JSON",
+				success : searchBoard,
+				error : function(error) {
+					console.log("자유 게시판 제목 error 발생");
+				}
+			});
+		} else if (sValue == 2) { // 이름 검색
+			console.log("작성자 입니다.");
+			$.ajax({
+				url : "qboardselect",
+				type : "POST",
+				data : {
+					boardId : search
+				},
+				dataType : "JSON",
+				success : searchBoard,
+				error : function(error) {
+					console.log("자유 게시판 작성자 error 발생");
+				}
+			});
+		}
+	}
+}
+
+function searchShareBoard() { // 정보공유 게시판 검색
+	console.log("검색 시작");
+	var target = document.getElementById("select");
+	var sValue = target.options[target.selectedIndex].value;
+	var search = "%" + document.getElementById("text").value + "%";
+	
+	console.log("컨트롤러로 넘길 값은 : " + search);
+	console.log("셀렉트 values는 " + sValue);
+
+	if (search == "%%") {
+		alert("검색할 정보를 입력해주세요.");
+	} else {
+		if (sValue == 0) { // 선택된 option이 없는 경우
+			console.log("선택 해야된다.");
+			alert("검색 항목을 선택해주세요.");
+		} else if (sValue == 1) { // 제목 검색
+			console.log("제목 입니다.");
+			$.ajax({
+				url : "sboardselect",
+				type : "POST",
+				data : {
+					boardTitle : search
+				},
+				dataType : "JSON",
+				success : searchBoard,
+				error : function(error) {
+					console.log("자유 게시판 제목 error 발생");
+				}
+			});
+		} else if (sValue == 2) { // 이름 검색
+			console.log("작성자 입니다.");
+			$.ajax({
+				url : "sboardselect",
+				type : "POST",
+				data : {
+					boardId : search
+				},
+				dataType : "JSON",
+				success : searchBoard,
+				error : function(error) {
+					console.log("자유 게시판 작성자 error 발생");
+				}
+			});
+		}
+	}
+}
+
+function searchEventBoard() { // 이벤트 게시판 검색
+	console.log("검색 시작");
+	var target = document.getElementById("select");
+	var sValue = target.options[target.selectedIndex].value;
+	var search = "%" + document.getElementById("text").value + "%";
+	
+	console.log("컨트롤러로 넘길 값은 : " + search);
+	console.log("셀렉트 values는 " + sValue);
+
+	if (search == "%%") {
+		alert("검색할 정보를 입력해주세요.");
+	} else {
+		if (sValue == 0) { // 선택된 option이 없는 경우
+			console.log("선택 해야된다.");
+			alert("검색 항목을 선택해주세요.");
+		} else if (sValue == 1) { // 제목 검색
+			console.log("제목 입니다.");
+			$.ajax({
+				url : "eboardselect",
+				type : "POST",
+				data : {
+					boardTitle : search
+				},
+				dataType : "JSON",
+				success : searchBoard,
+				error : function(error) {
+					console.log("자유 게시판 제목 error 발생");
+				}
+			});
+		} else if (sValue == 2) { // 이름 검색
+			console.log("작성자 입니다.");
+			$.ajax({
+				url : "eboardselect",
+				type : "POST",
+				data : {
+					boardId : search
+				},
+				dataType : "JSON",
+				success : searchBoard,
+				error : function(error) {
+					console.log("자유 게시판 작성자 error 발생");
+				}
+			});
+		}
+	}
+}
 </script>
 </head>
 <body>

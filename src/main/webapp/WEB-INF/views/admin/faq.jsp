@@ -190,26 +190,30 @@ a:active {color:#00BFFF;}
 		console.log("value : " + sValue);
 		console.log("컨트롤러로 : " + search);
 		
-		if (sValue == 0) {
-			console.log("선택 해야된다.");
-			alert("검색 항목을 선택해주세요.");
-		} else if (sValue == 1) {
-			console.log("제목 검색");
-			$.ajax({
-				url : "selectFaq",
-				type : "POST",
-				data : {
-					title : search
-				},
-				dataType : "JSON",
-				success : select,
-				error : function(request,status,error) {
-					console.log("자유 게시판 제목 error 발생");
-					console.log(error);
-					console.log(request);
-					console.log(status);
-				}
-			});
+		if (search == "%%") {
+			alert("검색할 정보를 입력해주세요.");
+		} else {
+			if (sValue == 0) {
+				console.log("선택 해야된다.");
+				alert("검색 항목을 선택해주세요.");
+			} else if (sValue == 1) {
+				console.log("제목 검색");
+				$.ajax({
+					url : "selectFaq",
+					type : "POST",
+					data : {
+						title : search
+					},
+					dataType : "JSON",
+					success : select,
+					error : function(request,status,error) {
+						console.log("자유 게시판 제목 error 발생");
+						console.log(error);
+						console.log(request);
+						console.log(status);
+					}
+				});
+			}
 		}
 	}
 	

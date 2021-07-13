@@ -97,6 +97,53 @@ function input() {
 function tag(no) {
 	console.log(a);
 }
+
+function searchNotice() {
+	console.log("�˻� ����");
+	var target = document.getElementById("select");
+	var sValue = target.options[target.selectedIndex].value;
+	var search = "%" + document.getElementById("text").value + "%";
+	
+	console.log("��Ʈ�ѷ��� �ѱ� ���� : " + search);
+	console.log("����Ʈ values�� " + sValue);
+
+	if (search == "%%") {
+		alert("검색할 정보를 입력해주세요.");
+	} else {
+		if (sValue == 0) { // ���õ� option�� ���� ���
+			console.log("���� �ؾߵȴ�.");
+			alert("�˻� �׸��� �������ּ���.");
+		} else if (sValue == 1) { // ���� �˻�
+			console.log("���� �Դϴ�.");
+			$.ajax({
+				url : "noticeselect",
+				type : "POST",
+				data : {
+					boardTitle : search
+				},
+				dataType : "JSON",
+				success : searchN,
+				error : function(error) {
+					console.log("���� �Խ��� ���� error �߻�");
+				}
+			});
+		} else if (sValue == 2) { // �̸� �˻�
+			console.log("�ۼ��� �Դϴ�.");
+			$.ajax({
+				url : "noticeselect",
+				type : "POST",
+				data : {
+					boardId : search
+				},
+				dataType : "JSON",
+				success : searchN,
+				error : function(error) {
+					console.log("���� �Խ��� �ۼ��� error �߻�");
+				}
+			});
+		}
+	}
+}
 </script>
 </head>
 <body>

@@ -5,45 +5,49 @@
 var cv = "";
 	
 	function searchNotice() {
-		console.log("°Ë»ö ½ÃÀÛ");
+		console.log("ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		var target = document.getElementById("select");
 		var sValue = target.options[target.selectedIndex].value;
 		var search = "%" + document.getElementById("text").value + "%";
 		
-		console.log("ÄÁÆ®·Ñ·¯·Î ³Ñ±æ °ªÀº : " + search);
-		console.log("¼¿·ºÆ® values´Â " + sValue);
+		console.log("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½Ñ±ï¿½ ï¿½ï¿½ï¿½ï¿½ : " + search);
+		console.log("ï¿½ï¿½ï¿½ï¿½Æ® valuesï¿½ï¿½ " + sValue);
 
-		if (sValue == 0) { // ¼±ÅÃµÈ optionÀÌ ¾ø´Â °æ¿ì
-			console.log("¼±ÅÃ ÇØ¾ßµÈ´Ù.");
-			alert("°Ë»ö Ç×¸ñÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.");
-		} else if (sValue == 1) { // Á¦¸ñ °Ë»ö
-			console.log("Á¦¸ñ ÀÔ´Ï´Ù.");
-			$.ajax({
-				url : "noticeselect",
-				type : "POST",
-				data : {
-					boardTitle : search
-				},
-				dataType : "JSON",
-				success : searchN,
-				error : function(error) {
-					console.log("ÀÚÀ¯ °Ô½ÃÆÇ Á¦¸ñ error ¹ß»ý");
-				}
-			});
-		} else if (sValue == 2) { // ÀÌ¸§ °Ë»ö
-			console.log("ÀÛ¼ºÀÚ ÀÔ´Ï´Ù.");
-			$.ajax({
-				url : "noticeselect",
-				type : "POST",
-				data : {
-					boardId : search
-				},
-				dataType : "JSON",
-				success : searchN,
-				error : function(error) {
-					console.log("ÀÚÀ¯ °Ô½ÃÆÇ ÀÛ¼ºÀÚ error ¹ß»ý");
-				}
-			});
+		if (search == "%%") {
+			alert("ê²€ìƒ‰í•  ì •ë³´ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”.");
+		} else {
+			if (sValue == 0) { // ï¿½ï¿½ï¿½Ãµï¿½ optionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+				console.log("ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ßµÈ´ï¿½.");
+				alert("ï¿½Ë»ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
+			} else if (sValue == 1) { // ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
+				console.log("ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½.");
+				$.ajax({
+					url : "noticeselect",
+					type : "POST",
+					data : {
+						boardTitle : search
+					},
+					dataType : "JSON",
+					success : searchN,
+					error : function(error) {
+						console.log("ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ error ï¿½ß»ï¿½");
+					}
+				});
+			} else if (sValue == 2) { // ï¿½Ì¸ï¿½ ï¿½Ë»ï¿½
+				console.log("ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½.");
+				$.ajax({
+					url : "noticeselect",
+					type : "POST",
+					data : {
+						boardId : search
+					},
+					dataType : "JSON",
+					success : searchN,
+					error : function(error) {
+						console.log("ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ error ï¿½ß»ï¿½");
+					}
+				});
+			}
 		}
 	}
 	
@@ -54,7 +58,7 @@ var cv = "";
 		for (var k = 0; k < elements.length; k++) {
 			elements[k].style.display = "none";
 		}
-		console.log("°Ô½ÃÆÇ °Ë»ö ÇÔ¼ö ÁøÀÔ");
+		console.log("ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		console.log(data);
 		$.each(data, function(i, list) {
 			cv += "<tr class='search'>"
@@ -70,27 +74,27 @@ var cv = "";
 		$("#tr").append(cv);
 	}
 	
-	function deleteNotice() { // °øÁö»çÇ× ±Û »èÁ¦
-		console.log("°øÁö»çÇ× ±Û »èÁ¦ ÀÔ´Ï´Ù.");
+	function deleteNotice() { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		console.log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½.");
 		var checked = document.getElementsByName("check");
 		var boardNo = document.getElementsByName("boardNo"); 
 		var deleteList = new Array();
 		for (var i = 0; i < checked.length; i++) {
 			if (checked[i].checked == false) {
-				console.log("Ã¼Å©µÈ°Ô ¾ø½À´Ï´Ù.")
+				console.log("Ã¼Å©ï¿½È°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.")
 				console.log(checked[i].checked);
 			} else {
-				console.log("Ã¼Å©µÈ°Ô ÀÖ½À´Ï´Ù.");
-				console.log("Ã¼Å©µÈ °øÁö»çÇ× ±Û ¹øÈ£ : " + boardNo[i].value);
+				console.log("Ã¼Å©ï¿½È°ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.");
+				console.log("Ã¼Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È£ : " + boardNo[i].value);
 				deleteList.push(boardNo[i].value);
-				console.log("Ã¼Å©µÈ °øÁö»çÇ× ±Û ¹øÈ£ ¸®½ºÆ® : " + deleteList);
+				console.log("Ã¼Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½Æ® : " + deleteList);
 			}
 		}
-			console.log("Ã¼Å©µÈ Ã¼Å©¹Ú½º °¹¼ö : " + deleteList.length);
+			console.log("Ã¼Å©ï¿½ï¿½ Ã¼Å©ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ : " + deleteList.length);
 			if (deleteList.length == 0) {
-				alert("ÇÏ³ª ÀÌ»óÀÇ ±ÛÀ» Ã¼Å©ÇØÁÖ¼¼¿ä.");
+				alert("ï¿½Ï³ï¿½ ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
 			} else {
-				alert("°øÁö»çÇ× ±ÛÀ» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?");
+				alert("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½?");
 				$.ajax({
 					url : "deletenoticelist",
 					type : "POST",
@@ -99,30 +103,30 @@ var cv = "";
 						boardNo : deleteList
 					},
 					success : function(data) {
-						console.log("success ÁøÀÔ");
+						console.log("success ï¿½ï¿½ï¿½ï¿½");
 						console.log(data);
 						location.replace("notice");
 					},
 					error : function(error) {
-						console.log("error ¹ß»ý");
+						console.log("error ï¿½ß»ï¿½");
 					}
 				});
 			}
 			
 	}
 
-	function noticeRadio() { // °øÁö»çÇ× ¶óµð¿À¹Ú½º Á¶È¸
+	function noticeRadio() { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú½ï¿½ ï¿½ï¿½È¸
 		var name = document.getElementsByName("radio");
 		for (var i = 0; i < name.length; i++) {
 			if (name[i].checked == false) {
-				console.log("Ã¼Å©µÈ °ªÀÌ ¾ø½À´Ï´Ù.")
+				console.log("Ã¼Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.")
 			} else {
 				var id = name[i].id;
 				var value = name[i].value;
 			}
 		}
-		console.log("id °ªÀº : " + id);
-		console.log("value °ªÀº : " + value);
+		console.log("id ï¿½ï¿½ï¿½ï¿½ : " + id);
+		console.log("value ï¿½ï¿½ï¿½ï¿½ : " + value);
 		$.ajax({
 			url : "noticeradio",
 			type : "POST",
@@ -134,7 +138,7 @@ var cv = "";
 			dataType : "JSON",
 			success : selectRadio,
 			error : function(error) {
-				console.log("error ¹ß»ý");
+				console.log("error ï¿½ß»ï¿½");
 			}
 		});
 	}
@@ -146,7 +150,7 @@ var cv = "";
 		for (var k = 0; k < elements.length; k++) {
 			elements[k].style.display = "none";
 		}
-		console.log("°Ô½ÃÆÇ °Ë»ö ÇÔ¼ö ÁøÀÔ");
+		console.log("ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		console.log(data);
 		$.each(data, function(i, list) {
 			cv += "<tr class='search'>"
@@ -162,25 +166,25 @@ var cv = "";
 		$("#tr").append(cv);
 	}
 	
-	function checkAll() { // Ã¼Å©¹Ú½º ÀüÃ¼ Ã¼Å©, ÇØÁ¦
-		console.log("Ã¼Å©¹Ú½º ÇÔ¼ö ÁøÀÔ");
+	function checkAll() { // Ã¼Å©ï¿½Ú½ï¿½ ï¿½ï¿½Ã¼ Ã¼Å©, ï¿½ï¿½ï¿½ï¿½
+		console.log("Ã¼Å©ï¿½Ú½ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		var checked = document.getElementsByName("check");
 		var checkAll = document.getElementById("checkAll");
 		if (checkAll.checked == false) {
 			for (var i = 0; i < checked.length; i++) {
 				checked[i].checked = false;
-				console.log("ÀüÃ¼ ¼±ÅÃ Ãë¼Ò");
+				console.log("ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½");
 			}
 		} else {
 			for (var i = 0; i < checked.length; i++) {
 				checked[i].checked = true;
-				console.log("ÀüÃ¼ ¼±ÅÃ");
+				console.log("ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½");
 			}
 		}
 	}
 
-	function checkOne() { // Ã¼Å©¹Ú½º °³º° Ã¼Å©, ÇØÁ¦
-		console.log("Ã¼Å©¹Ú½º °³º° ÇÔ¼ö ÁøÀÔ");
+	function checkOne() { // Ã¼Å©ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©, ï¿½ï¿½ï¿½ï¿½
+		console.log("Ã¼Å©ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		var allBox = document.querySelectorAll("input[name='check']");
 		var checkedBox = document
 				.querySelectorAll("input[name='check']:checked");
