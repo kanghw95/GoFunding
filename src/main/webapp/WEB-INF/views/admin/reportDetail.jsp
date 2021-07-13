@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/reportDetail.js"></script>
+<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
 <style>
 	.back {
 		border: 1px;
@@ -51,26 +52,35 @@ function userStop() {
 	console.log("정지시킬 아이디 : " + stopId);
 	console.log("조회할 제목 : " + title);
 	console.log("조회할 번호 : " + no);
-	if (confirm("정말 계정을 정지하겠습니까?")) {
-		$.ajax({
-			url : "userReport",
-			type : "POST",
-			traditional : true,
-			data : {
-				stopId : stopId,
-				title : title,
-				no : no
-			},
-			success : function(data) {
-				console.log("성공");
-			},
-			error : function(error) {
-				console.log("에러");
-			}
- 		})
-	} else {
-		console.log("계정 정지 취소");
-	}
+	
+	swal({
+	    title: "회원 정지",
+	    text: "회원을 정지시키겠습니까?",
+	    icon: "warning",
+	    buttons: ["아니오", "예"]
+	}).then((예) => {
+		if (예) {
+			console.log("예");
+			$.ajax({
+				url : "userReport",
+				type : "POST",
+				traditional : true,
+				data : {
+					stopId : stopId,
+					title : title,
+					no : no
+				},
+				success : function(data) {
+					console.log("성공");
+				},
+				error : function(error) {
+					console.log("에러");
+				}
+	 		})
+		} else {
+			console.log("취소");
+		}
+	})
 }	
 
 function userPass() {

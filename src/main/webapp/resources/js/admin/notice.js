@@ -74,46 +74,7 @@ var cv = "";
 		$("#tr").append(cv);
 	}
 	
-	function deleteNotice() { // �������� �� ����
-		console.log("�������� �� ���� �Դϴ�.");
-		var checked = document.getElementsByName("check");
-		var boardNo = document.getElementsByName("boardNo"); 
-		var deleteList = new Array();
-		for (var i = 0; i < checked.length; i++) {
-			if (checked[i].checked == false) {
-				console.log("üũ�Ȱ� �����ϴ�.")
-				console.log(checked[i].checked);
-			} else {
-				console.log("üũ�Ȱ� �ֽ��ϴ�.");
-				console.log("üũ�� �������� �� ��ȣ : " + boardNo[i].value);
-				deleteList.push(boardNo[i].value);
-				console.log("üũ�� �������� �� ��ȣ ����Ʈ : " + deleteList);
-			}
-		}
-			console.log("üũ�� üũ�ڽ� ���� : " + deleteList.length);
-			if (deleteList.length == 0) {
-				alert("�ϳ� �̻��� ���� üũ���ּ���.");
-			} else {
-				alert("�������� ���� �����Ͻðڽ��ϱ�?");
-				$.ajax({
-					url : "deletenoticelist",
-					type : "POST",
-					traditional : true,
-					data : {
-						boardNo : deleteList
-					},
-					success : function(data) {
-						console.log("success ����");
-						console.log(data);
-						location.replace("notice");
-					},
-					error : function(error) {
-						console.log("error �߻�");
-					}
-				});
-			}
-			
-	}
+	
 
 	function noticeRadio() { // �������� �����ڽ� ��ȸ
 		var name = document.getElementsByName("radio");

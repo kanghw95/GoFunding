@@ -10,6 +10,7 @@
 <link href="<%=request.getContextPath() %>/resources/css/admin/userList.css?ver=1.2" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/userList.js"></script>
+<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
 <style>
 	.no {
 		width: 35px;
@@ -178,23 +179,35 @@
 				if (deleteList.length == 0) {
 					alert("하나 이상의 유저를 체크해주세요.");
 				} else {
-					alert("회원 정보를 삭제하시겠습니까?");
-					$.ajax({
-						url : "userstop",
-						type : "POST",
-						traditional : true,
-						data : {
-							userNo : deleteList
-						},
-						success : function(data) {
-							console.log("success 진입");
-							console.log(data);
-							location.replace("userlist");
-						},
-						error : function(error) {
-							console.log("error 발생");
+					swal({
+					    title: "회원 삭제",
+					    text: "회원을 삭제하시겠습니까?",
+					    icon: "warning",
+					    buttons: ["아니오", "예"]
+					}).then((예) => {
+						if (예) {
+							console.log("예");
+							$.ajax({
+								url : "userstop",
+								type : "POST",
+								traditional : true,
+								data : {
+									userNo : deleteList
+								},
+								success : function(data) {
+									console.log("success 진입");
+									console.log(data);
+									location.replace("userlist");
+								},
+								error : function(error) {
+									console.log("error 발생");
+								}
+							});
+						} else {
+							console.log("취소");
 						}
-					});
+					})
+					
 				}
 		}
 		

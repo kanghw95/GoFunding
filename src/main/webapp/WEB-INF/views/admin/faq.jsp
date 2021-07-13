@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/faq.js"></script>
+<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
 <style>
 body {
     font-family: 'NanumSquare', sans-serif !important;
@@ -256,27 +257,34 @@ a:active {color:#00BFFF;}
 			if (deleteList.length == 0) {
 				alert("하나 이상의 글을 체크해주세요.");
 			} else {
-				var con = confirm("faq 글을 삭제하시겠습니까?");
-				if (con == true) {
-					$.ajax({
-						url : "deleteFaq",
-						type : "POST",
-						traditional : true,
-						data : {
-							no : deleteList
-						},
-						success : function(data) {
-							console.log("success 진입");
-							console.log(data);
-							location.replace("faq");
-						},
-						error : function(error) {
-							console.log("error 발생");
-						}
-					});
-				} else {
-					console.log("취소");
-				}
+				swal({
+				    title: "FAQ 게시글 삭제",
+				    text: "FAQ 게시글을 삭제하시겠습니까?",
+				    icon: "warning",
+				    buttons: ["아니오", "예"]
+				}).then((예) => {
+					if (예) {
+						console.log("예");
+						$.ajax({
+							url : "deleteFaq",
+							type : "POST",
+							traditional : true,
+							data : {
+								no : deleteList
+							},
+							success : function(data) {
+								console.log("success 진입");
+								console.log(data);
+								location.replace("faq");
+							},
+							error : function(error) {
+								console.log("error 발생");
+							}
+						});
+					} else {
+						console.log("취소");
+					}
+				})
 			}
 			
 	}
@@ -311,6 +319,22 @@ a:active {color:#00BFFF;}
 		} else {
 			checkAll.checked = false;
 		}
+	}
+	
+	function alert() {
+		console.log("안녕");
+		swal({
+		    title: "회원 삭제",
+		    text: "회원을 삭제하시겠습니까?",
+		    icon: "warning",
+		    buttons: ["아니오", "예"]
+		}).then((예) => {
+			if (예) {
+				console.log("예");
+			} else {
+				console.log("아니오");
+			}
+		})
 	}
 </script>
 </head>
@@ -367,6 +391,7 @@ a:active {color:#00BFFF;}
 		<br>
 		<button class="searchBtn" onclick="searchFaq()">검색</button>
 		<button class="deleteBtn" onclick="deleteFaq()">삭제</button>
+		<button onclick="alert()">안녕</button>
 	</div>
 </body>
 </html>

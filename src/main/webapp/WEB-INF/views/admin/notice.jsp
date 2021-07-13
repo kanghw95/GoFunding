@@ -11,6 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/notice.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
 <style>
 body {
     font-family: 'NanumSquare', sans-serif !important;
@@ -143,6 +144,59 @@ function searchNotice() {
 			});
 		}
 	}
+}
+
+function deleteNotice() { // �������� �� ����
+	console.log("�������� �� ���� �Դϴ�.");
+	var checked = document.getElementsByName("check");
+	var boardNo = document.getElementsByName("boardNo"); 
+	var deleteList = new Array();
+	for (var i = 0; i < checked.length; i++) {
+		if (checked[i].checked == false) {
+			console.log("üũ�Ȱ� �����ϴ�.")
+			console.log(checked[i].checked);
+		} else {
+			console.log("üũ�Ȱ� �ֽ��ϴ�.");
+			console.log("üũ�� �������� �� ��ȣ : " + boardNo[i].value);
+			deleteList.push(boardNo[i].value);
+			console.log("üũ�� �������� �� ��ȣ ����Ʈ : " + deleteList);
+		}
+	}
+		console.log("üũ�� üũ�ڽ� ���� : " + deleteList.length);
+		if (deleteList.length == 0) {
+			alert("�ϳ� �̻��� ���� üũ���ּ���.");
+		} else {
+			swal({
+			    title: "공지사항 게시글 삭제",
+			    text: "공지사항 게시글을 삭제하시겠습니까?",
+			    icon: "warning",
+			    buttons: ["아니오", "예"]
+			}).then((예) => {
+				if (예) {
+					console.log("예");
+					$.ajax({
+						url : "deletenoticelist",
+						type : "POST",
+						traditional : true,
+						data : {
+							boardNo : deleteList
+						},
+						success : function(data) {
+							console.log("success ����");
+							console.log(data);
+							location.replace("notice");
+						},
+						error : function(error) {
+							console.log("error �߻�");
+						}
+					});
+				} else {
+					console.log("취소");
+				}
+			})
+			
+		}
+		
 }
 </script>
 </head>
