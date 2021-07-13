@@ -46,15 +46,23 @@
 		</c:forEach>
 		</tr>
 	</table>
+	<c:if test="${sessionScope.user.userId ne null}">
+	<input type="hidden" id="Id" value="${sessionScope.user.userId}">
+	</c:if>
+	<c:if test="${sessionScope.user.userId eq null}">
+	<input type="hidden" id="Id" value="">
+	</c:if>
 </div>
 <div class="btnDiv"><button type="button" id="mainBtn">메인으로</button></div>
 </div>
 </div>
 </div>
 <script>
+var Id=$("#Id").val();
 $("[id^='formTitle']").click(function(event){
 	var fundingNo=$(this).children().next().next().val();
-	window.location.href="http://localhost:8090/sprout/funding/detail?no="+fundingNo;
+	window.location.href="http://localhost:8090/sprout/funding/detail?no="+fundingNo+
+			"&Id="+Id;
 });
 
 $("#fundingCategory").change(function(){
