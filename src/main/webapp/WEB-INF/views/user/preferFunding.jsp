@@ -28,6 +28,7 @@
 				<span>관심 펀딩이 존재하지 않습니다.</span>
 			</c:if>
 			<div class="fundingContainer">
+			<input type="hidden" name="Id" value="${user.userId}">
 			<c:if test="${preferList ne null}">
 				<c:forEach var="vo" items="${preferList}" varStatus="status">
 				<input type="hidden" name="no" value="${vo.fundingNo}">
@@ -55,7 +56,7 @@
 					<tr>
 						<td style="width: 267px; text-align: center;">
 							<div class="fundingCard_figure">
-								<a href="<%=request.getContextPath()%>/funding/detail?no=${vo.fundingNo}" class="fundingCard_wrap">참여하기</a>			
+								<a href="<%=request.getContextPath()%>/funding/detail?no=${vo.fundingNo}&Id=${user.userId}" class="fundingCard_wrap">참여하기</a>			
 							</div>
 						</td>
 					</tr>

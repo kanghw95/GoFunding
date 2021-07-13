@@ -1359,6 +1359,28 @@ public class AdminCtrl {
 		return "admin/faqDetail";
 	}
 	
+	@RequestMapping(value = "/userNotice", method = RequestMethod.GET)
+	public String userNoticeList(Model model, Criteria cri) throws Exception { // 사용자 공지사항 조회
+		
+		List<Board> notice = adService.noticeList(cri); // 게시판 리스트 가져오기
+		System.out.println("notice : " + notice);
+		model.addAttribute("notice", notice);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		System.out.println(pageMaker.getCri());
+		pageMaker.setTotalCount(adService.noticeCount());
+		
+		model.addAttribute("pageMaker", pageMaker);
+		
+		
+		
+		
+		
+		return "board/noticeBoard";
+	}
+	
+	
 	@RequestMapping(value = "faqcount", method = RequestMethod.GET)
 	public ModelAndView getFAQCount() { // 공지사항 수 조회
 		return null;

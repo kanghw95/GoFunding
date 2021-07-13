@@ -4,6 +4,8 @@ package com.funding.sprout.user.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +30,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.funding.sprout.HomeController;
 import com.funding.sprout.user.service.UserInfoService;
 import com.funding.sprout.user.service.UserSMSService;
+import com.funding.sprout.vo.Board;
+import com.funding.sprout.vo.Criteria;
+import com.funding.sprout.vo.PageMaker;
 import com.funding.sprout.vo.User;
 
 import net.nurigo.java_sdk.Coolsms;
@@ -225,5 +230,8 @@ public class UserInfoCtrl {
 		System.out.println("탈퇴 결과 : " + result);
 		
 	}
+	
+
+	
 	
 }

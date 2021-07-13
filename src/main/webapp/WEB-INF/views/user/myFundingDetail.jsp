@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>SPROUT! 새싹나눔</title>
 <link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/modal.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/user/myFundingDetail.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -19,7 +20,7 @@
 .modal_wrap{
 	display: none;
 	width: 300px;
-	height: 500px;
+	height: 350px;
 	position: absolute;
 	top:30%;
 	left: 50%;
@@ -35,7 +36,7 @@
 	content: "";
 	width: 100%;
 	height: 100%;
-	background-color:rgba(0, 0,0, 0);
+	background-color: rgba(255, 255, 255, 0.719);
 	top:0;
 	left: 0;
 	z-index: 1;
@@ -44,20 +45,22 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/views/header.jsp"%>
-	 <fmt:parseDate value="${fundingfin}" var="paymentday" pattern="yyyy년MM월dd"/> 
+<fmt:parseDate value="${fundingfin}" var="paymentday" pattern="yyyy년MM월dd"/> 
+	 
 	<div class="wrapper">
-				<div class="black_bg"></div>
+					<div class="black_bg"></div>
 				<div class="modal_wrap" style="text-align: center;">
-					취소 전에 확인하세요!
+					<div class="modal-title">취소 전에 확인하세요!</div>
 					 <hr>
-					 지금 신청하고 있는 펀딩은 ${paymentday}일에 배송이 시작됩니다.
+					<div class="modal-body"> 
+					지금 신청하고 있는 펀딩은  ${paymentday}일에 배송이 시작됩니다.
 					 <hr>
-					 펀딩은 쇼핑과 달리 배송이후 단순 변심으로 인한 취소, 환불이 어려울 수 있습니다.<br>
-					 <br>
-					<form action="insertOrderRefund" id="funRefund" method="post">
+					 펀딩은 쇼핑과 달리 배송이후 단순 변심으로 인한 취소, 환불이 어려울 수 있습니다.<br></div>
+					 <hr>
+					<form action="insertOrderRefund" id="funRefund" method="post" style="display: block; margin-top: 60px;">
 					
-					 <button type="button" id="noagree" style=" border: 1px solid black;">취소</button>
-					 <input type="submit" value="환불" id="agree" style=" border: 1px solid black;" >
+					 <button type="button" id="noagree" style=" border: 1px solid #fcf6c1;">취소</button>
+					 <input type="submit" value="환불" id="agree" style=" border: 1px solid #cff09e;" >
 					
 						<c:forEach var="rewardDetail" items="${fundingReward }" varStatus="status">
 							<input type="text" id="orderDetailNo${rewardDetail.orderDetailNo}" name="orderDetailNo" value="${rewardDetail.orderDetailNo}">
@@ -80,7 +83,7 @@
 		</h3>
 				
 	<c:forEach var="fundingDetail" items="${fundingDetail }" varStatus="status" begin="1" end="1">
-		<div class="fundingContainer">
+		<div class="fundingContainer" style="margin-bottom: 50px;">
 			<div class="orderInfoContainer">
 				<p class="fundingStatus">${fundingStatus }</p>
 				<p class="fundingTitle"><b>펀딩 이름: </b>${fundingDetail.fundingTitle }</p>
@@ -121,13 +124,16 @@
 						</p>
 					</c:forEach>
 				</c:if>
-			<div class="btnContainer">
-				<button class="refundBtn" id="cancelBtn">결제 취소</button>
 			</div>
+			<div class="btnContainer" style="display: block; text-align: center;">
+				<button class="refundBtn" id="cancelBtn">결제 취소</button>
 			</div>
 		</div>
 	</c:forEach>
 	</div>
+	
+	
+	
 	</div>
 	<%@include file="/WEB-INF/views/footer.jsp"%>
 </body>
@@ -154,7 +160,7 @@ $(document).ready(function () {
 			alert("배송 관련 작업중에는 환불이 불가능합니다.")
 			return;
 		}else if(orderStatus == 5){
-			alert("환불이 완료된 건입니다.")
+			swal.fire("환불이 완료된 건입니다.");
 			return;
 		}
 		

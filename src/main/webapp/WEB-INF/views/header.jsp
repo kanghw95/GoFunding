@@ -101,7 +101,7 @@ $(document).ready(function(){
 					<a href="#" class="subTitle">공지사항</a>
 					<div class="subMenu3" style="width: 180px;">
 						<ul>
-							<li><a href="#">공지사항</a></li>
+							<li><a href="<%=request.getContextPath()%>/userNotice">공지사항</a></li>
 							<li><a href="#">자주 물어보는 질문</a></li>
 							<li><a href="#">문의하기</a></li>
 						</ul>
@@ -132,7 +132,7 @@ $(document).ready(function(){
 				<div class="afterLogin">
 					<div class="dropdown">
 						<div class="picBtn" id="picBtn">
-							<input type="image" src="<%=request.getContextPath() %>/images/user64.png" class="pic" width="50" height="50" style="background-color: white" id="show">
+							<input type="image" src="<%=request.getContextPath() %>/resources/img/user64.png" class="pic" width="50" height="50" style="background-color: white" id="show">
 						</div>
 						<div class="dropdown-content" style="border: 1px solid #1abc9c; display:none" id="dropdown-content">
 							<a href="<%=request.getContextPath()%>/adminMain">관리자 페이지</a>

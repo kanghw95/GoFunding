@@ -46,7 +46,7 @@ ul, li{
 
 .refundBtn{
 	diplay:block;
-	float: right;
+	justify-content: center;
 	margin-top:10px;
 	background:#79bd9a;
 	color:#fff;

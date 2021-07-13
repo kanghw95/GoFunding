@@ -31,6 +31,25 @@
 #userId{
 	cursor: pointer;
 }
+
+.insideBtn {
+	width: 85px;
+	height: 40px;
+	border: none;
+	padding: 5px;
+	outline: none;
+	border-radius: 5px;
+	color: #1e1e1e;
+	background-color: #cff09e;
+	border: 1px solid #cff09e;
+	font-size: 15px;
+}
+
+.insideBtn:hover {
+	background-color: #a8dba8;
+	font-family: 'TmoneyRoundWindExtraBold';
+}
+
 </style>
 </head>
 <body>
@@ -58,7 +77,7 @@
 	
 	<div class="write-button">
 	<form id="sharewriteBtn2">
-	<button type="button">글쓰기</button>
+	<button type="button" class="insideBtn">글쓰기</button>
 	</form>
 	</div>
 	

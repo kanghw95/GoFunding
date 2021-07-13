@@ -55,13 +55,13 @@
 				</div>
 				<div class="freeContent">
 					<table class="table">
-						<c:if test="${!empty freeBoardCmtMore }">
+						<c:if test="${!empty freeBoardCmt }">
 							<tr style="background-color: #add9d4;">
 								<th>댓글 번호</th>
 								<th>댓글 제목</th>
 								<th style="border-right: none;">작성일</th>
 							</tr>
-							<c:forEach var="free" items="${freeBoardCmtMore }" varStatus="status">
+							<c:forEach var="free" items="${freeBoardCmt }" varStatus="status">
 								<tr>
 									<td style="text-align: center;">${free.cmtNo }</td>
 									<td>${free.cmtContent}</td>
@@ -69,7 +69,7 @@
 								</tr>
 							</c:forEach>
 						</c:if>
-						<c:if test="${empty freeBoardCmtMore }">
+						<c:if test="${empty freeBoardCmt }">
 							<span> 작성된 게시글이 없습니다 </span>
 						</c:if>
 					</table>
@@ -83,13 +83,13 @@
 				</div>
 				<div class="reviewContent">
 					<table class="table">
-						<c:if test="${!empty rBoardCmtMore }">
+						<c:if test="${!empty rBoardCmt }">
 							<tr style="background-color: #add9d4;">
 								<th>댓글 번호</th>
 								<th>댓글 제목</th>
 								<th style="border-right: none;">작성일</th>
 							</tr>
-							<c:forEach var="review" items="${rBoardCmtMore }" varStatus="status">
+							<c:forEach var="review" items="${rBoardCmt }" varStatus="status">
 								<tr>
 									<td style="text-align: center;">${review.cmtNo }</td>
 									<td>${review.cmtContent}</td>
@@ -97,7 +97,7 @@
 								</tr>
 							</c:forEach>
 						</c:if>
-						<c:if test="${empty rBoardCmtMore }">
+						<c:if test="${empty rBoardCmt }">
 							<span> 작성된 게시글이 없습니다 </span>
 						</c:if>
 					</table>
@@ -111,13 +111,13 @@
 				</div>
 				<div class="questionContent">
 					<table class="table">
-						<c:if test="${!empty qBoardCmtMore }">
+						<c:if test="${!empty qBoardCmt }">
 							<tr style="background-color: #add9d4;">
 								<th>댓글 번호</th>
 								<th>댓글 제목</th>
 								<th style="border-right: none;">작성일</th>
 							</tr>
-							<c:forEach var="q" items="${qBoardCmtMore }" varStatus="status">
+							<c:forEach var="q" items="${qBoardCmt }" varStatus="status">
 								<tr>
 									<td style="text-align: center;">${q.cmtNo }</td>
 									<td>${q.cmtContent}</td>
@@ -125,7 +125,7 @@
 								</tr>
 							</c:forEach>
 						</c:if>
-						<c:if test="${empty qBoardCmtMore }">
+						<c:if test="${empty qBoardCmt }">
 							<span> 작성된 게시글이 없습니다 </span>
 						</c:if>
 					</table>
@@ -139,13 +139,13 @@
 				</div>
 				<div class="shareContent">
 					<table class="table">
-						<c:if test="${!empty sBoardCmtMore }">
+						<c:if test="${!empty sBoardCmt }">
 							<tr style="background-color: #add9d4;">
 								<th>댓글 번호</th>
 								<th>댓글 제목</th>
 								<th style="border-right: none;">작성일</th>
 							</tr>
-							<c:forEach var="s" items="${sBoardCmtMore }" varStatus="status">
+							<c:forEach var="s" items="${sBoardCmt }" varStatus="status">
 								<tr>
 									<td style="text-align: center;">${s.cmtNo }</td>
 									<td>${s.cmtContent}</td>
@@ -153,7 +153,7 @@
 								</tr>
 							</c:forEach>
 						</c:if>
-						<c:if test="${empty sBoardCmtMore }">
+						<c:if test="${empty sBoardCmt }">
 							<span> 작성된 게시글이 없습니다 </span>
 						</c:if>
 					</table>
@@ -167,13 +167,13 @@
 				</div>
 				<div class="eventContent">
 					<table class="table">
-						<c:if test="${!empty eBoardCmtMore }">
+						<c:if test="${!empty eBoardCmt }">
 							<tr style="background-color: #add9d4;">
 								<th>댓글 번호</th>
 								<th>댓글 제목</th>
 								<th style="border-right: none;">작성일</th>
 							</tr>
-							<c:forEach var="e" items="${eBoardCmtMore }" varStatus="status">
+							<c:forEach var="e" items="${eBoardCmt }" varStatus="status">
 								<tr>
 									<td style="text-align: center;">${e.cmtNo }</td>
 									<td>${e.cmtContent}</td>
@@ -181,7 +181,7 @@
 								</tr>
 							</c:forEach>
 						</c:if>
-						<c:if test="${empty eBoardCmtMore }">
+						<c:if test="${empty eBoardCmt }">
 							<span> 작성된 게시글이 없습니다 </span>
 						</c:if>
 					</table>
