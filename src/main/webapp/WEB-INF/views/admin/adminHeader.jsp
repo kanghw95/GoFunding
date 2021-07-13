@@ -74,6 +74,7 @@ $(document).ready(function(){
 							<ul style="width: 150px;">
 								<li><a href="<%=request.getContextPath()%>/userlist">회원조회</a></li>
 								<li><a href="<%=request.getContextPath()%>/report">회원신고내역</a></li>
+								<li><a href="<%=request.getContextPath()%>/message/msgUserList">회원메시지</a></li>
 							</ul>
 						</div>
 					</div>
