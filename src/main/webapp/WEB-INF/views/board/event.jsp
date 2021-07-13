@@ -180,11 +180,6 @@
 			frm.method = "get";
 			frm.submit();
 		});
-		
-	    $("body").on("click", "[id^=userId]", function(event) {
-            var receiverId = $(this).text();
-	    	var pop = window.open("about:blank","content","width=500, height=600");
-   			pop.location.href="<%=request.getContextPath() %>/message/msgRead2?receiverId="+receiverId;
-        });
+
 	</script>
 </html>

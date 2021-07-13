@@ -197,8 +197,13 @@
 		
 	    $("body").on("click", "[id^=userId]", function(event) {
             var receiverId = $(this).text();
+			var sessionUserId = '${sessionScope.user.userId}';
+            if(sessionUserId == 'null' || sessionUserId == ''){
+				alert("로그인 후 글 쓰기가 가능합니다.");
+			} else{
 	    	var pop = window.open("about:blank","content","width=500, height=600");
    			pop.location.href="<%=request.getContextPath() %>/message/msgRead2?receiverId="+receiverId;
-        });
+			}
+       			 });
 	</script>
 </html>
