@@ -88,7 +88,7 @@ public class UserLoginCtrl {
 						System.out.println("정지 회원 로그인");
 					} else if (authority2.equals(drop)) {
 						wr.println("<script type='text/javascript'>"); 
-						wr.println("alert('아이디와 비밀번호를 확인해주세요.'); window.location = document.referrer;"); 
+						wr.println("alert('탈퇴한 회원입니다.'); window.location = document.referrer;"); 
 						wr.println("</script>");
 						wr.flush();
 						System.out.println("탈퇴 회원 로그인");
