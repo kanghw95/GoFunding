@@ -336,7 +336,9 @@
 									<c:forEach items="${historyResultDetail}" var="list" >
 										<li class="FundingDetailStoryParticipationList_item">
 												<div class="FundingDetailStoryParticipationList_thumbnail" style="background-color: black; "></div>
-												<div class="FundingDetailStoryParticipationList_date">${list.ORDERDATE}</div>
+												<fmt:formatDate value="${list.ORDERDATE}" type="DATE" var="paydate" pattern="yyyy년 MM월 dd일"/>
+												<div class="FundingDetailStoryParticipationList_date">${paydate}</div>
+												<br>
 												<div class="FundingDetailStoryParticipationList_user">
 													<span class="FundingDetailStoryParticipationList_name_">${list.ID } 님</span>
 													<span class="FundingDetailStoryParticipationList_amount">

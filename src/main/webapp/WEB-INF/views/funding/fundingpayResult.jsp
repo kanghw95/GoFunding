@@ -66,7 +66,7 @@
 				</section>
 				<div class="FundingDetailReportContent_links">
 					<a class="FundingDetailReportContent_link_list" href="/sprout">메인 페이지</a>
-					<a href="#" class="FundingDetailReportContent_link_my">My 펀딩</a>
+					<a href="<%=request.getContextPath()%>/myPage" class="FundingDetailReportContent_link_my">My 펀딩</a>
 				</div>
 			</div>
 		</div>

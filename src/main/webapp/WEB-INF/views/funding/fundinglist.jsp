@@ -223,9 +223,25 @@ pageEncoding="UTF-8"%>
 
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
-					<li class="fundingContent_itemAll">
+							<jsp:useBean id="currTime" class="java.util.Date" />
+							<jsp:useBean id="now" class="java.util.Date" />
+							<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+							<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
+							<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+							<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
+							<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+							
+							<li class="fundingContent_itemAll">
+	
 							<form action="funding/detail" id="detail${vo.fundingno}" method="get">
-							<a href="#" onclick="detail${vo.fundingno}.submit()" class="fundingCard_wrap">
+							<c:choose>
+								<c:when test="${(endDate-strDate) gt 0 }">
+									<a href="#" onclick="detail${vo.fundingno}.submit()" class="fundingCard_wrap">
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="detail${vo.fundingno}.submit()" class="fundingCard_wrap" style="background-color:rgba(0, 0,0, 0.1);">
+								</c:otherwise>
+							</c:choose>	
 								<input type="hidden" name="no" value="${vo.fundingno}">
 								<c:if test="${sessionScope.user.userId ne null}">
 									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
@@ -242,14 +258,6 @@ pageEncoding="UTF-8"%>
 											<strong class="fundingCard_title">${vo.fundingtitle}</strong>
 										<div class="fundingCard_organization">${vo.maker}</div>
 										<div class="fundingCard_figure">
-										<jsp:useBean id="currTime" class="java.util.Date" />
-
-										<jsp:useBean id="now" class="java.util.Date" />
-										<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
-										<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
-										<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-										<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
-										<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
 										
 										<c:choose>
 											<c:when test="${(endDate-strDate) gt 0 }">
@@ -281,9 +289,24 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '일자리 창출'}">
-						<li class="fundingContent_item1" >
+						<jsp:useBean id="currTime1" class="java.util.Date" />
+
+						<jsp:useBean id="now1" class="java.util.Date" />
+						<fmt:formatDate value="${now1}" pattern="yyyy-MM-dd" var="today" />
+						<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
+						<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+						<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
+						<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+						<li class="fundingContent_item1">				
 							<form action="funding/detail" id="detail1${vo.fundingno}" method="get">
-							<a href="#" onclick="detail1${vo.fundingno}.submit()" class="fundingCard_wrap">
+							<c:choose>
+								<c:when test="${(endDate-strDate) gt 0 }">
+									<a href="#" onclick="detail1${vo.fundingno}.submit()" class="fundingCard_wrap">
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="detail1${vo.fundingno}.submit()" class="fundingCard_wrap" style="background-color:rgba(0, 0,0, 0.1);">
+								</c:otherwise>
+							</c:choose>	
 								<input type="hidden" name="no" value="${vo.fundingno}">
 								<c:if test="${sessionScope.user.userId ne null}">
 									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
@@ -300,15 +323,6 @@ pageEncoding="UTF-8"%>
 											<strong class="fundingCard_title">${vo.fundingtitle}</strong>
 										<div class="fundingCard_organization">${vo.maker}</div>
 										<div class="fundingCard_figure">
-										<jsp:useBean id="currTime1" class="java.util.Date" />
-
-										<jsp:useBean id="now1" class="java.util.Date" />
-										<fmt:formatDate value="${now1}" pattern="yyyy-MM-dd" var="today" />
-										<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
-										<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-										<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
-										<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
-										
 										<c:choose>
 											<c:when test="${(endDate-strDate) gt 0 }">
 												<span class="fundingCard_date">${endDate - strDate } 일 남음</span>
@@ -339,9 +353,25 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '공정 무역'}">
+						<jsp:useBean id="currTime2" class="java.util.Date" />
+
+							<jsp:useBean id="now2" class="java.util.Date" />
+							<fmt:formatDate value="${now2}" pattern="yyyy-MM-dd" var="today" />
+							<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
+							<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+							<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
+							<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+							
 						<li class="fundingContent_item2" >
 							<form action="funding/detail" id="detail2${vo.fundingno}" method="get">
-							<a href="#" onclick="detail2${vo.fundingno}.submit()" class="fundingCard_wrap">
+							<c:choose>
+								<c:when test="${(endDate-strDate) gt 0 }">
+									<a href="#" onclick="detail2${vo.fundingno}.submit()" class="fundingCard_wrap">
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="detail2${vo.fundingno}.submit()" class="fundingCard_wrap" style="background-color:rgba(0, 0,0, 0.1);">
+								</c:otherwise>
+							</c:choose>	
 								<input type="hidden" name="no" value="${vo.fundingno}">
 								<c:if test="${sessionScope.user.userId ne null}">
 									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
@@ -358,15 +388,7 @@ pageEncoding="UTF-8"%>
 											<strong class="fundingCard_title">${vo.fundingtitle}</strong>
 										<div class="fundingCard_organization">${vo.maker}</div>
 										<div class="fundingCard_figure">
-										<jsp:useBean id="currTime2" class="java.util.Date" />
 
-										<jsp:useBean id="now2" class="java.util.Date" />
-										<fmt:formatDate value="${now2}" pattern="yyyy-MM-dd" var="today" />
-										<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
-										<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-										<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
-										<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
-										
 										<c:choose>
 											<c:when test="${(endDate-strDate) gt 0 }">
 												<span class="fundingCard_date">${endDate - strDate } 일 남음</span>
@@ -398,9 +420,25 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '친환경'}">
+							<jsp:useBean id="currTime3" class="java.util.Date" />
+
+							<jsp:useBean id="now3" class="java.util.Date" />
+							<fmt:formatDate value="${now3}" pattern="yyyy-MM-dd" var="today" />
+							<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
+							<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+							<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
+							<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+							
 						<li class="fundingContent_item3" >
 							<form action="funding/detail" id="detail3${vo.fundingno}" method="get">
-							<a href="#" onclick="detail3${vo.fundingno}.submit()" class="fundingCard_wrap">
+							<c:choose>
+								<c:when test="${(endDate-strDate) gt 0 }">
+									<a href="#" onclick="detail3${vo.fundingno}.submit()" class="fundingCard_wrap">
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="detail3${vo.fundingno}.submit()" class="fundingCard_wrap" style="background-color:rgba(0, 0,0, 0.1);">
+								</c:otherwise>
+							</c:choose>	
 								<input type="hidden" name="no" value="${vo.fundingno}">
 								<c:if test="${sessionScope.user.userId ne null}">
 									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
@@ -417,15 +455,7 @@ pageEncoding="UTF-8"%>
 											<strong class="fundingCard_title">${vo.fundingtitle}</strong>
 										<div class="fundingCard_organization">${vo.maker}</div>
 										<div class="fundingCard_figure">
-										<jsp:useBean id="currTime3" class="java.util.Date" />
 
-										<jsp:useBean id="now3" class="java.util.Date" />
-										<fmt:formatDate value="${now3}" pattern="yyyy-MM-dd" var="today" />
-										<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
-										<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-										<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
-										<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
-										
 										<c:choose>
 											<c:when test="${(endDate-strDate) gt 0 }">
 												<span class="fundingCard_date">${endDate - strDate } 일 남음</span>
@@ -457,9 +487,25 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '기부'}">
+							<jsp:useBean id="currTime4" class="java.util.Date" />
+
+							<jsp:useBean id="now4" class="java.util.Date" />
+							<fmt:formatDate value="${now4}" pattern="yyyy-MM-dd" var="today" />
+							<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
+							<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+							<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
+							<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+							
 						<li class="fundingContent_item4" >
-						<form action="funding/detail" id="detail4${vo.fundingno}" method="get">
-							<a href="#" onclick="detail4${vo.fundingno}.submit()" class="fundingCard_wrap">
+							<form action="funding/detail" id="detail4${vo.fundingno}" method="get">
+							<c:choose>
+								<c:when test="${(endDate-strDate) gt 0 }">
+									<a href="#" onclick="detail4${vo.fundingno}.submit()" class="fundingCard_wrap">
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="detail4${vo.fundingno}.submit()" class="fundingCard_wrap" style="background-color:rgba(0, 0,0, 0.1);">
+								</c:otherwise>
+							</c:choose>	
 								<input type="hidden" name="no" value="${vo.fundingno}">
 								<c:if test="${sessionScope.user.userId ne null}">
 									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
@@ -476,15 +522,7 @@ pageEncoding="UTF-8"%>
 											<strong class="fundingCard_title">${vo.fundingtitle}</strong>
 										<div class="fundingCard_organization">${vo.maker}</div>
 										<div class="fundingCard_figure">
-										<jsp:useBean id="currTime4" class="java.util.Date" />
 
-										<jsp:useBean id="now4" class="java.util.Date" />
-										<fmt:formatDate value="${now4}" pattern="yyyy-MM-dd" var="today" />
-										<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
-										<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-										<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
-										<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
-										
 										<c:choose>
 											<c:when test="${(endDate-strDate) gt 0 }">
 												<span class="fundingCard_date">${endDate - strDate } 일 남음</span>
@@ -516,9 +554,25 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '작은 가게'}">
+							<jsp:useBean id="currTime5" class="java.util.Date" />
+
+							<jsp:useBean id="now5" class="java.util.Date" />
+							<fmt:formatDate value="${now5}" pattern="yyyy-MM-dd" var="today" />
+							<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
+							<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+							<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
+							<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+							
 						<li class="fundingContent_item5" >
-						<form action="funding/detail" id="detail5${vo.fundingno}" method="get">
-							<a href="#" onclick="detail5${vo.fundingno}.submit()" class="fundingCard_wrap">
+							<form action="funding/detail" id="detail5${vo.fundingno}" method="get">
+							<c:choose>
+								<c:when test="${(endDate-strDate) gt 0 }">
+									<a href="#" onclick="detail5${vo.fundingno}.submit()" class="fundingCard_wrap">
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="detail5${vo.fundingno}.submit()" class="fundingCard_wrap" style="background-color:rgba(0, 0,0, 0.1);">
+								</c:otherwise>
+							</c:choose>	
 								<input type="hidden" name="no" value="${vo.fundingno}">
 								<c:if test="${sessionScope.user.userId ne null}">
 									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
@@ -535,15 +589,7 @@ pageEncoding="UTF-8"%>
 											<strong class="fundingCard_title">${vo.fundingtitle}</strong>
 										<div class="fundingCard_organization">${vo.maker}</div>
 										<div class="fundingCard_figure">
-										<jsp:useBean id="currTime5" class="java.util.Date" />
 
-										<jsp:useBean id="now5" class="java.util.Date" />
-										<fmt:formatDate value="${now5}" pattern="yyyy-MM-dd" var="today" />
-										<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
-										<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-										<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
-										<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
-										
 										<c:choose>
 											<c:when test="${(endDate-strDate) gt 0 }">
 												<span class="fundingCard_date">${endDate - strDate } 일 남음</span>
@@ -575,9 +621,25 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '미디어'}">
+							<jsp:useBean id="currTime6" class="java.util.Date" />
+
+							<jsp:useBean id="now6" class="java.util.Date" />
+							<fmt:formatDate value="${now6}" pattern="yyyy-MM-dd" var="today" />
+							<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
+							<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+							<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
+							<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+							
 						<li class="fundingContent_item6" >
-						<form action="funding/detail" id="detail6${vo.fundingno}" method="get">
-							<a href="#" onclick="detail6${vo.fundingno}.submit()" class="fundingCard_wrap">
+							<form action="funding/detail" id="detail6${vo.fundingno}" method="get">
+							<c:choose>
+								<c:when test="${(endDate-strDate) gt 0 }">
+									<a href="#" onclick="detail6${vo.fundingno}.submit()" class="fundingCard_wrap">
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="detail6${vo.fundingno}.submit()" class="fundingCard_wrap" style="background-color:rgba(0, 0,0, 0.1);">
+								</c:otherwise>
+							</c:choose>	
 								<input type="hidden" name="no" value="${vo.fundingno}">
 								<c:if test="${sessionScope.user.userId ne null}">
 									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
@@ -594,15 +656,7 @@ pageEncoding="UTF-8"%>
 											<strong class="fundingCard_title">${vo.fundingtitle}</strong>
 										<div class="fundingCard_organization">${vo.maker}</div>
 										<div class="fundingCard_figure">
-										<jsp:useBean id="currTime6" class="java.util.Date" />
 
-										<jsp:useBean id="now6" class="java.util.Date" />
-										<fmt:formatDate value="${now6}" pattern="yyyy-MM-dd" var="today" />
-										<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
-										<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-										<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
-										<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
-										
 										<c:choose>
 											<c:when test="${(endDate-strDate) gt 0 }">
 												<span class="fundingCard_date">${endDate - strDate } 일 남음</span>
@@ -633,9 +687,25 @@ pageEncoding="UTF-8"%>
 			<c:if test="${fundinglist ne null}">
 				<c:forEach var="vo" items="${fundinglist}" varStatus="status">
 					<c:if test="${vo.fundingcategory eq '창작자'}">
+							<jsp:useBean id="currTime7" class="java.util.Date" />
+
+							<jsp:useBean id="now7" class="java.util.Date" />
+							<fmt:formatDate value="${now7}" pattern="yyyy-MM-dd" var="today" />
+							<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
+							<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+							<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
+							<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+							
 						<li class="fundingContent_item7" >
-						<form action="funding/detail" id="detail7${vo.fundingno}" method="get">
-							<a href="#" onclick="detail7${vo.fundingno}.submit()" class="fundingCard_wrap">
+							<form action="funding/detail" id="detail7${vo.fundingno}" method="get">
+							<c:choose>
+								<c:when test="${(endDate-strDate) gt 0 }">
+									<a href="#" onclick="detail7${vo.fundingno}.submit()" class="fundingCard_wrap">
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="detail7${vo.fundingno}.submit()" class="fundingCard_wrap" style="background-color:rgba(0, 0,0, 0.1);">
+								</c:otherwise>
+							</c:choose>	
 								<input type="hidden" name="no" value="${vo.fundingno}">
 								<c:if test="${sessionScope.user.userId ne null}">
 									<input type="hidden" name="Id" value="${sessionScope.user.userId}">
@@ -652,15 +722,7 @@ pageEncoding="UTF-8"%>
 											<strong class="fundingCard_title">${vo.fundingtitle}</strong>
 										<div class="fundingCard_organization">${vo.maker}</div>
 										<div class="fundingCard_figure">
-										<jsp:useBean id="currTime7" class="java.util.Date" />
 
-										<jsp:useBean id="now7" class="java.util.Date" />
-										<fmt:formatDate value="${now7}" pattern="yyyy-MM-dd" var="today" />
-										<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>		
-										<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-										<fmt:parseDate value="${vo.fundingfin }" var="endPlanDate" pattern="yyyy-MM-dd"/>
-										<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
-										
 										<c:choose>
 											<c:when test="${(endDate-strDate) gt 0 }">
 												<span class="fundingCard_date">${endDate - strDate } 일 남음</span>
@@ -679,8 +741,8 @@ pageEncoding="UTF-8"%>
 				</c:forEach>
 			</c:if>
 			
+
 		</ul>
-		
 		</div>
 		
 		<button type="button" id="load" class="fundingContent_button_more">더보기<span class="fundingcontent_icon"></span></button>
