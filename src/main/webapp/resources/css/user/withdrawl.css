@@ -20,6 +20,10 @@ ul, li {
 	margin-right: auto;
 }
 
+.withdrawlTitle {
+	font-family: 'TmoneyRoundWindExtraBold';
+}
+
 .withdrawlReason {
 	border: 1px solid #ededed;
 	border-radius: 7px;
@@ -27,12 +31,39 @@ ul, li {
 	margin: 15px;
 }
 
-
 .caution {
 	border: 1px solid #ededed;
 	border-radius: 7px;
 	padding: 30px;
 	margin: 15px;
+}
+
+.insideBtn {
+	width: 85px;
+	height: 40px;
+	border: none;
+	padding: 5px;
+	outline: none;
+	border-radius: 5px;
+	color: #1e1e1e;
+	background-color: #cff09e;
+	border: 1px solid #cff09e;
+	font-size: 15px;
+}
+
+
+.insideBtn:hover {
+	background-color: #a8dba8;
+	cursor: pointer;
+}
+
+.modal-content {
+	width: 400px !important;
+}
+
+.modal-body {
+	padding-right: 50px;
+	padding-left: 50px;
 }
 
 
@@ -43,26 +74,43 @@ ul, li {
 	text-align: center;
 }
 
+.btn-danger{
+	border: none !important;
+}
+
+#withdrawal {
+	background:#fcf6c1 !important;
+	color:#202020 !important;
+	border: none !important;
+	border-radius: .25rem;
+	height: 38px;
+}
+
+#withdrawal:hover {
+	background:#cff09e !important;
+	color:#fff;
+}
+
 .withdrawlBtn{
 	diplay:block;
 	margin-top:10px;
-	background:#568C82;
+	background:#568C82 !important;
 	color:#fff;
-	border:none;
+	border:none !important;
 	position:relative;
 	height:40px;
 	font-size: 16px;
 	padding:0 1em;
 	cursor:pointer;
-	transition:800ms ease all;
+	transition:800ms ease all !important;
 	outline:none;
 	border-radius:5px;
 }
 
 
-.withdrawlBtn:hover{
-	background:#fff;
-	color:#1AAB8A;
+.withdrawlBtn:hover, .withdrawlBtn:focus, .withdrawlBtn:active{
+	background:#fff !important;
+	color:#1AAB8A !important;
 }
 
 .withdrawlBtn:before,.withdrawlBtn:after{
@@ -73,7 +121,7 @@ ul, li {
 	height:2px;
 	width:0;
 	background: #1AAB8A;
-	transition:400ms ease all;
+	transition:400ms ease all !important;
 }
 .withdrawlBtn:after{
 	right:inherit;
@@ -83,5 +131,5 @@ ul, li {
 }
 .withdrawlBtn:hover:before,.withdrawlBtn:hover:after {
 	width:100%;
-	transition:800ms ease all;
+	transition:800ms ease all !important;
 }

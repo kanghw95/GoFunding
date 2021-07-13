@@ -86,6 +86,7 @@ $(document).ready(function () {
 
 
 </script>
+
 </head>
 <body>
 <%@include file="/WEB-INF/views/header.jsp"%>
@@ -142,13 +143,14 @@ $(document).ready(function () {
 			        
 			        <!-- Modal body -->
 			       <div class="modal-body">
-			         	안전한 회원탈퇴 절차를 위하여 본인 인증 절차를 거치고 있습니다.
-			         	회원가입 시 입력한 휴대폰 번호를 입력 후 인증절차를 진행해주세요.
-		 				<div class="frmGroup">
-							<label for="phone">전화번호</label>
-							<input type="text" class="phoneNumber" name="phone" id="phone">
-							<input type="button" id="checkPhoneNumber" class="insideBtn" value="인증번호 전송"><br>
-							<input type="text" id="certification" class="inputPhone" name="certification" placeholder="인증번호를 입력해주세요">
+			         	안전한 회원탈퇴 절차를 위하여<br> 
+			         	본인 인증 절차를 거치고 있습니다.
+			         	회원가입 시 입력한 휴대폰 번호를 입력 후<br> 
+			         	인증절차를 진행해주세요.
+		 				<div class="frmGroup" id="phoneGroup" style="margin-top: 5px; padding-left: 40px;">
+							<input type="text" class="phoneNumber" name="phone" id="phone" placeholder="Phone Number" style="margin-bottom: 3px;">
+							<input type="button" id="checkPhoneNumber" class="insideBtn" value="번호확인" style="margin-bottom: 3px;"><br>
+							<input type="text" id="certification" class="inputPhone" name="certification" placeholder="인증번호">
 							<input type="button" id="checkCerNumber" class="insideBtn" value="인증하기">
 						</div>
 			       </div>
@@ -156,7 +158,7 @@ $(document).ready(function () {
 			        <!-- Modal footer -->
 			       <div class="modal-footer">
 			         <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-			         <button type="button" class="insideBtn" id="withdrawal">탈퇴하기</button>
+			         <button type="button" id="withdrawal">탈퇴하기</button>
 			       </div>
 			        
 			     </div>

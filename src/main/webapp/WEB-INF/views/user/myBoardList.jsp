@@ -80,7 +80,7 @@
 					<a href="#" onclick="myrlist();"><span class="more">더보기</span></a>
 				</div>
 				<div class="reviewContent">
-					<table>
+					<table class="table">
 						<c:if test="${!empty reviewBoardList }">
 							<tr style="background-color: #add9d4;">
 								<th>글 번호</th>
@@ -108,7 +108,7 @@
 					<a href="#" onclick="myqlist();"><span class="more">더보기</span></a>
 				</div>
 				<div class="questionContent">
-					<table>
+					<table class="table">
 						<c:if test="${!empty qBoardList }">
 							<tr style="background-color: #add9d4;">
 								<th>글 번호</th>
@@ -136,7 +136,7 @@
 					<a href="#" onclick="myslist();"><span class="more">더보기</span></a>
 				</div>
 				<div class="shareContent">
-					<table>
+					<table class="table">
 						<c:if test="${!empty sBoardList }">
 							<tr style="background-color: #add9d4;">
 								<th>글 번호</th>
@@ -164,7 +164,7 @@
 					<a href="#" onclick="myelist();"><span class="more">더보기</span></a>
 				</div>
 				<div class="eventContent">
-					<table>
+					<table class="table">
 						<c:if test="${!empty eBoardList }">
 							<tr style="background-color: #add9d4;">
 								<th>글 번호</th>

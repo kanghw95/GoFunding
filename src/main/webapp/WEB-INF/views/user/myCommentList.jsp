@@ -82,7 +82,7 @@
 					<a href="#" onclick="myrCmtlist();"><span class="more">더보기</span></a>
 				</div>
 				<div class="reviewContent">
-					<table>
+					<table class="table">
 						<c:if test="${!empty rBoardCmtMore }">
 							<tr style="background-color: #add9d4;">
 								<th>댓글 번호</th>
@@ -110,7 +110,7 @@
 					<a href="#" onclick="myqCmtlist();"><span class="more">더보기</span></a>
 				</div>
 				<div class="questionContent">
-					<table>
+					<table class="table">
 						<c:if test="${!empty qBoardCmtMore }">
 							<tr style="background-color: #add9d4;">
 								<th>댓글 번호</th>
@@ -138,7 +138,7 @@
 					<a href="#" onclick="mysCmtlist();"><span class="more">더보기</span></a>
 				</div>
 				<div class="shareContent">
-					<table>
+					<table class="table">
 						<c:if test="${!empty sBoardCmtMore }">
 							<tr style="background-color: #add9d4;">
 								<th>댓글 번호</th>
@@ -166,7 +166,7 @@
 					<a href="#" onclick="myeCmtlist();"><span class="more">더보기</span></a>
 				</div>
 				<div class="eventContent">
-					<table>
+					<table class="table">
 						<c:if test="${!empty eBoardCmtMore }">
 							<tr style="background-color: #add9d4;">
 								<th>댓글 번호</th>

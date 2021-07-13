@@ -420,7 +420,7 @@ public class UserMyPageCtrl {
 		return mv;
 	}
 	
-	//내가 쓴 자유 게시판 글 조회 더보기
+	//내가 쓴 자유 게시판 댓글 조회 더보기
 	@RequestMapping(value = "/myfcmtlist", method = RequestMethod.GET)
 	public ModelAndView myFreeBoardCmtMore(ModelAndView mv, HttpSession session) throws Exception{
 		System.out.println("myfcmtlist 들어옴");
@@ -439,7 +439,7 @@ public class UserMyPageCtrl {
 		return mv;
 	}
 	
-	//내가 쓴 후기 게시판 글 조회 더보기
+	//내가 쓴 후기 게시판 댓글 조회 더보기
 	@RequestMapping(value = "/myrcmtlist", method = RequestMethod.GET)
 	public ModelAndView myRBoardCmtMore(ModelAndView mv, HttpSession session) throws Exception{
 		System.out.println("myrcmtlist 들어옴");
@@ -458,7 +458,7 @@ public class UserMyPageCtrl {
 		return mv;
 	}
 	
-	//내가 쓴 질의응답 게시판 글 조회 더보기
+	//내가 쓴 질의응답 게시판 댓글 조회 더보기
 	@RequestMapping(value = "/myqcmtlist", method = RequestMethod.GET)
 	public ModelAndView myQBoardCmtMore(ModelAndView mv, HttpSession session) throws Exception{
 		System.out.println("myqcmtlist 들어옴");
@@ -477,7 +477,7 @@ public class UserMyPageCtrl {
 		return mv;
 	}
 	
-	//내가 쓴 정보공유 게시판 글 조회 더보기
+	//내가 쓴 정보공유 게시판 댓글 조회 더보기
 	@RequestMapping(value = "/myscmtlist", method = RequestMethod.GET)
 	public ModelAndView mySBoardCmtMore(ModelAndView mv, HttpSession session) throws Exception{
 		System.out.println("myscmtlist 들어옴");
@@ -496,7 +496,7 @@ public class UserMyPageCtrl {
 		return mv;
 	}
 	
-	//내가 쓴 이벤트 게시판 글 조회 더보기
+	//내가 쓴 이벤트 게시판 댓글 조회 더보기
 	@RequestMapping(value = "/myecmtlist", method = RequestMethod.GET)
 	public ModelAndView myEBoardCmtMore(ModelAndView mv, HttpSession session) throws Exception{
 		System.out.println("myecmtlist 들어옴");

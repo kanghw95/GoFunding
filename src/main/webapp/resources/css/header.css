@@ -237,10 +237,8 @@ header{
 
 .nav-content>li:hover>div{
 	display: block;
+	opacity: 0.95;
 	
-	/*opacity: 1;
-	visibility: visible;
-	overflow: visible;*/
 }
 
 
