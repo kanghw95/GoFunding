@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
-<link href="<%=request.getContextPath() %>/resources/css/user/join.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/user/popup.css" rel="stylesheet" type="text/css" />
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -114,7 +114,7 @@ $(document).ready(function() {
 	<div class="joinContainer">
 		
 		<h3>주소 수정하기</h3>
-		<h4>현재 주소</h4>
+		<h4 style="margin-bottom: 10px;">현재 주소</h4>
 		<input type="text" id="currentAddr" value="${user.userAddress }" style="border: none;">
 
 		<form id="addrCheck">	
@@ -125,7 +125,7 @@ $(document).ready(function() {
 			<input type="text" class="inputBox" id="sample6_extraAddress" name="address3" readonly  placeholder="참고항목">
 			<input type="hidden" id="address" name="userAddress" >
 				
-			<input type="button" id="merge" class="insideBtn" value="수정하기">
+			<input type="button" id="merge" class="btnModify" value="수정하기">
 		</form>
 	</div>
 </div>

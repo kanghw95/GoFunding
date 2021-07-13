@@ -159,7 +159,8 @@ header{
     
 }
 
-.nav-content>li.nav-search input[type="text"]:focus {
+.nav-content>li.nav-search input[type="text"]:focus,
+.nav-content>li.nav-search:hover select:focus {
 	color: #202020;
 }
 
@@ -217,6 +218,7 @@ header{
 }
 	
 /*메가 메뉴 드롭다운*/
+
 .nav-content>li>div{
 	position: absolute;
 	display: none;
@@ -259,10 +261,19 @@ header{
 	text-transform: uppercase;
 }
 
+
+.nav-content .nav-column .column-title a:hover, 
+.nav-content .nav-column .column-title a:focus, 
+.nav-content .nav-column .column-title a:visited {
+	cursor: pointer;
+	color: #ff722b;
+}
+
 .nav-content .nav-column li a,
 .nav-content .subMenu1 li a,
 .nav-content .subMenu2 li a,
-.nav-content .subMenu3 li a   {
+.nav-content .subMenu3 li a
+   {
 	display: block;
 	line-height: 26px;
 	
@@ -274,7 +285,11 @@ header{
 .nav-content .nav-column li a:hover,
 .nav-content .subMenu1 li a:hover,
 .nav-content .subMenu2 li a:hover,
-.nav-content .subMenu3 li a:hover {
+.nav-content .subMenu3 li a:hover,
+.nav-content .nav-column li a:focus,
+.nav-content .subMenu1 li a:focus,
+.nav-content .subMenu2 li a:focus,
+.nav-content .subMenu3 li a:focus {
 	color: #666666;
 }
 

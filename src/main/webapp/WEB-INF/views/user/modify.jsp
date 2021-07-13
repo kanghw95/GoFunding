@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SPROUT! 새싹나눔</title>
-<link href="<%=request.getContextPath() %>/resources/css/user/join.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/user/modify.css" rel="stylesheet" type="text/css" />
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -297,11 +297,11 @@ $(document).ready(function () {
 	$("#email").on("keyup", checkEmailReg);
 	$("#phone").on("keyup", checkPhoneReg);
 
-	$(".btnModify").on("click", mergeFav);
+	$("#btnModify").on("click", mergeFav);
 
 	
 		
-	$(".btnModify").on("click", function(){
+	$("#btnModify").on("click", function(){
 			
 		if(isPassPw && pwCheck && certifyPhoneNumber){
 			console.log("\n비번 유효성" + isPassPw + "\n이메일 유효성" + isPassEmail 
@@ -422,7 +422,7 @@ function modifyAddress() {
 			</div>
 			<div class="frmGroup">
 				<button type="reset" class="insideBtn">취소</button>
-				<button type="button" class="btnModify">정보 수정</button>
+				<button type="button" id = "btnModify" class="btn draw-border">정보 수정</button>
 			</div>
 
 		</form>

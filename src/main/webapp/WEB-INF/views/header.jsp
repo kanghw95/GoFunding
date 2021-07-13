@@ -38,7 +38,7 @@ $(document).ready(function(){
 					</a>
 					<div class="megaMenu">
 						<div class="nav-column">
-							<h3 class="column-title">펀딩</h3>
+							<h3 class="column-title"><a href="<%=request.getContextPath() %>/funselect">펀딩</a></h3>
 							<ul>
 								<li><a href="#">일자리 창출</a></li>
 								<li><a href="#">공정 무역</a></li>
@@ -70,7 +70,7 @@ $(document).ready(function(){
 					</div>
 				</li>
 				<li>
-					<a href="#" class="subTitle">펀딩</a>
+					<a href="<%=request.getContextPath() %>/funselect" class="subTitle">펀딩</a>
 					<div class="subMenu1">
 						<ul>
 							<li><a href="#">일자리 창출</a></li>

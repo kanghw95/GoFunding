@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.joinTitle {
+.modifyTitle {
 	margin-bottom: 20px;	
 }
 
@@ -32,7 +32,7 @@
 
 
 
-.joinContainer {
+.modifyContainer {
 	width: 500px;
 	padding-right: 15px;
 	padding-left: 15px;
@@ -55,22 +55,72 @@
 	font-size: 15px;
 }
 
-.findPostCode:hover {
-	color: #1abc9c;
+.insideBtn:hover {
+	background-color: #a8dba8;
+	font-family: 'TmoneyRoundWindExtraBold';
 }
 
-.btnJoin {
+
+
+.draw-border {
+	font-size: 15px;
+	box-shadow: inset 0 0 0 2px #cff09e;
+	background-color: #a8dba8;
+	border: none;
+	border-radius: 5px;
 	width: 85px;
 	height: 40px;
-	border: none;
-	padding: 5px;
-	outline: none;
-	border-radius: 5px;
-	color: #1e1e1e;
-	background-color: #a8dba8;
-	border: 1px solid #a8dba8;
-	font-size: 15px;
+	color: #202020;
+	transition: color 0.25s 0.0833333333s;
+	position: relative;
 }
+.draw-border::before, .draw-border::after {
+	border: 0 solid transparent;
+	box-sizing: border-box;
+	content: '';
+	pointer-events: none;
+	position: absolute;
+	width: 0;
+	height: 0;
+	bottom: 0;
+	right: 0;
+}
+.draw-border::before {
+	border-bottom-width: 2px;
+	border-left-width: 2px;
+}
+.draw-border::after {
+	border-top-width: 2px;
+	border-right-width: 2px;
+}
+.draw-border:hover {
+	color: #79bd9a;
+}
+.draw-border:hover::before, .draw-border:hover::after {
+	border-color: #79bd9a;
+	border-radius: 5px;
+	backgruond-color: #79bd9a;
+	transition: border-color 0s, width 0.25s, height 0.25s;
+	width: 100%;
+	height: 100%;
+}
+.draw-border:hover::before {
+	transition-delay: 0s, 0s, 0.25s;
+}
+.draw-border:hover::after {
+	transition-delay: 0s, 0.25s, 0s;
+}
+
+.btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+.btn:focus {
+	outline: 2px dotted #a8dba8;
+}
+
+
 
 h2 {
 	font-family: 'TmoneyRoundWindExtraBold' !important;

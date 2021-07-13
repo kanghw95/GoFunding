@@ -46,7 +46,10 @@ $(document).ready(
 				
 			</div>
 			<div class="profileInfo">
-				<a href="<%=request.getContextPath() %>/user/modifyUser" class="ModifyProfile">회원정보 수정</a>
+				<a href="<%=request.getContextPath() %>/user/modifyUser" class="ModifyProfile button--secondary">
+					<span class="text">회원정보 수정</span>
+	  				<span class="icon-arrow"></span>
+				</a>
 				<br>
 				<a href="<%=request.getContextPath() %>/user/logout" class="profileLogout">로그아웃</a>
 			</div>

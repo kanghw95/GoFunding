@@ -435,14 +435,14 @@ $(document).ready(function () {
 	$("#email").on("keyup", checkEmailReg);
 	$("#phone").on("keyup", checkPhoneReg);
 
-	$(".btnJoin").on("click", mergeAddress);
-	$(".btnJoin").on("click", mergeFav);
+	$("#btnJoin").on("click", mergeAddress);
+	$("#btnJoin").on("click", mergeFav);
 
 	
 	
 	
 		
-	$(".btnJoin").on("click", function(){
+	$("#btnJoin").on("click", function(){
 		
 
 		for(var i = 1; i<4; i++){
@@ -672,9 +672,9 @@ $(document).ready(function () {
 			</section>
 			
 			
-			<div class="frmGroup">
+			<div class="frmGroup" style="margin-top: 10px;">
 				<button type="reset" class="insideBtn">취소</button>
-				<button type="button" class="btnJoin">회원가입</button>
+				<button type="button" id="btnJoin" class="btn draw-border">회원가입</button>
 			</div>
 
 		</form>

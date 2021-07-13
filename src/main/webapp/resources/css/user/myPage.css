@@ -129,6 +129,87 @@ a {
 	width: 800px;
 }
 
+
+.button--secondary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  color: #038c65;
+  font-weight: bold;
+  width: 160px;
+  height: 44px;
+  border-radius: 22px;
+  border: 1px solid #038c65;
+  padding: 0 0 0 21px;
+  margin-left: 30px;
+  line-height: 44px;
+  text-align: center;
+  cursor: pointer;
+}
+.button--secondary:before {
+  content: "";
+  position: absolute;
+  left: 21px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #038c65;
+  transform: scale(0);
+  opacity: 0;
+  transition: all .33s cubic-bezier(.68,-.55,.265,1.55);
+}
+.button--secondary .text {
+  white-space: nowrap;
+  font-size: 14px;
+  transition: all .3s cubic-bezier(.68,-.55,.265,1.55);
+}
+.button--secondary .icon-arrow {
+  position: relative;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 20px;
+  border-radius: 50%;
+  background-color: #038c65;
+  transition: all .3s cubic-bezier(.68,-.55,.265,1.55);
+}
+.button--secondary .icon-arrow:after {
+  content: "";
+  display: inline-block;
+  background-color: inherit;
+  position: absolute;
+  left: 100%;
+  width: 20px;
+  height: 2px;
+  top: 4px;
+}
+.button--secondary:hover {
+   animation: icon-arrow-off .33s cubic-bezier(0,0,.2,1);
+}
+@keyframes icon-arrow-off {
+  0% {
+    transform: scale(1); }
+  50% {
+    transform: scale(0.95); }
+  100% {
+    transform: scale(1); } 
+}
+.button--secondary:hover:before {
+  transform: scale(1);
+  opacity: 1;
+}
+.button--secondary:hover .text {
+  transform: translateX(21px);
+}
+.button--secondary:hover .icon-arrow {
+  transform: translateX(30px) scale(.8);
+  opacity: 0;
+}
+
+
 .infoBox {
 	
    	height: 120px;

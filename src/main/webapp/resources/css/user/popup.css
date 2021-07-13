@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+
+[type='text'], [type='password'] {
+	width: 400px;
+	height: 40px;
+	font-size: 17px;
+	padding: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px; 
+	border-radius: 5px;
+	border: 1px solid #ddd;
+}
+
+
+.btnModify{
+	diplay:block;
+	margin-top:10px;
+	background:#79bd9a;
+	color:#fff;
+	border:none;
+	position:relative;
+	height:40px;
+	font-size: 16px;
+	padding:0 1em;
+	cursor:pointer;
+	transition:800ms ease all;
+	outline:none;
+	border-radius:5px;
+}
+
+
+.btnModify:hover{
+	background:#fff;
+	color:#79bd9a;
+}
+
+.btnModify:before,.btnModify:after{
+	content:'';
+	position:absolute;
+	top:0;
+	right:0;
+	height:2px;
+	width:0;
+	background: #79bd9a;
+	transition:400ms ease all;
+}
+.btnModify:after{
+	right:inherit;
+	top:inherit;
+	left:0;
+	bottom:0;
+}
+.btnModify:hover:before,.btnModify:hover:after {
+	width:100%;
+	transition:800ms ease all;
+}
+
+.inputPost{
+	width: 200px; 
+}
+
+.insideBtn {
+	width: 85px;
+	height: 40px;
+	border: none;
+	padding: 5px;
+	outline: none;
+	border-radius: 5px;
+	color: #1e1e1e;
+	background-color: #cff09e;
+	border: 1px solid #cff09e;
+	font-size: 15px;
+}
+
+
+.insideBtn:hover {
+	background-color: #a8dba8;
+	cursor: pointer;
+}

@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+.boardWrapper{
+	width: 1140ox;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.boardBox {
+	position: relative; 
+	height: 600px;
+}
+
+.boardContainer {
+	display: inline-block;
+	border: 1px solid #ededed;
+	box-shadow: 0 2px 4px 0 rgb(33 37 41 / 11%);
+	padding: 20px 20px;
+	margin: 5px;
+	width: 540px;
+	height: 180px;
+	justify-content: center;
+}
+
+.free {
+	position: absolute; 
+	top: 5px; 
+	left: 5px;
+}
+
+.review{
+	position: absolute; 
+	top: 5px; 
+	right: 5px;	
+}
+
+.question {
+	position: absolute; 
+	top: 195px; 
+	left: 5px;
+}
+
+.share {
+	position: absolute; 
+	top: 195px; 
+	right: 5px;
+}
+
+.event {
+	position: absolute; 
+	top: 385px; 
+	left: 295px;
+}
+
+.innerTitle {
+	display: inline-block;
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+.more {
+	position: relative;
+	float: right;
+	font-size: 16px;
+}
+
+.table {
+	border-collapse: collapse;
+	border: none;
+	width: 500px;
+	font-size: 15px;
+}
+
+.table td{
+	font-size: 15px;
+	padding: 3px;
+	line-height: 1.42857143;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	vertical-align: middle;
+} 
