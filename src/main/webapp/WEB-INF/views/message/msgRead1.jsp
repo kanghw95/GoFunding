@@ -18,7 +18,7 @@
 		<table class="table">
 	<c:forEach var="msg" items="${msg}" varStatus="status">
 			<tr id="text-${msg.MSGROOT}" class="textRow">
-				<td>${msg.MSGCONTENT}<br>
+				<td class="contents">${msg.MSGCONTENT}<br>
 				<c:if test="${msg.MSGROOT eq '1'}">
 				${msg.MAKER}<br></c:if>
 				<fmt:formatDate value="${msg.MSGDATE}" pattern="yy-MM-dd"/></td>

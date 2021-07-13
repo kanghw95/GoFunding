@@ -816,12 +816,18 @@
 		
 	});
 		
-	function makerMsg(event){
-        var maker = $("#maker").text();
-        console.log(maker);
-    	var pop = window.open("about:blank","content");
-		pop.location.href="http://localhost:8090/sprout/message/msgRead1?maker="+maker;		
-	}
+		function makerMsg(event){
+	        var maker = $("#maker").text();
+	        var sessionUserId = '${sessionScope.user.userId}';
+	        if(sessionUserId == 'null' || sessionUserId == ''){
+	        	alert('로그인 해주세요.');
+	        } else{
+	        console.log(maker);
+	    	var pop = window.open("about:blank","content","width=500, height=600");
+			pop.location.href="http://localhost:8090/sprout/message/msgRead1?maker="+maker;		
+	        }
+	        
+		}
 	var isLiked = '${isliked}';  // 1:좋아요, 0:아님
 	var cnt =  '${likedCnt}';
 	// 좋아요 아이디 체크

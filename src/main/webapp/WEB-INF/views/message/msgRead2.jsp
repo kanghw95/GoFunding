@@ -20,11 +20,11 @@
 		<div id="textArea1">
 		<table class="table">
 			<tr class="textRow">
-				<td>
+				<td class="contents">
 				${msg.msgContent}<br>
 				${msg.senderName}<br>
 				<fmt:formatDate value="${msg.msgDate}" pattern="yy-MM-dd"/></td>
-				<td><button type="button" id="msgDelete">X</button>
+				<td id="deleteBtn"><button type="button" id="msgDelete">X</button>
 				<input type="hidden" name="msgNo" id="msgNo" value="${msg.msgNo}"></td>
 			</tr>
 		</table>
@@ -33,7 +33,7 @@
 		<div id="textArea2">
 		<table class="table">
 			<tr class="textRow">
-				<td>
+				<td class="contents">
 				${msg.msgContent}<br>
 				<fmt:formatDate value="${msg.msgDate}" pattern="yy-MM-dd"/></td>
 				<td><button type="button" id="msgDelete">X</button>

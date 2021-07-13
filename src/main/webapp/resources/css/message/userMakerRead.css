@@ -65,9 +65,7 @@
 }
 
 #deleteBtn{
-	width: 50px;
 	text-align: center;
-	font-family: 'TmoneyRoundWindRegular';
 }
 
 #msgDelete{
@@ -101,4 +99,8 @@
 
 .inputTxt{
 	background-color: #e2e2e2;
+}
+
+.contents{
+	width: 85%;
 }

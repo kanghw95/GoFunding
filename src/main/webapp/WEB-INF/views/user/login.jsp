@@ -68,6 +68,19 @@ function attachSignin(element) {
    				$(this).prev().prev().prev().prev().prev().attr('type','password');
    			}
    		})
+   	$("#loginBtn").click(function(){
+  		if(ischkId==true&&ischkPwd==true){
+		$("#frm").attr('action','<%=request.getContextPath() %>/user/loginPost');
+   		$("#frm").attr('method','post');
+   		$("#frm").submit();
+		} else if(ischkId==false&&ischkPwd==true){
+  			alert('아이디 형식을 확인해 주세요.');
+  		} else if(ischkId==true&&ischkPwd==false){
+			alert('비밀번호 형식을 확인해 주세요.');
+ 		} else if(ischkId==false&&ischkPwd==false){
+ 			alert('아이디와 비밀번호 형식을 확인해 주세요.');
+ 		}
+ 		})
 	// id 정규식
 	var idReg = /^[a-z0-9]{4,12}$/; // 4-12자리 영소문자, 숫자만
    	$(".inputId").blur(function(event){ 
@@ -102,11 +115,12 @@ function attachSignin(element) {
 			console.log("ischkPwd: " + ischkPwd);
 	}
    	})
+   	
 });
    </script>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 	<div class="wrapper">
-	<form action="<%=request.getContextPath() %>/user/loginPost" method="post">
+	<form id="frm">
 		<c:if test="${empty user}">
 		<div class="outer">
 		<div class="login loginDiv">
@@ -121,7 +135,7 @@ function attachSignin(element) {
 				<a class="chk findId" href="<%=request.getContextPath() %>/user/findId">아이디</a> /
 				<a class="chk findPwd" href="<%=request.getContextPath() %>/user/findPwd">비밀번호 찾기</a>&nbsp;&nbsp;&nbsp;&nbsp;
 				<a class="chk chkPwd">비밀번호 확인하기</a><br><br>
-				<button type="submit" class="btns loginBtn">로그인</button><br><br>
+				<button type="button" class="btns loginBtn" id="loginBtn">로그인</button><br><br>
 				<hr>
 			</div>
 			<div id="gSignInWrapper">

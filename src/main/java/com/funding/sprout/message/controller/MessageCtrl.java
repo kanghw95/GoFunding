@@ -222,7 +222,7 @@ public class MessageCtrl {
 		try {
 			PrintWriter wr=response.getWriter();
 			wr.println("<script type='text/javascript'>"); 
-			wr.println("alert('등록성공'); window.location = document.referrer;"); 
+			wr.println("window.location = document.referrer;"); 
 			wr.println("</script>");
 			wr.flush();
 		} catch (IOException e) {
@@ -248,7 +248,7 @@ public class MessageCtrl {
 		try {
 			PrintWriter wr=response.getWriter();
 			wr.println("<script type='text/javascript'>"); 
-			wr.println("alert('등록성공'); window.location = document.referrer;"); 
+			wr.println("window.location = document.referrer;"); 
 			wr.println("</script>");
 			wr.flush();
 		} catch (IOException e) {
@@ -276,11 +276,12 @@ public class MessageCtrl {
 			msg.setSenderId(loginId);
 		}
 		result=msgService.msgInsert(msg);
+		
 		response.setContentType("text/html; charset=UTF-8");
 		try {
 			PrintWriter wr=response.getWriter();
 			wr.println("<script type='text/javascript'>"); 
-			wr.println("alert('등록성공'); window.location = document.referrer;"); 
+			wr.println("window.location = document.referrer;"); 
 			wr.println("</script>");
 			wr.flush();
 		} catch (IOException e) {

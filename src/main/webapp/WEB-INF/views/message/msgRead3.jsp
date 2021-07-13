@@ -18,11 +18,11 @@
 		<table class="table">
 	<c:forEach var="msg" items="${msg}" varStatus="status">
 			<tr id="text-${msg.MSGROOT}" class="textRow">
-				<td>${msg.MSGCONTENT}<br>
+				<td class="contents">${msg.MSGCONTENT}<br>
 				<c:if test="${msg.MSGROOT eq '0'}">
 				${msg.SENDERNAME}<br></c:if>
 				<fmt:formatDate value="${msg.MSGDATE}" pattern="yy-MM-dd"/></td>
-				<td><button type="button" id="msgDelete">X</button>
+				<td id="deleteBtn"><button type="button" id="msgDelete">X</button>
 				<input type="hidden" name="msgNo" id="msgNo" value="${msg.MSGNO}"></td>
 			</tr>
 	</c:forEach>

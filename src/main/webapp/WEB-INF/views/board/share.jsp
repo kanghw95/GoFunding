@@ -28,6 +28,9 @@
 	margin-left: 10px;
 	margin-top: 50px;
 }
+#userId{
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -96,7 +99,7 @@
 					</c:if>			
 					</td>
 	
-					<td align="center">${vo.boardId }</td>
+					<td align="center" id="userId">${vo.boardId }</td>
 					<td align="center">${vo.boardCnt }</td>
 					<td align="center">${vo.likecnt }</td> <!-- 추천 -->
 					<td align="center">${vo.boardDate }</td>
@@ -158,5 +161,12 @@
 			frm.method = "get";
 			frm.submit();
 		});
+		
+		
+	    $("body").on("click", "[id^=userId]", function(event) {
+            var receiverId = $(this).text();
+	    	var pop = window.open("about:blank","content","width=500, height=600");
+   			pop.location.href="<%=request.getContextPath() %>/message/msgRead2?receiverId="+receiverId;
+        });
 	</script>
 </html>
