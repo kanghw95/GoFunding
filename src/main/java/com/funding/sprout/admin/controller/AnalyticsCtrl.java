@@ -87,7 +87,6 @@ public class AnalyticsCtrl {
 		maleC*=GENDERTOTALC; femaleC*=GENDERTOTALC;
 
 		List<HashMap<String, String>> payment=analyticsService.analPayment();
-		List<HashMap<String, String>> payment1=analyticsService.analPaymentTab();
 		List<HashMap<String, String>> order1=analyticsService.analPaymentTab();
 		List<HashMap<String, String>> funding=analyticsService.analFundingTab();
 		List<HashMap<String, String>> formList=analyticsService.adminFormList();
@@ -117,7 +116,6 @@ public class AnalyticsCtrl {
 		mv.addObject("maleC", maleC);
 		mv.addObject("femaleC", femaleC);
 		mv.addObject("days", payment);
-		mv.addObject("payment1", payment1);
 		mv.addObject("order1", order1);
 		mv.addObject("funding", funding);
 		mv.addObject("formList1", formList);

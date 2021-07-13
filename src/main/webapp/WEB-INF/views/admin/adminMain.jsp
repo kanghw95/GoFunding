@@ -169,14 +169,12 @@
 					<td>${order.ORDERCNT}</td>
 					<td><fmt:formatNumber value="${order.ORDERTOTALPRICE}" pattern="#,###" /></td>
 					</tr>
-					</c:forEach>
-					<!--<c:forEach  var="payment" items="${payment1}">-->
 					<tr>
 					<td>환불</td>
-					<td></td>
-					<td></td>
+					<td>${order.REFUNDCNT}</td>
+					<td><fmt:formatNumber value="${order.REFUNDTOTALPRICE}" pattern="#,###" /></td>
 					</tr>
-					<!--</c:forEach>-->
+					</c:forEach>
 					</table>
 					</div>
 					<div class="paymentTab">
@@ -225,30 +223,22 @@
 					<td>
 					<fmt:formatNumber value="${order.ORDERTOTALPRICE}" pattern="#,###" />
 					</td>
-					<!--<c:forEach var="payment" items="${payment1}" varStatus="status">-->
 					<td>
-					<c:out value=""></c:out>
+					<fmt:formatNumber value="${order.REFUNDTOTALPRICE}" pattern="#,###" />
 					</td>					
-					<!--</c:forEach>-->					
 					<td>
-					<!--<c:forEach var="payment" items="${payment1}" varStatus="status">-->
-					<c:out value=""></c:out>
-					<!--</c:forEach>-->					
+					<fmt:formatNumber value="${order.ORDERTOTALPRICE-order.REFUNDTOTALPRICE}" pattern="#,###" />
 					</td>					
 					<td>
 					<c:out value="${order.ORDERCNT}"></c:out>
 					</td>					
-					<!--<c:forEach var="payment1" items="${payment1}" varStatus="status">-->
 					<td>
-					<c:out value=""></c:out>
+					<c:out value="${order.REFUNDCNT}"></c:out>
 					</td>					
-					<!--</c:forEach>-->					
-					<!--<c:forEach var="payment2" items="${payment1}" varStatus="status">-->
 					<td>
-					<c:out value="${order.ORDERCNT}"></c:out> <!-- TODO -->
+					<c:out value="${order.ORDERCNT-order.REFUNDCNT}"></c:out> <!-- TODO -->
 					</td>					
 					</c:forEach>					
-					<!--</c:forEach>-->					
 					<c:forEach var="funding" items="${funding}" varStatus="status">
 					<td>
 					<c:out value="${funding.PROCEEDING}"></c:out>
