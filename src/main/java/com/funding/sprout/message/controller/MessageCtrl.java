@@ -82,7 +82,7 @@ public class MessageCtrl {
 		vo.put("senderId", "admin");
 		vo.put("msgRoot", "3");
 
-		List<HashMap<String, String>> msgList = msgService.msgUserList(vo);
+		List<HashMap<String, String>> msgList = msgService.msgAdminUserList(vo);
 		mv.addObject("msgList",msgList);
 		mv.setViewName("/message/msgUserList");
 		

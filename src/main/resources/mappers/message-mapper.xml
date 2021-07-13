@@ -28,8 +28,14 @@
 		WHERE B.RANKING = 1 
 		ORDER BY B.MSGDATE DESC
 	</select>
-	<!-- 회원-회원 / 관리자-회원 목록 -->
+	<!-- 회원-회원 -->
 	<select id="selectUserList" parameterType="string" resultType="hashMap"> 
+		SELECT DISTINCT RECEIVERID AS SENDERID FROM MESSAGE WHERE MSGROOT = #{msgRoot} AND SENDERID = #{senderId}
+		UNION
+		SELECT DISTINCT SENDERID AS SENDERID FROM MESSAGE WHERE MSGROOT = #{msgRoot} AND RECEIVERID = #{senderId}
+	</select>
+	<!--  관리자-회원 목록 -->
+	<select id="selectAdminUserList" parameterType="string" resultType="hashMap"> 
 		SELECT DISTINCT RECEIVERID AS SENDERID FROM MESSAGE WHERE SENDERID = #{senderId}
 		UNION
         SELECT DISTINCT SENDERID AS SENDERID FROM MESSAGE WHERE RECEIVERID = #{senderId}

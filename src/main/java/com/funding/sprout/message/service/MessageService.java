@@ -18,6 +18,8 @@ public interface MessageService {
 	
 	public List<HashMap<String, String>> msgUserList(HashMap<String, String> vo); // 회원(관리자)-회원 목록
 	
+	public List<HashMap<String, String>> msgAdminUserList(HashMap<String, String> vo); //관리자-회원 메세지 목록
+	
 	public List<Map<String, String>> getUserMakerMessage(HashMap<String, String> id); //회원-메이커 상세 조회
 
 	public List<Map<String, String>> getMakerUserMessage(HashMap<String, String> id); //메이커-회원 상세 조회

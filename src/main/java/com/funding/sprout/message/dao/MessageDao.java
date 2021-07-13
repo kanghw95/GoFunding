@@ -33,8 +33,11 @@ public class MessageDao {
 	}
 
 	public List<HashMap<String, String>> msgUserList(HashMap<String, String> vo) { //회원-회원 메세지 목록
-		System.out.println("lll"+vo);
 		return sqlSession.selectList("Message.selectUserList", vo);
+	}
+	
+	public List<HashMap<String, String>> msgAdminUserList(HashMap<String, String> vo) { //관리자-회원 메세지 목록
+		return sqlSession.selectList("Message.selectAdminUserList", vo);
 	}
 
 	public List<Map<String, String>> getUserMakerMessage(HashMap<String, String> id) { //회원-메이커 상세 조회

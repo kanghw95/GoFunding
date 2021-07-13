@@ -50,6 +50,11 @@ public class MessageServiceImpl implements MessageService {
 	}
 	
 	@Override
+	public List<HashMap<String, String>> msgAdminUserList(HashMap<String, String> vo) {
+		return msgDao.msgAdminUserList(vo);
+	}
+	
+	@Override
 	public List<Map<String, String>> getUserMakerMessage(HashMap<String, String> id) {
 		return msgDao.getUserMakerMessage(id);
 	}
