@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>SPROUT! 새싹나눔</title>
+<link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/user/myFundingList.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -23,6 +25,7 @@
 		<div class="myFundingList">
 			<c:if test="${!empty fundingList }">
 				<c:forEach var="myFunding" items="${fundingList }" varStatus="status">
+				<div class="myFundingBox">
 					<ul>
 						<li>
 							<a href="<%=request.getContextPath()%>/myfundingdetail?fundingNo=${myFunding.fundingNo }"> 
@@ -60,6 +63,7 @@
 							</a>
 						</li>
 					</ul>
+					</div>
 				</c:forEach>
 			</c:if>
 			

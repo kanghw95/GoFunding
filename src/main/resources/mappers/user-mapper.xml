@@ -135,6 +135,11 @@
 		<result property="id" column="ID" />
 	</resultMap>	
 
+	<resultMap type="Prefer" id="resultPrefer"> <!-- 관심 펀딩 -->
+		<result property="fundingNo" column="FUNDINGNO" />
+		<result property="fundingTitle" column="FUNDINGTITLE" />
+		<result property="maker" column="MAKER" />
+	</resultMap>	
 		
 	<!-- 회원가입 -->
 	<insert id="insertUser" parameterType="User">
@@ -360,10 +365,6 @@
 		WHERE ID = #{id}
 		ORDER BY EVENTCMTNO DESC
 	</select>
-
-
-
-
 	
 	<!-- 내가 참여한 펀딩 전체 -->
 	<select id="myFunding" parameterType="string" resultType="myFunding">
@@ -412,6 +413,12 @@
 			ON R.REWARDNO = B.REWARDNO	
 		]]>
 	</select>
+	
+	<!-- 관심 펀딩 조회 -->
+	<select id="preferFunding" parameterType="string" resultMap="resultPrefer">
+		SELECT F.FUNDINGTITLE, F.MAKER, P.FUNDINGNO, P.ID FROM FUNDING F JOIN PREFERENCE P ON F.FUNDINGNO = P.FUNDINGNO WHERE ID = #{id}
+	</select>
+	
 	
 	<!-- 펀딩신청서 저장 -->
 	<insert id="inputForm">

@@ -1,5 +1,6 @@
 package com.funding.sprout.user.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,6 +31,7 @@ import com.funding.sprout.vo.Order;
 import com.funding.sprout.vo.OrderDetail;
 import com.funding.sprout.vo.OrderRefund;
 import com.funding.sprout.vo.PageMaker;
+import com.funding.sprout.vo.Prefer;
 import com.funding.sprout.vo.Reward;
 import com.funding.sprout.vo.User;
 
@@ -260,6 +262,27 @@ public class UserMyPageCtrl {
 		
 		return mv;
 	}
+	
+	// 관심 펀딩 조회
+		@RequestMapping(value = "/myprefer", method = RequestMethod.GET)
+		public ModelAndView mypreferList(ModelAndView mv, HttpSession session) throws Exception{
+			System.out.println("myprefer 들어옴");
+			
+			User loginUser = (User)session.getAttribute("user");
+			String id = loginUser.getUserId();
+			
+			List<Prefer> preferList = myService.preferList(id);
+			
+			System.out.println("preferList" + preferList);
+			
+			mv.addObject("preferList", preferList);
+			mv.setViewName("user/preferFunding");
+			
+			return mv;
+		}
+	
+	
+	
 	
 	
 	//내가 쓴  글 조회

@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+
+ul, li{
+	list-style: none;
+	padding: 0;
+}
+
+.myFundingList{
+	width: 1140px;
+	min-height: 700px;
+}
+
+.myFundingBox {
+	border: 1px solid #ededed;
+	border-radius: 7px;
+	box-shadow: 0 2px 2px 0 rgb(33 37 41 / 11%);
+	width: 700px;
+	padding: 10px 30px;
+	margin: 10px;
+	
+}
+
+.fundingBox {
+	position: relative;
+}
+
+.orderDate {
+	font-size: 14px;
+	float: left;
+}
+
+.fundingStatus {
+	float:right;
+	font-size: 14px;
+}
+
+.fundingTitle, .fundingTitle:hover, .fundingTitle:focus {
+	color: #ff722b;
+	font-size: 20px;
+}
+
+.orderDate, .orderDate:hover, .orderDate:focus,
+.fundingStatus, .fundingStatus:hover, .fundingStatus:focus,
+.maker, .maker:hover, .maker:focus,
+.orderStatus, .orderStatus:hover, .orderStatus:focus {
+	color: #202020;
+	font-size: 15px;
+}

@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+
+ul, li{
+	list-style: none;
+	padding: 0;
+}
+
+.detailBox{
+	width: 1140px;
+
+	
+}
+
+
+.fundingContainer {
+	width: 800px;	
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.orderInfoContainer, .fundingDetail {
+	border: 1px solid #ededed;
+	border-radius: 7px;
+	box-shadow: 0 2px 2px 0 rgb(33 37 41 / 11%);
+	width: 800px;
+	padding: 10px 30px;
+	margin-top: 20px; 
+	margin-bottom: 20px; 
+	
+}
+
+
+
+
+.fundingTitle{
+	color: #79bd9a;
+	font-size: 22px;
+}
+
+.fundingStatus, .maker, .orderStatus, .orderNo {
+	color: #202020;
+	font-size: 15px;
+}
+
+
+.refundBtn{
+	diplay:block;
+	float: right;
+	margin-top:10px;
+	background:#79bd9a;
+	color:#fff;
+	border:none;
+	position:relative;
+	height:40px;
+	font-size: 16px;
+	padding:0 1em;
+	cursor:pointer;
+	transition:800ms ease all;
+	outline:none;
+	border-radius:5px;
+}
+
+
+.refundBtn:hover{
+	background:#fff;
+	color:#79bd9a;
+}
+
+.refundBtn:before,.refundBtn:after{
+	content:'';
+	position:absolute;
+	top:0;
+	right:0;
+	height:2px;
+	width:0;
+	background: #79bd9a;
+	transition:400ms ease all;
+}
+.refundBtn:after{
+	right:inherit;
+	top:inherit;
+	left:0;
+	bottom:0;
+}
+.refundBtn:hover:before,.refundBtn:hover:after {
+	width:100%;
+	transition:800ms ease all;
+}
+

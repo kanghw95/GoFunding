@@ -7,6 +7,7 @@ import com.funding.sprout.vo.MyFunding;
 import com.funding.sprout.vo.Order;
 import com.funding.sprout.vo.OrderDetail;
 import com.funding.sprout.vo.OrderRefund;
+import com.funding.sprout.vo.Prefer;
 
 public interface UserMyPageService {
 	
@@ -25,6 +26,9 @@ public interface UserMyPageService {
 	public int orderStausChange(Order order) throws Exception;
 	
 	public int orderDetailStausChange(OrderDetail orDetail) throws Exception;
+	
+	// 관심 펀딩
+	public List<Prefer> preferList(String id) throws Exception;
 	
 	// 내가 쓴 글 조회
 	public List<Board> freeBoardList(String id) throws Exception;

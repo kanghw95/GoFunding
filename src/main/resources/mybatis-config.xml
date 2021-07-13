@@ -22,6 +22,7 @@
 		<typeAlias type="com.funding.sprout.vo.Application" alias="Application" />
 		<typeAlias type="com.funding.sprout.vo.Report" alias="Report" />
 		<typeAlias type="com.funding.sprout.vo.MyFunding" alias="MyFunding" />
+		<typeAlias type="com.funding.sprout.vo.Prefer" alias="Prefer" />
 	</typeAliases>
 
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->

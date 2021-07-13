@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+.preferWrapper{
+	width: 1140px;
+	min-height: 700px;
+	justify-content: center;
+}
+
+.fundingBox {
+	position: relative;
+	width: 1140px;
+}
+
+.FundingCard_img_wrap {
+    position: relative;
+    width: 267px;
+    height: 200px;
+    background-color: #ccc;
+}
+
+.fundingCard_content {
+    position: relative;
+    width: 267px;
+    
+}
+
+.fundingCard_figure {
+	position: relative;
+	width: 276px;	
+}
+
+.table {
+	display: inline-block;
+	float: left;
+	border: 1px solid #ededed;
+	padding: 0;
+	margin-top: 20px;
+	height: 315px;
+	font-size: 17px;
+	text-align: center;
+	vertical-align: center;
+
+}
+
+.table>tr, .table>tr>td{
+	width: 267px;
+	border-bottom: 1px solid #ededed
+}
+
+.table>tr>td>div{
+	margin: 0;
+}
+
+a, a:hover, a:visited, a:focus {
+	color: #79bd9a;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+

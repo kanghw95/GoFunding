@@ -12,6 +12,7 @@ import com.funding.sprout.vo.MyFunding;
 import com.funding.sprout.vo.Order;
 import com.funding.sprout.vo.OrderDetail;
 import com.funding.sprout.vo.OrderRefund;
+import com.funding.sprout.vo.Prefer;
 
 @Service("myService")
 public class UserMyPageServiceImpl implements UserMyPageService{
@@ -179,6 +180,12 @@ public class UserMyPageServiceImpl implements UserMyPageService{
 	@Override
 	public List<Board> eBoardCmtListMore(String id) throws Exception {
 		return myDao.eBoardCmtListMore(id);
+	}
+
+	// 관심 펀딩
+	@Override
+	public List<Prefer> preferList(String id) throws Exception {
+		return myDao.preferList(id);
 	}
 
 

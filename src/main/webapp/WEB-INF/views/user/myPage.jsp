@@ -119,7 +119,7 @@ $(document).ready(
 							<h2 class="logTitle">나의 활동</h2>
 							<div class="logBox">
 								<ul>
-									<li><a href="#"><span><i class="far fa-heart"></i>&nbsp; 관심 펀딩</span></a></li>
+									<li><a href="<%=request.getContextPath() %>/myprefer"><span><i class="far fa-heart"></i>&nbsp; 관심 펀딩</span></a></li>
 									<li><a href="<%=request.getContextPath() %>/myfundinglist"><span><i class="fas fa-clipboard-check"></i>&nbsp; 내가 참여한 펀딩</span></a></li>
 								</ul>
 								<ul>

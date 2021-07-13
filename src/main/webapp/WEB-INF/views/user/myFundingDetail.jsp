@@ -7,7 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>SPROUT! 새싹나눔</title>
-  <style type="text/css">
+<link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/user/myFundingDetail.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<style type="text/css">
 .modal_wrap{
 	display: none;
 	width: 300px;
@@ -65,9 +73,15 @@
 						</c:forEach>
 					</form>
 				</div>
+		
+		<div class="detailBox">
+		<h3 style="margin-bottom: 30px;">
+			<i class="fas fa-clipboard-check"></i>&nbsp; 내가 참여한 펀딩
+		</h3>
+				
 	<c:forEach var="fundingDetail" items="${fundingDetail }" varStatus="status" begin="1" end="1">
 		<div class="fundingContainer">
-			<div class="orderInfoContainer" style="border: 1px solid #ededed">
+			<div class="orderInfoContainer">
 				<p class="fundingStatus">${fundingStatus }</p>
 				<p class="fundingTitle"><b>펀딩 이름: </b>${fundingDetail.fundingTitle }</p>
 				<p class="maker"><b>메이커: </b>${fundingDetail.maker }</p>
@@ -95,7 +109,7 @@
 				<p id="Price" class="orderNo"></p>
 			</div>
 			
-			<div class="fundingDetail" style="border: 1px solid #ededed">
+			<div class="fundingDetail">
 				<c:if test="${!empty fundingReward }">
 					<c:forEach var="rewardDetail" items="${fundingReward }" varStatus="status">
 						<h3 class="rewardTitle">${rewardDetail.rewardTitle }</h3>
@@ -107,17 +121,19 @@
 						</p>
 					</c:forEach>
 				</c:if>
-			</div>
 			<div class="btnContainer">
 				<button class="refundBtn" id="cancelBtn">결제 취소</button>
 			</div>
+			</div>
 		</div>
 	</c:forEach>
+	</div>
 	</div>
 	<%@include file="/WEB-INF/views/footer.jsp"%>
 </body>
 
 <script>
+$(document).ready(function () {	
 	var totalRewardPirce = 0;
 	<c:forEach var="rewardDetail" items="${fundingReward }" varStatus="status">
 		totalRewardPirce +=  parseInt($("#rewardPirce${rewardDetail.orderDetailNo}").val());
@@ -130,6 +146,8 @@
 	<c:forEach var="fundingDetail" items="${fundingDetail }" varStatus="status" begin="1" end="1">
 	var orderStatus = ${fundingDetail.orderStatus};
 	</c:forEach>
+
+	
 	cancelBtn.addEventListener("click",function(){
 				
 		if(orderStatus == 4 || orderStatus == 3 || orderStatus == 2 ){
@@ -149,5 +167,7 @@
 		document.querySelector('.black_bg').style.display ='none';
 	}
 document.querySelector('#noagree').addEventListener('click', offClick);
+
+	});
 </script>
 </html>

@@ -12,6 +12,7 @@ import com.funding.sprout.vo.MyFunding;
 import com.funding.sprout.vo.Order;
 import com.funding.sprout.vo.OrderDetail;
 import com.funding.sprout.vo.OrderRefund;
+import com.funding.sprout.vo.Prefer;
 
 @Repository("myDao")
 public class UserMyPageDao {
@@ -34,17 +35,23 @@ public class UserMyPageDao {
 		return sqlSession.selectList("User.myFundingDetail", vo);
 	}
 
-	public int insertOrderRefund(OrderRefund orRefund) {
-		return sqlSession.insert("OrderRefund.insertOrderRefund", orRefund);
+	public int insertOrderRefund(OrderRefund orRefund) { // 펀딩 환불
+		return sqlSession.insert("OrderRefund.insertOrderRefund", orRefund); 
 	}
 
-	public int orderStausChange(Order order) {
-		return sqlSession.update("Order.orderStausChange", order);
+	public int orderStausChange(Order order) { // 펀딩 환불 후 결제 상태 바꾸기
+		return sqlSession.update("Order.orderStausChange", order); 
 	}
 
-	public int orderDetailStausChange(OrderDetail orDetail) {
+	public int orderDetailStausChange(OrderDetail orDetail) { // 펀딩 환불 후 결제 상태 바꾸기 (상세페이지) 
 		return sqlSession.update("OrderDetail.orderDetailStausChange", orDetail);
 	}
+	
+	public List<Prefer> preferList(String id) throws Exception { // 관심 펀딩 조회
+		return sqlSession.selectList("User.preferFunding", id);
+	}
+	
+	
 	public List<Board> freeBoardList(String id) throws Exception { // 자유 게시판 조회 (3개까지)
 		return sqlSession.selectList("User.selectFree", id);
 	}
