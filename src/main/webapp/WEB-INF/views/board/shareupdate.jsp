@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>후기게시글 수정</title>
+<title>정보공유게시글 수정</title>
 <!-- 스마트 에디터 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript"
@@ -48,10 +48,10 @@
 
 	<div>
 		<img src="../resources/img/admin/list.png" class="list">
-		<h1 class=free>후기게시판</h1>
+		<h1 class=free>정보공유게시판</h1>
 	</div>
 
-	<form action="update2" method="POST">
+	<form action="shareupdate2" method="POST">
 		<input type="hidden" name="boardNo" value="${data.boardNo }" />
 		
 		<table class="board">
@@ -67,7 +67,7 @@
 		</table>
 	</form>
 		<div class="button">
-			<button type="button" id="writebtn" name="writebtn">저장</button>
+			<button type="button" id="sharewritebtn" name="writebtn">저장</button>
 			<button type="button" onclick="history.back(-1)">취소</button>			
 		</div>
 	</div>
@@ -86,7 +86,7 @@
 		<script type="text/javascript">
 			window.onload = function() {
 				//버튼을 누를때 실행
-				var btn = document.getElementById("writebtn");
+				var btn = document.getElementById("sharewritebtn");
 				btn.onclick = function() {
 					submitContents(btn);
 				}

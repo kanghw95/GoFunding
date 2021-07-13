@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글 상세 페이지</title>
+<title>정보공유글 상세 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
 .list{
@@ -68,6 +68,7 @@
 	float: right;
 	margin-top: 100px;
 }
+
 .page{
 	float: right;
 	margin-left: 30px;
@@ -82,7 +83,7 @@
 		<% User user = (User) session.getAttribute("user"); %>
 		<div class="title">
 			<img src="../resources/img/admin/list.png" class="list">
-			<h1 class="free">자유게시판</h1>
+			<h1 class="free">정보공유게시판</h1>
 		</div>
 	<hr>
 		<div class="board">
@@ -105,7 +106,7 @@
 			
 			<div>
 				${data.boardDate }
-					<form id="frmUpdate" class="button">
+					<form id="sharefrmUpdate" class="button">
 					<input type="hidden" name="boardNo" value="${data.boardNo }">
 					<input type="hidden" name="userId" value="<%=user.getUserId()%>">
 
@@ -128,18 +129,17 @@
 		</div>
 		
 		
-		<div class="comment-box">댓글 	
+		<div class="comment-box">댓글 목록
 			<textarea id="comment-write" name="cmtContent" placeholder="댓글 입력창" rows="4" cols="150"></textarea>
 			<button id="comment-writebtn">등록</button>
 		</div>
 		
 		<div class="page">
-			<c:url var="list" value="list">
+			<c:url var="share" value="share">
 				<c:param name="page" value="${currentPage}" />
 			</c:url>
-			<a href="${list}">목록</a>
+			<a href="${share}">목록</a>
 		</div>
-		
 		
 		<div id="comment-list">
 			<c:forEach items="${commentList}" var="item"> 
@@ -179,8 +179,6 @@
 			                </td>
 			            </tr>
 			        </table>
-			        
-	        	
 			    </div>
 			</c:forEach>
 		</div>
@@ -251,8 +249,8 @@
 				alert("작성자가 아니므로 글 수정이 되지 않습니다.");
 				return false;
 			} 
-			var frm = document.getElementById("frmUpdate");
-			frm.action = "update";
+			var frm = document.getElementById("sharefrmUpdate");
+			frm.action = "shareupdate";
 			frm.method = "post";
 			frm.submit();
 				}else { // 취소누르면
@@ -280,8 +278,8 @@
 				alert("작성자가 아니므로 글 삭제가 되지 않습니다")
 				return false;	
 			}
-				var frm = document.getElementById("frmUpdate");
-				frm.action = "delete";
+				var frm = document.getElementById("sharefrmUpdate");
+				frm.action = "sharedelete";
 				frm.method = "post";
 				frm.submit();
 			}else { // 취소누르면

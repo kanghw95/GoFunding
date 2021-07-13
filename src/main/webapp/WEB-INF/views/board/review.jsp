@@ -8,32 +8,26 @@
 <title>후기게시판</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
-#list{
+.list{
 	width : 50px;
 	height : 50px;
-	float: left;
-	position: absolute;
-	top:100px;
-	left:10px;
+	margin-left: 10px;
 }
+
 .free{
-	position: absolute;
-	top:80px;
-	left:70px;
+	margin-left: 70px;
+	margin-top: -50px;
 }
 
-#option{
-	float:right;
-}
-.radio{
-	position: absolute;
-	top:170px;
+.write-button{
+	margin-left: 1050px;
+	margin-bottom: 20px;
 }
 
-#writeBtn2{
-	float:right;
+.table{
+	margin-left: 10px;
+	margin-top: 50px;
 }
-
 </style>
 </head>
 <body>
@@ -41,40 +35,39 @@
 	
 	<div class="wrapper">
 	
-	<img src="../resources/img/admin/list.png" id="list">
-	<h1 class="free">자유게시판</h1>
+	<img src="../resources/img/admin/list.png" class="list">
+	<h1 class="free">후기게시판</h1>
 	
-	<select id="option"onChange="window.location.href=this.value">
-		<option value="http://localhost:8090/sprout/board/list">자유게시판</option>
-		<option value="http://localhost:8090/sprout/board/review">후기게시판</option>
+<!-- 	<select id="option" onChange="window.location.href=this.value">
+		<option value="http://localhost:8090/sprout/board/list">자유게시판 이동</option>
+		<option value="http://localhost:8090/sprout/board/review">후기게시판 이동</option>
 		<option value="">QnA게시판</option>
 		<option value="">기부게시판</option>
 		<option value="">정보공유게시판</option>
-	</select>
-	<div class="radio">
+	</select> -->
+	
+<!-- 	<div class="radio">
 	<input type="radio" name="radio">최신순
 	<input type="radio" name="radio">추천순
 	<input type="radio" name="radio">조회순
 	<input type="radio" name="radio">댓글순
-	</div>
-	<br>
-	<br>
+	</div> -->
 	
+	<div class="write-button">
 	<form id="writeBtn2">
-	<input type="button" value="글쓰기" id="writing">
+	<button type="button">글쓰기</button>
 	</form>
+	</div>
 	
-	<br>
-	<br>
-
-	<table width="1140" height="800">
-		<tr bgcolor="#a8dba8">
-			<td align="center" width="100">NO</td>
-			<td align="center" width="500">제목</td>
+	<div class="table">
+	<table width="1100" height="800">
+		<tr bgcolor="#cff09e">
+			<td align="center" width="80">NO</td>
+			<td align="center" width="400">제목</td>
 			<td align="center" width="120">작성자</td>
-			<td align="center" width="100">조회</td>
-			<td align="center" width="100">추천</td>
-			<td align="center" width="120">작성일</td>
+			<td align="center" width="80">조회</td>
+			<td align="center" width="80">추천</td>
+			<td align="center" width="100">작성일</td>
 		</tr>
 
 		<!-- 글이 없을 경우 -->
@@ -90,7 +83,7 @@
 			<c:forEach var="vo" items="${list}" varStatus="status">
 				<tr>
 					<td align="center">${vo.boardNo }</td>
-					<td align="left"><a href="detail?boardNo=${vo.boardNo }&page=${currentPage}" class="title">${vo.boardTitle }</a>
+					<td align="left"><a href="reviewdetail?boardNo=${vo.boardNo }&page=${currentPage}" class="title">${vo.boardTitle }</a>
 					&nbsp;
 					
 					<!-- 제목 옆에 댓글수 -->
@@ -113,36 +106,54 @@
 		
 		<!-- 앞 페이지 번호 처리 -->
 		<tr align="center" height="20">
-			<td colspan="5"><c:if test="${currentPage <= 1}"> < </c:if>
+			<td colspan="5">
+	 			<c:if test="${currentPage <= 1}"> < </c:if>
 				<c:if test="${currentPage > 1}">
-					<c:url var="blistST" value="list">
+					<c:url var="review" value="review">
 						<c:param name="page" value="${currentPage-1}" />
 					</c:url>
-					<a href="${blistST}"> < </a>
+					<a href="${review}"> < </a>
 				</c:if> <!-- 끝 페이지 번호 처리 --> <c:set var="endPage" value="${maxPage}" /> 
 				<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
 					<c:if test="${p eq currentPage}">
 						<font color="red" size="4"><b>${p}</b></font>
 					</c:if>
 					<c:if test="${p ne currentPage}">
-						<c:url var="blistchk" value="list">
+						<c:url var="review" value="review">
 							<c:param name="page" value="${p}" />
 						</c:url>
-						<a href="${blistchk}">${p}</a>
+						<a href="${review}">${p}</a>
 					</c:if>
 				</c:forEach> 
 				<c:if test="${currentPage >= maxPage}"> > </c:if> 
 				<c:if test="${currentPage < maxPage}">
-					<c:url var="blistEND" value="list">
+					<c:url var="review" value="review">
 						<c:param name="page" value="${currentPage+1}" />
 					</c:url>
-					<a href="${blistEND}"> > </a>
-				</c:if></td>
-		</tr>
-	</table>
+					<a href="${review}"> > </a>
+				</c:if>
+				
+			<%-- 	<c:if test="${!empty review }">
+					<c:if test="${pageMaker.prev}">
+						<li><a href="review${pageMaker.makeQuery(pageMaker.startPage - 1)}" id="num"><</a></li>
+					</c:if>
+					<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
+						var="idx">
+						<li><a href="review${pageMaker.makeQuery(idx)}" id="num">${idx}</a></li>
+					</c:forEach>
+					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+						<li><a href="review${pageMaker.makeQuery(pageMaker.endPage + 1)}" id="num">></a></li>
+					</c:if>
+				</c:if> --%></td>
+			</tr>
+		</table>
+		</div>
+	</div>
+	<jsp:include page="/WEB-INF/views/footer.jsp" />
+</body>
 
 	<script>
-		$("#writing").on("click", function() {
+		$(".write-button").on("click", function() {
 			var write1 = confirm("글 쓰기 하시겠습니까?");
 			
 			if(write1 == true) {
@@ -157,12 +168,9 @@
 			}
 			
 			var frm = document.getElementById("writeBtn2");
-			frm.action = "write";
+			frm.action = "reviewwrite";
 			frm.method = "get";
 			frm.submit();
 		});
 	</script>
-	</div>
-	<jsp:include page="/WEB-INF/views/footer.jsp" />
-</body>
 </html>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>후기게시글 등록</title>
+<title>정보공유게시글 등록</title>
 <!-- 스마트 에디터 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript"
@@ -52,9 +52,9 @@
 	%>
 		<div>
 			<img src="../resources/img/admin/list.png" class="list">
-			<h1 class=free>후기게시판</h1>
+			<h1 class=free>정보공유게시판</h1>
 		
-				<form id="reviewinsert" >
+				<form id="shareinsert" >
 					<input type="hidden" name="userid" value="<%=user.getUserId()%>">
 						<table class="board" style="width=1100 height=600;">
 							<tr>
@@ -115,8 +115,8 @@
 							} else {
 								return false;
 							}
-							var frm = document.getElementById("reviewinsert");
-							frm.action="reviewinsert";
+							var frm = document.getElementById("shareinsert");
+							frm.action="shareinsert";
 							frm.method="post";
 							frm.submit();
 						});

@@ -9,167 +9,185 @@
 <title>후기글 상세 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
-/* .content{
-	border: 1px solid black;
-} */
-
-#list{
+.list{
 	width : 50px;
 	height : 50px;
-	float: left;
-	position: absolute;
-	top:100px;
-	left:10px;
+	margin-left: 10px;
 }
+
 .free{
-	position: absolute;
-	top:80px;
-	left:70px;
+	margin-left: 70px;
+	margin-top: -50px;
 }
 
-#like{
+.boardTitle{
+	margin-left: 50px;
+	margin-top: 50px;
+}
+
+.button{
+	margin-left: 900px;
+	margin-top: -25px;
+}
+
+#like, .like_cnt{
 	width : 50px;
 	height : 50px;
-	align:center;
+	margin-left: 500px;
+	margin-top: 200px;
 }
 
-#unlike{
+#unlike, .like_cnt{
 	width : 50px;
 	height : 50px;
+	margin-left: 500px;
+	margin-top: 200px;
 }
 
-.comment-writebutton{
-	float: right;
+.comment-box{
+	margin-left: 50px;
+	margin-top: 50px;
 }
 
-.cmtButton{
-	float: right;	
-}
-
-#frmUpdate{
-	position: absolute;
-	top: 260px;
-	left: 1000px;
-}
-#comment-write{
+#comment-write, #fixcomment{
 	resize: none;
 }
+
+#comment-writebtn{
+	float: right;
+	margin-left: 30px;
+	margin-top: 10px;
+}
+
+.comment-table{
+	margin-left: 50px;
+	margin-top: 20px;
+}
+
+.cmtButton fix{
+	float: right;
+	margin-top: 100px;
+}
+
+.page{
+	float: right;
+	margin-left: 30px;
+	margin-top: 10px;
+}
 </style>
-
 </head>
+
 <body>
-	<jsp:include page="/WEB-INF/views/header.jsp" />
+	<jsp:include page="/WEB-INF/views/header.jsp"/>
 	<div class="wrapper">
-	<%
-		User user = (User) session.getAttribute("user");
-	%>
-		<div class="content" width="1140" height="830">
-
-			<div class="title">
-			<img src="../resources/img/admin/list.png" id="list">
-				<h1 class="free">자유게시판</h1>
-			</div>
-
-			<div class="board">
-				<div class="board-title">
-					<div class="board-title-left">
-						<div id="title">
-							<h2>${data.boardTitle }</h2>
-						</div>
-							<form id="report">
-							  <input type="hidden" id="reportBoardNo" name="reportBoardNo" value="${data.boardNo}">
-			                  <input type="hidden" id="reportBoardId" name="reportBoardId" value="${data.boardId}">
-			                  <input type="hidden" id="reportBoardCotent" name="reportBoardCotent" value="${data.boardContent }">
-			                  <input type="hidden" id="reportBoardTitle" name="reportBoardTitle" value="${data.boardTitle }">
-							</form>
-						</div>
-					</div>	
-						
-						<div>${data.boardDate }</div>
-						<div>작성자: ${data.boardId} 조회수: ${data.boardCnt } <%-- 댓글수:${data.cmt } --%></div>
-					
-						<form id="frmUpdate">
-							<input type="hidden" name="boardNo" value="${data.boardNo }">
-							<input type="hidden" name="userId" value="<%=user.getUserId()%>">
-
-							<input type="button" value="신고" id="declaration"> 
-							<input type="button" value="수정" id="modify"> 
-							<input type="button" value="삭제" id="delete">
-						</form>
-				</div>
-			<hr>
-				<div class="board-content">						
-					<div id="content2">${data.boardContent }</div>
-					<div class="board-content-like"></div>
-				</div>
-				
-				<div>
-					<br><br><hr>
-					<div>댓글 목록</div>
-					<br>
-					<div class="comment-box">
-						<textarea id="comment-write" name="cmtContent" placeholder="댓글 입력창" rows="4" cols="150"></textarea>
-						<button id="comment-writebtn">등록</button>
-					</div>
-					<hr><br><br>
-					<div id="comment-list">
-						<!-- 첫 진입하면 EL tag 사용 ${commentList} 뿌려주기 -->
-						<!-- 추가 댓글 작성시 ajax 를 통해서 이부분 empty(싹 지우고) 다시 뿌려주기 -->
-						<c:forEach items="${commentList}" var="item"> 
-							 <div class = "comment-table">
-						        <table>
-						            <tr>
-						                <td class="comment-id">
-						                    <div class="cmtWriteId">${item.id}</div>
-						                </td>
-						                
-						                <td class="comment-date">
-						                    ${item.cmtDate}
-						                </td>
-						                
-						                <td class="comment-button">
-					                        <input type="hidden" class="cmtNo" value="${item.cmtNo}">
-						                    <div class="cmtButton normal">
-						                        <button type="button" class="btn btn-outline-primary btn-sm comment-addBtn" id="comment-addBtn">대댓글</button>
-						                        <button type="button" class="btn btn-outline-primary btn-sm comment-modifyBtn" id="comment-modifyBtn">수정</button>
-						                        <button type="button" class="btn btn-outline-primary btn-sm comment-deleteBtn" id="comment-deleteBtn">삭제</button>
-						                    </div>
-											<div class="cmtButton fix">						                    	
-					                    		<button class="fix-button">수정하기</button>
-					                    		<button class="fix-button-cancel">취소</button>
-					                    	</div>
-						                </td> 
-						            </tr>
-						            
-						            <tr>
-						                <td colspan="3" width="800px" class="comment-content">
-						                	<div class="cmtTextArea normal">
-						                    	${item.cmtContent}
-						                    </div>
-											<!-- 수정하기 눌럿을때 나오기 -->
-						                    <div class="cmtTextArea fix">
-					                    		<textarea id="fixcomment" rows="4" cols="150"></textarea>
-						                 	</div>
-								            <hr>
-						                </td>
-						            </tr>
-						        </table>
-						    </div>
-						</c:forEach>
-						
-					</div>
-				</div>
-					
-				<br><br>
-				<div class="page">
-				
-					<c:url var="list" value="list">
-						<c:param name="page" value="${currentPage}" />
-					</c:url>
-					<a href="${list}">목록</a>
-				</div>
-			</div>
+		<% User user = (User) session.getAttribute("user"); %>
+		<div class="title">
+			<img src="../resources/img/admin/list.png" class="list">
+			<h1 class="free">후기게시판</h1>
 		</div>
+	<hr>
+		<div class="board">
+			<div class="board-title">
+				<div class="board-title-left">
+				  	<form id="report">
+						  <input type="hidden" id="reportBoardNo" name="reportBoardNo" value="${data.boardNo}">
+		                  <input type="hidden" id="reportBoardId" name="reportBoardId" value="${data.boardId}">
+		                  <input type="hidden" id="reportBoardCotent" name="reportBoardCotent" value="${data.boardContent }">
+		                  <input type="hidden" id="reportBoardTitle" name="reportBoardTitle" value="${data.boardTitle }">
+					</form>
+				</div>
+			</div>
+		</div>		
+		
+		<div class="boardTitle"> 
+			<div>
+				<h2>${data.boardTitle }</h2>
+			</div>
+			
+			<div>
+				${data.boardDate }
+					<form id="reviewfrmUpdate" class="button">
+					<input type="hidden" name="boardNo" value="${data.boardNo }">
+					<input type="hidden" name="userId" value="<%=user.getUserId()%>">
+
+					<input type="button" value="신고" id="declaration"> 
+					<input type="button" value="수정" id="modify"> 
+					<input type="button" value="삭제" id="delete">
+				</form>	
+			</div>
+		
+			<div>
+				작성자: ${data.boardId} 조회수: ${data.boardCnt } <%-- 댓글수:${data.cmt } --%>
+			</div>	
+			<hr>
+			<div>
+				<h1>글내용</h1>						
+				${data.boardContent }
+			</div>
+			
+			<div class="board-content-like"></div><hr>
+		</div>
+		
+		
+		<div class="comment-box">댓글 목록
+			<textarea id="comment-write" name="cmtContent" placeholder="댓글 입력창" rows="4" cols="150"></textarea>
+			<button id="comment-writebtn">등록</button>
+		</div>
+		
+		<div class="page">
+			<c:url var="review" value="review">
+				<c:param name="page" value="${currentPage}" />
+			</c:url>
+			<a href="${review}">목록</a>
+		</div>
+		
+		
+		<div id="comment-list">
+			<c:forEach items="${commentList}" var="item"> 
+				 <div class = "comment-table">
+					<table>
+			            <tr>
+			                <td class="comment-id">
+			                    <div class="cmtWriteId">${item.id}</div>
+			                </td>
+						                
+			                <td class="comment-date">
+		                    	${item.cmtDate}
+			                </td>
+						                
+			                <td class="comment-button">
+	                        	<input type="hidden" class="cmtNo" value="${item.cmtNo}">
+				                    <div class="cmtButton normal">
+				                        <button type="button" class="btn btn-outline-primary btn-sm comment-addBtn" id="comment-addBtn">대댓글</button>
+				                        <button type="button" class="btn btn-outline-primary btn-sm comment-modifyBtn" id="comment-modifyBtn">수정</button>
+				                        <button type="button" class="btn btn-outline-primary btn-sm comment-deleteBtn" id="comment-deleteBtn">삭제</button>
+				                    </div>
+			                </td> 
+			            </tr>
+						            
+			            <tr>
+		                	<td colspan="3" width="800px" class="comment-content">
+			                	<div class="cmtTextArea normal">
+			                    	${item.cmtContent}
+			                    </div>
+								<!-- 수정하기 눌럿을때 나오기 -->
+			                    <div class="cmtTextArea fix">
+	                    			<textarea id="fixcomment" rows="4" cols="150"></textarea>
+                    				<button class="fix-button">수정하기</button>
+	                    			<button class="fix-button-cancel">취소</button>
+			                 	</div>
+			            		<hr>
+			                </td>
+			            </tr>
+			        </table>
+			    </div>
+			</c:forEach>
+		</div>
+		
+	</div>
+	<jsp:include page="/WEB-INF/views/footer.jsp"/>
+</body>
+
 	<script>
 	$(function(){ 
 		// 로드 되면 comment의 댓글,수정,삭제 버튼 나타내기
@@ -184,9 +202,9 @@
 		var tagHtml = '';
 		
 		if(isLiked == 1){// 1:좋아요, 0:아님
-			tagHtml = '<a><img src = "../resources/img/fullheart.png" id="unlike"><br><span class = "like_cnt">${likecnt }</span></a>';
+			tagHtml = '<a><img src = "../resources/img/fullheart.png" id="unlike"><br><span class = "like_cnt">${reviewlikecnt }</span></a>';
 		} else {// 0:아님
-			tagHtml = '<a><img src = "../resources/img/emptyheart.png" id="like"><br><span class = "like_cnt">${likecnt }</span></a>';
+			tagHtml = '<a><img src = "../resources/img/emptyheart.png" id="like"><br><span class = "like_cnt">${reviewlikecnt }</span></a>';
 		}
 		$(".board-content-like").append(tagHtml);
 
@@ -228,8 +246,8 @@
 				alert("작성자가 아니므로 글 수정이 되지 않습니다.");
 				return false;
 			} 
-			var frm = document.getElementById("frmUpdate");
-			frm.action = "update";
+			var frm = document.getElementById("reviewfrmUpdate");
+			frm.action = "reviewupdate";
 			frm.method = "post";
 			frm.submit();
 				}else { // 취소누르면
@@ -257,8 +275,8 @@
 				alert("작성자가 아니므로 글 삭제가 되지 않습니다")
 				return false;	
 			}
-				var frm = document.getElementById("frmUpdate");
-				frm.action = "delete";
+				var frm = document.getElementById("reviewfrmUpdate");
+				frm.action = "reviewdelete";
 				frm.method = "post";
 				frm.submit();
 			}else { // 취소누르면
@@ -289,7 +307,7 @@
 		$(".board-content-like").click(function() {
 			if (checkId() == false) {
 				$.ajax({
-					url : "clickLike",
+					url : "reviewclickLike",
 					type : "POST",
 					data : {
 						boardNo : '${data.boardNo }',
@@ -496,7 +514,4 @@
  		}
 	});   // on load 되면
 	</script>
-	</div>
-	<jsp:include page="/WEB-INF/views/footer.jsp" />
-</body>
 </html>

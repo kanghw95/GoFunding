@@ -182,8 +182,239 @@ public class BoardServiceImpl implements BoardService {
 	public int reviewLikecnt(int boardNo) { // 게시글 추천수
 		return boDao.reviewLikecnt(boardNo);
 	}
+	
+	// 질의응답 게시판
+	@Override
+	public int questionCount() { // 게시글 목록
+		return boDao.questionCount();
+	}
 
+	@Override
+	public Board questionDetail(int boardNo) { // 게시글 상세보기
+		return boDao.questionDetail(boardNo);
+	}
+	
+	@Override
+	public int questionInsertBoard(Board b) { // 게시글 등록
+		return boDao.questionInsertBoard(b);
+	}
+	
+	@Override
+	public void questionDeleteBoard(int boardNo) { // 글 삭제
+		boDao.questionDeleteBoard(boardNo);
+	}
 
+	@Override
+	public int questionUpdateBoard(Board b) { // 글 수정
+		return boDao.questionUpdateBoard(b);
+	}
+	
+	@Override
+	public List<Board> questionSelectList(int startPage, int limit) { // 번호 정렬
+		List<Board> result = null;
+		try{
+			result = boDao.questionSelectList(startPage, limit);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+			
+	@Override
+	public Board questionAddReadCount(int chk, int boardNo) { // 글 조회수 증가
 
+		if (chk == 0) {
+			boDao.questionAddReadCount(boardNo);
+		}
+		return boDao.questionSelectOne(boardNo);
+	}
+	
+	@Override
+	public Board questionSelectOne(int boardNo) { // 글 가져오기
+		return boDao.questionSelectOne(boardNo);
+	}
 
+	@Override
+	public int questionChecklike(int boardNo, String userId) { // 게시글 추천 여부 검사 비추천0 추천1
+
+		int result = boDao.questionChecklike(boardNo, userId);
+		
+		if(result == 0) {
+		} else {
+			}
+		return result;
+	}
+
+	@Override
+	public int questionInsertLike(int boardNo,String userId) { // 게시글 추천
+		return boDao.questionInsertLike(boardNo,userId);
+	}
+	
+	@Override
+	public int questionDeleteLike(int boardNo, String userId) { // 게시글 추천 취소
+		return boDao.questionDeleteLike(boardNo, userId);
+	}
+
+	@Override
+	public int questionLikecnt(int boardNo) { // 게시글 추천수
+		return boDao.questionLikecnt(boardNo);
+	}
+
+	
+	// 이벤트 게시판
+	@Override
+	public int eventCount() { // 게시글 목록
+		return boDao.eventCount();
+	}
+
+	@Override
+	public Board eventDetail(int boardNo) { // 게시글 상세보기
+		return boDao.eventDetail(boardNo);
+	}
+	
+	@Override
+	public int eventInsertBoard(Board b) { // 게시글 등록
+		return boDao.eventInsertBoard(b);
+	}
+	
+	@Override
+	public void eventDeleteBoard(int boardNo) { // 글 삭제
+		boDao.eventDeleteBoard(boardNo);
+	}
+
+	@Override
+	public int eventUpdateBoard(Board b) { // 글 수정
+		return boDao.eventUpdateBoard(b);
+	}
+	
+	@Override
+	public List<Board> eventSelectList(int startPage, int limit) { // 번호 정렬
+		List<Board> result = null;
+		try{
+			result = boDao.eventSelectList(startPage, limit);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+			
+	@Override
+	public Board eventAddReadCount(int chk, int boardNo) { // 글 조회수 증가
+
+		if (chk == 0) {
+			boDao.eventAddReadCount(boardNo);
+		}
+		return boDao.eventSelectOne(boardNo);
+	}
+	
+	@Override
+	public Board eventSelectOne(int boardNo) { // 글 가져오기
+		return boDao.eventSelectOne(boardNo);
+	}
+
+	@Override
+	public int eventChecklike(int boardNo, String userId) { // 게시글 추천 여부 검사 비추천0 추천1
+
+		int result = boDao.eventChecklike(boardNo, userId);
+		
+		if(result == 0) {
+		} else {
+			}
+		return result;
+	}
+
+	@Override
+	public int eventInsertLike(int boardNo,String userId) { // 게시글 추천
+		return boDao.eventInsertLike(boardNo,userId);
+	}
+	
+	@Override
+	public int eventDeleteLike(int boardNo, String userId) { // 게시글 추천 취소
+		return boDao.eventDeleteLike(boardNo, userId);
+	}
+
+	@Override
+	public int eventLikecnt(int boardNo) { // 게시글 추천수
+		return boDao.eventLikecnt(boardNo);
+	}
+	
+	
+	// 정보공유 게시판	
+	@Override
+	public int shareCount() { // 게시글 목록
+		return boDao.shareCount();
+	}
+
+	@Override
+	public Board shareDetail(int boardNo) { // 게시글 상세보기
+		return boDao.shareDetail(boardNo);
+	}
+	
+	@Override
+	public int shareInsertBoard(Board b) { // 게시글 등록
+		return boDao.shareInsertBoard(b);
+	}
+	
+	@Override
+	public void shareDeleteBoard(int boardNo) { // 글 삭제
+		boDao.shareDeleteBoard(boardNo);
+	}
+
+	@Override
+	public int shareUpdateBoard(Board b) { // 글 수정
+		return boDao.shareUpdateBoard(b);
+	}
+	
+	@Override
+	public List<Board> shareSelectList(int startPage, int limit) { // 번호 정렬
+		List<Board> result = null;
+		try{
+			result = boDao.shareSelectList(startPage, limit);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+			
+	@Override
+	public Board shareAddReadCount(int chk, int boardNo) { // 글 조회수 증가
+
+		if (chk == 0) {
+			boDao.shareAddReadCount(boardNo);
+		}
+		return boDao.shareSelectOne(boardNo);
+	}
+	
+	@Override
+	public Board shareSelectOne(int boardNo) { // 글 가져오기
+		return boDao.shareSelectOne(boardNo);
+	}
+
+	@Override
+	public int shareChecklike(int boardNo, String userId) { // 게시글 추천 여부 검사 비추천0 추천1
+
+		int result = boDao.shareChecklike(boardNo, userId);
+		
+		if(result == 0) {
+		} else {
+			}
+		return result;
+	}
+
+	@Override
+	public int shareInsertLike(int boardNo,String userId) { // 게시글 추천
+		return boDao.shareInsertLike(boardNo,userId);
+	}
+	
+	@Override
+	public int shareDeleteLike(int boardNo, String userId) { // 게시글 추천 취소
+		return boDao.shareDeleteLike(boardNo, userId);
+	}
+
+	@Override
+	public int shareLikecnt(int boardNo) { // 게시글 추천수
+		return boDao.shareLikecnt(boardNo);
+	}
+	
+	
 }

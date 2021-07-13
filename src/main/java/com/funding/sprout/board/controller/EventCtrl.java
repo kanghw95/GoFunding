@@ -1,7 +1,6 @@
 package com.funding.sprout.board.controller;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +25,12 @@ import com.funding.sprout.board.service.BoardService;
 import com.funding.sprout.comment.service.CommentService;
 import com.funding.sprout.vo.Board;
 import com.funding.sprout.vo.Comment;
-import com.funding.sprout.vo.Report;
 import com.funding.sprout.vo.User;
 
 @Controller
 @RequestMapping(value = "/board")
-public class BoardCtrl {
-
+public class EventCtrl {
+	
 	@Autowired
 	private BoardService boService;
 	@Autowired
@@ -40,21 +38,22 @@ public class BoardCtrl {
 
 	public static final int LIMIT = 10;
 	private static final Logger logger = LoggerFactory.getLogger(BoardCtrl.class);
-
-	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public ModelAndView list( // 게시글 목록
+	
+	// 후기게시판
+	@RequestMapping(value = "event", method = RequestMethod.GET)
+	public ModelAndView event( // 게시글 목록
 			@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", required = false) String keyword, ModelAndView mv, Comment cm, Board vo) {
 		logger.info("list()");
 		try {
 			int currentPage = page; // 한 페이지당 출력할 목록 갯수
-			int listCount = boService.totalCount();
+			int listCount = boService.eventCount();
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 					
 			if (keyword != null && !keyword.equals("")) {
 				mv.addObject("list", boService.searchList(keyword));
 			}else {
-				ArrayList<Board> aaa = new ArrayList<Board>(boService.selectList(currentPage, LIMIT));
+				ArrayList<Board> aaa = new ArrayList<Board>(boService.eventSelectList(currentPage, LIMIT));
 				mv.addObject("list", aaa);
 			}
 			logger.info("list()aaaa: ");
@@ -62,7 +61,7 @@ public class BoardCtrl {
 			mv.addObject("listCount", listCount);
 			mv.addObject("maxPage", maxPage);
  			
-			mv.setViewName("board/list");
+			mv.setViewName("board/event");
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", e.getMessage());
@@ -71,22 +70,22 @@ public class BoardCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "detail", method = RequestMethod.GET)
-	public ModelAndView detail(ModelAndView mv, @RequestParam(name = "boardNo") int boardNo,
+	@RequestMapping(value = "eventdetail", method = RequestMethod.GET)
+	public ModelAndView eventdetail(ModelAndView mv, @RequestParam(name = "boardNo") int boardNo,
 			@RequestParam(name = "page", defaultValue = "1") int page, HttpSession session,HttpServletResponse response){ // 게시글 상세보기
 		// 방법1
 		try {		
-			Board data = boService.selectBoard(0, boardNo); // 조회수증가
+			Board data = boService.eventAddReadCount(0, boardNo); // 조회수증가
 			int currentPage = page;
 			int likecnt = 0; // 추천수
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("data", data);
 			
 			String boardId = ((User)session.getAttribute("user")).getUserId(); 
-			int isLiked = boService.checklike(boardNo, boardId);    // 좋아요상태 :1, 아니면 :0
+			int isLiked = boService.eventChecklike(boardNo, boardId);    // 좋아요상태 :1, 아니면 :0
 			mv.addObject("isliked", isLiked);   // 좋아요상태 :1, 아니면 :0
 			
-			likecnt = boService.likecnt(boardNo); // 추천수
+			likecnt = boService.eventLikecnt(boardNo); // 추천수
 			mv.addObject("likecnt", likecnt);
 		
 			List<Comment> commentList = comService.CommentAll(boardNo); // 댓글 목록 리스트
@@ -114,13 +113,13 @@ public class BoardCtrl {
 //		return "board/detail";	 
 	}
 
-	@RequestMapping(value = "write", method = RequestMethod.GET)
-	public String write() { // write로 이동
-		return "board/write";
+	@RequestMapping(value = "eventwrite", method = RequestMethod.GET)
+	public String eventwrite() { // write로 이동
+		return "board/eventwrite";
 	}
 
-	@RequestMapping(value = "insert", method = RequestMethod.POST)
-	public ModelAndView insert(Board b, @RequestParam(name = "upfile", required = false) MultipartFile report,
+	@RequestMapping(value = "eventinsert", method = RequestMethod.POST)
+	public ModelAndView eventinsert(Board b, @RequestParam(name = "upfile", required = false) MultipartFile report,
 			@RequestParam("boardTitle") String boardtitle, @RequestParam("boardContent") String boardcotent,
 			@RequestParam("userid") String userid, HttpServletRequest request, ModelAndView mv, Board vo) { // 게시글 등록
 		int result = 0;
@@ -129,11 +128,11 @@ public class BoardCtrl {
 		vo.setBoardTitle(boardtitle);
 		vo.setBoardContent(boardcotent);
 		vo.setBoardId(userid);
-		result = boService.insertBoard(vo);
+		result = boService.eventInsertBoard(vo);
 		
 		try {
 			if (result != 0) {
-				mv.setViewName("redirect:list");
+				mv.setViewName("redirect:event");
 			} else {
 				mv.addObject("msg", "글 등록 실패");
 				mv.setViewName("errorPage");
@@ -146,14 +145,14 @@ public class BoardCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "delete")
-	public ModelAndView delete(@RequestParam(name = "boardNo") int boardNo,
+	@RequestMapping(value = "eventdelete")
+	public ModelAndView eventdelete(@RequestParam(name = "boardNo") int boardNo,
 			@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) { // 게시글 삭제
 		try {
 //			Board b = boService.selectBoard(1, boardNo);
-			boService.deleteBoard(boardNo);
+			boService.eventDeleteBoard(boardNo);
 			mv.addObject("currentPage", page);
-			mv.setViewName("redirect:list");
+			mv.setViewName("redirect:event");
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", e.getMessage());
@@ -162,75 +161,38 @@ public class BoardCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String boardRenew(int boardNo, Model model) { // 게시글 수정 jsp 이동
-		Board data = boService.detail(boardNo);
+	@RequestMapping(value = "eventupdate", method = RequestMethod.POST)
+	public String reviewboardRenew(int boardNo, Model model) { // 게시글 수정 jsp 이동
+		Board data = boService.eventDetail(boardNo);
 		model.addAttribute("data", data);
-		return "board/update";
+		return "board/eventupdate";
 	}
 
-	@RequestMapping(value = "update2", method = RequestMethod.POST)
-	public String boardUpdate(Board b) { // 게시글 수정
+	@RequestMapping(value = "eventupdate2", method = RequestMethod.POST)
+	public String reviewboardUpdate(Board b) { // 게시글 수정
 		boService.updateBoard(b);
-		return "redirect:list";
+		return "redirect:event";
 	}
 
-	@RequestMapping(value = "clickLike", method = RequestMethod.POST)
+	@RequestMapping(value = "eventclickLike", method = RequestMethod.POST)
 	@ResponseBody
-	public int clickLike(@RequestParam("boardNo") int boardNo, @RequestParam("boardId") String boardId, ModelAndView mv,
+	public int eventclickLike(@RequestParam("boardNo") int boardNo, @RequestParam("boardId") String boardId, ModelAndView mv,
 			ModelAndView model) { // 추천
 		int result = -1;
 		int likecnt = 0;
 		try {
-			result = boService.checklike(boardNo, boardId);
+			result = boService.eventChecklike(boardNo, boardId);
 			if (result == 0) { // 추천이 안되어있는 상태라면 클릭했을때 추천
-				boService.insertLike(boardNo, boardId);
+				boService.eventInsertLike(boardNo, boardId);
 			} else if (result == 1) { // 추천이 되어있는 상태라면 클릭했을때 추천 취소
-				boService.deleteLike(boardNo, boardId);
+				boService.eventDeleteLike(boardNo, boardId);
 			} else {
 				}
-			likecnt = boService.likecnt(boardNo); // 총 추천수
+			likecnt = boService.eventLikecnt(boardNo); // 총 추천수
 			//mv.addObject("likecnt", likecnt);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return likecnt;
-	}
-	
-	@RequestMapping(value = "reportsend", method = RequestMethod.POST)
-	public String ReportSend(Report re, ModelAndView mv, Board vo,
-	        @RequestParam("reportBoardNo") int reportBoardNo,
-	         @RequestParam("reportBoardId") String reportBoardId,
-	         @RequestParam("reportBoardCotent") String reportBoardCotent,
-	         @RequestParam("reportBoardTitle") String reportBoardTitle) { // 게시글 신고
-		try{
-			System.out.println("boardId : " + reportBoardId);
-
-			  mv.addObject("reportBoardNo",reportBoardNo);
-	          mv.addObject("reportBoardId",reportBoardId);
-	          mv.addObject("reportBoardCotent",reportBoardCotent);
-	          mv.addObject("reportBoardTitle",reportBoardTitle);
-			int result = boService.ReportSend(re);
-	 		mv.addObject("result",result);
-			}catch(Exception e) {
-				e.printStackTrace();
-				mv.addObject("msg", e.getMessage());
-				mv.setViewName("errorPage");
-		}
-		return "board/reportsend";
-	}
-
-	@RequestMapping(value = "boardRead", method = RequestMethod.GET)
-	public ModelAndView boarRead() { // 게시글 읽기
-		return null;
-
-	}
-
-	private void saveFile() {
-
-	}
-
-	private void removeFile() {
-
 	}
 }

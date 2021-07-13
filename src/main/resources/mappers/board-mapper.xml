@@ -13,7 +13,7 @@
 		<result column="CMT" property="cmt"/>		
 	</resultMap>
 	
-	<!-- 리뷰게시판 -->
+	<!-- 후기게시판 -->
 	<resultMap type="Board" id="reviewBoard">
 		<id column="REVIEWNO" property="boardNo" />
 		<result column="REVIEWTITLE" property="boardTitle" />
@@ -25,6 +25,48 @@
 		<result column="CMT" property="cmt"/>		
 	</resultMap>
 	
+	<!-- 질의응답게시판 -->
+		<resultMap type="Board" id="questionBoard">
+		<id column="QBOARDNO " property="boardNo" />
+		<result column="QBOARDTITLE" property="boardTitle" />
+		<result column="QBOARDCONTENT" property="boardContent" />
+		<result column="QBOARDDATE" property="boardDate" />
+		<result column="QBOARDCNT" property="boardCnt" />
+		<result column="ID" property="boardId" />
+		<result column="CNT" property="likecnt"/>
+		<result column="CMT" property="cmt"/>		
+	</resultMap>
+	
+	
+	<!-- 이벤트게시판 -->
+	<resultMap type="Board" id="eventBoard">
+		<id column="EVENTNO " property="boardNo" />
+		<result column="EVENTTITLE" property="boardTitle" />
+		<result column="EVENTCONTENT" property="boardContent" />
+		<result column="EVENTDATE" property="boardDate" />
+		<result column="EVENTCNT" property="boardCnt" />
+		<result column="ID" property="boardId" />
+		<result column="CNT" property="likecnt"/>
+		<result column="CMT" property="cmt"/>		
+	</resultMap>
+	
+	<!-- 정보공유게시판 -->
+	<resultMap type="Board" id="shareBoard">
+		<id column="SHARENO " property="boardNo" />
+		<result column="SHARETITLE" property="boardTitle" />
+		<result column="SHARECONTENT" property="boardContent" />
+		<result column="SHAREDATE" property="boardDate" />
+		<result column="SHARECNT" property="boardCnt" />
+		<result column="ID" property="boardId" />
+		<result column="CNT" property="likecnt"/>
+		<result column="CMT" property="cmt"/>		
+	</resultMap>
+	
+
+	
+
+	
+	<!-- 자유게시판 -->
 	<!-- 게시글 목록 -->
 	<select id="listCount" resultType="int">
 	    SELECT count(*) FROM BULLETINEBOARD
@@ -117,94 +159,285 @@
 	
 	
 	
-<!-- 후기게시판 
-	게시글 목록
+	
+	
+		
+	<!-- 후기게시판  -->
+	<!-- 게시글 목록 -->
 	<select id="reviewCount" resultType="int">
-	    SELECT count(*) FROM REVIEWBOARD 
+	    SELECT count(*) FROM REVIEWBOARD
 	</select>
 	
-	게시글 상세보기
+	<!-- 게시글 상세보기 -->
 	<select id="reviewDetail" resultMap="reviewBoard" parameterType="int">
-		SELECT * FROM REVIEWBOARD WHERE REVIEWNO  = #{boardNo}
+		SELECT * FROM REVIEWBOARD WHERE REVIEWNO = #{boardNo}
 	</select>
 
-	게시글 등록
-	<insert id="reviewInsertBoard" parameterType="Board" flushCache="true" statementType="PREPARED">
-		INSERT INTO REVIEWBOARD  (REVIEWNO  , REVIEWTITLE , REVIEWCONTENT , REVIEWDATE , REVIEWCNT , ID)
-		VALUES(REVIEWBOARD.NEXTVAL, #{boardTitle}, #{boardContent}, SYSDATE, 0, #{boardId})
+	<!-- 게시글 등록 -->
+	<insert id="reviewInsertBoard" parameterType="Board" flushCache="true" statementType="PREPARED">	
+		INSERT INTO REVIEWBOARD(REVIEWNO, REVIEWTITLE, REVIEWCONTENT, REVIEWDATE, REVIEWCNT, ID)
+		VALUES(SEQ_REVIEWBOARD.NEXTVAL, #{boardTitle}, #{boardContent}, SYSDATE, 0, #{boardId})
 	</insert>
 
-	게시글 삭제
+	<!-- 게시글 삭제 -->
 	<delete id="reviewDeleteBoard" parameterType="int" flushCache="true" statementType="PREPARED">
 		DELETE FROM REVIEWBOARD WHERE REVIEWNO = #{boardNo}
 	</delete>
 
-	게시글 수정
+	<!-- 게시글 수정 -->
 	<update id="reviewUpdateBoard" parameterType="Board" flushCache="true" statementType="PREPARED">
 		UPDATE REVIEWBOARD SET REVIEWTITLE = #{boardTitle}, REVIEWCONTENT =#{boardContent} WHERE REVIEWNO = #{boardNo}
 	</update>
 
-	페이지당 게시글 조회 / 번호정렬
+	<!-- 페이지당 게시글 조회 / 번호정렬 -->
 	<select id="reviewSelectList" resultMap="reviewBoard">
-    SELECT B.*,C.CNT, D.CMT
+  	SELECT B.*,C.CNT, D.CMT
 	FROM REVIEWBOARD B
-	LEFT OUTER JOIN(SELECT count(*) as CNT,REVIEWNO FROM REVIEWLIKE  group by REVIEWNO) C 
-    ON B.REVIEWNO = C.REVIEWNO
-	LEFT OUTER JOIN(SELECT COUNT(*) as CMT ,REVIEWNO FROM REVIEWCOMMENT  group by REVIEWNO) D 
-    ON B.REVIEWNO = D.REVIEWNO
+	LEFT OUTER JOIN(SELECT count(*) as CNT,REVIEWNO FROM REVIEWLIKE group by REVIEWNO) C 
+	ON B.REVIEWNO = C.REVIEWNO
+	LEFT OUTER JOIN(SELECT COUNT(*) as CMT ,REVIEWCMTNO FROM REVIEWCOMMENT group by REVIEWCMTNO) D 
+	ON B.REVIEWNO = D.REVIEWCMTNO
 	ORDER BY B.REVIEWNO DESC
 	</select>
 	
-	글 조회수 증가
+	<!-- 글 조회수 증가-->
   	<update id="reviewAddReadCount" parameterType="int" flushCache="true" statementType="PREPARED">
-  		UPDATE REVIEWBOARD SET FREECNT = FREECNT+1 WHERE REVIEWNO = #{boardNo}
+  		UPDATE REVIEWBOARD SET REVIEWCNT = REVIEWCNT+1 WHERE REVIEWNO = #{boardNo}
   	</update>
 	
-	게시글 단일 조회
-	<select id="reviewSelectOne" parameterType="int" resultMap="resultBoard">
+	<!-- 게시글 단일 조회 -->
+	<select id="reviewSelectOne" parameterType="int" resultMap="reviewBoard">
 		SELECT * FROM REVIEWBOARD WHERE REVIEWNO = #{boardNo}
 	</select>
 	
-	게시글 추천 여부 검사
+	<!-- 게시글 추천 여부 검사 -->
 	<select id="reviewChecklike" parameterType="hashmap" flushCache="true" statementType="PREPARED" resultType="int">
-		SELECT count(*) FROM REVIEWBOARD WHERE REVIEWNO = #{FREENO} and ID = #{ID}
+		SELECT count(*) FROM REVIEWLIKE WHERE REVIEWNO = #{boardNo} and ID = #{ID}
 	</select>
 	
-	게시글 추천
+	<!-- 게시글 추천 -->
 	<insert id="reviewInsertLike" parameterType="hashmap" flushCache="true" statementType="PREPARED" >
-		INSERT INTO REVIEWBOARD VALUES(#{REVIEWNO}, #{ID})
+		INSERT INTO REVIEWLIKE VALUES(#{REVIEWNO}, #{ID})
 	</insert>
 	
-	게시글 추천 취소
+	<!-- 게시글 추천 취소 -->
 	<delete id="reviewDeleteLike" parameterType="hashmap" flushCache="true" statementType="PREPARED">
-		DELETE FROM REVIEWBOARD WHERE REVIEWNO = #{FREENO} and ID = #{ID}
+		DELETE FROM REVIEWLIKE WHERE REVIEWNO = #{boardNo} and ID = #{ID}
 	</delete>
 	
-	게시글 추천수	
+	<!-- 게시글 추천수 -->	
 	<select id="reviewLikecnt" parameterType="int" flushCache="true" statementType="PREPARED" resultType="int">
-		SELECT count(*) FROM REVIEWBOARD WHERE REVIEWNO = #{boardNo}
+		SELECT count(*) FROM REVIEWLIKE WHERE REVIEWNO = #{boardNo}
 	</select>
-		
-자유 게시판 라디오박스 조회 
-	<select id="selectFRadio"  resultMap="resultBoard">
-		SELECT * FROM BULLETINEBOARD 
-		<choose>
-			<when test="date != null">
-				ORDER BY FREEDATE DESC
-			</when>
-			<when test="cnt != null">
-				ORDER BY FREECNT DESC
-			</when>
-			<otherwise></otherwise>
-		</choose>
+	
+
+	<!-- 질의응답게시판  -->
+	<!-- 게시글 목록 -->
+	<select id="questionCount" resultType="int">
+	    SELECT count(*) FROM QUESTIONBOARD
+	</select>
+	
+	<!-- 게시글 상세보기 -->
+	<select id="questionDetail" resultMap="questionBoard" parameterType="int">
+		SELECT * FROM QUESTIONBOARD WHERE QBOARDNO = #{boardNo}
 	</select>
 
-	검색한 게시글 조회
-	<select id="reviewSearchList" parameterType="string"
-		resultType="arraylist" resultMap="resultBoard">
-		SELECT * FROM BULLETINEBOARD WHERE
-		BOARD_TITLE LIKE '%'|| #{keyword} ||'%' OR BOARD_CONTENT LIKE '%'||
-		#{keyword} ||'%'
-		ORDER BY REGDATE DESC
-	</select> -->
+	<!-- 게시글 등록 -->
+	<insert id="questionInsertBoard" parameterType="Board" flushCache="true" statementType="PREPARED">
+		INSERT INTO QUESTIONBOARD(QBOARDNO, QBOARDTITLE, QBOARDCONTENT, QBOARDDATE, QBOARDCNT, ID)
+		VALUES(SEQ_QUESTIONBOARD.NEXTVAL, #{boardTitle}, #{boardContent}, SYSDATE, 0, #{boardId})
+	</insert>
+
+	<!-- 게시글 삭제 -->
+	<delete id="questionDeleteBoard" parameterType="int" flushCache="true" statementType="PREPARED">
+		DELETE FROM QUESTIONBOARD WHERE QBOARDNO = #{boardNo}
+	</delete>
+
+	<!-- 게시글 수정 -->
+	<update id="questionUpdateBoard" parameterType="Board" flushCache="true" statementType="PREPARED">
+		UPDATE QUESTIONBOARD SET QBOARDTITLE = #{boardTitle}, QBOARDCONTENT =#{boardContent} WHERE QBOARDNO = #{boardNo}
+	</update>
+
+	<!-- 페이지당 게시글 조회 / 번호정렬 -->
+	<select id="questionSelectList" resultMap="questionBoard">
+  	SELECT B.*,C.CNT, D.CMT
+	FROM QUESTIONBOARD B 
+	LEFT OUTER JOIN(SELECT count(*) as CNT,QBOARDNO FROM QUESTIONLIKE group by QBOARDNO ) C 
+	ON B.QBOARDNO = C.QBOARDNO
+	LEFT OUTER JOIN(SELECT COUNT(*) as CMT ,QBOARDNO FROM QUESTIONCOMMENT group by QBOARDNO ) D 
+	ON B.QBOARDNO = D.QBOARDNO 
+	ORDER BY B.QBOARDNO DESC
+	</select>
+	
+	<!-- 글 조회수 증가-->
+  	<update id="questionAddReadCount" parameterType="int" flushCache="true" statementType="PREPARED">
+  		UPDATE QUESTIONBOARD SET QBOARDCNT = QBOARDCNT+1 WHERE QBOARDNO = #{boardNo}
+  	</update>
+	
+	<!-- 게시글 단일 조회 -->
+	<select id="questionSelectOne" parameterType="int" resultMap="questionBoard">
+		SELECT * FROM QUESTIONBOARD WHERE QBOARDNO = #{boardNo}
+	</select>
+	
+	<!-- 게시글 추천 여부 검사 -->
+	<select id="questionChecklike" parameterType="hashmap" flushCache="true" statementType="PREPARED" resultType="int">
+		SELECT count(*) FROM QUESTIONLIKE WHERE QBOARDNO = #{boardNo} and ID = #{ID}
+	</select>
+	
+	<!-- 게시글 추천 -->
+	<insert id="questionInsertLike" parameterType="hashmap" flushCache="true" statementType="PREPARED" >
+		INSERT INTO QUESTIONLIKE VALUES(#{QBOARDNO}, #{ID})
+	</insert>
+	
+	<!-- 게시글 추천 취소 -->
+	<delete id="questionDeleteLike" parameterType="hashmap" flushCache="true" statementType="PREPARED">
+		DELETE FROM QUESTIONLIKE WHERE QBOARDNO = #{boardNo} and ID = #{ID}
+	</delete>
+	
+	<!-- 게시글 추천수 -->	
+	<select id="questionLikecnt" parameterType="int" flushCache="true" statementType="PREPARED" resultType="int">
+		SELECT count(*) FROM QUESTIONLIKE WHERE QBOARDNO = #{boardNo}
+	</select>
+	
+		
+	
+	<!-- 이벤트 게시판 -->
+	<select id="eventCount" resultType="int">
+    	SELECT count(*) FROM EVENTBOARD
+	</select>
+	
+	<!-- 게시글 상세보기 -->
+	<select id="eventDetail" resultMap="eventBoard" parameterType="int">
+		SELECT * FROM EVENTBOARD WHERE EVENTNO = #{boardNo}
+	</select>
+
+	<!-- 게시글 등록 -->
+	<insert id="eventInsertBoard" parameterType="Board" flushCache="true" statementType="PREPARED">
+		INSERT INTO EVENTBOARD(EVENTNO, EVENTTITLE, EVENTCONTENT, EVENTDATE, EVENTCNT, ID)
+		VALUES(SEQ_EVENTBOARD.NEXTVAL, #{boardTitle}, #{boardContent}, SYSDATE, 0, #{boardId})
+	</insert>
+
+	<!-- 게시글 삭제 -->
+	<delete id="eventDeleteBoard" parameterType="int" flushCache="true" statementType="PREPARED">
+		DELETE FROM EVENTBOARD WHERE EVENTNO = #{boardNo}
+	</delete>
+
+	<!-- 게시글 수정 -->
+	<update id="eventUpdateBoard" parameterType="Board" flushCache="true" statementType="PREPARED">
+		UPDATE EVENTBOARD SET EVENTTITLE = #{boardTitle}, EVENTCONTENT =#{boardContent} WHERE EVENTNO = #{boardNo}
+	</update>
+
+	<!-- 페이지당 게시글 조회 / 번호정렬 -->
+	<select id="eventSelectList" resultMap="eventBoard">
+	    SELECT B.*,C.CNT, D.CMT
+		FROM EVENTBOARD B
+		LEFT OUTER JOIN(SELECT count(*) as CNT,EVENTNO FROM EVENTLIKE group by EVENTNO) C 
+		ON B.EVENTNO = C.EVENTNO
+		LEFT OUTER JOIN(SELECT COUNT(*) as CMT,EVENTCMTNO FROM EVENTCOMMENT group by EVENTCMTNO) D 
+		ON B.EVENTNO = D.EVENTCMTNO 
+		ORDER BY B.EVENTNO DESC
+	</select>
+	
+	<!-- 글 조회수 증가-->
+  	<update id="eventAddReadCount" parameterType="int" flushCache="true" statementType="PREPARED">
+  		UPDATE EVENTBOARD SET EVENTCNT = EVENTCNT+1 WHERE EVENTNO = #{boardNo}
+  	</update>
+	
+	<!-- 게시글 단일 조회 -->
+	<select id="eventSelectOne" parameterType="int" resultMap="eventBoard">
+		SELECT * FROM EVENTBOARD WHERE EVENTNO = #{boardNo}
+	</select>
+	
+	<!-- 게시글 추천 여부 검사 -->
+	<select id="eventChecklike" parameterType="hashmap" flushCache="true" statementType="PREPARED" resultType="int">
+		SELECT count(*) FROM EVENTLIKE WHERE EVENTNO = #{boardNo} and ID = #{ID}
+	</select>
+	
+	<!-- 게시글 추천 -->
+	<insert id="eventInsertLike" parameterType="hashmap" flushCache="true" statementType="PREPARED" >
+		INSERT INTO EVENTLIKE VALUES(#{EVENTNO}, #{ID})
+	</insert>
+	
+	<!-- 게시글 추천 취소 -->
+	<delete id="eventDeleteLike" parameterType="hashmap" flushCache="true" statementType="PREPARED">
+		DELETE FROM EVENTLIKE WHERE EVENTNO = #{boardNo} and ID = #{ID}
+	</delete>
+	
+	<!-- 게시글 추천수 -->	
+	<select id="eventLikecnt" parameterType="int" flushCache="true" statementType="PREPARED" resultType="int">
+		SELECT count(*) FROM EVENTLIKE WHERE EVENTNO = #{boardNo}
+	</select>	
+		
+		
+		
+		
+		
+		
+	<!-- 정보공유게시판  -->
+	<!-- 게시글 목록 -->
+	<select id="shareCount" resultType="int">
+	    SELECT count(*) FROM SHAREBOARD
+	</select>
+	
+	<!-- 게시글 상세보기 -->
+	<select id="shareDetail" resultMap="shareBoard" parameterType="int">
+		SELECT * FROM SHAREBOARD WHERE SHARENO = #{boardNo}
+	</select>
+
+	<!-- 게시글 등록 -->
+	<insert id="shareInsertBoard" parameterType="Board" flushCache="true" statementType="PREPARED">
+		INSERT INTO SHAREBOARD(SHARENO, SHARETITLE, SHARECONTENT, SHAREDATE, SHARECNT, ID)
+		VALUES(SEQ_SHAREBOARD.NEXTVAL, #{boardTitle}, #{boardContent}, SYSDATE, 0, #{boardId})
+	</insert>
+
+	<!-- 게시글 삭제 -->
+	<delete id="shareDeleteBoard" parameterType="int" flushCache="true" statementType="PREPARED">
+		DELETE FROM SHAREBOARD WHERE SHARENO = #{boardNo}
+	</delete>
+
+	<!-- 게시글 수정 -->
+	<update id="shareUpdateBoard" parameterType="Board" flushCache="true" statementType="PREPARED">
+		UPDATE SHAREBOARD SET SHARETITLE = #{boardTitle}, SHARECONTENT =#{boardContent} WHERE SHARENO = #{boardNo}
+	</update>
+
+	<!-- 페이지당 게시글 조회 / 번호정렬 -->
+	<select id="shareSelectList" resultMap="shareBoard">
+		SELECT B.*,C.CNT, D.CMT
+		FROM SHAREBOARD B
+		LEFT OUTER JOIN(SELECT count(*) as CNT,SHARENO FROM SHARELIKE group by SHARENO ) C 
+		ON B.SHARENO = C.SHARENO 
+		LEFT OUTER JOIN(SELECT COUNT(*) as CMT,SHARENO FROM SHARECOMMENT group by SHARENO) D 
+		ON B.SHARENO = D.SHARENO 
+		ORDER BY B.SHARENO DESC
+	</select>
+	
+	<!-- 글 조회수 증가-->
+  	<update id="shareAddReadCount" parameterType="int" flushCache="true" statementType="PREPARED">
+  		UPDATE SHAREBOARD SET SHARECNT = SHARECNT+1 WHERE SHARENO = #{boardNo}
+  	</update>
+	
+	<!-- 게시글 단일 조회 -->
+	<select id="shareSelectOne" parameterType="int" resultMap="shareBoard">
+		SELECT * FROM SHAREBOARD WHERE SHARENO = #{boardNo}
+	</select>
+	
+	<!-- 게시글 추천 여부 검사 -->
+	<select id="shareChecklike" parameterType="hashmap" flushCache="true" statementType="PREPARED" resultType="int">
+		SELECT count(*) FROM SHARELIKE WHERE SHAREBOARDNO = #{boardNo} and ID = #{ID}
+	</select>
+	
+	<!-- 게시글 추천 -->
+	<insert id="shareInsertLike" parameterType="hashmap" flushCache="true" statementType="PREPARED" >
+		INSERT INTO SHARELIKE VALUES(#{SHAREBOARDNO}, #{ID})
+	</insert>
+	
+	<!-- 게시글 추천 취소 -->
+	<delete id="shareDeleteLike" parameterType="hashmap" flushCache="true" statementType="PREPARED">
+		DELETE FROM SHARELIKE WHERE SHAREBOARDNO = #{boardNo} and ID = #{ID}
+	</delete>
+	
+	<!-- 게시글 추천수 -->	
+	<select id="shareLikecnt" parameterType="int" flushCache="true" statementType="PREPARED" resultType="int">
+		SELECT count(*) FROM SHARELIKE WHERE SHAREBOARDNO = #{boardNo}
+	</select>
 </mapper>

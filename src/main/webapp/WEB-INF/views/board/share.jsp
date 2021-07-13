@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판</title>
+<title>정보공유게시판</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
 .list{
@@ -36,7 +36,7 @@
 	<div class="wrapper">
 	
 	<img src="../resources/img/admin/list.png" class="list">
-	<h1 class="free">자유게시판</h1>
+	<h1 class="free">정보공유게시판</h1>
 	
 <!-- 	<select id="option" onChange="window.location.href=this.value">
 		<option value="http://localhost:8090/sprout/board/list">자유게시판 이동</option>
@@ -54,14 +54,14 @@
 	</div> -->
 	
 	<div class="write-button">
-	<form id="writeBtn2">
+	<form id="sharewriteBtn2">
 	<button type="button">글쓰기</button>
 	</form>
 	</div>
 	
 	<div class="table">
 	<table width="1100" height="800">
-		<tr bgcolor="#fcf6c1">
+		<tr bgcolor="#3b8686">
 			<td align="center" width="80">NO</td>
 			<td align="center" width="400">제목</td>
 			<td align="center" width="120">작성자</td>
@@ -83,7 +83,7 @@
 			<c:forEach var="vo" items="${list}" varStatus="status">
 				<tr>
 					<td align="center">${vo.boardNo }</td>
-					<td align="left"><a href="detail?boardNo=${vo.boardNo }&page=${currentPage}" class="title">${vo.boardTitle }</a>
+					<td align="left"><a href="sharedetail?boardNo=${vo.boardNo }&page=${currentPage}" class="title">${vo.boardTitle }</a>
 					&nbsp;
 					
 					<!-- 제목 옆에 댓글수 -->
@@ -108,7 +108,7 @@
 		<tr align="center" height="20">
 			<td colspan="5"><c:if test="${currentPage <= 1}"> < </c:if>
 				<c:if test="${currentPage > 1}">
-					<c:url var="blistST" value="list">
+					<c:url var="share" value="share">
 						<c:param name="page" value="${currentPage-1}" />
 					</c:url>
 					<a href="${blistST}"> < </a>
@@ -118,18 +118,18 @@
 						<font color="red" size="4"><b>${p}</b></font>
 					</c:if>
 					<c:if test="${p ne currentPage}">
-						<c:url var="blistchk" value="list">
+						<c:url var="share" value="share">
 							<c:param name="page" value="${p}" />
 						</c:url>
-						<a href="${blistchk}">${p}</a>
+						<a href="${share}">${p}</a>
 					</c:if>
 				</c:forEach> 
 				<c:if test="${currentPage >= maxPage}"> > </c:if> 
 				<c:if test="${currentPage < maxPage}">
-					<c:url var="blistEND" value="list">
+					<c:url var="share" value="share">
 						<c:param name="page" value="${currentPage+1}" />
 					</c:url>
-					<a href="${blistEND}"> > </a>
+					<a href="${share}"> > </a>
 				</c:if></td>
 			</tr>
 		</table>
@@ -153,8 +153,8 @@
 				return false;
 			}
 			
-			var frm = document.getElementById("writeBtn2");
-			frm.action = "write";
+			var frm = document.getElementById("sharewriteBtn2");
+			frm.action = "sharewrite";
 			frm.method = "get";
 			frm.submit();
 		});

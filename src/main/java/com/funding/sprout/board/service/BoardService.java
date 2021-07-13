@@ -1,6 +1,10 @@
 package com.funding.sprout.board.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.RowBounds;
 
 import com.funding.sprout.vo.Board;
 import com.funding.sprout.vo.Report;
@@ -37,9 +41,8 @@ public interface BoardService {
 	 * public List<Board> selectFRadio(Board board) throws Exception; // 자유 게시판
 	 * 라디오박스 조회
 	 */	
-
 	List<Board> searchList(String keyword);
-
+	
 	// 후기게시판
 	int reviewCount();  // 게시글 목록
 	
@@ -64,4 +67,85 @@ public interface BoardService {
 	int reviewDeleteLike(int boardNo,String userId); // 게시글 추천 취소
 	
 	int reviewLikecnt(int boardNo); // 게시글 추천수
+	
+	// 질의응답 게시판
+	int questionCount();  // 게시글 목록
+	
+	Board questionDetail(int boardNo); // 게시글 상세보기
+	
+	int questionInsertBoard(Board b); // 게시글 등록
+	
+	void questionDeleteBoard(int boardNo); // 글 삭제
+	
+	int questionUpdateBoard(Board b); // 글 수정
+	
+	List<Board> questionSelectList(int startPage, int limit); // 번호 정렬
+		
+	Board questionAddReadCount(int chk, int boardNo); // 조회수 증가
+	
+	Board questionSelectOne(int boardNo); // 글 가져오기
+	
+	int questionChecklike(int boardNo, String userId); // 게시글 추천 여부 검사
+	
+	int questionInsertLike(int boardNo,String userId); // 게시글 추천
+	
+	int questionDeleteLike(int boardNo,String userId); // 게시글 추천 취소
+	
+	int questionLikecnt(int boardNo); // 게시글 추천수
+
+	
+	// 이벤트 게시판
+	int eventCount();  // 게시글 목록
+	
+	Board eventDetail(int boardNo); // 게시글 상세보기
+	
+	int eventInsertBoard(Board b); // 게시글 등록
+	
+	void eventDeleteBoard(int boardNo); // 글 삭제
+	
+	int eventUpdateBoard(Board b); // 글 수정
+	
+	List<Board> eventSelectList(int startPage, int limit); // 번호 정렬
+		
+	Board eventAddReadCount(int chk, int boardNo); // 조회수 증가
+	
+	Board eventSelectOne(int boardNo); // 글 가져오기
+	
+	int eventChecklike(int boardNo, String userId); // 게시글 추천 여부 검사
+	
+	int eventInsertLike(int boardNo,String userId); // 게시글 추천
+	
+	int eventDeleteLike(int boardNo,String userId); // 게시글 추천 취소
+	
+	int eventLikecnt(int boardNo); // 게시글 추천수
+	
+	
+	// 정보공유 게시판
+	int shareCount();  // 게시글 목록
+	
+	Board shareDetail(int boardNo); // 게시글 상세보기
+	
+	int shareInsertBoard(Board b); // 게시글 등록
+	
+	void shareDeleteBoard(int boardNo); // 글 삭제
+	
+	int shareUpdateBoard(Board b); // 글 수정
+	
+	List<Board> shareSelectList(int startPage, int limit); // 번호 정렬
+		
+	Board shareAddReadCount(int chk, int boardNo); // 조회수 증가
+	
+	Board shareSelectOne(int boardNo); // 글 가져오기
+	
+	int shareChecklike(int boardNo, String userId); // 게시글 추천 여부 검사
+	
+	int shareInsertLike(int boardNo,String userId); // 게시글 추천
+	
+	int shareDeleteLike(int boardNo,String userId); // 게시글 추천 취소
+	
+	int shareLikecnt(int boardNo); // 게시글 추천수
+	
+	
+
+	
 }
