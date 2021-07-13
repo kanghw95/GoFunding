@@ -320,22 +320,7 @@ a:active {color:#00BFFF;}
 			checkAll.checked = false;
 		}
 	}
-	
-	function alert() {
-		console.log("안녕");
-		swal({
-		    title: "회원 삭제",
-		    text: "회원을 삭제하시겠습니까?",
-		    icon: "warning",
-		    buttons: ["아니오", "예"]
-		}).then((예) => {
-			if (예) {
-				console.log("예");
-			} else {
-				console.log("아니오");
-			}
-		})
-	}
+
 </script>
 </head>
 <body>
@@ -391,7 +376,6 @@ a:active {color:#00BFFF;}
 		<br>
 		<button class="searchBtn" onclick="searchFaq()">검색</button>
 		<button class="deleteBtn" onclick="deleteFaq()">삭제</button>
-		<button onclick="alert()">안녕</button>
 	</div>
 </body>
 </html>
