@@ -44,35 +44,41 @@
 </style>
 </head>
 <body>
-	<%@include file="/WEB-INF/views/header.jsp"%>
-<fmt:parseDate value="${fundingfin}" var="paymentday" pattern="yyyy년MM월dd"/> 
-	 
-	<div class="wrapper">
-					<div class="black_bg"></div>
-				<div class="modal_wrap" style="text-align: center;">
-					<div class="modal-title">취소 전에 확인하세요!</div>
-					 <hr>
-					<div class="modal-body"> 
-					지금 신청하고 있는 펀딩은  ${paymentday}일에 배송이 시작됩니다.
-					 <hr>
-					 펀딩은 쇼핑과 달리 배송이후 단순 변심으로 인한 취소, 환불이 어려울 수 있습니다.<br></div>
-					 <hr>
-					<form action="insertOrderRefund" id="funRefund" method="post" style="display: block; margin-top: 60px;">
+   <%@include file="/WEB-INF/views/header.jsp"%>
+   <c:forEach var="fundingDetail" items="${fundingDetail }" varStatus="status" begin="1" end="1">
+    <fmt:parseDate value="${fundingDetail.fundingfin}" var="paymentday" pattern="yyyy-MM-dd"/> 
+   <fmt:formatDate value="${paymentday}" type="DATE" var="deliverydate" pattern="yyyy년 MM월 dd일"/> 
+    </c:forEach>
+   <div class="wrapper">
+            <div class="black_bg"></div>
+            <div class="modal_wrap" style="text-align: center;">
+      			<div class="modal-title">       
+               		취소 전에 확인하세요!
+               </div>
+                <hr>
+                <div class="modal-body">
+                	지금 신청하고 있는 펀딩은 <br>${deliverydate}에 <br>배송이 시작됩니다.
+                <hr>
+               		펀딩은 쇼핑과 달리<br> 배송이후 단순 변심으로 인한 <br>취소, 환불이 어려울 수 있습니다.<br>
+                </div>
+                <br>
+                
+               <form action="insertOrderRefund" id="funRefund" method="post" style="display: block; margin-top: 60px;">
 					
 					 <button type="button" id="noagree" style=" border: 1px solid #fcf6c1;">취소</button>
 					 <input type="submit" value="환불" id="agree" style=" border: 1px solid #cff09e;" >
-					
+					<br><br>
 						<c:forEach var="rewardDetail" items="${fundingReward }" varStatus="status">
-							<input type="text" id="orderDetailNo${rewardDetail.orderDetailNo}" name="orderDetailNo" value="${rewardDetail.orderDetailNo}">
+							<input type="hidden" id="orderDetailNo${rewardDetail.orderDetailNo}" name="orderDetailNo" value="${rewardDetail.orderDetailNo}">
 						</c:forEach>
 						<c:forEach var="rewardDetail" items="${fundingReward }" varStatus="status" begin="1" end="1">
-							<input type="text" id="orderNo" name="orderNo" value="${rewardDetail.orderNo}">
-							<input type="text" id="fundingNo" name="fundingNo" value="${rewardDetail.fundingNo}">
-							<input type="text" id="totalPrice" name="totalPrice" value="">
+							<input type="hidden" id="orderNo" name="orderNo" value="${rewardDetail.orderNo}">
+							<input type="hidden" id="fundingNo" name="fundingNo" value="${rewardDetail.fundingNo}">
+							<input type="hidden" id="totalPrice" name="totalPrice" value="">
 						</c:forEach>
 						<c:forEach var="rewardDetail" items="${fundingReward }" varStatus="status">
-							<input type="text" id="rewardEA" name="rewardEA" value="${rewardDetail.rewardCount}">
-							<input type="text" id="reward" name="reward" value="${rewardDetail.rewardTitle}">
+							<input type="hidden" id="rewardEA" name="rewardEA" value="${rewardDetail.rewardCount}">
+							<input type="hidden" id="reward" name="reward" value="${rewardDetail.rewardTitle}">
 						</c:forEach>
 					</form>
 				</div>

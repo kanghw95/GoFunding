@@ -22,7 +22,10 @@
 	background-color: #fcf6c1;
 	color: #202020;
 	font-size: 13px;
-	border-bottom: 1px solid #ededed;
+}
+
+#noagree:hover {
+	cursor: pointer;
 }
 
 #agree{
@@ -33,5 +36,9 @@
 	background-color: #cff09e;
 	color: #202020;
 	font-size: 13px;	
+}
+
+#agree:hover {
+	cursor: pointer;
 }
 
