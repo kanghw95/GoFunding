@@ -86,18 +86,6 @@ th {
 }
 </style>
 <script>
-jQuery(function($) {
-    $("body").css("display", "none");
-    $("body").fadeIn(800);
-    $("a.transition").click(function(event){
-        event.preventDefault();
-        linkLocation = this.href;
-        $("body").fadeOut(1000, redirectPage);
-    });
-    function redirectPage() {
-    window.location = linkLocation;
-    }
-});
 
 function input() {
 	location.href="noticeWrt"
@@ -249,14 +237,14 @@ function deleteNotice() { // �������� �� ����
 		<div id="paging">
 			<ul>
 				<c:if test="${pageMaker.prev}">
-					<li><a href="notice${pageMaker.makeQuery(pageMaker.startPage - 1)}" id="num"><</a></li>
+					<li><a href="userNotice${pageMaker.makeQuery(pageMaker.startPage - 1)}" id="num"><</a></li>
 				</c:if>
 				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
 					var="idx">
-					<li><a href="notice${pageMaker.makeQuery(idx)}" id="num">${idx}</a></li>
+					<li><a href="userNotice${pageMaker.makeQuery(idx)}" id="num">${idx}</a></li>
 				</c:forEach>
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					<li><a href="notice${pageMaker.makeQuery(pageMaker.endPage + 1)}" id="num">></a></li>
+					<li><a href="userNotice${pageMaker.makeQuery(pageMaker.endPage + 1)}" id="num">></a></li>
 				</c:if>
 			</ul>
 		</div>
