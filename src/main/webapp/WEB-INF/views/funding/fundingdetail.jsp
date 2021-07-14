@@ -298,12 +298,13 @@
 								</div>
 							</section>
 							
-						 <section class="FundingDetailStoryContent_reference">
+ 						 <section class="FundingDetailStoryContent_reference">
 							<h4 class="FundingDetailStoryContent_title">참고정보</h4>
 								<ul class="FundingDetailStoryReferenceList_wrap">
 									<li class="FundingDetailStoryReferenceList_item">
 										<a href="#" class="FundingDetailStoryReferenceList_link" target="_blank">
 										<span class="FundingDetailStoryReferenceList_logo">
+											<img src="<%=request.getContextPath() %>/resources/fundingimg/instagram.png" width="40" height="40" />
 										</span>
 										
 										<span class="FundingDetailStoryReferenceList_text">SNS</span>
@@ -313,22 +314,23 @@
 									<li class="FundingDetailStoryReferenceList_item">
 										<a href="#" class="FundingDetailStoryReferenceList_link" target="_blank">
 											<span class="FundingDetailStoryReferenceList_logo">
+												<img src="<%=request.getContextPath() %>/resources/fundingimg/home (2).png" width="40" height="40" />
 											</span>
-											
+												
 											<span class="FundingDetailStoryReferenceList_text">홈페이지</span>
 										</a>
 									</li>
 									<li class="FundingDetailStoryReferenceList_item">
 										<a onclick="makerMsg();" class="FundingDetailStoryReferenceList_link" target="_blank">
 											<span class="FundingDetailStoryReferenceList_logo">
-
+												<img src="<%=request.getContextPath() %>/resources/fundingimg/support.png" width="40" height="40" />
 											</span>
 											
 											<span class="FundingDetailStoryReferenceList_text">문의하기</span>
 										</a>
 									</li>
 								</ul>
-							</section>
+							</section>	
 							
 							<section class="FundingDetailStoryParticipationTabPanel_wrap">
 								<h4 class="FundingDetailStoryParticipationTabPanel_title">참여내역</h4>
@@ -826,7 +828,7 @@
 	        var maker = $("#maker").text();
 	        var sessionUserId = '${sessionScope.user.userId}';
 	        if(sessionUserId == 'null' || sessionUserId == ''){
-	        	alert('로그인 해주세요.');
+	        	Swal.fire('로그인 후 문의가 가능합니다.')
 	        } else{
 	        console.log(maker);
 	    	var pop = window.open("about:blank","content","width=500, height=600");

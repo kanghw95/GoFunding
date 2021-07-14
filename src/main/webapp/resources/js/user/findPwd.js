@@ -109,10 +109,16 @@ $("#sendBtn").click(function(){ //비밀번호 확인 버튼
 			},
 			dataType: "json",
 			success: function(result){
-				alert("회원님의 비밀번호는 "+result.userPwd+" 입니다.");
+				Swal.fire({
+			          icon: 'info',
+			          text: "회원님의 비밀번호는 "+result.userPwd+" 입니다.",
+			         })
 			},
 			error: function(){
-				alert("일치하는 정보가 없습니다.");
+				Swal.fire({
+			          icon: 'error',
+			          text: "일치하는 정보가 없습니다.",
+			         })
 			}
 		});
 	} else {

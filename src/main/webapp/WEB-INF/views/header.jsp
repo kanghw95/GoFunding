@@ -165,7 +165,10 @@ $(document).ready(function(){
 $("#createFunding").click(function(){
 	var userIdChk="${user.userId}";
 	if(userIdChk=='null'||userIdChk==''){
-		alert('로그인 해주세요.');
+        Swal.fire({
+         	  icon: 'warning',
+         	  text: '로그인을 해주세요!',
+         	})
 	} else if(userIdChk!='null'||userIdChk!='') {
 		location.href='<%=request.getContextPath()%>/user/applicationForm';
 	}

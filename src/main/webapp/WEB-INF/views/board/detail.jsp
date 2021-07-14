@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>글 상세 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link href="<%=request.getContextPath() %>/resources/css/sweetalert2.css" rel="stylesheet" type="text/css" />
 <style>
 .list{
 	width : 50px;
@@ -219,12 +221,18 @@
 			var boardId = '${data.boardId}';
 
 			if (sessionUserId == 'null' || sessionUserId == '') {
-				alert("로그인 후 추천 가능합니다")
+	           	Swal.fire({
+		           	  icon: 'error',
+		           	  text: '로그인 후 좋아요가 가능합니다',
+		           	})
 				return true;
 			}
 
 			if (sessionUserId == boardId) {
-				alert("본인 글에는 추천이 안됩니다.");
+	           	Swal.fire({
+		           	  icon: 'error',
+		           	  text: '본인 글에는 좋아요를 할 수 없습니다.',
+		           	})
 				return true;
 			} else {
 				return false;
@@ -240,15 +248,24 @@
 							
 			if(modify1){ // 확인누르면
 			if (sessionUserId == 'null' || sessionUserId == '') {
-				alert("로그인 후 수정 가능합니다.");
+	           	Swal.fire({
+		           	  icon: 'error',
+		           	  text: '로그인 후 수정 가능합니다.',
+		           	})
 				return false;
 			}
 			if (boardId == 'null' || boardId == '') {
-				alert("작성자가 아니므로 글 수정이 되지 않습니다.");
+	           	Swal.fire({
+		           	  icon: 'error',
+		           	  text: '작성자가 아니므로 글 수정이 되지 않습니다.',
+		           	})
 				return false;
 			}
 			if (boardId != sessionUserId) {
-				alert("작성자가 아니므로 글 수정이 되지 않습니다.");
+	           	Swal.fire({
+		           	  icon: 'error',
+		           	  text: '작성자가 아니므로 글 수정이 되지 않습니다.',
+		           	})
 				return false;
 			} 
 			var frm = document.getElementById("frmUpdate");
@@ -273,11 +290,17 @@
 				return false;
 			}
 			if (boardId == 'null' || boardId == '') {
-				alert("작성자가 아니므로 글 삭제가 되지 않습니다")
+	           	Swal.fire({
+		           	  icon: 'error',
+		           	  text: '작성자가 아니므로 글 삭제가 되지 않습니다',
+		           	})
 				return false;
 			}
 			if (boardId != sessionUserId) {
-				alert("작성자가 아니므로 글 삭제가 되지 않습니다")
+	           	Swal.fire({
+		           	  icon: 'error',
+		           	  text: '작성자가 아니므로 글 삭제가 되지 않습니다',
+		           	})
 				return false;	
 			}
 				var frm = document.getElementById("frmUpdate");
@@ -398,7 +421,10 @@
 			var comment = $("#comment-write").val();
 			
 			if(comment == '' || comment == 'null'){
-				alert("댓글을 입력해주세요");
+	           	Swal.fire({
+		           	  icon: 'error',
+		           	  text: '댓글을 입력해주세요',
+		           	})
 				} else {
 			$.ajax({
 				url : "comwrite",
@@ -440,7 +466,10 @@
 			
 			if(delete2){ // 확인누르면
 				if (sessionUserId == 'null' || sessionUserId == '' || sessionUserId != Id) {
-					alert("다른사람이 쓴 댓글은 삭제할 수 없습니다.");
+		           	Swal.fire({
+			           	  icon: 'error',
+			           	  text: '다른사람이 쓴 댓글은 삭제할 수 없습니다.',
+			           	})
 					return false;
 				}
 				$.ajax({
