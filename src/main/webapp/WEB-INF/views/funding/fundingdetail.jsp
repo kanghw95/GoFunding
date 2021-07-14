@@ -9,6 +9,8 @@
 <title>상세페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link href="<%=request.getContextPath() %>/resources/css/common.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath() %>/resources/css/modal.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_top/fundingdetail_cover.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_top/fundingdetail_sumary.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/resources/css/funding/fundingdetail/fundingdetail_top/fundingdetail_profile.css" rel="stylesheet" type="text/css" />
@@ -21,7 +23,7 @@
    .modal_wrap{
         display: none;
         width: 300px;
-        height: 500px;
+        height: 350px;
         position: absolute;
         top:17%;
         left: 50%;
@@ -37,7 +39,7 @@
         content: "";
         width: 100%;
         height: 100%;
-        background-color:rgba(0, 0,0, 0);
+        background-color: rgba(255, 255, 255, 0.719);
         top:0;
         left: 0;
         z-index: 1;
@@ -66,16 +68,20 @@
 			<div>
 				<div class="black_bg"></div>
 					<div class="modal_wrap" style="text-align: center;">
+						<div class="modal-title">
 						 펀딩 참여전 확인하세요!
+						 </div>
+						 <div class="modal-body">
 						 <hr>
-						 지금 신청하고 있는 펀딩은 ${deliverydate} 일에 배송이 시작됩니다.
+						 지금 신청하고 있는 펀딩은<br> ${deliverydate} 일에 <br>배송이 시작됩니다.
 						 <hr>
-						 펀딩은 쇼핑과 달리 배송이후 단순 변심으로 인한 취소, 환불이 어려울 수 있습니다.<br>
-						 배송 진행 전 결제 취소는 마이페이지에서 가능합니다.
+						 펀딩은 쇼핑과 달리 <br>배송이후 단순 변심으로 인한 <br>취소, 환불이 어려울 수 있습니다.<br>
+						 배송 진행 전 결제 취소는<br> 마이페이지에서 가능합니다.
+						 </div>
 						 <br>
-						 <form action="fundingpay" method="POST" id="fundingpay">
-						 <button type="button" id="noagree" style=" border: 1px solid black;">동의 안함</button>
-						 <input type="submit" value="동의" id="agree" style=" border: 1px solid black;" >
+						 <form action="fundingpay" method="POST" id="fundingpay" style="margin-top: 80px;">
+						 <button type="button" id="noagree"">동의 안함</button>
+						 <input type="submit" value="동의" id="agree">
 						 <c:forEach var="reward" items="${reward}">
 							 <input type="hidden" id="funding_pay_reword${reward.rewardNo}" name="funding_pay_reword" value="">
 							 <input type="hidden" id="funding_pay_reword_price${reward.rewardNo}" name="funding_pay_price" value="0">

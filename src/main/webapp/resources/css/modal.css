@@ -11,6 +11,7 @@
 .modal-body{
 	height: 120px;
 	vertical-align: middle;
+	padding-bottome: 10px;
 }
 
 #noagree{
@@ -21,6 +22,7 @@
 	background-color: #fcf6c1;
 	color: #202020;
 	font-size: 13px;
+	border-bottom: 1px solid #ededed;
 }
 
 #agree{
