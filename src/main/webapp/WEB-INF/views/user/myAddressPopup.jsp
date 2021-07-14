@@ -118,11 +118,11 @@ $(document).ready(function() {
 		<input type="text" id="currentAddr" value="${user.userAddress }" style="border: none;">
 
 		<form id="addrCheck">	
-			<input type="text" class="inputPost" id="sample6_postcode" name="postcode" readonly  placeholder="우편번호">
+			<input type="text" class="inputPost" id="sample6_postcode" name="postcode" readonly  placeholder="우편번호"><br>
 			<input type="button" class="insideBtn" onclick="sample6_execDaumPostcode()" value="주소 검색" >
-			<input type="text" class="inputBox" id="sample6_address" name="address1" readonly  placeholder="주소">
-			<input type="text" class="inputBox" id="sample6_detailAddress" name="address2"  placeholder="상세주소">
-			<input type="text" class="inputBox" id="sample6_extraAddress" name="address3" readonly  placeholder="참고항목">
+			<input type="text" class="inputBox" id="sample6_address" name="address1" readonly  placeholder="주소"><br>
+			<input type="text" class="inputBox" id="sample6_detailAddress" name="address2"  placeholder="상세주소"><br>
+			<input type="text" class="inputBox" id="sample6_extraAddress" name="address3" readonly  placeholder="참고항목"><br>
 			<input type="hidden" id="address" name="userAddress" >
 				
 			<input type="button" id="merge" class="btnModify" value="수정하기">

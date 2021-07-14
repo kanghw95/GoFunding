@@ -79,9 +79,9 @@ th {
 				<tbody>
 					<c:forEach var="q" items="${qBoardCmtMore }" varStatus="status">
 						<tr class="row100 body">
-							<td class="cell100 column1">${q.boardNo }</td>
-							<td class="cell100 column2">${q.boardTitle}</td>
-							<td class="cell100 column3">${q.boardDate}</td>
+							<td class="cell100 column1">${q.cmtNo }</td>
+							<td class="cell100 column2">${q.cmtContent}</td>
+							<td class="cell100 column3">${q.cmtDate}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

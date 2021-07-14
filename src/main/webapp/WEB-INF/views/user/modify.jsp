@@ -354,12 +354,12 @@ function modifyAddress() {
 		<h2 class="modifyTitle">SPROUT! 새싹나눔 회원 정보 수정</h2>
 		<form id="frmModify">
 			<div class="frmGroup">
-				<label for="id" style="font-weight: bold; font-size: 20px;">아이디</label>
+				<label for="id" style="font-weight: bold; font-size: 20px;">아이디</label><br>
 				<input type="text" class="inputBox" id="id" name="userId" value="${user.userId }" readonly> 
 				<div id="idCheck"></div>
 			</div>
 			<div class="frmGroup">
-				<label for="name" style="font-weight: bold; font-size: 20px;">이름</label>
+				<label for="name" style="font-weight: bold; font-size: 20px;">이름</label><br>
 				<input type="text" class="inputBox" id="name" name="userName" value="${user.userName }" readonly>
 				<div id="nameCheck"></div>
 			</div>
@@ -375,12 +375,12 @@ function modifyAddress() {
 			</div>
 
 			<div class="frmGroup">
-				<label for="email" style="font-weight: bold; font-size: 20px;">이메일</label>
+				<label for="email" style="font-weight: bold; font-size: 20px;">이메일</label><br>
 				<input type="text" class="inputBox" id="email" name="userEmail" value="${user.userEmail }">
 				<div id="emailCheck"></div>
 			</div>
 			<div class="frmGroup">
-				<label for="nickName" style="font-weight: bold; font-size: 20px;">닉네임</label>
+				<label for="nickName" style="font-weight: bold; font-size: 20px;">닉네임</label><br>
 				<input type="text" class="inputBox" id="nickName" name="userNick" value="${user.userNick }">
 				<div id="nickCheck"></div>
 			</div>
@@ -397,7 +397,7 @@ function modifyAddress() {
 				<input type="button" class="insideBtn" onclick="modifyAddress();" value="수정하기" ><br>
 			</div>
 			
-			<div class="frmGroup">
+			<div class="frmGroup" style="margin-top: 5px;">
 				<label for="phone" style="font-weight: bold; font-size: 20px;">전화번호</label>
 				<div id="phoneCheck"></div>
 				<input type="text" id="phone" class="inputPhone" name="userPhone" value="${user.userPhone }">
