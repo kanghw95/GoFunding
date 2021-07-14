@@ -61,7 +61,7 @@
 var Id=$("#Id").val();
 $("[id^='formTitle']").click(function(event){
 	var fundingNo=$(this).children().next().next().val();
-	window.location.href="http://localhost:8090/sprout/funding/detail?no="+fundingNo+
+	window.location.href="<%=request.getContextPath() %>/funding/detail?no="+fundingNo+
 			"&Id="+Id;
 });
 

@@ -55,7 +55,7 @@
 	$("[id^='formTitle']").click(function(event){
 		var applyNo=$(this).children().next().next().val();
 		console.log(applyNo);
-		window.location.href="http://localhost:8090/sprout/rejectFormDetail?applyNo="+applyNo;
+		window.location.href="<%=request.getContextPath() %>/rejectFormDetail?applyNo="+applyNo;
 	});
 	
 	$("#fundingCategory").change(function(){

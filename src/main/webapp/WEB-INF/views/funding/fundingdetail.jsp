@@ -824,7 +824,7 @@
 	        } else{
 	        console.log(maker);
 	    	var pop = window.open("about:blank","content","width=500, height=600");
-			pop.location.href="http://localhost:8090/sprout/message/msgRead1?maker="+maker;		
+			pop.location.href="<%=request.getContextPath() %>/message/msgRead1?maker="+maker;		
 	        }
 	        
 		}

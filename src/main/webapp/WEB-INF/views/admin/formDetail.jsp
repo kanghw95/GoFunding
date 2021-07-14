@@ -105,7 +105,7 @@
 								type: 'get',
 								success: function(){
 									alert('전송성공');
-									window.location.href="http://localhost:8090/sprout/formReject";
+									window.location.href="<%=request.getContextPath() %>/sprout/formReject";
 								},
 								error: function(request, status, error){
 									alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
