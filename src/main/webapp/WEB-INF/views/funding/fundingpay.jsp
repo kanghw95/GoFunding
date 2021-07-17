@@ -108,7 +108,6 @@
 						<div class="FundingDetailApplicationContent_radio">
 							<input type="radio" name="address" id="wa_default_address" aria-controls="wa_default_address_box" class="FundingDetailApplicationContent_input_type" value="PRIMARY_SHIPPING" checked="">
 								<label for="wa_default_address"ㅠ class="FundingDetailApplicationContent_label_type">기본배송지</label>
-							<button type="button" class="FundingDetailApplicationContent_button_list">배송지 목록</button>
 							<input type="radio" name="address" id="wa_new_address" class="FundingDetailApplicationContent_input_type" value="DIRECT_INPUT">
 								<label for="wa_new_address" class="FundingDetailApplicationContent_label_type">직접입력</label>
 						</div>
@@ -149,8 +148,6 @@
 									<input type="checkbox" id="input_check" aria-hidden="false"
 										class="FundingDetailApplicationContent_input_checkline">
 										<label for="input_check" class="FundingDetailApplicationContent_label_checkline">
-											<span id="new_address_input" class="FundingDetailApplicationContent_icon"></span>
-											입력한 주소를 배송지 목록에 추가
 										</label>
 								</div>
 							</div>
