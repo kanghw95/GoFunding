@@ -239,6 +239,38 @@
 			}
 		}
 		
+		// 통합 -  좋아요 / 해제
+		$(".board-content-like").click(function() {
+			if (checkId() == false) {
+				$.ajax({
+					url : "clickLike",
+					type : "POST",
+					data : {
+						boardNo : '${data.boardNo }',
+						boardId : '<%=user.getUserId()%>'
+					},
+					success : function(cnt) {
+						$(".board-content-like").empty(); // 기존 image 지우기
+						
+						var tagHtml = '';
+						
+						if(isLiked == 0){
+							isLiked = 1;  // 좋아요 상태로 바꾸기
+							tagHtml = '<a><img src = "../resources/img/fullheart.png" id="unlike"><br><span class = "like_cnt">'+cnt+'</span></a>';
+						} else {
+							isLiked = 0; // 해제 상태로 바꾸기
+							tagHtml = '<a><img src = "../resources/img/emptyheart.png" id="like"><br><span class = "like_cnt">'+cnt+'</span></a>';
+						}
+						$(".board-content-like").append(tagHtml);
+					},
+					error:function(e){
+						alert(e);
+					}
+				});
+			}
+		});
+		
+		
 		// 게시글 수정
 		$("#modify").on("click", function() {	
 			// 수정 아이디 체크
@@ -331,36 +363,7 @@
 				return false;	
 			}
 		});
-		// 통합 -  좋아요 / 해제
-		$(".board-content-like").click(function() {
-			if (checkId() == false) {
-				$.ajax({
-					url : "clickLike",
-					type : "POST",
-					data : {
-						boardNo : '${data.boardNo }',
-						boardId : '<%=user.getUserId()%>'
-					},
-					success : function(cnt) {
-						$(".board-content-like").empty(); // 기존 image 지우기
-						
-						var tagHtml = '';
-						
-						if(isLiked == 0){
-							isLiked = 1;  // 좋아요 상태로 바꾸기
-							tagHtml = '<a><img src = "../resources/img/fullheart.png" id="unlike"><br><span class = "like_cnt">'+cnt+'</span></a>';
-						} else {
-							isLiked = 0; // 해제 상태로 바꾸기
-							tagHtml = '<a><img src = "../resources/img/emptyheart.png" id="like"><br><span class = "like_cnt">'+cnt+'</span></a>';
-						}
-						$(".board-content-like").append(tagHtml);
-					},
-					error:function(e){
-						alert(e);
-					}
-				});
-			}
-		});
+		
 		
 		
 		function displayCommentList(result){

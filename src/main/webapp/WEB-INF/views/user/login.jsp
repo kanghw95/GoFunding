@@ -56,10 +56,16 @@ function attachSignin(element) {
         alert(JSON.stringify(error, undefined, 2));
       });
 	}
+	
+	
    	$(document).ready(function(){
    		var pwdCnt=0;
    	var ischkId=false;
    	var ischkPwd=false;
+   	
+   	console.log("ischkId : " + ischkId);
+	console.log("ischkPwd : " + ischkPwd);
+   	
    		$(".chkPwd").on('click',function(){
    			$(".chkPwd").toggleClass('active');
    			if($(".chkPwd").hasClass('active')){
@@ -81,6 +87,8 @@ function attachSignin(element) {
  			alert('아이디와 비밀번호 형식을 확인해 주세요.');
  		}
  		})
+ 		
+ 		
 	// id 정규식
 	var idReg = /^[a-z0-9]{4,12}$/; // 4-12자리 영소문자, 숫자만
    	$(".inputId").blur(function(event){ 
@@ -127,8 +135,7 @@ function attachSignin(element) {
 			<div class="idPwd">
 			<h1>로그인</h1>
 			<div class="warning warnId"></div>
-				<input type="text" name="userId" class="form inputId"
-					placeholder="아이디"><br><br>
+				<input type="text" name="userId" class="form inputId" placeholder="아이디"><br><br>
 			<div class="warning warnPwd"></div>
 				<input type="password" name="userPwd" class="form inputPwd"
 					placeholder="비밀번호"><br><br>

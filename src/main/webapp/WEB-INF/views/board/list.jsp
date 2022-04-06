@@ -162,9 +162,9 @@
 
 	<script>
 		$(".write-button").on("click", function() {
-			var write1 = confirm("글 쓰기 하시겠습니까?");
+		var write1 = confirm("글 쓰기 하시겠습니까?");
 			
-			if(write1 == true) {
+ 			if(write1 == true) {
 				var sessionUserId = '${sessionScope.user.userId}';
 						
 				if(sessionUserId == 'null' || sessionUserId == ''){
@@ -173,7 +173,7 @@
 				}	
 			}else{
 				return false;
-			}
+			} 
 			
 			var frm = document.getElementById("writeBtn2");
 			frm.action = "write";

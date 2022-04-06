@@ -7,10 +7,10 @@
 		<result column="FREETITLE" property="boardTitle" />
 		<result column="FREECONTENT" property="boardContent" />
 		<result column="FREEDATE" property="boardDate" />
-		<result column="FREECNT" property="boardCnt" />
+		<result column="FREECNT" property="boardCnt" /> <!-- 조회수 -->
 		<result column="ID" property="boardId" />
-		<result column="CNT" property="likecnt"/>
-		<result column="CMT" property="cmt"/>		
+		<result column="CNT" property="likecnt"/> <!-- 추천 -->
+		<result column="CMT" property="cmt"/>		<!-- 댓글 -->
 	</resultMap>
 	
 	<!-- 후기게시판 -->
